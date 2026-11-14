@@ -1,7 +1,8 @@
 # Real NISAR integration — Mexico first
 
 Status: **real GCOV and GUNW subsets are connected and browser-verified**.
-The Mexico GCOV series can be extended with `scripts/extend_mexico.py`; each
+The Mexico GCOV series contains all 29 PROVISIONAL catalogue acquisitions on
+track 019A/011 from 2025-10-30 to 2026-10-13. Re-run `scripts/extend_mexico.py` to verify it; each
 additional acquisition is an independently verified, hashed HDF5 subset. The
 GUNW panel retains its separate original pair dates and is not extrapolated.
 The first case covers about 2.6 × 2.8 km in Mexico City with 1024 preview locations,
@@ -18,7 +19,7 @@ and rejects a synthetic source. Offline scientific test fixtures remain in tests
 
 | Case | Acquisitions | Valid HH/HV per date | Accepted GUNW samples |
 |---|---|---|---|
-| Mexico City | 2025-10-30, 2025-11-11 | 1024, 1024 | 357 |
+| Mexico City | 29 dates, 2025-10-30 to 2026-10-13 | 1024 each date | 357 (one pair) |
 | Itupiranga, Pará | 2026-07-18, 2026-08-11 | 1024, 1024 | 0 |
 | Caracas | 2025-11-09, 2025-11-21 | 1024, 1024 | 0 |
 

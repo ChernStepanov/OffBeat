@@ -12,24 +12,24 @@ def main():
     root=sub.ROOT
     site=json.loads((root/'data/mexico.json').read_text())
     manifest=json.loads((root/'data/mexico-manifest.json').read_text())
-    records=manifest['products']['gcov'][:6]
+    records=manifest['products']['gcov']
     lat,lon=sub.coordinates()
     if [r['start'][:10] for r in records[:2]] != site['dates'][:2]: raise ValueError('Unexpected existing acquisitions')
     expected=[r['start'][:10] for r in records]
     if site['dates']==expected:
         for item in site['provenance'].get('additional_gcov',[]):
             if hashlib.sha256((root/item['subset_path']).read_bytes()).hexdigest()!=item['sha256']:raise ValueError('Invalid saved subset')
-        if len(site['provenance'].get('additional_gcov',[]))!=4:raise ValueError('Incomplete provenance')
-        print('Six acquisitions already exported and verified')
+        if len(site['provenance'].get('additional_gcov',[]))!=len(expected)-2:raise ValueError('Incomplete provenance')
+        print(f'{len(expected)} acquisitions already exported and verified')
         return
-    if len(site['dates'])!=2:raise ValueError('Unexpected existing date series')
+    if site['dates']!=expected[:len(site['dates'])]:raise ValueError('Unexpected existing date series')
     auth=earthaccess.login(strategy='interactive',persist=False)
     if not auth.authenticated: raise SystemExit('Earthdata login failed')
     fs=earthaccess.get_fsspec_https_session()
     target=root/'data/subsets/mexico-series'
     target.mkdir(parents=True,exist_ok=True)
     new=[]
-    for r in records[2:]:
+    for r in records[len(site['dates']):]:
         path=target/(r['start'][:10]+'.npz'); receipt=path.with_suffix('.json')
         if not receipt.exists():
             with fs.open(r['url'],block_size=1024*1024,cache_type='blockcache') as stream, h5py.File(stream,'r') as hdf:
@@ -64,7 +64,7 @@ def main():
                 p['peer'][k+'_sd'].append(round(spread,5) if spread>0 else None)
             p['peers']=p['peer_counts']['hv'][-1]
         site['dates'].append(record['date'])
-    site['provenance']['additional_gcov']=[r for r,_ in new]
+    site['provenance'].setdefault('additional_gcov',[]).extend(r for r,_ in new)
     site['provenance']['steps'].append('Additional same-track GCOV: validate grid, mask and acquisition date; sample native HH/HV and recompute same-class 1 km peer medians and MAD independently per date.')
     site['region']=f"Real GCOV {site['dates'][0]} – {site['dates'][-1]} · one GUNW pair"
     site['message']=f"Measured HH/HV on {len(site['dates'])} dates; LOS remains one 12-day pair. Atmospheric residuals remain; no trend or anomaly classification."

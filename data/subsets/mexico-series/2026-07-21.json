@@ -1,0 +1,37 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_026_019_A_011_4005_DHDH_A_20260721T120539_20260721T120614_P05023_N_F_J_001",
+    "concept_id": "G4259003134-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2026-07-21T12:05:39.000Z",
+    "end": "2026-07-21T12:06:14.999Z",
+    "size_mb": 6872.24449634552,
+    "polygons": [
+      [
+        "18.00434 -97.90808 20.14171 -98.47506 19.56599 -100.83452 17.43711 -100.24987 18.00434 -97.90808"
+      ]
+    ],
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_026_019_A_011_4005_DHDH_A_20260721T120539_20260721T120614_P05023_N_F_J_001/NISAR_L2_PR_GCOV_026_019_A_011_4005_DHDH_A_20260721T120539_20260721T120614_P05023_N_F_J_001.h5"
+  },
+  "grid": {
+    "epsg": 32614,
+    "spacing": [
+      10.0,
+      -10.0
+    ],
+    "window": [
+      9692,
+      9961,
+      20547,
+      20802
+    ],
+    "paths": {
+      "hh": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+      "hv": "/science/LSAR/GCOV/grids/frequencyA/HVHV",
+      "mask": "/science/LSAR/GCOV/grids/frequencyA/mask"
+    }
+  },
+  "date": "2026-07-21",
+  "subset_path": "data/subsets/mexico-series/2026-07-21.npz",
+  "sha256": "cb5e2e94dfb08a9768dde43a6a551625732cf6dafeae1736ee5430eb5ce64bc6"
+}
