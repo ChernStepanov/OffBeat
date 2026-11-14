@@ -86,11 +86,17 @@ Synthetic numerical fixtures exist only in offline tests, never in application d
 
 Click **3D terrain** in the map title bar. The workspace combines the existing
 synchronized maps with a real WebGL elevation map and NISAR samples registered
-to its surface. From the world overview it opens the mountainous Caracas case.
+to its surface. Terrain now streams worldwide as the camera moves; the map is
+not cropped to the study areas. Opening from the 2D overview keeps its centre.
 A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
 
-The surface and dense terrain point cloud use **66,049 DEM nodes per site**,
-prepared from [Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).
+The surface and dense terrain point cloud load visible elevation tiles from
+[Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).
+Detail adapts to scale. **World** shows the overview, **Study area** returns to
+the selected measurements, and **Map centre** opens the current 2D location.
+The 3D window also accepts place names or `latitude, longitude`; coordinates
+are processed locally, and names are sent to the same geocoders as the 2D search.
+Changing location does not infer or manufacture additional NISAR coverage.
 Surface colour represents elevation in metres. The separate **1,024 NISAR dots**
 keep their actual lat/lon; their colour represents the selected HH/HV backscatter,
 not elevation. Changing acquisition or polarization does not move them vertically.
@@ -110,16 +116,25 @@ size button or **Esc** to restore it. Double-click a title bar to maximize it.
 Browser fullscreen uses the browser's native Fullscreen API; leaving it restores
 the preceding window size. Map instances, data, input and selection are retained.
 
-The 3D renderer uses locally vendored Three.js r160.1 (MIT). Prepared DEM files
-are included, so terrain viewing requires no Earthdata login or elevation API.
-Rebuild them with `python3 scripts/prepare_terrain.py` (Python standard library;
-internet required). Source tile URLs, SHA-256 receipts, sampling, coverage and
-limits are retained in `data/terrain/*.json`. The DEM is historical context;
+The 3D renderer uses locally vendored Three.js r160.1 (MIT). Detailed global
+terrain needs internet, with no Earthdata login or API key. A measured coarse
+world tile is bundled so coverage remains visible if the provider is unavailable;
+failed tiles are identified and can be retried. Downloads are limited to five
+at once, decoded memory to 96 cached tiles, and visible geometry to 64 tiles.
+Obsolete requests are cancelled when the view changes. Web Mercator covers
+latitudes up to about 85.05 degrees north/south and wraps at the date line.
+
+Prepared local DEM contexts remain optional and never restrict navigation.
+Rebuild them with `python3 scripts/prepare_terrain.py`. Original tile receipts
+are retained in `data/terrain/*.json`; the bundled world PNG has its own hash.
+The DEM is historical context;
 resampling and a denser mesh do not increase the source's ground resolution.
 See [terrain processing and validation](docs/terrain-scene.md).
 
 Run `node scripts/test_point_cloud.mjs` for numeric DEM integrity, physical
 registration, date/channel independence, missing samples and exaggeration checks.
+Run `node scripts/test_terrain_tiles.mjs` for global addressing, tile budgets,
+decoding, cancellation races, cache bounds, fallback and retry checks.
 
 After editing JS or CSS, run `node scripts/version_assets.mjs` before committing.
 The generated content hashes prevent the browser from combining new HTML with
@@ -131,8 +146,9 @@ NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attributio
 
 Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA font uses SIL OFL 1.1, see `fonts/W95FA-OFL.txt`.
 
-Terrain: Mapzen Terrain Tiles, including USGS SRTM/GMTED2010 and Mexico INEGI
-Continental relief (2016). Attribution and upstream terms:
+Terrain: Mapzen Terrain Tiles, including USGS SRTM/GMTED2010, NOAA ETOPO1,
+Mexico INEGI Continental relief (2016) and other regional upstream datasets.
+Full attribution and terms:
 [Tilezen/Joerd](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
 Three.js is MIT-licensed; its notice is preserved in `js/vendor/THREE-LICENSE.txt`.
 

@@ -4,7 +4,40 @@ The former Canvas signal-height cloud has been replaced with WebGL terrain.
 Geographic elevation comes from a DEM; NISAR backscatter changes dot colour.
 The sample's height therefore stays fixed when its HH/HV signal changes.
 
-## Prepared elevation context
+## Continuous global terrain
+
+`js/terrain-tiles.js` addresses the full Web Mercator world, wraps longitude at
+the antimeridian, and streams zoom-0–14 Terrarium DEM tiles. Display navigation
+supports zoom 0–19 and latitude ±85.05112878°. Zooming further does not create
+additional source resolution. The camera is independent of every NISAR bbox.
+
+The renderer computes tile coverage from the camera frustum and adjusts LOD to
+stay within 64 visible tiles. Tile meshes have 64 or 128 subdivisions depending
+on the visible tile budget. Surface coordinates and NISAR overlays use the same
+Mercator frame, including the latitude-dependent conversion of elevation metres.
+Surface and dense terrain point cloud share real DEM elevations. There are no
+extruded study-area walls or fixed rectangular terrain extents.
+
+The loader allows five concurrent requests and a cache of at most 96 decoded
+tiles. It cancels obsolete requests, ignores obsolete views, and handles a return
+to a just-aborted viewport. Nearby lower-LOD parents and the bundled measured
+global tile fill coverage while detail loads. Download failures remain explicit
+and a Retry button retries them; missing heights are not replaced with fictional
+measurements. Mesh generation is spread across frames rather than blocking the UI.
+
+The bundled `data/terrain/world-0.png` is the provider's real zoom-0 ETOPO1 tile.
+Its URL, retrieval timestamp, source and SHA-256 are in `world-0.json`. It provides
+coarse global coverage without provider access; finer detail requires internet.
+Source attributions are linked from the viewport and below.
+
+World, Study area and Map centre navigation, direct coordinate/place search,
+and clickable prepared-area labels allow browsing outside measured coverage.
+At low zoom the dense radar dots are replaced by study-area labels. The HUD
+explicitly reports when there is no prepared NISAR series at the map centre;
+the selected sample card still belongs to its named study series. New or expanded
+radar bboxes do not require a new fixed terrain rectangle.
+
+## Optional prepared elevation context
 
 | Site | Nodes | Elevation range (m) |
 |---|---:|---:|
@@ -26,9 +59,9 @@ a north-to-south regular WGS84 grid. Cached original PNGs are excluded from Git.
 Prepared JSON files preserve source URLs, byte counts, SHA-256 hashes, numeric
 array checksum, bbox, sampling method, attribution and limitations.
 
-Both the terrain mesh and NISAR positions use the same local coordinate frame
-with longitude scaled by the cosine of the central latitude. NISAR lat/lon and
-HH/HV arrays are unchanged. Each dot's elevation is interpolated from the DEM;
+These optional contexts preserve the original extraction receipts and support
+height fallback before streamed DEM data is available. They do not bound the map.
+NISAR lat/lon and HH/HV arrays are unchanged. Each dot's elevation is sampled from the DEM;
 a small constant clearance avoids z-fighting. There are still only 1,024 sparse
 NISAR locations per site. No interpolated radar points, classifications or areas
 are generated. Height exaggeration defaults to 4x and can be set to 1x.
@@ -52,11 +85,21 @@ finite grids, source references, coordinate registration on every prepared date
 and channel, interpolation on a known plane, physical elevation under vertical
 exaggeration, missing values and preservation of original NISAR data.
 
+`node scripts/test_terrain_tiles.mjs` verifies global coordinate roundtrips,
+antimeridian addressing, polar bounds, visible tile budgets, Terrarium decoding,
+the bundled PNG checksum, download/cache bounds, aborted-request races and retry.
+
 Chrome browser checks cover terrain rendering without shader/runtime errors,
 precise picking, HH/HV and acquisition controls, all study areas, orbit/pan/zoom,
 render modes, contour/CRT toggles, independent map enlargement, 3D maximization,
 native fullscreen and restoration, input/selection retention, Russian controls,
 and 390 px layouts. Physical mobile devices and other browsers were not tested.
+
+Streaming checks additionally cover a region outside all prepared data (the
+Himalayas), movement beyond the old rectangles, the date line, rapid region
+changes, bounded caches, stale geocoder results, global overview, retained
+fullscreen/series controls and explicit provider failure with the bundled
+measured world fallback. Existing NISAR data and numerical receipts are unchanged.
 
 ## Primary sources
 

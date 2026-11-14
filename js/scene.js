@@ -30,7 +30,28 @@
   function render() {
     gpu?.render();
     if (gpu) document.querySelector('.cloud__compass svg').style.transform = `rotate(${-gpu.info().yaw * 180 / Math.PI}deg)`;
+    refreshStreamStatus();
     drawHistory();
+  }
+
+  function refreshStreamStatus() {
+    if (!gpu) return;
+    const info = gpu.info(), geo = info.center;
+    $('terrain-centre').textContent = `${geo.lat.toFixed(4)}, ${geo.lon.toFixed(4)} / zoom ${info.zoom.toFixed(1)}`;
+    $('terrain-status').textContent = `${phrase('DEM tiles', 'Тайлы DEM')}: ${info.fineTiles}/${info.desiredTiles} / z${info.sourceLevel}`
+      + (info.pending ? ` / ${phrase('loading', 'загрузка')}: ${info.pending}` : '')
+      + (info.failed ? ` / ${phrase('unavailable', 'недоступно')}: ${info.failed}` : '');
+    $('terrain-retry').hidden = !info.failed;
+    $('terrain-low').textContent = Math.round(info.min_m).toLocaleString();
+    $('terrain-high').textContent = Math.round(info.max_m).toLocaleString();
+    $('terrain-scale').textContent = `${(info.span_m / 1000).toFixed(info.span_m < 10000 ? 1 : 0)} km / ${phrase('height', 'высота')} ${info.exaggeration}x`;
+    if (info.terrainTiles > 0) $('cloud-empty').hidden = true;
+    else if (info.failed && !info.pending) empty(phrase('Elevation tiles unavailable', 'Тайлы высот недоступны'), phrase('Use Retry tiles to reconnect.', 'Нажмите «Повторить загрузку».'));
+    const h = selection ? gpu.elevationAt(selection.lon, selection.lat) : null;
+    $('terrain-elevation').textContent = Number.isFinite(h) ? `${h.toFixed(1)} m` : '-';
+    const b = selectedSite?.grid.bbox, overStudy = b && geo.lon >= b.w && geo.lon <= b.e && geo.lat >= b.s && geo.lat <= b.n && info.zoom >= 8;
+    $('cloud-site-name').textContent = overStudy ? selectedSite.name : phrase('World terrain', 'Рельеф мира');
+    $('cloud-count').textContent = overStudy ? `${points.length.toLocaleString(ru() ? 'ru-RU' : 'en-US')} / ${selectedSite.pixels.length} ${phrase('measured samples', 'точек с измерениями')}` : phrase('No prepared NISAR series at map centre.', 'В центре карты нет подготовленного ряда NISAR.');
   }
 
   function empty(title, message) {
@@ -41,10 +62,9 @@
   async function loadTerrain(site) {
     const ticket = ++terrainTicket;
     terrainSite = site?.id || null; terrain = null; loadedSignalKey = '';
-    gpu?.setTerrain(null, null);
-    if (!site) { empty(phrase('No measured samples here', 'Здесь нет измерений'), phrase('Choose a study area', 'Выберите участок')); return; }
-    empty(phrase('Loading real terrain...', 'Загрузка реального рельефа...'), 'Mapzen Terrain Tiles / DEM');
-    $('terrain-status').textContent = phrase('Loading elevation data...', 'Загрузка модели высот...');
+    gpu?.setTerrain(null, site);
+    if (!site) { gpu?.setSamples(null, 0, channel); return; }
+    gpu.focusSite(site);
     try {
       if (!terrainCache.has(site.id)) terrainCache.set(site.id, fetch(`data/terrain/${site.id}.json`).then(async response => {
         if (!response.ok) throw new Error(`DEM HTTP ${response.status}`);
@@ -53,14 +73,12 @@
       const data = await terrainCache.get(site.id);
       if (ticket !== terrainTicket) return;
       terrain = data;
-      gpu.setTerrain(data, site); gpu.setView(view);
-      $('terrain-low').textContent = Math.round(data.min_m).toLocaleString();
-      $('terrain-high').textContent = Math.round(data.max_m).toLocaleString();
+      gpu.setTerrain(data, site);
       update();
     } catch (error) {
       if (ticket !== terrainTicket) return;
-      $('terrain-status').textContent = error.message;
-      empty(phrase('Terrain unavailable', 'Рельеф недоступен'), error.message);
+      // Prepared DEM context is optional; globally streamed terrain still works for new sites.
+      terrain = null; update();
     }
   }
 
@@ -93,13 +111,14 @@
 
   function update() {
     if (!active || !OB.app) return;
+    $('terrain-query').placeholder = phrase('Place or latitude, longitude', 'Место или широта, долгота');
     selectedSite = $('acquisition').hidden ? null : OB.app.site();
     selection = selectedSite ? OB.app.pixel() : null;
     date = OB.app.date();
     points = selectedSite ? selectedSite.pixels.flatMap((p, index) => Number.isFinite(p[channel]?.[date]) && Number.isFinite(p.lat) && Number.isFinite(p.lon) ? [{ index, value: p[channel][date] }] : []) : [];
     $('scene-site').value = selectedSite?.id || '';
     $('scene-site').dispatchEvent(new Event('ob:select-sync'));
-    $('cloud-site-name').textContent = selectedSite?.name || 'NISAR / L-BAND';
+    $('cloud-site-name').textContent = selectedSite?.name || phrase('World terrain', 'Рельеф мира');
     $('cloud-date').textContent = selectedSite?.dates[date] || '-';
     $('terrain-date-label').textContent = selectedSite?.dates[date] || '-';
     $('terrain-date').max = String(Math.max(0, (selectedSite?.dates.length || 1) - 1));
@@ -110,26 +129,23 @@
     $('terrain-date-next').disabled = !selectedSite || date >= selectedSite.dates.length - 1;
     $('cloud-count').textContent = `${points.length.toLocaleString(ru() ? 'ru-RU' : 'en-US')} / ${selectedSite?.pixels.length || 0} ${phrase('measured samples', 'точек с измерениями')}`;
     if (gpu && terrainSite !== (selectedSite?.id || null)) loadTerrain(selectedSite);
-    if (terrain && gpu) {
-      const signalKey = `${selectedSite.id}/${date}/${channel}/${terrainSite}`;
+    if (gpu) {
+      const signalKey = `${selectedSite?.id || 'world'}/${date}/${channel}/${terrainSite}`;
       if (signalKey !== loadedSignalKey) { gpu.setSamples(selectedSite, date, channel); loadedSignalKey = signalKey; }
-      gpu.select(selectedSite.pixels.indexOf(selection));
-      $('cloud-empty').hidden = true;
-      $('terrain-status').textContent = `${terrain.n.toLocaleString()} x ${terrain.n.toLocaleString()} DEM / ${(terrain.n ** 2).toLocaleString()} ${phrase('elevation nodes', 'точек высот')}`;
-      const f = OB.terrain.frame(terrain);
-      $('terrain-scale').textContent = `${(f.width_m / 1000).toFixed(1)} x ${(f.depth_m / 1000).toFixed(1)} km / ${phrase('height', 'высота')} ${$('terrain-exaggeration').value}x`;
+      gpu.select(selectedSite?.pixels.indexOf(selection) ?? -1);
     }
     $('cloud-sample-id').textContent = selection?.id || phrase('Select a measured sample', 'Выберите точку измерения');
     $('cloud-value').textContent = selection ? (Number.isFinite(selection[channel][date]) ? `${channel.toUpperCase()} ${fixed(selection[channel][date])} dB` : phrase('Unavailable', 'Недоступно')) : '-';
     $('cloud-cover').textContent = selection ? (OB.COVER[selection.cover]?.name || phrase('Unavailable', 'Недоступно')) : '-';
     $('cloud-coordinates').textContent = selection ? `${selection.lat.toFixed(5)}, ${selection.lon.toFixed(5)}` : '-';
-    const elevation = selection && terrain ? OB.terrain.heightAt(terrain, selection.lon, selection.lat) : null;
+    const elevation = selection && gpu ? gpu.elevationAt(selection.lon, selection.lat) : null;
     $('terrain-elevation').textContent = Number.isFinite(elevation) ? `${elevation.toFixed(1)} m` : '-';
     $('cloud-history-label').textContent = selectedSite ? `${channel.toUpperCase()} / ${selectedSite.dates[0]} - ${selectedSite.dates.at(-1)}` : phrase('Sample history', 'История измерений');
     $('scene-status').textContent = selectedSite ? `${selectedSite.name} / ${selectedSite.dates[date]} / ${channel.toUpperCase()} / ${points.length} ${phrase('samples', 'точек')}` : phrase('Choose a prepared study area', 'Выберите подготовленный участок');
     for (const id of ['cloud-prev', 'cloud-next']) $(id).disabled = !points.length;
     $('cloud-card').disabled = !selection;
     $('scene-fit').disabled = !selectedSite;
+    $('terrain-study').disabled = !selectedSite;
     canvas.setAttribute('aria-label', phrase(`3D terrain map with ${points.length} measured ${channel.toUpperCase()} samples. Drag or use arrow keys to orbit; shift-drag to pan; plus and minus zoom.`, `3D-карта рельефа: ${points.length} точек ${channel.toUpperCase()}. Перетаскивание или стрелки вращают карту; Shift - перемещение; плюс и минус - масштаб.`));
     schedule();
   }
@@ -162,10 +178,6 @@
     setURL(true);
     $('scene-back').focus();
     OB.app.resizeMaps();
-    if ($('acquisition').hidden) {
-      const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url);
-      await OB.app.loadSite('venezuela');
-    }
     if (!active) return;
     empty(phrase('Starting 3D terrain...', 'Запуск 3D-рельефа...'), 'WebGL / DEM / NISAR');
     try {
@@ -173,6 +185,8 @@
       gpu = await gpuPromise;
       OB.terrainView = gpu;
       if (!active) return;
+      gpu.setActive(true);
+      if ($('acquisition').hidden) { const v = OB.app.viewport(); gpu.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); setView('plan'); }
       $('cloud-viewport').classList.toggle('terrain-crt', $('terrain-crt').checked);
     } catch (error) {
       gpuPromise = null;
@@ -185,6 +199,8 @@
     if (!active) return;
     if (OB.windows.active()) { OB.windows.restore(); return; }
     active = false; dragging = null; hovered = null;
+    cancelSearch();
+    gpu?.setActive(false);
     if (frame) cancelAnimationFrame(frame); frame = 0;
     home.after(mapWindow); scene.hidden = true;
     $('desk').inert = false;
@@ -214,7 +230,7 @@
     const id = event.target.value;
     if (!OB.SITES.some(s => s.id === id)) { update(); return; }
     const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url);
-    hovered = null; await OB.app.loadSite(id); OB.app.fit(); update();
+    cancelSearch(); hovered = null; await OB.app.loadSite(id); OB.app.fit(); setView('orbit'); gpu?.focusSite(OB.app.site()); update();
   });
   ['hh', 'hv'].forEach(key => $('cloud-' + key).addEventListener('click', () => setChannel(key)));
   ['orbit', 'plan'].forEach(key => $('cloud-' + key).addEventListener('click', () => setView(key)));
@@ -232,10 +248,45 @@
   $('terrain-date-prev').addEventListener('click', () => OB.app.selectDate(date - 1));
   $('terrain-date-next').addEventListener('click', () => OB.app.selectDate(date + 1));
   $('terrain-date').addEventListener('input', event => OB.app.selectDate(+event.target.value));
+  $('terrain-world').addEventListener('click', () => { cancelSearch(); setView('plan'); gpu?.goTo(0, 15, 0); $('terrain-search-status').textContent = phrase('Global terrain. NISAR measurements are available only at marked study areas.', 'Рельеф мира. Измерения NISAR доступны на отмеченных участках.'); schedule(); });
+  $('terrain-study').addEventListener('click', () => { cancelSearch(); if (selectedSite) { setView('orbit'); gpu?.focusSite(selectedSite); schedule(); } });
+  $('terrain-map-centre').addEventListener('click', () => { cancelSearch(); const v = OB.app.viewport(); setView('orbit'); gpu?.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); schedule(); });
+  $('terrain-retry').addEventListener('click', () => { gpu?.retry(); schedule(); });
+  let searchTicket = 0, lastSearchAt = 0;
+  function cancelSearch() { ++searchTicket; $('terrain-go').disabled = false; }
+  const placeCache = new Map();
+  $('terrain-search').addEventListener('submit', async event => {
+    event.preventDefault();
+    const ticket = ++searchTicket, query = OB.normalizePlaceQuery($('terrain-query').value), parsed = OB.parseCoordinates(query);
+    if (!query || query.length > 200) { $('terrain-search-status').textContent = phrase('Enter a place name or coordinates (up to 200 characters).', 'Введите место или координаты (до 200 символов).'); return; }
+    if (parsed.kind === 'invalid') { $('terrain-search-status').textContent = phrase('Enter latitude, longitude within the map bounds.', 'Введите широту и долготу в пределах карты.'); return; }
+    $('terrain-go').disabled = true;
+    try {
+      let place = parsed;
+      if (parsed.kind !== 'coordinates') {
+        $('terrain-search-status').textContent = phrase('Searching...', 'Поиск...');
+        if (!placeCache.has(query)) {
+          const delay = Math.max(0, 1000 - (Date.now() - lastSearchAt));
+          if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+          if (ticket !== searchTicket) return;
+          lastSearchAt = Date.now();
+          const results = await OB.geocodePlace(query, window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/');
+          if (!results.length) throw new Error(phrase('No place found.', 'Место не найдено.'));
+          placeCache.set(query, { lon: results[0].geometry.coordinates[0], lat: results[0].geometry.coordinates[1], name: results[0].properties.name });
+        }
+        place = placeCache.get(query);
+      }
+      if (ticket !== searchTicket) return;
+      setView('orbit'); gpu?.goTo(place.lon, place.lat, 11); schedule();
+      $('terrain-search-status').textContent = `${place.name || query}. ${phrase('Terrain context; no additional NISAR measurements are inferred.', 'Рельеф местности; дополнительные измерения NISAR не подразумеваются.')}`;
+    } catch (error) { if (ticket === searchTicket) $('terrain-search-status').textContent = error.message; }
+    finally { if (ticket === searchTicket) $('terrain-go').disabled = false; }
+  });
 
   function pointer(event) { const rect = canvas.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; }
   canvas.addEventListener('pointerdown', event => {
     if (![0, 2].includes(event.button) || dragging) return;
+    cancelSearch();
     canvas.focus({ preventScroll: true });
     const start = pointer(event);
     dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, pan: event.shiftKey || event.button === 2 };
@@ -254,13 +305,17 @@
     } else {
       const hit = gpu?.pick(p.x, p.y);
       hovered = hit?.index ?? null;
-      canvas.title = hit ? `${selectedSite.pixels[hit.index].id} / ${hit.height_m.toFixed(1)} m / ${channel.toUpperCase()} ${hit.value.toFixed(2)} dB` : '';
+      canvas.title = hit?.kind === 'site' ? OB.SITES.find(s => s.id === hit.siteId)?.name || '' : hit ? `${selectedSite.pixels[hit.index].id} / ${hit.height_m.toFixed(1)} m / ${channel.toUpperCase()} ${hit.value.toFixed(2)} dB` : '';
     }
     schedule();
   });
   canvas.addEventListener('pointerup', event => {
     if (!dragging || dragging.id !== event.pointerId) return;
-    if (!dragging.moved) { const p = pointer(event), hit = gpu?.pick(p.x, p.y); if (hit) OB.app.pickCell(hit.index, false); }
+    if (!dragging.moved) {
+      const p = pointer(event), hit = gpu?.pick(p.x, p.y);
+      if (hit?.kind === 'site') { setView('orbit'); OB.app.loadSite(hit.siteId).then(() => { gpu.focusSite(OB.app.site()); schedule(); }); }
+      else if (hit) OB.app.pickCell(hit.index, false);
+    }
     dragging = null; canvas.classList.remove('is-dragging');
     if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
   });
@@ -268,7 +323,7 @@
   canvas.addEventListener('pointercancel', cancelDrag); canvas.addEventListener('lostpointercapture', cancelDrag);
   canvas.addEventListener('contextmenu', event => event.preventDefault());
   canvas.addEventListener('pointerleave', () => { hovered = null; schedule(); });
-  canvas.addEventListener('wheel', event => { event.preventDefault(); zoom(Math.exp(-event.deltaY * .001)); }, { passive: false });
+  canvas.addEventListener('wheel', event => { event.preventDefault(); cancelSearch(); zoom(Math.exp(-event.deltaY * .001)); }, { passive: false });
   canvas.addEventListener('dblclick', () => setView(view));
   canvas.addEventListener('keydown', event => {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', '0'].includes(event.key)) return;
@@ -298,6 +353,7 @@
   });
   document.addEventListener('ob:sample-change', () => { if (active) requestAnimationFrame(update); });
   document.addEventListener('ob:window-resize', schedule);
+  canvas.addEventListener('ob:terrain-stream', schedule);
   canvas.addEventListener('ob:gpu-status', event => {
     if (event.detail === 'lost') empty(phrase('Graphics connection lost', 'Графический контекст потерян'), phrase('Waiting for WebGL to recover...', 'Ожидание восстановления WebGL...'));
     else update();

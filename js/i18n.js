@@ -2,6 +2,11 @@
 (() => {
   const translations = {
     '3D terrain':'3D-рельеф',
+    'World terrain':'Рельеф мира',
+    'Map centre':'Центр карты',
+    'Go':'Найти',
+    'Retry tiles':'Повторить загрузку',
+    'DEM: Mapzen / upstream credits':'DEM: Mapzen / источники данных',
     'OffBeat Terrain Lab - 3D field view':'OffBeat Terrain Lab - 3D-рельеф',
     'Terrain / NISAR - 3D':'Рельеф / NISAR - 3D',
     'Radar / sample map':'Радар / карта измерений',

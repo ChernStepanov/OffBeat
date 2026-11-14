@@ -702,6 +702,7 @@
     site: () => state.site,
     pixel: () => state.pixel,
     date: () => state.date,
+    viewport() { const c = map.getCenter().wrap(); return { lat: c.lat, lon: c.lng, zoom: map.getZoom() }; },
     selectDate: index => selectAcquisition(index),
     resizeMaps() {
       const center = map.getCenter(), zoom = map.getZoom();

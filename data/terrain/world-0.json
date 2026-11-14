@@ -1,0 +1,8 @@
+{
+  "source_url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/0/0/0.png",
+  "sha256": "0ac97eb7a98aa4e225cad6495523ea1f9851695df0f414e05ad981f652e8c042",
+  "retrieved_utc": "2026-11-14T17:08:12.714111+00:00",
+  "source": "Mapzen Terrain Tiles / ETOPO1",
+  "purpose": "Coarse global fallback for streamed terrain; not NISAR measurements",
+  "attribution_url": "https://github.com/tilezen/joerd/blob/master/docs/attribution.md"
+}

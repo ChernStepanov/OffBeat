@@ -504,6 +504,11 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .terrain-timeline input { flex: 1; min-width: 30px; width: auto; }
 .terrain-timeline button { padding: 2px 8px; min-width: 24px; min-height: 21px; }
 .terrain-timeline button:active:not(:disabled) { padding: 3px 7px 1px 9px; }
+.terrain-navigation { display: flex; flex: none; flex-wrap: wrap; align-items: center; gap: 5px; padding: 0 5px 7px; }
+.terrain-navigation button { padding: 3px 8px; min-height: 22px; }
+.terrain-navigation input { flex: 1; min-width: 120px; width: 120px; }
+.terrain-search-status { flex: none; margin: 0; padding: 0 6px 6px; overflow-wrap: anywhere; }
+.terrain-search-status:empty { display: none; }
 .terrain-window .cloud__viewport { background: #101410; min-height: 250px; }
 .terrain-window #cloud-canvas { image-rendering: auto; }
 .terrain-crt::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 3; opacity: .3; background: radial-gradient(ellipse at center, transparent 35%, #0009 100%), repeating-linear-gradient(0deg, #0003 0 1px, transparent 1px 3px), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.14' filter='url(%23grain)'/%3E%3C/svg%3E"); }
@@ -537,6 +542,7 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 }
 @media (max-width: 720px) {
   .scene .terrain-window { min-height: 690px; }
+  .terrain-navigation input { flex-basis: 60%; }
   .terrain-controls { gap: 5px; }
   .terrain-controls > label:not(:first-child) { margin-left: 1px; }
   .terrain-window .cloud__hud { left: 12px; top: 12px; gap: 3px; }

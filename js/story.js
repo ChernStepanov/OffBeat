@@ -260,7 +260,7 @@ window.OB = window.OB || {};
     const params = new URL(location.href).searchParams;
     let seen = false;
     try { seen = localStorage.getItem(KEY) === "seen"; } catch (e) { /* storage off: show it */ }
-    if (!box || seen || location.hash || params.has("site") || params.has("lat")) return;
+    if (!box || seen || location.hash || params.has("site") || params.has("lat") || params.get('view') === 'scene') return;
     const close = () => { box.hidden = true; try { localStorage.setItem(KEY, "seen"); } catch (e) { /* ignore */ } document.removeEventListener("keydown", onKey); };
     const onKey = e => { if (e.key === "Escape") close(); };
     $("welcome-tour").addEventListener("click", () => { close(); open(0); $("tour-win").scrollIntoView({ block: "start" }); });
