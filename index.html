@@ -228,6 +228,14 @@
                 <small id="gunw-series-note" hidden><span id="gunw-series-text"></span> <a href="data/analysis/mexico-gunw-quality.json">GUNW quality and sources</a>.</small>
                 <small id="gunw-postgap-note" hidden><span id="gunw-postgap-text"></span> <a href="data/analysis/mexico-gunw-postgap-quality.json">Later-pair quality and sources</a>.</small>
               </div>
+              <div class="plot" id="gnss-context" hidden>
+                <button type="button" class="btn" id="gnss-open">Inspect nearby GNSS station MMX1</button>
+                <div id="gnss-plot" hidden>
+                  <div class="pane-label">GNSS MMX1 vertical position change, cm, since 2025-12-17 (IGS20)</div>
+                  <canvas id="c-gnss" height="120" aria-label="GNSS station MMX1 vertical position change"></canvas>
+                  <small>Independent daily GNSS, not NISAR line of sight. Nearest sampled radar point is about 21 m away and fails some GUNW quality checks; no direct validation or stable reference is established. <a href="data/analysis/mexico-mmx1-gnss.json">GNSS source and quality</a>.</small>
+                </div>
+              </div>
               <div class="plot" id="plot-opera" hidden>
                 <div class="pane-label">Sentinel-1 OPERA DISP-S1, short-wavelength relative LOS, cm; + toward satellite (<a href="data/mexico/opera-disp.json">source and quality</a>)</div>
                 <canvas id="c-opera" height="120" aria-label="Quality-masked Sentinel-1 OPERA relative line of sight displacement"></canvas>
@@ -320,17 +328,17 @@
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
-<script src="js/data.js?v=9b172b50d489"></script>
+<script src="js/data.js?v=641a6dc5d949"></script>
 <script src="js/suggestions.js?v=eb8c52544811"></script>
 <script src="js/acquisitions.js?v=faedaefccc8f"></script>
 <script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
-<script src="js/chart.js?v=dceb6523aa2c"></script>
+<script src="js/chart.js?v=18aecc1b3630"></script>
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=24122e4b536d"></script>
 <script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=4b4bcbddb458"></script>
+<script src="js/i18n.js?v=bca531a9da6b"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
-<script src="js/app.js?v=4fb7ddab422e"></script>
+<script src="js/app.js?v=3b154197634b"></script>
 </body>
 </html>
