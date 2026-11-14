@@ -49,7 +49,7 @@ OB.terrainTiles = (() => {
     const b = tile.heights[(iy + 1) * s + ix] * (1 - fx) + tile.heights[(iy + 1) * s + ix + 1] * fx;
     return a * (1 - fy) + b * fy;
   }
-  function create(onChange, { limit = 96, concurrency = 5, fetcher = fetch, decodeImage } = {}) {
+  function create(onChange, { limit = 96, concurrency = 5, fetcher = fetch, decodeImage, rootUrl = 'data/terrain/world-0.png', onEvict = () => {} } = {}) {
     const cache = new Map(), running = new Map(), failures = new Map();
     let wanted = new Map(), queue = [], stopped = false;
     async function png(blob) {
@@ -64,7 +64,7 @@ OB.terrainTiles = (() => {
     function trim() {
       for (const key of cache.keys()) {
         if (cache.size <= limit) break;
-        if (key !== '0/0/0' && !wanted.has(key)) cache.delete(key);
+        if (key !== '0/0/0' && !wanted.has(key)) { const entry = cache.get(key); cache.delete(key); onEvict(entry); }
       }
     }
     function pump() {
@@ -78,10 +78,10 @@ OB.terrainTiles = (() => {
         const timeout = setTimeout(() => controller.abort('timeout'), 18000);
         (async () => {
           try {
-            const response = await fetcher(tile.z === 0 ? 'data/terrain/world-0.png' : tile.url, { signal: controller.signal });
+            const response = await fetcher(tile.z === 0 && rootUrl ? rootUrl : tile.url, { signal: controller.signal });
             if (!response.ok) throw new Error(`DEM HTTP ${response.status}`);
             const data = await (decodeImage || png)(await response.blob());
-            if (controller.signal.aborted) return;
+            if (controller.signal.aborted) { onEvict(data); return; }
             cache.set(tile.key, { ...data, z: tile.z, x: wrap(tile.x, 2 ** tile.z), y: tile.y });
             failures.delete(tile.key); trim(); onChange({ tile, ready: true });
           } catch (error) {

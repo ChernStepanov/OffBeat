@@ -507,6 +507,7 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .cloud__compass { position: absolute; top: 16px; right: 20px; display: grid; justify-items: center; gap: 4px; color: #b8c8d9; pointer-events: none; }
 .cloud__compass svg { transform-origin: center; }
 .cloud__key { position: absolute; left: 18px; bottom: 45px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; width: 125px; color: #b7c6d9; pointer-events: none; }
+.cloud__key[hidden] { display: none; }
 .cloud__key > span:first-child, .cloud__key i { grid-column: 1 / -1; }
 .cloud__key > span:last-child { text-align: right; }
 .cloud__key i { display: block; height: 6px; background: linear-gradient(90deg, #4786cf, #44c4bf, #dad784, #ff9d5e, #e76361); }

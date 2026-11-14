@@ -43,8 +43,13 @@
     $('terrain-centre').textContent = `${geo.lat.toFixed(4)}, ${geo.lon.toFixed(4)} / zoom ${info.zoom.toFixed(1)}`;
     $('terrain-status').textContent = `${phrase('DEM tiles', 'Тайлы DEM')}: ${info.fineTiles}/${info.desiredTiles} / z${info.sourceLevel}`
       + (info.pending ? ` / ${phrase('loading', 'загрузка')}: ${info.pending}` : '')
-      + (info.failed ? ` / ${phrase('unavailable', 'недоступно')}: ${info.failed}` : '');
-    $('terrain-retry').hidden = !info.failed;
+      + (info.failed ? ` / ${phrase('unavailable', 'недоступно')}: ${info.failed}` : '')
+      + (info.mode === 'topo' ? ` | ${phrase('Map tiles', 'Тайлы карты')}: ${info.mapReady}/${info.desiredTiles}`
+        + (info.mapPending ? ` / ${phrase('loading', 'загрузка')}: ${info.mapPending}` : '')
+        + (info.mapFailed ? ` / ${phrase('unavailable; DEM colours shown', 'недоступны; показаны цвета высот')}: ${info.mapFailed}` : '') : '');
+    $('terrain-retry').hidden = !info.failed && !info.mapFailed;
+    document.querySelector('.terrain-height-key').hidden = info.mode === 'topo' && !info.mapFailed;
+    $('terrain-contours').disabled = info.mode === 'topo';
     $('terrain-low').textContent = Math.round(info.min_m).toLocaleString();
     $('terrain-high').textContent = Math.round(info.max_m).toLocaleString();
     $('terrain-scale').textContent = `${(info.span_m / 1000).toFixed(info.span_m < 10000 ? 1 : 0)} km / ${phrase('height', 'высота')} ${info.exaggeration}x`;
