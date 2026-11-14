@@ -275,7 +275,7 @@
     cancelSearch();
     canvas.focus({ preventScroll: true });
     const start = pointer(event);
-    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, pan: event.shiftKey || event.button === 2 };
+    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, button: event.button, pan: event.shiftKey || event.button === 2 };
     canvas.setPointerCapture(event.pointerId);
     canvas.classList.add('is-dragging');
   });
@@ -302,7 +302,7 @@
   });
   canvas.addEventListener('pointerup', event => {
     if (!dragging || dragging.id !== event.pointerId) return;
-    if (!dragging.moved) {
+    if (!dragging.moved && dragging.button === 0) {
       const p = pointer(event), hit = gpu?.pick(p.x, p.y);
       if (hit?.kind === 'site') { setView('orbit'); OB.app.loadSite(hit.siteId).then(() => { gpu.focusSite(OB.app.site()); schedule(); }); }
       else if (hit) OB.app.pickCell(hit.index, false);
