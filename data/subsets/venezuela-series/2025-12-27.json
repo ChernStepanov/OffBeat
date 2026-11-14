@@ -1,0 +1,32 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_008_162_A_007_4005_DHDH_A_20251227T100655_20251227T100729_P05023_N_F_J_001",
+    "concept_id": "G4275130581-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2025-12-27T10:06:55.000Z",
+    "end": "2025-12-27T10:07:29.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_008_162_A_007_4005_DHDH_A_20251227T100655_20251227T100729_P05023_N_F_J_001/NISAR_L2_PR_GCOV_008_162_A_007_4005_DHDH_A_20251227T100655_20251227T100729_P05023_N_F_J_001.h5"
+  },
+  "grid": {
+    "epsg": 32619,
+    "spacing": [
+      10.0,
+      -10.0
+    ],
+    "window": [
+      20647,
+      20917,
+      29841,
+      30109
+    ],
+    "paths": {
+      "hh": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+      "hv": "/science/LSAR/GCOV/grids/frequencyA/HVHV",
+      "mask": "/science/LSAR/GCOV/grids/frequencyA/mask"
+    }
+  },
+  "date": "2025-12-27",
+  "subset_path": "data/subsets/venezuela-series/2025-12-27.npz",
+  "sha256": "fa3c54bdaa6ff7131f00537d9d8e29ae02219af147f2ba6a59ed294ce54e02ba",
+  "catalogue_query": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GCOV_PROVISIONAL_V1&bounding_box=-67.0925%2C10.4575%2C-67.0675%2C10.4825&page_size=2000&sort_key=start_date"
+}

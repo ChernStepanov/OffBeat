@@ -20,8 +20,8 @@ and rejects a synthetic source. Offline scientific test fixtures remain in tests
 | Case | Acquisitions | Valid HH/HV per date | Accepted GUNW samples |
 |---|---|---|---|
 | Mexico City | 29 dates, 2025-10-30 to 2026-10-13 | 1024 each date | 357 (one pair) |
-| Itupiranga, Pará | 2026-07-18, 2026-08-11 | 1024, 1024 | 0 |
-| Caracas | 2025-11-09, 2025-11-21 | 1024, 1024 | 0 |
+| Itupiranga, Pará | 6 dates, 2026-07-18 to 2026-09-28 | 1024 each date | 0 |
+| Caracas | 6 dates, 2025-11-09 to 2026-01-08 | 1024 each date | 0 |
 
 The last two cases have real GCOV and real downloaded GUNW subsets, but none of
 their GUNW samples pass the unchanged quality filters. Displacement stays null;
@@ -37,6 +37,14 @@ exact selection, source IDs, dates, native windows, quality flags and SHA-256.
 Recreate the additional cases with `python scripts/build_real_demos.py`; the
 default Amazon pair index is 2, Venezuela 0. `--site` and `--pair-index` allow
 explicit catalogue selection without changing quality thresholds.
+
+`scripts/extend_sites.py` adds up to four later PROVISIONAL GCOV dates per site
+per invocation, with CMR query, granule identifiers, native windows and SHA-256
+recorded in each receipt. The original GUNW date axis remains independent.
+For Caracas, a separate GUNW subset for 2026-06-13 to 2026-06-25 is in
+`data/subsets/venezuela-gunw/`. None of its 1024 samples meet the unchanged quality
+filters: 81 meet coherence >=0.7, but none meet ionosphere uncertainty <=1 rad.
+No displacement or stable reference has been estimated from this pair.
 
 ## Catalogue evidence (2026-11-14)
 
@@ -124,8 +132,8 @@ limitations. `data/mexico-inspection.json` preserves the HDF5 inventory.
   blue -25 to red 0 dB. Playback compares only measured HH/HV and measured peers.
 - HH/HV use acquisition dates; displacement has its own date axis. JSON `null`
   means unavailable, never zero. Plot lines and bands break at missing entries.
-- Both panes use the same Esri World Imagery basemap (grey under NISAR, colour on
-  the right), with matching zoom limits, optional place labels, study-area outlines
+- Both panes use the same colour Esri World Imagery basemap (with NISAR overlaid
+  on the left), with matching zoom limits, optional place labels, study-area outlines
   and metric scales. Dates vary by location; imagery is not date-matched validation.
   The measured NISAR grid is unchanged; sharper context does not increase its resolution.
 
