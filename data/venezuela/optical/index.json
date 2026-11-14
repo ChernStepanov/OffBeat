@@ -17,16 +17,16 @@
   "eligible_items": 53,
   "selection": "Минимум eo:cloud_cover в пределах ±window_days календарных дней UTC; затем близость к дате NISAR и ID сцены",
   "limitations": [
-    "Облачность сообщается по целому тайлу; облака, тени и валидность пикселей над участком не проверены",
     "Выбранная сцена может быть облачной; selected не означает чистый снимок или подтверждение радарной аномалии",
-    "Проверено включение bbox участка в bbox сцены, а не полное покрытие валидными пикселями",
-    "Изображения не скачаны и ещё не подключены к карте; текущая подложка Esri остаётся географическим контекстом"
+    "Облачность дана для тайла; облака и тени над участком не оценены. RGB valid_fraction показывает только наличие данных, не ясное небо.",
+    "BOA offset legacy COG учтён по earthsearch:boa_offset_applied; противоречащий raster:bands offset повторно не вычитается. Независимая радиометрическая валидация не выполнена."
   ],
   "summary": {
     "nisar_dates": 6,
     "selected": 6,
     "unavailable": 0,
-    "selected_scene_cloud_le_20_pct": 5
+    "selected_scene_cloud_le_20_pct": 5,
+    "rendered_dates": 6
   },
   "entries": [
     {
@@ -41,8 +41,8 @@
         "date": "2025-11-02",
         "scene_cloud_cover_pct": 13.426967,
         "aoi_cloud_cover_pct": null,
-        "aoi_valid_fraction": null,
-        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "aoi_valid_fraction": 1.0,
+        "coverage_check": "RGB window reprojected into aoi; see render.valid_fraction; clouds not checked",
         "scene_bbox": [
           -67.1762,
           9.919875,
@@ -56,10 +56,79 @@
           "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251102_0_L2A/B02.tif"
         },
         "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251102_0_L2A/SCL.tif",
-        "epsg": 32619
+        "epsg": 32619,
+        "render": {
+          "version": 2,
+          "file": "2025-11-02-687c2fc017.png",
+          "bbox": [
+            -67.0925,
+            10.4575,
+            -67.0675,
+            10.4825
+          ],
+          "crs": "EPSG:4326",
+          "width": 252,
+          "height": 256,
+          "stretch": {
+            "reflectance_min": 0.0,
+            "reflectance_max": 0.3,
+            "gamma": 2.2
+          },
+          "resampling": "bilinear",
+          "valid_fraction": 1.0,
+          "bytes": 134860,
+          "sha256": "f8746b5f68e6b2fcb49eee76ec0eab92bce24459e63dddf3c2930e58b2befe0f",
+          "bands": {
+            "red": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251102_0_L2A/B04.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "green": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251102_0_L2A/B03.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "blue": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251102_0_L2A/B02.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            }
+          },
+          "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_19PGM_20251102_0_L2A"
+        }
       },
       "delta_days": -7,
-      "reason": null
+      "reason": null,
+      "crop_status": "ready",
+      "crop_error": null
     },
     {
       "nisar_date": "2025-11-21",
@@ -73,8 +142,8 @@
         "date": "2025-11-09",
         "scene_cloud_cover_pct": 20.1691,
         "aoi_cloud_cover_pct": null,
-        "aoi_valid_fraction": null,
-        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "aoi_valid_fraction": 1.0,
+        "coverage_check": "RGB window reprojected into aoi; see render.valid_fraction; clouds not checked",
         "scene_bbox": [
           -67.176544,
           9.850599,
@@ -88,10 +157,79 @@
           "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251109_0_L2A/B02.tif"
         },
         "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251109_0_L2A/SCL.tif",
-        "epsg": 32619
+        "epsg": 32619,
+        "render": {
+          "version": 2,
+          "file": "2025-11-09-456dfa6f4c.png",
+          "bbox": [
+            -67.0925,
+            10.4575,
+            -67.0675,
+            10.4825
+          ],
+          "crs": "EPSG:4326",
+          "width": 252,
+          "height": 256,
+          "stretch": {
+            "reflectance_min": 0.0,
+            "reflectance_max": 0.3,
+            "gamma": 2.2
+          },
+          "resampling": "bilinear",
+          "valid_fraction": 1.0,
+          "bytes": 136403,
+          "sha256": "8e65c33a5088aeb309fbf1c8b1e616298d5f6a612b88bee0642f7cc2983363b4",
+          "bands": {
+            "red": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251109_0_L2A/B04.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "green": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251109_0_L2A/B03.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "blue": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/11/S2C_19PGM_20251109_0_L2A/B02.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            }
+          },
+          "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_19PGM_20251109_0_L2A"
+        }
       },
       "delta_days": -12,
-      "reason": null
+      "reason": null,
+      "crop_status": "ready",
+      "crop_error": null
     },
     {
       "nisar_date": "2025-12-03",
@@ -105,8 +243,8 @@
         "date": "2025-12-12",
         "scene_cloud_cover_pct": 3.782208,
         "aoi_cloud_cover_pct": null,
-        "aoi_valid_fraction": null,
-        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "aoi_valid_fraction": 1.0,
+        "coverage_check": "RGB window reprojected into aoi; see render.valid_fraction; clouds not checked",
         "scene_bbox": [
           -67.176107,
           9.936706,
@@ -120,10 +258,79 @@
           "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251212_0_L2A/B02.tif"
         },
         "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251212_0_L2A/SCL.tif",
-        "epsg": 32619
+        "epsg": 32619,
+        "render": {
+          "version": 2,
+          "file": "2025-12-12-76593af206.png",
+          "bbox": [
+            -67.0925,
+            10.4575,
+            -67.0675,
+            10.4825
+          ],
+          "crs": "EPSG:4326",
+          "width": 252,
+          "height": 256,
+          "stretch": {
+            "reflectance_min": 0.0,
+            "reflectance_max": 0.3,
+            "gamma": 2.2
+          },
+          "resampling": "bilinear",
+          "valid_fraction": 1.0,
+          "bytes": 137611,
+          "sha256": "802a1eed2c0463653bee9996da7552c800e3abffc35d4aa9c35f205a4bb0b0a1",
+          "bands": {
+            "red": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251212_0_L2A/B04.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "green": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251212_0_L2A/B03.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "blue": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251212_0_L2A/B02.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            }
+          },
+          "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_19PGM_20251212_0_L2A"
+        }
       },
       "delta_days": 9,
-      "reason": null
+      "reason": null,
+      "crop_status": "ready",
+      "crop_error": null
     },
     {
       "nisar_date": "2025-12-15",
@@ -137,8 +344,8 @@
         "date": "2025-12-22",
         "scene_cloud_cover_pct": 0.879336,
         "aoi_cloud_cover_pct": null,
-        "aoi_valid_fraction": null,
-        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "aoi_valid_fraction": 1.0,
+        "coverage_check": "RGB window reprojected into aoi; see render.valid_fraction; clouds not checked",
         "scene_bbox": [
           -67.176152,
           9.928568,
@@ -152,10 +359,79 @@
           "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B02.tif"
         },
         "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/SCL.tif",
-        "epsg": 32619
+        "epsg": 32619,
+        "render": {
+          "version": 2,
+          "file": "2025-12-22-d54b29d907.png",
+          "bbox": [
+            -67.0925,
+            10.4575,
+            -67.0675,
+            10.4825
+          ],
+          "crs": "EPSG:4326",
+          "width": 252,
+          "height": 256,
+          "stretch": {
+            "reflectance_min": 0.0,
+            "reflectance_max": 0.3,
+            "gamma": 2.2
+          },
+          "resampling": "bilinear",
+          "valid_fraction": 1.0,
+          "bytes": 141308,
+          "sha256": "bc2b566669fe38dd5055b2d08d4c4733afc42459d2f04cbfed885e91bf5b84c1",
+          "bands": {
+            "red": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B04.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "green": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B03.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "blue": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B02.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            }
+          },
+          "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_19PGM_20251222_0_L2A"
+        }
       },
       "delta_days": 7,
-      "reason": null
+      "reason": null,
+      "crop_status": "ready",
+      "crop_error": null
     },
     {
       "nisar_date": "2025-12-27",
@@ -169,8 +445,8 @@
         "date": "2025-12-22",
         "scene_cloud_cover_pct": 0.879336,
         "aoi_cloud_cover_pct": null,
-        "aoi_valid_fraction": null,
-        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "aoi_valid_fraction": 1.0,
+        "coverage_check": "RGB window reprojected into aoi; see render.valid_fraction; clouds not checked",
         "scene_bbox": [
           -67.176152,
           9.928568,
@@ -184,10 +460,79 @@
           "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B02.tif"
         },
         "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/SCL.tif",
-        "epsg": 32619
+        "epsg": 32619,
+        "render": {
+          "version": 2,
+          "file": "2025-12-22-d54b29d907.png",
+          "bbox": [
+            -67.0925,
+            10.4575,
+            -67.0675,
+            10.4825
+          ],
+          "crs": "EPSG:4326",
+          "width": 252,
+          "height": 256,
+          "stretch": {
+            "reflectance_min": 0.0,
+            "reflectance_max": 0.3,
+            "gamma": 2.2
+          },
+          "resampling": "bilinear",
+          "valid_fraction": 1.0,
+          "bytes": 141308,
+          "sha256": "bc2b566669fe38dd5055b2d08d4c4733afc42459d2f04cbfed885e91bf5b84c1",
+          "bands": {
+            "red": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B04.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "green": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B03.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "blue": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/B02.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            }
+          },
+          "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_19PGM_20251222_0_L2A"
+        }
       },
       "delta_days": -5,
-      "reason": null
+      "reason": null,
+      "crop_status": "ready",
+      "crop_error": null
     },
     {
       "nisar_date": "2026-01-08",
@@ -201,8 +546,8 @@
         "date": "2026-01-21",
         "scene_cloud_cover_pct": 8.376154,
         "aoi_cloud_cover_pct": null,
-        "aoi_valid_fraction": null,
-        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "aoi_valid_fraction": 1.0,
+        "coverage_check": "RGB window reprojected into aoi; see render.valid_fraction; clouds not checked",
         "scene_bbox": [
           -67.176539,
           9.858477,
@@ -216,10 +561,88 @@
           "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2026/1/S2C_19PGM_20260121_0_L2A/B02.tif"
         },
         "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2026/1/S2C_19PGM_20260121_0_L2A/SCL.tif",
-        "epsg": 32619
+        "epsg": 32619,
+        "render": {
+          "version": 2,
+          "file": "2026-01-21-be81ec4239.png",
+          "bbox": [
+            -67.0925,
+            10.4575,
+            -67.0675,
+            10.4825
+          ],
+          "crs": "EPSG:4326",
+          "width": 252,
+          "height": 256,
+          "stretch": {
+            "reflectance_min": 0.0,
+            "reflectance_max": 0.3,
+            "gamma": 2.2
+          },
+          "resampling": "bilinear",
+          "valid_fraction": 1.0,
+          "bytes": 137894,
+          "sha256": "8877e31168348159b380cd3c752877562e36804632c532cefff9641a7271cbc0",
+          "bands": {
+            "red": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2026/1/S2C_19PGM_20260121_0_L2A/B04.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "green": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2026/1/S2C_19PGM_20260121_0_L2A/B03.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            },
+            "blue": {
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2026/1/S2C_19PGM_20260121_0_L2A/B02.tif",
+              "source_crs": "EPSG:32619",
+              "window": [
+                879,
+                4057,
+                280,
+                283
+              ],
+              "scale": 0.0001,
+              "offset": 0.0,
+              "declared_stac_offset": -0.1,
+              "boa_offset_applied": true
+            }
+          },
+          "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_19PGM_20260121_0_L2A"
+        }
       },
       "delta_days": 13,
-      "reason": null
+      "reason": null,
+      "crop_status": "ready",
+      "crop_error": null
     }
-  ]
+  ],
+  "rendering": {
+    "version": 2,
+    "stretch": {
+      "reflectance_min": 0.0,
+      "reflectance_max": 0.3,
+      "gamma": 2.2
+    },
+    "note": "RGB B04/B03/B02, EPSG:4326, точный bbox; прозрачный nodata; облака не удалены"
+  }
 }
