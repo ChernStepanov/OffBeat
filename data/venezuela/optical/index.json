@@ -9589,8 +9589,9 @@
           ]
         }
       ],
-      "hls_status": "20 HLS T19PGM candidates inspected; none reached 80% clear AOI; other overlapping tiles unexamined",
-      "hls_quality_receipt": "data/subsets/venezuela-hls/2025-11-21-quality.json"
+      "hls_status": "20 same-acquisition T19PGM+T19PFM QA mosaics inspected; best clear AOI 46.6456%, below 80% threshold",
+      "hls_quality_receipt": "data/subsets/venezuela-hls/2025-11-21-quality.json",
+      "hls_mosaic_quality_receipt": "data/subsets/venezuela-hls/2025-11-21-mosaic-quality.json"
     },
     {
       "nisar_date": "2025-12-03",
