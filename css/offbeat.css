@@ -151,6 +151,8 @@ input[type="range"]:focus { outline: none; }
 input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
 
 .legend { margin-top: 6px; }
+.nisar-legend { white-space: nowrap; }
+.nisar-legend__ramp { display: inline-block; width: 90px; height: 9px; vertical-align: -1px; box-shadow: var(--sunken); }
 .legend__ramp { height: 10px; margin-top: 3px; box-shadow: var(--sunken); }
 .legend__ends { display: flex; justify-content: space-between; }
 

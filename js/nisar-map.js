@@ -11,7 +11,7 @@ OB.bindNisarMap = function (map, toggle, status) {
   const tiles = new Set();
   const imageCache = new Map();
   let failedTiles = 0, inflight = 0, statusTimer;
-  let layer, loading, caption;
+  let layer, loading, caption, legend;
   // A NASA browse pixel is ~19 m (native level 13). Up to zoom 16 it spans at most ~8 screen
   // pixels and smooth scaling hides the hatching; from zoom 17 it spans 16+ and smoothing turns
   // each one into a soft blob, so it is drawn as the honest square it is.
@@ -62,9 +62,12 @@ OB.bindNisarMap = function (map, toggle, status) {
     if (!caption) return;
     const past = map.getZoom() >= CRISP_FROM ? ' | Zoomed past radar detail: one square is one ~19 m NISAR browse pixel' : '';
     const busy = inflight > 0 ? ` | Loading NASA radar: ${inflight} request${inflight === 1 ? '' : 's'} left` : '';
-    status.textContent = caption + past + busy + (failedTiles
+    const text = caption + past + busy + (failedTiles
       ? ` | ${failedTiles} incomplete tile${failedTiles === 1 ? '' : 's'}: NASA did not answer, retrying. These gaps are not confirmed missing coverage.`
-      : ' | Transparent gaps: no browse coverage in this time window.');
+      : ' | No colour: NISAR did not image that ground in this window.');
+    status.textContent = '';
+    if (legend) status.append(legend, ' ');
+    status.append(text);
   }
 
   // The layer's own time domain via DescribeDomains: under 1 KB and ~0.3 s, instead of the
@@ -148,7 +151,7 @@ OB.bindNisarMap = function (map, toggle, status) {
         const mask = new Uint8Array(MASK * MASK);
         for (let py = 0; py < tileSize; py++) for (let px = 0; px < tileSize; px++)
           if (alpha[(py * tileSize + px) * 4 + 3]) mask[Math.floor(py / step) * MASK + Math.floor(px / step)] = 1;
-        return mask;
+        return { mask };
       })));
       if (ancestors.size > 64) ancestors.delete(ancestors.keys().next().value);
     }
@@ -160,14 +163,15 @@ OB.bindNisarMap = function (map, toggle, status) {
     const ax = coords.x >> k, ay = coords.y >> k, masks = await ancestorMasks(dates, coords.z - k, ax, ay);
     // the child's square inside the ancestor, one mask cell wider on each side for thin swath edges
     const cells = MASK >> k, ox = (coords.x - (ax << k)) * cells, oy = (coords.y - (ay << k)) * cells;
-    return dates.map((_, i) => i).filter(i => {
-      const mask = masks[i];
+    const wanted = dates.map((_, i) => i).filter(i => {
+      const mask = masks[i] && masks[i].mask;
       if (!mask) return true;                                // ancestor unknown for this date: ask the tile
       for (let my = Math.max(0, oy - 1); my < Math.min(MASK, oy + cells + 1); my++)
         for (let mx = Math.max(0, ox - 1); mx < Math.min(MASK, ox + cells + 1); mx++)
           if (mask[my * MASK + mx]) return true;
       return false;
     });
+    return wanted;
   }
 
   function createMosaic(dates) {
@@ -183,11 +187,25 @@ OB.bindNisarMap = function (map, toggle, status) {
         const slots = new Array(dates.length).fill(null);
         let shown = false;
         const show = error => { if (!shown) { shown = true; done(error, tile); } };
+        const levels = new Array(dates.length).fill(null);     // per date: coverage mask
         const paint = () => {
-          context.clearRect(0, 0, tileSize, tileSize);
-          for (const image of slots) if (image) context.drawImage(image, 0, 0);
-          tile.radar = { coords, pixels: context.getImageData(0, 0, tileSize, tileSize) };
-          colorTile(tile);
+          const owner = new Int8Array(tileSize * tileSize).fill(-1);
+          levels.forEach((mask, d) => { if (mask) for (let p = 0; p < mask.length; p++) if (mask[p]) owner[p] = d; });  // newest wins
+          const out = new ImageData(tileSize, tileSize);
+          for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
+            const p = y * tileSize + x, d = owner[p];
+            if (d < 0) continue;
+            // edge of a swath: a neighbour that is empty or from another date
+            const edge = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
+              const X = x + dx, Y = y + dy;
+              return X >= 0 && Y >= 0 && X < tileSize && Y < tileSize && owner[Y * tileSize + X] !== d;
+            });
+            const [r, g, b] = dateColour(d, dates.length), i = p * 4;
+            out.data[i] = edge ? r * 0.55 : r; out.data[i + 1] = edge ? g * 0.55 : g; out.data[i + 2] = edge ? b * 0.55 : b;
+            out.data[i + 3] = edge ? 230 : 150;
+          }
+          tile.radar = { coords, cells: out, owner, dates };
+          context.putImageData(out, 0, 0);
         };
         const url = date => `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`;
         // one date; a failed request is tried again later (twice), so a slow NASA reply heals itself
@@ -195,6 +213,7 @@ OB.bindNisarMap = function (map, toggle, status) {
           if (tile.unloaded) return;
           if (image) {
             slots[i] = image;
+            levels[i] = coverage(image);
             try { paint(); } catch (error) { context.clearRect(0, 0, tileSize, tileSize); show(error); return; }
             show(null);
             return;
@@ -225,24 +244,40 @@ OB.bindNisarMap = function (map, toggle, status) {
     return mosaic;
   }
 
-  // Recolour every pixel of the NASA browse tile in place: one screen cell is one data cell at
-  // the tile's own level, never an artificial block whose ground size changes with zoom.
-  function colorTile(tile) {
-    const context = tile.getContext('2d');
-    const image = new ImageData(new Uint8ClampedArray(tile.radar.pixels.data), tileSize, tileSize);
-    const pixels = image.data;
-    for (let i = 0; i < pixels.length; i += 4) {
-      if (pixels[i + 3] === 0) continue;
-      // Brightness of the NASA browse image on a display-only ramp.
-      const strength = Math.round(0.2126 * pixels[i] + 0.7152 * pixels[i + 1] + 0.0722 * pixels[i + 2]);
-      pixels[i] = strength;
-      pixels[i + 1] = 70;
-      pixels[i + 2] = 255 - strength;
-      pixels[i + 3] = 255;
+  // The layer shows where and when NISAR imaged the ground in the mosaic window, not brightness.
+  // NASA's browse tiles are a stretched false-colour picture whose level jumps from tile to tile
+  // and whose detail is speckle on a half-transparent checkerboard: fine for "is there data", not
+  // for a seamless image. Coverage = a 3 x 3 neighbourhood that is at least 35 % opaque, which
+  // closes the checkerboard without growing real swath edges.
+  const MIN_COVER = 0.35;
+  function coverage(image) {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = tileSize;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    const px = ctx.getImageData(0, 0, tileSize, tileSize).data;
+    const mask = new Uint8Array(tileSize * tileSize);
+    for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
+      let a = 0, cells = 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const X = x + dx, Y = y + dy;
+        if (X < 0 || Y < 0 || X >= tileSize || Y >= tileSize) continue;
+        a += px[(Y * tileSize + X) * 4 + 3]; cells++;
+      }
+      if (a / (255 * cells) >= MIN_COVER) mask[y * tileSize + x] = 1;
     }
-    tile.radar.cells = image;
-    context.putImageData(image, 0, 0);
+    return mask;
   }
+
+  // date order -> colour: oldest deep blue, through teal and amber, to coral for the newest day
+  const DATE_STOPS = [[0, [38, 70, 140]], [0.35, [42, 157, 143]], [0.7, [233, 196, 106]], [1, [231, 111, 81]]];
+  function dateColour(d, count) {
+    const t = count > 1 ? d / (count - 1) : 1;
+    let k = 1; while (k < DATE_STOPS.length - 1 && t > DATE_STOPS[k][0]) k++;
+    const [t0, a] = DATE_STOPS[k - 1], [t1, b] = DATE_STOPS[k], f = (t - t0) / (t1 - t0);
+    return a.map((c, j) => Math.round(c + (b[j] - c) * f));
+  }
+  const legendCss = n => `linear-gradient(90deg, ${Array.from({ length: n }, (_, d) => `rgb(${dateColour(d, n).join(',')})`).join(',')})`;
 
   async function update() {
     status.hidden = !toggle.checked;
@@ -258,7 +293,12 @@ OB.bindNisarMap = function (map, toggle, status) {
         const dates = await getDates();
         layer = createMosaic(dates);
         const lag = dates.latest !== dates.at(-1) ? ` (NASA tiles after this are still incomplete, newest ${dates.latest})` : '';
-        caption = `NASA NISAR quick-look | ${mosaicDays}-day mosaic through ${dates.at(-1)}${lag} | Blue to red: browse brightness, not calibrated; straight seams come from NASA's tiles`;
+        caption = `Where NISAR imaged the ground, coloured by date${lag} | from NASA GIBS browse tiles`;
+        legend = document.createElement('span');
+        legend.className = 'nisar-legend';
+        legend.innerHTML = `<span class="nisar-legend__ramp" style="background:${legendCss(dates.length)}"></span>`;
+        legend.prepend(dates[0] + ' ');
+        legend.append(' ' + dates.at(-1));
       }
       if (toggle.checked) {
         layer.addTo(map);

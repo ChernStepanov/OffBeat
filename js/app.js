@@ -119,7 +119,7 @@
     if (!await showPlace({lat: (bounds[0][0] + bounds[1][0]) / 2, lon: (bounds[0][1] + bounds[1][1]) / 2, bounds})) return;
     clearSearchMarkers();
     $('site-name').textContent = id === 'world' ? 'World' : id[0].toUpperCase() + id.slice(1);
-    $('map-caption').textContent = 'Global NASA NISAR browse mosaic; blue to red: image brightness. Gaps show the basemap.';
+    $('map-caption').textContent = 'Global NISAR coverage over the last 12 published days, coloured by acquisition date. Open a demo site for measured radar.';
     document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.region === id)));
   }
   $('regions').addEventListener('click', event => {
@@ -277,7 +277,7 @@
   }
 
   function drawRaster() {
-    $('map-caption').textContent = 'Global NASA browse brightness; optional points show peer z, blue negative / red positive; no event area';
+    $('map-caption').textContent = 'Global NISAR coverage by date; optional points show peer z, blue negative / red positive; no event area';
     if (state.raster) map.removeLayer(state.raster);
     state.raster = null;
     if (!$("l-offbeat").checked) return;
