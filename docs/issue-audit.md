@@ -21,7 +21,7 @@ are excluded at the user's request.
 | #27 | Partial | English recording script; no narrated screen recording produced |
 | #28 | Implemented as requested draft | English submission text and six-slide PPTX, with source notes and embedded measured chart values |
 | #29 | Implemented | Five-minute static launch, current data, reproduction, sources and licence gaps |
-| #33 | Partial | Own-history vs neighbour-relative baselines, candidates and random controls; dense windows, weather, labels and held-out evaluation absent |
+| #33 | Partial | Own-history vs neighbour-relative baselines, candidates, controls and coarse retrospective ERA5 precipitation context; dense windows, weather-corrected model, labels and held-out evaluation absent |
 | #35 | Open | RTC-S1 footprint overlap proven; no authenticated VV/VH series or numeric C/L contrast |
 | #36 | Open | DISP-S1 footprint overlap proven; no inspected displacement series or velocity |
 
