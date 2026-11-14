@@ -2,6 +2,8 @@
 (() => {
   const translations = {
     'Welcome to OffBeat':'Добро пожаловать в OffBeat',
+    'Measured HH/HV on 2 dates; exploratory peer deviations only. Too few dates for curve-shape classification. No GUNW displacement samples passed quality checks.':'Измерения HH/HV за две даты; отклонения от соседей требуют проверки. Для определения формы кривой дат недостаточно. Ни одно измерение смещения GUNW не прошло проверку качества.',
+    'Measured HH/HV on 2 dates; exploratory peer deviations only. Too few dates for curve-shape classification. GUNW has quality-filtered samples on a separate date axis.':'Измерения HH/HV за две даты; отклонения от соседей требуют проверки. Для определения формы кривой дат недостаточно. Прошедшие проверку точки GUNW показаны на отдельной временной шкале.',
     'No prepared measurements at this location. Choose a marked site to see its data and listen to a sample.':'Для этого места нет подготовленных измерений. Выберите отмеченный участок, чтобы увидеть данные и прослушать точку.',
     'Choose a prepared measurement site':'Выбрать участок с измерениями',
     'Measured data could not be loaded. Check your connection and reload the page.':'Не удалось загрузить измерения. Проверьте соединение и обновите страницу.',

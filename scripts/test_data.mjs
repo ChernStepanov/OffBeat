@@ -15,7 +15,7 @@ vm.createContext(context);
 vm.runInContext(fs.readFileSync('js/data.js','utf8'), context);
 await context.OB.loadData();
 assert.equal(context.OB.SITES[0].series(0,0).hh.length,site.dates.length);
-assert.deepEqual(Array.from(context.OB.SITES, s=>s.id),['mexico','amazon','venezuela','delhi','tokyo']);
+assert.deepEqual(Array.from(context.OB.SITES, s=>s.id),['mexico','amazon','venezuela','delhi','tokyo','khimki','nairobi','sydney']);
 for (const loaded of context.OB.SITES) {
   assert(!/synthetic|mock/i.test(loaded.source));
   assert.equal(loaded.provenance.inputs.length,3);

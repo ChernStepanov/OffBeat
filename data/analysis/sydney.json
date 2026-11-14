@@ -1,0 +1,514 @@
+{
+  "site": "sydney",
+  "dates": [
+    "2026-06-25",
+    "2026-07-07"
+  ],
+  "input_sha256": "fdb0bc1182d5d5420ab5ce5ab7e9945d24d65715ef003c685d0a20c2201e5e1d",
+  "valid_latest_z": 848,
+  "shape_counts": {
+    "drop": 0,
+    "flood": 0,
+    "drift": 0,
+    "step": 0
+  },
+  "class_medians": [
+    {
+      "date": "2026-06-25",
+      "classes": {
+        "10": {
+          "n": 186,
+          "hv_median_db": -12.043
+        },
+        "20": {
+          "n": 5,
+          "hv_median_db": -12.53879
+        },
+        "30": {
+          "n": 38,
+          "hv_median_db": -15.79701
+        },
+        "50": {
+          "n": 609,
+          "hv_median_db": -9.71425
+        },
+        "60": {
+          "n": 30,
+          "hv_median_db": -7.52988
+        },
+        "80": {
+          "n": 153,
+          "hv_median_db": -17.34655
+        },
+        "90": {
+          "n": 3,
+          "hv_median_db": -15.16694
+        }
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "classes": {
+        "10": {
+          "n": 186,
+          "hv_median_db": -11.60589
+        },
+        "20": {
+          "n": 5,
+          "hv_median_db": -11.56998
+        },
+        "30": {
+          "n": 38,
+          "hv_median_db": -15.58518
+        },
+        "50": {
+          "n": 609,
+          "hv_median_db": -9.68087
+        },
+        "60": {
+          "n": 30,
+          "hv_median_db": -8.53278
+        },
+        "80": {
+          "n": 153,
+          "hv_median_db": -17.47309
+        },
+        "90": {
+          "n": 3,
+          "hv_median_db": -15.4922
+        }
+      }
+    }
+  ],
+  "review_top10": [
+    {
+      "id": "SYD r0 c0",
+      "lat": -33.857890625,
+      "lon": 151.19789062499999,
+      "cover": 80,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.45641,
+        -9.45966
+      ],
+      "hv": [
+        -19.35823,
+        -18.23616
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 0
+    },
+    {
+      "id": "SYD r0 c1",
+      "lat": -33.857890625,
+      "lon": 151.198671875,
+      "cover": 80,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -10.40897,
+        -8.4341
+      ],
+      "hv": [
+        -17.34655,
+        -16.03386
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 0
+    },
+    {
+      "id": "SYD r0 c2",
+      "lat": -33.857890625,
+      "lon": 151.199453125,
+      "cover": 80,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.32106,
+        -12.65778
+      ],
+      "hv": [
+        -15.15993,
+        -15.74296
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 0
+    },
+    {
+      "id": "SYD r0 c3",
+      "lat": -33.857890625,
+      "lon": 151.20023437499998,
+      "cover": 80,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.38174,
+        -6.75022
+      ],
+      "hv": [
+        -19.43477,
+        -15.44315
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 0
+    },
+    {
+      "id": "SYD r0 c4",
+      "lat": -33.857890625,
+      "lon": 151.201015625,
+      "cover": 30,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.56116,
+        -6.98703
+      ],
+      "hv": [
+        -11.16122,
+        -10.26542
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 4
+    },
+    {
+      "id": "SYD r0 c5",
+      "lat": -33.857890625,
+      "lon": 151.20179687499999,
+      "cover": 10,
+      "z": 0.15582,
+      "style": null,
+      "since": null,
+      "hh": [
+        1.2745,
+        1.87334
+      ],
+      "hv": [
+        -9.85587,
+        -8.89945
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 20
+    },
+    {
+      "id": "SYD r0 c6",
+      "lat": -33.857890625,
+      "lon": 151.202578125,
+      "cover": 50,
+      "z": -0.77992,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.81948,
+        -7.09941
+      ],
+      "hv": [
+        -17.70009,
+        -15.49921
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 100
+    },
+    {
+      "id": "SYD r0 c7",
+      "lat": -33.857890625,
+      "lon": 151.203359375,
+      "cover": 50,
+      "z": 0.12288,
+      "style": null,
+      "since": null,
+      "hh": [
+        2.64489,
+        0.10547
+      ],
+      "hv": [
+        -10.09165,
+        -10.45913
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 104
+    },
+    {
+      "id": "SYD r0 c8",
+      "lat": -33.857890625,
+      "lon": 151.20414062499998,
+      "cover": 50,
+      "z": 0.60485,
+      "style": null,
+      "since": null,
+      "hh": [
+        7.64194,
+        7.1853
+      ],
+      "hv": [
+        -2.74078,
+        -7.15477
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 108
+    },
+    {
+      "id": "SYD r0 c9",
+      "lat": -33.857890625,
+      "lon": 151.204921875,
+      "cover": 50,
+      "z": 0.0646,
+      "style": null,
+      "since": null,
+      "hh": [
+        1.04165,
+        2.01667
+      ],
+      "hv": [
+        -9.3775,
+        -10.11893
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 112
+    }
+  ],
+  "controls": [
+    {
+      "id": "SYD r0 c12",
+      "lat": -33.857890625,
+      "lon": 151.207265625,
+      "cover": 50,
+      "z": -1.38668,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.08796,
+        -6.30839
+      ],
+      "hv": [
+        -16.17557,
+        -20.06705
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 119
+    },
+    {
+      "id": "SYD r30 c5",
+      "lat": -33.881328125,
+      "lon": 151.20179687499999,
+      "cover": 50,
+      "z": -0.91916,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.03909,
+        -7.6831
+      ],
+      "hv": [
+        -16.23795,
+        -14.64647
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 167
+    },
+    {
+      "id": "SYD r23 c26",
+      "lat": -33.875859375,
+      "lon": 151.218203125,
+      "cover": 50,
+      "z": -0.51283,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.17447,
+        -4.63459
+      ],
+      "hv": [
+        -14.71646,
+        -12.44458
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 237
+    },
+    {
+      "id": "SYD r12 c17",
+      "lat": -33.867265625,
+      "lon": 151.211171875,
+      "cover": 60,
+      "z": 0.6214,
+      "style": null,
+      "since": null,
+      "hh": [
+        0.20066,
+        1.2206
+      ],
+      "hv": [
+        -4.44609,
+        -3.99424
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 21
+    },
+    {
+      "id": "SYD r6 c8",
+      "lat": -33.862578125,
+      "lon": 151.20414062499998,
+      "cover": 10,
+      "z": 0.51622,
+      "style": null,
+      "since": null,
+      "hh": [
+        6.96796,
+        6.50471
+      ],
+      "hv": [
+        -6.992,
+        -8.01356
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 33
+    },
+    {
+      "id": "SYD r5 c9",
+      "lat": -33.861796875,
+      "lon": 151.204921875,
+      "cover": 50,
+      "z": -1.13749,
+      "style": null,
+      "since": null,
+      "hh": [
+        -12.88649,
+        -6.44454
+      ],
+      "hv": [
+        -16.80314,
+        -16.38524
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 192
+    },
+    {
+      "id": "SYD r23 c18",
+      "lat": -33.875859375,
+      "lon": 151.211953125,
+      "cover": 10,
+      "z": -1.07956,
+      "style": null,
+      "since": null,
+      "hh": [
+        -10.27472,
+        -8.20976
+      ],
+      "hv": [
+        -15.73814,
+        -15.83004
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 94
+    },
+    {
+      "id": "SYD r29 c23",
+      "lat": -33.880546875,
+      "lon": 151.215859375,
+      "cover": 50,
+      "z": -0.19688,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.04132,
+        -4.82423
+      ],
+      "hv": [
+        -10.23795,
+        -10.10338
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 205
+    },
+    {
+      "id": "SYD r16 c23",
+      "lat": -33.870390625,
+      "lon": 151.215859375,
+      "cover": 30,
+      "z": 0.50935,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.6429,
+        -9.1842
+      ],
+      "hv": [
+        -17.01572,
+        -15.23107
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 19
+    },
+    {
+      "id": "SYD r8 c18",
+      "lat": -33.864140625000005,
+      "lon": 151.211953125,
+      "cover": 50,
+      "z": 1.1525,
+      "style": null,
+      "since": null,
+      "hh": [
+        0.81675,
+        1.9973
+      ],
+      "hv": [
+        -3.46275,
+        -2.40744
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 216
+    }
+  ],
+  "requested_candidate": null,
+  "limitations": [
+    "WorldCover 2021 may be outdated",
+    "Sparse samples, no area or continuous raster",
+    "Curve shapes are not confirmed clearing, flood, earthquake or subsidence",
+    "No weather correction or labelled accuracy estimate"
+  ]
+}

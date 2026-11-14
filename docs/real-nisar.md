@@ -24,8 +24,13 @@ and rejects a synthetic source. Offline scientific test fixtures remain in tests
 | Caracas | 6 dates, 2025-11-09 to 2026-01-08 | 1024 each date | 0 |
 | New Delhi, India | 2 dates, 2025-11-21 to 2025-12-03 | 1024 each date | 0 |
 | Tokyo, Japan | 2 dates, 2025-10-31 to 2025-11-12 | 1024 each date | 803 (one pair) |
+| Khimki, Moscow Oblast, Russia | 2 dates, 2026-06-25 to 2026-07-07 | 1024 each date | 0 |
+| Nairobi, Kenya | 2 dates, 2026-06-30 to 2026-07-12 | 1024 each date | 593 (one pair) |
+| Sydney, Australia | 2 dates, 2026-06-25 to 2026-07-07 | 1024 each date | 573 (one pair) |
 
 Delhi (track 156A/016) and Tokyo (038A/020) are separate 0.025° windows, not city-wide coverage. The downloaded GCOV/GUNW granules, WGS84 sample coordinates, native window receipts and hashes are in `data/<site>-manifest.json` and `data/subsets/<site>/`. Reproduce each initial extraction with `python scripts/build_real_demos.py --site delhi` or `--site tokyo`, followed by `python -m scripts.analyze_samples`; catalogue selection may change as products are added. No dated optical previews are prepared for these sites. With only two GCOV dates no curve-shape classification is claimed. Delhi's GUNW is unavailable after quality filtering; Tokyo's accepted relative LOS measurements are one pair with no independently established stable reference or rate.
+
+Khimki (track 157A/030), Nairobi (057A/001) and Sydney (167A/161) use the same small-window and sparse-sample method and can be reproduced with `--site khimki`, `--site nairobi` and `--site sydney`. No Khimki GUNW samples passed the quality filters. The accepted Nairobi and Sydney values come from single relative LOS pairs; reference stability and displacement rates have not been established. Dated optical previews are not prepared for these sites.
 
 The Amazon and Caracas cases have real GCOV and downloaded GUNW subsets, but none of
 their GUNW samples pass the unchanged quality filters. Displacement stays null;

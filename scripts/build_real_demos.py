@@ -10,7 +10,10 @@ import subset_nisar as subset
 CASES=[('amazon','Itupiranga, Pará',dict(w=-49.2875,s=-4.7875,e=-49.2625,n=-4.7625),146,175),
        ('venezuela','Caracas and Catia La Mar',dict(w=-67.0925,s=10.4575,e=-67.0675,n=10.4825),162,7),
        ('delhi','New Delhi, India',dict(w=77.1975,s=28.5975,e=77.2225,n=28.6225),156,16),
-       ('tokyo','Tokyo, Japan',dict(w=139.6775,s=35.6775,e=139.7025,n=35.7025),38,20)]
+       ('tokyo','Tokyo, Japan',dict(w=139.6775,s=35.6775,e=139.7025,n=35.7025),38,20),
+       ('khimki','Khimki, Moscow Oblast, Russia',dict(w=37.4325,s=55.8925,e=37.4575,n=55.9175),157,30),
+       ('nairobi','Nairobi, Kenya',dict(w=36.8075,s=-1.3025,e=36.8325,n=-1.2775),57,1),
+       ('sydney','Sydney, Australia',dict(w=151.1975,s=-33.8825,e=151.2225,n=-33.8575),167,161)]
 
 def discover(site,bbox,track,frame,pair_index=0):
     products={}

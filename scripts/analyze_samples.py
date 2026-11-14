@@ -87,7 +87,7 @@ def analyze(site, radius=1000, minimum=10):
 
 if __name__=='__main__':
     folder=ROOT/'data/analysis';folder.mkdir(exist_ok=True)
-    for identifier in ['mexico','amazon','venezuela','delhi','tokyo']:
+    for identifier in ['mexico','amazon','venezuela','delhi','tokyo','khimki','nairobi','sydney']:
         path=ROOT/f'data/{identifier}.json';site=json.loads(path.read_text())
         report=analyze(site)
         path.write_text(json.dumps(site,allow_nan=False,separators=(',',':'))+'\n')
