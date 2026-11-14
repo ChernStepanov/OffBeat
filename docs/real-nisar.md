@@ -120,7 +120,10 @@ limitations. `data/mexico-inspection.json` preserves the HDF5 inventory.
   blue -25 to red 0 dB. Playback compares only measured HH/HV and measured peers.
 - HH/HV use acquisition dates; displacement has its own date axis. JSON `null`
   means unavailable, never zero. Plot lines and bands break at missing entries.
-- Optical context remains a **2020 cloudless composite**, not date-matched validation.
+- Both panes use the same Esri World Imagery basemap (grey under NISAR, colour on
+  the right), with matching zoom limits, optional place labels, study-area outlines
+  and metric scales. Dates vary by location; imagery is not date-matched validation.
+  The measured NISAR grid is unchanged; sharper context does not increase its resolution.
 
 Next: validate reference stability and atmospheric corrections, extend the temporal
 network before interpreting subsidence, then expand to other sites. The browser

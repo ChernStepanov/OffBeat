@@ -10,12 +10,22 @@
   }
   const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
 
-  // --- maps: anomaly raster over greyed imagery + optical map that follows it ---
-  const IMAGERY = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
-  const map = L.map("map", { zoomControl: true, attributionControl: false });
-  L.tileLayer(IMAGERY, { maxZoom: 17 }).addTo(map);
-  const optic = L.map("optic", { zoomControl: false, attributionControl: false });
-  L.tileLayer("https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg", { maxZoom: 17 }).addTo(optic);
+  // Identical imagery and zoom limits on both sides; grey styling only on the SAR pane.
+  const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+  const LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
+  const imageryCredit = 'Imagery &copy; Esri, Vantor, Earthstar Geographics';
+  const labelsCredit = 'Labels &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
+  const map = L.map("map", { zoomControl: true, maxZoom: 19 });
+  const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
+  const labelLayers = [map, optic].map(m => {
+    L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
+    m.createPane('placeLabels');
+    m.getPane('placeLabels').style.zIndex = 625;
+    m.getPane('placeLabels').style.pointerEvents = 'none';
+    L.control.scale({ metric: true, imperial: false, maxWidth: 100 }).addTo(m);
+    return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 19, attribution: labelsCredit }).addTo(m);
+  });
+  let areaLayers = [];
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
@@ -32,6 +42,27 @@
   $("z").addEventListener("input", e => { state.z = +e.target.value; $("z-out").textContent = state.z; refresh(); });
   $("l-offbeat").addEventListener("change", drawRaster);
   $("l-cover").addEventListener("change", drawCover);
+  $('l-labels').addEventListener('change', () => {
+    [map, optic].forEach((m, i) => {
+      if ($('l-labels').checked) labelLayers[i].addTo(m);
+      else m.removeLayer(labelLayers[i]);
+    });
+    drawAreaLabels();
+  });
+
+  function drawAreaLabels() {
+    areaLayers.forEach(([m, layer]) => m.removeLayer(layer));
+    areaLayers = [];
+    if (!state.site || !$('l-labels').checked) return;
+    const s = state.site, b = s.grid.bbox;
+    [map, optic].forEach(m => {
+      const outline = L.rectangle([[b.s, b.w], [b.n, b.e]], { color: '#fff', weight: 2, dashArray: '6 4', fill: false, interactive: false }).addTo(m);
+      const text = document.createElement('span');
+      text.textContent = s.name;
+      const label = L.marker([b.n, (b.w + b.e) / 2], { interactive: false, icon: L.divIcon({ className: 'area-label', html: text, iconSize: null }) }).addTo(m);
+      areaLayers.push([m, outline], [m, label]);
+    });
+  }
 
   // --- colours ---
   const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
@@ -303,7 +334,8 @@
     $('z').disabled = !s.grid.z.some(Number.isFinite);
     $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
     $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : 'Measured HV gamma0, blue −25 to red 0 dB; click a sample';
-    const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
+    const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
+    drawAreaLabels();
     buildSiteLayers(); drawValidation();
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
@@ -336,7 +368,7 @@
     patches: () => state.patches,
     pickCell: (i, fly) => pickCell(i, fly),
     zoomTo: (lat, lon, z) => map.setView([lat, lon], z, { animate: false }),
-    fit: () => { const b = state.site.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4], animate: false }); },
+    fit: () => { const b = state.site.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16], animate: false }); },
     play: () => $("play").click(),
     stop: () => OB.sonify.stop()
   };

@@ -73,8 +73,10 @@ Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tes
 
 ## Data
 
-NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC, ESA WorldCover 10 m, Sentinel-2 cloudless by EOX
-for the optical check (to be replaced by date-matched Sentinel-2 / HLS).
+NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
+Both panes use Esri World Imagery for matching detail, grey under NISAR and colour
+on the right. Place labels, study-area boundaries and metric scales help orientation.
+Imagery dates vary by location; this is context, not date-matched optical validation.
 
 ## Font
 
