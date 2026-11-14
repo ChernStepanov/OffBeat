@@ -1,6 +1,6 @@
 window.OB = window.OB || {};
 OB.bindOptical = function (map, select, status) {
-  let site, index, overlay, serial=0;
+  let site, index, overlay, serial=0, followDate=false;
   function clear() { if (overlay) map.removeLayer(overlay); overlay=null; }
   function draw() {
     clear();
@@ -19,17 +19,17 @@ OB.bindOptical = function (map, select, status) {
     select.title=status.textContent;
   }
   function setDate(date) {
-    if (!index?.entries?.length) return;
+    if (!followDate || !index?.entries?.length) return;
     const target=Date.parse(date);
     let best=0;
     index.entries.forEach((e,i)=>{if(Math.abs(Date.parse(e.nisar_date)-target)<Math.abs(Date.parse(index.entries[best].nisar_date)-target)) best=i;});
     select.value=String(best);draw();
   }
-  select.addEventListener('change',draw);
+  select.addEventListener('change',() => { followDate=select.value!=='context'; draw(); });
   return {
     setDate,
     async load(next,date) {
-      site=next;index=null;clear();const ticket=++serial;
+      site=next;index=null;followDate=false;clear();const ticket=++serial;
       select.replaceChildren(new Option('Context mosaic (date varies)','context'));
       select.disabled=true;status.textContent='Loading dated optical observations…';
       try {
@@ -40,11 +40,11 @@ OB.bindOptical = function (map, select, status) {
         index=data;
         index.entries.forEach((entry,i)=>select.add(new Option(entry.status==='ready'
           ? `${entry.date} / radar ${entry.nisar_date}` : `Unavailable / radar ${entry.nisar_date}`,String(i))));
-        select.disabled=false;setDate(date || site.dates.at(-1));
+        select.disabled=false;select.value='context';draw();
       } catch {if(ticket===serial)status.textContent='No prepared dated optical observations. Esri mosaic is geographic context only.';}
     },
     context() {
-      serial++;index=null;clear();select.value='context';select.disabled=true;
+      serial++;index=null;followDate=false;clear();select.value='context';select.disabled=true;
       select.title='Dated Sentinel-2 images are prepared for the demo sites only';
       status.textContent='Dated Sentinel-2 images exist for the demo sites only; here the Esri photo mosaic is shown (dates vary).';
     }
