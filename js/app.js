@@ -82,7 +82,7 @@
   // --- side lists ---
   $("sites").innerHTML = OB.SITES.map(s =>
     `<li><button type="button" data-site="${s.id}" aria-pressed="false">${s.name}<small>${s.region}</small></button></li>`).join("");
-  $("sites").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { ++searchSerial; $('place-results').replaceChildren(); $('place-status').textContent = ''; $('place-query').value = ''; document.dispatchEvent(new Event('ob:manual-navigation')); clearSearchMarkers(); const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url); loadSite(b.dataset.site); } });
+  $("sites").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { ++navigationSerial; ++searchSerial; $('place-submit').disabled = false; $('place-results').replaceChildren(); $('place-status').textContent = ''; $('place-query').value = ''; document.dispatchEvent(new Event('ob:manual-navigation')); clearSearchMarkers(); const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url); loadSite(b.dataset.site); } });
   $("styles").innerHTML = Object.entries(OB.STYLES).map(([k, s]) =>
     `<li><i class="dot" style="background:${s.color}"></i><div><b>${s.name}</b><span class="d">${s.what}</span></div></li>`).join("");
 
@@ -102,7 +102,7 @@
   // The endpoint can be replaced by the operator without changing the UI.
   const geocoder = window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/';
   const searchCache = new Map();
-  let lastSearch = 0, searchMarkers = [], searchSerial = 0;
+  let lastSearch = 0, searchMarkers = [], searchSerial = 0, navigationSerial = 0;
   const regions = {
     world: [[-60, -180], [80, 180]],
     europe: [[35, -12], [71, 45]],
@@ -113,9 +113,10 @@
   };
   async function showRegion(id) {
     const bounds = regions[id];
+    $('place-query').value = '';
     $('l-offbeat').checked = false; drawRaster();
     $('l-cover').checked = false; drawCover(); clearSiteLayers();
-    await showPlace({lat: (bounds[0][0] + bounds[1][0]) / 2, lon: (bounds[0][1] + bounds[1][1]) / 2, bounds});
+    if (!await showPlace({lat: (bounds[0][0] + bounds[1][0]) / 2, lon: (bounds[0][1] + bounds[1][1]) / 2, bounds})) return;
     clearSearchMarkers();
     $('site-name').textContent = id === 'world' ? 'World' : id[0].toUpperCase() + id.slice(1);
     $('map-caption').textContent = 'Global NASA NISAR browse mosaic; blue to red: image brightness. Gaps show the basemap.';
@@ -131,6 +132,7 @@
   }
   function clearPixel() {
     OB.sonify.stop(); state.cell = null; state.pixel = null;
+    $('val-win').hidden = true;
     [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
     $('px-id').textContent = 'No prepared measurement series here';
     for (const id of ['p-cover','p-peers','p-z','p-style','p-since','p-loc','p-quality']) $(id).textContent = 'Unavailable';
@@ -140,15 +142,21 @@
     $('play-hint').textContent = 'No measured series covers the selected location.';
   }
   async function showPlace(place) {
+    const ticket = ++navigationSerial;
+    ++state.loading;
+    ++searchSerial; $('place-submit').disabled = false; $('place-results').replaceChildren();
+    document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', 'false'));
     document.dispatchEvent(new Event('ob:manual-navigation'));
     const site = OB.SITES.find(s => { const b = s.grid.bbox; return place.lat >= b.s && place.lat <= b.n && place.lon >= b.w && place.lon <= b.e; });
     clearSearchMarkers();
     if (site) await loadSite(site.id);
+    if (ticket !== navigationSerial) return false;
     if (site) {
       const g = site.grid, b = g.bbox;
       const x = Math.min(g.w - 1, Math.floor((place.lon - b.w) / (b.e - b.w) * g.w));
       const y = Math.min(g.h - 1, Math.floor((b.n - place.lat) / (b.n - b.s) * g.h));
       await pickCell(y * g.w + x, false);
+      if (ticket !== navigationSerial) return false;
       $('data-status').textContent = `${site.message} Showing a measured sample at the selected location.`;
       $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
     } else {
@@ -171,16 +179,18 @@
     });
     saveViewport();
     $('map-win').scrollIntoView({ block: 'start', behavior: 'smooth' });
+    return true;
   }
   $('place-search').addEventListener('submit', async e => {
     e.preventDefault();
+    const serial = ++searchSerial;
+    $('place-submit').disabled = false;
     const query = OB.normalizePlaceQuery($('place-query').value), parsed = OB.parseCoordinates(query), results = $('place-results');
     results.replaceChildren();
-    if (!query) return;
+    if (!query) { $('place-status').textContent = ''; return; }
     if (parsed.kind === 'invalid') { $('place-status').textContent = 'Enter latitude, longitude (for example 19.43, -99.08). Latitude must be between -85.05 and 85.05; longitude between -180 and 180.'; return; }
-    if (parsed.kind === 'coordinates') { ++searchSerial; await showPlace(parsed); return; }
+    if (parsed.kind === 'coordinates') { await showPlace(parsed); return; }
     if (query.length > 200) { $('place-status').textContent = 'Search text is too long.'; return; }
-    const serial = ++searchSerial;
     $('place-submit').disabled = true; $('place-status').textContent = 'Searching places...';
     try {
       let features = searchCache.get(query.toLowerCase());
@@ -210,7 +220,7 @@
       $('place-status').textContent = results.children.length ? 'Choose a result.' : 'No places found. Try another name or coordinates.';
     } catch (error) {
       if (serial === searchSerial) $('place-status').textContent = 'Place search is unavailable. Try again or enter coordinates.';
-    } finally { $('place-submit').disabled = false; }
+    } finally { if (serial === searchSerial) $('place-submit').disabled = false; }
   });
 
   function drawAreaLabels() {
@@ -428,6 +438,7 @@
 
   // --- picking a pixel ---
   map.on("click", e => {
+    document.dispatchEvent(new Event('ob:manual-navigation'));
     if (!state.site) return;
     const g = state.site.grid;
     const { origin, width, height } = projectedGrid(g);
@@ -532,6 +543,7 @@
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
+    document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', 'false'));
     await optical.load(s,s.dates.at(-1));
     if (ticket !== state.loading) return;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
@@ -562,7 +574,11 @@
     sites: () => OB.SITES,
     site: () => state.site,
     pixel: () => state.pixel,
-    loadSite: id => (state.site && state.site.id === id) ? Promise.resolve(state.site) : loadSite(id),
+    loadSite(id) {
+      ++navigationSerial; ++searchSerial; $('place-submit').disabled = false; $('place-results').replaceChildren();
+      $('place-status').textContent = '';
+      return (state.site && state.site.id === id && state.pixel) ? Promise.resolve(state.site) : loadSite(id);
+    },
     setZ(v) { $("z").value = v; state.z = +$("z").value; $("z-out").textContent = state.z; refresh(); },
     setLayers({ offbeat = true, cover = false, extra = [] } = {}) {
       $("l-offbeat").checked = offbeat; drawRaster();
@@ -593,7 +609,9 @@
     const params = new URL(location.href).searchParams, saved = params.get('site') || (previousViewport && previousViewport.site);
     const lat = params.get('lat'), lon = params.get('lon');
     const savedPlace = lat !== null && lon !== null ? OB.parseCoordinates(`${lat}, ${lon}`) : null;
+    const startupNavigation = navigationSerial;
     loadSite(OB.SITES.some(s => s.id === legacy) ? legacy : saved).then(async () => {
+      if (navigationSerial !== startupNavigation) return;
       const worldStart = !params.has('site') && !OB.SITES.some(s => s.id === legacy) && !savedPlace;
       if (worldStart) await showRegion('world');
       if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; await showPlace(savedPlace); }

@@ -57,6 +57,8 @@ Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside ver
 ```sh
 node scripts/test_data.mjs
 node scripts/test_search.mjs
+node scripts/test_navigation.mjs
+node scripts/test_tour.mjs
 node scripts/version_assets.mjs --check
 .venv/bin/python -m pytest pipeline/tests -q -m "not network"
 ```
