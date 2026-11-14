@@ -124,5 +124,12 @@ OB.chart = (function () {
     g.lineWidth = 1;
   }
 
-  return { backscatter, displacement, cband };
+  // a plot with nothing to show says so, instead of an empty white box
+  function placeholder(cv, message) {
+    const { g, w, h } = setup(cv);
+    g.fillStyle = "#555"; g.font = "12.5px W95FA, Tahoma, sans-serif"; g.textAlign = "center";
+    g.fillText(message, w / 2, h / 2 + 4);
+  }
+
+  return { backscatter, displacement, cband, empty: placeholder };
 })();

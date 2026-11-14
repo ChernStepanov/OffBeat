@@ -13,21 +13,27 @@
   // Identical imagery and zoom limits; grey basemap under the colour NISAR layer.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
   const LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
+  // the data map gets a quiet light canvas so measurements read clearly; the photo stays on the right
+  const CANVAS = "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
+  const CANVAS_LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}";
+  const canvasCredit = 'Basemap &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
   const imageryCredit = 'Imagery &copy; Esri, Vantor, Earthstar Geographics';
   const labelsCredit = 'Labels &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
-  const map = L.map("map", { zoomControl: true, maxZoom: 19 });
-  const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
+  // minZoom 2 keeps the world filling the panel instead of grey margins around a tiny globe
+  const map = L.map("map", { zoomControl: true, maxZoom: 19, minZoom: 2, worldCopyJump: true });
+  const optic = L.map("optic", { zoomControl: true, maxZoom: 19, minZoom: 2, worldCopyJump: true });
   const optical = OB.bindOptical(optic, $('optical-date'), $('optical-status'));
   const labelLayers = [map, optic].map(m => {
     m.attributionControl.setPrefix('Leaflet');
-    L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
+    const isData = m === map;
+    L.tileLayer(isData ? CANVAS : IMAGERY, { maxZoom: 19, maxNativeZoom: isData ? 16 : 19, className: isData ? 'context-canvas' : 'context-imagery', attribution: isData ? canvasCredit : imageryCredit }).addTo(m);
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
     m.getPane('placeLabels').style.pointerEvents = 'none';
     m.createPane('selectedCell');
     m.getPane('selectedCell').style.zIndex = 640;
     m.getPane('selectedCell').style.pointerEvents = 'none';
-    return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 19, attribution: labelsCredit }).addTo(m);
+    return L.tileLayer(isData ? CANVAS_LABELS : LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: isData ? 16 : 19, attribution: isData ? canvasCredit : labelsCredit }).addTo(m);
   });
   let areaLayers = [];
   let syncing = false;
@@ -51,7 +57,7 @@
   }
   map.on('move resize', updateViewMetrics);
   OB.bindArchive(() => map.getCenter().wrap());
-  const radarCellBounds = OB.bindNisarMap(map, $('l-nisar'), $('nisar-status'));
+  const radarCellBounds = () => null;                      // the global NASA browse layer was removed: not readable as data
   const labelsButton = $('l-labels');
   const labelsVisible = () => labelsButton.getAttribute('aria-pressed') === 'true';
   const updateWaterLabels = OB.bindWaterLabels([map, optic], $('water-status'));
@@ -104,7 +110,7 @@
   const searchCache = new Map();
   let lastSearch = 0, searchMarkers = [], searchSerial = 0, navigationSerial = 0;
   const regions = {
-    world: [[-60, -180], [80, 180]],
+    world: [[-45, -125], [62, 45]],                        // centred west: every demo site is in the Americas
     europe: [[35, -12], [71, 45]],
     africa: [[-35, -18], [37, 52]],
     asia: [[-10, 40], [75, 180]],
@@ -119,7 +125,7 @@
     if (!await showPlace({lat: (bounds[0][0] + bounds[1][0]) / 2, lon: (bounds[0][1] + bounds[1][1]) / 2, bounds})) return;
     clearSearchMarkers();
     $('site-name').textContent = id === 'world' ? 'World' : id[0].toUpperCase() + id.slice(1);
-    $('map-caption').textContent = 'Global NISAR coverage over the last 12 published days, coloured by acquisition date. Open a demo site for measured radar.';
+    $('map-caption').textContent = 'Measured NISAR series exist at the marked demo sites. Click one to open it.';
     document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.region === id)));
   }
   $('regions').addEventListener('click', event => {
@@ -137,7 +143,8 @@
     $('px-id').textContent = 'No prepared measurement series here';
     for (const id of ['p-cover','p-peers','p-z','p-style','p-since','p-loc','p-quality']) $(id).textContent = 'Unavailable';
     $('p-extra').innerHTML = '';
-    for (const id of ['c-bs','c-disp']) { const canvas = $(id); canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); }
+    $('plot-s1').hidden = true;
+    for (const id of ['c-bs','c-disp']) OB.chart.empty($(id), 'No measured NISAR series here. Open a demo site on the map or in the list.');
     $('play').disabled = true; $('stop').disabled = true;
     $('play-hint').textContent = 'No measured series covers the selected location.';
   }
@@ -166,7 +173,7 @@
       $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
       $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'Pixel series unavailable at this location';
       $('source-link').hidden = true; $('site-layers').hidden = true;
-      $('sb-state').textContent = 'No prepared NISAR series at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Context: NASA GIBS and Esri';
+      $('sb-state').textContent = 'No prepared NISAR series at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Context: Esri basemap and photo mosaic';
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
       $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
     }
@@ -277,14 +284,19 @@
   }
 
   function drawRaster() {
-    $('map-caption').textContent = 'Global NISAR coverage by date; optional points show peer z, blue negative / red positive; no event area';
+    $('map-caption').textContent = 'Measured samples: grey in step, blue below and red above their same-class neighbours (|z| over the threshold)';
     if (state.raster) map.removeLayer(state.raster);
     state.raster = null;
     if (!$("l-offbeat").checked) return;
     const g = state.site.grid, t = state.z;
     if (state.site.analysis_status === 'exploratory_sparse_samples') {
-      state.raster = L.featureGroup(state.site.pixels.filter(p => Number.isFinite(p.z) && Math.abs(p.z)>=t).map(p =>
-        L.circleMarker([p.lat,p.lon],{radius:3,weight:0,fillColor:p.z<0?'#0050c8':'#c00000',fillOpacity:.8,interactive:false}))).addTo(map);
+      const pts = state.site.pixels.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon));
+      state.raster = L.featureGroup(pts.map(p => {
+        const off = Number.isFinite(p.z) && Math.abs(p.z) >= t;
+        return L.circleMarker([p.lat, p.lon], off
+          ? { radius: 4.5, weight: 1, color: '#fff', fillColor: p.z < 0 ? '#1d4fd8' : '#d0161b', fillOpacity: .9, interactive: false }
+          : { radius: 2, weight: 0, fillColor: '#5b6470', fillOpacity: .55, interactive: false });
+      })).addTo(map);
       return;
     }
     if (!g.z.some(Number.isFinite) && state.site.pixels) {
@@ -415,7 +427,8 @@
   function refresh() {
     const g = state.site.grid;
     state.patches = findPatches();
-    let px = 0; for (let i = 0; i < g.z.length; i++) if (g.style[i] && Math.abs(g.z[i]) >= state.z) px++;
+    // every sample past the threshold, as the map draws them; styles are not assigned on sparse samples
+    let px = 0; for (let i = 0; i < g.z.length; i++) if (Number.isFinite(g.z[i]) && Math.abs(g.z[i]) >= state.z && g.cover[i] !== 80) px++;
     drawRaster(); drawTop();
     $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} candidates · ${px} samples at |z| ≥ ${state.z}; area unknown` : 'No valid peer deviations';
   }
@@ -475,7 +488,7 @@
     state.pixel = p;
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;
-    $('map-caption').textContent = $('l-offbeat').checked ? 'Optional sample peer z: blue negative, red positive; no event area' : 'Global NASA browse mosaic: brightness, not calibrated HH/HV or sample z';
+    $('map-caption').textContent = $('l-offbeat').checked ? 'Measured samples: grey in step, blue below and red above their same-class neighbours' : 'Measured samples hidden; switch them on under Layers';
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
@@ -552,8 +565,9 @@
     $('source-link').href = `data/${s.id}-manifest.json`;
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
-    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Local peer z sample points (optional)' : 'Local measured HV overlay (optional)';
-    $('map-caption').textContent = 'Global NASA NISAR browse mosaic; local measurement overlay is optional.';
+    $('raster-label').textContent = 'Measured NISAR samples';
+    if (!OB.tourActive) $('l-offbeat').checked = true;     // the measurements are the point of a site: show them
+    $('map-caption').textContent = 'Measured samples: grey in step, blue below and red above their same-class neighbours';
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();
@@ -568,6 +582,20 @@
     }
     return s;
   }
+
+  // --- demo sites as clickable labels on the data map, while zoomed out far enough to need them ---
+  const sitePins = L.layerGroup(OB.SITES.map(s => {
+    const b = s.grid.bbox;
+    const pin = L.marker([(b.s + b.n) / 2, (b.w + b.e) / 2], {
+      icon: L.divIcon({ className: 'site-pin', html: `<span class="site-pin__dot"></span><span class="site-pin__name"></span>`, iconSize: null }),
+      keyboard: true, title: `Open ${s.name}`, riseOnHover: true,
+    });
+    pin.on('add', () => { const el = pin.getElement(); if (el) el.querySelector('.site-pin__name').textContent = s.name; });
+    pin.on('click', () => { document.dispatchEvent(new Event('ob:manual-navigation')); loadSite(s.id); });
+    return pin;
+  }));
+  const updatePins = () => { const show = map.getZoom() <= 9; if (show && !map.hasLayer(sitePins)) sitePins.addTo(map); if (!show && map.hasLayer(sitePins)) map.removeLayer(sitePins); };
+  map.on('zoomend load', updatePins);                     // 'load' fires with the first view
 
   // --- what the guided tour (js/story.js) may drive ---
   OB.app = {

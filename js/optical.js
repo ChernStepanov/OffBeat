@@ -43,6 +43,10 @@ OB.bindOptical = function (map, select, status) {
         select.disabled=false;setDate(date || site.dates.at(-1));
       } catch {if(ticket===serial)status.textContent='No prepared dated optical observations. Esri mosaic is geographic context only.';}
     },
-    context() {serial++;index=null;clear();select.value='context';select.disabled=true;draw();}
+    context() {
+      serial++;index=null;clear();select.value='context';select.disabled=true;
+      select.title='Dated Sentinel-2 images are prepared for the demo sites only';
+      status.textContent='Dated Sentinel-2 images exist for the demo sites only; here the Esri photo mosaic is shown (dates vary).';
+    }
   };
 };

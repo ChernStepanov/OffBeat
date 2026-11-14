@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=aa088c649ef9">
+<link rel="stylesheet" href="css/offbeat.css?v=477744eee931">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -73,7 +73,6 @@
           <fieldset class="group">
             <legend>Map</legend>
             <label><input type="checkbox" id="l-offbeat"> <span id="raster-label">Local measured HV overlay (optional)</span></label>
-            <label><input type="checkbox" id="l-nisar" checked> Global NISAR radar (NASA)</label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
             <button type="button" class="btn" id="l-labels" aria-pressed="true">Map labels</button>
             <small id="water-status" role="status" hidden></small>
@@ -148,7 +147,6 @@
             </div>
           </div>
           <div id="optical-status" class="pane-label" role="status">Context imagery is not date-matched validation.</div>
-          <div id="nisar-status" class="pane-label" role="status">Loading NISAR radar coverage…</div>
           <div id="map-view-metrics" class="pane-label"></div>
         </div>
       </section>
@@ -253,14 +251,13 @@
 <script src="js/styles.js?v=1c84dd9b23f5"></script>
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
-<script src="js/nisar-map.js?v=0220ef7661f4"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
 <script src="js/data.js?v=d7e029cc1f6c"></script>
-<script src="js/chart.js?v=590f61cb48b2"></script>
+<script src="js/chart.js?v=ccd9e09bcb99"></script>
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=537e5778ce5a"></script>
-<script src="js/optical.js?v=8bbb56a12289"></script>
-<script src="js/app.js?v=a51cd9b57bab"></script>
+<script src="js/optical.js?v=d485715e4c81"></script>
+<script src="js/app.js?v=96545100a516"></script>
 </body>
 </html>

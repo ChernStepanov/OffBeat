@@ -31,20 +31,20 @@ function newMap() {
     containerPointToLatLng:()=>({lat:0,lng:0}),project:p=>vector(p.lng??p[1],p.lat??p[0]),unproject:p=>({lat:p.y,lng:p.x,wrap(){return this;}}),
     hasLayer:()=>false,removeLayer(){},getBounds:()=>({})};maps.push(map);return map;
 }
-const layer=()=>({addTo(){return this;},setBounds(){return this;},bringToFront(){},bindTooltip(){return this;}});
+const layer=()=>({addTo(){return this;},setBounds(){return this;},bringToFront(){},bindTooltip(){return this;},on(){return this;}});
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
 const opticalLoads=[];let holdMexico=null;
 const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
-  L:{map:newMap,tileLayer:layer,rectangle:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector},
+  L:{map:newMap,tileLayer:layer,rectangle:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
 };context.window=context;vm.createContext(context);
 for(const file of ['styles','search','data'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
 Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:()=>()=>null,bindWaterLabels:()=>()=>{},
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),
-  chart:{backscatter(){},displacement(){},cband(){}},sonify:{stop(){},play(){}}});
+  chart:{backscatter(){},displacement(){},cband(){},empty(){}},sonify:{stop(){},play(){}}});
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 await tick();await tick();assert(OB.app);
