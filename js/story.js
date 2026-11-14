@@ -218,7 +218,11 @@ window.OB = window.OB || {};
   async function step(i) {
     at = Math.max(0, Math.min(CHAPTERS.length - 1, i));
     const ticket = ++busy, c = CHAPTERS[at];
-    history.replaceState(null, "", "#tour/" + (at + 1));
+    const url = new URL(location.href);
+    url.searchParams.delete('lat'); url.searchParams.delete('lon');
+    if (c.site) url.searchParams.set('site', c.site);
+    url.hash = 'tour/' + (at + 1);
+    history.replaceState(null, "", url);
     $("tour-next").disabled = true;
     render(null, null);
     OB.app.stop();
@@ -261,7 +265,7 @@ window.OB = window.OB || {};
     $("tour-play").addEventListener("click", () => OB.app.play());
     $("tour-open").addEventListener("click", e => { e.preventDefault(); open(0); $("tour-win").scrollIntoView({ block: "start" }); });
     document.addEventListener("keydown", e => {
-      if ($("tour-win").hidden || e.target.closest("input, textarea")) return;
+      if ($("tour-win").hidden || e.defaultPrevented || e.target.closest('input, textarea, select, button, a, [contenteditable="true"], [role="slider"]')) return;
       if (e.key === "ArrowRight" && !$("tour-next").disabled) $("tour-next").click();
       if (e.key === "ArrowLeft" && !$("tour-back").disabled) $("tour-back").click();
     });

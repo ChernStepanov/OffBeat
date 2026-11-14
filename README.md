@@ -103,7 +103,11 @@ The research pipeline can also export full real-data grids with `python -m pipel
 It has no synthetic mode. The browser uses the prepared small cases above, rather than these
 optional binary exports. Missing or quality-rejected samples remain unavailable.
 
-Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
+Проверки интерфейса: `node scripts/test_data.mjs`, `node scripts/test_search.mjs`,
+`node scripts/test_optical.mjs`, `node scripts/test_navigation.mjs` и
+`node scripts/test_tour.mjs`. Проверки пайплайна:
+`.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
+Результат ручного QA: [тур, поиск и карты](docs/qa-2026-11-14.md).
 
 ## Data
 
