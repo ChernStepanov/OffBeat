@@ -21,6 +21,13 @@ case works without login. Earthdata authorization is needed only to re-extract
 source data. Missing and quality-rejected measurements remain unavailable.
 See [download, processing and provenance instructions](docs/real-nisar.md).
 
+Разреженные демо теперь содержат z-score и предварительные формы изменения:
+Мехико — без найденных форм, Амазония — 6 HV drop, Каракас — 1 HV drop и 3 HH jump.
+Это кандидаты по форме сигнала; причины изменений независимо не подтверждены.
+[Метод, результаты и проверка десяти кандидатов](docs/preview-analysis.md).
+Пересчёт сохранённых измерений без сети: `python scripts/analyze_preview.py`.
+Нужны `numpy`, `scipy`, `pyproj`; исходные измерения и ось GUNW сохраняются.
+
 ## Run
 
 No build step. Any static server:

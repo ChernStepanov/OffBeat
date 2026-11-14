@@ -8,6 +8,7 @@ import h5py
 import numpy as np
 from pyproj import Transformer
 import rasterio
+from analyze_preview import analyze_site
 
 ROOT=Path(__file__).resolve().parents[1]
 N=32
@@ -188,6 +189,7 @@ def export(receipts,cover,lat,lon):
         source='NISAR PROVISIONAL GCOV + GUNW · ESA WorldCover 2021',status='measured_pair',message=f'Measured HH/HV for {dates[0]} – {dates[1]} ({days} days). GUNW accepted: {int(valid.sum())}/{N*N} samples. Atmospheric residuals remain; no trend or anomaly classification.',
         event=None,dates=dates,displacement_dates=dates,grid=dict(n=N,bbox=BBOX,cellM=None),pixels=pixels,provenance=provenance)
     output=ROOT/'data'/f"{CASE['id']}.json"
+    analyze_site(site)
     temporary=output.with_suffix('.tmp')
     temporary.write_text(json.dumps(site,allow_nan=False,separators=(',',':'))+'\n')
     temporary.replace(output)

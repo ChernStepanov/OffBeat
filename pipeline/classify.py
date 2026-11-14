@@ -54,7 +54,8 @@ def jump_at(z: np.ndarray, idx: np.ndarray) -> np.ndarray:
     with np.errstate(invalid="ignore", divide="ignore"):
         a = (v * after).sum(0) / (ok & after).sum(0)
         b = (v * ~after).sum(0) / (ok & ~after).sum(0)
-    return np.nan_to_num(a - b).astype(np.float32)
+    enough = ((ok & after).sum(0) >= 2) & ((ok & ~after).sum(0) >= 2)
+    return np.where(enough, a - b, np.nan).astype(np.float32)
 
 
 def drift_strength(dz: np.ndarray):
@@ -87,7 +88,7 @@ def classify(z_hh: np.ndarray, z_hv: np.ndarray, z_disp: np.ndarray | None = Non
     H, W = z_hh.shape[1:]
     style = np.zeros((H, W), np.uint8)
     since = np.full((H, W), -1, np.int16)
-    zout = np.nan_to_num(z_hv[-1]).astype(np.float32)
+    zout = z_hv[-1].astype(np.float32).copy()
 
     i_hv, j_hv = change_point(z_hv)
     i_hh, j_hh = change_point(z_hh)
@@ -97,7 +98,7 @@ def classify(z_hh: np.ndarray, z_hv: np.ndarray, z_disp: np.ndarray | None = Non
     flood = (j_hh >= k) & (np.abs(jump_at(z_hv, i_hh)) < flood_hv_max) & ~drop
     style[drop], since[drop] = CODE["drop"], i_hv[drop]
     style[flood], since[flood] = CODE["flood"], i_hh[flood]
-    zout[flood] = np.nan_to_num(z_hh[-1])[flood]
+    zout[flood] = z_hh[-1][flood]
 
     if z_disp is not None:
         i_d, j_d = change_point(z_disp)

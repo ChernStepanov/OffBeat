@@ -6,6 +6,7 @@ import earthaccess,h5py,numpy as np,requests
 from pyproj import Transformer
 import subset_nisar as sub
 from build_real_demos import CASES
+from analyze_preview import analyze_site
 
 def catalogue(site,bbox,track,frame):
     params={'short_name':'NISAR_L2_GCOV_PROVISIONAL_V1','bounding_box':','.join(str(bbox[k]) for k in ['w','s','e','n']),'page_size':2000,'sort_key':'start_date'}
@@ -70,6 +71,7 @@ def main():
             data['provenance']['steps'].append('Additional same-track GCOV: native samples, valid mask and power, 10log10, same-class neighbours per date.')
             data['region']=f"Real GCOV {data['dates'][0]} – {data['dates'][-1]} · one GUNW pair"
             data['message']=f"Measured HH/HV on {len(data['dates'])} dates; GUNW remains the original pair. Missing or rejected samples remain unavailable."
+            analyze_site(data)
             tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(data,allow_nan=False,separators=(',',':'))+'\n');tmp.replace(path)
             print(site,record['date'],'valid HH/HV',*[int(np.isfinite(values[k]).sum()) for k in ['hh','hv']],flush=True)
 

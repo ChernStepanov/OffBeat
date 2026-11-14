@@ -1,8 +1,8 @@
 // Change styles the curve classifier can name. Keys match `style` in the data contract.
 window.OB = window.OB || {};
 OB.STYLES = {
-  drop:  { name: "HV drop",        color: "#c00000", what: "Sharp fall in HV. Canopy gone: clearing or fire." },
-  flood: { name: "HH jump",        color: "#0050c8", what: "HH rises by double bounce. Water under vegetation." },
+  drop:  { name: "HV drop",        color: "#c00000", what: "HV falls relative to peers. Candidate change; clearing or fire requires independent checks." },
+  flood: { name: "HH jump",        color: "#0050c8", what: "HH rises relative to peers while HV changes little. Cause unverified; not a confirmed flood." },
   drift: { name: "Slow drift",     color: "#d86b00", what: "Phase drifts month after month. Ground sinking." },
   step:  { name: "Step",           color: "#007a1f", what: "Displacement jumps on one date. Earthquake." }
 };

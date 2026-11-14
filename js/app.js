@@ -323,6 +323,7 @@
   }
 
   function area(cells) {
+    if (!Number.isFinite(state.site.grid.cellM)) return `${cells} samples`;
     const ha = cells * state.site.grid.cellM ** 2 / 1e4;
     return ha >= 100 ? (ha / 100).toFixed(1) + " sq km" : Math.round(ha) + " ha";
   }
@@ -334,7 +335,7 @@
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
-    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'No anomaly classification: one measured pair is insufficient for a trend.'}</td></tr>`;
+    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `No connected group of 3 classified samples passes |z| >= ${state.z}. Isolated outliers may exist.` : 'Anomaly scores unavailable: valid measurements and peers required.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true).then(pixelSound); };
   $("top").addEventListener("click", rowPick);
@@ -386,7 +387,7 @@
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
     $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} valid HV samples at latest date; same class, ≤1 km`;
     $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
-    $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
+    $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Score unavailable' : st ? `<i class="tag" style="background:${st.color}"></i>${st.name} (candidate)` : Math.abs(p.z) >= 2.5 ? 'Outlier; no change shape' : 'No detected change';
     $("p-since").textContent = p.since || "—";
     $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
     $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;

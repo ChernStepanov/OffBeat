@@ -127,9 +127,12 @@ limitations. `data/mexico-inspection.json` preserves the HDF5 inventory.
   actual sampled same-class locations within 1 km, excluding the selected point;
   require 10 valid samples per channel/date. Band is median ±2×1.4826 MAD. Peer
   counts vary with date/channel and are stored per pixel. No fixed generated spread.
-- z-score, change styles and patch areas remain unavailable. Two acquisitions
-  cannot establish a slow trend. The map instead shows latest measured HV gamma0,
-  blue -25 to red 0 dB. Playback compares only measured HH/HV and measured peers.
+- После расширения GCOV рядов демо рассчитывает z-score и предварительные
+  HV drop / HH jump: [метод и результаты](preview-analysis.md).
+  Площади пятен и причины изменений не установлены. Одна GUNW-пара
+  не определяет скорость проседания. При отсутствии всех z-score карта
+  показывает последнее измеренное HV gamma0, от синего -25 до красного 0 dB.
+  Воспроизведение сравнивает измеренные HH/HV с измеренными соседями.
 - HH/HV use acquisition dates; displacement has its own date axis. JSON `null`
   means unavailable, never zero. Plot lines and bands break at missing entries.
 - Both panes use the same Esri World Imagery basemap (grey under NISAR, colour on

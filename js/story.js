@@ -15,7 +15,15 @@ window.OB = window.OB || {};
   // ---- pixel rules -------------------------------------------------------
   const largestPatch = style => app => {
     const p = OB.app.patches().find(q => q.style === style);
-    return p ? p.peak : null;
+    if (p) return p.peak;
+    // В разреженной выборке кандидат может не образовать связное пятно.
+    const samples = OB.app.site().pixels || [];
+    let best = null;
+    samples.forEach((sample, i) => {
+      if (sample.style === style && Number.isFinite(sample.z) &&
+          (best === null || Math.abs(sample.z) > Math.abs(samples[best].z))) best = i;
+    });
+    return best;
   };
   const extreme = (layer, sign) => () => {
     const a = OB.app.site().grid.extra && OB.app.site().grid.extra[layer];
@@ -79,7 +87,7 @@ window.OB = window.OB || {};
       site: "mexico", needs: has.site("mexico"), layers: { offbeat: true }, pick: measuredSample,
       title: "Radar sees what cameras miss",
       text: (s, p) => `<p>This is real NISAR data: L-band radar over Mexico City's airport, ${fmtDate(s.dates[s.dates.length - 1])}.
-        Red is strong HV backscatter from buildings and rough ground; blue is the smooth runways.</p>
+        The overlay highlights samples whose latest backscatter differs from nearby samples of the same land-cover class.</p>
         <p>Radar brings its own light, so it sees the same at night and through cloud. The hard part is reading it.</p>`
     },
     {
@@ -116,7 +124,7 @@ window.OB = window.OB || {};
     },
     {
       step: "Forest and pasture",
-      site: "amazon", needs: has.site("amazon"), layers: { offbeat: true, cover: false }, pick: classSample(10),
+      site: "amazon", needs: has.site("amazon"), layers: { offbeat: false, cover: true }, pick: classSample(10),
       title: "Forest and pasture, as radar sees them",
       text: (s, p) => {
         const f = lastHv(s, 10), g = lastHv(s, 30);
@@ -127,16 +135,16 @@ window.OB = window.OB || {};
       }
     },
     {
-      step: "Forest cleared",
+      step: "Candidate HV drop",
       site: "amazon", needs: has.style("amazon", "drop"), layers: { offbeat: true, extra: ["fires", "alerts"] },
       pick: largestPatch("drop"), z: 2.5, zoom: 13,
-      title: "Forest cleared in the dry season",
+      title: "A candidate HV drop",
       text: (s, p) => {
         const n = firesNear(s, p);
-        return `<p>When a forest is cut, HV falls by several decibels. OffBeat marks the HV drop in red and dates it.</p>
-          <p>This pixel fell out of step on <b>${p.since ? fmtDate(p.since) : "-"}</b>.
+        return `<p>OffBeat found a fall in HV relative to nearby samples of the same land-cover class. Red marks a candidate change, not confirmed forest loss.</p>
+          <p>The estimated first sampled date after the change is <b>${p.since ? fmtDate(p.since) : "-"}</b>. Clearing, fire and other causes need independent checks.
           ${n == null ? "" : `NASA FIRMS and INPE saw <b>${n}</b> fire${n === 1 ? "" : "s"} within 1 km in the 60 days around it.`}
-          Yellow outlines are INPE DETER and UMD GLAD clearing alerts.</p>`;
+          ${s.context && s.context.alerts ? 'Yellow outlines are INPE DETER and UMD GLAD clearing alerts.' : 'No independent alert comparison is loaded.'}</p>`;
       }
     },
     {
@@ -163,7 +171,8 @@ window.OB = window.OB || {};
       site: "amazon", needs: has.style("amazon", "drop"), layers: { offbeat: true }, pick: largestPatch("drop"), z: 2.5, sound: true,
       title: "Hear the pixel fall out of step",
       text: () => `<p>Every NISAR pass is one beat. The neighbours keep time; the pixel plays its own curve.
-        When the forest goes, its note drops, comes late and goes sour.</p><p>Press <b>Play the pixel</b>.</p>`
+        When a sample departs from its peers, its note changes, comes late and goes sour.
+        This is a candidate signal change, not proof of forest loss.</p><p>Press <b>Play the pixel</b>.</p>`
     },
     {
       step: "Your turn",

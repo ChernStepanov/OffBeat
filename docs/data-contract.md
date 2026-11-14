@@ -18,6 +18,18 @@ HH/HV are gamma0 power converted to dB. Missing entries are JSON null.
 With no WorldCover, `cover`, `peers`, `z`, `style`, `since` are null and peer
 arrays contain only nulls. Do not infer land cover or a normal/in-step result.
 
+Для `status: measured_analysis` поле `z` — оценка на последнюю дату:
+`(HV - peer.hv_med) / peer.hv_sd`, для `style: flood` используется HH.
+Соседи: тот же WorldCover, радиус 1000 м в локальной проекции источника,
+без самой точки; минимум 10 конечных измерений на канал и дату.
+Классы 0, 70, 80 исключены; нулевой MAD оставляет `sd` и z недоступными.
+`style` и `since` описывают предварительный сдвиг среднего z-ряда,
+а не подтверждённое событие. Форма может сохраняться при низком текущем |z|.
+`since` — первая дата после выбранного разбиения, минимум по два измерения
+с каждой стороны. Порог сдвига 2.5; HH jump требует |сдвиг HV| < 1.5
+на том же разбиении. Настройки и числа результатов — в `provenance.analysis`.
+Без ряда смещений и его соседей `drift` и `step` не рассчитываются.
+
 `disp` contains [0, apparent_relative_LOS_cm] for the accepted GUNW pair and is
 null for rejected samples. `peer_disp` is null: no deformation peer band is estimated.
 `coherence`, `component`, `ionosphere_interpolated`, `ionosphere_sd_rad` retain

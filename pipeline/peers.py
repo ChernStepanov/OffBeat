@@ -92,7 +92,35 @@ def peer_stats_blocks(stack, cover, pixel_m, block_m=1000, radius_m=3000, min_n=
 
 def zscore(stack: np.ndarray, med: np.ndarray, sd: np.ndarray) -> np.ndarray:
     with np.errstate(invalid="ignore", divide="ignore"):
-        return ((stack - med) / sd).astype(np.float32)
+        return np.where(sd > 0, (stack - med) / sd, np.nan).astype(np.float32)
+
+
+def sparse_peer_stats(stack, cover, east, north, radius_m=1000, min_n=10):
+    """Медиана, MAD и число соседей для разреженных точек, без включения себя.
+
+    stack: [T, N], east/north: координаты в метрах в локальной проекции.
+    Нулевой MAD не заменяется искусственным разбросом: z остаётся недоступен.
+    """
+    stack = np.asarray(stack, dtype=float)
+    cover = np.asarray(cover)
+    med = np.full(stack.shape, np.nan)
+    sd = np.full(stack.shape, np.nan)
+    counts = np.zeros(stack.shape, dtype=np.int32)
+    for i, code in enumerate(cover):
+        if code in (0, 70, 80):
+            continue
+        eligible = ((east - east[i]) ** 2 + (north - north[i]) ** 2 <= radius_m ** 2) & (cover == code)
+        eligible[i] = False
+        for t, values in enumerate(stack):
+            peers = values[eligible & np.isfinite(values)]
+            counts[t, i] = len(peers)
+            if len(peers) < min_n:
+                continue
+            med[t, i] = np.median(peers)
+            spread = MAD_K * np.median(np.abs(peers - med[t, i]))
+            if spread > 0:
+                sd[t, i] = spread
+    return med, sd, counts
 
 
 def to_db(power: np.ndarray, floor: float = 1e-5) -> np.ndarray:

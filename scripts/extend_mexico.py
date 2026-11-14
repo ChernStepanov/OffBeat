@@ -7,6 +7,7 @@ import h5py
 import numpy as np
 from pyproj import Transformer
 import subset_nisar as sub
+from analyze_preview import analyze_site
 
 def main():
     root=sub.ROOT
@@ -21,6 +22,10 @@ def main():
             if hashlib.sha256((root/item['subset_path']).read_bytes()).hexdigest()!=item['sha256']:raise ValueError('Invalid saved subset')
         if len(site['provenance'].get('additional_gcov',[]))!=len(expected)-2:raise ValueError('Incomplete provenance')
         print(f'{len(expected)} acquisitions already exported and verified')
+        analyze_site(site)
+        temp=root/'data/mexico.tmp'
+        temp.write_text(json.dumps(site,allow_nan=False,separators=(',',':'))+'\n')
+        temp.replace(root/'data/mexico.json')
         return
     if site['dates']!=expected[:len(site['dates'])]:raise ValueError('Unexpected existing date series')
     auth=earthaccess.login(strategy='interactive',persist=False)
@@ -68,6 +73,7 @@ def main():
     site['provenance']['steps'].append('Additional same-track GCOV: validate grid, mask and acquisition date; sample native HH/HV and recompute same-class 1 km peer medians and MAD independently per date.')
     site['region']=f"Real GCOV {site['dates'][0]} – {site['dates'][-1]} · one GUNW pair"
     site['message']=f"Measured HH/HV on {len(site['dates'])} dates; LOS remains one 12-day pair. Atmospheric residuals remain; no trend or anomaly classification."
+    analyze_site(site)
     temp=root/'data/mexico.tmp';temp.write_text(json.dumps(site,allow_nan=False,separators=(',',':'))+'\n');temp.replace(root/'data/mexico.json')
     print('Exported',len(site['dates']),'GCOV dates',flush=True)
 
