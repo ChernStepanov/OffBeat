@@ -205,6 +205,35 @@ canvas { display: block; width: calc(100% - 2px); background: var(--paper); }
 .foot { color: #fff; margin: 4px 2px 0; }
 .foot a { color: #ffff66; }
 
+/* --- data notice: a grey message panel, never bare text on the desktop --- */
+.notice {
+  display: grid; grid-template-columns: 16px 1fr; gap: 2px 8px; align-items: start;
+  margin: 0 0 10px; padding: 6px 8px;
+  background: #ffffe1; color: #000; box-shadow: var(--window);
+}
+.notice__icon { grid-row: span 2; margin-top: 1px; }
+.notice p { margin: 0; }
+.notice a:link, .notice a:visited { color: #0000ee; }
+
+/* --- tour: a Win98 wizard docked above the map --- */
+.tour__body { display: grid; grid-template-columns: 170px 1fr; gap: 12px; }
+.tour__steps {
+  margin: 0; padding: 8px 8px 8px 26px; align-self: start;
+  background: var(--sel); color: #fff; box-shadow: var(--sunken);
+}
+.tour__steps li { padding: 2px 0; color: #c8d4f0; }
+.tour__steps li.done { color: #fff; }
+.tour__steps li[aria-current] { color: #fff; font-weight: bold; }
+.tour__page { min-height: 150px; }
+.tour__page h3 { margin: 0 0 8px; font: bold 12.5px/16px var(--ui); }
+.tour__page p { max-width: 62ch; }
+.tour__note { margin: 8px 0 0; padding: 3px 6px; box-shadow: inset -1px -1px 0 var(--hi), inset 1px 1px 0 var(--lo); }
+.tour__note--warn { background: #ffffe1; }
+.tour__note--ok { background: var(--face); }
+.tour__bar { display: flex; gap: 6px; align-items: center; padding: 8px 6px 4px; border-top: 1px solid var(--lo); box-shadow: inset 0 1px 0 var(--hi); }
+.tour__gap { flex: 1; }
+.btn--default { box-shadow: 0 0 0 1px #000, var(--raised); }
+
 /* --- status bar: shallow sunken panels --- */
 .sbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
@@ -213,10 +242,21 @@ canvas { display: block; width: calc(100% - 2px); background: var(--paper); }
 }
 .sbar span { padding: 2px 6px; box-shadow: inset -1px -1px 0 var(--hi), inset 1px 1px 0 var(--lo); }
 .sbar #sb-state { flex: 1; }
+.sbar__sound {
+  display: flex; align-items: center; gap: 4px; padding: 1px 6px; border: 0; background: var(--face); color: #000; cursor: default;
+  box-shadow: inset -1px -1px 0 var(--hi), inset 1px 1px 0 var(--lo);
+}
+.sbar__sound:active { box-shadow: inset 1px 1px 0 var(--dk), inset -1px -1px 0 var(--hi); }
+.sbar__sound:focus-visible { outline: 1px dotted #000; outline-offset: -3px; }
+.sbar__sound .mute { display: none; }
+.sbar__sound[aria-pressed="false"] .mute { display: inline; }
+.sbar__sound[aria-pressed="false"] .wave { display: none; }
 
 /* --- narrow screens: stack it all --- */
 @media (max-width: 860px) {
-  #cols, .card { grid-template-columns: 1fr; }
+  #cols, .card, .tour__body { grid-template-columns: 1fr; }
+  .tour__steps { display: none; }
+  .tour__bar { flex-wrap: wrap; }
   #main { order: -1; } /* map first on a phone, controls under it */
   .maps { grid-template-columns: 1fr; }
   .map { height: 300px; }

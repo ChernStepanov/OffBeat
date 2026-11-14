@@ -22,9 +22,10 @@
       <h1>OffBeat - NISAR change finder</h1>
     </div>
     <nav class="menu" aria-label="Main">
+      <a href="#tour/1" id="tour-open"><u>T</u>ake the tour</a>
       <a href="#map-win"><u>M</u>ap</a>
       <a href="#card-win"><u>P</u>ixel card</a>
-      <a href="#top-win"><u>T</u>op anomalies</a>
+      <a href="#top-win">T<u>o</u>p anomalies</a>
       <a href="#about-win"><u>H</u>ow it works</a>
       <a href="https://nisar-docs.asf.alaska.edu/" rel="noopener">NISAR data guide</a>
     </nav>
@@ -81,8 +82,30 @@
 
     <!-- Main column -->
     <main id="main">
-      <p id="data-status" role="status">Loading measured data...</p>
-      <p><a href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a> · <a href="docs/real-nisar.md">Processing and limitations</a></p>
+      <div class="notice">
+        <svg class="notice__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#fff" stroke="#000"/><rect x="7" y="7" width="2" height="5" fill="#000080"/><rect x="7" y="4" width="2" height="2" fill="#000080"/></svg>
+        <p id="data-status" role="status">Loading measured data...</p>
+        <p class="notice__links"><a href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a>, <a href="docs/real-nisar.md">Processing and limitations</a></p>
+      </div>
+
+      <section class="win tour" id="tour-win" aria-labelledby="tour-title" hidden>
+        <div class="win-t"><h2>OffBeat Tour - <span id="tour-count">Step 1</span></h2></div>
+        <div class="win-b tour__body">
+          <ol class="tour__steps" id="tour-steps"></ol>
+          <div class="tour__page">
+            <h3 id="tour-title">...</h3>
+            <div id="tour-text"></div>
+            <p class="tour__note" id="tour-note" hidden></p>
+          </div>
+        </div>
+        <div class="tour__bar">
+          <button type="button" class="btn" id="tour-play" data-sfx="none" hidden>Play the pixel</button>
+          <span class="tour__gap"></span>
+          <button type="button" class="btn" id="tour-back">&lt; Back</button>
+          <button type="button" class="btn btn--default" id="tour-next">Next &gt;</button>
+          <button type="button" class="btn" id="tour-close">Close</button>
+        </div>
+      </section>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
         <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
@@ -128,8 +151,8 @@
             </div>
           </div>
           <div class="toolbar">
-            <button type="button" class="btn" id="play" disabled>Play the pixel</button>
-            <button type="button" class="btn" id="stop" disabled>Stop</button>
+            <button type="button" class="btn" id="play" data-sfx="none" disabled>Play the pixel</button>
+            <button type="button" class="btn" id="stop" data-sfx="none" disabled>Stop</button>
             <span class="hint" id="play-hint">Peers keep the beat, the pixel plays the HV curve. When it slips, you hear it.</span>
           </div>
         </div>
@@ -173,6 +196,10 @@
   <span id="sb-state">Loading…</span>
   <span id="sb-count">—</span>
   <span id="sb-src">Source: no measurements loaded</span>
+  <button type="button" class="sbar__sound" id="sb-sound" data-sfx="none" aria-pressed="true" title="Interface sounds">
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"><path d="M2 6h3l4-3v10l-4-3H2z" fill="#000"/><path class="wave" d="M11 5.5q2 2.5 0 5M12.5 4q3.5 4 0 8" fill="none" stroke="#000"/><path class="mute" d="M11 5l4 6M15 5l-4 6" stroke="#c00000" stroke-width="1.5"/></svg>
+    <span id="sb-sound-label">Sound on</span>
+  </button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -181,6 +208,8 @@
 <script src="js/data.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>
+<script src="js/sfx.js"></script>
+<script src="js/story.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

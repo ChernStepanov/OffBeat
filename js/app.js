@@ -197,7 +197,7 @@
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
     }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'No anomaly classification: one measured pair is insufficient for a trend.'}</td></tr>`;
   }
-  const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true); };
+  const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true).then(pixelSound); };
   $("top").addEventListener("click", rowPick);
   $("top").addEventListener("keydown", e => { if (e.key === "Enter") rowPick(e); });
 
@@ -225,8 +225,12 @@
   map.on("click", e => {
     const g = state.site.grid, b = g.bbox;
     const x = Math.floor((e.latlng.lng - b.w) / (b.e - b.w) * g.w), y = Math.floor((b.n - e.latlng.lat) / (b.n - b.s) * g.h);
-    if (x >= 0 && y >= 0 && x < g.w && y < g.h) pickCell(y * g.w + x, false);
+    if (x >= 0 && y >= 0 && x < g.w && y < g.h) pickCell(y * g.w + x, false).then(pixelSound);
   });
+  function pixelSound() {
+    const p = state.pixel; if (!p || !OB.sfx) return;
+    OB.sfx.play(p.style && Number.isFinite(p.z) && Math.abs(p.z) >= state.z ? "offbeat" : "instep");
+  }
 
   async function pickCell(i, fly) {
     OB.sonify.stop();
@@ -288,13 +292,13 @@
     $("sb-state").textContent = `Loading ${fallback.name}...`;
     let s;
     try { s = fallback.binary ? await OB.data.load(fallback.dataId || fallback.id, fallback) : fallback; if (fallback.binary) s.id = fallback.id; }
-    catch (e) { $('data-status').textContent = `Real data unavailable: ${e.message}`; $('sb-state').textContent = 'Load failed'; return; }
+    catch (e) { $('data-status').textContent = `Real data unavailable: ${e.message}`; $('sb-state').textContent = 'Load failed'; OB.sfx && OB.sfx.play("error"); return; }
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
-    $('data-status').textContent = s.message || s.source;
+    $('data-status').textContent = s.message || (/synthetic/i.test(s.source || '') ? 'Synthetic radar over real land cover: a pipeline test, not a NISAR measurement.' : s.source);
     $('z').disabled = !s.grid.z.some(Number.isFinite);
     $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
     $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : 'Measured HV gamma0, blue −25 to red 0 dB; click a sample';
@@ -303,13 +307,39 @@
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
     $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;
-    if (state.patches[0]) pickCell(state.patches[0].peak, false);
+    if (location.hash !== "#" + s.id && !OB.tourActive) history.replaceState(null, "", "#" + s.id);
+    if (state.patches[0]) await pickCell(state.patches[0].peak, false);
     else {
       const first = s.pixels ? s.pixels.findIndex(p => p.disp && p.disp.some(Number.isFinite) && p.hv.some(Number.isFinite)) : -1;
-      pickCell(first >= 0 ? first : Math.floor(s.grid.h / 2) * s.grid.w + Math.floor(s.grid.w / 2), false);
+      await pickCell(first >= 0 ? first : Math.floor(s.grid.h / 2) * s.grid.w + Math.floor(s.grid.w / 2), false);
     }
-    if (location.hash !== "#" + s.id) history.replaceState(null, "", "#" + s.id);
+    return s;
   }
+
+  // --- what the guided tour (js/story.js) may drive ---
+  OB.app = {
+    sites: () => OB.SITES,
+    site: () => state.site,
+    pixel: () => state.pixel,
+    loadSite: id => (state.site && state.site.id === id) ? Promise.resolve(state.site) : loadSite(id),
+    setZ(v) { $("z").value = v; state.z = +$("z").value; $("z-out").textContent = state.z; refresh(); },
+    setLayers({ offbeat = true, cover = false, extra = [] } = {}) {
+      $("l-offbeat").checked = offbeat; drawRaster();
+      $("l-cover").checked = cover; drawCover();
+      document.querySelectorAll("#site-layer-list input[data-layer]").forEach(c => {
+        const on = extra.includes(c.dataset.layer);
+        if (c.checked !== on || (on && !state.extra[c.dataset.layer])) { c.checked = on; toggleLayer(c.dataset.layer, on); }
+      });
+      restack();
+    },
+    patches: () => state.patches,
+    pickCell: (i, fly) => pickCell(i, fly),
+    zoomTo: (lat, lon, z) => map.setView([lat, lon], z, { animate: false }),
+    fit: () => { const b = state.site.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4], animate: false }); },
+    play: () => $("play").click(),
+    stop: () => OB.sonify.stop()
+  };
+  document.dispatchEvent(new Event("ob:ready"));
 
   window.addEventListener("resize", () => drawCharts());
   if (document.fonts) document.fonts.ready.then(() => drawCharts()); // canvas text needs W95FA loaded
@@ -317,5 +347,5 @@
     const id = location.hash.slice(1);
     if (OB.SITES.some(s => s.id === id) && (!state.site || state.site.id !== id)) loadSite(id);
   });
-  loadSite((location.hash || "").slice(1));
+  if (!OB.tourWanted) loadSite((location.hash || "").slice(1));
 })();

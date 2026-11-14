@@ -55,5 +55,5 @@ OB.sonify = (function () {
     nodes.forEach(n => { try { n.stop(); } catch (e) {} }); nodes = [];
   }
 
-  return { play, stop };
+  return { play, stop, playing: () => timer !== null };
 })();
