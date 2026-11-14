@@ -4,8 +4,35 @@ Status: **real GCOV and GUNW subsets are connected and browser-verified**.
 The first case covers about 2.6 × 2.8 km in Mexico City with 1024 preview locations,
 two acquisitions (2025-10-30 and 2025-11-11), and their GUNW pair. All 1024 locations
 have HH/HV on both dates; 357 GUNW locations pass the selected quality filters.
-This is an exploratory pair result, not a validated subsidence rate. Other demos
-remain withheld instead of displaying synthetic measurements.
+This is an exploratory pair result, not a validated subsidence rate.
+
+## Real-only demo replacement (2026-11-14)
+
+All large binary exports inherited from the former pipeline were actually marked
+`source: synthetic`. They and the browser/Python synthetic generators have been
+removed. The browser now loads only provenance-backed measured site JSON files
+and rejects a synthetic source. Offline scientific test fixtures remain in tests.
+
+| Case | Acquisitions | Valid HH/HV per date | Accepted GUNW samples |
+|---|---|---|---|
+| Mexico City | 2025-10-30, 2025-11-11 | 1024, 1024 | 357 |
+| Itupiranga, Pará | 2026-07-18, 2026-08-11 | 1024, 1024 | 0 |
+| Caracas | 2025-11-09, 2025-11-21 | 1024, 1024 | 0 |
+
+The last two cases have real GCOV and real downloaded GUNW subsets, but none of
+their GUNW samples pass the unchanged quality filters. Displacement stays null;
+there is no synthetic curve and no reference zero for a rejected sample. The
+24-day Amazon pair spans an acquisition gap. The earlier candidate (2026-06-24 /
+2026-07-06) had zero power throughout the second GCOV subset and was rejected.
+Its numeric subsets/receipts are retained as evidence, not loaded by the UI.
+The selected Amazon track is 146A/175; 045A does not cover this smaller AOI.
+Caracas uses 162A/007; its dates do not support an earthquake attribution.
+
+`data/<site>-manifest.json`, `data/<site>.json` and `data/subsets/` preserve the
+exact selection, source IDs, dates, native windows, quality flags and SHA-256.
+Recreate the additional cases with `python scripts/build_real_demos.py`; the
+default Amazon pair index is 2, Venezuela 0. `--site` and `--pair-index` allow
+explicit catalogue selection without changing quality thresholds.
 
 ## Catalogue evidence (2026-11-14)
 

@@ -13,6 +13,17 @@ ROOT=Path(__file__).resolve().parents[1]
 N=32
 BBOX=dict(w=-99.09,s=19.415,e=-99.065,n=19.44)
 WORLD='https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N18W102_Map.tif'
+CASE=dict(id='mexico',name='Mexico City',track=19,frame=11)
+TARGET=ROOT/'data/subsets'
+
+def configure(site_id,name,bbox,track,frame):
+    global CASE,BBOX,WORLD,TARGET
+    CASE=dict(id=site_id,name=name,track=track,frame=frame)
+    BBOX=bbox
+    TARGET=ROOT/'data/subsets'/site_id if site_id!='mexico' else ROOT/'data/subsets'
+    lat=int(np.floor(bbox['s']/3)*3);lon=int(np.floor(bbox['w']/3)*3)
+    tile=f"{'N' if lat>=0 else 'S'}{abs(lat):02}{'E' if lon>=0 else 'W'}{abs(lon):03}"
+    WORLD=f'https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_{tile}_Map.tif'
 
 def scalar(ds):
     value=ds[()]
@@ -44,15 +55,11 @@ def grid_samples(group,names,lat,lon):
     meta=dict(epsg=epsg,spacing=[float(xs[1]-xs[0]),float(ys[1]-ys[0])],window=[r0,r1,c0,c1],paths={k:group[v].name for k,v in names.items()})
     return result,meta
 
-def main():
+def extract(manifest,fs):
     lat,lon=coordinates()
-    target=ROOT/'data/subsets'
+    target=TARGET
     target.mkdir(parents=True,exist_ok=True)
-    manifest=json.loads((ROOT/'data/mexico-manifest.json').read_text())
     records=manifest['products']['gcov'][:2]+manifest['products']['gunw'][:1]
-    auth=earthaccess.login(strategy='interactive',persist=False)
-    if not auth.authenticated: raise SystemExit('Login failed')
-    fs=earthaccess.get_fsspec_https_session()
     receipts=[]
     for i,record in enumerate(records):
         output=target/f'nisar-{i}.npz'
@@ -71,7 +78,7 @@ def main():
             with h5py.File(remote,'r') as hdf:
                 ident=hdf['science/LSAR/identification']
                 identification={k:scalar(ident[k]) for k in ['trackNumber','frameNumber','orbitPassDirection','productVersion','lookDirection','radarBand']}
-                if (identification['trackNumber'],identification['frameNumber'],identification['orbitPassDirection'])!=(19,11,'Ascending'):
+                if (identification['trackNumber'],identification['frameNumber'],identification['orbitPassDirection'])!=(CASE['track'],CASE['frame'],'Ascending'):
                     raise ValueError('Incompatible acquisition geometry')
                 if i<2:
                     group=hdf['science/LSAR/GCOV/grids/frequencyA']
@@ -102,11 +109,13 @@ def main():
     export(receipts,cover,lat,lon)
 
 def export(receipts,cover,lat,lon):
-    target=ROOT/'data/subsets'
+    target=TARGET
     arrays=[dict(np.load(target/r['subset_file'])) for r in receipts]
     for r in receipts:
         if hashlib.sha256((target/r['subset_file']).read_bytes()).hexdigest()!=r['sha256']: raise ValueError('Subset checksum mismatch')
+        r['subset_path']=(target/r['subset_file']).relative_to(ROOT).as_posix()
     dates=[r['grid']['date'] for r in receipts[:2]]
+    days=int((np.datetime64(dates[1])-np.datetime64(dates[0]))/np.timedelta64(1,'D'))
     gunw=receipts[2]['grid']
     if dates!=[gunw['reference_date'],gunw['secondary_date']]: raise ValueError('Pair dates do not match GCOV')
     hh,hv=[],[]
@@ -125,30 +134,29 @@ def export(receipts,cover,lat,lon):
         (subs<100)&((subs//10)>0)&((subs%10)>0)&(((mask>>8)&65535)==0)&
         ((mask&0xFE000000)==0)&np.isfinite(a['iono_sd'])&(a['iono_sd']<=1.0))
     corrected=a['phase']-a['iono']
-    if not valid.any(): raise ValueError('No coherent valid GUNW samples in AOI')
     # Reference is explicit, selected by coherence; it is NOT asserted geologically stable.
-    reference=int(np.argmax(np.where(valid,a['coherence'],-1)))
-    component=int(a['component'].ravel()[reference])
-    valid &= a['component']==component
+    reference=int(np.argmax(np.where(valid,a['coherence'],-1))) if valid.any() else None
+    component=int(a['component'].ravel()[reference]) if reference is not None else None
+    valid &= a['component']==component if reference is not None else False
     factor=-299792458/gunw['center_frequency_hz']/(4*np.pi)*100
-    displacement=np.where(valid,(corrected-corrected.ravel()[reference])*factor,np.nan)
+    displacement=np.where(valid,(corrected-corrected.ravel()[reference])*factor,np.nan) if reference is not None else np.full(corrected.shape,np.nan)
     pixels=[]
     clean=lambda v:round(float(v),5) if np.isfinite(v) else None
     for i in range(N*N):
         bs_h=[clean(x.ravel()[i]) for x in hh]; bs_v=[clean(x.ravel()[i]) for x in hv]
         d=clean(displacement.ravel()[i])
-        pixels.append(dict(id=f'MEX r{i//N} c{i%N}',lat=float(lat.ravel()[i]),lon=float(lon.ravel()[i]),cover=int(cover.ravel()[i]) or None,
+        pixels.append(dict(id=f"{CASE['id'][:3].upper()} r{i//N} c{i%N}",lat=float(lat.ravel()[i]),lon=float(lon.ravel()[i]),cover=int(cover.ravel()[i]) or None,
             peers=None,z=None,style=None,since=None,hh=bs_h,hv=bs_v,peer={k:[None]*2 for k in ['hh_med','hh_sd','hv_med','hv_sd']},
             disp=[0,d] if d is not None else None,peer_disp=None,coherence=clean(a['coherence'].ravel()[i]),component=int(a['component'].ravel()[i]),
             ionosphere_interpolated=bool(mask.ravel()[i]&(1<<24)),ionosphere_sd_rad=clean(a['iono_sd'].ravel()[i])))
-    limitations=['One 12-day pair: no deformation trend, subsidence rate or event attribution',
+    limitations=[f'One {days}-day pair: no deformation trend, subsidence rate or event attribution',
         'Apparent relative LOS change, positive toward sensor; spatial reference selected by coherence, stability not established',
         'Ionosphere screen subtracted; troposphere and solid Earth tides not corrected, residual phase may not be ground motion',
         'Product-interpolated ionosphere screen retained where bit 24 is set, flagged per sample; require screen uncertainty <=1 rad',
         'WorldCover 2021 v200 is historical context, not contemporaneous land cover',
         'Sparse nearest-native samples, no area aggregation, no anomaly classification or patch area']
     # Compare only actual sampled same-class locations within 1 km, excluding self.
-    east,north=Transformer.from_crs(4326,32614,always_xy=True).transform(lon.ravel(),lat.ravel())
+    east,north=Transformer.from_crs(4326,receipts[0]['grid']['epsg'],always_xy=True).transform(lon.ravel(),lat.ravel())
     for i,p in enumerate(pixels):
         eligible=((east-east[i])**2+(north-north[i])**2<=1000**2)&(cover.ravel()==p['cover'])
         eligible[i]=False
@@ -165,24 +173,29 @@ def export(receipts,cover,lat,lon):
         p['peers']=p['peer_counts']['hv'][-1]
     limitations.append('Peers use sparse preview locations within 1 km, minimum 10 valid samples; median and 1.4826*MAD; no deformation peer band')
     provenance=dict(created_at=datetime.now(timezone.utc).isoformat(),inputs=receipts,
-        worldcover=dict(url=WORLD,year=2021,version='v200',sha256=hashlib.sha256((target/'worldcover.npz').read_bytes()).hexdigest(),attribution='© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'),
-        reference=dict(index=reference,lat=float(lat.ravel()[reference]),lon=float(lon.ravel()[reference]),component=component,coherence=clean(a['coherence'].ravel()[reference])),
+        worldcover=dict(url=WORLD,year=2021,version='v200',subset_path=(target/'worldcover.npz').relative_to(ROOT).as_posix(),sha256=hashlib.sha256((target/'worldcover.npz').read_bytes()).hexdigest(),attribution='© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'),
+        reference=dict(index=reference,lat=float(lat.ravel()[reference]),lon=float(lon.ravel()[reference]),component=component,coherence=clean(a['coherence'].ravel()[reference])) if reference is not None else None,
         steps=['Authenticated HTTP Range read of HDF5 native windows; subset arrays saved with SHA-256',
-        'Check track 19 ascending frame 11, frequency A, GCOV HH/HV, exact GUNW reference/secondary date match',
-        'Transform WGS84 preview locations to EPSG:32614, nearest native samples; reject GCOV mask 0/255, nonfinite/nonpositive power; 10log10 gamma0',
+        f"Check track {CASE['track']} ascending frame {CASE['frame']}, frequency A, GCOV HH/HV, exact GUNW reference/secondary date match",
+        f"Transform WGS84 preview locations to EPSG:{receipts[0]['grid']['epsg']}, nearest native samples; reject GCOV mask 0/255, nonfinite/nonpositive power; 10log10 gamma0",
         'GUNW HH 80m: coherence >=0.7, valid nonwater subswaths, no RSLC anomaly flags, ionosphere screen uncertainty <=1 rad; bit24 interpolation flagged, retain only reference connected component',
         'Subtract ionosphere screen, then spatial reference phase; convert with -c/(4*pi*f)*100 cm, positive toward sensor; epoch zero is a reference definition',
         'Sample ESA WorldCover 2021 v200 at preview coordinates',
         'Per channel/date same-class preview peers within 1 km, exclude self, minimum 10; median and 1.4826*MAD'],limitations=limitations,
         sign_source='https://github.com/isce-framework/isce3/blob/develop/cxx/isce3/signal/Crossmul.cpp',
         counts=dict(gcov_hh=[int(np.isfinite(x).sum()) for x in hh],gcov_hv=[int(np.isfinite(x).sum()) for x in hv],gunw_valid=int(valid.sum())))
-    site=dict(schema_version=2,id='mexico',name='Mexico City',region='Real GCOV + GUNW · 30 Oct – 11 Nov 2025',center=[19.4275,-99.0775],zoom=15,
-        source='NISAR PROVISIONAL GCOV + GUNW · ESA WorldCover 2021',status='measured_pair',message='Measured HH/HV and apparent relative LOS change for one 12-day pair. Atmospheric residuals remain; no subsidence trend or anomaly classification.',
+    site=dict(schema_version=2,id=CASE['id'],name=CASE['name'],region=f'Real GCOV + GUNW · {dates[0]} – {dates[-1]}',center=[float(lat.mean()),float(lon.mean())],zoom=15,
+        source='NISAR PROVISIONAL GCOV + GUNW · ESA WorldCover 2021',status='measured_pair',message=f'Measured HH/HV for {dates[0]} – {dates[1]} ({days} days). GUNW accepted: {int(valid.sum())}/{N*N} samples. Atmospheric residuals remain; no trend or anomaly classification.',
         event=None,dates=dates,displacement_dates=dates,grid=dict(n=N,bbox=BBOX,cellM=None),pixels=pixels,provenance=provenance)
-    output=ROOT/'data/mexico.json'
+    output=ROOT/'data'/f"{CASE['id']}.json"
     temporary=output.with_suffix('.tmp')
     temporary.write_text(json.dumps(site,allow_nan=False,separators=(',',':'))+'\n')
     temporary.replace(output)
     print(json.dumps(provenance['counts']),flush=True)
+
+def main():
+    auth=earthaccess.login(strategy='interactive',persist=False)
+    if not auth.authenticated: raise SystemExit('Login failed')
+    extract(json.loads((ROOT/'data/mexico-manifest.json').read_text()),earthaccess.get_fsspec_https_session())
 
 if __name__=='__main__': main()

@@ -34,8 +34,7 @@ Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
 ## Layout
 
 - `index.html`, `css/offbeat.css` — the page, desktop-2005 look on purpose.
-- `js/data.js` — loads `data/mexico.json`; never falls back to synthetic values.
-- `js/mock.js` — legacy synthetic generator, no longer loaded by the application.
+- `js/data.js` — loads measured site JSON files; rejects synthetic sources or missing provenance.
 - `scripts/subset_nisar.py` — local authenticated extraction, GUNW quality filtering and provenance.
 - `js/chart.js` — HH/HV and displacement plots against the peer band.
 - `js/sonify.js` — WebAudio: peers keep the beat, the pixel plays its curve, slips late and sour when it strays.
@@ -49,11 +48,11 @@ Python, in `pipeline/`. Set up once:
 python3 -m venv .venv && .venv/bin/pip install numpy scipy h5py rasterio pyproj earthaccess asf_search requests pillow pytest
 ```
 
-Run a site (writes `data/<site>/`, which the page reads; without it the page falls back to `js/mock.js`):
+Re-extract the small real cases used by the page (local interactive Earthdata login):
 
 ```bash
-.venv/bin/python -m pipeline.run mexico              # real NISAR, needs an Earthdata login in ~/.netrc
-.venv/bin/python -m pipeline.run mexico --synthetic  # invented radar on the real grid and real WorldCover
+.venv/Scripts/python.exe scripts/subset_nisar.py
+.venv/Scripts/python.exe scripts/build_real_demos.py
 ```
 
 | Step | Module | What it does |
@@ -66,7 +65,11 @@ Run a site (writes `data/<site>/`, which the page reads; without it the page fal
 | context | `context_amazon.py` | NASA FIRMS fires and INPE DETER alerts; checks OffBeat's clearings against them |
 | export | `export.py` | `meta.json`, `grid.bin`, `peers.bin`, per-pixel series in 32 x 32 tiles |
 
-Tests: `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
+The research pipeline can also export full real-data grids with `python -m pipeline.run <site>`.
+It has no synthetic mode. The browser uses the prepared small cases above, rather than these
+optional binary exports. Missing or quality-rejected samples remain unavailable.
+
+Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
 
 ## Data
 

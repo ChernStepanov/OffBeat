@@ -47,11 +47,36 @@ window.OB = window.OB || {};
       Math.hypot((x.lat - p.lat) * 111.32, (x.lon - p.lon) * 111.32 * k) <= 1).length;
   }
 
-  // ---- chapters ----------------------------------------------------------
-  const CHAPTERS = [
+  // ---- what the data can show ---------------------------------------------
+  const siteById = id => OB.app.sites().find(s => s.id === id);
+  const has = {
+    extra: (id, k) => () => { const s = siteById(id); return !!(s && s.grid.extra && s.grid.extra[k]); },
+    style: (id, st) => () => { const s = siteById(id); const c = OB.STYLE_KEYS.indexOf(st);
+      return !!(s && s.grid.style.some((v, i) => v === c && Number.isFinite(s.grid.z[i]))); },
+    site: id => () => !!siteById(id)
+  };
+  const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y); return b.length ? b[Math.floor(b.length / 2)] : NaN; };
+  const lastHv = (s, cls) => median(s.pixels.filter(p => p.cover === cls).map(p => p.hv[p.hv.length - 1]));
+  const dispSamples = s => s.pixels.map(p => p.disp && p.disp[p.disp.length - 1]).filter(Number.isFinite);
+  const largestMotion = () => {
+    const s = OB.app.site(); let best = null, bv = -1;
+    s.pixels.forEach((p, i) => { const v = p.disp && Math.abs(p.disp[p.disp.length - 1]); if (Number.isFinite(v) && v > bv) { bv = v; best = i; } });
+    return best;
+  };
+  const classSample = cls => () => {
+    const s = OB.app.site(), n = s.grid.n, mid = (n - 1) / 2; let best = null, bd = Infinity;
+    s.pixels.forEach((p, i) => { if (p.cover !== cls || !p.hv.every(Number.isFinite)) return;
+      const d = Math.hypot(i % n - mid, Math.floor(i / n) - mid); if (d < bd) { bd = d; best = i; } });
+    return best;
+  };
+  const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+
+  // ---- chapters ------------------------------------------------------------
+  // `needs` hides a chapter until the data behind it exists; nothing is shown that was not measured.
+  const ALL = [
     {
       step: "Radar through cloud",
-      site: "mexico", layers: { offbeat: true }, pick: measuredSample,
+      site: "mexico", needs: has.site("mexico"), layers: { offbeat: true }, pick: measuredSample,
       title: "Radar sees what cameras miss",
       text: (s, p) => `<p>This is real NISAR data: L-band radar over Mexico City's airport, ${fmtDate(s.dates[s.dates.length - 1])}.
         Red is strong HV backscatter from buildings and rough ground; blue is the smooth runways.</p>
@@ -59,7 +84,7 @@ window.OB = window.OB || {};
     },
     {
       step: "Neighbours, not the past",
-      site: "mexico", layers: { offbeat: false, cover: true }, pick: measuredSample,
+      site: "mexico", needs: has.site("mexico"), layers: { offbeat: false, cover: true }, pick: measuredSample,
       title: "Compare a pixel with its neighbours",
       text: (s, p) => `<p>NISAR has only months of history, too short to compare a pixel with its own past.
         OffBeat compares it with its neighbours instead: pixels of the same land cover nearby (ESA WorldCover).</p>
@@ -67,53 +92,89 @@ window.OB = window.OB || {};
         a pixel that leaves it on its own is out of step.</p>`
     },
     {
+      step: "Motion in 12 days",
+      site: "mexico", needs: () => { const s = siteById("mexico"); return !!s && dispSamples(s).length > 0; },
+      layers: { offbeat: true }, pick: largestMotion,
+      title: "One pair of passes, one snapshot of motion",
+      text: (s, p) => {
+        const d = dispSamples(s), n = s.pixels.length, dd = s.displacement_dates || s.dates;
+        const v = p.disp && p.disp[p.disp.length - 1];
+        return `<p>Comparing the radar phase of two passes ${days(dd[0], dd[dd.length - 1])} days apart gives line-of-sight motion.
+          ${d.length} of ${n} samples here passed the quality checks; they range from
+          ${Math.min(...d).toFixed(1)} to +${Math.max(...d).toFixed(1)} cm.</p>
+          <p>This sample shows <b>${Number.isFinite(v) ? (v > 0 ? "+" : "") + v.toFixed(2) + " cm" : "-"}</b>. Over 12 days that is mostly air, not ground:
+          a sinking rate needs a year of pairs, which is what OffBeat builds next.</p>`;
+      }
+    },
+    {
       step: "A sinking city",
-      site: "mexico-full", layers: { offbeat: false, extra: ["up"] }, pick: extreme("up", -1), z: 2.5,
+      site: "mexico", needs: has.extra("mexico", "up"), layers: { offbeat: false, extra: ["up"] }, pick: extreme("up", -1),
       title: "Mexico City is sinking",
       text: (s, p) => `<p>Pumping water from the old lake bed makes the ground subside. Two orbits, one looking east and one west,
         split the radar's line of sight into vertical and east-west motion.</p>
         <p>The pixel in the yellow box moves <b>${p.extra && Number.isFinite(p.extra.up) ? p.extra.up.toFixed(1) + " cm a year" : "-"}</b> vertically.</p>`
     },
     {
+      step: "Forest and pasture",
+      site: "amazon", needs: has.site("amazon"), layers: { offbeat: true, cover: false }, pick: classSample(10),
+      title: "Forest and pasture, as radar sees them",
+      text: (s, p) => {
+        const f = lastHv(s, 10), g = lastHv(s, 30);
+        return `<p>Real NISAR over Itupiranga, Pará, ${fmtDate(s.dates[s.dates.length - 1])}, at the edge of the Amazon's arc of deforestation.</p>
+          <p>Inside a canopy the radar bounces between leaves and branches and comes back twisted: strong HV.
+          Here forest returns a median of <b>${f.toFixed(1)} dB</b> in HV, pasture <b>${g.toFixed(1)} dB</b>.
+          That gap of ${(f - g).toFixed(1)} dB is what disappears when a forest is cut.</p>`;
+      }
+    },
+    {
       step: "Forest cleared",
-      site: "amazon", layers: { offbeat: true, extra: ["fires", "alerts"] }, pick: largestPatch("drop"), z: 2.5, zoom: 13,
+      site: "amazon", needs: has.style("amazon", "drop"), layers: { offbeat: true, extra: ["fires", "alerts"] },
+      pick: largestPatch("drop"), z: 2.5, zoom: 13,
       title: "Forest cleared in the dry season",
       text: (s, p) => {
         const n = firesNear(s, p);
-        return `<p>When a forest is cut, HV falls by several decibels: the radar stops bouncing around inside the canopy.
-          OffBeat marks the HV drop in red and dates it.</p>
+        return `<p>When a forest is cut, HV falls by several decibels. OffBeat marks the HV drop in red and dates it.</p>
           <p>This pixel fell out of step on <b>${p.since ? fmtDate(p.since) : "-"}</b>.
           ${n == null ? "" : `NASA FIRMS and INPE saw <b>${n}</b> fire${n === 1 ? "" : "s"} within 1 km in the 60 days around it.`}
           Yellow outlines are INPE DETER and UMD GLAD clearing alerts.</p>`;
       }
     },
     {
+      step: "Caracas, before the quake",
+      site: "venezuela", needs: has.site("venezuela"), layers: { offbeat: true, cover: false }, pick: classSample(50),
+      title: "Caracas, before the quake",
+      text: (s, p) => `<p>Real NISAR over Caracas, ${fmtDate(s.dates[0])} and ${fmtDate(s.dates[s.dates.length - 1])}.
+        On 24 June 2026 an M7.5 earthquake struck just off this coast.</p>
+        <p>These passes are the city before it: the baseline every later pass is compared against.
+        The pair spanning the quake is the next one OffBeat processes.</p>`
+    },
+    {
       step: "Earthquake damage",
-      site: "venezuela", layers: { offbeat: false, extra: ["damage"] }, pick: extreme("damage", 1), zoom: 14,
+      site: "venezuela", needs: has.extra("venezuela", "damage"), layers: { offbeat: false, extra: ["damage"] },
+      pick: extreme("damage", 1), zoom: 14,
       title: "Where the quake broke buildings",
-      text: (s, p) => `<p>An M7.5 earthquake struck off Caracas on 24 June 2026.
-        ${s.damagePair ? `NISAR passed on ${fmtDate(s.damagePair[0])} and again on ${fmtDate(s.damagePair[1])}.` : ""}
-        Where buildings collapse or shift, the radar echo stops matching from one pass to the next: coherence drops.</p>
+      text: (s, p) => `<p>Where buildings collapse or shift, the radar echo stops matching from one pass to the next: coherence drops.
+        ${s.damagePair ? `NISAR passed on ${fmtDate(s.damagePair[0])} and again on ${fmtDate(s.damagePair[1])}.` : ""}</p>
         <p>Yellow to red marks built-up pixels that lost more coherence than the rest of the city.
         This one scores <b>${p.extra && Number.isFinite(p.extra.damage) ? "z " + p.extra.damage.toFixed(1) : "-"}</b>.</p>`
     },
     {
       step: "Listen to it",
-      site: "amazon", layers: { offbeat: true }, pick: largestPatch("drop"), z: 2.5, sound: true,
+      site: "amazon", needs: has.style("amazon", "drop"), layers: { offbeat: true }, pick: largestPatch("drop"), z: 2.5, sound: true,
       title: "Hear the pixel fall out of step",
       text: () => `<p>Every NISAR pass is one beat. The neighbours keep time; the pixel plays its own curve.
-        While it follows the band you hear one chord. When the forest goes, its note drops, comes late and goes sour.</p>
-        <p>Press <b>Play the pixel</b>.</p>`
+        When the forest goes, its note drops, comes late and goes sour.</p><p>Press <b>Play the pixel</b>.</p>`
     },
     {
       step: "Your turn",
       site: null, layers: null, pick: null,
       title: "Your turn",
-      text: () => `<p>Pick a site on the left, click any pixel on the map, move the threshold, switch layers.
-        Every pixel has its own card, plot and sound.</p>
+      text: () => `<p>Pick a site on the left, click any sample on the map, switch layers.
+        Every sample has its own card and plot, with its sources one click away.</p>
         <p>Open this tour again from the menu bar.</p>`
     }
   ];
+  let CHAPTERS = ALL;
 
   // ---- the wizard window -------------------------------------------------
   let at = 0, busy = 0;
@@ -183,6 +244,7 @@ window.OB = window.OB || {};
   }
 
   function wire() {
+    CHAPTERS = ALL.filter(c => !c.needs || c.needs());
     $("tour-back").addEventListener("click", () => go(at - 1));
     $("tour-next").addEventListener("click", () => at === CHAPTERS.length - 1 ? close() : go(at + 1));
     $("tour-close").addEventListener("click", close);

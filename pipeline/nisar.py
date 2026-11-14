@@ -76,7 +76,6 @@ RG_LOS_Y = "losUnitVectorY"     # north component; up = sqrt(1 - x^2 - y^2)  [GU
 RG_X, RG_Y, RG_Z, RG_PROJ = "xCoordinates", "yCoordinates", "heightAboveEllipsoid", "projection"
 
 SPEED_OF_LIGHT = 299_792_458.0
-NISAR_L_WAVELENGTH = 0.2384     # fallback only (1257.5 MHz); the file's centerFrequency is preferred
 
 CMR_URL = "https://cmr.earthdata.nasa.gov/search/granules.umm_json"
 MATURITY_RANK = {"BETA": 0, "PROVISIONAL": 1, "VALIDATED": 2}
@@ -483,7 +482,7 @@ def read_gunw(granule: Granule, site: Site, grid: Grid | None = None, pol: str =
     range increase (isce3 crossmul + troposphere.py; MintPy uses the phase unflipped with the
     same -lambda/4pi rule). The spec itself does not state the sign - check it once on real data
     (e.g. Mexico City subsidence must give los_m < 0).
-    Wavelength = c / grids/frequencyA/centerFrequency (fallback 0.2384 m).
+    Wavelength = c / grids/frequencyA/centerFrequency; missing frequency is an error.
     Phase and coherence are averaged onto the grid, connected components take the mode.
     Invalid, water and fill samples (mask, NaN, conncomp 65535) are dropped first; the
     phase still carries the per-component 2 pi ambiguity, so compare within a component."""
@@ -501,7 +500,12 @@ def read_gunw(granule: Granule, site: Site, grid: Grid | None = None, pol: str =
             else _src_transform(x, y)
 
         cf_path = f"{GUNW_GRID.format(freq=freq)}/{GUNW_CENTER_FREQ}"
-        wavelength = SPEED_OF_LIGHT / float(f[cf_path][()]) if cf_path in f else NISAR_L_WAVELENGTH
+        if cf_path not in f:
+            raise ValueError('GUNW centerFrequency is missing; cannot convert phase to displacement')
+        center_frequency = float(f[cf_path][()])
+        if not np.isfinite(center_frequency) or center_frequency <= 0:
+            raise ValueError('GUNW centerFrequency must be finite and positive')
+        wavelength = SPEED_OF_LIGHT / center_frequency
 
         phase = _read(f[f"{pg}/{GUNW_UNW_PHASE}"], rows, cols).astype(np.float32)
         coh = _read(f[f"{pg}/{GUNW_UNW_COH}"], rows, cols).astype(np.float32)

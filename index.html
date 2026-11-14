@@ -85,7 +85,7 @@
       <div class="notice">
         <svg class="notice__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#fff" stroke="#000"/><rect x="7" y="7" width="2" height="5" fill="#000080"/><rect x="7" y="4" width="2" height="2" fill="#000080"/></svg>
         <p id="data-status" role="status">Loading measured data...</p>
-        <p class="notice__links"><a href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a>, <a href="docs/real-nisar.md">Processing and limitations</a></p>
+        <p class="notice__links"><a id="source-link" href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a>, <a href="docs/real-nisar.md">Processing and limitations</a></p>
       </div>
 
       <section class="win tour" id="tour-win" aria-labelledby="tour-title" hidden>
@@ -177,7 +177,7 @@
         <div class="win-t"><h2 id="t-about">How OffBeat finds a pixel out of step</h2></div>
         <div class="win-b">
           <div class="paper">
-            <p>This case shows measured NISAR HH/HV at sparse sample locations and a single 12-day GUNW pair. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
+            <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
             <p>No anomaly classifier or patch areas are published from this short case. Optical imagery is a 2020 composite for context, not a date-matched check. Missing and rejected measurements remain unavailable.</p>
           </div>
@@ -204,7 +204,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="js/styles.js"></script>
-<script src="js/binary-data.js"></script>
 <script src="js/data.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>

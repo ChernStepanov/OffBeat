@@ -51,6 +51,8 @@ class _Blob:
 
 
 def write(site: Site, grid: Grid, cover: np.ndarray, res: dict, source: str) -> Path:
+    if 'synthetic' in source.lower() or 'mock' in source.lower():
+        raise ValueError('Only measured source data may be exported')
     out = ROOT / site.id
     keep = {p.name: p.read_bytes() for p in out.glob("*") if p.is_file() and p.suffix in (".json", ".geojson")
             and p.name != "meta.json"}                       # context files (fires, alerts) stay
