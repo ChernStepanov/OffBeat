@@ -8,7 +8,7 @@
     $('play-hint').textContent = 'Cannot load real data. Check the static server and data/mexico.json.';
     return;
   }
-  const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
+  const state = { site: null, pixel: null, cell: null, date: 0, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
 
   // Identical imagery and zoom limits; grey basemap under the colour NISAR layer.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
@@ -38,6 +38,7 @@
     return L.tileLayer(isData ? CANVAS_LABELS : LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 16, attribution: isData ? canvasCredit : labelsCredit }).addTo(m);
   });
   let areaLayers = [];
+  let rankingData = null;
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
@@ -117,6 +118,51 @@
     drawAreaLabels();
   });
 
+  const ranking = OB.amazonRanking({ map, leaflet: L, panel: $('ranking-controls'), polarization: $('ranking-pol'), radius: $('ranking-radius'), status: $('ranking-status'), onPick: point => {
+    if (!state.site || state.site.id !== 'amazon') return;
+    const idx = point.row * state.site.grid.w + point.col;
+    if (idx >= 0 && idx < state.site.grid.w * state.site.grid.h) pickCell(idx, false);
+  }});
+  $('ranking-visible').addEventListener('change', () => {
+    ranking.setVisible(!!state.site && state.site.id === 'amazon' && $('ranking-visible').checked);
+    $('ranking-controls').hidden = !state.site || state.site.id !== 'amazon';
+  });
+  function loadRanking() {
+    ranking.load(fetch, 'data/amazon-ranking-experiment.json').then(data => {
+      if (!data) return;
+      rankingData = data;
+      $('ranking-dates').textContent = `Fixed event window ${rankingData.event_window.join(' → ')}; the map date slider does not change this analysis. Later acquisitions excluded from ranking. Window neighbors are not dashboard peers within 1 km. Minimum neighbors: ${rankingData.minimum_local_peers}.`;
+    });
+  }
+  loadRanking();
+
+  function updateAcquisition() {
+    const s = state.site;
+    const measured = !!s.pixels && s.dates.length > 0;
+    $('acquisition').hidden = !measured;
+    if (!measured) return;
+    const date = s.dates[state.date], available = OB.acquisitions.available(s, state.date);
+    $('date-index').max = String(s.dates.length - 1);
+    $('date-index').value = String(state.date);
+    $('date-index').disabled = s.dates.length < 2;
+    $('date-index').setAttribute('aria-valuetext', date);
+    $('date-label').textContent = date;
+    $('date-prev').disabled = state.date === 0;
+    $('date-next').disabled = state.date === s.dates.length - 1;
+    const value = state.pixel && state.pixel.hv[state.date];
+    const sample = state.pixel ? ` Selected sample: ${Number.isFinite(value) ? value.toFixed(2) + ' dB' : 'unavailable'}.` : '';
+    $('date-status').textContent = `${state.date + 1} of ${s.dates.length}: ${available}/${s.pixels.length} samples with measured HV.${sample}`;
+  }
+  function selectAcquisition(index) {
+    if (!state.site || $('acquisition').hidden) return;
+    OB.sonify.stop(); $('stop').disabled = true;
+    state.date = Math.max(0, Math.min(state.site.dates.length - 1, index));
+    updateAcquisition(); optical.setDate(state.site.dates[state.date]); drawCharts();
+  }
+  $('date-index').addEventListener('input', e => selectAcquisition(+e.target.value));
+  $('date-prev').addEventListener('click', () => selectAcquisition(state.date - 1));
+  $('date-next').addEventListener('click', () => selectAcquisition(state.date + 1));
+
   // The endpoint can be replaced by the operator without changing the UI.
   const geocoder = window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/';
   const searchCache = new Map();
@@ -169,6 +215,7 @@
     document.dispatchEvent(new Event('ob:manual-navigation'));
     const site = OB.SITES.find(s => { const b = s.grid.bbox; return place.lat >= b.s && place.lat <= b.n && place.lon >= b.w && place.lon <= b.e; });
     clearSearchMarkers();
+    ranking.setVisible(false); $('ranking-controls').hidden = true;
     if (site) await loadSite(site.id);
     if (ticket !== navigationSerial) return false;
     if (site) {
@@ -186,6 +233,7 @@
       $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
       $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'Pixel series unavailable at this location';
       $('source-link').hidden = true; $('site-layers').hidden = true;
+      $('acquisition').hidden = true;
       $('sb-state').textContent = 'No prepared NISAR series at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Context: Esri basemap and photo mosaic';
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
       $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
@@ -526,6 +574,7 @@
     const p = await s.series(x, y);
     if (state.cell !== i || state.site !== s) return;      // another click won the race
     state.pixel = p;
+    updateAcquisition();
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;
     $('map-caption').textContent = $('l-offbeat').checked ? 'Measured samples: grey in step, blue below and red above their same-class neighbours' : 'Measured samples hidden; switch them on under Layers';
@@ -558,7 +607,8 @@
   function sinceIdx() { const p = state.pixel; return p && p.since ? state.site.dates.indexOf(p.since) : null; }
   function drawCharts(head) {
     const p = state.pixel; if (!p) return;
-    OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
+    const selectedDate = !$('acquisition').hidden ? state.date : null;
+    OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head ?? selectedDate);
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
     // Sentinel-1 at the same sample point, when the site has it (data/<site>/sentinel1.json)
@@ -601,6 +651,8 @@
     // Optical metadata must not delay the map or radar measurements.
     optical.load(s,s.dates.at(-1));
     if (ticket !== state.loading) return;
+    state.date = s.dates.length - 1;
+    updateAcquisition();
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
     $('source-link').hidden = false;
@@ -613,6 +665,9 @@
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();
+    $('ranking-controls').hidden = s.id !== 'amazon';
+    ranking.setVisible(s.id === 'amazon' && $('ranking-visible').checked);
+    $('ranking-controls').hidden = s.id !== 'amazon';
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
     $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;
