@@ -36,7 +36,7 @@ const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){re
 const tileLayers=[], imageLayers=[];
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
-const opticalLoads=[];let holdMexico=null;
+const opticalLoads=[];let holdMexico=null; let radarBinding=null;
 const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
@@ -44,12 +44,15 @@ const context={URL,AbortSignal,Event,console,document,location,history:{replaceS
 };context.window=context;vm.createContext(context);
 for(const file of ['styles','search','data','acquisitions','amazon-ranking','suggestions'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
-Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:()=>()=>null,bindWaterLabels:()=>()=>{},
+Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:(map,toggle,status)=>{radarBinding={map,toggle,status};return ()=>null;},bindWaterLabels:()=>()=>{},
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),
   chart:{backscatter(){},displacement(){},cband(){},opera(){},gnss(){},empty(){}},sonify:{stop(){},play(){}}});
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 await tick();await tick();assert(OB.app);
+assert.equal(radarBinding.map,maps[0],'NASA coverage must be bound to the left map');
+assert.equal(radarBinding.toggle,$('l-nisar'));
+assert.equal(radarBinding.status,$('nisar-status'));
 for (const {options} of tileLayers) {
   assert.equal(options.maxNativeZoom,16,'High zoom must enlarge available tiles instead of requesting Esri placeholders');
   assert.equal(options.maxZoom,19,'Both maps must remain zoomable');

@@ -1,6 +1,10 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'Global NISAR coverage (NASA)':'Глобальное покрытие NISAR (NASA)',
+    'Colours show approximate acquisition dates, not measured change. Gaps may remain.':'Цвета показывают приблизительные даты съёмки, а не измеренное изменение. Возможны пробелы покрытия.',
+    'Loading NISAR radar coverage…':'Загрузка покрытия радара NISAR…',
+    'NASA radar imagery unavailable. Toggle the layer to retry.':'Радарные снимки NASA недоступны. Выключите и включите слой для повторной попытки.',
     'Welcome to OffBeat':'Добро пожаловать в OffBeat',
     'Measured HH/HV on 2 dates; exploratory peer deviations only. Too few dates for curve-shape classification. No GUNW displacement samples passed quality checks.':'Измерения HH/HV за две даты; отклонения от соседей требуют проверки. Для определения формы кривой дат недостаточно. Ни одно измерение смещения GUNW не прошло проверку качества.',
     'Measured HH/HV on 2 dates; exploratory peer deviations only. Too few dates for curve-shape classification. GUNW has quality-filtered samples on a separate date axis.':'Измерения HH/HV за две даты; отклонения от соседей требуют проверки. Для определения формы кривой дат недостаточно. Прошедшие проверку точки GUNW показаны на отдельной временной шкале.',
