@@ -1,0 +1,48 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GUNW_010_113_D_079_011_4000_SH_20260117T011333_20260117T011407_20260129T011333_20260129T011408_P05023_N_F_J_001",
+    "concept_id": "G4275957805-ASF",
+    "collection": "C2854335566-ASF",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GUNW_PROVISIONAL_V1/NISAR_L2_PR_GUNW_010_113_D_079_011_4000_SH_20260117T011333_20260117T011407_20260129T011333_20260129T011408_P05023_N_F_J_001/NISAR_L2_PR_GUNW_010_113_D_079_011_4000_SH_20260117T011333_20260117T011407_20260129T011333_20260129T011408_P05023_N_F_J_001.h5"
+  },
+  "catalogue_query": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GUNW_PROVISIONAL_V1&bounding_box=-99.09%2C19.415%2C-99.065%2C19.44&page_size=2000&sort_key=start_date",
+  "reference_date": "2026-01-17",
+  "secondary_date": "2026-01-29",
+  "identification": {
+    "track": 113,
+    "frame": 79,
+    "direction": "Descending",
+    "look_direction": "Left"
+  },
+  "center_frequency_hz": 1239000000.0,
+  "grid": {
+    "epsg": 32614,
+    "spacing": [
+      80.0,
+      -80.0
+    ],
+    "window": [
+      1220,
+      1255,
+      2982,
+      3015
+    ],
+    "paths": {
+      "phase": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/unwrappedPhase",
+      "coherence": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/coherenceMagnitude",
+      "component": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/connectedComponents",
+      "iono": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreen",
+      "iono_sd": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreenUncertainty",
+      "mask": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/mask"
+    }
+  },
+  "subset_path": "data/subsets/mexico-gunw-series/descending/2026-01-17_2026-01-29.npz",
+  "sha256": "828aeda1437d04d0e992e67023e82e0bd92f46fa6fafa6e210d119876952cabd",
+  "sample_count": 1024,
+  "quality_valid_count": 190,
+  "steps": [
+    "Sample native GUNW HH phase, coherence, components, ionosphere and uncertainty at 32x32 existing points",
+    "Use previous quality mask coherence >=0.7, valid nonwater subswaths, valid connected component, no anomaly flags and ionosphere uncertainty <=1 rad",
+    "No displacement rate or stable reference claimed"
+  ]
+}

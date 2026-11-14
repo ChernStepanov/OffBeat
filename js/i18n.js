@@ -32,6 +32,8 @@
     'Source and limitations':'Источник и ограничения',
     'GUNW quality and sources':'Качество и источники GUNW',
     'First three GUNW pairs: ascending 0/1024, descending 0/1024 points pass all three pair masks. A continuous rate cannot be estimated from these pairs.':'Первые три пары GUNW: в восходящем и нисходящем направлениях все фильтры проходят 0 из 1024 точек. По этим парам нельзя оценить непрерывную скорость.',
+    'Later-pair quality and sources':'Качество и источники последующих пар',
+    'Later segments: 275 ascending and 68 descending points pass their respective pair masks. Dates differ; reference stability and velocity remain unverified.':'В последующих отрезках маски всех пар проходят 275 восходящих и 68 нисходящих точек. Даты различаются; устойчивость опоры и скорость не проверены.',
     'Skip to the map':'Перейти к карте', 'OffBeat - NISAR change finder':'OffBeat — поиск изменений NISAR',
     'Take the tour':'Обзор', 'Map':'Карта', 'Pixel card':'Карточка пикселя', 'Top anomalies':'Основные аномалии', 'How it works':'Как это работает', 'NISAR data guide':'Справка по данным NISAR',
     'Location search':'Поиск места', 'Search':'Найти', 'Name in any language or coordinates':'Название на любом языке или координаты',

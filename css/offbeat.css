@@ -396,3 +396,4 @@ button.select98__button:disabled { color: var(--lo); background-color: var(--fac
 
 .suggestions__list { display: flex; flex-wrap: wrap; gap: 5px; }
 .suggestions__list .btn { text-align: left; }
+#gunw-series-note:not([hidden]), #gunw-postgap-note:not([hidden]) { display: block; margin-top: 4px; }
