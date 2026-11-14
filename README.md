@@ -57,10 +57,15 @@ Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside ver
 ```sh
 node scripts/test_data.mjs
 node scripts/test_search.mjs
+node scripts/version_assets.mjs --check
 .venv/bin/python -m pytest pipeline/tests -q -m "not network"
 ```
 
 Synthetic numerical fixtures exist only in offline tests, never in application data.
+
+After editing JS or CSS, run `node scripts/version_assets.mjs` before committing.
+The generated content hashes prevent the browser from combining new HTML with
+old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
 
 ## Sources and licences
 
