@@ -6,6 +6,7 @@
     $('sb-state').textContent = error.message;
     $('sb-src').textContent = 'No measurements loaded';
     $('play-hint').textContent = 'Cannot load real data. Check the static server and data/mexico.json.';
+    $('card-empty-message').textContent = 'Measured data could not be loaded. Check your connection and reload the page.';
     return;
   }
   const state = { site: null, pixel: null, cell: null, date: 0, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
@@ -196,6 +197,10 @@
   }
   function clearPixel() {
     OB.sonify.stop(); state.cell = null; state.pixel = null;
+    $('card-content').hidden = true;
+    $('card-empty').hidden = false;
+    $('card-empty-message').textContent = 'No prepared measurements at this location. Choose a marked site to see its data and listen to a sample.';
+    $('card-empty-sites').hidden = false;
     unmarkSample();
     $('val-win').hidden = true;
     [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
@@ -574,6 +579,8 @@
     const p = await s.series(x, y);
     if (state.cell !== i || state.site !== s) return;      // another click won the race
     state.pixel = p;
+    $('card-empty').hidden = true;
+    $('card-content').hidden = false;
     updateAcquisition();
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;

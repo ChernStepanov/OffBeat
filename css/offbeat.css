@@ -209,6 +209,8 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 
 /* --- pixel card --- */
 .card { display: grid; grid-template-columns: 220px 1fr; gap: 8px; }
+.card-empty { padding: 4px 2px; }
+.card-empty p { margin-bottom: 6px; }
 .props { width: 100%; border-collapse: separate; border-spacing: 0; align-self: start; }
 .props th, .props td { text-align: left; padding: 3px 5px; vertical-align: top; }
 .props th { width: 42%; font-weight: normal; color: #000; }

@@ -58,11 +58,16 @@ await OB.app.loadSite('mexico');
 const clicks=(id,button)=>$(id).listeners.click({target:button});
 clicks('regions',regionButtons[0]);await tick();
 assert.equal(OB.app.pixel(),null);
+assert.equal($('card-content').hidden,true,'Нет пустых графиков вне участка');
+assert.equal($('card-empty').hidden,false);
+assert.equal($('card-empty-sites').hidden,false);
 assert.equal(regionButtons[0].getAttribute('aria-pressed'),'true');
 const loadsBefore=opticalLoads.length;
 await OB.app.loadSite('mexico');
 assert.equal(opticalLoads.length,loadsBefore+1,'Тур должен восстановить оптику после World');
 assert(OB.app.pixel());assert(regionButtons.every(b=>b.getAttribute('aria-pressed')==='false'));
+assert.equal($('card-content').hidden,false,'Карточка с данными возвращается при выборе участка');
+assert.equal($('card-empty').hidden,true);
 
 // Запоздалые результаты поиска не возвращаются после перехода в регион.
 let completeSearch;

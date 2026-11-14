@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=450faf2d7dec">
+<link rel="stylesheet" href="css/offbeat.css?v=c81a3dbd2927">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -190,6 +190,11 @@
       <section class="win" id="card-win" aria-labelledby="t-card">
         <div class="win-t"><h2 id="t-card">Pixel card - <span id="px-id">click the map</span></h2></div>
         <div class="win-b">
+          <div id="card-empty" class="card-empty" role="status">
+            <p id="card-empty-message">Loading measured data...</p>
+            <a href="#sites" id="card-empty-sites" hidden>Choose a prepared measurement site</a>
+          </div>
+          <div id="card-content" hidden>
           <div class="card">
             <table class="props" id="px-props">
             <tbody>
@@ -222,6 +227,7 @@
             <button type="button" class="btn" id="play" data-sfx="none" disabled>Play the pixel</button>
             <button type="button" class="btn" id="stop" data-sfx="none" disabled>Stop</button>
             <span class="hint" id="play-hint">Peers keep the beat, the pixel plays the HV curve. When it slips, you hear it.</span>
+          </div>
           </div>
         </div>
       </section>
@@ -306,8 +312,8 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=24122e4b536d"></script>
 <script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=d261f176b003"></script>
+<script src="js/i18n.js?v=c84a000df8e2"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
-<script src="js/app.js?v=add92f88fa7e"></script>
+<script src="js/app.js?v=b847a39954e6"></script>
 </body>
 </html>
