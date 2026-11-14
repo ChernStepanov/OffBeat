@@ -16,7 +16,7 @@ OB.chart = (function () {
   function frame(g, w, h, dates, lo, hi, unit) {
     const X = i => PAD.l + (i / (dates.length - 1)) * (w - PAD.l - PAD.r);
     const Y = v => PAD.t + (1 - (v - lo) / (hi - lo)) * (h - PAD.t - PAD.b);
-    g.font = "10px Tahoma, Verdana, sans-serif"; g.fillStyle = "#333"; g.strokeStyle = "#e2e2e2"; g.lineWidth = 1;
+    g.font = "12.5px W95FA, Tahoma, sans-serif"; g.fillStyle = "#333"; g.strokeStyle = "#e2e2e2"; g.lineWidth = 1;
     const step = niceStep((hi - lo) / 4);
     for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
       const y = Math.round(Y(v)) + 0.5;
@@ -69,7 +69,7 @@ OB.chart = (function () {
   function displacement(cv, dates, p, sinceIdx, head) {
     const { g, w, h } = setup(cv);
     if (!p.disp) {
-      g.fillStyle = "#555"; g.font = "11px Tahoma, Verdana, sans-serif"; g.textAlign = "center";
+      g.fillStyle = "#555"; g.font = "12.5px W95FA, Tahoma, sans-serif"; g.textAlign = "center";
       g.fillText("No GUNW interferogram covers this pixel yet.", w / 2, h / 2 + 4);
       return;
     }

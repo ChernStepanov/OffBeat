@@ -89,17 +89,17 @@
 
   function area(cells) {
     const ha = cells * state.site.grid.cellM ** 2 / 1e4;
-    return ha >= 100 ? (ha / 100).toFixed(1) + " km²" : Math.round(ha) + " ha";
+    return ha >= 100 ? (ha / 100).toFixed(1) + " sq km" : Math.round(ha) + " ha";
   }
 
   function drawTop() {
     const s = state.site, g = s.grid, rows = state.patches.slice(0, 10);
     $("top").tBodies[0].innerHTML = rows.length ? rows.map((p, i) => {
-      const st = OB.STYLES[p.style], since = g.since[p.peak] >= 0 ? s.dates[g.since[p.peak]] : "—";
+      const st = OB.STYLES[p.style], since = g.since[p.peak] >= 0 ? s.dates[g.since[p.peak]] : "-";
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
-    }).join("") : `<tr><td colspan="5">Nothing passes |z| ≥ ${state.z}. Lower the threshold.</td></tr>`;
+    }).join("") : `<tr><td colspan="5">Nothing passes |z| >= ${state.z}. Lower the threshold.</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true); };
   $("top").addEventListener("click", rowPick);
@@ -110,7 +110,7 @@
     state.patches = findPatches();
     let px = 0; for (let i = 0; i < g.z.length; i++) if (g.style[i] && Math.abs(g.z[i]) >= state.z) px++;
     drawRaster(); drawTop();
-    $("sb-count").textContent = `${state.patches.length} patches · ${px} px at |z| ≥ ${state.z} · pixel ${g.cellM} m`;
+    $("sb-count").textContent = `${state.patches.length} patches, ${px} px at |z| >= ${state.z}, pixel ${g.cellM} m`;
   }
 
   // --- picking a pixel ---
@@ -130,7 +130,7 @@
     $("p-peers").textContent = `${p.peers} px, same class`;
     $("p-z").textContent = (p.z > 0 ? "+" : "") + p.z.toFixed(2);
     $("p-style").innerHTML = st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
-    $("p-since").textContent = p.since || "—";
+    $("p-since").textContent = p.since || "-";
     $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
     const b = g.bbox, dl = (b.n - b.s) / g.n, dw = (b.e - b.w) / g.n;
     const rect = [[b.n - (y + 1) * dl, b.w + x * dw], [b.n - y * dl, b.w + (x + 1) * dw]];
@@ -160,7 +160,7 @@
   }
   $("play").addEventListener("click", () => {
     const p = state.pixel; if (!p) return;
-    $("stop").disabled = false; $("sb-state").textContent = `Playing ${p.id}…`;
+    $("stop").disabled = false; $("sb-state").textContent = `Playing ${p.id}...`;
     OB.sonify.play(voice(p), i => drawCharts(i), () => { $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); });
   });
   $("stop").addEventListener("click", () => { OB.sonify.stop(); $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); });
@@ -175,12 +175,13 @@
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
-    $("sb-state").textContent = `Ready · ${s.dates.length} acquisitions, ${s.dates[0]} – ${s.dates[s.dates.length - 1]}`;
+    $("sb-state").textContent = `Ready, ${s.dates.length} acquisitions, ${s.dates[0]} to ${s.dates[s.dates.length - 1]}`;
     if (state.patches[0]) pickCell(state.patches[0].peak, false);
     if (location.hash !== "#" + s.id) history.replaceState(null, "", "#" + s.id);
   }
 
   window.addEventListener("resize", () => drawCharts());
+  if (document.fonts) document.fonts.ready.then(() => drawCharts()); // canvas text needs W95FA loaded
   window.addEventListener("hashchange", () => {
     const id = location.hash.slice(1);
     if (OB.SITES.some(s => s.id === id) && (!state.site || state.site.id !== id)) loadSite(id);

@@ -35,3 +35,9 @@ Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
 
 NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC, ESA WorldCover 10 m, Sentinel-2 cloudless by EOX
 for the optical check (to be replaced by date-matched Sentinel-2 / HLS).
+
+## Font
+
+W95FA by Alina Sava, a pixel re-creation of MS Sans Serif, SIL Open Font License 1.1 (`fonts/W95FA-OFL.txt`).
+It sits on its pixel grid at 12.5px (80 font units = 1px), so the UI uses that size. The font has no `— – · ≥ ² … ▶`,
+so the UI writes `-`, `>=`, `...` and `sq km` instead.
