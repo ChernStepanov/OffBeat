@@ -56,7 +56,8 @@ window.OB = window.OB || {};
     site: id => () => !!siteById(id)
   };
   const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y); return b.length ? b[Math.floor(b.length / 2)] : NaN; };
-  const lastHv = (s, cls) => median(s.pixels.filter(p => p.cover === cls).map(p => p.hv[p.hv.length - 1]));
+  // class median of HV per date, then the median over dates: the same measure the C-band comparison uses
+  const lastHv = (s, cls) => median(s.dates.map((_, t) => median(s.pixels.filter(p => p.cover === cls).map(p => p.hv[t]))));
   const dispSamples = s => s.pixels.map(p => p.disp && p.disp[p.disp.length - 1]).filter(Number.isFinite);
   const largestMotion = () => {
     const s = OB.app.site(); let best = null, bv = -1;
@@ -73,10 +74,12 @@ window.OB = window.OB || {};
   // L band against C band on the same points and weeks, when data/<site>/sentinel1.json exists
   const bandGap = s => {
     const g = s.context && s.context.sentinel1 && s.context.sentinel1.summary && s.context.sentinel1.summary.gap_forest_minus_pasture_dB;
-    if (!g || !Number.isFinite(g.C_VH) || !Number.isFinite(g.L_HV)) return "";
+    if (!g || !Number.isFinite(g.C_VH)) return "";
+    const l = lastHv(s, 10) - lastHv(s, 30);              // the same NISAR gap the paragraph above states
+    if (!Number.isFinite(l)) return "";
     return `<p>Sentinel-1, which looks with 5.6 cm waves instead of NISAR's 24 cm, sees the same forest and pasture
-      ${Math.abs(g.C_VH).toFixed(1)} dB apart in VH, against ${Math.abs(g.L_HV).toFixed(1)} dB in NISAR's HV.
-      ${Math.abs(g.L_HV) > Math.abs(g.C_VH) ? "The longer wave goes deeper into the canopy and tells the two apart more clearly." : "Here the shorter wave separates them as well; the canopy is not dense enough to saturate it."}</p>`;
+      ${Math.abs(g.C_VH).toFixed(1)} dB apart in VH, against ${Math.abs(l).toFixed(1)} dB in NISAR's HV.
+      ${Math.abs(l) > Math.abs(g.C_VH) ? "The longer wave goes deeper into the canopy and tells the two apart more clearly." : "Here the shorter wave separates them as well; the canopy is not dense enough to saturate it."}</p>`;
   };
 
   // ---- chapters ------------------------------------------------------------
@@ -128,7 +131,7 @@ window.OB = window.OB || {};
       title: "Forest and pasture, as radar sees them",
       text: (s, p) => {
         const f = lastHv(s, 10), g = lastHv(s, 30);
-        return `<p>Real NISAR over Itupiranga, Pará, ${fmtDate(s.dates[s.dates.length - 1])}, at the edge of the Amazon's arc of deforestation.</p>
+        return `<p>Real NISAR over Itupiranga, Pará, ${fmtDate(s.dates[0])} to ${fmtDate(s.dates[s.dates.length - 1])}, at the edge of the Amazon's arc of deforestation.</p>
           <p>Inside a canopy the radar bounces between leaves and branches and comes back twisted: strong HV.
           Here forest returns a median of <b>${f.toFixed(1)} dB</b> in HV, pasture <b>${g.toFixed(1)} dB</b>.
           That gap of ${(f - g).toFixed(1)} dB is what disappears when a forest is cut.</p>${bandGap(s)}`;

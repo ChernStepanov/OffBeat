@@ -81,10 +81,31 @@ def login():
     return earthaccess
 
 
-def gdal_env(token):
+NASA_HOSTS = ("asf.alaska.edu", "earthdatacloud.nasa.gov", "earthdata.nasa.gov")
+
+
+def signed_url(url, token, hops=6):
+    """Follow ASF's redirects by hand: the token goes only to NASA hosts, and the final pre-signed
+    CloudFront/S3 link (valid about an hour) is returned for GDAL to read without any credentials.
+    Sending the token on to S3 makes it refuse the request (403)."""
+    for _ in range(hops):
+        host = url.split("/")[2]
+        if not host.endswith(NASA_HOSTS):
+            return url
+        r = requests.get(url, headers={"Authorization": f"Bearer {token}", "Range": "bytes=0-0"},
+                         allow_redirects=False, timeout=60)
+        if r.status_code in (301, 302, 303, 307, 308):
+            url = requests.compat.urljoin(url, r.headers["Location"])
+            continue
+        if r.status_code in (200, 206):
+            return url
+        raise RuntimeError(f"HTTP {r.status_code} from {host}")
+    raise RuntimeError("too many redirects")
+
+
+def gdal_env():
     import rasterio
-    return rasterio.Env(GDAL_HTTP_HEADERS=f"Authorization: Bearer {token}",
-                        GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR", CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif",
+    return rasterio.Env(GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR", CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif",
                         GDAL_HTTP_TIMEOUT="60", GDAL_HTTP_MAX_RETRY="4", GDAL_HTTP_RETRY_DELAY="3",
                         VSI_CACHE="TRUE")
 
@@ -107,7 +128,7 @@ def sample(token, url, lats, lons):
     import rasterio
     from rasterio.windows import from_bounds
     from pyproj import Transformer
-    with gdal_env(token), rasterio.open("/vsicurl/" + url) as src:
+    with gdal_env(), rasterio.open("/vsicurl/" + signed_url(url, token)) as src:
         tr = Transformer.from_crs(4326, src.crs, always_xy=True)
         xs, ys = tr.transform(lons, lats)
         pad = 2 * abs(src.transform.a)
@@ -144,10 +165,12 @@ def compare(site, dates, vv, vh):
         c_vh = np.nanmedian([np.nanmedian(vh[d][idx]) for d in near])
         c_vv = np.nanmedian([np.nanmedian(vv[d][idx]) for d in near])
         l_hv = np.nanmedian([np.nanmedian([site["pixels"][i]["hv"][t] if site["pixels"][i]["hv"][t] is not None else np.nan for i in idx]) for t in range(len(nis))])
-        out["classes"][name] = {"points": len(idx), "S1_VH_dB": round(float(c_vh), 2), "S1_VV_dB": round(float(c_vv), 2), "NISAR_HV_dB": round(float(l_hv), 2)}
+        num = lambda v: None if not np.isfinite(v) else round(float(v), 2)
+        out["classes"][name] = {"points": len(idx), "S1_VH_dB": num(c_vh), "S1_VV_dB": num(c_vv), "NISAR_HV_dB": num(l_hv)}
     f, g = out["classes"].get("forest"), out["classes"].get("pasture/grass")
+    gap = lambda a, b: None if a is None or b is None else round(a - b, 2)
     if f and g:
-        out["gap_forest_minus_pasture_dB"] = {"C_VH": round(f["S1_VH_dB"] - g["S1_VH_dB"], 2), "L_HV": round(f["NISAR_HV_dB"] - g["NISAR_HV_dB"], 2)}
+        out["gap_forest_minus_pasture_dB"] = {"C_VH": gap(f["S1_VH_dB"], g["S1_VH_dB"]), "L_HV": gap(f["NISAR_HV_dB"], g["NISAR_HV_dB"])}
     return out
 
 
@@ -211,6 +234,8 @@ def main():
             "points_sha256": hashlib.sha256(json.dumps(pts).encode()).hexdigest(),
         },
     }
+    if not used:
+        sys.exit(f"No granule could be read ({len(granules)} tried); nothing written.")
     out["summary"] = compare(site, dates, vv, vh)
     print(json.dumps(out["summary"], indent=1))
     path = ROOT / "data" / a.site / "sentinel1.json"
