@@ -1,0 +1,80 @@
+{
+  "samples": {
+    "AMA r7 c4": [
+      {
+        "source": "archive/preview-2026-11-14/data/amazon/validation/reviews.json",
+        "source_sha256": "3df6de7a850aa1a2c9b2a35eb0ce621fb436034d893a3b94fd18ac6c326f4e16",
+        "independence": "previously inspected; not blind test label",
+        "verdict": "non_forest_change",
+        "observation": "Открытый травянистый участок виден уже 3 июля. К сентябрю он буреет; нового удаления кроны в точке не видно. Последний z вернулся к +0.60.",
+        "hypothesis": "Изменение травянистой растительности или влажности; сезонное высыхание правдоподобно, но причина не установлена."
+      }
+    ],
+    "AMA r12 c20": [
+      {
+        "source": "archive/preview-2026-11-14/data/amazon/validation/reviews.json",
+        "source_sha256": "3df6de7a850aa1a2c9b2a35eb0ce621fb436034d893a3b94fd18ac6c326f4e16",
+        "independence": "previously inspected; not blind test label",
+        "verdict": "non_forest_change",
+        "observation": "Точка лежит в открытом поле во всех пяти RGB. К 21 сентября участок светлеет; SCL меняется с растительности на открытый грунт. Лесная граница рядом не пересекает точку.",
+        "hypothesis": "Изменение покрытия или влажности поля; свежая вырубка в этой точке не подтверждена. Неподтверждённый GLAD-пиксель в 89 м не является совпадением."
+      }
+    ],
+    "AMA r15 c13": [
+      {
+        "source": "archive/preview-2026-11-14/data/amazon/validation/reviews.json",
+        "source_sha256": "3df6de7a850aa1a2c9b2a35eb0ce621fb436034d893a3b94fd18ac6c326f4e16",
+        "independence": "previously inspected; not blind test label",
+        "verdict": "non_forest_change",
+        "observation": "Открытый участок у дорожки существует уже в июле. Побурение усиливается к сентябрю; исчезновения леса в точке не видно. Форма сильно зависит от последней даты.",
+        "hypothesis": "Изменение травянистого покрытия или влажности, а не установленная потеря леса."
+      }
+    ],
+    "AMA r21 c0": [
+      {
+        "source": "archive/preview-2026-11-14/data/amazon/validation/reviews.json",
+        "source_sha256": "3df6de7a850aa1a2c9b2a35eb0ce621fb436034d893a3b94fd18ac6c326f4e16",
+        "independence": "previously inspected; not blind test label",
+        "verdict": "unresolved",
+        "observation": "Точка у лесной кромки и края RGB-вырезки. На ясных датах 14 августа и 3 сентября нового разрыва кроны не видно. На 21 сентября в точке SCL=3, тень; эта дата не используется как ясное подтверждение.",
+        "hypothesis": "Плавное снижение HV устойчиво к исключению одной даты в 5 из 6 прогонов, но причина не установлена. Возможны эффекты кромки, влажности и неоднородного покрытия. Называть сигнал доказанным шумом нельзя."
+      }
+    ],
+    "AMA r21 c31": [
+      {
+        "source": "archive/preview-2026-11-14/data/amazon/validation/reviews.json",
+        "source_sha256": "3df6de7a850aa1a2c9b2a35eb0ce621fb436034d893a3b94fd18ac6c326f4e16",
+        "independence": "previously inspected; not blind test label",
+        "verdict": "unresolved",
+        "observation": "Исторический WorldCover — травянистый покров, точка у существующей границы с лесом. Контур кромки на доступных RGB заметно не смещается; верхнее поле буреет.",
+        "hypothesis": "Причина снижения HV не установлена. Возможны изменение травянистой части или смешанный сигнал кромки; исторический код 30 не доказывает текущее покрытие в точке. Из RGB не следует новая вырубка."
+      }
+    ],
+    "AMA r28 c1": [
+      {
+        "source": "archive/preview-2026-11-14/data/amazon/validation/reviews.json",
+        "source_sha256": "3df6de7a850aa1a2c9b2a35eb0ce621fb436034d893a3b94fd18ac6c326f4e16",
+        "independence": "previously inspected; not blind test label",
+        "verdict": "likely_false_change",
+        "observation": "Древесный покров вокруг точки сохраняется на всех пяти RGB. Последний z равен −0.18 после временного провала; HV drop сохраняется только в 2 из 6 прогонов с исключением одной даты.",
+        "hypothesis": "Вероятное ложное выделение устойчивого изменения коротким рядом. Это не доказательство инструментального шума, но оснований считать точку вырубкой нет."
+      }
+    ],
+    "AMA r5 c15": [
+      {
+        "status": "unknown",
+        "interval": [
+          "2026-08-23",
+          "2026-09-04"
+        ],
+        "source": "data/analysis/amazon-dense-pair.json",
+        "note": "SAR-only corroboration is not independent forest-loss evidence."
+      }
+    ]
+  },
+  "dated_optical": "data/amazon/optical/index.json",
+  "dated_alerts": "archive/preview-2026-11-14/data/amazon/validation/alerts.geojson",
+  "source_manifest": "archive/preview-2026-11-14/data/amazon/validation/sources.json",
+  "positive_control_limit": "archive/preview-2026-11-14/docs/amazon-positive-eval.md",
+  "policy": "No alert absence or archived interpretation converted to a blind negative."
+}

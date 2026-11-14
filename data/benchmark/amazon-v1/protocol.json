@@ -1,0 +1,6189 @@
+{
+  "version": 1,
+  "registered_date": "2026-11-14",
+  "ids": [
+    "AMA r0 c0",
+    "AMA r0 c1",
+    "AMA r0 c10",
+    "AMA r0 c11",
+    "AMA r0 c12",
+    "AMA r0 c13",
+    "AMA r0 c14",
+    "AMA r0 c15",
+    "AMA r0 c16",
+    "AMA r0 c17",
+    "AMA r0 c18",
+    "AMA r0 c19",
+    "AMA r0 c2",
+    "AMA r0 c20",
+    "AMA r0 c21",
+    "AMA r0 c22",
+    "AMA r0 c23",
+    "AMA r0 c24",
+    "AMA r0 c25",
+    "AMA r0 c26",
+    "AMA r0 c27",
+    "AMA r0 c28",
+    "AMA r0 c29",
+    "AMA r0 c3",
+    "AMA r0 c30",
+    "AMA r0 c31",
+    "AMA r0 c4",
+    "AMA r0 c5",
+    "AMA r0 c6",
+    "AMA r0 c7",
+    "AMA r0 c8",
+    "AMA r0 c9",
+    "AMA r1 c0",
+    "AMA r1 c1",
+    "AMA r1 c10",
+    "AMA r1 c11",
+    "AMA r1 c12",
+    "AMA r1 c13",
+    "AMA r1 c14",
+    "AMA r1 c15",
+    "AMA r1 c16",
+    "AMA r1 c17",
+    "AMA r1 c18",
+    "AMA r1 c19",
+    "AMA r1 c2",
+    "AMA r1 c20",
+    "AMA r1 c21",
+    "AMA r1 c22",
+    "AMA r1 c23",
+    "AMA r1 c24",
+    "AMA r1 c25",
+    "AMA r1 c26",
+    "AMA r1 c27",
+    "AMA r1 c28",
+    "AMA r1 c29",
+    "AMA r1 c3",
+    "AMA r1 c30",
+    "AMA r1 c31",
+    "AMA r1 c4",
+    "AMA r1 c5",
+    "AMA r1 c6",
+    "AMA r1 c7",
+    "AMA r1 c8",
+    "AMA r1 c9",
+    "AMA r10 c0",
+    "AMA r10 c1",
+    "AMA r10 c10",
+    "AMA r10 c11",
+    "AMA r10 c12",
+    "AMA r10 c13",
+    "AMA r10 c14",
+    "AMA r10 c15",
+    "AMA r10 c16",
+    "AMA r10 c17",
+    "AMA r10 c18",
+    "AMA r10 c19",
+    "AMA r10 c2",
+    "AMA r10 c20",
+    "AMA r10 c21",
+    "AMA r10 c22",
+    "AMA r10 c23",
+    "AMA r10 c24",
+    "AMA r10 c25",
+    "AMA r10 c26",
+    "AMA r10 c27",
+    "AMA r10 c28",
+    "AMA r10 c29",
+    "AMA r10 c3",
+    "AMA r10 c30",
+    "AMA r10 c31",
+    "AMA r10 c4",
+    "AMA r10 c5",
+    "AMA r10 c6",
+    "AMA r10 c7",
+    "AMA r10 c8",
+    "AMA r10 c9",
+    "AMA r11 c0",
+    "AMA r11 c1",
+    "AMA r11 c10",
+    "AMA r11 c11",
+    "AMA r11 c12",
+    "AMA r11 c13",
+    "AMA r11 c14",
+    "AMA r11 c15",
+    "AMA r11 c16",
+    "AMA r11 c17",
+    "AMA r11 c18",
+    "AMA r11 c19",
+    "AMA r11 c2",
+    "AMA r11 c20",
+    "AMA r11 c21",
+    "AMA r11 c22",
+    "AMA r11 c23",
+    "AMA r11 c24",
+    "AMA r11 c25",
+    "AMA r11 c26",
+    "AMA r11 c27",
+    "AMA r11 c28",
+    "AMA r11 c29",
+    "AMA r11 c3",
+    "AMA r11 c30",
+    "AMA r11 c31",
+    "AMA r11 c4",
+    "AMA r11 c5",
+    "AMA r11 c6",
+    "AMA r11 c7",
+    "AMA r11 c8",
+    "AMA r11 c9",
+    "AMA r12 c0",
+    "AMA r12 c1",
+    "AMA r12 c10",
+    "AMA r12 c11",
+    "AMA r12 c12",
+    "AMA r12 c13",
+    "AMA r12 c14",
+    "AMA r12 c15",
+    "AMA r12 c16",
+    "AMA r12 c17",
+    "AMA r12 c18",
+    "AMA r12 c19",
+    "AMA r12 c2",
+    "AMA r12 c20",
+    "AMA r12 c21",
+    "AMA r12 c22",
+    "AMA r12 c23",
+    "AMA r12 c24",
+    "AMA r12 c25",
+    "AMA r12 c26",
+    "AMA r12 c27",
+    "AMA r12 c28",
+    "AMA r12 c29",
+    "AMA r12 c3",
+    "AMA r12 c30",
+    "AMA r12 c31",
+    "AMA r12 c4",
+    "AMA r12 c5",
+    "AMA r12 c6",
+    "AMA r12 c7",
+    "AMA r12 c8",
+    "AMA r12 c9",
+    "AMA r13 c0",
+    "AMA r13 c1",
+    "AMA r13 c10",
+    "AMA r13 c11",
+    "AMA r13 c12",
+    "AMA r13 c13",
+    "AMA r13 c14",
+    "AMA r13 c15",
+    "AMA r13 c16",
+    "AMA r13 c17",
+    "AMA r13 c18",
+    "AMA r13 c19",
+    "AMA r13 c2",
+    "AMA r13 c20",
+    "AMA r13 c21",
+    "AMA r13 c22",
+    "AMA r13 c23",
+    "AMA r13 c24",
+    "AMA r13 c25",
+    "AMA r13 c26",
+    "AMA r13 c27",
+    "AMA r13 c28",
+    "AMA r13 c29",
+    "AMA r13 c3",
+    "AMA r13 c30",
+    "AMA r13 c31",
+    "AMA r13 c4",
+    "AMA r13 c5",
+    "AMA r13 c6",
+    "AMA r13 c7",
+    "AMA r13 c8",
+    "AMA r13 c9",
+    "AMA r14 c0",
+    "AMA r14 c1",
+    "AMA r14 c10",
+    "AMA r14 c11",
+    "AMA r14 c12",
+    "AMA r14 c13",
+    "AMA r14 c14",
+    "AMA r14 c15",
+    "AMA r14 c16",
+    "AMA r14 c17",
+    "AMA r14 c18",
+    "AMA r14 c19",
+    "AMA r14 c2",
+    "AMA r14 c20",
+    "AMA r14 c21",
+    "AMA r14 c22",
+    "AMA r14 c23",
+    "AMA r14 c24",
+    "AMA r14 c25",
+    "AMA r14 c26",
+    "AMA r14 c27",
+    "AMA r14 c28",
+    "AMA r14 c29",
+    "AMA r14 c3",
+    "AMA r14 c30",
+    "AMA r14 c31",
+    "AMA r14 c4",
+    "AMA r14 c5",
+    "AMA r14 c6",
+    "AMA r14 c7",
+    "AMA r14 c8",
+    "AMA r14 c9",
+    "AMA r15 c0",
+    "AMA r15 c1",
+    "AMA r15 c10",
+    "AMA r15 c11",
+    "AMA r15 c12",
+    "AMA r15 c13",
+    "AMA r15 c14",
+    "AMA r15 c15",
+    "AMA r15 c16",
+    "AMA r15 c17",
+    "AMA r15 c18",
+    "AMA r15 c19",
+    "AMA r15 c2",
+    "AMA r15 c20",
+    "AMA r15 c21",
+    "AMA r15 c22",
+    "AMA r15 c23",
+    "AMA r15 c24",
+    "AMA r15 c25",
+    "AMA r15 c26",
+    "AMA r15 c27",
+    "AMA r15 c28",
+    "AMA r15 c29",
+    "AMA r15 c3",
+    "AMA r15 c30",
+    "AMA r15 c31",
+    "AMA r15 c4",
+    "AMA r15 c5",
+    "AMA r15 c6",
+    "AMA r15 c7",
+    "AMA r15 c8",
+    "AMA r15 c9",
+    "AMA r16 c0",
+    "AMA r16 c1",
+    "AMA r16 c10",
+    "AMA r16 c11",
+    "AMA r16 c12",
+    "AMA r16 c13",
+    "AMA r16 c14",
+    "AMA r16 c15",
+    "AMA r16 c16",
+    "AMA r16 c17",
+    "AMA r16 c18",
+    "AMA r16 c19",
+    "AMA r16 c2",
+    "AMA r16 c20",
+    "AMA r16 c21",
+    "AMA r16 c22",
+    "AMA r16 c23",
+    "AMA r16 c24",
+    "AMA r16 c25",
+    "AMA r16 c26",
+    "AMA r16 c27",
+    "AMA r16 c28",
+    "AMA r16 c29",
+    "AMA r16 c3",
+    "AMA r16 c30",
+    "AMA r16 c31",
+    "AMA r16 c4",
+    "AMA r16 c5",
+    "AMA r16 c6",
+    "AMA r16 c7",
+    "AMA r16 c8",
+    "AMA r16 c9",
+    "AMA r17 c0",
+    "AMA r17 c1",
+    "AMA r17 c10",
+    "AMA r17 c11",
+    "AMA r17 c12",
+    "AMA r17 c13",
+    "AMA r17 c14",
+    "AMA r17 c15",
+    "AMA r17 c16",
+    "AMA r17 c17",
+    "AMA r17 c18",
+    "AMA r17 c19",
+    "AMA r17 c2",
+    "AMA r17 c20",
+    "AMA r17 c21",
+    "AMA r17 c22",
+    "AMA r17 c23",
+    "AMA r17 c24",
+    "AMA r17 c25",
+    "AMA r17 c26",
+    "AMA r17 c27",
+    "AMA r17 c28",
+    "AMA r17 c29",
+    "AMA r17 c3",
+    "AMA r17 c30",
+    "AMA r17 c31",
+    "AMA r17 c4",
+    "AMA r17 c5",
+    "AMA r17 c6",
+    "AMA r17 c7",
+    "AMA r17 c8",
+    "AMA r17 c9",
+    "AMA r18 c0",
+    "AMA r18 c1",
+    "AMA r18 c10",
+    "AMA r18 c11",
+    "AMA r18 c12",
+    "AMA r18 c13",
+    "AMA r18 c14",
+    "AMA r18 c15",
+    "AMA r18 c16",
+    "AMA r18 c17",
+    "AMA r18 c18",
+    "AMA r18 c19",
+    "AMA r18 c2",
+    "AMA r18 c20",
+    "AMA r18 c21",
+    "AMA r18 c22",
+    "AMA r18 c23",
+    "AMA r18 c24",
+    "AMA r18 c25",
+    "AMA r18 c26",
+    "AMA r18 c27",
+    "AMA r18 c28",
+    "AMA r18 c29",
+    "AMA r18 c3",
+    "AMA r18 c30",
+    "AMA r18 c31",
+    "AMA r18 c4",
+    "AMA r18 c5",
+    "AMA r18 c6",
+    "AMA r18 c7",
+    "AMA r18 c8",
+    "AMA r18 c9",
+    "AMA r19 c0",
+    "AMA r19 c1",
+    "AMA r19 c10",
+    "AMA r19 c11",
+    "AMA r19 c12",
+    "AMA r19 c13",
+    "AMA r19 c14",
+    "AMA r19 c15",
+    "AMA r19 c16",
+    "AMA r19 c17",
+    "AMA r19 c18",
+    "AMA r19 c19",
+    "AMA r19 c2",
+    "AMA r19 c20",
+    "AMA r19 c21",
+    "AMA r19 c22",
+    "AMA r19 c23",
+    "AMA r19 c24",
+    "AMA r19 c25",
+    "AMA r19 c26",
+    "AMA r19 c27",
+    "AMA r19 c28",
+    "AMA r19 c29",
+    "AMA r19 c3",
+    "AMA r19 c30",
+    "AMA r19 c31",
+    "AMA r19 c4",
+    "AMA r19 c5",
+    "AMA r19 c6",
+    "AMA r19 c7",
+    "AMA r19 c8",
+    "AMA r19 c9",
+    "AMA r2 c0",
+    "AMA r2 c1",
+    "AMA r2 c10",
+    "AMA r2 c11",
+    "AMA r2 c12",
+    "AMA r2 c13",
+    "AMA r2 c14",
+    "AMA r2 c15",
+    "AMA r2 c16",
+    "AMA r2 c17",
+    "AMA r2 c18",
+    "AMA r2 c19",
+    "AMA r2 c2",
+    "AMA r2 c20",
+    "AMA r2 c21",
+    "AMA r2 c22",
+    "AMA r2 c23",
+    "AMA r2 c24",
+    "AMA r2 c25",
+    "AMA r2 c26",
+    "AMA r2 c27",
+    "AMA r2 c28",
+    "AMA r2 c29",
+    "AMA r2 c3",
+    "AMA r2 c30",
+    "AMA r2 c31",
+    "AMA r2 c4",
+    "AMA r2 c5",
+    "AMA r2 c6",
+    "AMA r2 c7",
+    "AMA r2 c8",
+    "AMA r2 c9",
+    "AMA r20 c0",
+    "AMA r20 c1",
+    "AMA r20 c10",
+    "AMA r20 c11",
+    "AMA r20 c12",
+    "AMA r20 c13",
+    "AMA r20 c14",
+    "AMA r20 c15",
+    "AMA r20 c16",
+    "AMA r20 c17",
+    "AMA r20 c18",
+    "AMA r20 c19",
+    "AMA r20 c2",
+    "AMA r20 c20",
+    "AMA r20 c21",
+    "AMA r20 c22",
+    "AMA r20 c23",
+    "AMA r20 c24",
+    "AMA r20 c25",
+    "AMA r20 c26",
+    "AMA r20 c27",
+    "AMA r20 c28",
+    "AMA r20 c29",
+    "AMA r20 c3",
+    "AMA r20 c30",
+    "AMA r20 c31",
+    "AMA r20 c4",
+    "AMA r20 c5",
+    "AMA r20 c6",
+    "AMA r20 c7",
+    "AMA r20 c8",
+    "AMA r20 c9",
+    "AMA r21 c0",
+    "AMA r21 c1",
+    "AMA r21 c10",
+    "AMA r21 c11",
+    "AMA r21 c12",
+    "AMA r21 c13",
+    "AMA r21 c14",
+    "AMA r21 c15",
+    "AMA r21 c16",
+    "AMA r21 c17",
+    "AMA r21 c18",
+    "AMA r21 c19",
+    "AMA r21 c2",
+    "AMA r21 c20",
+    "AMA r21 c21",
+    "AMA r21 c22",
+    "AMA r21 c23",
+    "AMA r21 c24",
+    "AMA r21 c25",
+    "AMA r21 c26",
+    "AMA r21 c27",
+    "AMA r21 c28",
+    "AMA r21 c29",
+    "AMA r21 c3",
+    "AMA r21 c30",
+    "AMA r21 c31",
+    "AMA r21 c4",
+    "AMA r21 c5",
+    "AMA r21 c6",
+    "AMA r21 c7",
+    "AMA r21 c8",
+    "AMA r21 c9",
+    "AMA r22 c0",
+    "AMA r22 c1",
+    "AMA r22 c10",
+    "AMA r22 c11",
+    "AMA r22 c12",
+    "AMA r22 c13",
+    "AMA r22 c14",
+    "AMA r22 c15",
+    "AMA r22 c16",
+    "AMA r22 c17",
+    "AMA r22 c18",
+    "AMA r22 c19",
+    "AMA r22 c2",
+    "AMA r22 c20",
+    "AMA r22 c21",
+    "AMA r22 c22",
+    "AMA r22 c23",
+    "AMA r22 c24",
+    "AMA r22 c25",
+    "AMA r22 c26",
+    "AMA r22 c27",
+    "AMA r22 c28",
+    "AMA r22 c29",
+    "AMA r22 c3",
+    "AMA r22 c30",
+    "AMA r22 c31",
+    "AMA r22 c4",
+    "AMA r22 c5",
+    "AMA r22 c6",
+    "AMA r22 c7",
+    "AMA r22 c8",
+    "AMA r22 c9",
+    "AMA r23 c0",
+    "AMA r23 c1",
+    "AMA r23 c10",
+    "AMA r23 c11",
+    "AMA r23 c12",
+    "AMA r23 c13",
+    "AMA r23 c14",
+    "AMA r23 c15",
+    "AMA r23 c16",
+    "AMA r23 c17",
+    "AMA r23 c18",
+    "AMA r23 c19",
+    "AMA r23 c2",
+    "AMA r23 c20",
+    "AMA r23 c21",
+    "AMA r23 c22",
+    "AMA r23 c23",
+    "AMA r23 c24",
+    "AMA r23 c25",
+    "AMA r23 c26",
+    "AMA r23 c27",
+    "AMA r23 c28",
+    "AMA r23 c29",
+    "AMA r23 c3",
+    "AMA r23 c30",
+    "AMA r23 c31",
+    "AMA r23 c4",
+    "AMA r23 c5",
+    "AMA r23 c6",
+    "AMA r23 c7",
+    "AMA r23 c8",
+    "AMA r23 c9",
+    "AMA r24 c0",
+    "AMA r24 c1",
+    "AMA r24 c10",
+    "AMA r24 c11",
+    "AMA r24 c12",
+    "AMA r24 c13",
+    "AMA r24 c14",
+    "AMA r24 c15",
+    "AMA r24 c16",
+    "AMA r24 c17",
+    "AMA r24 c18",
+    "AMA r24 c19",
+    "AMA r24 c2",
+    "AMA r24 c20",
+    "AMA r24 c21",
+    "AMA r24 c22",
+    "AMA r24 c23",
+    "AMA r24 c24",
+    "AMA r24 c25",
+    "AMA r24 c26",
+    "AMA r24 c27",
+    "AMA r24 c28",
+    "AMA r24 c29",
+    "AMA r24 c3",
+    "AMA r24 c30",
+    "AMA r24 c31",
+    "AMA r24 c4",
+    "AMA r24 c5",
+    "AMA r24 c6",
+    "AMA r24 c7",
+    "AMA r24 c8",
+    "AMA r24 c9",
+    "AMA r25 c0",
+    "AMA r25 c1",
+    "AMA r25 c10",
+    "AMA r25 c11",
+    "AMA r25 c12",
+    "AMA r25 c13",
+    "AMA r25 c14",
+    "AMA r25 c15",
+    "AMA r25 c16",
+    "AMA r25 c17",
+    "AMA r25 c18",
+    "AMA r25 c19",
+    "AMA r25 c2",
+    "AMA r25 c20",
+    "AMA r25 c21",
+    "AMA r25 c22",
+    "AMA r25 c23",
+    "AMA r25 c24",
+    "AMA r25 c25",
+    "AMA r25 c26",
+    "AMA r25 c27",
+    "AMA r25 c28",
+    "AMA r25 c29",
+    "AMA r25 c3",
+    "AMA r25 c30",
+    "AMA r25 c31",
+    "AMA r25 c4",
+    "AMA r25 c5",
+    "AMA r25 c6",
+    "AMA r25 c7",
+    "AMA r25 c8",
+    "AMA r25 c9",
+    "AMA r26 c0",
+    "AMA r26 c1",
+    "AMA r26 c10",
+    "AMA r26 c11",
+    "AMA r26 c12",
+    "AMA r26 c13",
+    "AMA r26 c14",
+    "AMA r26 c15",
+    "AMA r26 c16",
+    "AMA r26 c17",
+    "AMA r26 c18",
+    "AMA r26 c19",
+    "AMA r26 c2",
+    "AMA r26 c20",
+    "AMA r26 c21",
+    "AMA r26 c22",
+    "AMA r26 c23",
+    "AMA r26 c24",
+    "AMA r26 c25",
+    "AMA r26 c26",
+    "AMA r26 c27",
+    "AMA r26 c28",
+    "AMA r26 c29",
+    "AMA r26 c3",
+    "AMA r26 c30",
+    "AMA r26 c31",
+    "AMA r26 c4",
+    "AMA r26 c5",
+    "AMA r26 c6",
+    "AMA r26 c7",
+    "AMA r26 c8",
+    "AMA r26 c9",
+    "AMA r27 c0",
+    "AMA r27 c1",
+    "AMA r27 c10",
+    "AMA r27 c11",
+    "AMA r27 c12",
+    "AMA r27 c13",
+    "AMA r27 c14",
+    "AMA r27 c15",
+    "AMA r27 c16",
+    "AMA r27 c17",
+    "AMA r27 c18",
+    "AMA r27 c19",
+    "AMA r27 c2",
+    "AMA r27 c20",
+    "AMA r27 c21",
+    "AMA r27 c22",
+    "AMA r27 c23",
+    "AMA r27 c24",
+    "AMA r27 c25",
+    "AMA r27 c26",
+    "AMA r27 c27",
+    "AMA r27 c28",
+    "AMA r27 c29",
+    "AMA r27 c3",
+    "AMA r27 c30",
+    "AMA r27 c31",
+    "AMA r27 c4",
+    "AMA r27 c5",
+    "AMA r27 c6",
+    "AMA r27 c7",
+    "AMA r27 c8",
+    "AMA r27 c9",
+    "AMA r28 c0",
+    "AMA r28 c1",
+    "AMA r28 c10",
+    "AMA r28 c11",
+    "AMA r28 c12",
+    "AMA r28 c13",
+    "AMA r28 c14",
+    "AMA r28 c15",
+    "AMA r28 c16",
+    "AMA r28 c17",
+    "AMA r28 c18",
+    "AMA r28 c19",
+    "AMA r28 c2",
+    "AMA r28 c20",
+    "AMA r28 c21",
+    "AMA r28 c22",
+    "AMA r28 c23",
+    "AMA r28 c24",
+    "AMA r28 c25",
+    "AMA r28 c26",
+    "AMA r28 c27",
+    "AMA r28 c28",
+    "AMA r28 c29",
+    "AMA r28 c3",
+    "AMA r28 c30",
+    "AMA r28 c31",
+    "AMA r28 c4",
+    "AMA r28 c5",
+    "AMA r28 c6",
+    "AMA r28 c7",
+    "AMA r28 c8",
+    "AMA r28 c9",
+    "AMA r29 c0",
+    "AMA r29 c1",
+    "AMA r29 c10",
+    "AMA r29 c11",
+    "AMA r29 c12",
+    "AMA r29 c13",
+    "AMA r29 c14",
+    "AMA r29 c15",
+    "AMA r29 c16",
+    "AMA r29 c17",
+    "AMA r29 c18",
+    "AMA r29 c19",
+    "AMA r29 c2",
+    "AMA r29 c20",
+    "AMA r29 c21",
+    "AMA r29 c22",
+    "AMA r29 c23",
+    "AMA r29 c24",
+    "AMA r29 c25",
+    "AMA r29 c26",
+    "AMA r29 c27",
+    "AMA r29 c28",
+    "AMA r29 c29",
+    "AMA r29 c3",
+    "AMA r29 c30",
+    "AMA r29 c31",
+    "AMA r29 c4",
+    "AMA r29 c5",
+    "AMA r29 c6",
+    "AMA r29 c7",
+    "AMA r29 c8",
+    "AMA r29 c9",
+    "AMA r3 c0",
+    "AMA r3 c1",
+    "AMA r3 c10",
+    "AMA r3 c11",
+    "AMA r3 c12",
+    "AMA r3 c13",
+    "AMA r3 c14",
+    "AMA r3 c15",
+    "AMA r3 c16",
+    "AMA r3 c17",
+    "AMA r3 c18",
+    "AMA r3 c19",
+    "AMA r3 c2",
+    "AMA r3 c20",
+    "AMA r3 c21",
+    "AMA r3 c22",
+    "AMA r3 c23",
+    "AMA r3 c24",
+    "AMA r3 c25",
+    "AMA r3 c26",
+    "AMA r3 c27",
+    "AMA r3 c28",
+    "AMA r3 c29",
+    "AMA r3 c3",
+    "AMA r3 c30",
+    "AMA r3 c31",
+    "AMA r3 c4",
+    "AMA r3 c5",
+    "AMA r3 c6",
+    "AMA r3 c7",
+    "AMA r3 c8",
+    "AMA r3 c9",
+    "AMA r30 c0",
+    "AMA r30 c1",
+    "AMA r30 c10",
+    "AMA r30 c11",
+    "AMA r30 c12",
+    "AMA r30 c13",
+    "AMA r30 c14",
+    "AMA r30 c15",
+    "AMA r30 c16",
+    "AMA r30 c17",
+    "AMA r30 c18",
+    "AMA r30 c19",
+    "AMA r30 c2",
+    "AMA r30 c20",
+    "AMA r30 c21",
+    "AMA r30 c22",
+    "AMA r30 c23",
+    "AMA r30 c24",
+    "AMA r30 c25",
+    "AMA r30 c26",
+    "AMA r30 c27",
+    "AMA r30 c28",
+    "AMA r30 c29",
+    "AMA r30 c3",
+    "AMA r30 c30",
+    "AMA r30 c31",
+    "AMA r30 c4",
+    "AMA r30 c5",
+    "AMA r30 c6",
+    "AMA r30 c7",
+    "AMA r30 c8",
+    "AMA r30 c9",
+    "AMA r31 c0",
+    "AMA r31 c1",
+    "AMA r31 c10",
+    "AMA r31 c11",
+    "AMA r31 c12",
+    "AMA r31 c13",
+    "AMA r31 c14",
+    "AMA r31 c15",
+    "AMA r31 c16",
+    "AMA r31 c17",
+    "AMA r31 c18",
+    "AMA r31 c19",
+    "AMA r31 c2",
+    "AMA r31 c20",
+    "AMA r31 c21",
+    "AMA r31 c22",
+    "AMA r31 c23",
+    "AMA r31 c24",
+    "AMA r31 c25",
+    "AMA r31 c26",
+    "AMA r31 c27",
+    "AMA r31 c28",
+    "AMA r31 c29",
+    "AMA r31 c3",
+    "AMA r31 c30",
+    "AMA r31 c31",
+    "AMA r31 c4",
+    "AMA r31 c5",
+    "AMA r31 c6",
+    "AMA r31 c7",
+    "AMA r31 c8",
+    "AMA r31 c9",
+    "AMA r4 c0",
+    "AMA r4 c1",
+    "AMA r4 c10",
+    "AMA r4 c11",
+    "AMA r4 c12",
+    "AMA r4 c13",
+    "AMA r4 c14",
+    "AMA r4 c15",
+    "AMA r4 c16",
+    "AMA r4 c17",
+    "AMA r4 c18",
+    "AMA r4 c19",
+    "AMA r4 c2",
+    "AMA r4 c20",
+    "AMA r4 c21",
+    "AMA r4 c22",
+    "AMA r4 c23",
+    "AMA r4 c24",
+    "AMA r4 c25",
+    "AMA r4 c26",
+    "AMA r4 c27",
+    "AMA r4 c28",
+    "AMA r4 c29",
+    "AMA r4 c3",
+    "AMA r4 c30",
+    "AMA r4 c31",
+    "AMA r4 c4",
+    "AMA r4 c5",
+    "AMA r4 c6",
+    "AMA r4 c7",
+    "AMA r4 c8",
+    "AMA r4 c9",
+    "AMA r5 c0",
+    "AMA r5 c1",
+    "AMA r5 c10",
+    "AMA r5 c11",
+    "AMA r5 c12",
+    "AMA r5 c13",
+    "AMA r5 c14",
+    "AMA r5 c15",
+    "AMA r5 c16",
+    "AMA r5 c17",
+    "AMA r5 c18",
+    "AMA r5 c19",
+    "AMA r5 c2",
+    "AMA r5 c20",
+    "AMA r5 c21",
+    "AMA r5 c22",
+    "AMA r5 c23",
+    "AMA r5 c24",
+    "AMA r5 c25",
+    "AMA r5 c26",
+    "AMA r5 c27",
+    "AMA r5 c28",
+    "AMA r5 c29",
+    "AMA r5 c3",
+    "AMA r5 c30",
+    "AMA r5 c31",
+    "AMA r5 c4",
+    "AMA r5 c5",
+    "AMA r5 c6",
+    "AMA r5 c7",
+    "AMA r5 c8",
+    "AMA r5 c9",
+    "AMA r6 c0",
+    "AMA r6 c1",
+    "AMA r6 c10",
+    "AMA r6 c11",
+    "AMA r6 c12",
+    "AMA r6 c13",
+    "AMA r6 c14",
+    "AMA r6 c15",
+    "AMA r6 c16",
+    "AMA r6 c17",
+    "AMA r6 c18",
+    "AMA r6 c19",
+    "AMA r6 c2",
+    "AMA r6 c20",
+    "AMA r6 c21",
+    "AMA r6 c22",
+    "AMA r6 c23",
+    "AMA r6 c24",
+    "AMA r6 c25",
+    "AMA r6 c26",
+    "AMA r6 c27",
+    "AMA r6 c28",
+    "AMA r6 c29",
+    "AMA r6 c3",
+    "AMA r6 c30",
+    "AMA r6 c31",
+    "AMA r6 c4",
+    "AMA r6 c5",
+    "AMA r6 c6",
+    "AMA r6 c7",
+    "AMA r6 c8",
+    "AMA r6 c9",
+    "AMA r7 c0",
+    "AMA r7 c1",
+    "AMA r7 c10",
+    "AMA r7 c11",
+    "AMA r7 c12",
+    "AMA r7 c13",
+    "AMA r7 c14",
+    "AMA r7 c15",
+    "AMA r7 c16",
+    "AMA r7 c17",
+    "AMA r7 c18",
+    "AMA r7 c19",
+    "AMA r7 c2",
+    "AMA r7 c20",
+    "AMA r7 c21",
+    "AMA r7 c22",
+    "AMA r7 c23",
+    "AMA r7 c24",
+    "AMA r7 c25",
+    "AMA r7 c26",
+    "AMA r7 c27",
+    "AMA r7 c28",
+    "AMA r7 c29",
+    "AMA r7 c3",
+    "AMA r7 c30",
+    "AMA r7 c31",
+    "AMA r7 c4",
+    "AMA r7 c5",
+    "AMA r7 c6",
+    "AMA r7 c7",
+    "AMA r7 c8",
+    "AMA r7 c9",
+    "AMA r8 c0",
+    "AMA r8 c1",
+    "AMA r8 c10",
+    "AMA r8 c11",
+    "AMA r8 c12",
+    "AMA r8 c13",
+    "AMA r8 c14",
+    "AMA r8 c15",
+    "AMA r8 c16",
+    "AMA r8 c17",
+    "AMA r8 c18",
+    "AMA r8 c19",
+    "AMA r8 c2",
+    "AMA r8 c20",
+    "AMA r8 c21",
+    "AMA r8 c22",
+    "AMA r8 c23",
+    "AMA r8 c24",
+    "AMA r8 c25",
+    "AMA r8 c26",
+    "AMA r8 c27",
+    "AMA r8 c28",
+    "AMA r8 c29",
+    "AMA r8 c3",
+    "AMA r8 c30",
+    "AMA r8 c31",
+    "AMA r8 c4",
+    "AMA r8 c5",
+    "AMA r8 c6",
+    "AMA r8 c7",
+    "AMA r8 c8",
+    "AMA r8 c9",
+    "AMA r9 c0",
+    "AMA r9 c1",
+    "AMA r9 c10",
+    "AMA r9 c11",
+    "AMA r9 c12",
+    "AMA r9 c13",
+    "AMA r9 c14",
+    "AMA r9 c15",
+    "AMA r9 c16",
+    "AMA r9 c17",
+    "AMA r9 c18",
+    "AMA r9 c19",
+    "AMA r9 c2",
+    "AMA r9 c20",
+    "AMA r9 c21",
+    "AMA r9 c22",
+    "AMA r9 c23",
+    "AMA r9 c24",
+    "AMA r9 c25",
+    "AMA r9 c26",
+    "AMA r9 c27",
+    "AMA r9 c28",
+    "AMA r9 c29",
+    "AMA r9 c3",
+    "AMA r9 c30",
+    "AMA r9 c31",
+    "AMA r9 c4",
+    "AMA r9 c5",
+    "AMA r9 c6",
+    "AMA r9 c7",
+    "AMA r9 c8",
+    "AMA r9 c9"
+  ],
+  "input_sha256": {
+    "data/amazon.json": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729",
+    "data/analysis/amazon-era5.json": "f9fffcc54bd2417c0a644cc76d9a65ce98e85b9ddcdb304a0c2b90d33622d3ed"
+  },
+  "event_group_rule": "Entire 2.7 km AOI in one group; no pixel holdout is independent.",
+  "assignments": [
+    {
+      "id": "AMA r0 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r0 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r1 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r10 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r11 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r12 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r13 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r14 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r15 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r16 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r17 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r18 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r19 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r2 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r20 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r21 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r22 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r23 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r24 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r25 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r26 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r27 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r28 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r29 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r3 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r30 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r31 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r4 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r5 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r6 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r7 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r8 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c0",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c1",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c10",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c11",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c12",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c13",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c14",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c15",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c16",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c17",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c18",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c19",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c2",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c20",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c21",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c22",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c23",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c24",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c25",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c26",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c27",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c28",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c29",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c3",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c30",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c31",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c4",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c5",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c6",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c7",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c8",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    },
+    {
+      "id": "AMA r9 c9",
+      "event_group": "amazon-small-aoi-2026",
+      "split": "development"
+    }
+  ],
+  "control_ids": [
+    "AMA r0 c19",
+    "AMA r0 c2",
+    "AMA r11 c12",
+    "AMA r13 c15",
+    "AMA r14 c14",
+    "AMA r16 c23",
+    "AMA r17 c6",
+    "AMA r2 c20",
+    "AMA r23 c11",
+    "AMA r23 c25",
+    "AMA r26 c6",
+    "AMA r29 c11",
+    "AMA r3 c18",
+    "AMA r3 c25",
+    "AMA r3 c8",
+    "AMA r6 c15",
+    "AMA r7 c16",
+    "AMA r7 c21",
+    "AMA r7 c30",
+    "AMA r7 c5"
+  ],
+  "k": [
+    5,
+    10,
+    20
+  ],
+  "threshold_db": 2.5,
+  "target": "persistent forest-cover loss; all methods are candidate rankings, not attribution",
+  "comparison": "mean first three versus mean last three HV dates; positive means drop",
+  "weather": "ridge=1; rain7/10; fit first three dates only; retrospective ablation",
+  "test_admission": "New spatially disjoint event groups with dated blind confirmed/refuted/unknown labels; new protocol required."
+}
