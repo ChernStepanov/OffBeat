@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=867ee7448afd">
+<link rel="stylesheet" href="css/offbeat.css?v=9fc1a428dd9e">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -144,10 +144,10 @@
       </section>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
-        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
+        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" aria-expanded="false" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>3D terrain</span></button><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
         <div class="win-b win-b--flush">
           <fieldset class="group acquisition" id="acquisition" hidden>
-            <legend>Measured HV acquisition</legend>
+            <legend>Measured acquisition</legend>
             <div class="acquisition__controls">
               <button type="button" class="btn" id="date-prev" aria-label="Previous acquisition">&lt;</button>
               <label for="date-index">Date <output id="date-label" for="date-index"></output></label>
@@ -157,12 +157,15 @@
             <p id="date-status" role="status" aria-live="polite"></p>
             <small>Acquisitions are not equally spaced. The date marks the chart; map colours show the latest peer deviation. A selected dated optical image follows the radar date.</small>
           </fieldset>
+          <small class="scene-map-note">Map colours show the latest peer deviation; the cloud follows the date slider.</small>
           <div class="maps">
-            <div class="maps__pane">
+            <div class="maps__pane" id="radar-pane">
+              <div class="win-t map-pane-title"><h2>Radar / sample map</h2></div>
               <div class="pane-label" id="map-caption">Measured HV gamma0, blue −25 to red 0 dB; click a sample</div>
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
-            <div class="maps__pane">
+            <div class="maps__pane" id="optical-pane">
+              <div class="win-t map-pane-title"><h2>Optical / geographic context</h2></div>
               <div class="pane-label"><label for="optical-date">Optical observation:</label> <select id="optical-date" disabled><option value="context">Context mosaic (date varies)</option></select></div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
@@ -282,6 +285,74 @@
   </div>
 </div>
 
+<!-- The existing maps move here while exploring; their layers and selection stay intact. -->
+<section class="win scene" id="scene-win" role="dialog" aria-modal="true" aria-labelledby="scene-title" hidden>
+  <div class="win-t scene__title">
+    <span class="win-t__icon" aria-hidden="true"></span>
+    <h2 id="scene-title">OffBeat Terrain Lab - 3D field view</h2>
+    <button type="button" id="scene-close" class="scene__close" aria-label="Close scene view"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="m1 1 8 8m0-8L1 9" stroke="currentColor" stroke-width="2"/></svg></button>
+  </div>
+  <div class="scene__toolbar">
+    <button type="button" class="btn" id="scene-back">&lt; Back to dashboard</button>
+    <span class="scene__separator" aria-hidden="true"></span>
+    <label for="scene-site">Study area</label>
+    <select id="scene-site"><option value="" disabled>Choose a study area</option><option value="mexico">Mexico City</option><option value="amazon">Itupiranga, Pará</option><option value="venezuela">Caracas and Catia La Mar</option></select>
+    <button type="button" class="btn" id="scene-fit">Fit maps</button>
+    <span class="scene__live"><i aria-hidden="true"></i> Measured NISAR samples</span>
+  </div>
+  <div class="scene__layout">
+    <div class="scene__map-slot" id="scene-map-slot"></div>
+    <section class="win cloud terrain-window" id="terrain-win" aria-labelledby="cloud-title">
+      <div class="win-t"><h2 id="cloud-title">Terrain / NISAR - 3D</h2><span class="cloud__file">FIELD TERMINAL / 03</span></div>
+      <div class="cloud__toolbar">
+        <div class="cloud__buttons" role="group" aria-label="Point cloud polarization"><button type="button" id="cloud-hv" aria-pressed="true">HV</button><button type="button" id="cloud-hh" aria-pressed="false">HH</button></div>
+        <span class="scene__separator" aria-hidden="true"></span>
+        <div class="cloud__buttons" role="group" aria-label="Point cloud view"><button type="button" id="cloud-orbit" aria-pressed="true">3D orbit</button><button type="button" id="cloud-plan" aria-pressed="false">Top view</button></div>
+        <div class="cloud__buttons cloud__zoom"><button type="button" id="cloud-zoom-out" aria-label="Zoom out point cloud">-</button><button type="button" id="cloud-zoom-in" aria-label="Zoom in point cloud">+</button><button type="button" id="cloud-reset">Reset view</button></div>
+      </div>
+      <div class="terrain-controls">
+        <label for="terrain-mode">Render</label><select id="terrain-mode"><option value="hybrid">Relief + cloud</option><option value="relief">Solid relief</option><option value="points">Point cloud</option></select>
+        <label for="terrain-exaggeration">Height</label><select id="terrain-exaggeration"><option value="1">1x</option><option value="2">2x</option><option value="4" selected>4x</option><option value="8">8x</option></select>
+        <label><input type="checkbox" id="terrain-radar" checked> NISAR</label>
+        <label><input type="checkbox" id="terrain-contours" checked> Contours</label>
+        <label><input type="checkbox" id="terrain-crt" checked> CRT</label>
+      </div>
+      <div class="terrain-timeline">
+        <button type="button" id="terrain-date-prev" aria-label="Previous 3D acquisition">&lt;</button>
+        <label for="terrain-date">Acquisition <output id="terrain-date-label"></output></label>
+        <input type="range" id="terrain-date" min="0" max="0" step="1" value="0" aria-label="3D acquisition date">
+        <button type="button" id="terrain-date-next" aria-label="Next 3D acquisition">&gt;</button>
+      </div>
+      <form class="terrain-navigation" id="terrain-search">
+        <button type="button" id="terrain-world">World</button>
+        <button type="button" id="terrain-study">Study area</button>
+        <button type="button" id="terrain-map-centre">Map centre</button>
+        <input type="search" id="terrain-query" placeholder="Place or latitude, longitude" aria-label="Search the global 3D map" autocomplete="off" required>
+        <button type="submit" id="terrain-go">Go</button>
+        <button type="button" id="terrain-retry" hidden>Retry tiles</button>
+      </form>
+      <p class="terrain-search-status" id="terrain-search-status" role="status" aria-live="polite"></p>
+      <div class="cloud__viewport" id="cloud-viewport">
+        <canvas id="cloud-canvas" tabindex="0" role="img" aria-label="Interactive 3D elevation map with geographically registered NISAR samples. Drag to orbit, shift-drag to pan, scroll to zoom. Arrow keys rotate; plus and minus zoom." aria-describedby="cloud-help cloud-explanation"></canvas>
+        <div class="cloud__hud"><span class="terrain-terminal">OFFBEAT / TOPOGRAPHIC RECON</span><strong id="cloud-site-name">NISAR / L-BAND</strong><span id="cloud-date">-</span><span id="cloud-count">0 samples</span><span id="terrain-status" role="status">Loading elevation data...</span><span id="terrain-centre"></span></div>
+        <div class="cloud__compass" aria-hidden="true"><span>N</span><svg width="28" height="32" viewBox="0 0 28 32"><path d="M14 2 4 27l10-5 10 5z" fill="none" stroke="#9aaec7"/><path d="M14 2v20l10 5z" fill="#9aaec7"/></svg></div>
+        <div class="cloud__empty" id="cloud-empty" hidden><strong>No measured samples here</strong><span>Choose a prepared study area to explore its signal.</span></div>
+        <div class="cloud__key terrain-height-key"><span>Elevation / m</span><i aria-hidden="true"></i><span id="terrain-low">-</span><span id="terrain-high">-</span></div>
+        <div class="cloud__key terrain-signal-key"><span>NISAR / dB</span><i aria-hidden="true"></i><span>-35</span><span>+5 dB</span></div>
+        <div class="terrain-scale" id="terrain-scale">DEM / measured elevations</div>
+        <div class="cloud__interaction" id="cloud-help">Drag: orbit / Shift-drag: pan / Scroll: zoom / Click: inspect</div>
+      </div>
+      <div class="cloud__selection">
+        <div class="cloud__sample-heading"><strong id="cloud-sample-id">Select a measured sample</strong><div class="cloud__buttons"><button type="button" id="cloud-prev" aria-label="Previous measured sample">&lt;</button><button type="button" id="cloud-next" aria-label="Next measured sample">&gt;</button><button type="button" id="cloud-card">Pixel card</button></div></div>
+        <div class="cloud__readout" aria-live="polite"><div><span>Signal</span><strong id="cloud-value">-</strong></div><div><span>Elevation</span><strong id="terrain-elevation">-</strong></div><div><span>Land cover (2021)</span><strong id="cloud-cover">-</strong></div><div><span>Coordinates</span><strong id="cloud-coordinates">-</strong></div></div>
+        <div class="cloud__history"><span id="cloud-history-label">Sample history</span><canvas id="cloud-history" height="46" role="img" aria-label="Selected sample backscatter history; gaps mean missing observations"></canvas></div>
+      </div>
+      <p class="cloud__explanation" id="cloud-explanation">Surface height and colour: DEM elevation in metres. NISAR dots keep their measured coordinates; dot colour shows HH/HV. Height exaggeration is visual only. <a href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noopener">DEM: Mapzen / upstream credits</a>.</p>
+    </section>
+  </div>
+  <div class="scene__status"><span id="scene-status" role="status">Ready</span><span>NASA-ISRO NISAR / ASF DAAC</span><span>Esc to return</span></div>
+</section>
+
 <div class="modal" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title" hidden>
   <section class="win modal__win">
     <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2 id="welcome-title">Welcome to OffBeat</h2></div>
@@ -327,10 +398,16 @@
 <script src="js/chart.js?v=dceb6523aa2c"></script>
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
-<script src="js/story.js?v=24122e4b536d"></script>
+<script src="js/story.js?v=1dcbeeed16fe"></script>
 <script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=4b4bcbddb458"></script>
+<script src="js/i18n.js?v=ce6fe6a35341"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
-<script src="js/app.js?v=4fb7ddab422e"></script>
+<script src="js/point-cloud.js?v=1ac5ff904712"></script>
+<script src="js/terrain-model.js?v=b520e2e37d01"></script>
+<script src="js/terrain-tiles.js?v=901c0f440f28"></script>
+<script src="js/terrain-renderer.js?v=ac64afde1586"></script>
+<script src="js/windows.js?v=29471bd56346"></script>
+<script src="js/scene.js?v=5ef338d83ef9"></script>
+<script src="js/app.js?v=86d1e5febbd5"></script>
 </body>
 </html>
