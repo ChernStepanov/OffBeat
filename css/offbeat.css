@@ -7,9 +7,9 @@
   --dk: #404040;
   --ink: #000000;
   --paper: #ffffff;
-  --title-a: #0a246a;
-  --title-b: #a6caf0;
-  --sel: #0a246a;
+  --title-a: #000080;
+  --title-b: #1084d0;
+  --sel: #000080;
   --link: #0000ee;
   --mono: "Courier New", Courier, "DejaVu Sans Mono", monospace;
   --ui: Tahoma, Verdana, "DejaVu Sans", Arial, sans-serif;
@@ -59,12 +59,6 @@ p { margin: 0 0 8px; }
 }
 .win-t h1, .win-t h2 { flex: 1; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .win-t__icon { width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E"); }
-.win-t__btns { display: flex; gap: 2px; }
-.win-t__btns b {
-  width: 16px; height: 14px; display: grid; place-items: center;
-  background: var(--face); color: #000; font: bold 10px/1 var(--ui);
-  border: 1px solid; border-color: var(--hi) var(--dk) var(--dk) var(--hi);
-}
 .win-b { padding: 8px; }
 .win-b--flush { padding: 4px; }
 
@@ -113,6 +107,9 @@ input[type="range"] { width: 100%; accent-color: var(--sel); }
 .pane-label { font: 11px/1.3 var(--ui); color: #222; padding: 2px 2px 3px; }
 .map { height: 360px; }
 .leaflet-container { font: 11px/1.4 var(--ui); background: #c8c8c8; }
+#map .leaflet-tile-pane { filter: grayscale(1) brightness(.62) contrast(1.1); } /* imagery as a quiet grey ground */
+.raster { image-rendering: pixelated; image-rendering: crisp-edges; }
+#map { cursor: crosshair; }
 .leaflet-bar, .leaflet-bar a { border-radius: 0 !important; }
 .leaflet-bar { border: 2px solid; border-color: var(--hi) var(--dk) var(--dk) var(--hi) !important; box-shadow: none !important; }
 .leaflet-bar a { background: var(--face); color: #000; }
@@ -174,7 +171,6 @@ canvas { display: block; width: 100%; }
   #main { order: -1; } /* map first on a phone, controls under it */
   .maps { grid-template-columns: 1fr; }
   .map { height: 300px; }
-  .win-t__btns { display: none; }
   .sbar #sb-src { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -26,11 +26,10 @@ Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
 ## Layout
 
 - `index.html`, `css/offbeat.css` — the page, desktop-2005 look on purpose.
-- `js/mock.js` — synthetic sites in the shape of [docs/data-contract.md](docs/data-contract.md). Replace with real files.
+- `js/mock.js` — synthetic pixels over the real demo AOIs and acquisition dates. Replace with pipeline output.
 - `js/chart.js` — HH/HV and displacement plots against the peer band.
 - `js/sonify.js` — WebAudio: peers keep the beat, the pixel plays its curve, slips late and sour when it strays.
 - `js/app.js` — maps (Leaflet), pixel card, top list, player.
-- `docs/coverage.md` — NISAR coverage and dates for the demo sites.
 
 ## Data
 

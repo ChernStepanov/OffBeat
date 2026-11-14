@@ -1,4 +1,4 @@
-// Change styles the curve classifier can name. Keys match `style` in the data contract (docs/data-contract.md).
+// Change styles the curve classifier can name. Keys match `style` in the data contract.
 window.OB = window.OB || {};
 OB.STYLES = {
   drop:  { name: "HV drop",        color: "#c00000", what: "Sharp fall in HV. Canopy gone: clearing or fire." },
