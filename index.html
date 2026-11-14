@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=b020f5a74ca8">
+<link rel="stylesheet" href="css/offbeat.css?v=0885c08f16bd">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -114,6 +114,15 @@
         <p id="data-status" role="status">Loading measured data...</p>
         <p class="notice__links"><a id="source-link" href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a>, <a href="docs/real-nisar.md">Processing and limitations</a></p>
       </div>
+
+      <section class="win suggestions" aria-labelledby="suggestions-title">
+        <div class="win-t"><h2 id="suggestions-title">Suggested places to investigate</h2></div>
+        <div class="win-b">
+          <p>Strongest measured deviations from same-class neighbours in prepared sites, on each site's latest date. Candidates require verification; the cause is unknown.</p>
+          <div id="suggestions-list" class="suggestions__list" role="group" aria-label="Suggested locations"></div>
+          <p id="suggestions-empty" hidden>No prepared samples exceed the threshold, or valid peer data are unavailable.</p>
+        </div>
+      </section>
 
       <section class="win tour" id="tour-win" aria-labelledby="tour-title" hidden>
         <div class="win-t"><h2>OffBeat Tour - <span id="tour-count">Step 1</span></h2></div>
@@ -310,6 +319,7 @@
 <script src="js/archive.js?v=a69beae81229"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
 <script src="js/data.js?v=577138d53c06"></script>
+<script src="js/suggestions.js?v=eb8c52544811"></script>
 <script src="js/acquisitions.js?v=faedaefccc8f"></script>
 <script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
 <script src="js/chart.js?v=dceb6523aa2c"></script>
@@ -317,8 +327,8 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=24122e4b536d"></script>
 <script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=ec98c6cbf23c"></script>
+<script src="js/i18n.js?v=4d4066794f7c"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
-<script src="js/app.js?v=a597954ae56e"></script>
+<script src="js/app.js?v=b807a19ae544"></script>
 </body>
 </html>

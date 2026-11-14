@@ -41,7 +41,7 @@ const context={URL,AbortSignal,Event,console,document,location,history:{replaceS
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
   L:{map:newMap,tileLayer:(url,options)=>{tileLayers.push({url,options});return layer();},rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
 };context.window=context;vm.createContext(context);
-for(const file of ['styles','search','data','acquisitions','amazon-ranking'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
+for(const file of ['styles','search','data','acquisitions','amazon-ranking','suggestions'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
 Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:()=>()=>null,bindWaterLabels:()=>()=>{},
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),

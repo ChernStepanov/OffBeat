@@ -706,6 +706,26 @@
     return s;
   }
 
+  // Suggestions are based on measured latest-date peer deviations, one per site.
+  const suggestions = OB.suggestPlaces(OB.SITES);
+  $('suggestions-empty').hidden = suggestions.length > 0;
+  suggestions.forEach(({site, pixel, index}) => {
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'btn';
+    button.textContent = site.name + ' · ' + site.dates.at(-1) + ' · z ' + (pixel.z > 0 ? '+' : '') + pixel.z.toFixed(1);
+    button.addEventListener('click', async () => {
+      const navigation = ++navigationSerial; ++searchSerial;
+      $('place-submit').disabled = false; $('place-results').replaceChildren(); $('place-status').textContent = '';
+      document.dispatchEvent(new Event('ob:manual-navigation')); clearSearchMarkers();
+      const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url);
+      await loadSite(site.id);
+      if (navigation !== navigationSerial || !state.site || state.site.id !== site.id) return;
+      await pickCell(index, true);
+      $('card-win').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+    $('suggestions-list').appendChild(button);
+  });
+
   // --- demo sites as clickable labels on the data map, while zoomed out far enough to need them ---
   const sitePins = L.layerGroup(OB.SITES.map(s => {
     const b = s.grid.bbox;
