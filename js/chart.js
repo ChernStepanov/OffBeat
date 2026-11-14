@@ -59,7 +59,7 @@ OB.chart = (function () {
     band(g, X, Y, p.peer.hh_med, p.peer.hh_sd, 2);
     band(g, X, Y, p.peer.hv_med, p.peer.hv_sd, 2);
     g.lineWidth = 1.6;
-    g.strokeStyle = "#0a246a"; line(g, X, Y, p.hh); dots(g, X, Y, p.hh, "#0a246a");
+    g.strokeStyle = "#000080"; line(g, X, Y, p.hh); dots(g, X, Y, p.hh, "#000080");
     g.strokeStyle = "#c00000"; line(g, X, Y, p.hv); dots(g, X, Y, p.hv, "#c00000");
     g.lineWidth = 1;
     marker(g, X, h, sinceIdx, sinceIdx != null ? "off-beat" : "");
