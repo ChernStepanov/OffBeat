@@ -200,6 +200,9 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .sw { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin: 0 4px 0 1px; }
 .sw--hh { background: var(--title-a); }
 .sw--hv { background: var(--st-drop); }
+.sw--vv { background: #007a1f; }
+.sw--vh { background: #7a5c00; }
+.sw--nisar { background: rgba(255, 204, 0, .5); height: 8px; }
 .sw--peer { background: #b8b8b8; height: 8px; }
 
 .toolbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }

@@ -107,5 +107,22 @@ OB.chart = (function () {
     if (head != null) playhead(g, X, h, head);
   }
 
-  return { backscatter, displacement };
+  // Sentinel-1 C band over its own, longer record; the shaded span is when NISAR measured this site
+  function cband(cv, dates, vv, vh, nisarDates) {
+    const { g, w, h } = setup(cv);
+    const [lo, hi] = range(vv.concat(vh), 1);
+    const { X, Y } = frame(g, w, h, dates, lo, hi);
+    if (nisarDates && nisarDates.length) {
+      const t0 = Date.parse(dates[0]), t1 = Date.parse(dates[dates.length - 1]);
+      const x = d => PAD.l + (Date.parse(d) - t0) / (t1 - t0) * (w - PAD.l - PAD.r);
+      const a = Math.max(PAD.l, x(nisarDates[0])), b = Math.min(w - PAD.r, x(nisarDates[nisarDates.length - 1]));
+      if (b > a) { g.fillStyle = "rgba(255,204,0,.25)"; g.fillRect(a, PAD.t, Math.max(2, b - a), h - PAD.t - PAD.b); }
+    }
+    g.lineWidth = 1.4;
+    g.strokeStyle = "#007a1f"; line(g, X, Y, vv); dots(g, X, Y, vv, "#007a1f");
+    g.strokeStyle = "#7a5c00"; line(g, X, Y, vh); dots(g, X, Y, vh, "#7a5c00");
+    g.lineWidth = 1;
+  }
+
+  return { backscatter, displacement, cband };
 })();

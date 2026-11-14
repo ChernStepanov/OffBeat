@@ -477,6 +477,12 @@
     OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
+    // Sentinel-1 at the same sample point, when the site has it (data/<site>/sentinel1.json)
+    const s1 = state.site.context && state.site.context.sentinel1, i = state.cell;
+    const vv = s1 && Number.isInteger(i) ? s1.points.vv.map(row => row[i] ?? NaN) : null;
+    const vh = s1 && Number.isInteger(i) ? s1.points.vh.map(row => row[i] ?? NaN) : null;
+    $("plot-s1").hidden = !(vv && vv.concat(vh).some(Number.isFinite));
+    if (!$("plot-s1").hidden) OB.chart.cband($("c-s1"), s1.dates, vv, vh, state.site.dates);
   }
 
   function channelName(p) {
