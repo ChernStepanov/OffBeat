@@ -17,6 +17,7 @@
   const labelsCredit = 'Labels &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
   const map = L.map("map", { zoomControl: true, maxZoom: 19 });
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
+  const optical = OB.bindOptical(optic, $('optical-date'), $('optical-status'));
   const labelLayers = [map, optic].map(m => {
     m.attributionControl.setPrefix('Leaflet');
     L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
@@ -151,6 +152,7 @@
       $('data-status').textContent = `${site.message} Showing a measured sample at the selected location.`;
       $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
     } else {
+      optical.context();
       clearPixel();
       $('data-status').textContent = 'No prepared pixel series at this location. Radar imagery is available where the global mosaic has coverage.';
       $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
@@ -265,10 +267,16 @@
   }
 
   function drawRaster() {
+    $('map-caption').textContent = 'Global NASA browse brightness; optional points show peer z, blue negative / red positive; no event area';
     if (state.raster) map.removeLayer(state.raster);
     state.raster = null;
     if (!$("l-offbeat").checked) return;
     const g = state.site.grid, t = state.z;
+    if (state.site.analysis_status === 'exploratory_sparse_samples') {
+      state.raster = L.featureGroup(state.site.pixels.filter(p => Number.isFinite(p.z) && Math.abs(p.z)>=t).map(p =>
+        L.circleMarker([p.lat,p.lon],{radius:3,weight:0,fillColor:p.z<0?'#0050c8':'#c00000',fillOpacity:.8,interactive:false}))).addTo(map);
+      return;
+    }
     if (!g.z.some(Number.isFinite) && state.site.pixels) {
       // Prepared series belong in the charts, not a separate square on the map.
       return;
@@ -350,6 +358,11 @@
 
   // --- patches: connected pixels of one style above the threshold ---
   function findPatches() {
+    if (state.site.analysis_status === 'exploratory_sparse_samples') {
+      return state.site.pixels.map((p,peak)=>({style:p.style,cells:1,peak,mean:Math.abs(p.z)}))
+        .filter(p=>p.style && Number.isFinite(state.site.pixels[p.peak].z) && p.mean>=state.z)
+        .sort((a,b)=>b.mean-a.mean);
+    }
     const g = state.site.grid, W = g.w, H = g.h, t = state.z, seen = new Uint8Array(W * H), out = [];
     for (let i = 0; i < W * H; i++) {
       if (seen[i] || !g.style[i] || !(Math.abs(g.z[i]) >= t)) continue;
@@ -371,6 +384,7 @@
   }
 
   function area(cells) {
+    if (state.site.grid.cellM == null) return `${cells} sample${cells===1?'':'s'}; area unknown`;
     const ha = cells * state.site.grid.cellM ** 2 / 1e4;
     return ha >= 100 ? (ha / 100).toFixed(1) + " sq km" : Math.round(ha) + " ha";
   }
@@ -382,7 +396,7 @@
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
-    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'No anomaly classification: one measured pair is insufficient for a trend.'}</td></tr>`;
+    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `No classified shape passes |z| ≥ ${state.z}.` : 'No classified candidates with valid peer measurements.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true).then(pixelSound); };
   $("top").addEventListener("click", rowPick);
@@ -393,7 +407,7 @@
     state.patches = findPatches();
     let px = 0; for (let i = 0; i < g.z.length; i++) if (g.style[i] && Math.abs(g.z[i]) >= state.z) px++;
     drawRaster(); drawTop();
-    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} patches · ${px} px at |z| ≥ ${state.z}` : 'No validated anomaly scores';
+    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} candidates · ${px} samples at |z| ≥ ${state.z}; area unknown` : 'No valid peer deviations';
   }
 
   // --- validation summary (Amazon, from pipeline) ---
@@ -401,6 +415,10 @@
     const v = state.site.context && state.site.context.validation;
     $("val-win").hidden = !v;
     if (!v) return;
+    if (v.kind === 'sparse_sample_validation') {
+      $('val-body').textContent = `${v.n_candidates} HV-drop candidates: ${v.n_alert_matches} overlap a dated alert within +/-${v.max_days} days; ${v.n_fire_matches} have a fire within ${v.fire_radius_m/1000} km and the same date window. These are context matches, not confirmed clearing. No event area, recall or accuracy is estimated from sparse samples. Missing alerts do not rule out change.`;
+      return;
+    }
     const pct = x => x == null ? "-" : Math.round(x * 100) + "%";
     $("val-body").innerHTML =
       `<p>${v.n_patches} clearing patches found by OffBeat, checked against ${v.source || "deforestation alerts"}.</p>` +
@@ -446,13 +464,13 @@
     state.pixel = p;
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;
-    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
+    $('map-caption').textContent = $('l-offbeat').checked ? 'Optional sample peer z: blue negative, red positive; no event area' : 'Global NASA browse mosaic: brightness, not calibrated HH/HV or sample z';
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
     $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} valid HV samples at latest date; same class, ≤1 km`;
     $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
-    $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
+    $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st ? `<i class="tag" style="background:${st.color}"></i>${st.name} (unverified shape)` : 'No classified shape';
     $("p-since").textContent = p.since || "—";
     $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;
     $('p-extra').innerHTML = Object.entries(p.extra || {}).filter(([, v]) => Number.isFinite(v))
@@ -465,6 +483,7 @@
     showCellBounds(rect);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
+    optical.setDate(p.since || s.dates.at(-1));
     const v = voice(p);
     $("play").disabled = !v.pix.some((x, i) => Number.isFinite(x) && Number.isFinite(v.med[i]) && Number.isFinite(v.sd[i]));
     $("play-hint").textContent = $("play").disabled ? 'Audio unavailable: measured pixel and peer series required.' : `Peers keep the beat, the pixel plays its ${channelName(p)} curve.`;
@@ -507,13 +526,15 @@
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
+    await optical.load(s,s.dates.at(-1));
+    if (ticket !== state.loading) return;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
     $('source-link').hidden = false;
     $('source-link').href = `data/${s.id}-manifest.json`;
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
-    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Local Off-Beat raster (optional)' : 'Local measured HV overlay (optional)';
+    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Local peer z sample points (optional)' : 'Local measured HV overlay (optional)';
     $('map-caption').textContent = 'Global NASA NISAR browse mosaic; local measurement overlay is optional.';
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();

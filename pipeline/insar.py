@@ -25,7 +25,11 @@ def chain_pairs(pairs: list[dict], min_coh: float = 0.3, ref_mask: np.ndarray | 
     in one pair (low coherence or conncomp 0) gets NaN from that date on.
     Returns (dates list[str], disp_cm float32[T, H, W]) with T = len(pairs) + 1, first date = 0.
     """
+    if not pairs:
+        raise ValueError('At least one GUNW pair is required')
     pairs = sorted(pairs, key=lambda p: p["sec"])
+    if len({(p.get('track'), p.get('direction')) for p in pairs}) > 1:
+        raise ValueError('Cannot chain different tracks or viewing directions')
     H, W = pairs[0]["los_m"].shape
     dates = [pairs[0]["ref"]] + [p["sec"] for p in pairs]
     out = np.zeros((len(dates), H, W), np.float32)
@@ -35,7 +39,17 @@ def chain_pairs(pairs: list[dict], min_coh: float = 0.3, ref_mask: np.ndarray | 
             raise ValueError(f"pairs are not consecutive: {dates[i - 1]} -> {p['ref']}")
         good = (p["coherence"] >= min_coh) & (p["conncomp"] > 0) & ~np.isnan(p["los_m"])
         ref = good if ref_mask is None else good & ref_mask
-        offset = np.nanmedian(p["los_m"][ref]) if ref.any() else 0.0
+        if not ref.any():
+            alive[:] = False
+            if i == 1: out[0] = np.nan
+            out[i:] = np.nan
+            break
+        components, counts = np.unique(p['conncomp'][ref], return_counts=True)
+        component = components[np.argmax(counts)]
+        ref &= p['conncomp'] == component
+        good &= p['conncomp'] == component
+        offset = np.nanmedian(p["los_m"][ref])
+        if i == 1: out[0] = np.where(good,0,np.nan)
         alive &= good
         out[i] = out[i - 1] + np.where(alive, (p["los_m"] - offset) * 100, np.nan)
     return dates, out

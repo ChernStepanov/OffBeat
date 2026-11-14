@@ -1,0 +1,718 @@
+{
+  "site": "amazon",
+  "dates": [
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28"
+  ],
+  "input_sha256": "ce8a9b35d564e98eb0d04d4f98d09b9f33a79a28f574c5fa4b7bc1d4925c73d1",
+  "valid_latest_z": 1024,
+  "shape_counts": {
+    "drop": 6,
+    "flood": 0,
+    "drift": 0,
+    "step": 0
+  },
+  "class_medians": [
+    {
+      "date": "2026-07-18",
+      "classes": {
+        "10": {
+          "n": 575,
+          "hv_median_db": -12.06549
+        },
+        "30": {
+          "n": 449,
+          "hv_median_db": -17.39754
+        }
+      }
+    },
+    {
+      "date": "2026-08-11",
+      "classes": {
+        "10": {
+          "n": 575,
+          "hv_median_db": -12.17936
+        },
+        "30": {
+          "n": 449,
+          "hv_median_db": -18.05081
+        }
+      }
+    },
+    {
+      "date": "2026-08-23",
+      "classes": {
+        "10": {
+          "n": 575,
+          "hv_median_db": -12.34019
+        },
+        "30": {
+          "n": 449,
+          "hv_median_db": -18.76493
+        }
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "classes": {
+        "10": {
+          "n": 575,
+          "hv_median_db": -12.53233
+        },
+        "30": {
+          "n": 449,
+          "hv_median_db": -19.69332
+        }
+      }
+    },
+    {
+      "date": "2026-09-16",
+      "classes": {
+        "10": {
+          "n": 575,
+          "hv_median_db": -12.54094
+        },
+        "30": {
+          "n": 449,
+          "hv_median_db": -20.01671
+        }
+      }
+    },
+    {
+      "date": "2026-09-28",
+      "classes": {
+        "10": {
+          "n": 575,
+          "hv_median_db": -12.0055
+        },
+        "30": {
+          "n": 449,
+          "hv_median_db": -15.54589
+        }
+      }
+    }
+  ],
+  "review_top10": [
+    {
+      "id": "AMA r21 c0",
+      "lat": -4.779296875,
+      "lon": -49.287109375,
+      "cover": 10,
+      "z": -2.76141,
+      "style": "drop",
+      "since": "2026-08-23",
+      "hh": [
+        -6.19979,
+        -3.99715,
+        -6.07921,
+        -5.31193,
+        -6.60654,
+        -12.76186
+      ],
+      "hv": [
+        -5.5737,
+        -9.52076,
+        -12.46262,
+        -12.87439,
+        -13.84538,
+        -17.18724
+      ],
+      "own_history_hv_change_db": -7.96908,
+      "peer_relative_hv_change_db": -8.04991,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 139
+    },
+    {
+      "id": "AMA r7 c4",
+      "lat": -4.768359375,
+      "lon": -49.283984375,
+      "cover": 30,
+      "z": 0.59922,
+      "style": "drop",
+      "since": "2026-09-16",
+      "hh": [
+        -7.34944,
+        -6.53404,
+        -10.43311,
+        -7.1143,
+        -5.80661,
+        -6.98025
+      ],
+      "hv": [
+        -9.44145,
+        -11.5318,
+        -12.62859,
+        -14.12256,
+        -21.20991,
+        -14.13311
+      ],
+      "own_history_hv_change_db": -7.18489,
+      "peer_relative_hv_change_db": -7.18835,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 187
+    },
+    {
+      "id": "AMA r21 c31",
+      "lat": -4.779296875,
+      "lon": -49.262890625000004,
+      "cover": 30,
+      "z": -1.5415,
+      "style": "drop",
+      "since": "2026-09-16",
+      "hh": [
+        -9.28673,
+        -8.7031,
+        -8.05952,
+        -6.65697,
+        -10.07122,
+        -10.35106
+      ],
+      "hv": [
+        -10.59098,
+        -10.431,
+        -10.4555,
+        -12.7103,
+        -15.30013,
+        -17.81369
+      ],
+      "own_history_hv_change_db": -6.04592,
+      "peer_relative_hv_change_db": -6.41828,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 74
+    },
+    {
+      "id": "AMA r15 c13",
+      "lat": -4.774609375,
+      "lon": -49.276953125,
+      "cover": 30,
+      "z": -1.75246,
+      "style": "drop",
+      "since": "2026-09-16",
+      "hh": [
+        -5.95274,
+        -2.26095,
+        -4.78866,
+        -4.97062,
+        -10.25527,
+        -7.54058
+      ],
+      "hv": [
+        -12.43699,
+        -10.43247,
+        -12.20199,
+        -13.66481,
+        -15.43178,
+        -20.01354
+      ],
+      "own_history_hv_change_db": -6.28793,
+      "peer_relative_hv_change_db": -6.20463,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 211
+    },
+    {
+      "id": "AMA r28 c1",
+      "lat": -4.7847656249999995,
+      "lon": -49.286328125000004,
+      "cover": 10,
+      "z": -0.17769,
+      "style": "drop",
+      "since": "2026-09-16",
+      "hh": [
+        -7.00017,
+        -4.91154,
+        -7.75878,
+        -5.37092,
+        -8.50373,
+        -7.60514
+      ],
+      "hv": [
+        -7.64566,
+        -6.04036,
+        -8.36721,
+        -9.09166,
+        -14.06415,
+        -11.18891
+      ],
+      "own_history_hv_change_db": -5.78352,
+      "peer_relative_hv_change_db": -5.83338,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 130
+    },
+    {
+      "id": "AMA r12 c20",
+      "lat": -4.772265625,
+      "lon": -49.271484375,
+      "cover": 30,
+      "z": -2.09486,
+      "style": "drop",
+      "since": "2026-09-04",
+      "hh": [
+        -7.28007,
+        -5.85961,
+        -4.79106,
+        -9.60314,
+        -13.60774,
+        -8.81382
+      ],
+      "hv": [
+        -15.65154,
+        -16.73011,
+        -14.44074,
+        -22.22221,
+        -23.79597,
+        -20.28898
+      ],
+      "own_history_hv_change_db": -5.85165,
+      "peer_relative_hv_change_db": -5.79727,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 188
+    },
+    {
+      "id": "AMA r20 c19",
+      "lat": -4.778515625,
+      "lon": -49.272265625,
+      "cover": 30,
+      "z": 0.58278,
+      "style": null,
+      "since": null,
+      "hh": [
+        -13.93383,
+        -13.25705,
+        -13.38491,
+        -13.87071,
+        -15.69286,
+        -7.10795
+      ],
+      "hv": [
+        -21.12339,
+        -23.25359,
+        -20.88488,
+        -18.45853,
+        -19.11764,
+        -14.5268
+      ],
+      "own_history_hv_change_db": 5.36627,
+      "peer_relative_hv_change_db": 5.71842,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 119
+    },
+    {
+      "id": "AMA r31 c25",
+      "lat": -4.787109375,
+      "lon": -49.267578125,
+      "cover": 30,
+      "z": -2.42094,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.72556,
+        -4.62055,
+        -5.95842,
+        -4.63304,
+        -5.82013,
+        -8.93599
+      ],
+      "hv": [
+        -10.92834,
+        -13.56998,
+        -13.72216,
+        -16.31895,
+        -16.10819,
+        -18.57916
+      ],
+      "own_history_hv_change_db": -5.09452,
+      "peer_relative_hv_change_db": -5.71545,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 57
+    },
+    {
+      "id": "AMA r0 c6",
+      "lat": -4.762890625,
+      "lon": -49.282421875000004,
+      "cover": 30,
+      "z": 2.00281,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.58895,
+        -11.97785,
+        -10.0177,
+        -11.91097,
+        -10.98404,
+        -5.17212
+      ],
+      "hv": [
+        -19.46286,
+        -20.65141,
+        -20.00223,
+        -18.08862,
+        -18.67968,
+        -10.39243
+      ],
+      "own_history_hv_change_db": 5.52108,
+      "peer_relative_hv_change_db": 5.66931,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 126
+    },
+    {
+      "id": "AMA r5 c15",
+      "lat": -4.766796875,
+      "lon": -49.275390625,
+      "cover": 10,
+      "z": -0.41155,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.73383,
+        -3.61368,
+        -3.89343,
+        -14.24135,
+        -13.93782,
+        -3.6377
+      ],
+      "hv": [
+        -11.57087,
+        -10.10236,
+        -9.78809,
+        -17.20815,
+        -17.03645,
+        -15.86822
+      ],
+      "own_history_hv_change_db": -5.61572,
+      "peer_relative_hv_change_db": -5.57546,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 129
+    }
+  ],
+  "controls": [
+    {
+      "id": "AMA r0 c12",
+      "lat": -4.762890625,
+      "lon": -49.277734375,
+      "cover": 10,
+      "z": 0.73281,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.63666,
+        -5.71498,
+        -7.1037,
+        -5.37772,
+        -4.52873,
+        -4.85914
+      ],
+      "hv": [
+        -11.36882,
+        -14.57665,
+        -10.41949,
+        -13.34084,
+        -14.40285,
+        -11.06315
+      ],
+      "own_history_hv_change_db": 0.23973,
+      "peer_relative_hv_change_db": 0.54296,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 75
+    },
+    {
+      "id": "AMA r30 c5",
+      "lat": -4.786328125,
+      "lon": -49.283203125,
+      "cover": 10,
+      "z": -0.38419,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.62926,
+        -7.31194,
+        -5.60906,
+        -5.40116,
+        -6.84304,
+        -6.87717
+      ],
+      "hv": [
+        -9.3775,
+        -9.52332,
+        -11.82885,
+        -12.0078,
+        -12.58646,
+        -11.58546
+      ],
+      "own_history_hv_change_db": -2.63555,
+      "peer_relative_hv_change_db": -2.73797,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 168
+    },
+    {
+      "id": "AMA r23 c26",
+      "lat": -4.7808593749999995,
+      "lon": -49.266796875000004,
+      "cover": 10,
+      "z": 0.28269,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.11441,
+        -6.46002,
+        -5.66432,
+        -6.40114,
+        -5.57352,
+        -7.52879
+      ],
+      "hv": [
+        -8.63809,
+        -13.22608,
+        -14.38389,
+        -11.321,
+        -11.05195,
+        -10.96905
+      ],
+      "own_history_hv_change_db": -0.07841,
+      "peer_relative_hv_change_db": 0.13478,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 197
+    },
+    {
+      "id": "AMA r12 c17",
+      "lat": -4.772265625,
+      "lon": -49.273828125,
+      "cover": 10,
+      "z": -0.10832,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.92547,
+        -6.54255,
+        -7.95544,
+        -6.23241,
+        -8.33141,
+        -6.49233
+      ],
+      "hv": [
+        -14.551,
+        -13.58991,
+        -14.17526,
+        -11.80419,
+        -10.91708,
+        -13.8751
+      ],
+      "own_history_hv_change_db": 1.67436,
+      "peer_relative_hv_change_db": 1.84888,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 206
+    },
+    {
+      "id": "AMA r6 c8",
+      "lat": -4.767578125,
+      "lon": -49.280859375,
+      "cover": 30,
+      "z": -2.2418,
+      "style": null,
+      "since": null,
+      "hh": [
+        -10.39838,
+        -9.27441,
+        -12.64615,
+        -11.69599,
+        -11.9325,
+        -6.15838
+      ],
+      "hv": [
+        -20.72866,
+        -17.77885,
+        -20.46722,
+        -20.35364,
+        -21.57039,
+        -20.44009
+      ],
+      "own_history_hv_change_db": -1.75149,
+      "peer_relative_hv_change_db": -1.73891,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 214
+    },
+    {
+      "id": "AMA r5 c9",
+      "lat": -4.766796875,
+      "lon": -49.280078125,
+      "cover": 30,
+      "z": 0.96633,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.35127,
+        -9.56558,
+        -7.95022,
+        -8.75708,
+        -8.65221,
+        -7.45865
+      ],
+      "hv": [
+        -21.22389,
+        -21.62484,
+        -19.68912,
+        -20.34921,
+        -20.75797,
+        -13.74755
+      ],
+      "own_history_hv_change_db": 4.1716,
+      "peer_relative_hv_change_db": 4.22074,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 212
+    },
+    {
+      "id": "AMA r23 c18",
+      "lat": -4.7808593749999995,
+      "lon": -49.273046875000006,
+      "cover": 10,
+      "z": -0.32662,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.27548,
+        -9.41321,
+        -8.77067,
+        -9.01073,
+        -9.40977,
+        -7.68266
+      ],
+      "hv": [
+        -11.68016,
+        -11.315,
+        -13.67658,
+        -12.82291,
+        -11.18826,
+        -12.0055
+      ],
+      "own_history_hv_change_db": -0.0993,
+      "peer_relative_hv_change_db": -0.17177,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 280
+    },
+    {
+      "id": "AMA r29 c23",
+      "lat": -4.785546875,
+      "lon": -49.269140625000006,
+      "cover": 30,
+      "z": -1.61648,
+      "style": null,
+      "since": null,
+      "hh": [
+        -13.60745,
+        -14.6134,
+        -13.55404,
+        -15.43001,
+        -14.00552,
+        -9.42462
+      ],
+      "hv": [
+        -22.12596,
+        -20.31857,
+        -23.86047,
+        -21.51941,
+        -21.54039,
+        -17.45444
+      ],
+      "own_history_hv_change_db": 1.72485,
+      "peer_relative_hv_change_db": 1.31611,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 70
+    },
+    {
+      "id": "AMA r16 c23",
+      "lat": -4.775390625,
+      "lon": -49.269140625000006,
+      "cover": 10,
+      "z": -0.24505,
+      "style": null,
+      "since": null,
+      "hh": [
+        -10.92645,
+        -11.66507,
+        -11.96637,
+        -13.01132,
+        -13.07933,
+        -7.10038
+      ],
+      "hv": [
+        -15.38227,
+        -17.13141,
+        -17.52496,
+        -20.27815,
+        -20.48739,
+        -13.39988
+      ],
+      "own_history_hv_change_db": -0.6868,
+      "peer_relative_hv_change_db": -0.57052,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 244
+    },
+    {
+      "id": "AMA r8 c18",
+      "lat": -4.769140625,
+      "lon": -49.273046875000006,
+      "cover": 10,
+      "z": 0.19625,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.43683,
+        -11.26844,
+        -14.48164,
+        -15.77356,
+        -13.408,
+        -6.71338
+      ],
+      "hv": [
+        -19.26286,
+        -20.01162,
+        -18.25954,
+        -19.43746,
+        -21.42193,
+        -14.16466
+      ],
+      "own_history_hv_change_db": 1.84394,
+      "peer_relative_hv_change_db": 2.13048,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 172
+    }
+  ],
+  "requested_candidate": {
+    "id": "AMA r5 c15",
+    "lat": -4.766796875,
+    "lon": -49.275390625,
+    "cover": 10,
+    "z": -0.41155,
+    "style": null,
+    "since": null,
+    "hh": [
+      -6.73383,
+      -3.61368,
+      -3.89343,
+      -14.24135,
+      -13.93782,
+      -3.6377
+    ],
+    "hv": [
+      -11.57087,
+      -10.10236,
+      -9.78809,
+      -17.20815,
+      -17.03645,
+      -15.86822
+    ],
+    "own_history_hv_change_db": -5.61572,
+    "peer_relative_hv_change_db": -5.57546,
+    "status": "unknown: no independent dated validation",
+    "valid_peer_count": 129
+  },
+  "limitations": [
+    "WorldCover 2021 may be outdated",
+    "Sparse samples, no area or continuous raster",
+    "Curve shapes are not confirmed clearing, flood, earthquake or subsidence",
+    "No weather correction or labelled accuracy estimate"
+  ]
+}

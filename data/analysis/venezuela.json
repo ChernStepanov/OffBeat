@@ -1,0 +1,762 @@
+{
+  "site": "venezuela",
+  "dates": [
+    "2025-11-09",
+    "2025-11-21",
+    "2025-12-03",
+    "2025-12-15",
+    "2025-12-27",
+    "2026-01-08"
+  ],
+  "input_sha256": "e658a9c864468a8e643887d7901a6e46eab69daa026b81eafc789f526b337e14",
+  "valid_latest_z": 1012,
+  "shape_counts": {
+    "drop": 1,
+    "flood": 3,
+    "drift": 0,
+    "step": 0
+  },
+  "class_medians": [
+    {
+      "date": "2025-11-09",
+      "classes": {
+        "10": {
+          "n": 814,
+          "hv_median_db": -9.43975
+        },
+        "20": {
+          "n": 29,
+          "hv_median_db": -11.47425
+        },
+        "30": {
+          "n": 58,
+          "hv_median_db": -12.13697
+        },
+        "40": {
+          "n": 1,
+          "hv_median_db": -15.06036
+        },
+        "50": {
+          "n": 122,
+          "hv_median_db": -9.89744
+        }
+      }
+    },
+    {
+      "date": "2025-11-21",
+      "classes": {
+        "10": {
+          "n": 814,
+          "hv_median_db": -2.31149
+        },
+        "20": {
+          "n": 29,
+          "hv_median_db": -3.53181
+        },
+        "30": {
+          "n": 58,
+          "hv_median_db": -2.04282
+        },
+        "40": {
+          "n": 1,
+          "hv_median_db": -1.76645
+        },
+        "50": {
+          "n": 122,
+          "hv_median_db": -2.59312
+        }
+      }
+    },
+    {
+      "date": "2025-12-03",
+      "classes": {
+        "10": {
+          "n": 814,
+          "hv_median_db": -3.86062
+        },
+        "20": {
+          "n": 29,
+          "hv_median_db": -5.56325
+        },
+        "30": {
+          "n": 58,
+          "hv_median_db": -3.82578
+        },
+        "40": {
+          "n": 1,
+          "hv_median_db": -6.96503
+        },
+        "50": {
+          "n": 122,
+          "hv_median_db": -4.05675
+        }
+      }
+    },
+    {
+      "date": "2025-12-15",
+      "classes": {
+        "10": {
+          "n": 814,
+          "hv_median_db": -10.20457
+        },
+        "20": {
+          "n": 29,
+          "hv_median_db": -13.93941
+        },
+        "30": {
+          "n": 58,
+          "hv_median_db": -12.55174
+        },
+        "40": {
+          "n": 1,
+          "hv_median_db": -14.74909
+        },
+        "50": {
+          "n": 122,
+          "hv_median_db": -11.22644
+        }
+      }
+    },
+    {
+      "date": "2025-12-27",
+      "classes": {
+        "10": {
+          "n": 814,
+          "hv_median_db": -9.58105
+        },
+        "20": {
+          "n": 29,
+          "hv_median_db": -11.52944
+        },
+        "30": {
+          "n": 58,
+          "hv_median_db": -12.09266
+        },
+        "40": {
+          "n": 1,
+          "hv_median_db": -16.1306
+        },
+        "50": {
+          "n": 122,
+          "hv_median_db": -10.27341
+        }
+      }
+    },
+    {
+      "date": "2026-01-08",
+      "classes": {
+        "10": {
+          "n": 814,
+          "hv_median_db": -7.61557
+        },
+        "20": {
+          "n": 29,
+          "hv_median_db": -9.66857
+        },
+        "30": {
+          "n": 58,
+          "hv_median_db": -9.00201
+        },
+        "40": {
+          "n": 1,
+          "hv_median_db": -9.00994
+        },
+        "50": {
+          "n": 122,
+          "hv_median_db": -8.08696
+        }
+      }
+    }
+  ],
+  "review_top10": [
+    {
+      "id": "VEN r25 c27",
+      "lat": 10.462578125,
+      "lon": -67.071015625,
+      "cover": 10,
+      "z": 3.10627,
+      "style": null,
+      "since": null,
+      "hh": [
+        -1.83942,
+        1.10187,
+        -6.71109,
+        -7.78804,
+        -3.57438,
+        -4.21512
+      ],
+      "hv": [
+        -10.35983,
+        -5.36209,
+        -4.35356,
+        -5.30372,
+        -2.98157,
+        1.31473
+      ],
+      "own_history_hv_change_db": 7.02754,
+      "peer_relative_hv_change_db": 9.79615,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 230
+    },
+    {
+      "id": "VEN r11 c14",
+      "lat": 10.473515625,
+      "lon": -67.081171875,
+      "cover": 10,
+      "z": -1.26674,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.62638,
+        -7.3102,
+        -3.6041,
+        -9.17097,
+        -8.56813,
+        -8.91284
+      ],
+      "hv": [
+        -9.73956,
+        2.64799,
+        -3.97371,
+        -12.09571,
+        -16.26819,
+        -11.91431
+      ],
+      "own_history_hv_change_db": -10.54547,
+      "peer_relative_hv_change_db": -7.59451,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 301
+    },
+    {
+      "id": "VEN r2 c3",
+      "lat": 10.480546875,
+      "lon": -67.089765625,
+      "cover": 10,
+      "z": -1.41559,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.15045,
+        -9.55487,
+        -7.93547,
+        -6.88452,
+        -10.09732,
+        -8.57337
+      ],
+      "hv": [
+        -18.07129,
+        -9.84802,
+        -12.67504,
+        -6.78367,
+        -7.75517,
+        -11.57235
+      ],
+      "own_history_hv_change_db": 4.2959,
+      "peer_relative_hv_change_db": 7.37054,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 134
+    },
+    {
+      "id": "VEN r11 c4",
+      "lat": 10.473515625,
+      "lon": -67.088984375,
+      "cover": 10,
+      "z": 0.30914,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.53842,
+        -9.04481,
+        -10.57058,
+        -12.62912,
+        -10.01879,
+        -9.09997
+      ],
+      "hv": [
+        -18.483,
+        -6.08798,
+        -6.2772,
+        -15.86263,
+        -9.28469,
+        -7.13215
+      ],
+      "own_history_hv_change_db": 4.07707,
+      "peer_relative_hv_change_db": 7.00892,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 221
+    },
+    {
+      "id": "VEN r25 c12",
+      "lat": 10.462578125,
+      "lon": -67.082734375,
+      "cover": 50,
+      "z": 1.75734,
+      "style": null,
+      "since": null,
+      "hh": [
+        1.2592,
+        -0.4076,
+        -0.00912,
+        -3.39142,
+        -5.33343,
+        -2.8495
+      ],
+      "hv": [
+        -7.66845,
+        -7.10268,
+        -9.08985,
+        -5.14133,
+        -4.7092,
+        -2.88715
+      ],
+      "own_history_hv_change_db": 3.58739,
+      "peer_relative_hv_change_db": 6.82394,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 66
+    },
+    {
+      "id": "VEN r0 c23",
+      "lat": 10.482109375,
+      "lon": -67.074140625,
+      "cover": 10,
+      "z": -1.20615,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.36367,
+        -5.87534,
+        -5.07569,
+        -9.5697,
+        -7.04114,
+        -5.01991
+      ],
+      "hv": [
+        -28.04818,
+        -8.31413,
+        -10.49273,
+        -18.94594,
+        -16.82074,
+        -12.16334
+      ],
+      "own_history_hv_change_db": 3.68912,
+      "peer_relative_hv_change_db": 6.73996,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 150
+    },
+    {
+      "id": "VEN r18 c23",
+      "lat": 10.468046874999999,
+      "lon": -67.074140625,
+      "cover": 10,
+      "z": 0.20749,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.69071,
+        -4.90262,
+        -3.731,
+        -3.31945,
+        -4.50178,
+        -4.53451
+      ],
+      "hv": [
+        -13.85041,
+        -5.49613,
+        -5.16831,
+        -9.01958,
+        -5.12793,
+        -6.76987
+      ],
+      "own_history_hv_change_db": 3.72437,
+      "peer_relative_hv_change_db": 6.54627,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 325
+    },
+    {
+      "id": "VEN r4 c14",
+      "lat": 10.478984375,
+      "lon": -67.081171875,
+      "cover": 10,
+      "z": -0.0209,
+      "style": null,
+      "since": null,
+      "hh": [
+        -2.28713,
+        -6.48864,
+        -3.49627,
+        -6.43104,
+        -9.08313,
+        -5.33801
+      ],
+      "hv": [
+        -15.77091,
+        -9.32968,
+        -3.72885,
+        -12.79854,
+        -9.40797,
+        -8.67554
+      ],
+      "own_history_hv_change_db": 3.50854,
+      "peer_relative_hv_change_db": 6.52622,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 221
+    },
+    {
+      "id": "VEN r31 c25",
+      "lat": 10.457890625,
+      "lon": -67.07257812499999,
+      "cover": 10,
+      "z": 1.17327,
+      "style": null,
+      "since": null,
+      "hh": [
+        -1.7179,
+        -3.4361,
+        -1.4149,
+        -4.54129,
+        -4.08405,
+        -2.92974
+      ],
+      "hv": [
+        -9.77018,
+        -7.23431,
+        -4.30003,
+        -6.12502,
+        -6.17404,
+        -3.68725
+      ],
+      "own_history_hv_change_db": 3.5716,
+      "peer_relative_hv_change_db": 6.48485,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 156
+    },
+    {
+      "id": "VEN r19 c26",
+      "lat": 10.467265625,
+      "lon": -67.07179687499999,
+      "cover": 10,
+      "z": 0.69395,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.19941,
+        -6.11073,
+        -4.01006,
+        -7.54589,
+        -5.93633,
+        -6.70864
+      ],
+      "hv": [
+        -17.86671,
+        -4.01828,
+        -1.27393,
+        -8.5015,
+        -9.78651,
+        -5.27058
+      ],
+      "own_history_hv_change_db": 3.41395,
+      "peer_relative_hv_change_db": 6.18856,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 294
+    }
+  ],
+  "controls": [
+    {
+      "id": "VEN r0 c12",
+      "lat": 10.482109375,
+      "lon": -67.082734375,
+      "cover": 10,
+      "z": -0.66805,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.36909,
+        -2.41494,
+        -6.49137,
+        -12.89592,
+        -8.29781,
+        -6.381
+      ],
+      "hv": [
+        -9.42165,
+        1.43048,
+        -3.9206,
+        -13.44831,
+        -7.73024,
+        -10.37411
+      ],
+      "own_history_hv_change_db": -5.05659,
+      "peer_relative_hv_change_db": -1.96722,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 149
+    },
+    {
+      "id": "VEN r30 c5",
+      "lat": 10.458671875,
+      "lon": -67.088203125,
+      "cover": 10,
+      "z": 0.08898,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.16684,
+        -3.52856,
+        -4.8755,
+        -3.67245,
+        -4.43067,
+        -6.68259
+      ],
+      "hv": [
+        -11.70831,
+        -3.23119,
+        -2.67771,
+        -11.3385,
+        -11.14189,
+        -7.51905
+      ],
+      "own_history_hv_change_db": -1.86072,
+      "peer_relative_hv_change_db": 0.73965,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 158
+    },
+    {
+      "id": "VEN r23 c26",
+      "lat": 10.464140624999999,
+      "lon": -67.07179687499999,
+      "cover": 10,
+      "z": 0.28871,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.2707,
+        -1.06574,
+        -0.74014,
+        -3.65546,
+        -3.47874,
+        -5.63591
+      ],
+      "hv": [
+        -4.60354,
+        2.0521,
+        -2.76226,
+        -5.14344,
+        -9.65482,
+        -6.27446
+      ],
+      "own_history_hv_change_db": -6.68892,
+      "peer_relative_hv_change_db": -3.92501,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 272
+    },
+    {
+      "id": "VEN r12 c17",
+      "lat": 10.472734375,
+      "lon": -67.078828125,
+      "cover": 10,
+      "z": -1.09394,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.83528,
+        -3.84674,
+        -7.49037,
+        -7.84864,
+        -7.95363,
+        -5.52797
+      ],
+      "hv": [
+        -9.08434,
+        -3.3975,
+        -12.07192,
+        -7.5667,
+        -13.20806,
+        -11.09251
+      ],
+      "own_history_hv_change_db": -5.90937,
+      "peer_relative_hv_change_db": -3.22581,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 315
+    },
+    {
+      "id": "VEN r6 c8",
+      "lat": 10.477421875,
+      "lon": -67.085859375,
+      "cover": 20,
+      "z": -0.39475,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.95591,
+        3.68495,
+        1.41147,
+        -4.29803,
+        1.27593,
+        -3.23845
+      ],
+      "hv": [
+        -16.06446,
+        -2.85755,
+        -8.95216,
+        -15.38842,
+        -16.3553,
+        -10.84901
+      ],
+      "own_history_hv_change_db": -4.14115,
+      "peer_relative_hv_change_db": -1.48649,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 20
+    },
+    {
+      "id": "VEN r5 c9",
+      "lat": 10.478203125,
+      "lon": -67.085078125,
+      "cover": 30,
+      "z": 0.1535,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.43323,
+        -7.30873,
+        -1.24074,
+        -3.48014,
+        -5.50707,
+        -1.92797
+      ],
+      "hv": [
+        -18.43377,
+        0.30679,
+        -4.53461,
+        -10.67237,
+        -13.86763,
+        -8.98318
+      ],
+      "own_history_hv_change_db": -2.36192,
+      "peer_relative_hv_change_db": 0.66028,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 33
+    },
+    {
+      "id": "VEN r23 c18",
+      "lat": 10.464140624999999,
+      "lon": -67.078046875,
+      "cover": 10,
+      "z": 0.12384,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.46959,
+        -5.94017,
+        -4.5124,
+        -6.55026,
+        -3.89087,
+        -6.08223
+      ],
+      "hv": [
+        -11.01941,
+        2.41798,
+        -5.07025,
+        -6.55352,
+        -9.7639,
+        -7.09571
+      ],
+      "own_history_hv_change_db": -4.12909,
+      "peer_relative_hv_change_db": -1.40448,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 317
+    },
+    {
+      "id": "VEN r29 c23",
+      "lat": 10.459453125,
+      "lon": -67.074140625,
+      "cover": 10,
+      "z": -0.83686,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.22278,
+        -1.4161,
+        -1.05158,
+        -4.54167,
+        -4.42309,
+        -5.23029
+      ],
+      "hv": [
+        -7.0204,
+        -2.71247,
+        1.28047,
+        -4.60248,
+        -9.7041,
+        -9.17149
+      ],
+      "own_history_hv_change_db": -4.57136,
+      "peer_relative_hv_change_db": -1.7494,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 210
+    },
+    {
+      "id": "VEN r16 c23",
+      "lat": 10.469609375,
+      "lon": -67.074140625,
+      "cover": 10,
+      "z": 0.81699,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.19218,
+        -2.28432,
+        -5.95855,
+        -5.57903,
+        -5.34175,
+        -5.04408
+      ],
+      "hv": [
+        -6.55764,
+        0.49198,
+        -6.23773,
+        -13.04263,
+        -11.27665,
+        -5.24445
+      ],
+      "own_history_hv_change_db": -5.22772,
+      "peer_relative_hv_change_db": -2.45517,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 325
+    },
+    {
+      "id": "VEN r8 c18",
+      "lat": 10.475859375,
+      "lon": -67.078046875,
+      "cover": 50,
+      "z": -0.116,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.17166,
+        -6.95158,
+        -2.70567,
+        -11.7508,
+        -10.44323,
+        -7.45528
+      ],
+      "hv": [
+        -14.67567,
+        -1.36326,
+        -3.22082,
+        -13.80153,
+        -11.97269,
+        -8.7387
+      ],
+      "own_history_hv_change_db": -2.33623,
+      "peer_relative_hv_change_db": 0.44706,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 52
+    }
+  ],
+  "requested_candidate": null,
+  "limitations": [
+    "WorldCover 2021 may be outdated",
+    "Sparse samples, no area or continuous raster",
+    "Curve shapes are not confirmed clearing, flood, earthquake or subsidence",
+    "No weather correction or labelled accuracy estimate"
+  ]
+}
