@@ -99,6 +99,6 @@ old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
 
 NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. Amazon OPERA RTC-S1 provides sampled C-band measurements; Mexico OPERA DISP-S1 remains catalogue evidence only.
 
-Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA font uses SIL OFL 1.1, see `fonts/W95FA-OFL.txt`.
+Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA by Alina Sava and Ark Pixel 12px proportional by TakWolf (version 2026.11.10, https://github.com/TakWolf/ark-pixel-font) use SIL OFL 1.1; see `fonts/W95FA-OFL.txt` and `fonts/ark-pixel-OFL.txt`. Ark Pixel supplies Cyrillic glyphs only.
 
 No software LICENSE is currently declared. Public visibility does not itself grant an open-source licence; copyright holders must choose one before claiming OSI licensing for submission.
