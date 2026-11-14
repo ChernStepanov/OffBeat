@@ -7,6 +7,7 @@ OB.loadData = async function () {
   if (!response.ok) throw new Error(`Data request failed (${response.status})`);
   const site = await response.json();
   const g = site.grid, count = g.n * g.n;
+  g.w = g.h = g.n;
   if (site.schema_version !== 2 || site.pixels.length !== count) throw new Error('Invalid site schema');
   for (const p of site.pixels) {
     for (const key of ['hh', 'hv']) {
@@ -19,4 +20,14 @@ OB.loadData = async function () {
   g.since = site.pixels.map(p => p.since ? site.dates.indexOf(p.since) : -1);
   site.series = (x, y) => site.pixels[y * g.n + x];
   OB.SITES = [site];
+  if (OB.data) {
+    for (const id of ['mexico', 'amazon', 'venezuela']) {
+      try {
+        const response = await fetch(`data/${id}/meta.json`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const meta = await response.json();
+        OB.SITES.push({ id: id === 'mexico' ? 'mexico-full' : id, dataId: id, name: (meta.name || id) + (id === 'mexico' ? ' · full series' : ''), region: meta.source || 'NISAR pipeline data', binary: true });
+      } catch (error) { console.warn(`Site ${id} unavailable`, error); }
+    }
+  }
 };

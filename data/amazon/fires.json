@@ -1,0 +1,9052 @@
+[
+{
+"date": "2025-11-01",
+"lat": -4.5723,
+"lon": -49.41761,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 6.37,
+"provider": "FIRMS",
+"time": "0347"
+},
+{
+"date": "2025-11-01",
+"lat": -4.56605,
+"lon": -49.41653,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.92,
+"provider": "FIRMS",
+"time": "0347"
+},
+{
+"date": "2025-11-01",
+"lat": -4.57507,
+"lon": -49.41119,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0438"
+},
+{
+"date": "2025-11-01",
+"lat": -4.57177,
+"lon": -49.41066,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0438"
+},
+{
+"date": "2025-11-01",
+"lat": -4.57453,
+"lon": -49.41464,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 0.8,
+"provider": "INPE",
+"time": "0438"
+},
+{
+"date": "2025-11-01",
+"lat": -4.60195,
+"lon": -49.36352,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 40.3,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2025-11-01",
+"lat": -4.92357,
+"lon": -49.20702,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 63.2,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2025-11-01",
+"lat": -4.92017,
+"lon": -49.15724,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.0,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2025-11-01",
+"lat": -4.60021,
+"lon": -49.36118,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 46.2,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2025-11-01",
+"lat": -4.9237,
+"lon": -49.2149,
+"source": "MODIS",
+"confidence": 57,
+"frp": 63.9,
+"provider": "FIRMS",
+"time": "1749"
+},
+{
+"date": "2025-11-02",
+"lat": -4.59604,
+"lon": -49.4581,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.81,
+"provider": "FIRMS",
+"time": "1726"
+},
+{
+"date": "2025-11-02",
+"lat": -4.7873,
+"lon": -49.3448,
+"source": "MODIS",
+"confidence": 69,
+"frp": 10.6,
+"provider": "FIRMS",
+"time": "1827"
+},
+{
+"date": "2025-11-03",
+"lat": -4.7216,
+"lon": -49.48854,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 4.29,
+"provider": "FIRMS",
+"time": "1708"
+},
+{
+"date": "2025-11-03",
+"lat": -4.57005,
+"lon": -49.23938,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.51,
+"provider": "FIRMS",
+"time": "1708"
+},
+{
+"date": "2025-11-03",
+"lat": -4.66492,
+"lon": -49.27924,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.32,
+"provider": "FIRMS",
+"time": "1728"
+},
+{
+"date": "2025-11-04",
+"lat": -4.6253,
+"lon": -49.4663,
+"source": "MODIS",
+"confidence": 78,
+"frp": 7.2,
+"provider": "FIRMS",
+"time": "0034"
+},
+{
+"date": "2025-11-04",
+"lat": -4.6265,
+"lon": -49.4753,
+"source": "MODIS",
+"confidence": 64,
+"frp": 4.3,
+"provider": "FIRMS",
+"time": "0034"
+},
+{
+"date": "2025-11-04",
+"lat": -4.62783,
+"lon": -49.46974,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.05,
+"provider": "FIRMS",
+"time": "0431"
+},
+{
+"date": "2025-11-04",
+"lat": -4.62844,
+"lon": -49.46598,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.05,
+"provider": "FIRMS",
+"time": "0431"
+},
+{
+"date": "2025-11-04",
+"lat": -4.63232,
+"lon": -49.47076,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2025-11-04",
+"lat": -4.63298,
+"lon": -49.47524,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2025-11-04",
+"lat": -4.60244,
+"lon": -49.29668,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 6.17,
+"provider": "FIRMS",
+"time": "1649"
+},
+{
+"date": "2025-11-04",
+"lat": -4.60278,
+"lon": -49.29637,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 4.7,
+"provider": "FIRMS",
+"time": "1710"
+},
+{
+"date": "2025-11-04",
+"lat": -4.63137,
+"lon": -49.47427,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 6.1,
+"provider": "FIRMS",
+"time": "1710"
+},
+{
+"date": "2025-11-05",
+"lat": -4.97523,
+"lon": -49.29029,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 8.24,
+"provider": "FIRMS",
+"time": "1651"
+},
+{
+"date": "2025-11-05",
+"lat": -4.97912,
+"lon": -49.31559,
+"source": "VIIRS_NOAA20",
+"confidence": "l",
+"frp": 2.37,
+"provider": "FIRMS",
+"time": "1651"
+},
+{
+"date": "2025-11-06",
+"lat": -4.59989,
+"lon": -49.35696,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2025-11-07",
+"lat": -4.61101,
+"lon": -49.48631,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.33,
+"provider": "FIRMS",
+"time": "0454"
+},
+{
+"date": "2025-11-07",
+"lat": -4.87464,
+"lon": -49.38724,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 19.2,
+"provider": "FIRMS",
+"time": "1613"
+},
+{
+"date": "2025-11-07",
+"lat": -4.71409,
+"lon": -49.2284,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.5,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2025-11-07",
+"lat": -4.7096,
+"lon": -49.40254,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2025-11-07",
+"lat": -4.61051,
+"lon": -49.48683,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2025-11-07",
+"lat": -4.71488,
+"lon": -49.23344,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.5,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2025-11-07",
+"lat": -4.8752,
+"lon": -49.38521,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 6.24,
+"provider": "FIRMS",
+"time": "1733"
+},
+{
+"date": "2025-11-07",
+"lat": -4.848,
+"lon": -49.1681,
+"source": "MODIS",
+"confidence": 73,
+"frp": 12.3,
+"provider": "FIRMS",
+"time": "1823"
+},
+{
+"date": "2025-11-07",
+"lat": -4.8493,
+"lon": -49.1772,
+"source": "MODIS",
+"confidence": 56,
+"frp": 6.1,
+"provider": "FIRMS",
+"time": "1823"
+},
+{
+"date": "2025-11-07",
+"lat": -4.6953,
+"lon": -49.3236,
+"source": "MODIS",
+"confidence": 60,
+"frp": 8.8,
+"provider": "FIRMS",
+"time": "1823"
+},
+{
+"date": "2025-11-07",
+"lat": -4.6966,
+"lon": -49.3326,
+"source": "MODIS",
+"confidence": 60,
+"frp": 7.1,
+"provider": "FIRMS",
+"time": "1823"
+},
+{
+"date": "2025-11-08",
+"lat": -4.60105,
+"lon": -49.36055,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.4,
+"provider": "FIRMS",
+"time": "0436"
+},
+{
+"date": "2025-11-08",
+"lat": -4.60448,
+"lon": -49.36108,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.4,
+"provider": "FIRMS",
+"time": "0436"
+},
+{
+"date": "2025-11-08",
+"lat": -4.65631,
+"lon": -49.47762,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "1643"
+},
+{
+"date": "2025-11-09",
+"lat": -4.5839,
+"lon": -49.3892,
+"source": "MODIS",
+"confidence": 73,
+"frp": 5.9,
+"provider": "FIRMS",
+"time": "0034"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58461,
+"lon": -49.38992,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.79,
+"provider": "FIRMS",
+"time": "0417"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58913,
+"lon": -49.39069,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.79,
+"provider": "FIRMS",
+"time": "0417"
+},
+{
+"date": "2025-11-09",
+"lat": -4.75815,
+"lon": -49.39161,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.77,
+"provider": "FIRMS",
+"time": "0417"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58476,
+"lon": -49.39122,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.07,
+"provider": "FIRMS",
+"time": "0438"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58807,
+"lon": -49.39174,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.07,
+"provider": "FIRMS",
+"time": "0438"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58752,
+"lon": -49.39519,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.07,
+"provider": "FIRMS",
+"time": "0438"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58861,
+"lon": -49.38829,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.12,
+"provider": "FIRMS",
+"time": "0438"
+},
+{
+"date": "2025-11-09",
+"lat": -4.75829,
+"lon": -49.3907,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.55,
+"provider": "FIRMS",
+"time": "0438"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58914,
+"lon": -49.39302,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.7,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58989,
+"lon": -49.38756,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.7,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58827,
+"lon": -49.39061,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "1626"
+},
+{
+"date": "2025-11-09",
+"lat": -4.87565,
+"lon": -49.38699,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 12.2,
+"provider": "INPE",
+"time": "1626"
+},
+{
+"date": "2025-11-09",
+"lat": -4.87616,
+"lon": -49.39053,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 12.2,
+"provider": "INPE",
+"time": "1626"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58427,
+"lon": -49.3912,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "1626"
+},
+{
+"date": "2025-11-09",
+"lat": -4.94194,
+"lon": -49.22812,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 9.22,
+"provider": "FIRMS",
+"time": "1655"
+},
+{
+"date": "2025-11-09",
+"lat": -4.87625,
+"lon": -49.38792,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 24.24,
+"provider": "FIRMS",
+"time": "1655"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58994,
+"lon": -49.38809,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.98,
+"provider": "FIRMS",
+"time": "1655"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58654,
+"lon": -49.38862,
+"source": "VIIRS_SNPP",
+"confidence": "l",
+"frp": 2.98,
+"provider": "FIRMS",
+"time": "1655"
+},
+{
+"date": "2025-11-09",
+"lat": -4.5871,
+"lon": -49.39225,
+"source": "VIIRS_SNPP",
+"confidence": "l",
+"frp": 5.65,
+"provider": "FIRMS",
+"time": "1655"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58314,
+"lon": -49.38914,
+"source": "VIIRS_SNPP",
+"confidence": "l",
+"frp": 3.26,
+"provider": "FIRMS",
+"time": "1655"
+},
+{
+"date": "2025-11-09",
+"lat": -4.94269,
+"lon": -49.22797,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 32.26,
+"provider": "FIRMS",
+"time": "1716"
+},
+{
+"date": "2025-11-09",
+"lat": -4.87659,
+"lon": -49.38702,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 10.52,
+"provider": "FIRMS",
+"time": "1716"
+},
+{
+"date": "2025-11-09",
+"lat": -4.59055,
+"lon": -49.38801,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 10.59,
+"provider": "FIRMS",
+"time": "1716"
+},
+{
+"date": "2025-11-09",
+"lat": -4.58779,
+"lon": -49.38647,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 11.47,
+"provider": "FIRMS",
+"time": "1716"
+},
+{
+"date": "2025-11-09",
+"lat": -4.9446,
+"lon": -49.2302,
+"source": "MODIS",
+"confidence": 84,
+"frp": 120.9,
+"provider": "FIRMS",
+"time": "1802"
+},
+{
+"date": "2025-11-09",
+"lat": -4.9465,
+"lon": -49.2438,
+"source": "MODIS",
+"confidence": 54,
+"frp": 17.5,
+"provider": "FIRMS",
+"time": "1802"
+},
+{
+"date": "2025-11-10",
+"lat": -4.7482,
+"lon": -49.4937,
+"source": "MODIS",
+"confidence": 100,
+"frp": 23.4,
+"provider": "FIRMS",
+"time": "0624"
+},
+{
+"date": "2025-11-12",
+"lat": -4.90762,
+"lon": -49.32553,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0431"
+},
+{
+"date": "2025-11-12",
+"lat": -4.90703,
+"lon": -49.32925,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0431"
+},
+{
+"date": "2025-11-12",
+"lat": -4.62893,
+"lon": -49.46564,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0431"
+},
+{
+"date": "2025-11-12",
+"lat": -4.90581,
+"lon": -49.34058,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.2,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2025-11-12",
+"lat": -4.84857,
+"lon": -49.26408,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.8,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2025-11-12",
+"lat": -4.8435,
+"lon": -49.26055,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.8,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2025-11-12",
+"lat": -4.90515,
+"lon": -49.33648,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.2,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2025-11-12",
+"lat": -4.84927,
+"lon": -49.2683,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.8,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2025-11-12",
+"lat": -4.8442,
+"lon": -49.26477,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.8,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2025-11-12",
+"lat": -4.85001,
+"lon": -49.26204,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 8.69,
+"provider": "FIRMS",
+"time": "1739"
+},
+{
+"date": "2025-11-12",
+"lat": -4.84327,
+"lon": -49.26303,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 11.85,
+"provider": "FIRMS",
+"time": "1739"
+},
+{
+"date": "2025-11-12",
+"lat": -4.9134,
+"lon": -49.341,
+"source": "MODIS",
+"confidence": 0,
+"frp": 8.8,
+"provider": "FIRMS",
+"time": "1819"
+},
+{
+"date": "2025-11-12",
+"lat": -4.848,
+"lon": -49.2613,
+"source": "MODIS",
+"confidence": 74,
+"frp": 18.4,
+"provider": "FIRMS",
+"time": "1819"
+},
+{
+"date": "2025-11-12",
+"lat": -4.8492,
+"lon": -49.2701,
+"source": "MODIS",
+"confidence": 71,
+"frp": 14.8,
+"provider": "FIRMS",
+"time": "1819"
+},
+{
+"date": "2025-11-12",
+"lat": -4.6279,
+"lon": -49.4638,
+"source": "MODIS",
+"confidence": 0,
+"frp": 7.0,
+"provider": "FIRMS",
+"time": "1819"
+},
+{
+"date": "2025-11-13",
+"lat": -4.71837,
+"lon": -49.24514,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0412"
+},
+{
+"date": "2025-11-13",
+"lat": -4.61331,
+"lon": -49.29298,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.4,
+"provider": "INPE",
+"time": "0412"
+},
+{
+"date": "2025-11-13",
+"lat": -4.61168,
+"lon": -49.29023,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.59,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.61445,
+"lon": -49.29421,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.59,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.615,
+"lon": -49.29075,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.59,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.71781,
+"lon": -49.24316,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.37,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.72113,
+"lon": -49.24368,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.04,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.84289,
+"lon": -49.26269,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.69,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.84621,
+"lon": -49.26321,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.35,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-13",
+"lat": -4.6119,
+"lon": -49.29435,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 0.6,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.61253,
+"lon": -49.29023,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.3,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.60999,
+"lon": -49.28842,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.19,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.61371,
+"lon": -49.29321,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.37,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.71846,
+"lon": -49.24514,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.12,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.71993,
+"lon": -49.24434,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.2,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.84252,
+"lon": -49.26444,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 0.48,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.84687,
+"lon": -49.26509,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 0.69,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-13",
+"lat": -4.84245,
+"lon": -49.26371,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 12.0,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2025-11-13",
+"lat": -4.67344,
+"lon": -49.46646,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 23.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2025-11-13",
+"lat": -4.83851,
+"lon": -49.26062,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 15.3,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2025-11-13",
+"lat": -4.67008,
+"lon": -49.46699,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 23.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88222,
+"lon": -49.38772,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.81,
+"provider": "FIRMS",
+"time": "0423"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88627,
+"lon": -49.38837,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 0.87,
+"provider": "FIRMS",
+"time": "0423"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88161,
+"lon": -49.38697,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 0.87,
+"provider": "FIRMS",
+"time": "0444"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88497,
+"lon": -49.38749,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 0.98,
+"provider": "FIRMS",
+"time": "0444"
+},
+{
+"date": "2025-11-14",
+"lat": -4.92034,
+"lon": -49.15533,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.29,
+"provider": "FIRMS",
+"time": "1701"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88611,
+"lon": -49.38762,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.87,
+"provider": "FIRMS",
+"time": "1701"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88185,
+"lon": -49.38405,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 11.33,
+"provider": "FIRMS",
+"time": "1701"
+},
+{
+"date": "2025-11-14",
+"lat": -4.8825,
+"lon": -49.38817,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.87,
+"provider": "FIRMS",
+"time": "1701"
+},
+{
+"date": "2025-11-14",
+"lat": -4.84392,
+"lon": -49.26181,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.85,
+"provider": "FIRMS",
+"time": "1701"
+},
+{
+"date": "2025-11-14",
+"lat": -4.88391,
+"lon": -49.38382,
+"source": "VIIRS_NOAA20",
+"confidence": "h",
+"frp": 8.78,
+"provider": "FIRMS",
+"time": "1722"
+},
+{
+"date": "2025-11-15",
+"lat": -4.88383,
+"lon": -49.38715,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 1.95,
+"provider": "FIRMS",
+"time": "0404"
+},
+{
+"date": "2025-11-15",
+"lat": -4.88186,
+"lon": -49.38898,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.27,
+"provider": "FIRMS",
+"time": "0425"
+},
+{
+"date": "2025-11-15",
+"lat": -4.88186,
+"lon": -49.38772,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.64,
+"provider": "FIRMS",
+"time": "0425"
+},
+{
+"date": "2025-11-15",
+"lat": -4.88401,
+"lon": -49.37477,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.15,
+"provider": "FIRMS",
+"time": "0425"
+},
+{
+"date": "2025-11-15",
+"lat": -4.88552,
+"lon": -49.38831,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.64,
+"provider": "FIRMS",
+"time": "0425"
+},
+{
+"date": "2025-11-15",
+"lat": -4.72039,
+"lon": -49.49487,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.73,
+"provider": "FIRMS",
+"time": "1642"
+},
+{
+"date": "2025-11-15",
+"lat": -4.71696,
+"lon": -49.49538,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.73,
+"provider": "FIRMS",
+"time": "1642"
+},
+{
+"date": "2025-11-15",
+"lat": -4.84392,
+"lon": -49.26031,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 4.16,
+"provider": "FIRMS",
+"time": "1704"
+},
+{
+"date": "2025-11-16",
+"lat": -4.76071,
+"lon": -49.3886,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0455"
+},
+{
+"date": "2025-11-16",
+"lat": -4.76143,
+"lon": -49.38383,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0455"
+},
+{
+"date": "2025-11-16",
+"lat": -4.95249,
+"lon": -49.10978,
+"source": "VIIRS_NOAA20",
+"confidence": "l",
+"frp": 3.13,
+"provider": "FIRMS",
+"time": "1645"
+},
+{
+"date": "2025-11-16",
+"lat": -4.94918,
+"lon": -49.11028,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.13,
+"provider": "FIRMS",
+"time": "1645"
+},
+{
+"date": "2025-11-16",
+"lat": -4.93623,
+"lon": -49.29236,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.84,
+"provider": "FIRMS",
+"time": "1645"
+},
+{
+"date": "2025-11-17",
+"lat": -4.93432,
+"lon": -49.43646,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.14,
+"provider": "FIRMS",
+"time": "1626"
+},
+{
+"date": "2025-11-17",
+"lat": -4.78173,
+"lon": -49.39627,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 19.9,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2025-11-17",
+"lat": -4.937,
+"lon": -49.3105,
+"source": "MODIS",
+"confidence": 78,
+"frp": 17.3,
+"provider": "FIRMS",
+"time": "1815"
+},
+{
+"date": "2025-11-17",
+"lat": -4.7905,
+"lon": -49.3196,
+"source": "MODIS",
+"confidence": 53,
+"frp": 9.4,
+"provider": "FIRMS",
+"time": "1815"
+},
+{
+"date": "2025-11-17",
+"lat": -4.7918,
+"lon": -49.3288,
+"source": "MODIS",
+"confidence": 65,
+"frp": 11.6,
+"provider": "FIRMS",
+"time": "1815"
+},
+{
+"date": "2025-11-17",
+"lat": -4.7831,
+"lon": -49.3961,
+"source": "MODIS",
+"confidence": 0,
+"frp": 12.7,
+"provider": "FIRMS",
+"time": "1815"
+},
+{
+"date": "2025-11-18",
+"lat": -4.84033,
+"lon": -49.39237,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0421"
+},
+{
+"date": "2025-11-23",
+"lat": -4.57812,
+"lon": -49.31146,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.8,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2025-11-25",
+"lat": -4.56188,
+"lon": -49.21342,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.8,
+"provider": "INPE",
+"time": "1626"
+},
+{
+"date": "2025-11-25",
+"lat": -4.9327,
+"lon": -49.15283,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 12.45,
+"provider": "FIRMS",
+"time": "1716"
+},
+{
+"date": "2025-11-25",
+"lat": -4.9316,
+"lon": -49.1474,
+"source": "MODIS",
+"confidence": 62,
+"frp": 8.8,
+"provider": "FIRMS",
+"time": "1828"
+},
+{
+"date": "2025-11-25",
+"lat": -4.9331,
+"lon": -49.157,
+"source": "MODIS",
+"confidence": 78,
+"frp": 18.0,
+"provider": "FIRMS",
+"time": "1828"
+},
+{
+"date": "2025-11-26",
+"lat": -4.9287,
+"lon": -49.1537,
+"source": "MODIS",
+"confidence": 67,
+"frp": 8.5,
+"provider": "FIRMS",
+"time": "0014"
+},
+{
+"date": "2025-11-26",
+"lat": -4.61484,
+"lon": -49.46176,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 4.06,
+"provider": "FIRMS",
+"time": "0419"
+},
+{
+"date": "2025-11-26",
+"lat": -4.67334,
+"lon": -49.38402,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.02,
+"provider": "FIRMS",
+"time": "0419"
+},
+{
+"date": "2025-11-26",
+"lat": -4.67793,
+"lon": -49.38119,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.02,
+"provider": "FIRMS",
+"time": "0419"
+},
+{
+"date": "2025-11-26",
+"lat": -4.92855,
+"lon": -49.15125,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.08,
+"provider": "FIRMS",
+"time": "0419"
+},
+{
+"date": "2025-11-26",
+"lat": -4.93249,
+"lon": -49.15192,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 1.08,
+"provider": "FIRMS",
+"time": "0419"
+},
+{
+"date": "2025-11-26",
+"lat": -4.67596,
+"lon": -49.37866,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.2,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2025-11-26",
+"lat": -4.9301,
+"lon": -49.15359,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2025-11-26",
+"lat": -4.68077,
+"lon": -49.37923,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.2,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2025-11-26",
+"lat": -4.6752,
+"lon": -49.38374,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.6,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2025-11-26",
+"lat": -4.68078,
+"lon": -49.37984,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2025-11-26",
+"lat": -4.93291,
+"lon": -49.15446,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2025-11-27",
+"lat": -4.56075,
+"lon": -49.3178,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 9.28,
+"provider": "FIRMS",
+"time": "1618"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58547,
+"lon": -49.49583,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.61,
+"provider": "FIRMS",
+"time": "1618"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58043,
+"lon": -49.49316,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 11.49,
+"provider": "FIRMS",
+"time": "1618"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58124,
+"lon": -49.49873,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 11.49,
+"provider": "FIRMS",
+"time": "1618"
+},
+{
+"date": "2025-11-27",
+"lat": -4.75207,
+"lon": -49.20671,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 4.85,
+"provider": "FIRMS",
+"time": "1639"
+},
+{
+"date": "2025-11-27",
+"lat": -4.71817,
+"lon": -49.49665,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.3,
+"provider": "FIRMS",
+"time": "1639"
+},
+{
+"date": "2025-11-27",
+"lat": -4.66299,
+"lon": -49.45279,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.98,
+"provider": "FIRMS",
+"time": "1639"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58515,
+"lon": -49.49444,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 6.19,
+"provider": "FIRMS",
+"time": "1639"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58175,
+"lon": -49.49497,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 9.59,
+"provider": "FIRMS",
+"time": "1639"
+},
+{
+"date": "2025-11-27",
+"lat": -4.74233,
+"lon": -49.26342,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.7,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2025-11-27",
+"lat": -4.74063,
+"lon": -49.26284,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.9,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58384,
+"lon": -49.49455,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.4,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2025-11-27",
+"lat": -4.58042,
+"lon": -49.49305,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.9,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2025-11-29",
+"lat": -4.6385,
+"lon": -49.3615,
+"source": "MODIS",
+"confidence": 66,
+"frp": 5.9,
+"provider": "FIRMS",
+"time": "0033"
+},
+{
+"date": "2025-11-29",
+"lat": -4.64064,
+"lon": -49.36407,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.34,
+"provider": "FIRMS",
+"time": "0442"
+},
+{
+"date": "2025-11-29",
+"lat": -4.63846,
+"lon": -49.36592,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.35,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-11-29",
+"lat": -4.63908,
+"lon": -49.36178,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.35,
+"provider": "FIRMS",
+"time": "0503"
+},
+{
+"date": "2025-12-02",
+"lat": -4.85492,
+"lon": -49.08245,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 2.43,
+"provider": "FIRMS",
+"time": "1645"
+},
+{
+"date": "2025-12-03",
+"lat": -4.66296,
+"lon": -49.37179,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0438"
+},
+{
+"date": "2025-12-04",
+"lat": -4.77071,
+"lon": -49.25553,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 19.0,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2025-12-11",
+"lat": -4.5765,
+"lon": -49.1685,
+"source": "MODIS",
+"confidence": 44,
+"frp": 4.8,
+"provider": "FIRMS",
+"time": "0013"
+},
+{
+"date": "2025-12-11",
+"lat": -4.57346,
+"lon": -49.16609,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 2.67,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-12",
+"lat": -4.87193,
+"lon": -49.3903,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 5.73,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-12",
+"lat": -4.86831,
+"lon": -49.39085,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 15.41,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-12",
+"lat": -4.81206,
+"lon": -49.27033,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 6.46,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-12",
+"lat": -4.80841,
+"lon": -49.27085,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 6.46,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-18",
+"lat": -4.5828,
+"lon": -49.089,
+"source": "MODIS",
+"confidence": 78,
+"frp": 13.3,
+"provider": "FIRMS",
+"time": "1827"
+},
+{
+"date": "2025-12-26",
+"lat": -4.87122,
+"lon": -49.28483,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2025-12-26",
+"lat": -4.87342,
+"lon": -49.28514,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 4.63,
+"provider": "FIRMS",
+"time": "1715"
+},
+{
+"date": "2025-12-26",
+"lat": -4.87102,
+"lon": -49.2839,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.26,
+"provider": "FIRMS",
+"time": "1715"
+},
+{
+"date": "2025-12-26",
+"lat": -4.65989,
+"lon": -49.46622,
+"source": "VIIRS_NOAA20",
+"confidence": "h",
+"frp": 33.01,
+"provider": "FIRMS",
+"time": "1736"
+},
+{
+"date": "2025-12-27",
+"lat": -4.98333,
+"lon": -49.35254,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 3.27,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.9002,
+"lon": -49.47017,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 45.0,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.8968,
+"lon": -49.4707,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 17.51,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.78351,
+"lon": -49.32438,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 4.49,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.60632,
+"lon": -49.06348,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 4.97,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.60229,
+"lon": -49.0603,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 13.83,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.60287,
+"lon": -49.06402,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 53.73,
+"provider": "FIRMS",
+"time": "1656"
+},
+{
+"date": "2025-12-27",
+"lat": -4.90233,
+"lon": -49.46686,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 12.09,
+"provider": "FIRMS",
+"time": "1717"
+},
+{
+"date": "2025-12-27",
+"lat": -4.90326,
+"lon": -49.47237,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 8.62,
+"provider": "FIRMS",
+"time": "1717"
+},
+{
+"date": "2025-12-27",
+"lat": -4.89744,
+"lon": -49.46768,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 11.35,
+"provider": "FIRMS",
+"time": "1717"
+},
+{
+"date": "2025-12-28",
+"lat": -4.81234,
+"lon": -49.26011,
+"source": "VIIRS_SNPP",
+"confidence": "n",
+"frp": 7.0,
+"provider": "FIRMS",
+"time": "1638"
+},
+{
+"date": "2025-12-28",
+"lat": -4.89975,
+"lon": -49.47105,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 6.18,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-28",
+"lat": -4.80928,
+"lon": -49.25583,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 14.15,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-28",
+"lat": -4.80994,
+"lon": -49.26008,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 3.43,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-28",
+"lat": -4.6175,
+"lon": -49.46541,
+"source": "VIIRS_NOAA20",
+"confidence": "n",
+"frp": 5.31,
+"provider": "FIRMS",
+"time": "1658"
+},
+{
+"date": "2025-12-28",
+"lat": -4.9036,
+"lon": -49.4779,
+"source": "MODIS",
+"confidence": 74,
+"frp": 14.6,
+"provider": "FIRMS",
+"time": "1817"
+},
+{
+"date": "2025-12-28",
+"lat": -4.9022,
+"lon": -49.468,
+"source": "MODIS",
+"confidence": 58,
+"frp": 5.6,
+"provider": "FIRMS",
+"time": "1817"
+},
+{
+"date": "2025-12-28",
+"lat": -4.8836,
+"lon": -49.3401,
+"source": "MODIS",
+"confidence": 50,
+"frp": 5.9,
+"provider": "FIRMS",
+"time": "1817"
+},
+{
+"date": "2025-12-28",
+"lat": -4.8142,
+"lon": -49.2509,
+"source": "MODIS",
+"confidence": 69,
+"frp": 9.4,
+"provider": "FIRMS",
+"time": "1818"
+},
+{
+"date": "2025-12-28",
+"lat": -4.8156,
+"lon": -49.2605,
+"source": "MODIS",
+"confidence": 90,
+"frp": 42.8,
+"provider": "FIRMS",
+"time": "1818"
+},
+{
+"date": "2025-12-30",
+"lat": -4.80701,
+"lon": -49.40528,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-01-01",
+"lat": -4.76564,
+"lon": -49.29596,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.9,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2026-01-01",
+"lat": -4.74942,
+"lon": -49.32383,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.4,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-01-01",
+"lat": -4.74988,
+"lon": -49.32522,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-01-02",
+"lat": -4.87056,
+"lon": -49.17776,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 18.5,
+"provider": "INPE",
+"time": "1706"
+},
+{
+"date": "2026-01-02",
+"lat": -4.87884,
+"lon": -49.17309,
+"source": "MODIS",
+"confidence": null,
+"frp": 45.3,
+"provider": "INPE",
+"time": "1815"
+},
+{
+"date": "2026-01-02",
+"lat": -4.88043,
+"lon": -49.18435,
+"source": "MODIS",
+"confidence": null,
+"frp": 36.9,
+"provider": "INPE",
+"time": "1815"
+},
+{
+"date": "2026-01-02",
+"lat": -4.81577,
+"lon": -49.30339,
+"source": "MODIS",
+"confidence": null,
+"frp": 8.7,
+"provider": "INPE",
+"time": "1815"
+},
+{
+"date": "2026-01-03",
+"lat": -4.86723,
+"lon": -49.17857,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-01-03",
+"lat": -4.82746,
+"lon": -49.47666,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-01-05",
+"lat": -4.90135,
+"lon": -49.47606,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-01-05",
+"lat": -4.90044,
+"lon": -49.47775,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.4,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-01-05",
+"lat": -4.89979,
+"lon": -49.47365,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.4,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-01-05",
+"lat": -4.65737,
+"lon": -49.49397,
+"source": "MODIS",
+"confidence": null,
+"frp": 7.9,
+"provider": "INPE",
+"time": "1830"
+},
+{
+"date": "2026-01-25",
+"lat": -4.97447,
+"lon": -49.38674,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.2,
+"provider": "INPE",
+"time": "1613"
+},
+{
+"date": "2026-01-29",
+"lat": -4.88415,
+"lon": -49.45852,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-01-29",
+"lat": -4.87917,
+"lon": -49.45858,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "1700"
+},
+{
+"date": "2026-01-29",
+"lat": -4.88278,
+"lon": -49.45805,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "1700"
+},
+{
+"date": "2026-01-30",
+"lat": -4.8816,
+"lon": -49.17616,
+"source": "MODIS",
+"confidence": null,
+"frp": 19.1,
+"provider": "INPE",
+"time": "1806"
+},
+{
+"date": "2026-01-31",
+"lat": -4.87302,
+"lon": -49.18107,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "1743"
+},
+{
+"date": "2026-02-02",
+"lat": -4.91371,
+"lon": -49.24247,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.2,
+"provider": "INPE",
+"time": "1704"
+},
+{
+"date": "2026-02-02",
+"lat": -4.79096,
+"lon": -49.43805,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.0,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-02-02",
+"lat": -4.62446,
+"lon": -49.22161,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-02-02",
+"lat": -4.91912,
+"lon": -49.24663,
+"source": "MODIS",
+"confidence": null,
+"frp": 9.2,
+"provider": "INPE",
+"time": "1821"
+},
+{
+"date": "2026-02-02",
+"lat": -4.97034,
+"lon": -49.41985,
+"source": "MODIS",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "1821"
+},
+{
+"date": "2026-02-21",
+"lat": -4.94913,
+"lon": -49.24188,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.2,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-02-23",
+"lat": -4.61694,
+"lon": -49.4634,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 8.6,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2026-03-23",
+"lat": -4.96117,
+"lon": -49.18941,
+"source": "MODIS",
+"confidence": null,
+"frp": 4.3,
+"provider": "INPE",
+"time": "1828"
+},
+{
+"date": "2026-03-26",
+"lat": -4.69481,
+"lon": -49.4637,
+"source": "MODIS",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1225"
+},
+{
+"date": "2026-05-26",
+"lat": -4.68859,
+"lon": -49.17148,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "1648"
+},
+{
+"date": "2026-05-26",
+"lat": -4.68906,
+"lon": -49.17066,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "1707"
+},
+{
+"date": "2026-05-29",
+"lat": -4.97337,
+"lon": -49.44235,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-06-12",
+"lat": -4.64686,
+"lon": -49.29733,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.4,
+"provider": "INPE",
+"time": "1648"
+},
+{
+"date": "2026-06-12",
+"lat": -4.64355,
+"lon": -49.29783,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.5,
+"provider": "INPE",
+"time": "1650"
+},
+{
+"date": "2026-07-01",
+"lat": -4.63436,
+"lon": -49.20412,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 47.1,
+"provider": "INPE",
+"time": "1639"
+},
+{
+"date": "2026-07-01",
+"lat": -4.63298,
+"lon": -49.20761,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.4,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-07-01",
+"lat": -4.63647,
+"lon": -49.2034,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.4,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-07-01",
+"lat": -4.6324,
+"lon": -49.20405,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.4,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-07-01",
+"lat": -4.63203,
+"lon": -49.20494,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.8,
+"provider": "INPE",
+"time": "1734"
+},
+{
+"date": "2026-07-04",
+"lat": -4.85074,
+"lon": -49.08075,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.4,
+"provider": "INPE",
+"time": "1618"
+},
+{
+"date": "2026-07-04",
+"lat": -4.84965,
+"lon": -49.08261,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.2,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-07-09",
+"lat": -4.61946,
+"lon": -49.05232,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 0.7,
+"provider": "INPE",
+"time": "0451"
+},
+{
+"date": "2026-07-11",
+"lat": -4.61534,
+"lon": -49.05025,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-07-11",
+"lat": -4.61464,
+"lon": -49.05455,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-07-11",
+"lat": -4.61834,
+"lon": -49.05278,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0508"
+},
+{
+"date": "2026-07-11",
+"lat": -4.61389,
+"lon": -49.05219,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0508"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61069,
+"lon": -49.0592,
+"source": "MODIS",
+"confidence": null,
+"frp": 17.7,
+"provider": "INPE",
+"time": "0001"
+},
+{
+"date": "2026-07-12",
+"lat": -4.60945,
+"lon": -49.05014,
+"source": "MODIS",
+"confidence": null,
+"frp": 33.7,
+"provider": "INPE",
+"time": "0001"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61668,
+"lon": -49.05331,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 0.8,
+"provider": "INPE",
+"time": "0353"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61064,
+"lon": -49.05209,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.9,
+"provider": "INPE",
+"time": "0353"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61175,
+"lon": -49.05268,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61607,
+"lon": -49.05092,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0451"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61268,
+"lon": -49.05041,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.7,
+"provider": "INPE",
+"time": "0451"
+},
+{
+"date": "2026-07-12",
+"lat": -4.61211,
+"lon": -49.05407,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.7,
+"provider": "INPE",
+"time": "0451"
+},
+{
+"date": "2026-07-18",
+"lat": -4.80492,
+"lon": -49.07089,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-07-18",
+"lat": -4.80752,
+"lon": -49.06972,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-18",
+"lat": -4.99475,
+"lon": -49.12479,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-18",
+"lat": -4.99142,
+"lon": -49.12529,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-19",
+"lat": -4.80621,
+"lon": -49.07082,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 15.2,
+"provider": "INPE",
+"time": "1603"
+},
+{
+"date": "2026-07-19",
+"lat": -4.962,
+"lon": -49.09573,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.0,
+"provider": "INPE",
+"time": "1603"
+},
+{
+"date": "2026-07-19",
+"lat": -4.95741,
+"lon": -49.09206,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 11.9,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-07-19",
+"lat": -4.95811,
+"lon": -49.09694,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 11.9,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-07-19",
+"lat": -4.8063,
+"lon": -49.06952,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 11.4,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-07-19",
+"lat": -4.80242,
+"lon": -49.07011,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-07-19",
+"lat": -4.95738,
+"lon": -49.09479,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 30.4,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-07-19",
+"lat": -4.95867,
+"lon": -49.09354,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 29.2,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-19",
+"lat": -4.80442,
+"lon": -49.07158,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 6.4,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-19",
+"lat": -4.80726,
+"lon": -49.06734,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.7,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-19",
+"lat": -4.96267,
+"lon": -49.09672,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 29.2,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-19",
+"lat": -4.80383,
+"lon": -49.06787,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.7,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-07-25",
+"lat": -4.9298,
+"lon": -49.39272,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.0,
+"provider": "INPE",
+"time": "1643"
+},
+{
+"date": "2026-07-26",
+"lat": -4.61852,
+"lon": -49.0555,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-07-26",
+"lat": -4.61514,
+"lon": -49.05497,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.0,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-07-31",
+"lat": -4.61258,
+"lon": -49.05706,
+"source": "MODIS",
+"confidence": null,
+"frp": 89.8,
+"provider": "INPE",
+"time": "2356"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61483,
+"lon": -49.0561,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.4,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61089,
+"lon": -49.05542,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.4,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-08-01",
+"lat": -4.6136,
+"lon": -49.0551,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "0455"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61701,
+"lon": -49.05561,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "0455"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61018,
+"lon": -49.05458,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.4,
+"provider": "INPE",
+"time": "0455"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61456,
+"lon": -49.0527,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0514"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61504,
+"lon": -49.05399,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "0514"
+},
+{
+"date": "2026-08-01",
+"lat": -4.61005,
+"lon": -49.05337,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "0514"
+},
+{
+"date": "2026-08-01",
+"lat": -4.6137,
+"lon": -49.05836,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0514"
+},
+{
+"date": "2026-08-01",
+"lat": -4.9959,
+"lon": -49.27094,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-08-03",
+"lat": -4.55121,
+"lon": -49.23634,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.3,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-08-03",
+"lat": -4.90764,
+"lon": -49.28561,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 8.9,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2026-08-04",
+"lat": -4.70681,
+"lon": -49.06749,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 9.9,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-08-04",
+"lat": -4.70293,
+"lon": -49.06807,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 9.9,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-08-04",
+"lat": -4.87912,
+"lon": -49.38594,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-08-04",
+"lat": -4.70409,
+"lon": -49.06938,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.2,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-08-04",
+"lat": -4.70753,
+"lon": -49.06886,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "1656"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91523,
+"lon": -49.24023,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91753,
+"lon": -49.23691,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91613,
+"lon": -49.23478,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91261,
+"lon": -49.23607,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91291,
+"lon": -49.23534,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.0,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-08-07",
+"lat": -4.9163,
+"lon": -49.23589,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.0,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91281,
+"lon": -49.23953,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0501"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91358,
+"lon": -49.23434,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0501"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91389,
+"lon": -49.23777,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 11.0,
+"provider": "INPE",
+"time": "1558"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91415,
+"lon": -49.23974,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 18.7,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91033,
+"lon": -49.2368,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.2,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-08-07",
+"lat": -4.91363,
+"lon": -49.2363,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 30.3,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-08-15",
+"lat": -4.76999,
+"lon": -49.14481,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1650"
+},
+{
+"date": "2026-08-15",
+"lat": -4.76668,
+"lon": -49.14531,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1650"
+},
+{
+"date": "2026-08-15",
+"lat": -4.76615,
+"lon": -49.14186,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1650"
+},
+{
+"date": "2026-08-15",
+"lat": -4.76947,
+"lon": -49.14135,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1650"
+},
+{
+"date": "2026-08-15",
+"lat": -4.76411,
+"lon": -49.14456,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 11.3,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-08-15",
+"lat": -4.76962,
+"lon": -49.142,
+"source": "MODIS",
+"confidence": null,
+"frp": 10.4,
+"provider": "INPE",
+"time": "1847"
+},
+{
+"date": "2026-08-15",
+"lat": -4.7988,
+"lon": -49.39323,
+"source": "MODIS",
+"confidence": null,
+"frp": 10.5,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-08-15",
+"lat": -4.78915,
+"lon": -49.39454,
+"source": "MODIS",
+"confidence": null,
+"frp": 7.7,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-08-16",
+"lat": -4.79391,
+"lon": -49.39157,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0440"
+},
+{
+"date": "2026-08-16",
+"lat": -4.74111,
+"lon": -49.23605,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.8,
+"provider": "INPE",
+"time": "1633"
+},
+{
+"date": "2026-08-16",
+"lat": -4.76295,
+"lon": -49.14313,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.1,
+"provider": "INPE",
+"time": "1633"
+},
+{
+"date": "2026-08-16",
+"lat": -4.76396,
+"lon": -49.14071,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "1633"
+},
+{
+"date": "2026-08-16",
+"lat": -4.76142,
+"lon": -49.14407,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-08-18",
+"lat": -4.73598,
+"lon": -49.0693,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2026-08-19",
+"lat": -4.9424,
+"lon": -49.13229,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-08-20",
+"lat": -4.70579,
+"lon": -49.06299,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.6,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-08-20",
+"lat": -4.70418,
+"lon": -49.06489,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 6.2,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-08-20",
+"lat": -4.7036,
+"lon": -49.06116,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-08-20",
+"lat": -4.70762,
+"lon": -49.06436,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 6.2,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-08-21",
+"lat": -4.74804,
+"lon": -49.2963,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.2,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-08-21",
+"lat": -4.74741,
+"lon": -49.29394,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-08-21",
+"lat": -4.74791,
+"lon": -49.29743,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.3,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-08-23",
+"lat": -4.79316,
+"lon": -49.35809,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-08-23",
+"lat": -4.91343,
+"lon": -49.07263,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.4,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-08-24",
+"lat": -4.73614,
+"lon": -49.28316,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-08-24",
+"lat": -4.7356,
+"lon": -49.27932,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-08-24",
+"lat": -4.73505,
+"lon": -49.28277,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.6,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-08-27",
+"lat": -4.7655,
+"lon": -49.44831,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 16.8,
+"provider": "INPE",
+"time": "1605"
+},
+{
+"date": "2026-08-27",
+"lat": -4.76758,
+"lon": -49.45139,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 19.2,
+"provider": "INPE",
+"time": "1605"
+},
+{
+"date": "2026-08-27",
+"lat": -4.76631,
+"lon": -49.45396,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 13.4,
+"provider": "INPE",
+"time": "1605"
+},
+{
+"date": "2026-08-27",
+"lat": -4.76779,
+"lon": -49.44918,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.7,
+"provider": "INPE",
+"time": "1626"
+},
+{
+"date": "2026-08-29",
+"lat": -4.97522,
+"lon": -49.40307,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-02",
+"lat": -4.71053,
+"lon": -49.06245,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "1613"
+},
+{
+"date": "2026-09-02",
+"lat": -4.71169,
+"lon": -49.06231,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "1613"
+},
+{
+"date": "2026-09-02",
+"lat": -4.70637,
+"lon": -49.06299,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1613"
+},
+{
+"date": "2026-09-02",
+"lat": -4.70908,
+"lon": -49.06379,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 23.3,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-09-02",
+"lat": -4.70817,
+"lon": -49.06279,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 8.9,
+"provider": "INPE",
+"time": "1734"
+},
+{
+"date": "2026-09-02",
+"lat": -4.71084,
+"lon": -49.06195,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.5,
+"provider": "INPE",
+"time": "1734"
+},
+{
+"date": "2026-09-02",
+"lat": -4.71197,
+"lon": -49.06604,
+"source": "MODIS",
+"confidence": null,
+"frp": 15.9,
+"provider": "INPE",
+"time": "1845"
+},
+{
+"date": "2026-09-04",
+"lat": -4.79938,
+"lon": -49.29922,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.9,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-09-04",
+"lat": -4.80271,
+"lon": -49.29872,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.9,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-09-04",
+"lat": -4.80218,
+"lon": -49.29526,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.2,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-09-04",
+"lat": -4.79885,
+"lon": -49.29576,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.2,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-09-05",
+"lat": -4.75539,
+"lon": -49.27056,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-09-06",
+"lat": -4.80976,
+"lon": -49.38636,
+"source": "MODIS",
+"confidence": null,
+"frp": 33.8,
+"provider": "INPE",
+"time": "0024"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81632,
+"lon": -49.39105,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0400"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81107,
+"lon": -49.38523,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0400"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81026,
+"lon": -49.38985,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0400"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81774,
+"lon": -49.38511,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81437,
+"lon": -49.38459,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81383,
+"lon": -49.38818,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.5,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-09-06",
+"lat": -4.8172,
+"lon": -49.3887,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.5,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81254,
+"lon": -49.38581,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 8.7,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81283,
+"lon": -49.38874,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 11.8,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81234,
+"lon": -49.38515,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 11.8,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81664,
+"lon": -49.38623,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.6,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81724,
+"lon": -49.38977,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.6,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81117,
+"lon": -49.3872,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-09-06",
+"lat": -4.81178,
+"lon": -49.39073,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-09-07",
+"lat": -4.81393,
+"lon": -49.38884,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-09-07",
+"lat": -4.81509,
+"lon": -49.39047,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-07",
+"lat": -4.814,
+"lon": -49.38363,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.6,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-07",
+"lat": -4.81455,
+"lon": -49.38708,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-07",
+"lat": -4.703,
+"lon": -49.15667,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 49.1,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-09-07",
+"lat": -4.70359,
+"lon": -49.14487,
+"source": "MODIS",
+"confidence": null,
+"frp": 31.8,
+"provider": "INPE",
+"time": "1836"
+},
+{
+"date": "2026-09-07",
+"lat": -4.70592,
+"lon": -49.16123,
+"source": "MODIS",
+"confidence": null,
+"frp": 127.3,
+"provider": "INPE",
+"time": "1836"
+},
+{
+"date": "2026-09-08",
+"lat": -4.70291,
+"lon": -49.15477,
+"source": "MODIS",
+"confidence": null,
+"frp": 7.5,
+"provider": "INPE",
+"time": "0005"
+},
+{
+"date": "2026-09-08",
+"lat": -4.70179,
+"lon": -49.15319,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-09-08",
+"lat": -4.70325,
+"lon": -49.15448,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-09-08",
+"lat": -4.70267,
+"lon": -49.15813,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-09-08",
+"lat": -4.70363,
+"lon": -49.1552,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-09-08",
+"lat": -4.81344,
+"lon": -49.38571,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-09-08",
+"lat": -4.5627,
+"lon": -49.23417,
+"source": "MODIS",
+"confidence": null,
+"frp": 34.1,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-09-11",
+"lat": -4.92163,
+"lon": -49.23982,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-09-11",
+"lat": -4.92499,
+"lon": -49.23932,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-09-11",
+"lat": -4.92729,
+"lon": -49.23167,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-09-11",
+"lat": -4.92371,
+"lon": -49.24136,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.9,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2026-09-12",
+"lat": -4.92287,
+"lon": -49.2404,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 0.6,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59482,
+"lon": -49.38665,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 8.1,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59298,
+"lon": -49.38766,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59236,
+"lon": -49.3834,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59303,
+"lon": -49.387,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59246,
+"lon": -49.38333,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59505,
+"lon": -49.38296,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-09-13",
+"lat": -4.59636,
+"lon": -49.3854,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-09-14",
+"lat": -4.91096,
+"lon": -49.33384,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-14",
+"lat": -4.92174,
+"lon": -49.23465,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 14.0,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-14",
+"lat": -4.92168,
+"lon": -49.23399,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 21.7,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-14",
+"lat": -4.92532,
+"lon": -49.23341,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 12.7,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-15",
+"lat": -4.92051,
+"lon": -49.22947,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-15",
+"lat": -4.91874,
+"lon": -49.23014,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-15",
+"lat": -4.91921,
+"lon": -49.22978,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0516"
+},
+{
+"date": "2026-09-15",
+"lat": -4.88127,
+"lon": -49.24689,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.9,
+"provider": "INPE",
+"time": "1613"
+},
+{
+"date": "2026-09-15",
+"lat": -4.87965,
+"lon": -49.24629,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-09-19",
+"lat": -4.98725,
+"lon": -49.39728,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 12.5,
+"provider": "INPE",
+"time": "1639"
+},
+{
+"date": "2026-09-19",
+"lat": -4.98885,
+"lon": -49.39634,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2026-09-19",
+"lat": -4.98771,
+"lon": -49.39032,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-09-19",
+"lat": -4.92453,
+"lon": -49.05538,
+"source": "MODIS",
+"confidence": null,
+"frp": 64.6,
+"provider": "INPE",
+"time": "1940"
+},
+{
+"date": "2026-09-20",
+"lat": -4.86262,
+"lon": -49.35166,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2026-09-20",
+"lat": -4.85819,
+"lon": -49.3524,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2026-09-20",
+"lat": -4.86372,
+"lon": -49.35079,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "1715"
+},
+{
+"date": "2026-09-21",
+"lat": -4.71784,
+"lon": -49.44355,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-09-23",
+"lat": -4.99871,
+"lon": -49.47754,
+"source": "MODIS",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "0003"
+},
+{
+"date": "2026-09-23",
+"lat": -4.99949,
+"lon": -49.47412,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-09-23",
+"lat": -4.99989,
+"lon": -49.47384,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-09-25",
+"lat": -4.78909,
+"lon": -49.39341,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.7,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-09-25",
+"lat": -4.78517,
+"lon": -49.394,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-09-25",
+"lat": -4.92128,
+"lon": -49.23013,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-25",
+"lat": -4.7865,
+"lon": -49.39671,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-25",
+"lat": -4.92468,
+"lon": -49.2296,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-25",
+"lat": -4.78933,
+"lon": -49.39259,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-25",
+"lat": -4.92488,
+"lon": -49.22657,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 13.7,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-09-25",
+"lat": -4.92599,
+"lon": -49.23048,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 12.5,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-09-26",
+"lat": -4.93584,
+"lon": -49.21693,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.1,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-26",
+"lat": -4.94662,
+"lon": -49.21556,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.5,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-26",
+"lat": -4.93881,
+"lon": -49.21629,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 6.7,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-09-27",
+"lat": -4.78882,
+"lon": -49.10734,
+"source": "MODIS",
+"confidence": null,
+"frp": 4.7,
+"provider": "INPE",
+"time": "2358"
+},
+{
+"date": "2026-09-27",
+"lat": -4.79004,
+"lon": -49.11622,
+"source": "MODIS",
+"confidence": null,
+"frp": 36.3,
+"provider": "INPE",
+"time": "2358"
+},
+{
+"date": "2026-09-28",
+"lat": -4.7934,
+"lon": -49.11278,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-28",
+"lat": -4.78891,
+"lon": -49.11941,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-28",
+"lat": -4.78948,
+"lon": -49.11583,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-28",
+"lat": -4.78611,
+"lon": -49.11531,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-28",
+"lat": -4.79284,
+"lon": -49.11636,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-28",
+"lat": -4.79677,
+"lon": -49.1133,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-28",
+"lat": -4.79527,
+"lon": -49.11302,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-09-28",
+"lat": -4.78655,
+"lon": -49.11692,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-09-28",
+"lat": -4.79131,
+"lon": -49.11243,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-09-28",
+"lat": -4.79052,
+"lon": -49.11751,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-09-28",
+"lat": -4.7935,
+"lon": -49.11441,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-09-28",
+"lat": -4.7892,
+"lon": -49.1186,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0527"
+},
+{
+"date": "2026-09-28",
+"lat": -4.79603,
+"lon": -49.11469,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0527"
+},
+{
+"date": "2026-09-29",
+"lat": -4.66491,
+"lon": -49.23235,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-09-29",
+"lat": -4.66562,
+"lon": -49.22808,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-09-29",
+"lat": -4.77556,
+"lon": -49.44928,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.4,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-29",
+"lat": -4.7768,
+"lon": -49.44743,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.1,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-09-29",
+"lat": -4.76276,
+"lon": -49.392,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-09-29",
+"lat": -4.67421,
+"lon": -49.07258,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-09-29",
+"lat": -4.67479,
+"lon": -49.07632,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-09-29",
+"lat": -4.76636,
+"lon": -49.3786,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-09-29",
+"lat": -4.76545,
+"lon": -49.37318,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-09-29",
+"lat": -4.95002,
+"lon": -49.41188,
+"source": "MODIS",
+"confidence": null,
+"frp": 31.5,
+"provider": "INPE",
+"time": "2339"
+},
+{
+"date": "2026-09-29",
+"lat": -4.80899,
+"lon": -49.46679,
+"source": "MODIS",
+"confidence": null,
+"frp": 43.2,
+"provider": "INPE",
+"time": "2339"
+},
+{
+"date": "2026-09-29",
+"lat": -4.95198,
+"lon": -49.42652,
+"source": "MODIS",
+"confidence": null,
+"frp": 13.9,
+"provider": "INPE",
+"time": "2339"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94807,
+"lon": -49.4174,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81394,
+"lon": -49.4637,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.0,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.80703,
+"lon": -49.46728,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94985,
+"lon": -49.4131,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94886,
+"lon": -49.41282,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81471,
+"lon": -49.45925,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.5,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94903,
+"lon": -49.4177,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0355"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81649,
+"lon": -49.46225,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.7,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81241,
+"lon": -49.46149,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.4,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81181,
+"lon": -49.4651,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-30",
+"lat": -4.80772,
+"lon": -49.46445,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.1,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81345,
+"lon": -49.46311,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94708,
+"lon": -49.41404,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.9,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-09-30",
+"lat": -4.80952,
+"lon": -49.46617,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-09-30",
+"lat": -4.95045,
+"lon": -49.41457,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81401,
+"lon": -49.45951,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.2,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-09-30",
+"lat": -4.80616,
+"lon": -49.46565,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-09-30",
+"lat": -4.81449,
+"lon": -49.46312,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.3,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-30",
+"lat": -4.96101,
+"lon": -49.25816,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 11.8,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-30",
+"lat": -4.96161,
+"lon": -49.26222,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 11.8,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-30",
+"lat": -4.96458,
+"lon": -49.25763,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.8,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94879,
+"lon": -49.41453,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 14.7,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-09-30",
+"lat": -4.96068,
+"lon": -49.26173,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 15.0,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.94836,
+"lon": -49.41574,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.788,
+"lon": -49.11604,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.9,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.84513,
+"lon": -49.35582,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.78869,
+"lon": -49.12029,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.9,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.96364,
+"lon": -49.257,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 9.6,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.96002,
+"lon": -49.25757,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.7,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.78854,
+"lon": -49.11543,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 18.1,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-09-30",
+"lat": -4.78842,
+"lon": -49.1152,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.1,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2026-09-30",
+"lat": -4.84691,
+"lon": -49.35533,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2026-09-30",
+"lat": -4.78907,
+"lon": -49.11898,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 8.2,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2026-09-30",
+"lat": -4.8463,
+"lon": -49.3518,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2026-10-01",
+"lat": -4.66489,
+"lon": -49.23096,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-01",
+"lat": -4.66568,
+"lon": -49.23017,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.0,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-01",
+"lat": -4.94971,
+"lon": -49.41802,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-01",
+"lat": -4.96002,
+"lon": -49.11159,
+"source": "MODIS",
+"confidence": null,
+"frp": 7.9,
+"provider": "INPE",
+"time": "1904"
+},
+{
+"date": "2026-10-03",
+"lat": -4.67326,
+"lon": -49.45557,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81764,
+"lon": -49.26907,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.75596,
+"lon": -49.27154,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.76276,
+"lon": -49.37382,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.8201,
+"lon": -49.28358,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 160.6,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81314,
+"lon": -49.27273,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.80962,
+"lon": -49.28213,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.1,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81511,
+"lon": -49.28431,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 160.6,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.80913,
+"lon": -49.27922,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.6,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.82058,
+"lon": -49.28639,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 79.7,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81913,
+"lon": -49.27789,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 55.4,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81462,
+"lon": -49.28144,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 160.6,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-03",
+"lat": -4.82089,
+"lon": -49.27717,
+"source": "MODIS",
+"confidence": null,
+"frp": 182.0,
+"provider": "INPE",
+"time": "1841"
+},
+{
+"date": "2026-10-03",
+"lat": -4.82308,
+"lon": -49.29319,
+"source": "MODIS",
+"confidence": null,
+"frp": 149.3,
+"provider": "INPE",
+"time": "1841"
+},
+{
+"date": "2026-10-03",
+"lat": -4.82454,
+"lon": -49.28192,
+"source": "MODIS",
+"confidence": null,
+"frp": 190.2,
+"provider": "INPE",
+"time": "1841"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81527,
+"lon": -49.29956,
+"source": "MODIS",
+"confidence": null,
+"frp": 16.2,
+"provider": "INPE",
+"time": "1841"
+},
+{
+"date": "2026-10-03",
+"lat": -4.81298,
+"lon": -49.28364,
+"source": "MODIS",
+"confidence": null,
+"frp": 188.7,
+"provider": "INPE",
+"time": "1841"
+},
+{
+"date": "2026-10-03",
+"lat": -4.82687,
+"lon": -49.29801,
+"source": "MODIS",
+"confidence": null,
+"frp": 49.3,
+"provider": "INPE",
+"time": "1841"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81891,
+"lon": -49.29188,
+"source": "MODIS",
+"confidence": null,
+"frp": 26.7,
+"provider": "INPE",
+"time": "0037"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81452,
+"lon": -49.28788,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-04",
+"lat": -4.8193,
+"lon": -49.28339,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81535,
+"lon": -49.2828,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81101,
+"lon": -49.28135,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.8523,
+"lon": -49.41968,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.82175,
+"lon": -49.28318,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.8172,
+"lon": -49.28601,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.4,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81776,
+"lon": -49.28243,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.4,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81325,
+"lon": -49.28906,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81837,
+"lon": -49.28264,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81439,
+"lon": -49.28189,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.4,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81781,
+"lon": -49.28622,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0457"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81549,
+"lon": -49.2854,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0516"
+},
+{
+"date": "2026-10-04",
+"lat": -4.8204,
+"lon": -49.28618,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0516"
+},
+{
+"date": "2026-10-04",
+"lat": -4.81412,
+"lon": -49.278,
+"source": "MODIS",
+"confidence": null,
+"frp": 4.5,
+"provider": "INPE",
+"time": "0703"
+},
+{
+"date": "2026-10-04",
+"lat": -4.87954,
+"lon": -49.39965,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-04",
+"lat": -4.93251,
+"lon": -49.23906,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.0,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-04",
+"lat": -4.92597,
+"lon": -49.34042,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 11.2,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-04",
+"lat": -4.92466,
+"lon": -49.34249,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.5,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-10-05",
+"lat": -4.78192,
+"lon": -49.34863,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1734"
+},
+{
+"date": "2026-10-06",
+"lat": -4.9429,
+"lon": -49.09421,
+"source": "MODIS",
+"confidence": null,
+"frp": 14.2,
+"provider": "INPE",
+"time": "0018"
+},
+{
+"date": "2026-10-06",
+"lat": -4.86987,
+"lon": -49.42735,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.5,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-06",
+"lat": -4.94389,
+"lon": -49.09697,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.3,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-06",
+"lat": -4.83387,
+"lon": -49.49398,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-06",
+"lat": -4.96554,
+"lon": -49.35992,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.5,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-06",
+"lat": -4.94588,
+"lon": -49.09238,
+"source": "MODIS",
+"confidence": null,
+"frp": 26.0,
+"provider": "INPE",
+"time": "1858"
+},
+{
+"date": "2026-10-07",
+"lat": -4.55494,
+"lon": -49.35234,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.4,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-07",
+"lat": -4.55569,
+"lon": -49.34794,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-07",
+"lat": -4.84138,
+"lon": -49.37061,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-07",
+"lat": -4.55522,
+"lon": -49.35214,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-07",
+"lat": -4.55662,
+"lon": -49.35116,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-07",
+"lat": -4.55585,
+"lon": -49.34796,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-07",
+"lat": -4.95339,
+"lon": -49.16962,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.5,
+"provider": "INPE",
+"time": "1603"
+},
+{
+"date": "2026-10-07",
+"lat": -4.55595,
+"lon": -49.34937,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-07",
+"lat": -4.95623,
+"lon": -49.17053,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.7,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-07",
+"lat": -4.77194,
+"lon": -49.38105,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-07",
+"lat": -4.81019,
+"lon": -49.28065,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 15.4,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-07",
+"lat": -4.76843,
+"lon": -49.38511,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.3,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-07",
+"lat": -4.95543,
+"lon": -49.16905,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.4,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.556,
+"lon": -49.34874,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.81121,
+"lon": -49.27909,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 47.4,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.81405,
+"lon": -49.27489,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 16.5,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.76524,
+"lon": -49.29735,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.3,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.81462,
+"lon": -49.27858,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 16.5,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.77161,
+"lon": -49.38255,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 19.4,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.90294,
+"lon": -49.43946,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.84575,
+"lon": -49.36745,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-07",
+"lat": -4.94143,
+"lon": -49.22265,
+"source": "MODIS",
+"confidence": null,
+"frp": 10.8,
+"provider": "INPE",
+"time": "2356"
+},
+{
+"date": "2026-10-07",
+"lat": -4.94022,
+"lon": -49.21386,
+"source": "MODIS",
+"confidence": null,
+"frp": 9.9,
+"provider": "INPE",
+"time": "2356"
+},
+{
+"date": "2026-10-08",
+"lat": -4.80308,
+"lon": -49.06693,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-08",
+"lat": -4.8825,
+"lon": -49.27995,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-08",
+"lat": -4.88121,
+"lon": -49.10838,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-08",
+"lat": -4.94178,
+"lon": -49.2187,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-08",
+"lat": -4.80434,
+"lon": -49.06686,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-08",
+"lat": -4.77043,
+"lon": -49.12124,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.8,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-08",
+"lat": -4.77092,
+"lon": -49.12469,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.8,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-08",
+"lat": -4.76496,
+"lon": -49.12208,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.8,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-08",
+"lat": -4.87917,
+"lon": -49.10735,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 10.3,
+"provider": "INPE",
+"time": "1639"
+},
+{
+"date": "2026-10-08",
+"lat": -4.77556,
+"lon": -49.12301,
+"source": "MODIS",
+"confidence": null,
+"frp": 32.7,
+"provider": "INPE",
+"time": "1834"
+},
+{
+"date": "2026-10-08",
+"lat": -4.76596,
+"lon": -49.1312,
+"source": "MODIS",
+"confidence": null,
+"frp": 19.0,
+"provider": "INPE",
+"time": "1834"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62578,
+"lon": -49.22243,
+"source": "MODIS",
+"confidence": null,
+"frp": 112.6,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62969,
+"lon": -49.21675,
+"source": "MODIS",
+"confidence": null,
+"frp": 30.7,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61284,
+"lon": -49.21931,
+"source": "MODIS",
+"confidence": null,
+"frp": 106.7,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-09",
+"lat": -4.66466,
+"lon": -49.2311,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.8,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.664,
+"lon": -49.23525,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61922,
+"lon": -49.21542,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.7,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.93817,
+"lon": -49.21665,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.0,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62056,
+"lon": -49.20712,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.8,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61989,
+"lon": -49.21127,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.7,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62415,
+"lon": -49.20769,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62349,
+"lon": -49.21183,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 6.6,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.95009,
+"lon": -49.41876,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.6604,
+"lon": -49.23469,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-09",
+"lat": -4.66283,
+"lon": -49.2351,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.9486,
+"lon": -49.41562,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61719,
+"lon": -49.2123,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.93698,
+"lon": -49.21596,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.65924,
+"lon": -49.23454,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.66344,
+"lon": -49.23105,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.2,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61782,
+"lon": -49.20825,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.95215,
+"lon": -49.4162,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.6214,
+"lon": -49.20881,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.66703,
+"lon": -49.2316,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62077,
+"lon": -49.21286,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.9,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.94058,
+"lon": -49.2165,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61761,
+"lon": -49.21339,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.9373,
+"lon": -49.21988,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61655,
+"lon": -49.2171,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.65942,
+"lon": -49.23392,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.93784,
+"lon": -49.21627,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62309,
+"lon": -49.21422,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.93782,
+"lon": -49.21859,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61811,
+"lon": -49.20987,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.66489,
+"lon": -49.23477,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.66541,
+"lon": -49.23124,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61707,
+"lon": -49.2136,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62359,
+"lon": -49.21069,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-09",
+"lat": -4.62196,
+"lon": -49.21053,
+"source": "MODIS",
+"confidence": null,
+"frp": 5.0,
+"provider": "INPE",
+"time": "0657"
+},
+{
+"date": "2026-10-09",
+"lat": -4.91627,
+"lon": -49.33848,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-09",
+"lat": -4.76449,
+"lon": -49.29924,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.6,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-09",
+"lat": -4.8942,
+"lon": -49.05375,
+"source": "MODIS",
+"confidence": null,
+"frp": 52.7,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61461,
+"lon": -49.21798,
+"source": "MODIS",
+"confidence": null,
+"frp": 89.8,
+"provider": "INPE",
+"time": "2337"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61422,
+"lon": -49.20895,
+"source": "MODIS",
+"confidence": null,
+"frp": 225.2,
+"provider": "INPE",
+"time": "2337"
+},
+{
+"date": "2026-10-09",
+"lat": -4.61266,
+"lon": -49.20275,
+"source": "MODIS",
+"confidence": null,
+"frp": 189.9,
+"provider": "INPE",
+"time": "2337"
+},
+{
+"date": "2026-10-09",
+"lat": -4.60286,
+"lon": -49.21049,
+"source": "MODIS",
+"confidence": null,
+"frp": 14.3,
+"provider": "INPE",
+"time": "2337"
+},
+{
+"date": "2026-10-10",
+"lat": -4.61356,
+"lon": -49.20477,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-10",
+"lat": -4.61021,
+"lon": -49.20798,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.2,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-10",
+"lat": -4.61262,
+"lon": -49.21027,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-10",
+"lat": -4.89124,
+"lon": -49.05156,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-10",
+"lat": -4.60773,
+"lon": -49.20947,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-10",
+"lat": -4.95025,
+"lon": -49.4165,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-10-10",
+"lat": -4.61299,
+"lon": -49.20722,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-10-10",
+"lat": -4.89328,
+"lon": -49.05085,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.2,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-10-10",
+"lat": -4.60956,
+"lon": -49.20667,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-10-10",
+"lat": -4.88987,
+"lon": -49.0503,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.7,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-10-10",
+"lat": -4.61222,
+"lon": -49.20601,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-10",
+"lat": -4.92229,
+"lon": -49.35667,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-10",
+"lat": -4.60826,
+"lon": -49.20539,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-10",
+"lat": -4.8928,
+"lon": -49.05223,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-10",
+"lat": -4.61146,
+"lon": -49.21107,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-10",
+"lat": -4.89317,
+"lon": -49.05396,
+"source": "MODIS",
+"confidence": null,
+"frp": 47.0,
+"provider": "INPE",
+"time": "1200"
+},
+{
+"date": "2026-10-10",
+"lat": -4.88563,
+"lon": -49.28015,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-10-10",
+"lat": -4.96218,
+"lon": -49.42722,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.2,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-10-10",
+"lat": -4.9573,
+"lon": -49.41738,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.6,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-10-10",
+"lat": -4.96029,
+"lon": -49.42697,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 16.0,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-10-10",
+"lat": -4.96429,
+"lon": -49.42943,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-10-10",
+"lat": -4.96362,
+"lon": -49.42526,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-10-10",
+"lat": -4.95927,
+"lon": -49.42591,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-10-10",
+"lat": -4.93218,
+"lon": -49.39606,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-10-10",
+"lat": -4.95781,
+"lon": -49.41024,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 8.3,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-10",
+"lat": -4.95998,
+"lon": -49.4221,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 10.6,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-10",
+"lat": -4.92281,
+"lon": -49.34919,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 33.3,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-10",
+"lat": -4.96112,
+"lon": -49.41004,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.5,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-10",
+"lat": -4.96321,
+"lon": -49.42191,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 10.7,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-11",
+"lat": -4.6068,
+"lon": -49.20125,
+"source": "MODIS",
+"confidence": null,
+"frp": 89.8,
+"provider": "INPE",
+"time": "0016"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60833,
+"lon": -49.20691,
+"source": "MODIS",
+"confidence": null,
+"frp": 112.9,
+"provider": "INPE",
+"time": "0016"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60904,
+"lon": -49.21629,
+"source": "MODIS",
+"confidence": null,
+"frp": 112.0,
+"provider": "INPE",
+"time": "0016"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96021,
+"lon": -49.41548,
+"source": "MODIS",
+"confidence": null,
+"frp": 31.7,
+"provider": "INPE",
+"time": "0016"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96229,
+"lon": -49.42983,
+"source": "MODIS",
+"confidence": null,
+"frp": 16.6,
+"provider": "INPE",
+"time": "0016"
+},
+{
+"date": "2026-10-11",
+"lat": -4.61045,
+"lon": -49.22194,
+"source": "MODIS",
+"confidence": null,
+"frp": 40.5,
+"provider": "INPE",
+"time": "0016"
+},
+{
+"date": "2026-10-11",
+"lat": -4.61175,
+"lon": -49.20927,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "0347"
+},
+{
+"date": "2026-10-11",
+"lat": -4.6051,
+"lon": -49.2082,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "0347"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96295,
+"lon": -49.40742,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0349"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60868,
+"lon": -49.2128,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "0349"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96755,
+"lon": -49.42019,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "0349"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96189,
+"lon": -49.41335,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0349"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60974,
+"lon": -49.20699,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "0349"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96282,
+"lon": -49.40884,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.6075,
+"lon": -49.20801,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60675,
+"lon": -49.21249,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96047,
+"lon": -49.42255,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96581,
+"lon": -49.41871,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96502,
+"lon": -49.42327,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96204,
+"lon": -49.41343,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60702,
+"lon": -49.20908,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96759,
+"lon": -49.42157,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96043,
+"lon": -49.42397,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96261,
+"lon": -49.41019,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.65553,
+"lon": -49.39711,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.5,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96207,
+"lon": -49.41364,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.0,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96428,
+"lon": -49.42105,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60757,
+"lon": -49.20565,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.2,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60648,
+"lon": -49.21253,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60582,
+"lon": -49.20926,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.7,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2026-10-11",
+"lat": -4.60949,
+"lon": -49.20816,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2026-10-11",
+"lat": -4.64593,
+"lon": -49.45272,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 11.4,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-10-11",
+"lat": -4.64664,
+"lon": -49.45773,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 15.3,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-10-11",
+"lat": -4.97193,
+"lon": -49.42017,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 20.6,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-11",
+"lat": -4.64922,
+"lon": -49.45677,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-11",
+"lat": -4.64866,
+"lon": -49.45318,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-11",
+"lat": -4.96855,
+"lon": -49.42069,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 20.6,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-11",
+"lat": -4.81734,
+"lon": -49.2885,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 10.7,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-11",
+"lat": -4.81237,
+"lon": -49.28925,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 31.1,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-11",
+"lat": -4.97296,
+"lon": -49.42078,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 11.1,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-11",
+"lat": -4.81333,
+"lon": -49.29493,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 31.1,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-12",
+"lat": -4.76447,
+"lon": -49.31392,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.7,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-12",
+"lat": -4.76531,
+"lon": -49.30917,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.7,
+"provider": "INPE",
+"time": "0408"
+},
+{
+"date": "2026-10-12",
+"lat": -4.81662,
+"lon": -49.29409,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.0,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-12",
+"lat": -4.76075,
+"lon": -49.31138,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.6,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-12",
+"lat": -4.76472,
+"lon": -49.31203,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.4,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-12",
+"lat": -4.76299,
+"lon": -49.31149,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-12",
+"lat": -4.84683,
+"lon": -49.30568,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-12",
+"lat": -4.6141,
+"lon": -49.20436,
+"source": "MODIS",
+"confidence": null,
+"frp": 36.7,
+"provider": "INPE",
+"time": "2354"
+},
+{
+"date": "2026-10-12",
+"lat": -4.61531,
+"lon": -49.21316,
+"source": "MODIS",
+"confidence": null,
+"frp": 78.7,
+"provider": "INPE",
+"time": "2354"
+},
+{
+"date": "2026-10-13",
+"lat": -4.69514,
+"lon": -49.47189,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.5,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-10-13",
+"lat": -4.76703,
+"lon": -49.31056,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.5,
+"provider": "INPE",
+"time": "1730"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62574,
+"lon": -49.20598,
+"source": "MODIS",
+"confidence": null,
+"frp": 90.2,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-14",
+"lat": -4.60367,
+"lon": -49.21635,
+"source": "MODIS",
+"confidence": null,
+"frp": 25.4,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-14",
+"lat": -4.60915,
+"lon": -49.20843,
+"source": "MODIS",
+"confidence": null,
+"frp": 30.8,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62023,
+"lon": -49.21369,
+"source": "MODIS",
+"confidence": null,
+"frp": 127.3,
+"provider": "INPE",
+"time": "0035"
+},
+{
+"date": "2026-10-14",
+"lat": -4.61629,
+"lon": -49.21278,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.6264,
+"lon": -49.21436,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.60618,
+"lon": -49.21121,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62246,
+"lon": -49.21744,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62303,
+"lon": -49.21383,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.8,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.61292,
+"lon": -49.21227,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62223,
+"lon": -49.28405,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.9,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.60955,
+"lon": -49.21173,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62081,
+"lon": -49.20609,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-14",
+"lat": -4.61203,
+"lon": -49.21096,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62059,
+"lon": -49.20729,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.61594,
+"lon": -49.21157,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62376,
+"lon": -49.21277,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62047,
+"lon": -49.28709,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.60812,
+"lon": -49.21036,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.5,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62302,
+"lon": -49.21766,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62076,
+"lon": -49.2195,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62076,
+"lon": -49.21951,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.2,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2026-10-14",
+"lat": -4.62141,
+"lon": -49.21502,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "0529"
+},
+{
+"date": "2026-10-14",
+"lat": -4.89445,
+"lon": -49.34062,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.9,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-10-14",
+"lat": -4.90971,
+"lon": -49.41368,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 57.9,
+"provider": "INPE",
+"time": "1628"
+},
+{
+"date": "2026-10-15",
+"lat": -4.76564,
+"lon": -49.12189,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 8.3,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-15",
+"lat": -4.76625,
+"lon": -49.12613,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-15",
+"lat": -4.76945,
+"lon": -49.1236,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.3,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-15",
+"lat": -4.76609,
+"lon": -49.12423,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 25.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.96819,
+"lon": -49.38372,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 35.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.86758,
+"lon": -49.27951,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.97216,
+"lon": -49.38685,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 35.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.9648,
+"lon": -49.38424,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.76667,
+"lon": -49.12797,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 38.3,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.98765,
+"lon": -49.08247,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 10.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.97159,
+"lon": -49.38319,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 35.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.96537,
+"lon": -49.3879,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-15",
+"lat": -4.96966,
+"lon": -49.38413,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 21.0,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-15",
+"lat": -4.96482,
+"lon": -49.38492,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.9,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-15",
+"lat": -4.9715,
+"lon": -49.38663,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 13.3,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-15",
+"lat": -4.76608,
+"lon": -49.1284,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 65.0,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-15",
+"lat": -4.97449,
+"lon": -49.38335,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 21.0,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-15",
+"lat": -4.97063,
+"lon": -49.38129,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 24.8,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-15",
+"lat": -4.96667,
+"lon": -49.38743,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 14.3,
+"provider": "INPE",
+"time": "1728"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96724,
+"lon": -49.39123,
+"source": "MODIS",
+"confidence": null,
+"frp": 8.3,
+"provider": "INPE",
+"time": "0013"
+},
+{
+"date": "2026-10-16",
+"lat": -4.63041,
+"lon": -49.22039,
+"source": "MODIS",
+"confidence": null,
+"frp": 36.9,
+"provider": "INPE",
+"time": "0013"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62834,
+"lon": -49.20601,
+"source": "MODIS",
+"confidence": null,
+"frp": 36.7,
+"provider": "INPE",
+"time": "0013"
+},
+{
+"date": "2026-10-16",
+"lat": -4.61722,
+"lon": -49.20764,
+"source": "MODIS",
+"confidence": null,
+"frp": 65.2,
+"provider": "INPE",
+"time": "0013"
+},
+{
+"date": "2026-10-16",
+"lat": -4.6193,
+"lon": -49.222,
+"source": "MODIS",
+"confidence": null,
+"frp": 48.8,
+"provider": "INPE",
+"time": "0013"
+},
+{
+"date": "2026-10-16",
+"lat": -4.97813,
+"lon": -49.38964,
+"source": "MODIS",
+"confidence": null,
+"frp": 12.8,
+"provider": "INPE",
+"time": "0013"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62381,
+"lon": -49.21168,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62845,
+"lon": -49.20878,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62323,
+"lon": -49.21526,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.6,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62767,
+"lon": -49.2122,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.8,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62439,
+"lon": -49.2081,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62333,
+"lon": -49.21167,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "0453"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96657,
+"lon": -49.38763,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-10-16",
+"lat": -4.62564,
+"lon": -49.20737,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.5,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-10-16",
+"lat": -4.97735,
+"lon": -49.38604,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 21.0,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96956,
+"lon": -49.383,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 15.6,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96896,
+"lon": -49.3789,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 14.3,
+"provider": "INPE",
+"time": "1635"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96917,
+"lon": -49.38759,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.2,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96755,
+"lon": -49.38768,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96017,
+"lon": -49.36377,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 15.2,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-16",
+"lat": -4.97633,
+"lon": -49.38648,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-16",
+"lat": -4.96166,
+"lon": -49.36372,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.0,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-16",
+"lat": -4.63078,
+"lon": -49.20933,
+"source": "MODIS",
+"confidence": null,
+"frp": 11.4,
+"provider": "INPE",
+"time": "1845"
+},
+{
+"date": "2026-10-17",
+"lat": -4.63189,
+"lon": -49.20812,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.1,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-17",
+"lat": -4.62564,
+"lon": -49.2109,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.5,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-17",
+"lat": -4.6263,
+"lon": -49.20713,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.6,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-17",
+"lat": -4.62583,
+"lon": -49.20733,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-17",
+"lat": -4.62944,
+"lon": -49.20792,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-17",
+"lat": -4.62154,
+"lon": -49.21092,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-17",
+"lat": -4.62222,
+"lon": -49.20674,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-17",
+"lat": -4.62515,
+"lon": -49.21151,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0432"
+},
+{
+"date": "2026-10-17",
+"lat": -4.92379,
+"lon": -49.23451,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.2,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-18",
+"lat": -4.7684,
+"lon": -49.30146,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.2,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-18",
+"lat": -4.97606,
+"lon": -49.35084,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 80.3,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-10-18",
+"lat": -4.97331,
+"lon": -49.3539,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 57.3,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-10-18",
+"lat": -4.97716,
+"lon": -49.35692,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 91.6,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-10-18",
+"lat": -4.97437,
+"lon": -49.35995,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 57.3,
+"provider": "INPE",
+"time": "1737"
+},
+{
+"date": "2026-10-19",
+"lat": -4.91521,
+"lon": -49.1611,
+"source": "MODIS",
+"confidence": null,
+"frp": 8.5,
+"provider": "INPE",
+"time": "1900"
+},
+{
+"date": "2026-10-22",
+"lat": -4.62587,
+"lon": -49.20834,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 17.3,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-22",
+"lat": -4.62514,
+"lon": -49.2039,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 28.7,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-22",
+"lat": -4.62963,
+"lon": -49.20319,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 17.8,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-22",
+"lat": -4.82293,
+"lon": -49.17474,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 54.3,
+"provider": "INPE",
+"time": "1717"
+},
+{
+"date": "2026-10-22",
+"lat": -4.84828,
+"lon": -49.19212,
+"source": "MODIS",
+"confidence": null,
+"frp": 12.3,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-10-22",
+"lat": -4.63635,
+"lon": -49.20497,
+"source": "MODIS",
+"confidence": null,
+"frp": 12.9,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-10-22",
+"lat": -4.79123,
+"lon": -49.38955,
+"source": "MODIS",
+"confidence": null,
+"frp": 10.6,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-10-22",
+"lat": -4.78687,
+"lon": -49.39579,
+"source": "MODIS",
+"confidence": null,
+"frp": 10.9,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-10-22",
+"lat": -4.62684,
+"lon": -49.20641,
+"source": "MODIS",
+"confidence": null,
+"frp": 29.2,
+"provider": "INPE",
+"time": "1915"
+},
+{
+"date": "2026-10-22",
+"lat": -4.95203,
+"lon": -49.38161,
+"source": "MODIS",
+"confidence": null,
+"frp": 5.2,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-10-23",
+"lat": -4.61911,
+"lon": -49.20638,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.2,
+"provider": "INPE",
+"time": "0419"
+},
+{
+"date": "2026-10-23",
+"lat": -4.62103,
+"lon": -49.2042,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-23",
+"lat": -4.62132,
+"lon": -49.2043,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.1,
+"provider": "INPE",
+"time": "1603"
+},
+{
+"date": "2026-10-23",
+"lat": -4.99333,
+"lon": -49.21571,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 5.5,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-23",
+"lat": -4.95519,
+"lon": -49.37695,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 9.3,
+"provider": "INPE",
+"time": "1637"
+},
+{
+"date": "2026-10-23",
+"lat": -4.95291,
+"lon": -49.37489,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 13.6,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-23",
+"lat": -4.76245,
+"lon": -49.11903,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 31.5,
+"provider": "INPE",
+"time": "1658"
+},
+{
+"date": "2026-10-24",
+"lat": -4.66345,
+"lon": -49.22723,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-24",
+"lat": -4.66223,
+"lon": -49.22952,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.8,
+"provider": "INPE",
+"time": "0523"
+},
+{
+"date": "2026-10-24",
+"lat": -4.6258,
+"lon": -49.20434,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 20.0,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-24",
+"lat": -4.62629,
+"lon": -49.20499,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 14.8,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-24",
+"lat": -4.74226,
+"lon": -49.46392,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-24",
+"lat": -4.6253,
+"lon": -49.20071,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 31.7,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-24",
+"lat": -4.62576,
+"lon": -49.20137,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 34.6,
+"provider": "INPE",
+"time": "1620"
+},
+{
+"date": "2026-10-24",
+"lat": -4.62716,
+"lon": -49.19869,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 20.9,
+"provider": "INPE",
+"time": "1639"
+},
+{
+"date": "2026-10-24",
+"lat": -4.62775,
+"lon": -49.20274,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 25.9,
+"provider": "INPE",
+"time": "1639"
+},
+{
+"date": "2026-10-24",
+"lat": -4.91591,
+"lon": -49.27493,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 21.8,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-24",
+"lat": -4.62634,
+"lon": -49.20294,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.9,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-24",
+"lat": -4.92142,
+"lon": -49.27386,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 18.8,
+"provider": "INPE",
+"time": "1724"
+},
+{
+"date": "2026-10-24",
+"lat": -4.80558,
+"lon": -49.39283,
+"source": "MODIS",
+"confidence": null,
+"frp": 16.6,
+"provider": "INPE",
+"time": "1853"
+},
+{
+"date": "2026-10-24",
+"lat": -4.97959,
+"lon": -49.3913,
+"source": "MODIS",
+"confidence": null,
+"frp": 16.3,
+"provider": "INPE",
+"time": "1853"
+},
+{
+"date": "2026-10-25",
+"lat": -4.8945,
+"lon": -49.39654,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-25",
+"lat": -4.89334,
+"lon": -49.39869,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0504"
+},
+{
+"date": "2026-10-25",
+"lat": -4.77114,
+"lon": -49.29169,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 20.8,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-25",
+"lat": -4.77191,
+"lon": -49.29613,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 20.8,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-26",
+"lat": -4.75282,
+"lon": -49.08525,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 0.6,
+"provider": "INPE",
+"time": "0444"
+},
+{
+"date": "2026-10-26",
+"lat": -4.76943,
+"lon": -49.29668,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1722"
+},
+{
+"date": "2026-10-26",
+"lat": -4.94352,
+"lon": -49.2406,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.0,
+"provider": "INPE",
+"time": "1741"
+},
+{
+"date": "2026-10-27",
+"lat": -4.94413,
+"lon": -49.2462,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-27",
+"lat": -4.74062,
+"lon": -49.49956,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.6,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-27",
+"lat": -4.94743,
+"lon": -49.24672,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-27",
+"lat": -4.62661,
+"lon": -49.21323,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 0.9,
+"provider": "INPE",
+"time": "0446"
+},
+{
+"date": "2026-10-27",
+"lat": -4.9449,
+"lon": -49.40952,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 4.6,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-27",
+"lat": -4.96432,
+"lon": -49.20108,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 28.1,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-27",
+"lat": -4.75711,
+"lon": -49.48283,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-27",
+"lat": -4.75375,
+"lon": -49.48333,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 150.9,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-27",
+"lat": -4.80486,
+"lon": -49.32518,
+"source": "MODIS",
+"confidence": null,
+"frp": 5.5,
+"provider": "INPE",
+"time": "1908"
+},
+{
+"date": "2026-10-27",
+"lat": -4.63341,
+"lon": -49.2123,
+"source": "MODIS",
+"confidence": null,
+"frp": 8.5,
+"provider": "INPE",
+"time": "1908"
+},
+{
+"date": "2026-10-27",
+"lat": -4.76583,
+"lon": -49.30402,
+"source": "MODIS",
+"confidence": null,
+"frp": 31.1,
+"provider": "INPE",
+"time": "1908"
+},
+{
+"date": "2026-10-27",
+"lat": -4.76453,
+"lon": -49.29521,
+"source": "MODIS",
+"confidence": null,
+"frp": 4.3,
+"provider": "INPE",
+"time": "1908"
+},
+{
+"date": "2026-10-27",
+"lat": -4.96766,
+"lon": -49.20077,
+"source": "MODIS",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-10-27",
+"lat": -4.95873,
+"lon": -49.202,
+"source": "MODIS",
+"confidence": null,
+"frp": 5.1,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-10-27",
+"lat": -4.62916,
+"lon": -49.21113,
+"source": "MODIS",
+"confidence": null,
+"frp": 8.1,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-10-27",
+"lat": -4.9959,
+"lon": -49.47453,
+"source": "MODIS",
+"confidence": null,
+"frp": 25.1,
+"provider": "INPE",
+"time": "2352"
+},
+{
+"date": "2026-10-28",
+"lat": -4.99533,
+"lon": -49.47379,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-28",
+"lat": -4.99475,
+"lon": -49.47733,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.4,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-28",
+"lat": -4.62735,
+"lon": -49.21033,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0425"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96264,
+"lon": -49.20246,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-28",
+"lat": -4.99581,
+"lon": -49.47237,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96415,
+"lon": -49.20269,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 2.2,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-28",
+"lat": -4.76631,
+"lon": -49.11916,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 14.8,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96401,
+"lon": -49.19702,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 16.6,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96142,
+"lon": -49.19901,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 17.4,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96448,
+"lon": -49.20043,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 13.4,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-28",
+"lat": -4.68764,
+"lon": -49.46956,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.1,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.76745,
+"lon": -49.12044,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.8,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.77043,
+"lon": -49.11555,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.8,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.75154,
+"lon": -49.09187,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 8.5,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96375,
+"lon": -49.20003,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 14.9,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.77113,
+"lon": -49.11988,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.8,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.76675,
+"lon": -49.1161,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.8,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.96673,
+"lon": -49.1952,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 9.3,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-28",
+"lat": -4.75452,
+"lon": -49.08698,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "1705"
+},
+{
+"date": "2026-10-29",
+"lat": -4.88083,
+"lon": -49.27998,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-10-29",
+"lat": -4.61271,
+"lon": -49.47623,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 34.6,
+"provider": "INPE",
+"time": "1645"
+},
+{
+"date": "2026-10-30",
+"lat": -4.85851,
+"lon": -49.26279,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 23.7,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-30",
+"lat": -4.86076,
+"lon": -49.2603,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.7,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-30",
+"lat": -4.85628,
+"lon": -49.261,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 9.7,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-30",
+"lat": -4.78908,
+"lon": -49.31513,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "1709"
+},
+{
+"date": "2026-10-30",
+"lat": -4.79455,
+"lon": -49.39612,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.0,
+"provider": "INPE",
+"time": "1747"
+},
+{
+"date": "2026-10-30",
+"lat": -4.79588,
+"lon": -49.39586,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 10.4,
+"provider": "INPE",
+"time": "1747"
+},
+{
+"date": "2026-10-31",
+"lat": -4.63049,
+"lon": -49.35853,
+"source": "MODIS",
+"confidence": null,
+"frp": 19.3,
+"provider": "INPE",
+"time": "0009"
+},
+{
+"date": "2026-10-31",
+"lat": -4.63115,
+"lon": -49.35513,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 1.7,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.66212,
+"lon": -49.38707,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 4.5,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.62718,
+"lon": -49.35479,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.7,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.62597,
+"lon": -49.35885,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.65767,
+"lon": -49.38649,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.62672,
+"lon": -49.35446,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 5.3,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.70376,
+"lon": -49.46609,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 3.9,
+"provider": "INPE",
+"time": "0414"
+},
+{
+"date": "2026-10-31",
+"lat": -4.65813,
+"lon": -49.38842,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-31",
+"lat": -4.65874,
+"lon": -49.38427,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.0,
+"provider": "INPE",
+"time": "0510"
+},
+{
+"date": "2026-10-31",
+"lat": -4.85999,
+"lon": -49.2841,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.7,
+"provider": "INPE",
+"time": "1607"
+},
+{
+"date": "2026-10-31",
+"lat": -4.68498,
+"lon": -49.46797,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 7.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-10-31",
+"lat": -4.74735,
+"lon": -49.09887,
+"source": "VIIRS_NOAA21",
+"confidence": null,
+"frp": 8.2,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-01",
+"lat": -4.6079,
+"lon": -49.37534,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2026-11-01",
+"lat": -4.61148,
+"lon": -49.37479,
+"source": "VIIRS_SNPP",
+"confidence": null,
+"frp": 3.3,
+"provider": "INPE",
+"time": "1711"
+},
+{
+"date": "2026-11-01",
+"lat": -4.61115,
+"lon": -49.21276,
+"source": "MODIS",
+"confidence": null,
+"frp": 11.7,
+"provider": "INPE",
+"time": "1902"
+},
+{
+"date": "2026-11-01",
+"lat": -4.63659,
+"lon": -49.1997,
+"source": "MODIS",
+"confidence": null,
+"frp": 16.5,
+"provider": "INPE",
+"time": "1902"
+},
+{
+"date": "2026-11-01",
+"lat": -4.76058,
+"lon": -49.28687,
+"source": "MODIS",
+"confidence": null,
+"frp": 6.0,
+"provider": "INPE",
+"time": "1902"
+},
+{
+"date": "2026-11-01",
+"lat": -4.80394,
+"lon": -49.3312,
+"source": "MODIS",
+"confidence": null,
+"frp": 4.0,
+"provider": "INPE",
+"time": "1902"
+},
+{
+"date": "2026-11-01",
+"lat": -4.90973,
+"lon": -49.16867,
+"source": "MODIS",
+"confidence": null,
+"frp": 44.8,
+"provider": "INPE",
+"time": "1902"
+},
+{
+"date": "2026-11-01",
+"lat": -4.91107,
+"lon": -49.1778,
+"source": "MODIS",
+"confidence": null,
+"frp": 23.0,
+"provider": "INPE",
+"time": "1902"
+},
+{
+"date": "2026-11-02",
+"lat": -4.8903,
+"lon": -49.39188,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.3,
+"provider": "INPE",
+"time": "0433"
+},
+{
+"date": "2026-11-02",
+"lat": -4.78409,
+"lon": -49.32541,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 19.2,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-11-02",
+"lat": -4.63089,
+"lon": -49.20321,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 82.4,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-11-02",
+"lat": -4.63434,
+"lon": -49.19907,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 25.8,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-11-02",
+"lat": -4.63031,
+"lon": -49.19969,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 25.8,
+"provider": "INPE",
+"time": "1713"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56392,
+"lon": -49.40491,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56234,
+"lon": -49.39457,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56949,
+"lon": -49.39701,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.55625,
+"lon": -49.39902,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56061,
+"lon": -49.40542,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.55783,
+"lon": -49.40937,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56512,
+"lon": -49.39062,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.5573,
+"lon": -49.40592,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.1,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56339,
+"lon": -49.40147,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.77303,
+"lon": -49.3079,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.0,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56008,
+"lon": -49.40197,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.57001,
+"lon": -49.40046,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.55677,
+"lon": -49.40247,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 2.6,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.6794,
+"lon": -49.47165,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 1.8,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.55956,
+"lon": -49.39852,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56287,
+"lon": -49.39802,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 7.3,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56181,
+"lon": -49.39112,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.55903,
+"lon": -49.39507,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.9,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56565,
+"lon": -49.39407,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56618,
+"lon": -49.39751,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 3.8,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.56114,
+"lon": -49.40887,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 4.4,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.77025,
+"lon": -49.31185,
+"source": "VIIRS_NOAA20",
+"confidence": null,
+"frp": 5.0,
+"provider": "INPE",
+"time": "1652"
+},
+{
+"date": "2026-11-03",
+"lat": -4.57637,
+"lon": -49.21445,
+"source": "MODIS",
+"confidence": null,
+"frp": 20.3,
+"provider": "INPE",
+"time": "2328"
+},
+{
+"date": "2026-11-03",
+"lat": -4.9807,
+"lon": -49.21449,
+"source": "MODIS",
+"confidence": null,
+"frp": 58.2,
+"provider": "INPE",
+"time": "2328"
+}
+]

@@ -33,6 +33,10 @@ OB.chart = (function () {
 
   function niceStep(x) { const p = Math.pow(10, Math.floor(Math.log10(x))); const m = x / p; return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p; }
 
+  // real series have gaps (NaN): ranges skip them, lines break at them
+  const fin = a => a.filter(Number.isFinite);
+  const range = (a, pad) => { const f = fin(a); return f.length ? [Math.floor(Math.min(...f) - pad), Math.ceil(Math.max(...f) + pad)] : [-1, 1]; };
+
   function band(g, X, Y, med, sd, k) {
     g.fillStyle = "rgba(150,150,150,.28)";
     for (let start = 0; start < med.length;) {

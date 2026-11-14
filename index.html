@@ -50,6 +50,11 @@
             <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
           </fieldset>
+          <fieldset class="group" id="site-layers" hidden>
+            <legend>This site</legend>
+            <div id="site-layer-list"></div>
+            <div class="legend" id="legend" hidden></div>
+          </fieldset>
           <fieldset class="group">
             <legend>Threshold</legend>
             <label for="z">Show pixels with |z| >= <output id="z-out" for="z">2.5</output></label>
@@ -100,13 +105,16 @@
         <div class="win-b">
           <div class="card">
             <table class="props" id="px-props">
-              <tr><th scope="row">WorldCover 2021</th><td id="p-cover">-</td></tr>
+            <tbody>
+              <tr><th scope="row">WorldCover class</th><td id="p-cover">-</td></tr>
               <tr><th scope="row">Peers</th><td id="p-peers">-</td></tr>
               <tr><th scope="row">z-score</th><td id="p-z">-</td></tr>
               <tr><th scope="row">Style</th><td id="p-style">-</td></tr>
               <tr><th scope="row">Since</th><td id="p-since">-</td></tr>
               <tr><th scope="row">Location</th><td id="p-loc">-</td></tr>
               <tr><th scope="row">GUNW quality</th><td id="p-quality">-</td></tr>
+            </tbody>
+            <tbody id="p-extra"></tbody>
             </table>
             <div class="plots">
               <div class="plot">
@@ -137,6 +145,11 @@
         </div>
       </section>
 
+      <section class="win" id="val-win" aria-labelledby="t-val" hidden>
+        <div class="win-t"><h2 id="t-val">Check against deforestation alerts</h2></div>
+        <div class="win-b"><div class="paper" id="val-body"></div></div>
+      </section>
+
       <section class="win" id="about-win" aria-labelledby="t-about">
         <div class="win-t"><h2 id="t-about">How OffBeat finds a pixel out of step</h2></div>
         <div class="win-b">
@@ -164,6 +177,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="js/styles.js"></script>
+<script src="js/binary-data.js"></script>
 <script src="js/data.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>

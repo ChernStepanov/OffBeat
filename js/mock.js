@@ -136,7 +136,7 @@ window.OB = window.OB || {};
     return {
       id: cfg.id, name: cfg.name, region: cfg.region, center: cfg.center, zoom: cfg.zoom,
       event: cfg.event, dates: D, source: "synthetic",
-      grid: { n: N, bbox, z, style, cover, since, cellM }, series
+      grid: { n: N, w: N, h: N, bbox, z, style, cover, since, cellM, extra: {} }, series, context: {}
     };
   }
 
