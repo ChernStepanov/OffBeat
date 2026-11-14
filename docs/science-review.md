@@ -76,8 +76,9 @@ NISAR L-band is approximately **24 cm**; Sentinel-1 C-band is about **5.55 cm**.
 Longer wavelengths can interact more with woody structure, while canopy penetration,
 biomass saturation and moisture sensitivity depend on surface and acquisition
 conditions. HH/HV and VV/VH values at different frequencies and geometries cannot
-be treated as equivalent measurements. The numerical C/L contrast is not yet
-computed. [NASA NISAR facts](https://science.nasa.gov/mission/nisar/mission-overview/),
+be treated as equivalent measurements. A descriptive comparison for the sampled
+Amazon site is documented in [the OPERA RTC analysis](amazon-opera-rtc-comparison.md).
+[NASA NISAR facts](https://science.nasa.gov/mission/nisar/mission-overview/),
 [ESA Sentinel-1 instrument](https://sentiwiki.copernicus.eu/web/s1-mission).
 
 Longer NISAR histories could support season-aware vegetation monitoring, groundwater
@@ -95,6 +96,6 @@ not a processed 2024–2026 series. Query URLs, collection IDs, first 20 returne
 granule IDs, dates, footprints and source links are preserved in
 [Mexico evidence](../data/evidence/mexico-opera-disp.json) and
 [Amazon evidence](../data/evidence/amazon-opera-rtc.json).
-Footprint overlap does not establish usable pixel coverage or processing compatibility.
-Earthdata is excluded by user choice for this run: no OPERA velocity or C/L numeric
-comparison is claimed. These issues remain open.
+Footprint overlap alone does not establish usable pixel coverage or processing compatibility.
+Subsequent authenticated RTC-S1 extraction produced a sampled VV/VH series and the
+descriptive comparison linked above. No OPERA displacement velocity is claimed; #36 remains open.

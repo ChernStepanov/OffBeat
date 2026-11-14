@@ -1,7 +1,7 @@
 # Issue audit — 14 November 2026
 
-This audit does not claim every issue is fixed. Additional Earthdata downloads
-are excluded at the user's request.
+This audit does not claim every issue is fixed. It records the prepared data and
+remaining work; subsequent authenticated RTC-S1 extraction is included below.
 
 | Issue | Status | Acceptance evidence or remaining work |
 |---|---|---|
@@ -22,7 +22,7 @@ are excluded at the user's request.
 | #28 | Implemented as requested draft | English submission text and six-slide PPTX, with source notes and embedded measured chart values |
 | #29 | Implemented | Five-minute static launch, current data, reproduction, sources and licence gaps |
 | #33 | Partial | Own-history vs neighbour-relative baselines, candidates, controls and coarse retrospective ERA5 precipitation context; dense windows, weather-corrected model, labels and held-out evaluation absent |
-| #35 | Open | RTC-S1 footprint overlap proven; no authenticated VV/VH series or numeric C/L contrast |
+| #35 | Implemented | RTC-S1 VV/VH series and descriptive C/L class comparison; see [method, granules and limitations](amazon-opera-rtc-comparison.md). |
 | #36 | Open | DISP-S1 footprint overlap proven; no inspected displacement series or velocity |
 
 Raw HH/HV, GUNW and original source receipts are preserved. Analysis provenance

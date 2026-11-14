@@ -55,7 +55,7 @@ window.OB = window.OB || {};
       return !!(s && s.grid.style.some((v, i) => v === c && Number.isFinite(s.grid.z[i]) && Math.abs(s.grid.z[i]) >= 2.5)); },
     site: id => () => !!siteById(id)
   };
-  const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y); return b.length ? b[Math.floor(b.length / 2)] : NaN; };
+  const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y), n = b.length; return n ? (b[Math.floor((n - 1) / 2)] + b[Math.floor(n / 2)]) / 2 : NaN; };
   // class median of HV per date, then the median over dates: the same measure the C-band comparison uses
   const lastHv = (s, cls) => median(s.dates.map((_, t) => median(s.pixels.filter(p => p.cover === cls).map(p => p.hv[t]))));
   const dispSamples = s => s.pixels.map(p => p.disp && p.disp[p.disp.length - 1]).filter(Number.isFinite);
@@ -77,9 +77,9 @@ window.OB = window.OB || {};
     if (!g || !Number.isFinite(g.C_VH)) return "";
     const l = lastHv(s, 10) - lastHv(s, 30);              // the same NISAR gap the paragraph above states
     if (!Number.isFinite(l)) return "";
-    return `<p>Sentinel-1 (NASA OPERA RTC, 5.6 cm waves against NISAR's 24 cm) at the same samples and weeks puts the
+    return `<p>Sentinel-1 (NASA OPERA RTC, 5.6 cm waves against NISAR's 24 cm) at the same sample locations and roughly the same season puts the
       tree-cover and grassland samples ${Math.abs(g.C_VH).toFixed(1)} dB apart in VH, against ${Math.abs(l).toFixed(1)} dB in NISAR's HV.
-      ${Math.abs(l) > Math.abs(g.C_VH) ? "The longer wavelength separates the two classes more clearly, consistent with deeper penetration into the canopy." : "Here the shorter wavelength separates them about as well."}</p>`;
+      The sensors, acquisition dates and viewing geometries differ; this descriptive comparison does not establish the cause of the difference.</p>`;
   };
 
   // ---- chapters ------------------------------------------------------------
