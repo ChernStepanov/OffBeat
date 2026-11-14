@@ -4,6 +4,7 @@ OB.bindOptical = function (map, select, status) {
   function clear() { if (overlay) map.removeLayer(overlay); overlay=null; }
   function draw() {
     clear();
+    select.dispatchEvent(new Event('ob:select-sync'));
     const entry=index?.entries[Number(select.value)];
     if (select.value==='context' || !entry) {
       status.textContent='Esri context mosaic: dates vary, not date-matched validation.'; return;
@@ -56,6 +57,7 @@ OB.bindOptical = function (map, select, status) {
     context() {
       serial++;index=null;followDate=false;clear();select.value='context';select.disabled=true;
       select.title='Dated Sentinel-2 images are prepared for the demo sites only';
+      select.dispatchEvent(new Event('ob:select-sync'));
       status.textContent='Dated Sentinel-2 images exist for the demo sites only; here the Esri photo mosaic is shown (dates vary).';
     }
   };

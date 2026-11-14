@@ -120,7 +120,7 @@ p { margin: 0 0 8px; }
   box-shadow: inset 1px 1px 0 var(--hi), 1px 1px 0 var(--hi);
 }
 .group:last-child { margin-bottom: 0; }
-.group legend { padding: 0 2px; }
+.group legend { position: relative; z-index: 1; padding: 0 3px; background: var(--face); }
 .group label { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
 
 /* checkbox: white sunken square, black tick */
@@ -248,6 +248,23 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 
 /* a disabled field looks disabled, the way Win98 greyed it out */
 :where(select, input[type="text"], input[type="search"]):disabled { color: var(--lo); background-color: var(--face); text-shadow: 1px 1px 0 var(--hi); }
+
+/* Draw the open list ourselves: native OS popups cannot be consistently styled. */
+.select98 { position: relative; display: inline-block; max-width: 100%; vertical-align: middle; }
+.select98__native { position: absolute; width: 1px; height: 1px; padding: 0; opacity: 0; pointer-events: none; }
+button.select98__button, button.select98__button:active:not(:disabled) {
+  display: block; max-width: 100%; min-height: 22px; min-width: 48px;
+  padding: 3px 22px 3px 4px; border: 0; border-radius: 0; text-align: left;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #000;
+  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='17' shape-rendering='crispEdges'%3E%3Crect width='16' height='17' fill='%23c0c0c0'/%3E%3Cpath d='M0 0h15M0 0v16' stroke='%23dfdfdf'/%3E%3Cpath d='M1 1h13M1 1v14' stroke='%23fff'/%3E%3Cpath d='M15 0v17M0 16h16' stroke='%23000'/%3E%3Cpath d='M14 1v15M1 15h14' stroke='%23808080'/%3E%3Cpath d='M4 7h7v1H4zM5 8h5v1H5zM6 9h3v1H6zM7 10h1v1H7z'/%3E%3C/svg%3E") right 2px center no-repeat;
+  box-shadow: var(--sunken);
+}
+button.select98__button:disabled { color: var(--lo); background-color: var(--face); }
+.select98__list { position: absolute; z-index: 1000; top: 100%; left: 0; min-width: 100%; max-width: min(90vw, 440px); max-height: 220px; overflow: auto; padding: 2px; background: var(--paper); box-shadow: var(--sunken); }
+.select98__list[hidden] { display: none; }
+.select98__list [role="option"] { padding: 2px 4px; white-space: nowrap; cursor: default; }
+.select98__list [role="option"].is-active, .select98__list [role="option"]:hover { background: var(--sel); color: #fff; }
+.select98__list [aria-disabled="true"] { color: var(--lo); }
 
 /* --- push buttons: raised, sink on press, dotted focus inside --- */
 .btn {

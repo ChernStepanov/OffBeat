@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 let overlays=0, removed=0, listener;
 const created=[];
-const select={value:'context',disabled:true,options:[],replaceChildren(option){this.value='context';this.options=[option];},add(option){this.options.push(option);},addEventListener(_name,cb){listener=cb;}};
-const context={window:{},Option:function(text,value){this.text=text;this.value=value;},AbortSignal,
+const select={value:'context',disabled:true,options:[],replaceChildren(option){this.value='context';this.options=[option];},add(option){this.options.push(option);},addEventListener(_name,cb){listener=cb;},dispatchEvent(){}};
+const context={window:{},Option:function(text,value){this.text=text;this.value=value;},AbortSignal,Event,
   fetch:async()=>({ok:true,json:async()=>({site:'a',schema_version:1,entries:[
     {status:'ready',nisar_date:'2026-01-01',date:'2026-01-02',path:'image.png',sha256:'abc',bounds:{s:0,w:0,n:1,e:1},aoi_cloud_shadow_snow_fraction:0,scene_id:'x'},
     {status:'ready',nisar_date:'2026-01-13',date:'2026-01-12',path:'image2.png',sha256:'def',bounds:{s:0,w:0,n:1,e:1},aoi_cloud_shadow_snow_fraction:0,scene_id:'y'},
