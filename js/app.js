@@ -1,7 +1,8 @@
-// Wires sites, the z-score raster, the pixel card, the patch list and the player.
+// Wires sites, the z-score raster, site layers, the pixel card, the patch list and the player.
 (function () {
   const $ = id => document.getElementById(id);
-  const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null };
+  const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null,
+                  extra: {}, vectors: [], loading: 0 };
 
   // --- maps: anomaly raster over greyed imagery + optical map that follows it ---
   const IMAGERY = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
@@ -26,15 +27,37 @@
   $("l-offbeat").addEventListener("change", drawRaster);
   $("l-cover").addEventListener("change", drawCover);
 
-  // --- rasters ---
+  // --- colours ---
   const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
   const STYLE_RGB = OB.STYLE_KEYS.map(k => k ? rgb(OB.STYLES[k].color) : [90, 90, 90]);
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  // diverging: negative (sinking, away from the satellite) red, positive blue
+  const diverging = max => v => {
+    if (isNaN(v) || Math.abs(v) < max * 0.15) return null;   // hide motion within noise
+    const t = Math.min(1, Math.abs(v) / max);
+    return (v < 0 ? mix([255, 200, 160], [192, 0, 0], t) : mix([170, 200, 255], [0, 40, 200], t)).concat(Math.round(90 + 165 * t));
+  };
+  const heat = (lo, hi) => v => {
+    if (isNaN(v) || v < lo) return null;
+    const t = Math.min(1, (v - lo) / (hi - lo));
+    return mix([255, 255, 0], [255, 0, 0], t).concat(Math.round(150 + 105 * t));
+  };
+
+  // layers a site may carry beyond the Off-Beat raster (written by pipeline/run.py)
+  const SITE_LAYERS = {
+    damage:    { label: "Damage proxy (coherence loss)", unit: "z", lo: "2", hi: "8", ramp: "linear-gradient(90deg,#ffff00,#ff0000)", paint: heat(2, 8), card: "Damage z", fmt: v => v.toFixed(1) },
+    coseismic: { label: "Ground motion in the quake",    unit: "cm, line of sight", lo: "-10", hi: "+10", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(10), card: "Quake motion", fmt: v => v.toFixed(1) + " cm" },
+    up:        { label: "Vertical motion",               unit: "cm/yr", lo: "-30", hi: "+30", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(30), card: "Vertical", fmt: v => v.toFixed(1) + " cm/yr" },
+    east:      { label: "East-west motion",              unit: "cm/yr, east +", lo: "-8", hi: "+8", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(8), card: "East-west", fmt: v => v.toFixed(1) + " cm/yr" },
+    fires:     { label: "Active fires (NASA FIRMS)" },
+    alerts:    { label: "Deforestation alerts" }
+  };
 
   function paint(fn) {
     const g = state.site.grid, cv = document.createElement("canvas");
-    cv.width = cv.height = g.n;
-    const ctx = cv.getContext("2d"), img = ctx.createImageData(g.n, g.n);
-    for (let i = 0; i < g.n * g.n; i++) {
+    cv.width = g.w; cv.height = g.h;
+    const ctx = cv.getContext("2d"), img = ctx.createImageData(g.w, g.h);
+    for (let i = 0; i < g.w * g.h; i++) {
       const px = fn(i); if (!px) continue;
       img.data.set(px, i * 4);
     }
@@ -50,7 +73,7 @@
     const g = state.site.grid, t = state.z;
     state.raster = paint(i => {
       const a = Math.abs(g.z[i]);
-      if (a < t || g.cover[i] === 80) return null;
+      if (!(a >= t) || !g.style[i] || g.cover[i] === 80) return null;
       const [r, gg, b] = STYLE_RGB[g.style[i]];
       return [r, gg, b, Math.round(255 * Math.min(1, 0.55 + (a - t) / 6))];
     }).addTo(map);
@@ -61,24 +84,82 @@
     state.coverRaster = null;
     if (!$("l-cover").checked) return;
     const g = state.site.grid;
-    state.coverRaster = paint(i => rgb(OB.COVER[g.cover[i]].color).concat(150)).addTo(map);
+    state.coverRaster = paint(i => OB.COVER[g.cover[i]] ? rgb(OB.COVER[g.cover[i]].color).concat(150) : null).addTo(map);
+    restack();
+  }
+
+  function restack() {
+    Object.values(state.extra).forEach(l => l && l.bringToFront && l.bringToFront());
     if (state.raster) state.raster.bringToFront();
+  }
+
+  // --- site layers: list only what this site has ---
+  function buildSiteLayers() {
+    const s = state.site, have = Object.keys(s.grid.extra || {});
+    if (s.context && s.context.fires) have.push("fires");
+    if (s.context && s.context.alerts) have.push("alerts");
+    $("site-layers").hidden = !have.length;
+    $("site-layer-list").innerHTML = have.map(k =>
+      `<label><input type="checkbox" data-layer="${k}"> ${SITE_LAYERS[k].label}</label>`).join("");
+    $("legend").hidden = true;
+  }
+  $("site-layer-list").addEventListener("change", e => {
+    const k = e.target.dataset.layer; if (!k) return;
+    toggleLayer(k, e.target.checked);
+  });
+
+  function toggleLayer(k, on) {
+    const s = state.site, L0 = SITE_LAYERS[k];
+    if (state.extra[k]) { [map, optic].forEach(m => m.hasLayer(state.extra[k]) && m.removeLayer(state.extra[k])); delete state.extra[k]; }
+    if (state.extra[k + "_o"]) { optic.removeLayer(state.extra[k + "_o"]); delete state.extra[k + "_o"]; }
+    if (on) {
+      if (k === "fires") {
+        const pts = s.context.fires.map(f => L.circleMarker([f.lat, f.lon], { radius: 2.5, color: "#000", weight: 1, fillColor: "#ff6600", fillOpacity: 1 })
+          .bindTooltip(`Fire ${f.date}${f.source ? ", " + f.source : ""}`));
+        state.extra[k] = L.layerGroup(pts).addTo(map);
+        state.extra[k + "_o"] = L.layerGroup(s.context.fires.map(f => L.circleMarker([f.lat, f.lon], { radius: 2.5, color: "#ff6600", weight: 1, fill: false }))).addTo(optic);
+      } else if (k === "alerts") {
+        const style = { color: "#ffff00", weight: 1, fill: false };
+        state.extra[k] = L.geoJSON(s.context.alerts, { style, onEachFeature: (f, l) => l.bindTooltip(`Alert ${f.properties.date}, ${f.properties.area_ha ? f.properties.area_ha.toFixed(1) + " ha" : ""}`) }).addTo(map);
+        state.extra[k + "_o"] = L.geoJSON(s.context.alerts, { style }).addTo(optic);
+      } else {
+        const a = s.grid.extra[k];
+        state.extra[k] = paint(i => L0.paint(a[i])).addTo(map);
+      }
+    }
+    showLegend();
+    restack();
+  }
+
+  function showLegend() {
+    const on = Object.keys(state.extra).filter(k => SITE_LAYERS[k] && SITE_LAYERS[k].ramp);
+    const k = on[on.length - 1];
+    $("legend").hidden = !k;
+    if (!k) return;
+    const L0 = SITE_LAYERS[k];
+    $("legend").innerHTML = `<div>${L0.label}, ${L0.unit}</div><div class="legend__ramp" style="background:${L0.ramp}"></div>` +
+      `<div class="legend__ends"><span>${L0.lo}</span><span>${L0.hi}</span></div>`;
+  }
+
+  function clearSiteLayers() {
+    Object.keys(state.extra).forEach(k => { [map, optic].forEach(m => m.hasLayer(state.extra[k]) && m.removeLayer(state.extra[k])); });
+    state.extra = {};
   }
 
   // --- patches: connected pixels of one style above the threshold ---
   function findPatches() {
-    const g = state.site.grid, n = g.n, t = state.z, seen = new Uint8Array(n * n), out = [];
-    for (let i = 0; i < n * n; i++) {
-      if (seen[i] || !g.style[i] || Math.abs(g.z[i]) < t) continue;
+    const g = state.site.grid, W = g.w, H = g.h, t = state.z, seen = new Uint8Array(W * H), out = [];
+    for (let i = 0; i < W * H; i++) {
+      if (seen[i] || !g.style[i] || !(Math.abs(g.z[i]) >= t)) continue;
       const st = g.style[i], stack = [i]; seen[i] = 1;
       let cells = 0, peak = i, sum = 0;
       while (stack.length) {
-        const c = stack.pop(), x = c % n, y = (c - x) / n;
+        const c = stack.pop(), x = c % W, y = (c - x) / W;
         cells++; sum += Math.abs(g.z[c]);
         if (Math.abs(g.z[c]) > Math.abs(g.z[peak])) peak = c;
         for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-          const X = x + dx, Y = y + dy, j = Y * n + X;
-          if (X < 0 || Y < 0 || X >= n || Y >= n || seen[j] || g.style[j] !== st || Math.abs(g.z[j]) < t) continue;
+          const X = x + dx, Y = y + dy, j = Y * W + X;
+          if (X < 0 || Y < 0 || X >= W || Y >= H || seen[j] || g.style[j] !== st || !(Math.abs(g.z[j]) >= t)) continue;
           seen[j] = 1; stack.push(j);
         }
       }
@@ -109,30 +190,47 @@
     const g = state.site.grid;
     state.patches = findPatches();
     let px = 0; for (let i = 0; i < g.z.length; i++) if (g.style[i] && Math.abs(g.z[i]) >= state.z) px++;
-    drawRaster(); drawTop();
+    drawRaster(); restack(); drawTop();
     $("sb-count").textContent = `${state.patches.length} patches, ${px} px at |z| >= ${state.z}, pixel ${g.cellM} m`;
+  }
+
+  // --- validation summary (Amazon, from pipeline) ---
+  function drawValidation() {
+    const v = state.site.context && state.site.context.validation;
+    $("val-win").hidden = !v;
+    if (!v) return;
+    const pct = x => x == null ? "-" : Math.round(x * 100) + "%";
+    $("val-body").innerHTML =
+      `<p>${v.n_patches} clearing patches found by OffBeat, checked against ${v.source || "deforestation alerts"}.</p>` +
+      `<p><b>${pct(v.share_confirmed)}</b> overlap an alert. Median lag to the alert: <b>${v.median_lag_days == null ? "-" : v.median_lag_days + " days"}</b> (negative: OffBeat saw it first). ` +
+      `<b>${pct(v.share_with_fire)}</b> have a FIRMS fire nearby. OffBeat caught <b>${pct(v.alert_recall)}</b> of the alert area.</p>`;
   }
 
   // --- picking a pixel ---
   map.on("click", e => {
     const g = state.site.grid, b = g.bbox;
-    const x = Math.floor((e.latlng.lng - b.w) / (b.e - b.w) * g.n), y = Math.floor((b.n - e.latlng.lat) / (b.n - b.s) * g.n);
-    if (x >= 0 && y >= 0 && x < g.n && y < g.n) pickCell(y * g.n + x, false);
+    const x = Math.floor((e.latlng.lng - b.w) / (b.e - b.w) * g.w), y = Math.floor((b.n - e.latlng.lat) / (b.n - b.s) * g.h);
+    if (x >= 0 && y >= 0 && x < g.w && y < g.h) pickCell(y * g.w + x, false);
   });
 
-  function pickCell(i, fly) {
+  async function pickCell(i, fly) {
     OB.sonify.stop();
-    const s = state.site, g = s.grid, x = i % g.n, y = (i - x) / g.n, p = s.series(x, y);
-    state.cell = i; state.pixel = p;
+    const s = state.site, g = s.grid, x = i % g.w, y = (i - x) / g.w;
+    state.cell = i;
+    const p = await s.series(x, y);
+    if (state.cell !== i || state.site !== s) return;      // another click won the race
+    state.pixel = p;
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
-    $("p-cover").textContent = `${OB.COVER[p.cover].name} (${p.cover})`;
-    $("p-peers").textContent = `${p.peers} px, same class`;
+    $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : `class ${p.cover}`;
+    $("p-peers").textContent = p.peers ? `${p.peers} px, same class` : "same class, within 3 km";
     $("p-z").textContent = (p.z > 0 ? "+" : "") + p.z.toFixed(2);
     $("p-style").innerHTML = st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
     $("p-since").textContent = p.since || "-";
     $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
-    const b = g.bbox, dl = (b.n - b.s) / g.n, dw = (b.e - b.w) / g.n;
+    $("p-extra").innerHTML = Object.entries(p.extra || {}).filter(([, v]) => !isNaN(v))
+      .map(([k, v]) => `<tr><th scope="row">${SITE_LAYERS[k].card}</th><td>${SITE_LAYERS[k].fmt(v)}</td></tr>`).join("");
+    const b = g.bbox, dl = (b.n - b.s) / g.h, dw = (b.e - b.w) / g.w;
     const rect = [[b.n - (y + 1) * dl, b.w + x * dw], [b.n - y * dl, b.w + (x + 1) * dw]];
     cellBox.setBounds(rect).addTo(map); cellBoxOptic.setBounds(rect).addTo(optic);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
@@ -154,7 +252,7 @@
     return p.style === "flood" ? "HH" : "HV";
   }
   function voice(p) {
-    if ((p.style === "drift" || p.style === "step") && p.disp) return { pix: p.disp, med: p.peer_disp, sd: p.peer_disp.map(() => 1.2) };
+    if ((p.style === "drift" || p.style === "step") && p.disp) return { pix: p.disp, med: p.peer_disp, sd: p.peer_disp.map(() => 1.5) };
     if (p.style === "flood") return { pix: p.hh, med: p.peer.hh_med, sd: p.peer.hh_sd };
     return { pix: p.hv, med: p.peer.hv_med, sd: p.peer.hv_sd };
   }
@@ -166,13 +264,21 @@
   $("stop").addEventListener("click", () => { OB.sonify.stop(); $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); });
 
   // --- site switch ---
-  function loadSite(id) {
+  async function loadSite(id) {
     OB.sonify.stop();
-    const s = OB.SITES.find(x => x.id === id) || OB.SITES[0];
+    const fallback = OB.SITES.find(x => x.id === id) || OB.SITES[0];
+    const ticket = ++state.loading;
+    $("sb-state").textContent = `Loading ${fallback.name}...`;
+    let s;
+    try { s = await OB.data.load(fallback.id, fallback); }
+    catch (e) { console.warn("site data failed, using the built-in sample", e); s = fallback; }
+    if (ticket !== state.loading) return;
+    clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
+    buildSiteLayers(); drawValidation();
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
     $("sb-state").textContent = `Ready, ${s.dates.length} acquisitions, ${s.dates[0]} to ${s.dates[s.dates.length - 1]}`;

@@ -31,15 +31,20 @@ OB.chart = (function () {
 
   function niceStep(x) { const p = Math.pow(10, Math.floor(Math.log10(x))); const m = x / p; return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p; }
 
+  // real series have gaps (NaN): ranges skip them, lines break at them
+  const fin = a => a.filter(Number.isFinite);
+  const range = (a, pad) => { const f = fin(a); return f.length ? [Math.floor(Math.min(...f) - pad), Math.ceil(Math.max(...f) + pad)] : [-1, 1]; };
+
   function band(g, X, Y, med, sd, k) {
     g.fillStyle = "rgba(150,150,150,.28)"; g.beginPath();
-    med.forEach((m, i) => g.lineTo(X(i), Y(m + k * sd[i])));
-    for (let i = med.length - 1; i >= 0; i--) g.lineTo(X(i), Y(med[i] - k * sd[i]));
+    const ok = med.map((m, i) => i).filter(i => Number.isFinite(med[i]) && Number.isFinite(sd[i]));
+    ok.forEach(i => g.lineTo(X(i), Y(med[i] + k * sd[i])));
+    ok.slice().reverse().forEach(i => g.lineTo(X(i), Y(med[i] - k * sd[i])));
     g.closePath(); g.fill();
     g.strokeStyle = "#8a8a8a"; g.setLineDash([3, 3]); line(g, X, Y, med); g.setLineDash([]);
   }
-  function line(g, X, Y, arr) { g.beginPath(); arr.forEach((v, i) => i ? g.lineTo(X(i), Y(v)) : g.moveTo(X(i), Y(v))); g.stroke(); }
-  function dots(g, X, Y, arr, c) { g.fillStyle = c; arr.forEach((v, i) => g.fillRect(X(i) - 1.5, Y(v) - 1.5, 3, 3)); }
+  function line(g, X, Y, arr) { g.beginPath(); let up = true; arr.forEach((v, i) => { if (!Number.isFinite(v)) { up = true; return; } up ? g.moveTo(X(i), Y(v)) : g.lineTo(X(i), Y(v)); up = false; }); g.stroke(); }
+  function dots(g, X, Y, arr, c) { g.fillStyle = c; arr.forEach((v, i) => Number.isFinite(v) && g.fillRect(X(i) - 1.5, Y(v) - 1.5, 3, 3)); }
   function marker(g, X, h, i, label) {
     if (i == null || i < 0) return;
     const x = Math.round(X(i)) + 0.5;
@@ -54,7 +59,7 @@ OB.chart = (function () {
   function backscatter(cv, dates, p, sinceIdx, head) {
     const { g, w, h } = setup(cv);
     const all = p.hh.concat(p.hv, p.peer.hh_med.map((m, i) => m + 2 * p.peer.hh_sd[i]), p.peer.hv_med.map((m, i) => m - 2 * p.peer.hv_sd[i]));
-    const lo = Math.floor(Math.min(...all) - 1), hi = Math.ceil(Math.max(...all) + 1);
+    const [lo, hi] = range(all, 1);
     const { X, Y } = frame(g, w, h, dates, lo, hi);
     band(g, X, Y, p.peer.hh_med, p.peer.hh_sd, 2);
     band(g, X, Y, p.peer.hv_med, p.peer.hv_sd, 2);
@@ -74,7 +79,7 @@ OB.chart = (function () {
       return;
     }
     const all = p.disp.concat(p.peer_disp.map(v => v + 2.4), p.peer_disp.map(v => v - 2.4));
-    const lo = Math.floor(Math.min(...all)), hi = Math.ceil(Math.max(...all));
+    const [lo, hi] = range(all, 0);
     const { X, Y } = frame(g, w, h, dates, lo, hi);
     band(g, X, Y, p.peer_disp, p.peer_disp.map(() => 1.2), 2);
     g.lineWidth = 1.6; g.strokeStyle = "#d86b00"; line(g, X, Y, p.disp); dots(g, X, Y, p.disp, "#d86b00"); g.lineWidth = 1;
