@@ -1,7 +1,6 @@
 """Run the analysis for a site and write what the web reads.
 
     .venv/bin/python -m pipeline.run mexico              # real NISAR (needs Earthdata login)
-    .venv/bin/python -m pipeline.run mexico --synthetic  # invented inputs on the real grid and land cover
 
 Output in data/<site>/ (format described in export.py).
 """
@@ -29,7 +28,7 @@ def _nan_mean3(a):
 
 
 def load_real(site: Site, grid):
-    from . import nisar  # imported here so synthetic runs work without the reader
+    from . import nisar
     tracks = site.tracks
     primary = tracks[0]
     gcov = [nisar.load_or_read(g, site, "gcov") for g in nisar.search(site, "GCOV", primary)]
@@ -124,24 +123,18 @@ def check_clearings(site, grid, res, path, k=2.5, min_cells=3):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("site", choices=sorted(SITES))
-    ap.add_argument("--synthetic", action="store_true")
     a = ap.parse_args()
     site = SITES[a.site]
     grid = site_grid(site)
     cover = read_cover(site, grid)
-    if a.synthetic:
-        from .synthetic import make
-        gcov, gunw, _ = make(site, cover)
-        source = "synthetic"
-    else:
-        gcov, gunw = load_real(site, grid)
-        source = "NISAR L2 GCOV + GUNW (ASF DAAC)"
+    gcov, gunw = load_real(site, grid)
+    source = "NISAR L2 GCOV + GUNW (ASF DAAC)"
     res = analyze(site, cover, gcov, gunw)
     validation = export.ROOT / site.id / "validation.json"
-    if site.id == "amazon" and not a.synthetic:
+    if site.id == "amazon":
         check_clearings(site, grid, res, validation)
     elif validation.exists():
-        validation.unlink()            # scores from real data never sit next to synthetic layers
+        validation.unlink()            # outdated validation does not follow a new export
     path = export.write(site, grid, cover, res, source)
     styled = int((res["style"] > 0).sum())
     print(f"{site.id}: {len(res['dates'])} dates, {styled} styled px, layers: "

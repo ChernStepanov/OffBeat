@@ -1,7 +1,9 @@
 # Runtime data contract (schema version 2)
 
-`js/data.js` fetches `data/mexico.json`. Network errors and invalid input stop
-loading with an explicit message; the legacy mock generator is never loaded.
+`js/data.js` fetches `data/{mexico,amazon,venezuela}.json`. It rejects synthetic
+sources, absent provenance and invalid array shapes. Unavailable sites are
+reported explicitly; if every site fails, loading stops. Mock generators have
+been removed from the application and pipeline.
 
 The JSON has site `id`, `name`, `region`, `center`, `zoom`, `source`, `status`,
 `message`, `event`, `dates`, `displacement_dates`, `grid`, `pixels`, `provenance`.

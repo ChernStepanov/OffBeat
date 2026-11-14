@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { createHash } from 'node:crypto';
 
 const site = JSON.parse(fs.readFileSync('data/mexico.json', 'utf8'));
 const manifest = JSON.parse(fs.readFileSync('data/mexico-manifest.json', 'utf8'));
@@ -8,12 +9,23 @@ assert.equal(manifest.products.gcov.length,29);
 assert.equal(manifest.products.gunw.length,28);
 assert(manifest.products.gcov.every(g=>g.id.includes('_019_A_011_4005_DHDH_')));
 assert(manifest.products.gunw.every(g=>g.id.includes('_019_A_011_')));
-const context = {window:{}, fetch:async()=>({ok:true,json:async()=>site})};
+const context = {window:{}, fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path,'utf8'))})};
 context.window = context;
 vm.createContext(context);
 vm.runInContext(fs.readFileSync('js/data.js','utf8'), context);
 await context.OB.loadData();
 assert.equal(context.OB.SITES[0].series(0,0).hh.length,site.dates.length);
+assert.equal(context.OB.SITES.length,3);
+for (const loaded of context.OB.SITES) {
+  assert(!/synthetic|mock/i.test(loaded.source));
+  assert.equal(loaded.provenance.inputs.length,3);
+  assert(loaded.pixels.some(p=>p.hh.some(Number.isFinite)&&p.hv.some(Number.isFinite)));
+  for (const receipt of [...loaded.provenance.inputs,loaded.provenance.worldcover]) {
+    assert.equal(createHash('sha256').update(fs.readFileSync(receipt.subset_path)).digest('hex'),receipt.sha256);
+  }
+}
+context.fetch = async path=>({ok:true,json:async()=>({...JSON.parse(fs.readFileSync(path,'utf8')),source:'synthetic'})});
+await assert.rejects(context.OB.loadData(), /measured provenance required/);
 if (site.status === 'measured_pair') {
   assert.equal(site.dates.length,2);
   assert(site.pixels.some(p=>p.hh.every(Number.isFinite)&&p.hv.every(Number.isFinite)));
