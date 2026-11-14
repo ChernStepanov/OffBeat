@@ -40,13 +40,13 @@
         <div class="win-t"><h2 id="t-search">Location search</h2></div>
         <div class="win-b">
           <form id="place-search" class="place-search">
-            <input id="place-query" type="search" aria-label="Location search" placeholder="Place name or coordinates" autocomplete="off" required>
+            <input id="place-query" type="search" aria-label="Location search" placeholder="Name in any language or coordinates" dir="auto" autocomplete="off" required>
             <button class="btn" type="submit" id="place-submit">Search</button>
           </form>
-          <p class="place-hint">Coordinates: latitude, longitude. Names are sent to Photon / Komoot.</p>
+          <p class="place-hint">Search names in any language. Coordinates: latitude, longitude. Names are sent to Open-Meteo, with Photon / Komoot as fallback.</p>
           <p id="place-status" role="status" aria-live="polite"></p>
           <ul id="place-results" class="place-results"></ul>
-          <small>Search data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>; <a href="https://github.com/komoot/photon">Photon</a>.</small>
+          <small>Search data: <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo</a> / <a href="https://www.geonames.org/">GeoNames</a>; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> / <a href="https://github.com/komoot/photon">Photon</a>.</small>
         </div>
       </section>
 
