@@ -1,0 +1,92 @@
+{
+  "source": "NASA LP DAAC HLS v2.0",
+  "source_catalogue": "data/venezuela/optical/index.json",
+  "nisar_date": "2025-11-21",
+  "inspected_at": "2026-11-14",
+  "scope": "All CMR HLSS30 and HLSL30 results for tile T19PGM intersecting AOI, 2025-11-06 through 2025-12-06; other overlapping HLS tiles unexamined",
+  "mask": "Fmask: exclude fill and bits 1 cloud, 2 adjacent cloud/shadow, 3 cloud shadow, 4 snow/ice; transform AOI bounds to source CRS and read nearest whole-pixel window",
+  "threshold": 0.8,
+  "limitations": "Fractions rounded to 3 decimal places; HLS 30m and five-pixel cloud adjacency are more conservative than the Sentinel-2 SCL mask. No scene passed; no image generated.",
+  "candidates": [
+    {
+      "producer_id": "HLS.S30.T19PGM.2025311T150719",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025313T145741",
+      "clear_fraction": 0.403
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025315T145741",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025316T150731",
+      "clear_fraction": 0.002
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025318T145719",
+      "clear_fraction": 0.195
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025318T150741",
+      "clear_fraction": 0.005
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025321T150719",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025323T145731",
+      "clear_fraction": 0.022
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025325T145941",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025326T150731",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.L30.T19PGM.2025315T144625",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.L30.T19PGM.2025323T144620",
+      "clear_fraction": 0.125
+    },
+    {
+      "producer_id": "HLS.L30.T19PGM.2025331T144623",
+      "clear_fraction": 0.011
+    },
+    {
+      "producer_id": "HLS.L30.T19PGM.2025339T144617",
+      "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025331T150709",
+      "clear_fraction": 0.126
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025333T145731",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025335T145741",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025336T150731",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025338T145719",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025338T150741",
+      "clear_fraction": 0.0
+    }
+  ]
+}

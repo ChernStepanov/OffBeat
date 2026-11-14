@@ -142,13 +142,13 @@
           "scene_id": "S2A_19PGM_20251204_1_L2A",
           "status": "rejected_cloud_or_nodata",
           "aoi_cloud_shadow_snow_fraction": 0.997589111328125,
-          "aoi_clear_fraction": 0.0
+          "aoi_clear_fraction": 0
         },
         {
           "scene_id": "S2B_19PGM_20251204_0_L2A",
           "status": "rejected_cloud_or_nodata",
           "aoi_cloud_shadow_snow_fraction": 0.997589111328125,
-          "aoi_clear_fraction": 0.0
+          "aoi_clear_fraction": 0
         },
         {
           "scene_id": "S2A_19PGM_20251121_0_L2A",
@@ -160,25 +160,25 @@
           "scene_id": "S2C_19PGM_20251202_0_L2A",
           "status": "rejected_cloud_or_nodata",
           "aoi_cloud_shadow_snow_fraction": 0.997589111328125,
-          "aoi_clear_fraction": 0.0
+          "aoi_clear_fraction": 0
         },
         {
           "scene_id": "S2A_19PGM_20251201_0_L2A",
           "status": "rejected_cloud_or_nodata",
           "aoi_cloud_shadow_snow_fraction": 0.997589111328125,
-          "aoi_clear_fraction": 0.0
+          "aoi_clear_fraction": 0
         },
         {
           "scene_id": "S2B_19PGM_20251124_1_L2A",
           "status": "rejected_cloud_or_nodata",
           "aoi_cloud_shadow_snow_fraction": 0.997589111328125,
-          "aoi_clear_fraction": 0.0
+          "aoi_clear_fraction": 0
         },
         {
           "scene_id": "S2A_19PGM_20251124_0_L2A",
           "status": "rejected_cloud_or_nodata",
           "aoi_cloud_shadow_snow_fraction": 0.997589111328125,
-          "aoi_clear_fraction": 0.0
+          "aoi_clear_fraction": 0
         }
       ],
       "hls_catalogue": [
@@ -9589,7 +9589,8 @@
           ]
         }
       ],
-      "hls_status": "catalogue_only: Earthdata required to inspect quality and render"
+      "hls_status": "20 HLS T19PGM candidates inspected; none reached 80% clear AOI; other overlapping tiles unexamined",
+      "hls_quality_receipt": "data/subsets/venezuela-hls/2025-11-21-quality.json"
     },
     {
       "nisar_date": "2025-12-03",
@@ -9648,7 +9649,7 @@
         "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/SCL.tif"
       },
       "status": "ready",
-      "aoi_cloud_shadow_snow_fraction": 0.0,
+      "aoi_cloud_shadow_snow_fraction": 0,
       "aoi_clear_fraction": 0.990753173828125,
       "path": "data/venezuela/optical/S2C_19PGM_20251222_0_L2A.png",
       "sha256": "d2e200f26480c5f4e9cb5b5ff165750324127a0c48c033d2ed1332947819c225",
@@ -9691,7 +9692,7 @@
         "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/GM/2025/12/S2C_19PGM_20251222_0_L2A/SCL.tif"
       },
       "status": "ready",
-      "aoi_cloud_shadow_snow_fraction": 0.0,
+      "aoi_cloud_shadow_snow_fraction": 0,
       "aoi_clear_fraction": 0.990753173828125,
       "path": "data/venezuela/optical/S2C_19PGM_20251222_0_L2A.png",
       "sha256": "d2e200f26480c5f4e9cb5b5ff165750324127a0c48c033d2ed1332947819c225",
