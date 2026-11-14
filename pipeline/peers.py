@@ -95,5 +95,10 @@ def zscore(stack: np.ndarray, med: np.ndarray, sd: np.ndarray) -> np.ndarray:
         return ((stack - med) / sd).astype(np.float32)
 
 
-def to_db(power: np.ndarray, floor: float = 1e-5) -> np.ndarray:
-    return (10 * np.log10(np.maximum(power, floor))).astype(np.float32)
+def to_db(power: np.ndarray) -> np.ndarray:
+    """Positive measured power only; zero, negative and nonfinite values are missing."""
+    values=np.asarray(power,dtype=np.float64)
+    out=np.full(values.shape,np.nan,dtype=np.float32)
+    valid=np.isfinite(values)&(values>0)
+    out[valid]=10*np.log10(values[valid])
+    return out

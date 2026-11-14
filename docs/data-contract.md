@@ -18,6 +18,14 @@ HH/HV are gamma0 power converted to dB. Missing entries are JSON null.
 With no WorldCover, `cover`, `peers`, `z`, `style`, `since` are null and peer
 arrays contain only nulls. Do not infer land cover or a normal/in-step result.
 
+`analysis_status: exploratory_sparse_samples` adds measured-input-hashed
+leave-one-out peer recomputation and `z_hh` / `z_hv` arrays. The latest `z` is
+a same-class spatial departure; `style` / `since` identify an exploratory curve
+shape, never a confirmed event. Zero spread or missing samples produce null z.
+Sparse sample points cannot be interpreted as continuous raster pixels or areas.
+Reports in `data/analysis/` retain reviewed examples, deterministic random controls
+and own-history versus peer-relative baselines. `cellM` remains null.
+
 `disp` contains [0, apparent_relative_LOS_cm] for the accepted GUNW pair and is
 null for rejected samples. `peer_disp` is null: no deformation peer band is estimated.
 `coherence`, `component`, `ionosphere_interpolated`, `ionosphere_sd_rad` retain

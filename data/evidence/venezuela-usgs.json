@@ -1,0 +1,97 @@
+{
+  "checked_at": "2026-11-14T13:04:31.733470+00:00",
+  "query": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-06-24&endtime=2026-06-25&minlatitude=9&maxlatitude=12&minlongitude=-70&maxlongitude=-65&minmagnitude=7",
+  "response": {
+    "type": "FeatureCollection",
+    "metadata": {
+      "generated": 1794661469000,
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-06-24&endtime=2026-06-25&minlatitude=9&maxlatitude=12&minlongitude=-70&maxlongitude=-65&minmagnitude=7",
+      "title": "USGS Earthquakes",
+      "status": 200,
+      "api": "2.8.4",
+      "count": 2
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "mag": 7.5,
+          "place": "20 km W of Catia La Mar, Venezuela",
+          "time": 1782338704053,
+          "updated": 1794244503568,
+          "tz": null,
+          "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t7zp",
+          "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000t7zp&format=geojson",
+          "felt": 972,
+          "cdi": 8.9,
+          "mmi": 9.056,
+          "alert": "red",
+          "status": "reviewed",
+          "tsunami": 0,
+          "sig": 2865,
+          "net": "us",
+          "code": "6000t7zp",
+          "ids": ",us6000t7zp,",
+          "sources": ",us,",
+          "types": ",dyfi,event-sequence,finite-fault,general-header,general-text,ground-failure,impact-text,losspager,moment-tensor,oaf,origin,phase-data,shakemap,",
+          "nst": 64,
+          "dmin": 0.422,
+          "rms": 0.63,
+          "gap": 39,
+          "magType": "mww",
+          "type": "earthquake",
+          "title": "M 7.5 - 20 km W of Catia La Mar, Venezuela"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -67.2205,
+            10.5955,
+            10
+          ]
+        },
+        "id": "us6000t7zp"
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "mag": 7.2,
+          "place": "20 km E of San Felipe, Venezuela",
+          "time": 1782338671806,
+          "updated": 1788536450040,
+          "tz": null,
+          "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t7zc",
+          "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000t7zc&format=geojson",
+          "felt": null,
+          "cdi": null,
+          "mmi": 8.806,
+          "alert": "red",
+          "status": "reviewed",
+          "tsunami": 0,
+          "sig": 2000,
+          "net": "us",
+          "code": "6000t7zc",
+          "ids": ",atth5pbk,us6000t7zc,",
+          "sources": ",at,us,",
+          "types": ",general-header,general-text,ground-failure,internal-origin,losspager,moment-tensor,origin,phase-data,shakemap,",
+          "nst": 120,
+          "dmin": 1.027,
+          "rms": 0.59,
+          "gap": 21,
+          "magType": "mww",
+          "type": "earthquake",
+          "title": "M 7.2 - 20 km E of San Felipe, Venezuela"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -68.5564,
+            10.3713,
+            10
+          ]
+        },
+        "id": "us6000t7zc"
+      }
+    ]
+  }
+}

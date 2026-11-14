@@ -52,7 +52,7 @@ window.OB = window.OB || {};
   const has = {
     extra: (id, k) => () => { const s = siteById(id); return !!(s && s.grid.extra && s.grid.extra[k]); },
     style: (id, st) => () => { const s = siteById(id); const c = OB.STYLE_KEYS.indexOf(st);
-      return !!(s && s.grid.style.some((v, i) => v === c && Number.isFinite(s.grid.z[i]))); },
+      return !!(s && s.grid.style.some((v, i) => v === c && Number.isFinite(s.grid.z[i]) && Math.abs(s.grid.z[i]) >= 2.5)); },
     site: id => () => !!siteById(id)
   };
   const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y); return b.length ? b[Math.floor(b.length / 2)] : NaN; };
@@ -79,17 +79,15 @@ window.OB = window.OB || {};
       site: "mexico", needs: has.site("mexico"), layers: { offbeat: true }, pick: measuredSample,
       title: "Radar sees what cameras miss",
       text: (s, p) => `<p>This is real NISAR data: L-band radar over Mexico City's airport, ${fmtDate(s.dates[s.dates.length - 1])}.
-        Red is strong HV backscatter from buildings and rough ground; blue is the smooth runways.</p>
-        <p>Radar brings its own light, so it sees the same at night and through cloud. The hard part is reading it.</p>`
+        The measured HH/HV curves are in the pixel card. The global map is a NASA browse mosaic with its own dates and brightness scale; it is not this sample's calibrated HV.</p>
+        <p>Radar supplies its own illumination and can observe at night and through clouds. Surface moisture, geometry and quality still affect the measurement.</p>`
     },
     {
       step: "Neighbours, not the past",
       site: "mexico", needs: has.site("mexico"), layers: { offbeat: false, cover: true }, pick: measuredSample,
       title: "Compare a pixel with its neighbours",
-      text: (s, p) => `<p>NISAR has only months of history, too short to compare a pixel with its own past.
-        OffBeat compares it with its neighbours instead: pixels of the same land cover nearby (ESA WorldCover).</p>
-        <p>The grey band in the plot below is those neighbours. Rain and seasons move the whole band;
-        a pixel that leaves it on its own is out of step.</p>`
+      text: (s, p) => `<p>This case has ${s.dates.length} radar dates. We compare its own history and sampled neighbours of the same ESA WorldCover 2021 class within 1 km, excluding the sample itself.</p>
+        <p>The grey band is the median plus or minus twice the robust spread, when at least 10 valid neighbours exist. It is not a confidence interval. A departure is a candidate for checking; weather and outdated land cover can also explain it.</p>`
     },
     {
       step: "Motion in 12 days",
@@ -102,8 +100,7 @@ window.OB = window.OB || {};
         return `<p>Comparing the radar phase of two passes ${days(dd[0], dd[dd.length - 1])} days apart gives line-of-sight motion.
           ${d.length} of ${n} samples here passed the quality checks; they range from
           ${Math.min(...d).toFixed(1)} to +${Math.max(...d).toFixed(1)} cm.</p>
-          <p>This sample shows <b>${Number.isFinite(v) ? (v > 0 ? "+" : "") + v.toFixed(2) + " cm" : "-"}</b>. Over 12 days that is mostly air, not ground:
-          a sinking rate needs a year of pairs, which is what OffBeat builds next.</p>`;
+          <p>This sample shows <b>${Number.isFinite(v) ? (v > 0 ? "+" : "") + v.toFixed(2) + " cm" : "-"}</b> of apparent relative LOS change. Ionospheric phase was subtracted; troposphere, tides and reference instability remain possible contributors. One pair cannot separate them or establish a vertical sinking rate.</p>`;
       }
     },
     {
@@ -112,31 +109,30 @@ window.OB = window.OB || {};
       title: "Mexico City is sinking",
       text: (s, p) => `<p>Pumping water from the old lake bed makes the ground subside. Two orbits, one looking east and one west,
         split the radar's line of sight into vertical and east-west motion.</p>
-        <p>The pixel in the yellow box moves <b>${p.extra && Number.isFinite(p.extra.up) ? p.extra.up.toFixed(1) + " cm a year" : "-"}</b> vertically.</p>`
+        <p>The selected sample has an estimated vertical rate of <b>${p.extra && Number.isFinite(p.extra.up) ? p.extra.up.toFixed(1) + " cm a year" : "-"}</b>. This requires compatible ascending and descending time series and an assessed stable reference; northward motion is assumed zero.</p>`
     },
     {
-      step: "Forest and pasture",
+      step: "Tree cover and grassland",
       site: "amazon", needs: has.site("amazon"), layers: { offbeat: true, cover: false }, pick: classSample(10),
-      title: "Forest and pasture, as radar sees them",
+      title: "Tree cover and grassland, as radar sees them",
       text: (s, p) => {
         const f = lastHv(s, 10), g = lastHv(s, 30);
         return `<p>Real NISAR over Itupiranga, Pará, ${fmtDate(s.dates[s.dates.length - 1])}, at the edge of the Amazon's arc of deforestation.</p>
-          <p>Inside a canopy the radar bounces between leaves and branches and comes back twisted: strong HV.
-          Here forest returns a median of <b>${f.toFixed(1)} dB</b> in HV, pasture <b>${g.toFixed(1)} dB</b>.
-          That gap of ${(f - g).toFixed(1)} dB is what disappears when a forest is cut.</p>`;
+          <p>Scattering within vegetation can change polarization, producing HV. WorldCover tree-cover samples have a median of <b>${f.toFixed(1)} dB</b> in HV; grassland samples have <b>${g.toFixed(1)} dB</b> on this date, a ${(f - g).toFixed(1)} dB difference.</p>
+          <p>WorldCover is from 2021. Grassland is not proof of pasture, and a radar contrast alone does not establish clearing or biomass.</p>`;
       }
     },
     {
-      step: "Forest cleared",
+      step: "HV-drop candidate",
       site: "amazon", needs: has.style("amazon", "drop"), layers: { offbeat: true, extra: ["fires", "alerts"] },
       pick: largestPatch("drop"), z: 2.5, zoom: 13,
-      title: "Forest cleared in the dry season",
+      title: "An HV-drop candidate to investigate",
       text: (s, p) => {
         const n = firesNear(s, p);
-        return `<p>When a forest is cut, HV falls by several decibels. OffBeat marks the HV drop in red and dates it.</p>
+        return `<p>HV has a downward shift relative to sampled neighbours. This curve shape can be consistent with vegetation change, but is not a confirmed clearing or fire.</p>
           <p>This pixel fell out of step on <b>${p.since ? fmtDate(p.since) : "-"}</b>.
           ${n == null ? "" : `NASA FIRMS and INPE saw <b>${n}</b> fire${n === 1 ? "" : "s"} within 1 km in the 60 days around it.`}
-          Yellow outlines are INPE DETER and UMD GLAD clearing alerts.</p>`;
+          Alert outlines provide dated external context; only a spatial and temporal match counts as supporting evidence. No event area is inferred from these sparse samples.</p>`;
       }
     },
     {
@@ -146,16 +142,16 @@ window.OB = window.OB || {};
       text: (s, p) => `<p>Real NISAR over Caracas, ${fmtDate(s.dates[0])} and ${fmtDate(s.dates[s.dates.length - 1])}.
         On 24 June 2026 an M7.5 earthquake struck just off this coast.</p>
         <p>These passes are the city before it: the baseline every later pass is compared against.
-        The pair spanning the quake is the next one OffBeat processes.</p>`
+        A separately downloaded June 13-25 GUNW subset has no samples passing the current full quality mask. No coseismic displacement or damage has been established here.</p>`
     },
     {
       step: "Earthquake damage",
       site: "venezuela", needs: has.extra("venezuela", "damage"), layers: { offbeat: false, extra: ["damage"] },
       pick: extreme("damage", 1), zoom: 14,
-      title: "Where the quake broke buildings",
-      text: (s, p) => `<p>Where buildings collapse or shift, the radar echo stops matching from one pass to the next: coherence drops.
+      title: "Coherence-loss candidates",
+      text: (s, p) => `<p>Coherence can decrease after structural change, but also with moisture, vegetation, geometry or processing problems. This layer requires comparable pre-event pairs.
         ${s.damagePair ? `NISAR passed on ${fmtDate(s.damagePair[0])} and again on ${fmtDate(s.damagePair[1])}.` : ""}</p>
-        <p>Yellow to red marks built-up pixels that lost more coherence than the rest of the city.
+        <p>Yellow to red marks built-up samples that lost more coherence than the rest of the city; it is a proxy, not a verified building-damage map.
         This one scores <b>${p.extra && Number.isFinite(p.extra.damage) ? "z " + p.extra.damage.toFixed(1) : "-"}</b>.</p>`
     },
     {
@@ -163,7 +159,7 @@ window.OB = window.OB || {};
       site: "amazon", needs: has.style("amazon", "drop"), layers: { offbeat: true }, pick: largestPatch("drop"), z: 2.5, sound: true,
       title: "Hear the pixel fall out of step",
       text: () => `<p>Every NISAR pass is one beat. The neighbours keep time; the pixel plays its own curve.
-        When the forest goes, its note drops, comes late and goes sour.</p><p>Press <b>Play the pixel</b>.</p>`
+        A lower measured HV shifts its note; large peer departures delay and detune it. The timing and pitch are a designed mapping, not an independent detector of forest loss.</p><p>Press <b>Play the pixel</b>.</p>`
     },
     {
       step: "Your turn",

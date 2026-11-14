@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "kind": "sparse_sample_validation",
+  "n_candidates": 6,
+  "n_alert_matches": 0,
+  "n_fire_matches": 1,
+  "max_days": 60,
+  "fire_radius_m": 1000,
+  "candidates": [
+    {
+      "id": "AMA r7 c4",
+      "lat": -4.768359375,
+      "lon": -49.283984375,
+      "cover": 30,
+      "since": "2026-09-16",
+      "alerts": [],
+      "fires": [
+        {
+          "source": "VIIRS_SNPP",
+          "date": "2026-10-25",
+          "distance_m": 908.5
+        },
+        {
+          "source": "MODIS",
+          "date": "2026-11-01",
+          "distance_m": 917.9
+        }
+      ],
+      "status": "unknown: no matched alert"
+    },
+    {
+      "id": "AMA r12 c20",
+      "lat": -4.772265625,
+      "lon": -49.271484375,
+      "cover": 30,
+      "since": "2026-09-04",
+      "alerts": [],
+      "fires": [],
+      "status": "unknown: no matched alert"
+    },
+    {
+      "id": "AMA r15 c13",
+      "lat": -4.774609375,
+      "lon": -49.276953125,
+      "cover": 30,
+      "since": "2026-09-16",
+      "alerts": [],
+      "fires": [],
+      "status": "unknown: no matched alert"
+    },
+    {
+      "id": "AMA r21 c0",
+      "lat": -4.779296875,
+      "lon": -49.287109375,
+      "cover": 10,
+      "since": "2026-08-23",
+      "alerts": [],
+      "fires": [],
+      "status": "unknown: no matched alert"
+    },
+    {
+      "id": "AMA r21 c31",
+      "lat": -4.779296875,
+      "lon": -49.262890625000004,
+      "cover": 30,
+      "since": "2026-09-16",
+      "alerts": [],
+      "fires": [],
+      "status": "unknown: no matched alert"
+    },
+    {
+      "id": "AMA r28 c1",
+      "lat": -4.7847656249999995,
+      "lon": -49.286328125000004,
+      "cover": 10,
+      "since": "2026-09-16",
+      "alerts": [],
+      "fires": [],
+      "status": "unknown: no matched alert"
+    }
+  ],
+  "area_ha": null,
+  "recall": null,
+  "limitations": [
+    "Sparse points, no event area or recall estimate",
+    "Absence of an alert does not establish absence of change",
+    "Alert match is supporting evidence, not independent confirmation of the cause",
+    "No negative labels, no precision or accuracy estimate"
+  ],
+  "sources": {
+    "alerts": "data/amazon/alerts.geojson",
+    "fires": "data/amazon/fires.json",
+    "analysis": "data/analysis/amazon.json"
+  }
+}
