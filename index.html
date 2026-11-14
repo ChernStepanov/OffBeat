@@ -53,7 +53,14 @@
           <fieldset class="group">
             <legend>Threshold</legend>
             <label for="z">Show pixels with |z| ≥ <output id="z-out" for="z">2.5</output></label>
-            <input type="range" id="z" min="1.5" max="6" step="0.5" value="2.5">
+            <div class="slider">
+              <span aria-hidden="true">1.5</span>
+              <div class="slider__rail">
+                <input type="range" id="z" min="1.5" max="6" step="0.5" value="2.5">
+                <div class="slider__ticks" aria-hidden="true"></div>
+              </div>
+              <span aria-hidden="true">6</span>
+            </div>
           </fieldset>
         </div>
       </section>
