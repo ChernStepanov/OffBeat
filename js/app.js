@@ -57,7 +57,6 @@
   }
   map.on('move resize', updateViewMetrics);
   OB.bindArchive(() => map.getCenter().wrap());
-  const radarCellBounds = () => null;                      // the global NASA browse layer was removed: not readable as data
   const labelsButton = $('l-labels');
   const labelsVisible = () => labelsButton.getAttribute('aria-pressed') === 'true';
   const updateWaterLabels = OB.bindWaterLabels([map, optic], $('water-status'));
@@ -450,8 +449,21 @@
   }
 
   // --- picking a pixel ---
-  map.on("click", e => {
+  let coordinateTips = [];
+  function showClickedCoordinates(latlng) {
+    const point = latlng.wrap();
+    const text = `${point.lat.toFixed(6)}, ${point.lng.toFixed(6)}`;
+    coordinateTips.forEach(([target, tip]) => target.removeLayer(tip));
+    coordinateTips = [map, optic].map(target => {
+      const tip = L.tooltip({permanent:true, direction:'top', offset:[0,-8], interactive:false})
+        .setLatLng(point).setContent(text).addTo(target);
+      return [target, tip];
+    });
+    return text;
+  }
+  function onMapClick(e) {
     document.dispatchEvent(new Event('ob:manual-navigation'));
+    const coordinates = showClickedCoordinates(e.latlng);
     if (!state.site) return;
     const g = state.site.grid;
     const { origin, width, height } = projectedGrid(g);
@@ -466,14 +478,13 @@
       return;
     }
     clearPixel();
-    const bounds = radarCellBounds(e.latlng);
-    if (bounds) {
-      showCellBounds(bounds);
-      $('px-id').textContent = 'NISAR mosaic cell';
-    } else if (localVisible) {
+    $('p-loc').textContent = coordinates;
+    if (localVisible) {
       pickCell(index, false).then(pixelSound);
     }
-  });
+  }
+  map.on('click', onMapClick);
+  optic.on('click', onMapClick);
   function pixelSound() {
     const p = state.pixel; if (!p || !OB.sfx) return;
     OB.sfx.play(p.style && Number.isFinite(p.z) && Math.abs(p.z) >= state.z ? "offbeat" : "instep");
