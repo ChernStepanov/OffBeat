@@ -1,4 +1,4 @@
-"""Inspect HLS v2 Fmask quality for the first recorded CMR page at the Caracas AOI.
+"""Inspect HLS v2 Fmask quality for the Caracas AOI.
 
 Requires a locally supplied Earthdata token. Writes a receipt, never credentials or signed URLs.
 """
@@ -25,9 +25,19 @@ def main():
     entry = next(e for e in index['entries'] if e['nisar_date'] == '2025-11-21')
     b = index['bbox']
     candidates = []
-    for collection in entry['hls_catalogue']:
-        for granule in collection['granules']:
-            ident = granule['producer_id']
+    for short_name in ('HLSS30', 'HLSL30'):
+        response = requests.get('https://cmr.earthdata.nasa.gov/search/granules.json', params={
+            'short_name': short_name,
+            'bounding_box': ','.join(str(b[k]) for k in ('w', 's', 'e', 'n')),
+            'temporal': '2025-11-06T00:00:00Z,2025-12-06T23:59:59Z',
+            'page_size': 200, 'sort_key': 'start_date',
+        }, timeout=60)
+        response.raise_for_status()
+        granules = response.json()['feed']['entry']
+        if int(response.headers.get('CMR-Hits', len(granules))) > len(granules):
+            raise RuntimeError('CMR results exceed page size; implement pagination')
+        for granule in granules:
+            ident = granule['producer_granule_id']
             if '.T19PGM.' not in ident:
                 continue
             links = [link['href'] for link in granule['links'] if link.get('href', '').startswith('https://data.lpdaac.earthdatacloud.nasa.gov/') and link['href'].endswith('.Fmask.tif')]
@@ -52,7 +62,7 @@ def main():
     receipt = {
         'source': 'NASA LP DAAC HLS v2.0', 'source_catalogue': str(INDEX.relative_to(ROOT)),
         'nisar_date': entry['nisar_date'], 'inspected_at': dt.datetime.now(dt.timezone.utc).isoformat(),
-        'scope': 'First page of recorded CMR HLS candidates for tile T19PGM; not an exhaustive search',
+        'scope': 'All CMR HLSS30 and HLSL30 results for tile T19PGM intersecting AOI, 2025-11-06 through 2025-12-06; other overlapping HLS tiles unexamined',
         'mask': 'Fmask: exclude fill and bits 1 cloud, 2 adjacent cloud/shadow, 3 cloud shadow, 4 snow/ice; transform AOI bounds to source CRS and read nearest whole-pixel window',
         'threshold': 0.8,
         'limitations': 'Fractions rounded to 3 decimal places; HLS 30m and five-pixel cloud adjacency are more conservative than the Sentinel-2 SCL mask. No image generated.',

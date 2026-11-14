@@ -3,7 +3,7 @@
   "source_catalogue": "data/venezuela/optical/index.json",
   "nisar_date": "2025-11-21",
   "inspected_at": "2026-11-14",
-  "scope": "First page of recorded CMR HLS candidates for tile T19PGM; not an exhaustive search",
+  "scope": "All CMR HLSS30 and HLSL30 results for tile T19PGM intersecting AOI, 2025-11-06 through 2025-12-06; other overlapping HLS tiles unexamined",
   "mask": "Fmask: exclude fill and bits 1 cloud, 2 adjacent cloud/shadow, 3 cloud shadow, 4 snow/ice; transform AOI bounds to source CRS and read nearest whole-pixel window",
   "threshold": 0.8,
   "limitations": "Fractions rounded to 3 decimal places; HLS 30m and five-pixel cloud adjacency are more conservative than the Sentinel-2 SCL mask. No scene passed; no image generated.",
@@ -63,6 +63,30 @@
     {
       "producer_id": "HLS.L30.T19PGM.2025339T144617",
       "clear_fraction": 0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025331T150709",
+      "clear_fraction": 0.126
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025333T145731",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025335T145741",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025336T150731",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025338T145719",
+      "clear_fraction": 0.0
+    },
+    {
+      "producer_id": "HLS.S30.T19PGM.2025338T150741",
+      "clear_fraction": 0.0
     }
   ]
 }

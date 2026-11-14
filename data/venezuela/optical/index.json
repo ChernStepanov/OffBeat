@@ -9589,7 +9589,7 @@
           ]
         }
       ],
-      "hls_status": "14 first-page HLS T19PGM candidates inspected; none reached 80% clear AOI; additional catalogue pages not yet inspected",
+      "hls_status": "20 HLS T19PGM candidates inspected; none reached 80% clear AOI; other overlapping tiles unexamined",
       "hls_quality_receipt": "data/subsets/venezuela-hls/2025-11-21-quality.json"
     },
     {
