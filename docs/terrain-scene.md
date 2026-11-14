@@ -11,9 +11,10 @@ the antimeridian, and streams zoom-0–14 Terrarium DEM tiles. Display navigatio
 supports zoom 0–19 and latitude ±85.05112878°. Zooming further does not create
 additional source resolution. The camera is independent of every NISAR bbox.
 
-The renderer computes tile coverage from the camera frustum and adjusts LOD to
-stay within 64 visible tiles. Tile meshes have 32 or 64 subdivisions depending
-on the visible tile budget. Surface coordinates and NISAR overlays use the same
+The renderer preloads a geographic square covering the full orbit around the
+map centre and adjusts LOD to stay within 64 tiles. Every tile has 64 subdivisions.
+Coverage, source LOD, geometry and elevation colours remain fixed during camera
+rotation; panning or zooming may load a new area or level. Surface coordinates and NISAR overlays use the same
 Mercator frame, including the latitude-dependent conversion of elevation metres.
 Surface and dense terrain point cloud share real DEM elevations. There are no
 extruded study-area walls or fixed rectangular terrain extents.

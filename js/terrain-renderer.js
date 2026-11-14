@@ -15,6 +15,7 @@ OB.createTerrainRenderer = async function (canvas) {
   let site = null, context = null, date = 0, channel = 'hv', selectedIndex = -1, radar = null, marker = null, sampleList = [];
   let coverageDirty = true, overlayDirty = true, paused = false, sourceLevel = 0, wantedKey = '', segments = 64;
   let minHeight = 0, maxHeight = 3000, vertices = 0, nodes = new Map(), desired = [];
+  let geometryRevision = 0;
   const target = new T.Vector3(), ray = new T.Raycaster(), screenPointer = new T.Vector2();
   const rampLow = { value: 0 }, rampHigh = { value: 3000 }, contours = { value: 1 };
   const palette = ['#536c68', '#789080', '#a4aa8a', '#c2bd9f', '#d6d2bd', '#eeeade'].map(hex => new T.Color(hex).toArray().map(v => v.toFixed(6)).join(','));
@@ -77,21 +78,8 @@ OB.createTerrainRenderer = async function (canvas) {
     camera.up.set(0, 1, 0); camera.lookAt(target); camera.updateMatrixWorld();
   }
   function updateCoverage() {
-    const s = scale(), xs = [0], ys = [0];
-    for (const x of [-1, 1]) for (const y of [-1, 1]) {
-      const direction = new T.Vector3(x, y, .5).unproject(camera).sub(camera.position).normalize();
-      // Include valleys below a high camera target, rather than clipping their tile coverage.
-      const floor = Math.min(0, targetHeight) - .5;
-      const t = direction.y < -.015 ? (floor - camera.position.y) / direction.y : 20;
-      const p = camera.position.clone().addScaledVector(direction, Math.min(20, Math.max(0, t)));
-      xs.push(tiles.clamp(p.x, -20, 20)); ys.push(tiles.clamp(p.z, -20, 20));
-    }
-    const bounds = { w: center.x + (Math.min(...xs) - .45) / s, e: center.x + (Math.max(...xs) + .45) / s,
-      n: center.y + (Math.min(...ys) - .45) / s, s: center.y + (Math.max(...ys) + .45) / s };
-    // The overview shows one world; closer views wrap seamlessly across the date line.
-    if (viewZoom < 1.5) { bounds.w = Math.max(0, bounds.w); bounds.e = Math.min(1 - 1e-12, bounds.e); }
-    desired = tiles.cover(bounds, viewZoom + 2, 64); sourceLevel = desired[0]?.z || 0;
-    segments = desired.length <= 24 ? 64 : 32;
+    desired = tiles.orbitCoverage(center, viewZoom); sourceLevel = desired[0]?.z || 0;
+    segments = 64;
     const keys = desired.map(t => t.meshKey).join('|') + '/' + segments;
     if (keys !== wantedKey) {
       wantedKey = keys;
@@ -124,6 +112,7 @@ OB.createTerrainRenderer = async function (canvas) {
     mesh.frustumCulled = cloud.frustumCulled = false; group.add(mesh, cloud);
     const previous = nodes.get(tile.meshKey); if (previous) disposeNode(previous);
     surface.add(group); nodes.set(tile.meshKey, { group, mesh, cloud, tile, low, high, detail, segments, dirty: false });
+    geometryRevision++;
     return true;
   }
   function positionTiles() {
@@ -235,10 +224,10 @@ OB.createTerrainRenderer = async function (canvas) {
     setTerrain(data, s) { context = data; if (s) site = s; overlayDirty = true; },
     setSamples(s, t, pol) { site = s; date = t; channel = pol; overlayDirty = true; },
     select: setSelection,
-    rotate(dx, dy) { yaw -= dx * .007; if (!plan) pitch = tiles.clamp(pitch + dy * .006, .32, 1.45); changed(); },
+    rotate(dx, dy) { yaw -= dx * .007; if (!plan) pitch = tiles.clamp(pitch + dy * .006, .32, 1.45); notify(); },
     pan(dx, dy) { const unit = camera.position.distanceTo(target) / height / scale(); center.x += (-dx * Math.cos(yaw) + dy * Math.sin(yaw)) * unit; center.y += (dx * Math.sin(yaw) + dy * Math.cos(yaw)) * unit; center.x = tiles.wrap(center.x, 1); center.y = tiles.clamp(center.y, 0, 1); changed(); },
     zoom(factor) { if (Number.isFinite(factor) && factor > 0) { viewZoom = tiles.clamp(viewZoom + Math.log2(factor), 0, 19); changed(); } },
-    setView(view) { plan = view === 'plan'; yaw = plan ? 0 : -.65; pitch = .77; changed(); },
+    setView(view) { plan = view === 'plan'; yaw = plan ? 0 : -.65; pitch = .77; notify(); },
     setExaggeration(value) { exaggeration = value; overlayDirty = true; notify(); },
     setMode(value) { mode = value; notify(); }, setContours(value) { contours.value = value ? 1 : 0; notify(); },
     setPointsVisible(value) { pointsVisible = value; overlayDirty = true; notify(); },
@@ -247,7 +236,7 @@ OB.createTerrainRenderer = async function (canvas) {
     projectSample(index) { const p = sampleList.find(p => p.index === index); if (!p) return null; const v = p.position.clone().project(camera); return { x: (v.x + 1) * width / 2, y: (1 - v.y) * height / 2, depth: v.z }; },
     info: () => {
       const network = stream.info(), building = desired.filter(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; }).length;
-      return { terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => stream.cache.has(t.key)).length,
+      return { geometryRevision, terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => stream.cache.has(t.key)).length,
         radarSamples: sampleList.length, exaggeration, mode, renderer: 'WebGL / Three.js', yaw, pitch, zoom: viewZoom, sourceLevel, center: location(),
         min_m: minHeight, max_m: maxHeight, span_m: tiles.C * Math.cos(location().lat * Math.PI / 180) / 2 ** viewZoom,
         ...network, building, loading: coverageDirty || network.pending > 0 || building > 0 };

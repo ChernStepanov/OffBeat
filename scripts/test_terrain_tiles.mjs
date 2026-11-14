@@ -20,6 +20,24 @@ for (let i = 0; i < 100; i++) {
 }
 const bytes = new Uint8ClampedArray([128, 0, 0, 255, 128, 100, 0, 255, 127, 156, 0, 255, 131, 232, 0, 255]);
 const decoded = m.decode(bytes, 2);
+// A complete orbit always retains the same geographic tile set and source LOD.
+for (const [lon, lat] of [[-67.08, 10.47], [86.925, 27.988], [179.99, 80]]) {
+  const center = m.mercator(lon, lat);
+  for (const zoom of [0, 4, 11, 12.2, 19]) {
+    const tiles = m.orbitCoverage(center, zoom);
+    assert(tiles.length > 0 && tiles.length <= 64);
+    const n = 2 ** tiles[0].z;
+    const xs = tiles.map(t => t.x), ys = tiles.map(t => t.y);
+    // At local scales cover a full rotation around the centre, including valleys.
+    if (zoom >= 4) {
+      const radius = 12 / (2 * 2 ** zoom);
+      assert(Math.min(...xs) / n <= center.x - radius);
+      assert((Math.max(...xs) + 1) / n >= center.x + radius);
+      assert(Math.min(...ys) / n <= Math.max(0, center.y - radius));
+      assert((Math.max(...ys) + 1) / n >= Math.min(1, center.y + radius));
+    }
+  }
+}
 assert.deepEqual(Array.from(decoded.heights), [0, 100, -100, 1000]);
 assert.equal(m.sample(decoded, .5, .5), 250);
 assert.throws(() => m.decode(new Uint8ClampedArray(16), 2), /transparent/);

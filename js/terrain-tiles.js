@@ -34,6 +34,14 @@ OB.terrainTiles = (() => {
     }
     return { size, heights };
   }
+  // Preload an orbit around the geographic centre. Camera yaw/pitch must never
+  // choose a different elevation source, tessellation or height colour range.
+  function orbitCoverage(center, zoom) {
+    const radius = 12 / (2 * 2 ** zoom);
+    const bounds = { w: center.x - radius, e: center.x + radius, n: center.y - radius, s: center.y + radius };
+    if (zoom < 1.5) { bounds.w = Math.max(0, bounds.w); bounds.e = Math.min(1 - 1e-12, bounds.e); }
+    return cover(bounds, zoom + 2, 64);
+  }
   function sample(tile, u, v) {
     const s = tile.size, x = clamp(u * s - .5, 0, s - 1), y = clamp(v * s - .5, 0, s - 1);
     const ix = Math.min(s - 2, Math.floor(x)), iy = Math.min(s - 2, Math.floor(y)), fx = x - ix, fy = y - iy;
@@ -112,5 +120,5 @@ OB.terrainTiles = (() => {
       resume() { stopped = false; setWanted([...wanted.values()]); },
     };
   }
-  return { MAX_LAT, C, clamp, wrap, mercator, geographic, descriptor, cover, decode, sample, create };
+  return { MAX_LAT, C, clamp, wrap, mercator, geographic, descriptor, cover, orbitCoverage, decode, sample, create };
 })();
