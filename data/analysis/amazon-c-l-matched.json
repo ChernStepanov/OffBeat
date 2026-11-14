@@ -3,7 +3,7 @@
   "inputs": [
     {
       "path": "data/amazon.json",
-      "sha256": "b55c6310128993fab59dc7d4548131904a2d4192a16c32d71a580ab6d0f405eb"
+      "sha256": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729"
     },
     {
       "path": "data/amazon/sentinel1.json",

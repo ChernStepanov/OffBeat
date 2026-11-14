@@ -55,7 +55,7 @@
     },
     {
       "path": "data/amazon/fires.json",
-      "sha256": "ff726f1edff03760766dd9a7016f6775f0c49c9edd4affaca479832536387105"
+      "sha256": "8e72bc5df54f8eeb2375953d8ff3fcd0de5104b6c79fa4898d82b901ffa80abc"
     }
   ],
   "method": "Retrospective exploratory rule, not preregistered: 2021 forest class, six valid native 20 m HV observations, full 1 km peer-neighbourhood coverage, median of 3 post minus median of 3 pre <= -3 dB, at least 2 of 3 post observations <= pre median -3 dB, then 8-connected groups of at least 4 cells. Fixed 60-day window around first post date for alert polygon intersection and fire point within 1 km of candidate footprint.",

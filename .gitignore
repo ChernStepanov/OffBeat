@@ -1,5 +1,6 @@
 data/raw/
 data/catalog/
+data/terrain-cache/
 .venv/
 __pycache__/
 *.pyc

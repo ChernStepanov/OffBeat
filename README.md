@@ -91,6 +91,60 @@ node scripts/version_assets.mjs --check
 
 Synthetic numerical fixtures exist only in offline tests, never in application data.
 
+## 3D terrain and expandable windows
+
+Click **3D terrain** in the map title bar. The workspace combines the existing
+synchronized maps with a real WebGL elevation map and NISAR samples registered
+to its surface. Terrain now streams worldwide as the camera moves; the map is
+not cropped to the study areas. Opening from the 2D overview keeps its centre.
+A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
+
+The surface and dense terrain point cloud load visible elevation tiles from
+[Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).
+Detail adapts to scale. **World** shows the overview, **Study area** returns to
+the selected measurements, and **Map centre** opens the current 2D location.
+The 3D window also accepts place names or `latitude, longitude`; coordinates
+are processed locally, and names are sent to the same geocoders as the 2D search.
+Changing location does not infer or manufacture additional NISAR coverage.
+Surface colour represents elevation in metres. The separate **1,024 NISAR dots**
+keep their actual lat/lon; their colour represents the selected HH/HV backscatter,
+not elevation. Changing acquisition or polarization does not move them vertically.
+No extra NISAR observations are invented. **Height 1x / 2x / 4x / 8x** changes only
+visual exaggeration; elevation readouts remain physical metres.
+
+Choose **Relief + cloud**, **Solid relief** or **Point cloud**; toggle contours,
+NISAR dots and the static CRT grain. Drag to orbit, Shift-drag/right-drag to pan,
+scroll or use **+ / -** to zoom. **Top view**, **Reset view**, keyboard arrows and
+**0** are available. Click a visible NISAR point to update both maps, the pixel
+card and its measured history. The 3D window has its own synchronized acquisition
+slider, including when it occupies the whole screen. On phones the panels stack.
+
+Every instrument window, including each map separately, has title-bar buttons for
+**Enlarge window**, **Maximize window** and **Browser fullscreen**. Press the same
+size button or **Esc** to restore it. Double-click a title bar to maximize it.
+Browser fullscreen uses the browser's native Fullscreen API; leaving it restores
+the preceding window size. Map instances, data, input and selection are retained.
+
+The 3D renderer uses locally vendored Three.js r160.1 (MIT). Detailed global
+terrain needs internet, with no Earthdata login or API key. A measured coarse
+world tile is bundled so coverage remains visible if the provider is unavailable;
+failed tiles are identified and can be retried. Downloads are limited to five
+at once, decoded memory to 96 cached tiles, and visible geometry to 64 tiles.
+Obsolete requests are cancelled when the view changes. Web Mercator covers
+latitudes up to about 85.05 degrees north/south and wraps at the date line.
+
+Prepared local DEM contexts remain optional and never restrict navigation.
+Rebuild them with `python3 scripts/prepare_terrain.py`. Original tile receipts
+are retained in `data/terrain/*.json`; the bundled world PNG has its own hash.
+The DEM is historical context;
+resampling and a denser mesh do not increase the source's ground resolution.
+See [terrain processing and validation](docs/terrain-scene.md).
+
+Run `node scripts/test_point_cloud.mjs` for numeric DEM integrity, physical
+registration, date/channel independence, missing samples and exaggeration checks.
+Run `node scripts/test_terrain_tiles.mjs` for global addressing, tile budgets,
+decoding, cancellation races, cache bounds, fallback and retry checks.
+
 After editing JS or CSS, run `node scripts/version_assets.mjs` before committing.
 The generated content hashes prevent the browser from combining new HTML with
 old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
@@ -100,5 +154,11 @@ old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
 NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. Amazon OPERA RTC-S1 provides sampled C-band measurements; Mexico OPERA DISP-S1 remains catalogue evidence only.
 
 Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA font uses SIL OFL 1.1, see `fonts/W95FA-OFL.txt`.
+
+Terrain: Mapzen Terrain Tiles, including USGS SRTM/GMTED2010, NOAA ETOPO1,
+Mexico INEGI Continental relief (2016) and other regional upstream datasets.
+Full attribution and terms:
+[Tilezen/Joerd](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
+Three.js is MIT-licensed; its notice is preserved in `js/vendor/THREE-LICENSE.txt`.
 
 No software LICENSE is currently declared. Public visibility does not itself grant an open-source licence; copyright holders must choose one before claiming OSI licensing for submission.
