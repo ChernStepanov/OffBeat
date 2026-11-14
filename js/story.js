@@ -90,7 +90,7 @@ window.OB = window.OB || {};
       site: "mexico", needs: has.site("mexico"), layers: { offbeat: true }, pick: measuredSample,
       title: "Radar sees what cameras miss",
       text: (s, p) => `<p>This is real NISAR data: L-band radar over Mexico City's airport, ${fmtDate(s.dates[s.dates.length - 1])}.
-        Измеренные кривые HH/HV находятся в карточке точки. Слева показаны точки измерений на светлой карте; справа — оптический контекст или выбранный датированный снимок. Фон карты не является измерением радара.</p>
+        Each dot on the left is one measured sample; its HH/HV curves are in the pixel card below. The photo on the right is optical context, or a dated Sentinel-2 image you pick. The map background is not a radar measurement.</p>
         <p>Radar supplies its own illumination and can observe at night and through clouds. Surface moisture, geometry and quality still affect the measurement.</p>`
     },
     {
@@ -254,6 +254,22 @@ window.OB = window.OB || {};
     if (s) { const url = new URL(location.href); url.searchParams.set('site', s.id); url.hash = ''; history.replaceState(null, "", url); }
   }
 
+  // First visit with a bare address: a welcome dialog offers the tour instead of starting it unasked.
+  function welcome() {
+    const KEY = "offbeat.welcome.v1", box = $("welcome");
+    const params = new URL(location.href).searchParams;
+    let seen = false;
+    try { seen = localStorage.getItem(KEY) === "seen"; } catch (e) { /* storage off: show it */ }
+    if (!box || seen || location.hash || params.has("site") || params.has("lat")) return;
+    const close = () => { box.hidden = true; try { localStorage.setItem(KEY, "seen"); } catch (e) { /* ignore */ } document.removeEventListener("keydown", onKey); };
+    const onKey = e => { if (e.key === "Escape") close(); };
+    $("welcome-tour").addEventListener("click", () => { close(); open(0); $("tour-win").scrollIntoView({ block: "start" }); });
+    $("welcome-explore").addEventListener("click", close);
+    document.addEventListener("keydown", onKey);
+    box.hidden = false;
+    $("welcome-tour").focus();
+  }
+
   function wire() {
     document.addEventListener('ob:manual-navigation', () => { if (OB.tourActive) close(); });
     CHAPTERS = ALL.filter(c => !c.needs || c.needs());
@@ -268,6 +284,7 @@ window.OB = window.OB || {};
       if (e.key === "ArrowLeft" && !$("tour-back").disabled) $("tour-back").click();
     });
     if (OB.tourWanted) open(startAt);
+    else welcome();
   }
 
   // app.js loads its data asynchronously and announces itself when ready

@@ -296,6 +296,15 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .tour__gap { flex: 1; }
 .btn--default { box-shadow: 0 0 0 1px #000, var(--raised); }
 
+/* --- modal dialog: a Win98 message box over a dimmed desktop --- */
+.modal { position: fixed; inset: 0; z-index: 2000; display: grid; grid-template-columns: minmax(0, 440px); justify-content: center; align-content: center; padding: 16px;
+  background: repeating-conic-gradient(rgba(0, 0, 0, .35) 0 25%, transparent 0 50%) 0 0 / 2px 2px; }
+.modal[hidden] { display: none; }
+.modal__win { width: 100%; min-width: 0; margin: 0; box-shadow: var(--window), 4px 4px 0 rgba(0, 0, 0, .5); }
+.modal__body { display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding: 12px 10px 4px; }
+.modal__body p { margin: 0 0 8px; }
+.modal .tour__bar { flex-wrap: wrap; }
+
 /* --- status bar: shallow sunken panels --- */
 .sbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;

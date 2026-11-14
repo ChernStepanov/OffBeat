@@ -79,6 +79,17 @@
     pane: 'selectedCell', color: '#ffcc00', weight: 3, fill: false, interactive: false,
   });
   const cellBox = box(), cellBoxOptic = box();
+  // the picked sample: a ring around its point on both maps (a point, never an area)
+  const rings = [map, optic].map(m => [
+    L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#000', weight: 4, fill: false, interactive: false }),
+    L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#ffcc00', weight: 2, fill: false, interactive: false }),
+  ]);
+  function markSample(latlng) {
+    rings.forEach((pair, i) => pair.forEach(r => { r.setLatLng(latlng); if (!(i ? optic : map).hasLayer(r)) r.addTo(i ? optic : map); }));
+  }
+  function unmarkSample() {
+    rings.forEach((pair, i) => pair.forEach(r => { const m = i ? optic : map; if (m.hasLayer(r)) m.removeLayer(r); }));
+  }
   function showCellBounds(bounds) {
     const [a, b] = bounds.map(corner => map.project(corner, 0));
     const center = map.unproject(a.add(b).divideBy(2), 0);
@@ -139,6 +150,7 @@
   }
   function clearPixel() {
     OB.sonify.stop(); state.cell = null; state.pixel = null;
+    unmarkSample();
     $('val-win').hidden = true;
     [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
     $('px-id').textContent = 'No prepared measurement series here';
@@ -414,6 +426,19 @@
 
   function drawTop() {
     const s = state.site, g = s.grid, rows = state.patches.slice(0, 10);
+    if (s.pixels) {                                        // sparse samples: rank single points, classified shapes first by |z|
+      const off = s.pixels.map((p, i) => ({ p, i })).filter(({ p }) => Number.isFinite(p.z) && Math.abs(p.z) >= state.z && p.cover !== 80)
+        .sort((a, b) => Math.abs(b.p.z) - Math.abs(a.p.z)).slice(0, 10);
+      if (off.length) {
+        $("top").tBodies[0].innerHTML = off.map(({ p, i }, k) => {
+          const st = p.style ? OB.STYLES[p.style] : null;
+          return `<tr data-cell="${i}" tabindex="0" aria-selected="${state.cell === i}">
+            <td>${k + 1}</td><td>${st ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : (p.z < 0 ? 'Below neighbours' : 'Above neighbours')}</td>
+            <td>1 sample, ${OB.COVER[p.cover] ? OB.COVER[p.cover].name : 'class ' + p.cover}</td><td>${(p.z > 0 ? '+' : '') + p.z.toFixed(1)}</td><td>${p.since || '-'}</td></tr>`;
+        }).join("");
+        return;
+      }
+    }
     $("top").tBodies[0].innerHTML = rows.length ? rows.map((p, i) => {
       const st = OB.STYLES[p.style], since = g.since[p.peak] >= 0 ? s.dates[g.since[p.peak]] : "-";
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
@@ -431,7 +456,7 @@
     // every sample past the threshold, as the map draws them; styles are not assigned on sparse samples
     let px = 0; for (let i = 0; i < g.z.length; i++) if (Number.isFinite(g.z[i]) && Math.abs(g.z[i]) >= state.z && g.cover[i] !== 80) px++;
     drawRaster(); drawTop();
-    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} candidates · ${px} samples at |z| ≥ ${state.z}; area unknown` : 'No valid peer deviations';
+    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${px} off-beat sample${px === 1 ? '' : 's'} at |z| ≥ ${state.z}, ${state.patches.length} with a classified shape` : 'No valid peer deviations';
   }
 
   // --- validation summary (Amazon, from pipeline) ---
@@ -518,6 +543,7 @@
       map.unproject(origin.add([(x + 1) * width, (y + 1) * height]), 0),
     ];
     showCellBounds(rect);
+    if (Number.isFinite(p.lat) && Number.isFinite(p.lon)) markSample([p.lat, p.lon]);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
     optical.setDate(p.since || s.dates.at(-1));
