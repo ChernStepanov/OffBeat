@@ -18,6 +18,7 @@
   const map = L.map("map", { zoomControl: true, maxZoom: 19 });
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
   const labelLayers = [map, optic].map(m => {
+    m.attributionControl.setPrefix('<a href="https://leafletjs.com/" title="A JavaScript library for interactive maps">Leaflet</a>');
     L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
