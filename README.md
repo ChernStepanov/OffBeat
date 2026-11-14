@@ -4,6 +4,18 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 
 [Demo](https://offbeat.chern.su/) | [Repository](https://github.com/ChernStepanov/OffBeat)
 
+## Что сделано и что осталось
+
+Состояние на 14 ноября 2026; актуальные статусы и обсуждение — в [issues](https://github.com/ChernStepanov/OffBeat/issues). Подробные результаты и ограничения приведены в [аудите задач](docs/issue-audit.md).
+
+**Сделано:** подключены реальные выборки NISAR и ссылки на гранулы; рассчитаны сравнения с соседями и предварительные формы кривых; добавлены датированные снимки Sentinel-2 и переключение дат. Исправлены проверка дат лесных alert и смешение кэшированных версий сайта. Подготовлены [научный разбор](docs/science-review.md), [черновик заявки](docs/submission-draft.md) и [слайды](docs/submission/offbeat-draft.pptx). Отсутствующие данные показываются явно.
+
+**Частично сделано:** z-score рассчитан для разреженных точек, но плотного растра ещё нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)); выполнена сверка точек с alert и пожарами, но проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Есть простые базовые сравнения для ML, но погодная коррекция и независимая оценка ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)).
+
+**Осталось:** обработать HLS ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)), дополнительные ряды GUNW ([#16](https://github.com/ChernStepanov/OffBeat/issues/16), [#17](https://github.com/ChernStepanov/OffBeat/issues/17)) и продукты OPERA ([#35](https://github.com/ChernStepanov/OffBeat/issues/35), [#36](https://github.com/ChernStepanov/OffBeat/issues/36)); для загрузки нужен Earthdata Login. Также не завершены проверка правил и лицензии ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), запись видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)).
+
+Проверены 36 научных тестов и сценарии данных, поиска и тура; шесть сетевых тестов не запускались. Заявку и видео ещё не сдавали.
+
 ## Run in five minutes
 
 No build or NASA login is needed for the prepared demo. Clone the repository, serve its root with Python 3, then open http://localhost:8765/:
@@ -12,7 +24,7 @@ No build or NASA login is needed for the prepared demo. Clone the repository, se
 python -m http.server 8765
 ```
 
-Choose a prepared site for measured HH/HV charts. The default global NASA GIBS map is a browse mosaic with separate dates and a brightness scale, not calibrated backscatter. The optional local analysis layer displays sparse sample points, never a continuous event raster or event area. Use the optical selector for dated Sentinel-2 previews. Missing observations are explicit; the Esri mosaic is geographic context only. External map tiles and search require internet. Audio starts after a user click.
+Choose a prepared site for measured HH/HV charts. The default global NASA GIBS map is a browse mosaic coloured by acquisition date, not calibrated backscatter. The optional local analysis layer displays sparse sample points, never a continuous event raster or event area. Use the optical selector for dated Sentinel-2 previews. Missing observations are explicit; the Esri mosaic is geographic context only. External map tiles and search require internet. Audio starts after a user click.
 
 Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Names are sent only on submit, cached in the session and throttled. Coordinate searches are local. Operators can override `OB_MULTILINGUAL_GEOCODER_URL` and `OB_GEOCODER_URL` before app.js. Translated-name coverage depends on the providers.
 
