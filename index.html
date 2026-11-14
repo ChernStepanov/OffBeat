@@ -76,6 +76,8 @@
 
     <!-- Main column -->
     <main id="main">
+      <p id="data-status" role="status">Loading measured data...</p>
+      <p><a href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a> · <a href="docs/real-nisar.md">Processing and limitations</a></p>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
         <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
@@ -86,7 +88,7 @@
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
             <div class="maps__pane">
-              <div class="pane-label">Optical check, Sentinel-2 cloudless (EOX)</div>
+              <div class="pane-label">Optical context, Sentinel-2 cloudless 2020 (EOX)</div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>

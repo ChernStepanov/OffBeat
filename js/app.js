@@ -2,6 +2,7 @@
 (async function () {
   const $ = id => document.getElementById(id);
   try { await OB.loadData(); } catch (error) {
+    $('data-status').textContent = 'Real data unavailable: ' + error.message;
     $('sb-state').textContent = error.message;
     $('sb-src').textContent = 'No measurements loaded';
     $('play-hint').textContent = 'Cannot load real data. Check the static server and data/mexico.json.';
@@ -179,6 +180,7 @@
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
+    $('data-status').textContent = s.message || s.source;
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;

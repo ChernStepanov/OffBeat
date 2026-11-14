@@ -1,46 +1,33 @@
-# Data contract: pipeline → front end
+# Runtime data contract (schema version 2)
 
-The front end reads one JSON file per demo site. Today `js/mock.js` builds these objects in the browser;
-the NISAR pipeline should write the same shape to `data/<site>.json`, and `app.js` switches to `fetch`.
+`js/data.js` fetches `data/mexico.json`. Network errors and invalid input stop
+loading with an explicit message; the legacy mock generator is never loaded.
 
-```jsonc
-{
-  "id": "mexico",                       // url hash, lowercase
-  "name": "Mexico City",
-  "region": "Subsidence of the lake-bed clays",   // one line under the name
-  "center": [19.40, -99.06],            // lat, lon
-  "zoom": 11,
-  "source": "NISAR L2 GCOV + GUNW",     // "synthetic" for mock data; shown in the status bar
-  "event": { "index": 16, "label": "Main shock" },  // or null; index into dates
-  "dates": ["2025-11-07", "..."],       // acquisition dates, ISO, ascending, shared by every pixel
+The JSON has site `id`, `name`, `region`, `center`, `zoom`, `source`, `status`,
+`message`, `event`, `dates`, `displacement_dates`, `grid`, `pixels`, `provenance`.
+The grid contains `n` and geographic `bbox: {w,s,e,n}`. `pixels` has exactly `n*n`
+entries, row-major from northwest; locations represent sparse preview samples,
+not native raster pixels or area averages. `cellM` is null for this sparse grid.
 
-  "pixels": [{
-    "id": "MEX-0281",
-    "lat": 19.5095, "lon": -99.0965,
-    "cover": 50,                        // ESA WorldCover v200 class code
-    "peers": 43,                        // how many same-class pixels in the neighbourhood
-    "z": -4.1,                          // signed z-score vs. peers at the last date, in the style's channel
-    "style": "drift",                   // "drop" | "flood" | "drift" | "step" | null (in step)
-    "since": "2025-12-01",              // first date the pixel left the peer band, or null
+Each pixel has `id`, `lat`, `lon`, `cover`, `peers`, `z`, `style`, `since`, `hh`,
+`hv`, `peer`, `disp`, `peer_disp`. `peer` contains `hh_med`, `hh_sd`, `hv_med`,
+`hv_sd`. Each backscatter and peer array has exactly `dates.length` entries.
+HH/HV are gamma0 power converted to dB. Missing entries are JSON null.
+With no WorldCover, `cover`, `peers`, `z`, `style`, `since` are null and peer
+arrays contain only nulls. Do not infer land cover or a normal/in-step result.
 
-    "hh": [-3.1, "..."],                // dB, gamma0, one value per date (null where missing)
-    "hv": [-11.2, "..."],
-    "peer": {
-      "hh_med": [], "hh_sd": [],        // peer median and std per date, dB
-      "hv_med": [], "hv_sd": []
-    },
-    "disp": [0, -0.4, "..."],           // cm, line of sight, relative to dates[0]; null if no GUNW
-    "peer_disp": [0, -0.15, "..."]      // peer median displacement, cm; null if no GUNW
-  }]
-}
-```
+`disp` and `peer_disp` are null until GUNW conversion is validated. Future
+displacement arrays use `displacement_dates`, independently of GCOV dates;
+each result must name its pair/reference, units, sign convention, connected
+component, masks, corrections and reference location in provenance. A missing
+measurement is never represented as zero or carried across a gap. An optional
+`peer_disp_sd` must contain measured robust spread; the plot supplies no fixed band.
 
-## Rules the front end relies on
+`provenance` records input producer and CMR IDs, dates, URLs, SHA-256, processing
+steps, creation time and limitations. Before download, the checked-in file has
+empty dates and all-null measurements and points to the public CMR manifest.
 
-- Every array has `dates.length` entries.
-- `z` is computed on the channel the style lives in: HV for `drop`, HH for `flood`, displacement for
-  `drift` and `step`. Pixels with no style still carry `z` (the heat map shows them at low thresholds).
-- Peers: same WorldCover class, inside a fixed radius (start with 3 km), excluding the pixel itself.
-  Use median and a robust spread (1.4826 × MAD) rather than mean and std.
-- Ship only what the map needs: all pixels above |z| 1.5 plus a thin random sample of the rest.
-  A site file should stay under 5 MB.
+The earlier pipeline design described irregular pixel samples, but the running
+map actually required square arrays plus a `series(x,y)` function. The loader
+adapts this square JSON to those arrays. Future native geospatial rasters need
+their own CRS/geotransform-aware rendering rather than assuming a geographic grid.
