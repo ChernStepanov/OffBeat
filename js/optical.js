@@ -1,6 +1,6 @@
 window.OB = window.OB || {};
 OB.bindOptical = function (map, select, status, mirror) {
-  let site, index, overlay, mirrorOverlay, serial=0, followDate=false;
+  let site, index, overlay, mirrorOverlay, serial=0, followDate=false, observationStatus='';
   function clear() { if (overlay) map.removeLayer(overlay); if (mirrorOverlay) mirror.removeLayer(mirrorOverlay); overlay=null; mirrorOverlay=null; }
   function draw() {
     clear();
@@ -17,19 +17,23 @@ OB.bindOptical = function (map, select, status, mirror) {
     overlay=current;
     if (mirror) mirrorOverlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{pane:'opticalMirror',className:'grayscale-imagery',interactive:false}).addTo(mirror);
     current.on('error',()=>{if (overlay!==current) return; clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
-    current.on?.('load',()=>{if (overlay===current) sharpen();});
+    current.on?.('load',()=>{if (overlay===current) updateDetail();});
     current.addTo(map);
-    status.textContent=`${entry.source} | ${entry.date} | NISAR ${entry.nisar_date} | AOI cloud/shadow/snow ${Math.round(entry.aoi_cloud_shadow_snow_fraction*100)}% | ${entry.scene_id}`;
+    observationStatus=`${entry.source} | ${entry.date} | NISAR ${entry.nisar_date} | AOI cloud/shadow/snow ${Math.round(entry.aoi_cloud_shadow_snow_fraction*100)}% | ${entry.scene_id}`;
+    status.textContent=observationStatus;
     select.title=status.textContent;
   }
-  // Sentinel-2 is 10 m per pixel. Stretched past twice its size the browser's smoothing turns it
-  // into a blur next to the sharp basemap, so from there it is drawn as the honest 10 m squares.
-  function sharpen() {
-    for (const img of [overlay?.getElement?.(), mirrorOverlay?.getElement?.()]) {
-      if (img && img.naturalWidth) img.style.imageRendering=img.getBoundingClientRect().width/img.naturalWidth>=2 ? 'pixelated' : 'auto';
-    }
+  // The dated image has finite resolution. At high magnification reveal the context
+  // imagery instead of covering it with enlarged blocks; restore it on zooming out.
+  function updateDetail() {
+    const img=overlay?.getElement?.();
+    if (!img || !img.naturalWidth) return;
+    const show=img.getBoundingClientRect().width/img.naturalWidth < 2;
+    overlay.setOpacity(show ? 1 : 0);
+    mirrorOverlay?.setOpacity(show ? 1 : 0);
+    status.textContent=show ? observationStatus : observationStatus + ' | Zoomed in: showing Esri context; zoom out to see the dated image.';
   }
-  map.on?.('zoomend',sharpen);
+  map.on?.('zoomend',updateDetail);
   function setDate(date) {
     if (!followDate || !index?.entries?.length) return;
     const target=Date.parse(date);
