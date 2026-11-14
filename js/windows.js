@@ -84,11 +84,9 @@ OB.windows = (() => {
     const title = [...element.children].find(child => child.classList.contains('win-t'));
     if (!title) continue;
     const controls = document.createElement('div'); controls.className = 'window-buttons'; controls.setAttribute('role', 'group');
-    ['large', 'max', 'screen'].forEach((mode, index) => {
-      const button = document.createElement('button'); button.type = 'button'; button.dataset.windowAction = mode;
-      button.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" shape-rendering="crispEdges">${icons[index]}</svg>`;
-      button.addEventListener('click', () => action(element, mode)); controls.append(button);
-    });
+    const button = document.createElement('button'); button.type = 'button'; button.dataset.windowAction = 'max';
+    button.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" shape-rendering="crispEdges">${icons[1]}</svg>`;
+    button.addEventListener('click', () => action(element, 'max')); controls.append(button);
     title.insertBefore(controls, title.querySelector('#scene-close'));
     title.addEventListener('dblclick', event => { if (!event.target.closest('button')) action(element, 'max'); });
   }
