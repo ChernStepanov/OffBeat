@@ -18,7 +18,7 @@ OB.chart = (function () {
     const duration = times.at(-1) - times[0];
     const X = i => PAD.l + (duration > 0 ? (times[i] - times[0]) / duration : 0.5) * (w - PAD.l - PAD.r);
     const Y = v => PAD.t + (1 - (v - lo) / (hi - lo)) * (h - PAD.t - PAD.b);
-    g.font = "10px Tahoma, Verdana, sans-serif"; g.fillStyle = "#333"; g.strokeStyle = "#e2e2e2"; g.lineWidth = 1;
+    g.font = "12.5px W95FA, Tahoma, sans-serif"; g.fillStyle = "#333"; g.strokeStyle = "#e2e2e2"; g.lineWidth = 1;
     const step = niceStep((hi - lo) / 4);
     for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
       const y = Math.round(Y(v)) + 0.5;
@@ -84,7 +84,7 @@ OB.chart = (function () {
   function displacement(cv, dates, p, sinceIdx, head) {
     const { g, w, h } = setup(cv);
     if (!dates.length || !p.disp || !p.disp.some(Number.isFinite)) {
-      g.fillStyle = "#555"; g.font = "11px Tahoma, Verdana, sans-serif"; g.textAlign = "center";
+      g.fillStyle = "#555"; g.font = "12.5px W95FA, Tahoma, sans-serif"; g.textAlign = "center";
       g.fillText("No validated GUNW displacement for this pixel.", w / 2, h / 2 + 4);
       return;
     }

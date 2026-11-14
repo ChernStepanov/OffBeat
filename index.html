@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OffBeat — NISAR pixels out of step with their neighbours</title>
+<title>OffBeat - NISAR pixels out of step with their neighbours</title>
 <meta name="description" content="OffBeat compares every NISAR pixel with nearby pixels of the same land cover and flags the ones that fall out of step: clearings, floods, subsidence, earthquakes.">
 <meta name="theme-color" content="#000080">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
@@ -19,7 +19,7 @@
   <header class="win app-bar">
     <div class="win-t">
       <span class="win-t__icon" aria-hidden="true"></span>
-      <h1>OffBeat — NISAR change finder</h1>
+      <h1>OffBeat - NISAR change finder</h1>
     </div>
     <nav class="menu" aria-label="Main">
       <a href="#map-win"><u>M</u>ap</a>
@@ -52,7 +52,7 @@
           </fieldset>
           <fieldset class="group">
             <legend>Threshold</legend>
-            <label for="z">Show pixels with |z| ≥ <output id="z-out" for="z">2.5</output></label>
+            <label for="z">Show pixels with |z| >= <output id="z-out" for="z">2.5</output></label>
             <div class="slider">
               <span aria-hidden="true">1.5</span>
               <div class="slider__rail">
@@ -78,15 +78,15 @@
     <main id="main">
 
       <section class="win" id="map-win" aria-labelledby="t-map">
-        <div class="win-t"><h2 id="t-map">Off-Beat map — <span id="site-name">…</span></h2></div>
+        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
         <div class="win-b win-b--flush">
           <div class="maps">
             <div class="maps__pane">
-              <div class="pane-label">z-score vs. same-class peers · click any pixel</div>
+              <div class="pane-label">z-score vs. same-class peers, click any pixel</div>
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
             <div class="maps__pane">
-              <div class="pane-label">Optical check · Sentinel-2 cloudless (EOX)</div>
+              <div class="pane-label">Optical check, Sentinel-2 cloudless (EOX)</div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>
@@ -94,20 +94,20 @@
       </section>
 
       <section class="win" id="card-win" aria-labelledby="t-card">
-        <div class="win-t"><h2 id="t-card">Pixel card — <span id="px-id">click the map</span></h2></div>
+        <div class="win-t"><h2 id="t-card">Pixel card - <span id="px-id">click the map</span></h2></div>
         <div class="win-b">
           <div class="card">
             <table class="props" id="px-props">
-              <tr><th scope="row">Land cover</th><td id="p-cover">—</td></tr>
-              <tr><th scope="row">Peers</th><td id="p-peers">—</td></tr>
-              <tr><th scope="row">z-score</th><td id="p-z">—</td></tr>
-              <tr><th scope="row">Style</th><td id="p-style">—</td></tr>
-              <tr><th scope="row">Since</th><td id="p-since">—</td></tr>
-              <tr><th scope="row">Location</th><td id="p-loc">—</td></tr>
+              <tr><th scope="row">Land cover</th><td id="p-cover">-</td></tr>
+              <tr><th scope="row">Peers</th><td id="p-peers">-</td></tr>
+              <tr><th scope="row">z-score</th><td id="p-z">-</td></tr>
+              <tr><th scope="row">Style</th><td id="p-style">-</td></tr>
+              <tr><th scope="row">Since</th><td id="p-since">-</td></tr>
+              <tr><th scope="row">Location</th><td id="p-loc">-</td></tr>
             </table>
             <div class="plots">
               <div class="plot">
-                <div class="pane-label">Backscatter, dB — HH <i class="sw sw--hh"></i> HV <i class="sw sw--hv"></i> peers <i class="sw sw--peer"></i></div>
+                <div class="pane-label">Backscatter, dB - HH <i class="sw sw--hh"></i> HV <i class="sw sw--hv"></i> peers <i class="sw sw--peer"></i></div>
                 <canvas id="c-bs" height="190" aria-label="HH and HV backscatter of the pixel against its peers"></canvas>
               </div>
               <div class="plot">
@@ -117,8 +117,8 @@
             </div>
           </div>
           <div class="toolbar">
-            <button type="button" class="btn" id="play" disabled>▶ Play the pixel</button>
-            <button type="button" class="btn" id="stop" disabled>■ Stop</button>
+            <button type="button" class="btn" id="play" disabled>Play the pixel</button>
+            <button type="button" class="btn" id="stop" disabled>Stop</button>
             <span class="hint" id="play-hint">Peers keep the beat, the pixel plays the HV curve. When it slips, you hear it.</span>
           </div>
         </div>
@@ -146,7 +146,7 @@
       </section>
 
       <p class="foot">
-        Data: NASA-ISRO NISAR via ASF DAAC · ESA WorldCover 10 m · Sentinel-2 cloudless by EOX · imagery © Esri.
+        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, Sentinel-2 cloudless by EOX, imagery (c) Esri. Font W95FA by Alina Sava, OFL.
         Built for NASA Space Apps 2026, “Dancing with the SARs”. Open source.
       </p>
     </main>
