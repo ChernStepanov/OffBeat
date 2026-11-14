@@ -1,0 +1,8 @@
+data/raw/
+data/catalog/
+.venv/
+__pycache__/
+*.pyc
+.netrc
+_netrc
+.env

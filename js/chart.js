@@ -14,7 +14,9 @@ OB.chart = (function () {
   }
 
   function frame(g, w, h, dates, lo, hi, unit) {
-    const X = i => PAD.l + (i / (dates.length - 1)) * (w - PAD.l - PAD.r);
+    const times = dates.map(d => Date.parse(d));
+    const duration = times.at(-1) - times[0];
+    const X = i => PAD.l + (duration > 0 ? (times[i] - times[0]) / duration : 0.5) * (w - PAD.l - PAD.r);
     const Y = v => PAD.t + (1 - (v - lo) / (hi - lo)) * (h - PAD.t - PAD.b);
     g.font = "12.5px W95FA, Tahoma, sans-serif"; g.fillStyle = "#333"; g.strokeStyle = "#e2e2e2"; g.lineWidth = 1;
     const step = niceStep((hi - lo) / 4);
@@ -36,15 +38,24 @@ OB.chart = (function () {
   const range = (a, pad) => { const f = fin(a); return f.length ? [Math.floor(Math.min(...f) - pad), Math.ceil(Math.max(...f) + pad)] : [-1, 1]; };
 
   function band(g, X, Y, med, sd, k) {
-    g.fillStyle = "rgba(150,150,150,.28)"; g.beginPath();
-    const ok = med.map((m, i) => i).filter(i => Number.isFinite(med[i]) && Number.isFinite(sd[i]));
-    ok.forEach(i => g.lineTo(X(i), Y(med[i] + k * sd[i])));
-    ok.slice().reverse().forEach(i => g.lineTo(X(i), Y(med[i] - k * sd[i])));
-    g.closePath(); g.fill();
+    g.fillStyle = "rgba(150,150,150,.28)";
+    for (let start = 0; start < med.length;) {
+      while (start < med.length && !(Number.isFinite(med[start]) && Number.isFinite(sd[start]))) start++;
+      let end = start;
+      while (end < med.length && Number.isFinite(med[end]) && Number.isFinite(sd[end])) end++;
+      if (end > start) {
+        g.beginPath();
+        for (let i = start; i < end; i++) g.lineTo(X(i), Y(med[i] + k * sd[i]));
+        for (let i = end - 1; i >= start; i--) g.lineTo(X(i), Y(med[i] - k * sd[i]));
+        g.closePath(); g.fill();
+      }
+      start = end + 1;
+    }
     g.strokeStyle = "#8a8a8a"; g.setLineDash([3, 3]); line(g, X, Y, med); g.setLineDash([]);
   }
-  function line(g, X, Y, arr) { g.beginPath(); let up = true; arr.forEach((v, i) => { if (!Number.isFinite(v)) { up = true; return; } up ? g.moveTo(X(i), Y(v)) : g.lineTo(X(i), Y(v)); up = false; }); g.stroke(); }
-  function dots(g, X, Y, arr, c) { g.fillStyle = c; arr.forEach((v, i) => Number.isFinite(v) && g.fillRect(X(i) - 1.5, Y(v) - 1.5, 3, 3)); }
+  function line(g, X, Y, arr) { let active = false; g.beginPath(); arr.forEach((v, i) => { if (!Number.isFinite(v)) { active = false; return; } if (active) g.lineTo(X(i), Y(v)); else g.moveTo(X(i), Y(v)); active = true; }); g.stroke(); }
+  function dots(g, X, Y, arr, c) { g.fillStyle = c; arr.forEach((v, i) => { if (Number.isFinite(v)) g.fillRect(X(i) - 1.5, Y(v) - 1.5, 3, 3); }); }
+  function empty(g, w, h, message) { g.fillStyle = '#555'; g.font = '11px Tahoma, sans-serif'; g.textAlign = 'center'; g.fillText(message, w / 2, h / 2); }
   function marker(g, X, h, i, label) {
     if (i == null || i < 0) return;
     const x = Math.round(X(i)) + 0.5;
@@ -58,8 +69,10 @@ OB.chart = (function () {
 
   function backscatter(cv, dates, p, sinceIdx, head) {
     const { g, w, h } = setup(cv);
-    const all = p.hh.concat(p.hv, p.peer.hh_med.map((m, i) => m + 2 * p.peer.hh_sd[i]), p.peer.hv_med.map((m, i) => m - 2 * p.peer.hv_sd[i]));
-    const [lo, hi] = range(all, 1);
+    const bound = (med, sd, sign) => med.map((m,i) => Number.isFinite(m) && Number.isFinite(sd[i]) ? m + sign * 2 * sd[i] : null);
+    const all = p.hh.concat(p.hv, bound(p.peer.hh_med,p.peer.hh_sd,1), bound(p.peer.hv_med,p.peer.hv_sd,-1)).filter(Number.isFinite);
+    if (!dates.length || !all.length) { empty(g,w,h,'No GCOV HH/HV measurements loaded for this pixel.'); return; }
+    const lo = Math.floor(Math.min(...all) - 1), hi = Math.ceil(Math.max(...all) + 1);
     const { X, Y } = frame(g, w, h, dates, lo, hi);
     band(g, X, Y, p.peer.hh_med, p.peer.hh_sd, 2);
     band(g, X, Y, p.peer.hv_med, p.peer.hv_sd, 2);
@@ -69,19 +82,20 @@ OB.chart = (function () {
     g.lineWidth = 1;
     marker(g, X, h, sinceIdx, sinceIdx != null ? "off-beat" : "");
     if (head != null) playhead(g, X, h, head);
+    if (!p.hh.some(Number.isFinite) || !p.hv.some(Number.isFinite)) empty(g,w,28, !p.hh.some(Number.isFinite) ? 'HH unavailable' : 'HV unavailable');
   }
 
   function displacement(cv, dates, p, sinceIdx, head) {
     const { g, w, h } = setup(cv);
-    if (!p.disp) {
+    if (!dates.length || !p.disp || !p.disp.some(Number.isFinite)) {
       g.fillStyle = "#555"; g.font = "12.5px W95FA, Tahoma, sans-serif"; g.textAlign = "center";
-      g.fillText("No GUNW interferogram covers this pixel yet.", w / 2, h / 2 + 4);
+      g.fillText("No validated GUNW displacement for this pixel.", w / 2, h / 2 + 4);
       return;
     }
-    const all = p.disp.concat(p.peer_disp.map(v => v + 2.4), p.peer_disp.map(v => v - 2.4));
-    const [lo, hi] = range(all, 0);
+    const all = p.disp.concat(p.peer_disp || []).filter(Number.isFinite);
+    const lo = Math.floor(Math.min(...all) - 1), hi = Math.ceil(Math.max(...all) + 1);
     const { X, Y } = frame(g, w, h, dates, lo, hi);
-    band(g, X, Y, p.peer_disp, p.peer_disp.map(() => 1.2), 2);
+    if (p.peer_disp && p.peer_disp_sd) band(g, X, Y, p.peer_disp, p.peer_disp_sd, 2);
     g.lineWidth = 1.6; g.strokeStyle = "#d86b00"; line(g, X, Y, p.disp); dots(g, X, Y, p.disp, "#d86b00"); g.lineWidth = 1;
     marker(g, X, h, sinceIdx, "");
     if (head != null) playhead(g, X, h, head);

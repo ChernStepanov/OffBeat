@@ -1,8 +1,14 @@
-// Wires sites, the z-score raster, site layers, the pixel card, the patch list and the player.
-(function () {
+// Wires sites, the z-score raster, the pixel card, the patch list and the player.
+(async function () {
   const $ = id => document.getElementById(id);
-  const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null,
-                  extra: {}, vectors: [], loading: 0 };
+  try { await OB.loadData(); } catch (error) {
+    $('data-status').textContent = 'Real data unavailable: ' + error.message;
+    $('sb-state').textContent = error.message;
+    $('sb-src').textContent = 'No measurements loaded';
+    $('play-hint').textContent = 'Cannot load real data. Check the static server and data/mexico.json.';
+    return;
+  }
+  const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
 
   // --- maps: anomaly raster over greyed imagery + optical map that follows it ---
   const IMAGERY = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
@@ -71,9 +77,18 @@
     state.raster = null;
     if (!$("l-offbeat").checked) return;
     const g = state.site.grid, t = state.z;
+    if (!g.z.some(Number.isFinite) && state.site.pixels) {
+      state.raster = paint(i => {
+        const value = state.site.pixels[i].hv.at(-1);
+        if (!Number.isFinite(value)) return null;
+        const q = Math.max(0, Math.min(1, (value + 25) / 25));
+        return [Math.round(255*q), 70, Math.round(255*(1-q)), 180];
+      }).addTo(map);
+      return;
+    }
     state.raster = paint(i => {
       const a = Math.abs(g.z[i]);
-      if (!(a >= t) || !g.style[i] || g.cover[i] === 80) return null;
+      if (!Number.isFinite(g.z[i]) || a < t || g.cover[i] === 80) return null;
       const [r, gg, b] = STYLE_RGB[g.style[i]];
       return [r, gg, b, Math.round(255 * Math.min(1, 0.55 + (a - t) / 6))];
     }).addTo(map);
@@ -85,7 +100,7 @@
     if (!$("l-cover").checked) return;
     const g = state.site.grid;
     state.coverRaster = paint(i => OB.COVER[g.cover[i]] ? rgb(OB.COVER[g.cover[i]].color).concat(150) : null).addTo(map);
-    restack();
+    if (state.raster) state.raster.bringToFront();
   }
 
   function restack() {
@@ -180,7 +195,7 @@
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
-    }).join("") : `<tr><td colspan="5">Nothing passes |z| >= ${state.z}. Lower the threshold.</td></tr>`;
+    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'No anomaly classification: one measured pair is insufficient for a trend.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true); };
   $("top").addEventListener("click", rowPick);
@@ -190,8 +205,8 @@
     const g = state.site.grid;
     state.patches = findPatches();
     let px = 0; for (let i = 0; i < g.z.length; i++) if (g.style[i] && Math.abs(g.z[i]) >= state.z) px++;
-    drawRaster(); restack(); drawTop();
-    $("sb-count").textContent = `${state.patches.length} patches, ${px} px at |z| >= ${state.z}, pixel ${g.cellM} m`;
+    drawRaster(); drawTop();
+    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} patches · ${px} px at |z| ≥ ${state.z}` : 'No validated anomaly scores';
   }
 
   // --- validation summary (Amazon, from pipeline) ---
@@ -222,21 +237,23 @@
     state.pixel = p;
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
-    $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : `class ${p.cover}`;
-    $("p-peers").textContent = p.peers ? `${p.peers} px, same class` : "same class, within 3 km";
-    $("p-z").textContent = (p.z > 0 ? "+" : "") + p.z.toFixed(2);
-    $("p-style").innerHTML = st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
-    $("p-since").textContent = p.since || "-";
+    $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
+    $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} valid HV samples at latest date; same class, ≤1 km`;
+    $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
+    $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
+    $("p-since").textContent = p.since || "—";
     $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
-    $("p-extra").innerHTML = Object.entries(p.extra || {}).filter(([, v]) => !isNaN(v))
-      .map(([k, v]) => `<tr><th scope="row">${SITE_LAYERS[k].card}</th><td>${SITE_LAYERS[k].fmt(v)}</td></tr>`).join("");
+    $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;
+    $('p-extra').innerHTML = Object.entries(p.extra || {}).filter(([, v]) => Number.isFinite(v))
+      .map(([k, v]) => `<tr><th scope="row">${SITE_LAYERS[k].card}</th><td>${SITE_LAYERS[k].fmt(v)}</td></tr>`).join('');
     const b = g.bbox, dl = (b.n - b.s) / g.h, dw = (b.e - b.w) / g.w;
     const rect = [[b.n - (y + 1) * dl, b.w + x * dw], [b.n - y * dl, b.w + (x + 1) * dw]];
     cellBox.setBounds(rect).addTo(map); cellBoxOptic.setBounds(rect).addTo(optic);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
-    $("play").disabled = false;
-    $("play-hint").textContent = `Peers keep the beat, the pixel plays its ${channelName(p)} curve. When it slips, you hear it.`;
+    const v = voice(p);
+    $("play").disabled = !v.pix.some((x, i) => Number.isFinite(x) && Number.isFinite(v.med[i]) && Number.isFinite(v.sd[i]));
+    $("play-hint").textContent = $("play").disabled ? 'Audio unavailable: measured pixel and peer series required.' : `Peers keep the beat, the pixel plays its ${channelName(p)} curve.`;
     drawTop();
   }
 
@@ -244,7 +261,7 @@
   function drawCharts(head) {
     const p = state.pixel; if (!p) return;
     OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
-    OB.chart.displacement($("c-disp"), state.site.dates, p, sinceIdx(), head);
+    OB.chart.displacement($("c-disp"), state.site.displacement_dates || state.site.dates, p, null, head);
   }
 
   function channelName(p) {
@@ -252,7 +269,7 @@
     return p.style === "flood" ? "HH" : "HV";
   }
   function voice(p) {
-    if ((p.style === "drift" || p.style === "step") && p.disp) return { pix: p.disp, med: p.peer_disp, sd: p.peer_disp.map(() => 1.5) };
+    if ((p.style === "drift" || p.style === "step") && p.disp && p.peer_disp && p.peer_disp_sd) return { pix: p.disp, med: p.peer_disp, sd: p.peer_disp_sd };
     if (p.style === "flood") return { pix: p.hh, med: p.peer.hh_med, sd: p.peer.hh_sd };
     return { pix: p.hv, med: p.peer.hv_med, sd: p.peer.hv_sd };
   }
@@ -270,19 +287,27 @@
     const ticket = ++state.loading;
     $("sb-state").textContent = `Loading ${fallback.name}...`;
     let s;
-    try { s = await OB.data.load(fallback.id, fallback); }
-    catch (e) { console.warn("site data failed, using the built-in sample", e); s = fallback; }
+    try { s = fallback.binary ? await OB.data.load(fallback.dataId || fallback.id, fallback) : fallback; if (fallback.binary) s.id = fallback.id; }
+    catch (e) { $('data-status').textContent = `Real data unavailable: ${e.message}`; $('sb-state').textContent = 'Load failed'; return; }
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
+    $('data-status').textContent = s.message || s.source;
+    $('z').disabled = !s.grid.z.some(Number.isFinite);
+    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
+    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : 'Measured HV gamma0, blue −25 to red 0 dB; click a sample';
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
     buildSiteLayers(); drawValidation();
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
-    $("sb-state").textContent = `Ready, ${s.dates.length} acquisitions, ${s.dates[0]} to ${s.dates[s.dates.length - 1]}`;
+    $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;
     if (state.patches[0]) pickCell(state.patches[0].peak, false);
+    else {
+      const first = s.pixels ? s.pixels.findIndex(p => p.disp && p.disp.some(Number.isFinite) && p.hv.some(Number.isFinite)) : -1;
+      pickCell(first >= 0 ? first : Math.floor(s.grid.h / 2) * s.grid.w + Math.floor(s.grid.w / 2), false);
+    }
     if (location.hash !== "#" + s.id) history.replaceState(null, "", "#" + s.id);
   }
 

@@ -28,9 +28,12 @@ OB.sonify = (function () {
     stop();
     ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
     if (ctx.state === "suspended") ctx.resume();
-    const all = series.pix.concat(series.med), lo = Math.min(...all), hi = Math.max(...all) + 0.01;
+    const all = series.pix.concat(series.med).filter(Number.isFinite);
+    if (!all.length) { onEnd && onEnd(); return; }
+    const lo = Math.min(...all), hi = Math.max(...all) + 0.01;
     const t0 = ctx.currentTime + 0.08;
     series.pix.forEach((v, i) => {
+      if (!Number.isFinite(v) || !Number.isFinite(series.med[i]) || !Number.isFinite(series.sd[i])) return;
       const t = t0 + i * BEAT;
       const z = Math.min(4, Math.abs(v - series.med[i]) / (series.sd[i] || 1));
       click(t);

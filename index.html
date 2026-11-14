@@ -47,7 +47,7 @@
         <div class="win-b">
           <fieldset class="group">
             <legend>Map</legend>
-            <label><input type="checkbox" id="l-offbeat" checked> Off-Beat raster</label>
+            <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
           </fieldset>
           <fieldset class="group" id="site-layers" hidden>
@@ -81,17 +81,19 @@
 
     <!-- Main column -->
     <main id="main">
+      <p id="data-status" role="status">Loading measured data...</p>
+      <p><a href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a> · <a href="docs/real-nisar.md">Processing and limitations</a></p>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
         <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
         <div class="win-b win-b--flush">
           <div class="maps">
             <div class="maps__pane">
-              <div class="pane-label">z-score vs. same-class peers, click any pixel</div>
+              <div class="pane-label" id="map-caption">Measured HV gamma0, blue −25 to red 0 dB; click a sample</div>
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
             <div class="maps__pane">
-              <div class="pane-label">Optical check, Sentinel-2 cloudless (EOX)</div>
+              <div class="pane-label">Optical context, Sentinel-2 cloudless 2020 (EOX)</div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>
@@ -104,12 +106,13 @@
           <div class="card">
             <table class="props" id="px-props">
             <tbody>
-              <tr><th scope="row">Land cover</th><td id="p-cover">-</td></tr>
+              <tr><th scope="row">WorldCover class</th><td id="p-cover">-</td></tr>
               <tr><th scope="row">Peers</th><td id="p-peers">-</td></tr>
               <tr><th scope="row">z-score</th><td id="p-z">-</td></tr>
               <tr><th scope="row">Style</th><td id="p-style">-</td></tr>
               <tr><th scope="row">Since</th><td id="p-since">-</td></tr>
               <tr><th scope="row">Location</th><td id="p-loc">-</td></tr>
+              <tr><th scope="row">GUNW quality</th><td id="p-quality">-</td></tr>
             </tbody>
             <tbody id="p-extra"></tbody>
             </table>
@@ -119,7 +122,7 @@
                 <canvas id="c-bs" height="190" aria-label="HH and HV backscatter of the pixel against its peers"></canvas>
               </div>
               <div class="plot">
-                <div class="pane-label">Line-of-sight displacement, cm (GUNW)</div>
+                <div class="pane-label">Apparent relative LOS change, cm (GUNW); + toward sensor</div>
                 <canvas id="c-disp" height="120" aria-label="Displacement of the pixel against its peers"></canvas>
               </div>
             </div>
@@ -151,9 +154,9 @@
         <div class="win-t"><h2 id="t-about">How OffBeat finds a pixel out of step</h2></div>
         <div class="win-b">
           <div class="paper">
-            <p>NISAR has only a few months of history, so a pixel's own past is too short to compare against. OffBeat compares it with its neighbours instead: every pixel of the same ESA WorldCover class within a few kilometres.</p>
-            <p>If all the rice paddies around scatter alike and one drops sharply in HV, that pixel gets a z-score against its peers. A classifier then reads the shape of the curve and names the style: a drop, a flood jump, a slow drift or a step.</p>
-            <p>The optical pane on the right follows the map, so every finding can be checked against a picture.</p>
+            <p>This case shows measured NISAR HH/HV at sparse sample locations and a single 12-day GUNW pair. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
+            <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
+            <p>No anomaly classifier or patch areas are published from this short case. Optical imagery is a 2020 composite for context, not a date-matched check. Missing and rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
@@ -167,14 +170,14 @@
 </div>
 
 <div class="sbar" role="status" aria-live="polite">
-  <span id="sb-state">Loading...</span>
-  <span id="sb-count">-</span>
-  <span id="sb-src">Source: synthetic</span>
+  <span id="sb-state">Loading…</span>
+  <span id="sb-count">—</span>
+  <span id="sb-src">Source: no measurements loaded</span>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="js/styles.js"></script>
-<script src="js/mock.js"></script>
+<script src="js/binary-data.js"></script>
 <script src="js/data.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>
