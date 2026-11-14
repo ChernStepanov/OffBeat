@@ -23,6 +23,11 @@ OB.bindImagery = function (map, url, options) {
       });
     }
   });
-  const detail = new Detailed(url, {...options, crossOrigin: 'anonymous', minZoom: 17, maxNativeZoom: 19, maxZoom: 19, keepBuffer: 1}).addTo(map);
-  return {base, detail};
+  // Keep each available level underneath the next: if level 19 is missing,
+  // level 18 or 17 is sharper than jumping directly back to level 16.
+  const details = [17, 18, 19].map(level => new Detailed(url, {
+    ...options, crossOrigin: 'anonymous', minZoom: level,
+    maxNativeZoom: level, maxZoom: 19, keepBuffer: 1,
+  }).addTo(map));
+  return {base, details};
 };

@@ -61,7 +61,7 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   function showStatus() {
     if (!caption) return;
-    const past = map.getZoom() >= CRISP_FROM ? ' | Zoomed past radar detail: one square is one ~19 m NISAR browse pixel' : '';
+    const past = map.getZoom() >= CRISP_FROM ? ' | Radar coverage hidden at this zoom; zoom out to see the dated strips.' : '';
     const busy = inflight > 0 ? ` | Loading NASA radar: ${inflight} request${inflight === 1 ? '' : 's'} left` : '';
     const text = caption + past + busy + (failedTiles
       ? ` | ${failedTiles} incomplete tile${failedTiles === 1 ? '' : 's'}: NASA did not answer, retrying. These gaps are not confirmed missing coverage.`
@@ -317,6 +317,7 @@ OB.bindNisarMap = function (map, toggle, status) {
       }
       if (toggle.checked) {
         layer.addTo(map);
+        layer.setOpacity(map.getZoom() >= CRISP_FROM ? 0 : 0.9);
         showStatus();
       }
     } catch {
@@ -328,7 +329,12 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   toggle.addEventListener('change', update);
   map.whenReady(update);
-  map.on('zoomend', () => { const r = rendering(); for (const tile of tiles) tile.style.imageRendering = r; showStatus(); });
+  map.on('zoomend', () => {
+    const r = rendering();
+    for (const tile of tiles) tile.style.imageRendering = r;
+    if (layer) layer.setOpacity(map.getZoom() >= CRISP_FROM ? 0 : 0.9);
+    showStatus();
+  });
 
   return function cellBounds(latlng) {
     if (!toggle.checked || !layer || !map.hasLayer(layer)) return null;

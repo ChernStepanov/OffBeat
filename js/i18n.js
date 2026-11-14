@@ -124,6 +124,8 @@
     const match=value.match(/^(\s*)([\s\S]*?)(\s*)$/), core=match[2];
     let translated=normalizedTranslations[normalize(core)];
     if (!translated) translated=core.replace(/^Measured HH\/HV on (\d+) dates; exploratory peer deviations and curve shapes\. Event cause unverified; GUNW remains separate\.$/, 'Измерения HH/HV за $1 дат; отклонения от соседей и формы кривых требуют проверки. Причина не подтверждена; GUNW рассматривается отдельно.')
+      .replace('Zoomed in: showing Esri context; zoom out to see the dated image.', 'При сильном приближении показан обзорный снимок Esri; отдалите карту, чтобы увидеть снимок за выбранную дату.')
+      .replace('Radar coverage hidden at this zoom; zoom out to see the dated strips.', 'На этом масштабе покрытие радара скрыто; отдалите карту, чтобы увидеть полосы по датам.')
       .replace(/^Scale: (.+) m\/px \| Approx\. viewing altitude: (.+)$/, 'Масштаб: $1 м/пикс. | Примерная высота обзора: $2')
       .replace(/^(\d+) valid HV samples at latest date; same class, ≤1 km$/, '$1 пригодных измерений HV на последнюю дату; тот же класс, ≤1 км');
     return match[1]+translated+match[3];
