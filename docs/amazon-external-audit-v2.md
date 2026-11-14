@@ -1,0 +1,44 @@
+# Amazon SAR: revised external and quality-aware audit
+
+This is a retrospective revision to the prior nearest-scene check; **nothing was preregistered**. Reproduce the offline candidate report, then the network-dependent external report:
+
+```sh
+/tmp/opencode/nasa-venv/bin/python scripts/eda_amazon_spatial_v2.py > data/amazon-spatial-sar-eda-v2.json
+/tmp/opencode/nasa-venv/bin/python scripts/audit_amazon_external_v2.py > data/amazon-spatial-external-audit-v2.json
+/tmp/opencode/nasa-venv/bin/python -m pytest scripts/test_eda_amazon_spatial_v2.py scripts/test_audit_amazon_external_v2.py -q
+```
+
+The corrected offline strong rule requires both dHH < 0 and dHV < 0, ranking by RMS `sqrt((dHH²+dHV²)/2)`; low-change controls use minimum RMS, not absolute signed mean. The former selection is retained in `data/amazon-spatial-sar-eda-v2-original-selection.json` and explicitly compared with the corrected points in both JSON summaries. Two strong points and all seeded-random controls stayed the same; two strong points and all three low-change controls changed. Selection is retrospective, separated cells are not independent events, and no neighbor counts are construed as events.
+
+## Exact SAR times and Sentinel-2 inventory
+
+Local NISAR L2 GCOV provisional granules and exact acquisition intervals:
+
+- `NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001`: **2026-08-23 09:04:09–09:04:43 UTC**.
+- `NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001`: **2026-09-04 09:04:08–09:04:43 UTC**.
+
+The S2 search windows are exact 30-day brackets anchored to those times: pre **2026-07-24 09:04:09–2026-08-23 09:04:09 UTC**, post **2026-09-04 09:04:43–2026-10-04 09:04:43 UTC**. Earth Search STAC collections are `sentinel-2-c1-l2a` and `sentinel-2-pre-c1-l2a`. The script queries each of the ten revised points in both windows, follows every advertised STAC `next` link, and reads the SCL COG of every returned unique scene. Each revised point has 9 pre and 9 post scenes (18 unique items across points). It preserves per-scene ID, exact acquisition time, scene-level cloud metadata, asset URL/CRS/resolution, candidate-pixel SCL, and seconds offset from the relevant exact SAR boundary. All 40 STAC response pages, SHA-256 hashes, HTTP metadata and fetch times are recorded in the JSON; raw JSON bodies are in `data/amazon-external-audit-v3-raw/`. No STAC total-matched count was returned/verified, so pagination completion means only that no further advertised page link remained, not that this is a complete Sentinel archive.
+
+Raster sampling used Rasterio, transforming candidate lon/lat from EPSG:4326 into each asset CRS (EPSG:32722), then sampling the containing pixel. The post-hoc quality rule treats SCL **4 and 5 equally**: both are eligible clear land classes, with no preference by class. Nodata, defective, cloud, shadow, unclassified and other non-4/5 categories are ineligible. Among eligible observations choose the one nearest in absolute time to the exact SAR boundary, then earlier UTC datetime, then item ID. This avoids suppressing possible 4↔5 changes through class-prioritized scene selection. It remains a retrospective descriptive selection, not preregistered; all per-pixel scenes remain in the report.
+
+### Broader 2026-08-14 → 2026-09-21 bracket
+
+The broad comparison is intentionally reported separately from the closest-scene method. Scene IDs are `S2A_T22MFV_20260814T134225_L2A` (**2026-08-14 13:44:04.495 UTC**) and `S2C_T22MFV_20260921T134246_L2A` (**2026-09-21 13:43:48.815 UTC**), separated by **37 days 23:59:44.320**. Relative to NISAR, the first is 8 days 19:20:04 before the 23-Aug acquisition start; the second is 17 days 04:25:45 after the 04-Sep acquisition end. This much wider, post-hoc optical bracket **cannot date a change to the SAR interval or prove clearing**.
+
+For the previous ten selected cells, direct re-sampling of scenes **S2C_T22MFV_20260802T133834_L2A** (2026-08-02 13:43:49.700Z), **S2A_T22MFV_20260804T134226_L2A** (2026-08-04 13:44:06.123Z), and **S2A_T22MFV_20260814T134225_L2A** gives class 4 for all ten cells on all three dates. The **S2C_T22MFV_20260921T134246_L2A** (2026-09-21 13:43:48.815Z) values in prior candidate order are **5, 5, 4, 4, 4, 4, 4, 4, 5, 5**. This independently re-samples Sol's observation. On the corrected strong points the wider 14-Aug→21-Sep pair is 4→5, 4→5, 4→4, 4→4; the latter means only that these two scene pixels share a class, not temporal stability. Class 4 is the SCL vegetation class; class 5 means “not vegetated,” not deforestation. Neither transition establishes forest loss or stability. SCL is a scene classifier, not an independent disturbance label.
+
+The old nearest-to-SAR-edge scenes remain in the full inventory: 22-Aug before and 06-Sep after. Their pixel classifications were often cloud, shadow or unclassified. The full per-pixel sequence for revised low-change cell **17,3** is preserved: pre `[9,9,4,4,9,4,4,9,5]` on 25-Jul, 28-Jul, 02-Aug, 04-Aug, 07-Aug, 12-Aug, 14-Aug, 17-Aug, 22-Aug; post `[8,9,8,8,5,10,4,9,8]` on 06-Sep, 11-Sep, 13-Sep, 16-Sep, 21-Sep, 23-Sep, 26-Sep, 01-Oct, 03-Oct. The neutral nearest-clear 4/5 rule selects 22-Aug class 5 before and 21-Sep class 5 after; 26-Sep class 4 is also present. This sequence may reflect a classifier/surface change, but neither its timing nor cause is resolved by SCL. It is not evidence of stability or a confirmed disturbance.
+
+## Geometry repair, alerts, fires and source availability
+
+Local `data/amazon/alerts.geojson` has 373 features. Shapely validity inspection finds **200 invalid geometries**: `make_valid` repairs all 200 into valid results (198 MultiPolygon, 2 GeometryCollection). Candidate spatial tests use repaired geometries; `covers` is used, so boundary points count as covered. Metric distance is computed after projection to UTM 22S. There are 49 candidate–polygon proximity pairs within 2 km, but **zero point-cover matches**, including boundary. These are proximity pairs, not independent alerts/events. Among the 49, 36 records are dated before the fixed 30-day pre-window, 3 are dated 2026-08-23 (same SAR calendar day; within-day ordering ambiguous), and 10 are dated between the SAR calendar dates; none is after 24-Aug. Alert record dates do not establish public-availability vintage.
+
+The independent INPE TerraBrasilis DETER WFS endpoint was queried for the current candidate bbox, layer `deter-amz:deter_amz`. It reports 7 matched/returned features, and pagination is complete against `numberMatched=7`; none has a `view_date` in the inclusive date-only 24-Jul–04-Oct window. This is bounded to this query/bbox and current WFS response. DETER `view_date` is date-only and `publish_month` month-only; exact within-day ordering/publication time is unknown. Date-only alert/fire records on timed window boundaries (24-Jul and 04-Oct) or SAR dates (23-Aug, 04-Sep) are tagged as time-ambiguous. Raw WFS response, its hash, URL, fetch time and pagination metadata are retained.
+
+The local fire-point file yields 10 candidate–detection proximity pairs within 2 km during 24-Jul–04-Oct, five on 05-Sep and five on 03-Oct, at 1,278–1,879 m; none is within 500 m. These are active-fire points, not burned-area polygons; repeated detections may be the same fire. Raw local date/time fields are retained, but the JSON does not declare timezone semantics for its `time` value. This local subset does not demonstrate complete FIRMS coverage. No NASA FIRMS Archive API key was available.
+
+The alert GeoJSON and SAR subset sidecars/NPZs, fires input, candidate report and current remote catalogue responses are SHA-256 hashed in the output. Full SCL COG bytes/HTTP range responses are not archived or hashed: the report preserves STAC IDs, asset URLs and sampled values. GLAD's live query/archive was not obtained; checked-in GLAD-L/DETER GeoJSON only was inspected, and GFW API access requires authentication. No independently confirmed event linked to the revised Amazon SAR candidates/controls, or independently published matching NISAR event outside Amazon, was verified in the sources checked. These are evidence/access limits, not evidence no such events exist.
+
+## Interpretation
+
+Cloud/shadow/unclassified observations are not vegetation evidence. “Not vegetated” is not synonymous with forest loss. Neither a class-4→5 SCL sequence, GLAD/DETER temporal proximity, nor a fire point establishes the date, cause, or occurrence of a clearing event. No matching alert/fire is not evidence of absence outside these data, windows, geometries, buffers, or coverage. The clipped provisional SAR subset and spatially separated sample cells do not support mapped-area estimates or independent-event counts. No model training or causal attribution is performed.

@@ -1,0 +1,1321 @@
+{
+  "analysis": "retrospective 3-acquisition median HV boundary EDA",
+  "seed": 33,
+  "window_acquisitions": 3,
+  "training": false,
+  "units": "HV gamma0 backscatter, dB",
+  "sites": [
+    {
+      "id": "mexico",
+      "dates": [
+        "2025-10-30",
+        "2025-11-11",
+        "2025-11-23",
+        "2025-12-05",
+        "2025-12-17",
+        "2025-12-29",
+        "2026-01-10",
+        "2026-01-22",
+        "2026-02-03",
+        "2026-02-15",
+        "2026-02-27",
+        "2026-03-11",
+        "2026-03-23",
+        "2026-04-04",
+        "2026-04-16",
+        "2026-04-28",
+        "2026-05-10",
+        "2026-05-22",
+        "2026-06-03",
+        "2026-06-15",
+        "2026-06-27",
+        "2026-07-09",
+        "2026-07-21",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-07",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "sampled_points": 1024,
+      "boundaries": [
+        {
+          "boundary": "2025-12-05",
+          "before_dates": [
+            "2025-10-30",
+            "2025-11-11",
+            "2025-11-23"
+          ],
+          "after_dates": [
+            "2025-12-05",
+            "2025-12-17",
+            "2025-12-29"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -9.644214999999999,
+          "hv_median_after_db": -10.945170000000001,
+          "site_median_contrast_after_minus_before_db": -1.3009550000000019,
+          "raw_abs_change_median_db": 1.5712899999999996,
+          "raw_change_median_db": -1.3340500000000004,
+          "peer_adjusted_change_median_db": 0.07268000000000097,
+          "peer_adjusted_abs_change_median_db": 1.2428600000000003,
+          "random_control_abs_change_median_db": 1.7065149999999996,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.14098000000000077,
+          "ranked_abs_change_top10_point_indices": [
+            713,
+            383,
+            487,
+            297,
+            95,
+            375,
+            19,
+            173,
+            82,
+            755
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            383,
+            713,
+            487,
+            95,
+            656,
+            84,
+            476,
+            505,
+            676,
+            341
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2025-12-17",
+          "before_dates": [
+            "2025-11-11",
+            "2025-11-23",
+            "2025-12-05"
+          ],
+          "after_dates": [
+            "2025-12-17",
+            "2025-12-29",
+            "2026-01-10"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -10.01615,
+          "hv_median_after_db": -10.92145,
+          "site_median_contrast_after_minus_before_db": -0.9053000000000004,
+          "raw_abs_change_median_db": 1.4317149999999987,
+          "raw_change_median_db": -0.8033300000000003,
+          "peer_adjusted_change_median_db": 0.021079999999999544,
+          "peer_adjusted_abs_change_median_db": 1.2261500000000005,
+          "random_control_abs_change_median_db": 1.6757549999999988,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.12236000000000047,
+          "ranked_abs_change_top10_point_indices": [
+            713,
+            16,
+            762,
+            341,
+            487,
+            187,
+            551,
+            81,
+            931,
+            755
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            713,
+            187,
+            656,
+            762,
+            969,
+            81,
+            931,
+            341,
+            915,
+            676
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2025-12-29",
+          "before_dates": [
+            "2025-11-23",
+            "2025-12-05",
+            "2025-12-17"
+          ],
+          "after_dates": [
+            "2025-12-29",
+            "2026-01-10",
+            "2026-01-22"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -10.85106,
+          "hv_median_after_db": -11.11377,
+          "site_median_contrast_after_minus_before_db": -0.2627100000000002,
+          "raw_abs_change_median_db": 1.6166749999999999,
+          "raw_change_median_db": -1.2552249999999994,
+          "peer_adjusted_change_median_db": 0.03827999999999676,
+          "peer_adjusted_abs_change_median_db": 1.2732199999999985,
+          "random_control_abs_change_median_db": 1.8083850000000004,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.1669900000000002,
+          "ranked_abs_change_top10_point_indices": [
+            94,
+            566,
+            341,
+            455,
+            363,
+            333,
+            551,
+            430,
+            174,
+            462
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            566,
+            468,
+            579,
+            497,
+            1022,
+            1013,
+            174,
+            341,
+            36,
+            30
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-01-10",
+          "before_dates": [
+            "2025-12-05",
+            "2025-12-17",
+            "2025-12-29"
+          ],
+          "after_dates": [
+            "2026-01-10",
+            "2026-01-22",
+            "2026-02-03"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -10.945170000000001,
+          "hv_median_after_db": -13.95604,
+          "site_median_contrast_after_minus_before_db": -3.010869999999999,
+          "raw_abs_change_median_db": 2.549945,
+          "raw_change_median_db": -2.4485000000000006,
+          "peer_adjusted_change_median_db": 0.2825199999999999,
+          "peer_adjusted_abs_change_median_db": 1.4502900000000025,
+          "random_control_abs_change_median_db": 2.725519999999999,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.2071000000000005,
+          "ranked_abs_change_top10_point_indices": [
+            189,
+            399,
+            183,
+            329,
+            31,
+            392,
+            59,
+            450,
+            155,
+            426
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            167,
+            500,
+            718,
+            168,
+            408,
+            898,
+            192,
+            189,
+            780,
+            347
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-01-22",
+          "before_dates": [
+            "2025-12-17",
+            "2025-12-29",
+            "2026-01-10"
+          ],
+          "after_dates": [
+            "2026-01-22",
+            "2026-02-03",
+            "2026-02-15"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -10.92145,
+          "hv_median_after_db": -14.415805,
+          "site_median_contrast_after_minus_before_db": -3.4943550000000005,
+          "raw_abs_change_median_db": 3.8316999999999988,
+          "raw_change_median_db": -3.8056050000000003,
+          "peer_adjusted_change_median_db": 0.35720000000000063,
+          "peer_adjusted_abs_change_median_db": 1.7538999999999998,
+          "random_control_abs_change_median_db": 3.268644999999999,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.22682000000000002,
+          "ranked_abs_change_top10_point_indices": [
+            268,
+            189,
+            403,
+            183,
+            306,
+            584,
+            185,
+            82,
+            84,
+            423
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            263,
+            14,
+            683,
+            408,
+            881,
+            348,
+            142,
+            502,
+            171,
+            168
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-02-03",
+          "before_dates": [
+            "2025-12-29",
+            "2026-01-10",
+            "2026-01-22"
+          ],
+          "after_dates": [
+            "2026-02-03",
+            "2026-02-15",
+            "2026-02-27"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -11.11377,
+          "hv_median_after_db": -14.992560000000001,
+          "site_median_contrast_after_minus_before_db": -3.8787900000000004,
+          "raw_abs_change_median_db": 2.944004999999999,
+          "raw_change_median_db": -2.924179999999999,
+          "peer_adjusted_change_median_db": 0.20612999999999992,
+          "peer_adjusted_abs_change_median_db": 1.5176800000000004,
+          "random_control_abs_change_median_db": 2.5949849999999994,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.24143999999999988,
+          "ranked_abs_change_top10_point_indices": [
+            403,
+            461,
+            218,
+            84,
+            187,
+            53,
+            579,
+            214,
+            183,
+            459
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            683,
+            109,
+            492,
+            199,
+            111,
+            196,
+            171,
+            928,
+            197,
+            105
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-02-15",
+          "before_dates": [
+            "2026-01-10",
+            "2026-01-22",
+            "2026-02-03"
+          ],
+          "after_dates": [
+            "2026-02-15",
+            "2026-02-27",
+            "2026-03-11"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -13.95604,
+          "hv_median_after_db": -14.992560000000001,
+          "site_median_contrast_after_minus_before_db": -1.0365200000000012,
+          "raw_abs_change_median_db": 1.710560000000001,
+          "raw_change_median_db": -1.3750650000000006,
+          "peer_adjusted_change_median_db": 0.10877999999999943,
+          "peer_adjusted_abs_change_median_db": 1.452919999999998,
+          "random_control_abs_change_median_db": 1.613760000000001,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.18710000000000004,
+          "ranked_abs_change_top10_point_indices": [
+            554,
+            375,
+            351,
+            589,
+            159,
+            20,
+            52,
+            438,
+            522,
+            617
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            492,
+            263,
+            199,
+            713,
+            683,
+            166,
+            377,
+            532,
+            498,
+            447
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-02-27",
+          "before_dates": [
+            "2026-01-22",
+            "2026-02-03",
+            "2026-02-15"
+          ],
+          "after_dates": [
+            "2026-02-27",
+            "2026-03-11",
+            "2026-03-23"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.415805,
+          "hv_median_after_db": -14.89939,
+          "site_median_contrast_after_minus_before_db": -0.4835849999999997,
+          "raw_abs_change_median_db": 1.1550250000000002,
+          "raw_change_median_db": -0.2553499999999982,
+          "peer_adjusted_change_median_db": 0.09896000000000171,
+          "peer_adjusted_abs_change_median_db": 1.1275999999999984,
+          "random_control_abs_change_median_db": 1.2546200000000005,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.10656000000000176,
+          "ranked_abs_change_top10_point_indices": [
+            623,
+            622,
+            263,
+            48,
+            403,
+            348,
+            345,
+            853,
+            661,
+            514
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            623,
+            492,
+            622,
+            263,
+            48,
+            348,
+            447,
+            403,
+            345,
+            780
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-03-11",
+          "before_dates": [
+            "2026-02-03",
+            "2026-02-15",
+            "2026-02-27"
+          ],
+          "after_dates": [
+            "2026-03-11",
+            "2026-03-23",
+            "2026-04-04"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.992560000000001,
+          "hv_median_after_db": -14.4688,
+          "site_median_contrast_after_minus_before_db": 0.5237600000000011,
+          "raw_abs_change_median_db": 1.2176250000000008,
+          "raw_change_median_db": 0.09087000000000067,
+          "peer_adjusted_change_median_db": 0.12973000000000035,
+          "peer_adjusted_abs_change_median_db": 1.1465700000000005,
+          "random_control_abs_change_median_db": 1.5202649999999984,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.10807000000000144,
+          "ranked_abs_change_top10_point_indices": [
+            713,
+            352,
+            655,
+            617,
+            403,
+            845,
+            12,
+            853,
+            684,
+            796
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            713,
+            352,
+            655,
+            617,
+            403,
+            682,
+            853,
+            796,
+            373,
+            684
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-03-23",
+          "before_dates": [
+            "2026-02-15",
+            "2026-02-27",
+            "2026-03-11"
+          ],
+          "after_dates": [
+            "2026-03-23",
+            "2026-04-04",
+            "2026-04-16"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.992560000000001,
+          "hv_median_after_db": -14.4688,
+          "site_median_contrast_after_minus_before_db": 0.5237600000000011,
+          "raw_abs_change_median_db": 1.1940049999999998,
+          "raw_change_median_db": 0.35103999999999935,
+          "peer_adjusted_change_median_db": -0.11359000000000208,
+          "peer_adjusted_abs_change_median_db": 1.1593599999999995,
+          "random_control_abs_change_median_db": 1.1469900000000006,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.13081999999999994,
+          "ranked_abs_change_top10_point_indices": [
+            819,
+            352,
+            713,
+            881,
+            35,
+            497,
+            655,
+            95,
+            244,
+            878
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            819,
+            352,
+            713,
+            881,
+            35,
+            143,
+            655,
+            876,
+            748,
+            497
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-04-04",
+          "before_dates": [
+            "2026-02-27",
+            "2026-03-11",
+            "2026-03-23"
+          ],
+          "after_dates": [
+            "2026-04-04",
+            "2026-04-16",
+            "2026-04-28"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.89939,
+          "hv_median_after_db": -14.465155,
+          "site_median_contrast_after_minus_before_db": 0.43423500000000104,
+          "raw_abs_change_median_db": 1.118335000000001,
+          "raw_change_median_db": 0.38985499999999984,
+          "peer_adjusted_change_median_db": -0.1117499999999989,
+          "peer_adjusted_abs_change_median_db": 1.2032799999999995,
+          "random_control_abs_change_median_db": 1.0458399999999992,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.09964000000000084,
+          "ranked_abs_change_top10_point_indices": [
+            713,
+            819,
+            623,
+            881,
+            497,
+            762,
+            412,
+            28,
+            348,
+            351
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            713,
+            819,
+            623,
+            881,
+            412,
+            762,
+            497,
+            748,
+            866,
+            896
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-04-16",
+          "before_dates": [
+            "2026-03-11",
+            "2026-03-23",
+            "2026-04-04"
+          ],
+          "after_dates": [
+            "2026-04-16",
+            "2026-04-28",
+            "2026-05-10"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.4688,
+          "hv_median_after_db": -14.552990000000001,
+          "site_median_contrast_after_minus_before_db": -0.08419000000000132,
+          "raw_abs_change_median_db": 1.1969150000000006,
+          "raw_change_median_db": 0.00623499999999888,
+          "peer_adjusted_change_median_db": -0.03186999999999962,
+          "peer_adjusted_abs_change_median_db": 1.1819800000000011,
+          "random_control_abs_change_median_db": 1.2041699999999995,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.09501999999999988,
+          "ranked_abs_change_top10_point_indices": [
+            352,
+            819,
+            383,
+            713,
+            172,
+            263,
+            412,
+            497,
+            881,
+            667
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            352,
+            383,
+            819,
+            172,
+            263,
+            713,
+            412,
+            497,
+            881,
+            622
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-04-28",
+          "before_dates": [
+            "2026-03-23",
+            "2026-04-04",
+            "2026-04-16"
+          ],
+          "after_dates": [
+            "2026-04-28",
+            "2026-05-10",
+            "2026-05-22"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.4688,
+          "hv_median_after_db": -14.535705,
+          "site_median_contrast_after_minus_before_db": -0.06690500000000021,
+          "raw_abs_change_median_db": 1.1281149999999998,
+          "raw_change_median_db": 0.04357999999999862,
+          "peer_adjusted_change_median_db": 0.04585000000000061,
+          "peer_adjusted_abs_change_median_db": 1.158590000000002,
+          "random_control_abs_change_median_db": 1.2581550000000017,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.09590999999999994,
+          "ranked_abs_change_top10_point_indices": [
+            352,
+            383,
+            795,
+            172,
+            683,
+            497,
+            35,
+            896,
+            384,
+            582
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            352,
+            383,
+            795,
+            683,
+            172,
+            896,
+            497,
+            384,
+            35,
+            582
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-05-10",
+          "before_dates": [
+            "2026-04-04",
+            "2026-04-16",
+            "2026-04-28"
+          ],
+          "after_dates": [
+            "2026-05-10",
+            "2026-05-22",
+            "2026-06-03"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.465155,
+          "hv_median_after_db": -14.535705,
+          "site_median_contrast_after_minus_before_db": -0.07055000000000078,
+          "raw_abs_change_median_db": 1.2015499999999997,
+          "raw_change_median_db": -0.2608550000000003,
+          "peer_adjusted_change_median_db": -0.04037999999999897,
+          "peer_adjusted_abs_change_median_db": 1.1485499999999966,
+          "random_control_abs_change_median_db": 1.3105349999999998,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.12118000000000073,
+          "ranked_abs_change_top10_point_indices": [
+            383,
+            19,
+            497,
+            683,
+            762,
+            896,
+            384,
+            818,
+            844,
+            394
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            383,
+            19,
+            896,
+            683,
+            384,
+            497,
+            762,
+            818,
+            844,
+            394
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-05-22",
+          "before_dates": [
+            "2026-04-16",
+            "2026-04-28",
+            "2026-05-10"
+          ],
+          "after_dates": [
+            "2026-05-22",
+            "2026-06-03",
+            "2026-06-15"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.552990000000001,
+          "hv_median_after_db": -14.535705,
+          "site_median_contrast_after_minus_before_db": 0.017285000000001105,
+          "raw_abs_change_median_db": 1.198245000000001,
+          "raw_change_median_db": -0.06538000000000066,
+          "peer_adjusted_change_median_db": -0.1418999999999997,
+          "peer_adjusted_abs_change_median_db": 1.2209699999999977,
+          "random_control_abs_change_median_db": 1.174055,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.12998999999999938,
+          "ranked_abs_change_top10_point_indices": [
+            263,
+            19,
+            352,
+            683,
+            172,
+            566,
+            497,
+            818,
+            865,
+            123
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            19,
+            263,
+            352,
+            683,
+            497,
+            172,
+            818,
+            566,
+            795,
+            621
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-06-03",
+          "before_dates": [
+            "2026-04-28",
+            "2026-05-10",
+            "2026-05-22"
+          ],
+          "after_dates": [
+            "2026-06-03",
+            "2026-06-15",
+            "2026-06-27"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.535705,
+          "hv_median_after_db": -14.412189999999999,
+          "site_median_contrast_after_minus_before_db": 0.12351500000000115,
+          "raw_abs_change_median_db": 1.2550749999999997,
+          "raw_change_median_db": 0.15189999999999948,
+          "peer_adjusted_change_median_db": -0.07554000000000372,
+          "peer_adjusted_abs_change_median_db": 1.207460000000001,
+          "random_control_abs_change_median_db": 1.1114099999999998,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.11876000000000175,
+          "ranked_abs_change_top10_point_indices": [
+            647,
+            19,
+            352,
+            389,
+            683,
+            488,
+            169,
+            367,
+            489,
+            172
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            19,
+            647,
+            352,
+            169,
+            389,
+            488,
+            683,
+            189,
+            684,
+            123
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-06-15",
+          "before_dates": [
+            "2026-05-10",
+            "2026-05-22",
+            "2026-06-03"
+          ],
+          "after_dates": [
+            "2026-06-15",
+            "2026-06-27",
+            "2026-07-09"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.535705,
+          "hv_median_after_db": -14.299,
+          "site_median_contrast_after_minus_before_db": 0.2367050000000006,
+          "raw_abs_change_median_db": 1.3360749999999992,
+          "raw_change_median_db": 0.34035499999999974,
+          "peer_adjusted_change_median_db": -0.06883999999999801,
+          "peer_adjusted_abs_change_median_db": 1.307409999999999,
+          "random_control_abs_change_median_db": 1.2239149999999999,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.09931999999999874,
+          "ranked_abs_change_top10_point_indices": [
+            647,
+            213,
+            367,
+            233,
+            541,
+            26,
+            32,
+            699,
+            818,
+            442
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            647,
+            417,
+            818,
+            541,
+            699,
+            213,
+            560,
+            442,
+            976,
+            32
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-06-27",
+          "before_dates": [
+            "2026-05-22",
+            "2026-06-03",
+            "2026-06-15"
+          ],
+          "after_dates": [
+            "2026-06-27",
+            "2026-07-09",
+            "2026-07-21"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.535705,
+          "hv_median_after_db": -14.299,
+          "site_median_contrast_after_minus_before_db": 0.2367050000000006,
+          "raw_abs_change_median_db": 1.3231799999999998,
+          "raw_change_median_db": 0.4341349999999995,
+          "peer_adjusted_change_median_db": 0.009790000000000632,
+          "peer_adjusted_abs_change_median_db": 1.2468699999999977,
+          "random_control_abs_change_median_db": 1.208870000000001,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.1154200000000003,
+          "ranked_abs_change_top10_point_indices": [
+            213,
+            877,
+            190,
+            263,
+            683,
+            497,
+            30,
+            795,
+            442,
+            699
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            263,
+            190,
+            795,
+            685,
+            442,
+            492,
+            683,
+            699,
+            944,
+            213
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-07-09",
+          "before_dates": [
+            "2026-06-03",
+            "2026-06-15",
+            "2026-06-27"
+          ],
+          "after_dates": [
+            "2026-07-09",
+            "2026-07-21",
+            "2026-08-14"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.412189999999999,
+          "hv_median_after_db": -14.299,
+          "site_median_contrast_after_minus_before_db": 0.11318999999999946,
+          "raw_abs_change_median_db": 1.392809999999999,
+          "raw_change_median_db": 0.4428950000000018,
+          "peer_adjusted_change_median_db": -0.00741999999999976,
+          "peer_adjusted_abs_change_median_db": 1.299240000000001,
+          "random_control_abs_change_median_db": 1.3030300000000006,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.1218699999999977,
+          "ranked_abs_change_top10_point_indices": [
+            647,
+            622,
+            566,
+            695,
+            30,
+            877,
+            95,
+            685,
+            298,
+            492
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            647,
+            492,
+            622,
+            463,
+            26,
+            685,
+            995,
+            695,
+            354,
+            140
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-07-21",
+          "before_dates": [
+            "2026-06-15",
+            "2026-06-27",
+            "2026-07-09"
+          ],
+          "after_dates": [
+            "2026-07-21",
+            "2026-08-14",
+            "2026-08-26"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.299,
+          "hv_median_after_db": -12.516655,
+          "site_median_contrast_after_minus_before_db": 1.7823449999999994,
+          "raw_abs_change_median_db": 2.0652149999999994,
+          "raw_change_median_db": 1.7348800000000004,
+          "peer_adjusted_change_median_db": -0.14161999999999964,
+          "peer_adjusted_abs_change_median_db": 1.4103400000000015,
+          "random_control_abs_change_median_db": 2.343145,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.19476999999999833,
+          "ranked_abs_change_top10_point_indices": [
+            623,
+            482,
+            647,
+            82,
+            372,
+            523,
+            403,
+            222,
+            151,
+            463
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            647,
+            26,
+            623,
+            45,
+            262,
+            819,
+            13,
+            42,
+            140,
+            492
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-08-14",
+          "before_dates": [
+            "2026-06-27",
+            "2026-07-09",
+            "2026-07-21"
+          ],
+          "after_dates": [
+            "2026-08-14",
+            "2026-08-26",
+            "2026-09-07"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.299,
+          "hv_median_after_db": -12.516655,
+          "site_median_contrast_after_minus_before_db": 1.7823449999999994,
+          "raw_abs_change_median_db": 2.036205,
+          "raw_change_median_db": 1.7137599999999997,
+          "peer_adjusted_change_median_db": -0.12911000000000072,
+          "peer_adjusted_abs_change_median_db": 1.3700100000000006,
+          "random_control_abs_change_median_db": 2.5631550000000005,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.1718599999999988,
+          "ranked_abs_change_top10_point_indices": [
+            360,
+            372,
+            95,
+            583,
+            82,
+            881,
+            815,
+            93,
+            295,
+            151
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            151,
+            45,
+            78,
+            262,
+            713,
+            881,
+            819,
+            541,
+            815,
+            435
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-08-26",
+          "before_dates": [
+            "2026-07-09",
+            "2026-07-21",
+            "2026-08-14"
+          ],
+          "after_dates": [
+            "2026-08-26",
+            "2026-09-07",
+            "2026-09-19"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -14.299,
+          "hv_median_after_db": -12.77049,
+          "site_median_contrast_after_minus_before_db": 1.528509999999999,
+          "raw_abs_change_median_db": 1.758095,
+          "raw_change_median_db": 1.3534550000000003,
+          "peer_adjusted_change_median_db": -0.04009000000000107,
+          "peer_adjusted_abs_change_median_db": 1.33934,
+          "random_control_abs_change_median_db": 1.5411549999999998,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.11085000000000012,
+          "ranked_abs_change_top10_point_indices": [
+            622,
+            29,
+            95,
+            815,
+            52,
+            460,
+            583,
+            577,
+            219,
+            388
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            622,
+            685,
+            78,
+            17,
+            881,
+            541,
+            815,
+            437,
+            121,
+            26
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-09-07",
+          "before_dates": [
+            "2026-07-21",
+            "2026-08-14",
+            "2026-08-26"
+          ],
+          "after_dates": [
+            "2026-09-07",
+            "2026-09-19",
+            "2026-10-01"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -12.516655,
+          "hv_median_after_db": -13.488199999999999,
+          "site_median_contrast_after_minus_before_db": -0.971544999999999,
+          "raw_abs_change_median_db": 1.4140850000000005,
+          "raw_change_median_db": -0.7125599999999981,
+          "peer_adjusted_change_median_db": 0.09943000000000168,
+          "peer_adjusted_abs_change_median_db": 1.2169199999999991,
+          "random_control_abs_change_median_db": 1.419045000000001,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.11646000000000001,
+          "ranked_abs_change_top10_point_indices": [
+            623,
+            524,
+            145,
+            428,
+            82,
+            620,
+            523,
+            615,
+            307,
+            335
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            26,
+            136,
+            206,
+            615,
+            380,
+            172,
+            623,
+            291,
+            67,
+            352
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        },
+        {
+          "boundary": "2026-09-19",
+          "before_dates": [
+            "2026-08-14",
+            "2026-08-26",
+            "2026-09-07"
+          ],
+          "after_dates": [
+            "2026-09-19",
+            "2026-10-01",
+            "2026-10-13"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1003,
+          "hv_median_before_db": -12.516655,
+          "hv_median_after_db": -13.488199999999999,
+          "site_median_contrast_after_minus_before_db": -0.971544999999999,
+          "raw_abs_change_median_db": 1.4510250000000005,
+          "raw_change_median_db": -0.8797249999999988,
+          "peer_adjusted_change_median_db": 0.10658000000000012,
+          "peer_adjusted_abs_change_median_db": 1.2659800000000025,
+          "random_control_abs_change_median_db": 1.5729150000000005,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.12339000000000055,
+          "ranked_abs_change_top10_point_indices": [
+            713,
+            428,
+            623,
+            145,
+            847,
+            307,
+            82,
+            524,
+            523,
+            615
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            713,
+            435,
+            961,
+            714,
+            10,
+            172,
+            73,
+            291,
+            776,
+            623
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        }
+      ],
+      "common_component": null
+    },
+    {
+      "id": "venezuela",
+      "dates": [
+        "2025-11-09",
+        "2025-11-21",
+        "2025-12-03",
+        "2025-12-15",
+        "2025-12-27",
+        "2026-01-08"
+      ],
+      "sampled_points": 1024,
+      "boundaries": [
+        {
+          "boundary": "2025-12-15",
+          "before_dates": [
+            "2025-11-09",
+            "2025-11-21",
+            "2025-12-03"
+          ],
+          "after_dates": [
+            "2025-12-15",
+            "2025-12-27",
+            "2026-01-08"
+          ],
+          "n_raw": 1024,
+          "n_peer_adjusted": 1012,
+          "hv_median_before_db": -3.90416,
+          "hv_median_after_db": -9.775895,
+          "site_median_contrast_after_minus_before_db": -5.871735,
+          "raw_abs_change_median_db": 5.03975,
+          "raw_change_median_db": -5.03975,
+          "peer_adjusted_change_median_db": -0.06005000000000038,
+          "peer_adjusted_abs_change_median_db": 1.5052700000000008,
+          "random_control_abs_change_median_db": 5.035165,
+          "low_change_control_n": 103,
+          "low_change_control_abs_change_median_db": 0.8486299999999996,
+          "ranked_abs_change_top10_point_indices": [
+            52,
+            210,
+            374,
+            354,
+            357,
+            637,
+            42,
+            39,
+            831,
+            170
+          ],
+          "ranked_peer_adjusted_abs_change_top10_point_indices": [
+            67,
+            812,
+            309,
+            209,
+            827,
+            693,
+            560,
+            311,
+            20,
+            354
+          ],
+          "spatial_independence": "Even locations separated by ~0.9 km are not independent events; the sampled grid is spatially correlated."
+        }
+      ],
+      "common_component": "Per-date site-wide median changes can contain a common-mode component (atmosphere, calibration/geometry, seasonal surface response, or broad signal). Subtracting same-class peer medians removes much of a spatially shared shift; it does not identify its physical cause or establish tectonic deformation."
+    }
+  ],
+  "warnings": [
+    "Retrospective/look-ahead: all currently checked-in acquisitions and all boundaries are analyzed; not a prospective alert test.",
+    "Sample selection and retrospective boundary ranking can inflate apparent effects; no multiple-testing correction or causal inference.",
+    "Grid locations are spatially correlated; even ~0.9 km separation does not make observations independent events.",
+    "Same-class peer correction is an exploratory common-mode adjustment and depends on historical ESA WorldCover classification.",
+    "USGS us6000t7zp (2026-06-24) is outside the current Caracas demo dates; the additional 2026-06-13\u201425 GUNW has zero samples passing the unchanged quality filter. No event match is claimed.",
+    "Independent GNSS: UNR IGS20 MMX1 tenv3 https://geodesy.unr.edu/gps_timeseries/IGS20/tenv3/IGS20/MMX1.tenv3 reports Up \u221210.38 mm from 2025-10-30 to 2025-11-11; this absolute GNSS component is not directly comparable to relative LOS or its spatial reference.",
+    "HV backscatter is not displacement. Small sample counts and coverage differ by date/site; unavailable values are excluded, not imputed."
+  ]
+}

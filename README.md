@@ -31,6 +31,10 @@ python3 -m http.server 8765
 
 Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
 
+For programmatic read-only access, run `python3 -m api.server` and see the
+[HTTP API documentation](docs/api.md). This is separate from the static UI and
+is not an MCP server.
+
 «Поиск локаций» accepts place, region and forest names or decimal `latitude, longitude`.
 Names are sent only on submit to the public Photon / Komoot demo service, based on
 OpenStreetMap; requests are cached during the session and limited to one per second
@@ -41,6 +45,13 @@ geographic context and explicitly marks the measurement series as unavailable.
 The selected site and searched coordinates are retained in the URL across reloads.
 The last map centre and zoom are also remembered locally in the same browser;
 an explicitly selected site or coordinates in a link take precedence.
+
+The measured HV map opens on the latest acquisition. Use the date slider or the
+previous/next buttons above the maps to browse actual acquisition dates. The
+counter reports HV availability and the selected sample's value; the yellow line
+on the backscatter plot marks that date (or the playback position during audio).
+Missing samples remain transparent. Colour imagery and GUNW are not changed to
+match the selected GCOV date.
 
 ## Layout
 
@@ -80,7 +91,7 @@ The research pipeline can also export full real-data grids with `python -m pipel
 It has no synthetic mode. The browser uses the prepared small cases above, rather than these
 optional binary exports. Missing or quality-rejected samples remain unavailable.
 
-Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
+Tests: `node scripts/test_data.mjs`, `node scripts/test_acquisitions.mjs`, and `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
 
 ## Data
 

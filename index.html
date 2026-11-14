@@ -125,6 +125,26 @@
       <section class="win" id="map-win" aria-labelledby="t-map">
         <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
         <div class="win-b win-b--flush">
+          <fieldset class="group acquisition" id="acquisition" hidden>
+            <legend>Measured HV acquisition</legend>
+            <div class="acquisition__controls">
+              <button type="button" class="btn" id="date-prev" aria-label="Previous acquisition">&lt;</button>
+              <label for="date-index">Date <output id="date-label" for="date-index"></output></label>
+              <input type="range" id="date-index" min="0" max="0" step="1" value="0" aria-describedby="date-status">
+              <button type="button" class="btn" id="date-next" aria-label="Next acquisition">&gt;</button>
+            </div>
+            <p id="date-status" role="status" aria-live="polite"></p>
+            <small>Acquisitions are not equally spaced. Missing samples stay transparent; colour imagery is not date-matched.</small>
+          </fieldset>
+          <fieldset class="group acquisition" id="ranking-controls" hidden>
+            <legend>Amazon change signals · fixed experiment window</legend>
+            <div class="acquisition__controls">
+              <label>Polarization <select id="ranking-pol"><option value="hh">HH</option><option value="hv">HV</option></select></label>
+              <label>Neighborhood <select id="ranking-radius"><option value="3x3">3×3</option><option value="5x5" selected>5×5</option><option value="9x9">9×9</option></select></label>
+            </div>
+            <p id="ranking-dates"></p><p id="ranking-status" role="status" aria-live="polite">Choose a sampled point.</p>
+            <small>The map background is measured HV level for the separate date slider; colored dots show fixed-window change, not level. Window neighbors (3×3/5×5/9×9) are not the dashboard’s 1 km peers. “Rank” is position in the sample, not probability; cause unknown. Dots are sampled cells, not area. WorldCover 2021 class is contextual; weather is unavailable. Optical imagery is geographic context, not event confirmation.</small>
+          </fieldset>
           <div class="maps">
             <div class="maps__pane">
               <div class="pane-label" id="map-caption">Measured HV gamma0, blue −25 to red 0 dB; click a sample</div>
@@ -221,6 +241,8 @@
 <script src="js/styles.js"></script>
 <script src="js/search.js"></script>
 <script src="js/data.js"></script>
+<script src="js/acquisitions.js"></script>
+<script src="js/amazon-ranking.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>
 <script src="js/sfx.js"></script>
