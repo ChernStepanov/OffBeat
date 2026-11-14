@@ -77,7 +77,9 @@ OB.windows = (() => {
     if (document.fullscreenElement) { fullscreenOwner = null; await document.exitFullscreen(); }
     if (state?.element === element && state.mode === mode) restoreDOM(); else promote(element, mode);
   }
-  const windows = [...document.querySelectorAll('.win:not(.app-bar):not(.modal__win), .maps__pane')];
+  // Only panels whose contents benefit from more space get window controls.
+  // The main map has its own maximize button; the 3D workspace already fills the screen.
+  const windows = [...document.querySelectorAll('#radar-pane, #optical-pane, #terrain-win, #card-win, #top-win')];
   for (const element of windows) {
     const title = [...element.children].find(child => child.classList.contains('win-t'));
     if (!title) continue;
