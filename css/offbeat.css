@@ -560,10 +560,10 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 #map-win.window-expanded .maps { flex: 1; grid-template-rows: minmax(0, 1fr); }
 .window-expanded:fullscreen { inset: 0 !important; width: 100vw !important; height: 100vh !important; }
 
-/* A worn field terminal: olive, bone, amber and grain, with no flashing effects. */
-.terrain-window { --face: #b7b7a8; --lt: #d6d5c3; --hi: #efeddb; --lo: #6e7064; background: var(--face); }
-.terrain-window > .win-t { background: linear-gradient(90deg, #26362e, #68735b); }
-.terrain-window .cloud__toolbar { border-bottom: 1px solid #6e7064; box-shadow: 0 1px 0 #efeddb; padding-top: 6px; padding-bottom: 6px; }
+/* Match the rest of the Windows-style desktop. */
+.terrain-window { background: var(--face); }
+.terrain-window > .win-t { background: linear-gradient(90deg, #000080, #1084d0); }
+.terrain-window .cloud__toolbar { border-bottom: 1px solid var(--lo); box-shadow: 0 1px 0 var(--hi); padding-top: 6px; padding-bottom: 6px; }
 .terrain-controls { display: flex; flex-wrap: wrap; flex: none; align-items: center; gap: 6px; padding: 7px 5px; }
 .terrain-controls label { display: flex; align-items: center; gap: 4px; }
 .terrain-controls > label:not(:first-child) { margin-left: 5px; }
@@ -590,17 +590,17 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .terrain-window .cloud__compass svg path:last-child { fill: #c3c6a8; }
 .terrain-window .cloud__empty { z-index: 5; background: #101410e8; }
 .terrain-window .cloud__key { z-index: 4; color: #d6d6b5; text-shadow: 1px 1px #101410; bottom: 48px; width: 138px; }
-.terrain-window .terrain-height-key i { background: linear-gradient(90deg, #223127, #495938, #7e824c, #ac9960, #cbbf91, #e3dfc6); }
+.terrain-window .terrain-height-key i { background: linear-gradient(90deg, #536c68, #789080, #a4aa8a, #c2bd9f, #d6d2bd, #eeeade); }
 .terrain-window .terrain-signal-key { left: 180px; width: 112px; }
 .terrain-scale { position: absolute; right: 18px; bottom: 47px; z-index: 4; color: #b0b699; text-align: right; pointer-events: none; text-shadow: 1px 1px #101410; }
 .terrain-window .cloud__interaction { z-index: 4; color: #afb79a; font-size: 12.5px; }
-.terrain-window .cloud__selection { background: #e4e2d4; box-shadow: inset -1px -1px 0 #efeddb, inset 1px 1px 0 #6e7064, inset -2px -2px 0 #d6d5c3, inset 2px 2px 0 #000; }
-.terrain-window .cloud__sample-heading { border-color: #b8b8a6; }
-.terrain-window .cloud__sample-heading > strong { color: #293d31; }
+.terrain-window .cloud__selection { background: #fff; box-shadow: var(--sunken); }
+.terrain-window .cloud__sample-heading { border-color: #c0c0c0; }
+.terrain-window .cloud__sample-heading > strong { color: #000080; }
 .terrain-window .cloud__readout { grid-template-columns: .8fr .7fr 1fr 1.4fr; }
-.terrain-window .cloud__readout span, .terrain-window .cloud__history > span { color: #535b49; }
-.terrain-window .cloud__explanation { color: #252d25; padding: 7px 6px 4px; }
-.terrain-window .cloud__explanation a { color: #253e30; }
+.terrain-window .cloud__readout span, .terrain-window .cloud__history > span { color: #555; }
+.terrain-window .cloud__explanation { color: #000; padding: 7px 6px 4px; }
+.terrain-window .cloud__explanation a { color: #0000ee; }
 .terrain-window.window-expanded { overflow: hidden; }
 .terrain-window.window-expanded .cloud__viewport { flex: 1; min-height: 160px; }
 .terrain-window.window-expanded .cloud__file { display: inline; }

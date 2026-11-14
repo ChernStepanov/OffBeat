@@ -13,11 +13,11 @@ OB.createTerrainRenderer = async function (canvas) {
   let center = tiles.mercator(-67.08, 10.47), viewZoom = 12.23, yaw = -.65, pitch = .77, plan = false;
   let exaggeration = 4, mode = 'hybrid', pointsVisible = true, width = 1, height = 1, targetHeight = 0;
   let site = null, context = null, date = 0, channel = 'hv', selectedIndex = -1, radar = null, marker = null, sampleList = [];
-  let coverageDirty = true, terrainVersion = 0, overlayDirty = true, paused = false, sourceLevel = 0, wantedKey = '', segments = 64;
+  let coverageDirty = true, overlayDirty = true, paused = false, sourceLevel = 0, wantedKey = '', segments = 64;
   let minHeight = 0, maxHeight = 3000, vertices = 0, nodes = new Map(), desired = [];
   const target = new T.Vector3(), ray = new T.Raycaster(), screenPointer = new T.Vector2();
   const rampLow = { value: 0 }, rampHigh = { value: 3000 }, contours = { value: 1 };
-  const palette = ['#223127', '#495938', '#7e824c', '#ac9960', '#cbbf91', '#e3dfc6'].map(hex => new T.Color(hex).toArray().map(v => v.toFixed(6)).join(','));
+  const palette = ['#536c68', '#789080', '#a4aa8a', '#c2bd9f', '#d6d2bd', '#eeeade'].map(hex => new T.Color(hex).toArray().map(v => v.toFixed(6)).join(','));
   function terrainShader(shader) {
     shader.uniforms.heightLow = rampLow; shader.uniforms.heightHigh = rampHigh; shader.uniforms.showContours = contours;
     shader.vertexShader = 'attribute float elevation; varying float vElevation;\n' + shader.vertexShader;
@@ -40,7 +40,16 @@ OB.createTerrainRenderer = async function (canvas) {
   const signalMaterial = new T.PointsMaterial({ vertexColors: true, size: 4, sizeAttenuation: false, toneMapped: false });
   const scale = () => 2 * 2 ** viewZoom;
   const notify = () => canvas.dispatchEvent(new Event('ob:terrain-stream'));
-  const stream = tiles.create(event => { if (event.ready) { terrainVersion++; overlayDirty = true; } notify(); });
+  const stream = tiles.create(event => {
+    if (event.ready) {
+      for (const node of nodes.values()) {
+        const delta = node.tile.z - event.tile.z;
+        if (delta >= 0 && tiles.wrap(Math.floor(node.tile.x / 2 ** delta), 2 ** event.tile.z) === tiles.wrap(event.tile.x, 2 ** event.tile.z) && Math.floor(node.tile.y / 2 ** delta) === event.tile.y) node.dirty = true;
+      }
+      overlayDirty = true;
+    }
+    notify();
+  });
   const disposeNode = node => { node.mesh.geometry.dispose(); node.cloud.geometry.dispose(); surface.remove(node.group); };
   function location() { return tiles.geographic(center.x, center.y); }
   function elevationAt(lon, lat) {
@@ -82,18 +91,16 @@ OB.createTerrainRenderer = async function (canvas) {
     // The overview shows one world; closer views wrap seamlessly across the date line.
     if (viewZoom < 1.5) { bounds.w = Math.max(0, bounds.w); bounds.e = Math.min(1 - 1e-12, bounds.e); }
     desired = tiles.cover(bounds, viewZoom + 2, 64); sourceLevel = desired[0]?.z || 0;
-    segments = desired.length <= 24 ? 128 : 64;
+    segments = desired.length <= 24 ? 64 : 32;
     const keys = desired.map(t => t.meshKey).join('|') + '/' + segments;
     if (keys !== wantedKey) {
       wantedKey = keys;
-      const keep = new Set(desired.map(t => t.meshKey));
-      for (const [key, node] of nodes) if (!keep.has(key) || node.segments !== segments) { disposeNode(node); nodes.delete(key); }
       const parents = new Map();
       for (const t of desired) {
         const z = Math.max(0, t.z - 2), shift = 2 ** (t.z - z), p = tiles.descriptor(z, Math.floor(t.x / shift), Math.floor(t.y / shift)); parents.set(p.key, p);
       }
       stream.setWanted([tiles.descriptor(0, 0, 0), ...parents.values(), ...desired]);
-      terrainVersion++; overlayDirty = true;
+      overlayDirty = true;
     }
     coverageDirty = false;
   }
@@ -116,7 +123,7 @@ OB.createTerrainRenderer = async function (canvas) {
     const group = new T.Group(), mesh = new T.Mesh(geometry, landMaterial), cloud = new T.Points(cloudGeometry, cloudMaterial);
     mesh.frustumCulled = cloud.frustumCulled = false; group.add(mesh, cloud);
     const previous = nodes.get(tile.meshKey); if (previous) disposeNode(previous);
-    surface.add(group); nodes.set(tile.meshKey, { group, mesh, cloud, tile, low, high, detail, segments, version: terrainVersion });
+    surface.add(group); nodes.set(tile.meshKey, { group, mesh, cloud, tile, low, high, detail, segments, dirty: false });
     return true;
   }
   function positionTiles() {
@@ -182,12 +189,18 @@ OB.createTerrainRenderer = async function (canvas) {
     updateCamera(); if (coverageDirty) updateCoverage();
     let built = 0;
     for (const tile of desired) {
-      if ((nodes.get(tile.meshKey)?.version ?? -1) < terrainVersion && buildTile(tile)) { if (++built >= 3) break; }
+      const node = nodes.get(tile.meshKey);
+      if ((!node || node.dirty || node.segments !== segments) && buildTile(tile)) { if (++built >= 3) break; }
+    }
+    const pendingMeshes = desired.some(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; });
+    if (!pendingMeshes) {
+      const keep = new Set(desired.map(t => t.meshKey));
+      for (const [key, node] of nodes) if (!keep.has(key)) { disposeNode(node); nodes.delete(key); }
     }
     positionTiles(); if (overlayDirty || built) rebuildSamples();
     positionPins(); if (marker) marker.quaternion.copy(camera.quaternion);
     renderer.render(scene, camera);
-    if (built && desired.some(t => (nodes.get(t.meshKey)?.version ?? -1) < terrainVersion)) notify();
+    if (built && pendingMeshes) notify();
   }
   function pick(x, y) {
     for (const pin of sitePins) if (pin.sprite.visible) {
@@ -216,7 +229,7 @@ OB.createTerrainRenderer = async function (canvas) {
     goTo((b.w + b.e) / 2, (b.n + b.s) / 2, Math.log2(1 / span));
   }
   canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); canvas.dispatchEvent(new CustomEvent('ob:gpu-status', { detail: 'lost' })); });
-  canvas.addEventListener('webglcontextrestored', () => { terrainVersion++; notify(); canvas.dispatchEvent(new CustomEvent('ob:gpu-status', { detail: 'restored' })); });
+  canvas.addEventListener('webglcontextrestored', () => { for (const node of nodes.values()) node.dirty = true; notify(); canvas.dispatchEvent(new CustomEvent('ob:gpu-status', { detail: 'restored' })); });
   return {
     render, pick, goTo, focusSite, elevationAt,
     setTerrain(data, s) { context = data; if (s) site = s; overlayDirty = true; },
@@ -233,7 +246,7 @@ OB.createTerrainRenderer = async function (canvas) {
     setActive(value) { paused = !value; if (value) { stream.resume(); changed(); } else stream.stop(); },
     projectSample(index) { const p = sampleList.find(p => p.index === index); if (!p) return null; const v = p.position.clone().project(camera); return { x: (v.x + 1) * width / 2, y: (1 - v.y) * height / 2, depth: v.z }; },
     info: () => {
-      const network = stream.info(), building = desired.filter(t => (nodes.get(t.meshKey)?.version ?? -1) < terrainVersion).length;
+      const network = stream.info(), building = desired.filter(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; }).length;
       return { terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => stream.cache.has(t.key)).length,
         radarSamples: sampleList.length, exaggeration, mode, renderer: 'WebGL / Three.js', yaw, pitch, zoom: viewZoom, sourceLevel, center: location(),
         min_m: minHeight, max_m: maxHeight, span_m: tiles.C * Math.cos(location().lat * Math.PI / 180) / 2 ** viewZoom,
