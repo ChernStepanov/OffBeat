@@ -12,9 +12,11 @@ OB.bindNisarMap = function (map, toggle, status) {
   const imageCache = new Map();
   let failedTiles = 0, inflight = 0, statusTimer;
   let layer, loading, caption;
-  // Smooth scaling at every zoom: hard-edged magnified pixels read as noise and blocks, and the
-  // tiles Leaflet stretches while the next zoom loads look broken when they are pixelated.
-  const rendering = () => 'auto';
+  // A NASA browse pixel is ~19 m (native level 13). Up to zoom 16 it spans at most ~8 screen
+  // pixels and smooth scaling hides the hatching; from zoom 17 it spans 16+ and smoothing turns
+  // each one into a soft blob, so it is drawn as the honest square it is.
+  const CRISP_FROM = nativeZoom + 4;
+  const rendering = () => map.getZoom() >= CRISP_FROM ? 'pixelated' : 'auto';
 
   map.createPane('nisarRadar');
   map.getPane('nisarRadar').style.zIndex = 250;
@@ -58,8 +60,9 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   function showStatus() {
     if (!caption) return;
+    const past = map.getZoom() >= CRISP_FROM ? ' | Zoomed past radar detail: one square is one ~19 m NISAR browse pixel' : '';
     const busy = inflight > 0 ? ` | Loading NASA radar: ${inflight} request${inflight === 1 ? '' : 's'} left` : '';
-    status.textContent = caption + busy + (failedTiles
+    status.textContent = caption + past + busy + (failedTiles
       ? ` | ${failedTiles} incomplete tile${failedTiles === 1 ? '' : 's'}: NASA did not answer, retrying. These gaps are not confirmed missing coverage.`
       : ' | Transparent gaps: no browse coverage in this time window.');
   }
@@ -270,7 +273,7 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   toggle.addEventListener('change', update);
   map.whenReady(update);
-  map.on('zoomend', () => { const r = rendering(); for (const tile of tiles) tile.style.imageRendering = r; });
+  map.on('zoomend', () => { const r = rendering(); for (const tile of tiles) tile.style.imageRendering = r; showStatus(); });
 
   return function cellBounds(latlng) {
     if (!toggle.checked || !layer || !map.hasLayer(layer)) return null;
