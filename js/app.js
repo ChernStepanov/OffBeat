@@ -19,18 +19,42 @@
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
   const optical = OB.createOpticalView(optic);
   const labelLayers = [map, optic].map(m => {
-    m.attributionControl.setPrefix('<a href="https://leafletjs.com/" title="A JavaScript library for interactive maps">Leaflet</a>');
+    m.attributionControl.setPrefix('Leaflet');
     L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
     m.getPane('placeLabels').style.pointerEvents = 'none';
-    L.control.scale({ metric: true, imperial: false, maxWidth: 100 }).addTo(m);
+    m.createPane('selectedCell');
+    m.getPane('selectedCell').style.zIndex = 640;
+    m.getPane('selectedCell').style.pointerEvents = 'none';
     return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 19, attribution: labelsCredit }).addTo(m);
   });
   let areaLayers = [];
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
+  function updateViewMetrics() {
+    const size = map.getSize();
+    const center = size.divideBy(2);
+    if (!size.x || !size.y) return;
+    const metersPerPixel = map.distance(
+      map.containerPointToLatLng(center.subtract([1, 0])),
+      map.containerPointToLatLng(center.add([1, 0])),
+    ) / 2;
+    // Equivalent nadir camera altitude for an assumed 45° vertical field of view.
+    const altitude = metersPerPixel * size.y / (2 * Math.tan(Math.PI / 8));
+    const scale = metersPerPixel >= 10 ? Math.round(metersPerPixel)
+      : Number(metersPerPixel.toPrecision(2));
+    const height = altitude >= 1000 ? `${Math.round(altitude / 100) / 10} km` : `${Math.round(altitude)} m`;
+    $('map-view-metrics').textContent = `Scale: ${scale} m/px | Approx. viewing altitude: ${height}`;
+    $('map-view-metrics').title = 'Altitude equivalent for a top-down view with a 45° vertical field of view.';
+  }
+  map.on('move resize', updateViewMetrics);
+  OB.bindArchive(() => map.getCenter().wrap());
+  const radarCellBounds = OB.bindNisarMap(map, $('l-nisar'), $('nisar-status'));
+  const labelsButton = $('l-labels');
+  const labelsVisible = () => labelsButton.getAttribute('aria-pressed') === 'true';
+  const updateWaterLabels = OB.bindWaterLabels([map, optic], $('water-status'));
   const viewportKey = 'offbeat.map.viewport.v1';
   let previousViewport = null, viewportReady = !!OB.tourWanted;
   try { previousViewport = JSON.parse(localStorage.getItem(viewportKey) || 'null'); } catch (_) { /* storage unavailable */ }
@@ -44,8 +68,16 @@
     try { localStorage.setItem(viewportKey, JSON.stringify({site:state.site.id, anchor:viewportAnchor(), lat:c.lat, lon:c.lng, zoom:map.getZoom()})); } catch (_) { /* storage unavailable */ }
   }
   map.on('moveend', saveViewport);
-  const box = () => L.rectangle([[0, 0], [0, 0]], { color: "#ffcc00", weight: 2, fill: false, interactive: false });
+  const box = () => L.rectangle([[0, 0], [0, 0]], {
+    pane: 'selectedCell', color: '#ffcc00', weight: 3, fill: false, interactive: false,
+  });
   const cellBox = box(), cellBoxOptic = box();
+  function showCellBounds(bounds) {
+    const [a, b] = bounds.map(corner => map.project(corner, 0));
+    const center = map.unproject(a.add(b).divideBy(2), 0);
+    const coordinates = `${center.lat.toFixed(6)}, ${center.wrap().lng.toFixed(6)}`;
+    $('p-loc').textContent = coordinates;
+  }
 
   // --- side lists ---
   $("sites").innerHTML = OB.SITES.map(s =>
@@ -57,11 +89,13 @@
   $("z").addEventListener("input", e => { state.z = +e.target.value; $("z-out").textContent = state.z; refresh(); });
   $("l-offbeat").addEventListener("change", drawRaster);
   $("l-cover").addEventListener("change", drawCover);
-  $('l-labels').addEventListener('change', () => {
+  labelsButton.addEventListener('click', () => {
+    labelsButton.setAttribute('aria-pressed', String(!labelsVisible()));
     [map, optic].forEach((m, i) => {
-      if ($('l-labels').checked) labelLayers[i].addTo(m);
+      if (labelsVisible()) labelLayers[i].addTo(m);
       else m.removeLayer(labelLayers[i]);
     });
+    updateWaterLabels(labelsVisible());
     drawAreaLabels();
   });
 
@@ -69,6 +103,28 @@
   const geocoder = window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/';
   const searchCache = new Map();
   let lastSearch = 0, searchMarkers = [], searchSerial = 0;
+  const regions = {
+    world: [[-60, -180], [80, 180]],
+    europe: [[35, -12], [71, 45]],
+    africa: [[-35, -18], [37, 52]],
+    asia: [[-10, 40], [75, 180]],
+    oceania: [[-48, 110], [10, 180]],
+    americas: [[-56, -170], [72, -34]],
+  };
+  async function showRegion(id) {
+    const bounds = regions[id];
+    $('l-offbeat').checked = false; drawRaster();
+    $('l-cover').checked = false; drawCover(); clearSiteLayers();
+    await showPlace({lat: (bounds[0][0] + bounds[1][0]) / 2, lon: (bounds[0][1] + bounds[1][1]) / 2, bounds});
+    clearSearchMarkers();
+    $('site-name').textContent = id === 'world' ? 'World' : id[0].toUpperCase() + id.slice(1);
+    $('map-caption').textContent = 'Global NASA NISAR browse mosaic; blue to red: image brightness. Gaps show the basemap.';
+    document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.region === id)));
+  }
+  $('regions').addEventListener('click', event => {
+    const button = event.target.closest('button[data-region]');
+    if (button) showRegion(button.dataset.region);
+  });
   function clearSearchMarkers() {
     searchMarkers.forEach(([m, marker]) => m.removeLayer(marker));
     searchMarkers = [];
@@ -76,7 +132,7 @@
   function clearPixel() {
     OB.sonify.stop(); state.cell = null; state.pixel = null;
     [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
-    $('px-id').textContent = 'No NISAR data at this location';
+    $('px-id').textContent = 'No prepared measurement series here';
     for (const id of ['p-cover','p-peers','p-z','p-style','p-since','p-loc','p-quality']) $(id).textContent = 'Unavailable';
     $('p-extra').innerHTML = '';
     for (const id of ['c-bs','c-disp']) { const canvas = $(id); canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); }
@@ -98,11 +154,11 @@
     } else {
       clearPixel();
       optical.clear();
-      $('data-status').textContent = 'No prepared NISAR measurements at this location. The map is geographic context only.';
-      $('place-status').textContent = 'No prepared NISAR data here. Choose a demo site to return to measurements.';
-      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'No prepared NISAR data at this location';
+      $('data-status').textContent = 'No prepared pixel series at this location. Radar imagery is available where the global mosaic has coverage.';
+      $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
+      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'Pixel series unavailable at this location';
       $('source-link').hidden = true; $('site-layers').hidden = true;
-      $('sb-state').textContent = 'No prepared NISAR data at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Source: geographic context';
+      $('sb-state').textContent = 'No prepared NISAR series at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Context: NASA GIBS and Esri';
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
       $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
     }
@@ -118,7 +174,7 @@
   }
   $('place-search').addEventListener('submit', async e => {
     e.preventDefault();
-    const query = $('place-query').value.trim(), parsed = OB.parseCoordinates(query), results = $('place-results');
+    const query = OB.normalizePlaceQuery($('place-query').value), parsed = OB.parseCoordinates(query), results = $('place-results');
     results.replaceChildren();
     if (!query) return;
     if (parsed.kind === 'invalid') { $('place-status').textContent = 'Enter latitude, longitude (for example 19.43, -99.08). Latitude must be between -85.05 and 85.05; longitude between -180 and 180.'; return; }
@@ -131,11 +187,8 @@
       if (!features) {
         const delay = Math.max(0, 1000 - (Date.now() - lastSearch));
         if (delay) await new Promise(resolve => setTimeout(resolve, delay));
-        const url = new URL(geocoder); url.searchParams.set('q', query); url.searchParams.set('limit', '8');
         lastSearch = Date.now();
-        const response = await fetch(url, { signal: AbortSignal.timeout(12000) });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json(); features = Array.isArray(data.features) ? data.features : [];
+        features = await OB.geocodePlace(query, geocoder);
         searchCache.set(query.toLowerCase(), features);
       }
       if (serial !== searchSerial) return;
@@ -145,7 +198,7 @@
         const props = feature.properties || {}, names = [props.name, props.city, props.county, props.state, props.country].filter((v,i,a) => typeof v === 'string' && v && a.indexOf(v) === i);
         const label = names.join(', ') || `${coords[1].toFixed(4)}, ${coords[0].toFixed(4)}`;
         const li = document.createElement('li'), button = document.createElement('button');
-        button.type = 'button'; button.textContent = label;
+        button.type = 'button'; button.textContent = label; button.dir = 'auto'; button.translate = false;
         button.addEventListener('click', async () => {
           results.replaceChildren(); $('place-query').value = label;
           let bounds = null; const extent = props.extent;
@@ -163,15 +216,7 @@
   function drawAreaLabels() {
     areaLayers.forEach(([m, layer]) => m.removeLayer(layer));
     areaLayers = [];
-    if (!state.site || !$('l-labels').checked) return;
-    const s = state.site, b = s.grid.bbox;
-    [map, optic].forEach(m => {
-      const outline = L.rectangle([[b.s, b.w], [b.n, b.e]], { color: '#fff', weight: 2, dashArray: '6 4', fill: false, interactive: false }).addTo(m);
-      const text = document.createElement('span');
-      text.textContent = s.name;
-      const label = L.marker([b.n, (b.w + b.e) / 2], { interactive: false, icon: L.divIcon({ className: 'area-label', html: text, iconSize: null }) }).addTo(m);
-      areaLayers.push([m, outline], [m, label]);
-    });
+    if (!state.site || !labelsVisible()) return;
   }
 
   // --- colours ---
@@ -213,18 +258,21 @@
     return L.imageOverlay(cv.toDataURL(), [[b.s, b.w], [b.n, b.e]], { className: "raster", interactive: false });
   }
 
+  // Leaflet stretches the raster between its corners in Web Mercator.
+  function projectedGrid(g) {
+    const b = g.bbox;
+    const origin = map.project([b.n, b.w], 0);
+    const end = map.project([b.s, b.e], 0);
+    return { origin, width: (end.x - origin.x) / g.w, height: (end.y - origin.y) / g.h };
+  }
+
   function drawRaster() {
     if (state.raster) map.removeLayer(state.raster);
     state.raster = null;
     if (!$("l-offbeat").checked) return;
     const g = state.site.grid, t = state.z;
     if (!g.z.some(Number.isFinite) && state.site.pixels) {
-      state.raster = paint(i => {
-        const value = state.site.pixels[i].hv.at(-1);
-        if (!Number.isFinite(value)) return null;
-        const q = Math.max(0, Math.min(1, (value + 25) / 25));
-        return [Math.round(255*q), 70, Math.round(255*(1-q)), 180];
-      }).addTo(map);
+      // Prepared series belong in the charts, not a separate square on the map.
       return;
     }
     state.raster = paint(i => {
@@ -411,9 +459,27 @@
 
   // --- picking a pixel ---
   map.on("click", e => {
-    const g = state.site.grid, b = g.bbox;
-    const x = Math.floor((e.latlng.lng - b.w) / (b.e - b.w) * g.w), y = Math.floor((b.n - e.latlng.lat) / (b.n - b.s) * g.h);
-    if (x >= 0 && y >= 0 && x < g.w && y < g.h) pickCell(y * g.w + x, false).then(pixelSound);
+    if (!state.site) return;
+    const g = state.site.grid;
+    const { origin, width, height } = projectedGrid(g);
+    const point = map.project(e.latlng, 0);
+    const x = Math.floor((point.x - origin.x) / width);
+    const y = Math.floor((point.y - origin.y) / height);
+    const index = y * g.w + x;
+    const localVisible = $('l-offbeat').checked && x >= 0 && y >= 0 && x < g.w && y < g.h;
+    const isAnomaly = Number.isFinite(g.z[index]) && Math.abs(g.z[index]) >= state.z && g.cover[index] !== 80;
+    if (localVisible && (isAnomaly || Number.isFinite(state.site.pixels?.[index]?.hv.at(-1)))) {
+      pickCell(index, false).then(pixelSound);
+      return;
+    }
+    clearPixel();
+    const bounds = radarCellBounds(e.latlng);
+    if (bounds) {
+      showCellBounds(bounds);
+      $('px-id').textContent = 'NISAR mosaic cell';
+    } else if (localVisible) {
+      pickCell(index, false).then(pixelSound);
+    }
   });
   function pixelSound() {
     const p = state.pixel; if (!p || !OB.sfx) return;
@@ -438,13 +504,15 @@
     $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
     $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Score unavailable' : st ? `<i class="tag" style="background:${st.color}"></i>${st.name} (candidate)` : Math.abs(p.z) >= 2.5 ? 'Outlier; no change shape' : 'No detected change';
     $("p-since").textContent = p.since || "—";
-    $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
     $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;
     $('p-extra').innerHTML = Object.entries(p.extra || {}).filter(([, v]) => Number.isFinite(v))
       .map(([k, v]) => `<tr><th scope="row">${SITE_LAYERS[k].card}</th><td>${SITE_LAYERS[k].fmt(v)}</td></tr>`).join('');
-    const b = g.bbox, dl = (b.n - b.s) / g.h, dw = (b.e - b.w) / g.w;
-    const rect = [[b.n - (y + 1) * dl, b.w + x * dw], [b.n - y * dl, b.w + (x + 1) * dw]];
-    cellBox.setBounds(rect).addTo(map); cellBoxOptic.setBounds(rect).addTo(optic);
+    const { origin, width, height } = projectedGrid(g);
+    const rect = [
+      map.unproject(origin.add([x * width, y * height]), 0),
+      map.unproject(origin.add([(x + 1) * width, (y + 1) * height]), 0),
+    ];
+    showCellBounds(rect);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
     const v = voice(p);
@@ -496,8 +564,8 @@
     $('source-link').href = `data/${s.id}-manifest.json`;
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
-    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
-    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
+    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Local Off-Beat raster (optional)' : 'Local measured HV overlay (optional)';
+    $('map-caption').textContent = 'Global NASA NISAR browse mosaic; local measurement overlay is optional.';
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();
@@ -551,9 +619,11 @@
     const lat = params.get('lat'), lon = params.get('lon');
     const savedPlace = lat !== null && lon !== null ? OB.parseCoordinates(`${lat}, ${lon}`) : null;
     loadSite(OB.SITES.some(s => s.id === legacy) ? legacy : saved).then(async () => {
+      const worldStart = !params.has('site') && !OB.SITES.some(s => s.id === legacy) && !savedPlace;
+      if (worldStart) await showRegion('world');
       if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; await showPlace(savedPlace); }
       const v = previousViewport;
-      if (v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
+      if (!worldStart && v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
       viewportReady = true; saveViewport();
     });
   }

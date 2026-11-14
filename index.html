@@ -8,11 +8,11 @@
 <meta name="theme-color" content="#000080">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="css/offbeat.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
-
 <div id="desk">
 
   <!-- Title + menu bar -->
@@ -40,19 +40,29 @@
         <div class="win-t"><h2 id="t-search">Location search</h2></div>
         <div class="win-b">
           <form id="place-search" class="place-search">
-            <input id="place-query" type="search" aria-label="Location search" placeholder="Place name or coordinates" autocomplete="off" required>
+            <input id="place-query" type="search" aria-label="Location search" placeholder="Name in any language or coordinates" dir="auto" autocomplete="off" required>
             <button class="btn" type="submit" id="place-submit">Search</button>
           </form>
-          <p class="place-hint">Coordinates: latitude, longitude. Names are sent to Photon / Komoot.</p>
+          <p class="place-hint">Search names in any language. Coordinates: latitude, longitude. Names are sent to Open-Meteo, with Photon / Komoot as fallback.</p>
           <p id="place-status" role="status" aria-live="polite"></p>
           <ul id="place-results" class="place-results"></ul>
-          <small>Search data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>; <a href="https://github.com/komoot/photon">Photon</a>.</small>
+          <small>Search data: <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo</a> / <a href="https://www.geonames.org/">GeoNames</a>; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> / <a href="https://github.com/komoot/photon">Photon</a>.</small>
         </div>
       </section>
 
       <section class="win" aria-labelledby="t-site">
-        <div class="win-t"><h2 id="t-site">Demo sites</h2></div>
+        <div class="win-t"><h2 id="t-site">Explore the world</h2></div>
         <div class="win-b">
+          <ul class="sites" id="regions">
+            <li><button type="button" data-region="world">World</button></li>
+            <li><button type="button" data-region="europe">Europe</button></li>
+            <li><button type="button" data-region="africa">Africa</button></li>
+            <li><button type="button" data-region="asia">Asia</button></li>
+            <li><button type="button" data-region="oceania">Oceania</button></li>
+            <li><button type="button" data-region="americas">Americas</button></li>
+          </ul>
+          <p>NASA NISAR imagery where available. Coverage gaps remain transparent. Search anywhere for source acquisitions.</p>
+          <p>Prepared measurement series:</p>
           <ul class="sites" id="sites"></ul>
         </div>
       </section>
@@ -62,9 +72,11 @@
         <div class="win-b">
           <fieldset class="group">
             <legend>Map</legend>
-            <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
+            <label><input type="checkbox" id="l-offbeat"> <span id="raster-label">Local measured HV overlay (optional)</span></label>
+            <label><input type="checkbox" id="l-nisar" checked> Global NISAR radar (NASA)</label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
-            <label><input type="checkbox" id="l-labels" checked> Place names and study area</label>
+            <button type="button" class="btn" id="l-labels" aria-pressed="true">Map labels</button>
+            <small id="water-status" role="status" hidden></small>
           </fieldset>
           <fieldset class="group" id="site-layers" hidden>
             <legend>This site</legend>
@@ -140,6 +152,18 @@
             </div>
           </div>
           <p class="optical-detail" id="optical-detail" role="status">Prepared Sentinel-2 images are available inside each study area; clouds over the area are not assessed.</p>
+          <div id="nisar-status" class="pane-label" role="status">Loading NISAR radar coverage…</div>
+          <div id="map-view-metrics" class="pane-label"></div>
+        </div>
+      </section>
+
+      <section class="win" aria-labelledby="t-archive">
+        <div class="win-t"><h2 id="t-archive">NISAR archive</h2></div>
+        <div class="win-b">
+          <button id="archive-search" class="btn" type="button" disabled>Search at map centre</button>
+          <p id="archive-status" role="status">Find ASF acquisitions and source files for the point at the centre of the map.</p>
+          <ul id="archive-results" hidden></ul>
+          <button id="archive-more" class="btn" type="button" hidden>Load more</button>
         </div>
       </section>
 
@@ -199,7 +223,7 @@
           <div class="paper">
             <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
-            <p>Peer z-scores and candidate HV drops / HH jumps are calculated from measured backscatter. These shapes do not establish clearing, flooding or ground motion. Sparse samples do not measure patch area. The right map can show a dated Sentinel-2 RGB crop inside the study area, with the scene date and tile cloud cover. Clouds and shadows over the study area are not assessed. Esri imagery outside the crop or in mosaic mode is geographic context with varying dates. Labels and the dashed study-area boundary can be switched off. Missing and rejected measurements remain unavailable.</p>
+            <p>Peer z-scores and candidate HV drops / HH jumps are calculated from measured backscatter. These shapes do not establish clearing, flooding or ground motion. Sparse samples do not measure patch area. The right map can show a dated Sentinel-2 RGB crop with the scene date and tile cloud cover. Clouds and shadows over the study area are not assessed. The global NASA NISAR browse mosaic is display imagery, not a calibrated anomaly score. Esri imagery outside the crop or in mosaic mode is geographic context with varying dates. Map labels can be switched off. Missing and rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
@@ -223,8 +247,14 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"></script>
+<script src="js/text98.js"></script>
 <script src="js/styles.js"></script>
 <script src="js/search.js"></script>
+<script src="js/archive.js"></script>
+<script src="js/nisar-map.js"></script>
+<script src="js/water-labels.js"></script>
 <script src="js/data.js"></script>
 <script src="js/optical.js"></script>
 <script src="js/chart.js"></script>

@@ -45,13 +45,17 @@ python3 -m http.server 8765
 Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
 
 «Поиск локаций» accepts place, region and forest names or decimal `latitude, longitude`.
-Names are sent only on submit to the public Photon / Komoot demo service, based on
+Names in any script are sent only on submit to Open-Meteo / GeoNames, with Photon / Komoot as fallback based on
 OpenStreetMap; requests are cached during the session and limited to one per second
 per browser. The demo endpoint may throttle or go offline. Operators can set
 `window.OB_GEOCODER_URL` before loading `js/app.js` to use a suitable Photon endpoint.
-Coordinate searches are local. A search outside the prepared NISAR areas shows
+Set window.OB_MULTILINGUAL_GEOCODER_URL to replace the primary Open-Meteo endpoint. Unicode names and right-to-left scripts are preserved; matching depends on provider name coverage. Coordinate searches are local. A search outside the prepared NISAR areas shows
 geographic context and explicitly marks the measurement series as unavailable.
 The selected site and searched coordinates are retained in the URL across reloads.
+The NISAR archive panel searches NASA CMR across ASF NISAR collections for the
+point at the map centre. Results include official granule records and original
+file links when available. File downloads may require Earthdata Login. Pixel
+charts and sonification use the prepared measured cases.
 The last map centre and zoom are also remembered locally in the same browser;
 an explicitly selected site or coordinates in a link take precedence.
 
@@ -103,9 +107,16 @@ Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tes
 
 ## Data
 
+The left map loads a rolling 12-day NISAR GCOV radar mosaic from NASA GIBS.
+Newer tiles take precedence, and transparent coverage gaps show the Esri
+basemap. OffBeat aggregates the GIBS browse image into square cells and maps
+image brightness to blue through red. Clicking a cell outlines its bounds on
+both maps. The local measured HV overlay uses its own dB scale, with pixel
+charts available in the prepared cases.
+
 NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
 Both panes use Esri World Imagery for matching detail, grey under NISAR on the left
-and colour on the right. Place labels, study-area boundaries and metric scales help orientation.
+and colour on the right. Place labels and metric scales help orientation.
 Imagery dates vary by location; this is context, not date-matched optical validation.
 
 ## Font
