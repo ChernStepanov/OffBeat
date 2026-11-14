@@ -12,7 +12,7 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 
 **Частично сделано:** z-score рассчитан для разреженных точек, но плотного растра ещё нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)); выполнена сверка точек с alert и пожарами, но проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Есть простые базовые сравнения для ML, но погодная коррекция и независимая оценка ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)).
 
-**Осталось:** обработать HLS ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)), дополнительные ряды GUNW ([#16](https://github.com/ChernStepanov/OffBeat/issues/16), [#17](https://github.com/ChernStepanov/OffBeat/issues/17)) и продукты OPERA ([#35](https://github.com/ChernStepanov/OffBeat/issues/35), [#36](https://github.com/ChernStepanov/OffBeat/issues/36)); для загрузки нужен Earthdata Login. Также не завершены проверка правил и лицензии ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), запись видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)).
+**Осталось:** обработать HLS ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)), дополнительные ряды GUNW ([#16](https://github.com/ChernStepanov/OffBeat/issues/16), [#17](https://github.com/ChernStepanov/OffBeat/issues/17)) и данные OPERA DISP-S1 ([#36](https://github.com/ChernStepanov/OffBeat/issues/36)); для загрузки нужен Earthdata Login. Ряд OPERA RTC-S1 для Амазонии и его ограничения описаны [отдельно](docs/amazon-opera-rtc-comparison.md). Также не завершены проверка правил и лицензии ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), запись видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)).
 
 Проверены 36 научных тестов и сценарии данных, поиска и тура; шесть сетевых тестов не запускались. Заявку и видео ещё не сдавали.
 
@@ -30,6 +30,8 @@ python -m http.server 8765
 в [архиве эксперимента](archive/preview-2026-11-14/README.md); он не является оценкой текущего детектора.
 
 Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Names are sent only on submit, cached in the session and throttled. Coordinate searches are local. Operators can override `OB_MULTILINGUAL_GEOCODER_URL` and `OB_GEOCODER_URL` before app.js. Translated-name coverage depends on the providers.
+For programmatic read-only access, run `python3 -m api.server` and see the [HTTP API documentation](docs/api.md).
+
 
 ## Actual prepared data
 
@@ -38,8 +40,17 @@ Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Na
 | Mexico City | 29, 2025-10-30 to 2026-10-13 | 357/1024, one 12-day pair | 29/29 radar dates |
 | Itupiranga, Para | 6, 2026-07-18 to 2026-09-28 | 0 | 6/6 radar dates |
 | Caracas | 6, 2025-11-09 to 2026-01-08 | 0 | 5/6 radar dates |
+| New Delhi, India | 2, 2025-11-21 to 2025-12-03 | 0 | not prepared |
+| Tokyo, Japan | 2, 2025-10-31 to 2025-11-12 | 803/1024, one 12-day pair | not prepared |
+| Khimki, Moscow Oblast, Russia | 2, 2026-06-25 to 2026-07-07 | 0 | not prepared |
+| Nairobi, Kenya | 2, 2026-06-30 to 2026-07-12 | 593/1024, one 12-day pair | not prepared |
+| Sydney, Australia | 2, 2026-06-25 to 2026-07-07 | 573/1024, one 12-day pair | not prepared |
 
 Each site has 1024 sparse nearest-native sample locations. Missing and rejected observations stay null. GUNW has a separate date axis; its first zero is a reference convention. No vertical velocity, building-damage map, confirmed clearing area or forecast accuracy is claimed.
+
+The Delhi and Tokyo sites each cover a small 0.025° × 0.025° window, not the whole city. Their two GCOV dates are insufficient for curve-shape classification or a trend. Tokyo's GUNW pair is an apparent relative LOS change, not an independently validated ground-motion rate; no Delhi GUNW samples passed the quality mask. Dated optical images are not yet prepared for these two sites; the Esri mosaic is context only.
+
+Khimki, Nairobi and Sydney likewise cover only small 0.025° × 0.025° windows, with two GCOV dates and no dated optical preview. No Khimki GUNW samples passed the quality mask; accepted Nairobi and Sydney pairs show apparent relative LOS change, not validated rates. Two dates are insufficient to classify curve shapes or determine a trend.
 
 - `data/<site>.json`: measured values, leave-one-out peer bands, latest robust z, exploratory curve shapes and GUNW quality/provenance.
 - `data/<site>-manifest.json`: producer/CMR IDs, dates, tracks, footprints, polarizations and URLs. `data/subsets/`: numeric subsets and SHA-256 receipts.
@@ -67,7 +78,7 @@ Peers use the same WorldCover 2021 class within 1 km, excluding self, with at le
 
 Optical processing searches Earth Search within +/-15 days, checks the local SCL mask, reads only AOI COG windows, and reprojects to the exact site bbox. All dates use reflectance 0 to 0.3 and gamma 2.2; provider harmonisation flags prevent applying the BOA offset twice.
 
-Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. Without login, catalogue overlap is checkable but OPERA velocities and numerical C/L comparisons remain unavailable.
+Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. The prepared Amazon RTC-S1 series and comparison are available offline; no OPERA displacement velocity has been calculated.
 
 ```sh
 node scripts/test_data.mjs
@@ -86,7 +97,7 @@ old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
 
 ## Sources and licences
 
-NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. OPERA is catalogue evidence only until actual additional measurements are processed.
+NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. Amazon OPERA RTC-S1 provides sampled C-band measurements; Mexico OPERA DISP-S1 remains catalogue evidence only.
 
 Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA font uses SIL OFL 1.1, see `fonts/W95FA-OFL.txt`.
 

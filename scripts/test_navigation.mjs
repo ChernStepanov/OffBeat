@@ -41,7 +41,7 @@ const context={URL,AbortSignal,Event,console,document,location,history:{replaceS
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
   L:{map:newMap,tileLayer:(url,options)=>{tileLayers.push({url,options});return layer();},rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
 };context.window=context;vm.createContext(context);
-for(const file of ['styles','search','data'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
+for(const file of ['styles','search','data','acquisitions','amazon-ranking'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
 Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:()=>()=>null,bindWaterLabels:()=>()=>{},
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),
@@ -58,11 +58,16 @@ await OB.app.loadSite('mexico');
 const clicks=(id,button)=>$(id).listeners.click({target:button});
 clicks('regions',regionButtons[0]);await tick();
 assert.equal(OB.app.pixel(),null);
+assert.equal($('card-content').hidden,true,'Нет пустых графиков вне участка');
+assert.equal($('card-empty').hidden,false);
+assert.equal($('card-empty-sites').hidden,false);
 assert.equal(regionButtons[0].getAttribute('aria-pressed'),'true');
 const loadsBefore=opticalLoads.length;
 await OB.app.loadSite('mexico');
 assert.equal(opticalLoads.length,loadsBefore+1,'Тур должен восстановить оптику после World');
 assert(OB.app.pixel());assert(regionButtons.every(b=>b.getAttribute('aria-pressed')==='false'));
+assert.equal($('card-content').hidden,false,'Карточка с данными возвращается при выборе участка');
+assert.equal($('card-empty').hidden,true);
 
 // Запоздалые результаты поиска не возвращаются после перехода в регион.
 let completeSearch;

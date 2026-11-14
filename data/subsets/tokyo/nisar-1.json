@@ -1,0 +1,39 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_005_038_A_020_4005_DHDH_A_20251112T194830_20251112T194905_P05023_N_F_J_001",
+    "concept_id": "G4271566964-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2025-11-12T19:48:30.000Z",
+    "end": "2025-11-12T19:49:05.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_005_038_A_020_4005_DHDH_A_20251112T194830_20251112T194905_P05023_N_F_J_001/NISAR_L2_PR_GCOV_005_038_A_020_4005_DHDH_A_20251112T194830_20251112T194905_P05023_N_F_J_001.h5"
+  },
+  "identification": {
+    "trackNumber": 38,
+    "frameNumber": 20,
+    "orbitPassDirection": "Ascending",
+    "productVersion": "1.0.11",
+    "lookDirection": "Left",
+    "radarBand": "L"
+  },
+  "grid": {
+    "epsg": 32654,
+    "spacing": [
+      10.0,
+      -10.0
+    ],
+    "window": [
+      27396,
+      27669,
+      10963,
+      11187
+    ],
+    "paths": {
+      "hh": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+      "hv": "/science/LSAR/GCOV/grids/frequencyA/HVHV",
+      "mask": "/science/LSAR/GCOV/grids/frequencyA/mask"
+    },
+    "date": "2025-11-12"
+  },
+  "subset_file": "nisar-1.npz",
+  "sha256": "f59b71a390ab384dfc46a37a06283ca7314ef78eca8607374c210c34745b509f"
+}

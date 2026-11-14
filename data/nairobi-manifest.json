@@ -1,0 +1,47 @@
+{
+  "site": "nairobi",
+  "checked_at": "2026-11-14T17:03:48.639545+00:00",
+  "queries": [
+    "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GCOV_PROVISIONAL_V1&bounding_box=36.8075%2C-1.3025%2C36.8325%2C-1.2775&page_size=2000&sort_key=start_date",
+    "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GUNW_PROVISIONAL_V1&bounding_box=36.8075%2C-1.3025%2C36.8325%2C-1.2775&page_size=2000&sort_key=start_date"
+  ],
+  "products": {
+    "gcov": [
+      {
+        "id": "NISAR_L2_PR_GCOV_024_057_A_001_4005_DHDH_A_20260630T031543_20260630T031617_P05023_N_F_J_001",
+        "concept_id": "G4241360537-ASF",
+        "collection": "C2854338529-ASF",
+        "start": "2026-06-30T03:15:43.000Z",
+        "end": "2026-06-30T03:16:17.999Z",
+        "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_024_057_A_001_4005_DHDH_A_20260630T031543_20260630T031617_P05023_N_F_J_001/NISAR_L2_PR_GCOV_024_057_A_001_4005_DHDH_A_20260630T031543_20260630T031617_P05023_N_F_J_001.h5"
+      },
+      {
+        "id": "NISAR_L2_PR_GCOV_025_057_A_001_4005_DHDH_A_20260712T031542_20260712T031616_P05023_N_F_J_001",
+        "concept_id": "G4252522655-ASF",
+        "collection": "C2854338529-ASF",
+        "start": "2026-07-12T03:15:42.000Z",
+        "end": "2026-07-12T03:16:16.999Z",
+        "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_025_057_A_001_4005_DHDH_A_20260712T031542_20260712T031616_P05023_N_F_J_001/NISAR_L2_PR_GCOV_025_057_A_001_4005_DHDH_A_20260712T031542_20260712T031616_P05023_N_F_J_001.h5"
+      }
+    ],
+    "gunw": [
+      {
+        "id": "NISAR_L2_PR_GUNW_024_057_A_001_025_4000_SH_20260630T031543_20260630T031617_20260712T031542_20260712T031616_P05023_N_F_J_001",
+        "concept_id": "G4253122812-ASF",
+        "collection": "C2854335566-ASF",
+        "start": "2026-06-30T03:15:43.000Z",
+        "end": "2026-07-12T03:16:16.999Z",
+        "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GUNW_PROVISIONAL_V1/NISAR_L2_PR_GUNW_024_057_A_001_025_4000_SH_20260630T031543_20260630T031617_20260712T031542_20260712T031616_P05023_N_F_J_001/NISAR_L2_PR_GUNW_024_057_A_001_025_4000_SH_20260630T031543_20260630T031617_20260712T031542_20260712T031616_P05023_N_F_J_001.h5"
+      }
+    ]
+  },
+  "track": 57,
+  "frame": 1,
+  "maturity": "PROVISIONAL",
+  "bbox": {
+    "w": 36.8075,
+    "s": -1.3025,
+    "e": 36.8325,
+    "n": -1.2775
+  }
+}

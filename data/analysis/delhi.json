@@ -1,0 +1,498 @@
+{
+  "site": "delhi",
+  "dates": [
+    "2025-11-21",
+    "2025-12-03"
+  ],
+  "input_sha256": "ce55d8ed3f10ab89340ded0fbdfa15d928e23b216064133aa98f1754de7cfea8",
+  "valid_latest_z": 1011,
+  "shape_counts": {
+    "drop": 0,
+    "flood": 0,
+    "drift": 0,
+    "step": 0
+  },
+  "class_medians": [
+    {
+      "date": "2025-11-21",
+      "classes": {
+        "10": {
+          "n": 558,
+          "hv_median_db": -12.29979
+        },
+        "30": {
+          "n": 34,
+          "hv_median_db": -18.63997
+        },
+        "40": {
+          "n": 3,
+          "hv_median_db": -17.50492
+        },
+        "50": {
+          "n": 421,
+          "hv_median_db": -12.51518
+        },
+        "60": {
+          "n": 8,
+          "hv_median_db": -18.30382
+        }
+      }
+    },
+    {
+      "date": "2025-12-03",
+      "classes": {
+        "10": {
+          "n": 558,
+          "hv_median_db": -12.15492
+        },
+        "30": {
+          "n": 34,
+          "hv_median_db": -18.04091
+        },
+        "40": {
+          "n": 3,
+          "hv_median_db": -19.53213
+        },
+        "50": {
+          "n": 421,
+          "hv_median_db": -12.43572
+        },
+        "60": {
+          "n": 8,
+          "hv_median_db": -19.15441
+        }
+      }
+    }
+  ],
+  "review_top10": [
+    {
+      "id": "DEL r0 c0",
+      "lat": 28.622109374999997,
+      "lon": 77.197890625,
+      "cover": 50,
+      "z": 0.33801,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.23531,
+        -10.91155
+      ],
+      "hv": [
+        -14.38252,
+        -11.66021
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 55
+    },
+    {
+      "id": "DEL r0 c1",
+      "lat": 28.622109374999997,
+      "lon": 77.198671875,
+      "cover": 50,
+      "z": 1.08741,
+      "style": null,
+      "since": null,
+      "hh": [
+        3.24593,
+        1.7941
+      ],
+      "hv": [
+        -6.75885,
+        -8.96846
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 66
+    },
+    {
+      "id": "DEL r0 c2",
+      "lat": 28.622109374999997,
+      "lon": 77.199453125,
+      "cover": 10,
+      "z": -0.13111,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.11086,
+        -6.24418
+      ],
+      "hv": [
+        -10.66131,
+        -12.16802
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 69
+    },
+    {
+      "id": "DEL r0 c3",
+      "lat": 28.622109374999997,
+      "lon": 77.20023437500001,
+      "cover": 10,
+      "z": -0.28188,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.10213,
+        -8.12427
+      ],
+      "hv": [
+        -12.90347,
+        -12.55972
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 71
+    },
+    {
+      "id": "DEL r0 c4",
+      "lat": 28.622109374999997,
+      "lon": 77.20101562500001,
+      "cover": 10,
+      "z": 1.58918,
+      "style": null,
+      "since": null,
+      "hh": [
+        -2.12059,
+        -3.2188
+      ],
+      "hv": [
+        -9.35052,
+        -8.41358
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 76
+    },
+    {
+      "id": "DEL r0 c5",
+      "lat": 28.622109374999997,
+      "lon": 77.201796875,
+      "cover": 50,
+      "z": -0.08365,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.63627,
+        -8.8243
+      ],
+      "hv": [
+        -13.36442,
+        -13.31726
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 97
+    },
+    {
+      "id": "DEL r0 c6",
+      "lat": 28.622109374999997,
+      "lon": 77.202578125,
+      "cover": 10,
+      "z": 2.57865,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.70298,
+        -5.8195
+      ],
+      "hv": [
+        -8.25975,
+        -6.10738
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 84
+    },
+    {
+      "id": "DEL r0 c7",
+      "lat": 28.622109374999997,
+      "lon": 77.203359375,
+      "cover": 10,
+      "z": -0.24589,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.54778,
+        -8.18008
+      ],
+      "hv": [
+        -11.9946,
+        -12.48117
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 89
+    },
+    {
+      "id": "DEL r0 c8",
+      "lat": 28.622109374999997,
+      "lon": 77.20414062500001,
+      "cover": 50,
+      "z": -0.04222,
+      "style": null,
+      "since": null,
+      "hh": [
+        -12.53121,
+        -11.1751
+      ],
+      "hv": [
+        -12.14037,
+        -12.66638
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 117
+    },
+    {
+      "id": "DEL r0 c9",
+      "lat": 28.622109374999997,
+      "lon": 77.204921875,
+      "cover": 10,
+      "z": -0.30331,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.52992,
+        -5.73858
+      ],
+      "hv": [
+        -10.11898,
+        -12.7793
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 96
+    }
+  ],
+  "controls": [
+    {
+      "id": "DEL r0 c12",
+      "lat": 28.622109374999997,
+      "lon": 77.207265625,
+      "cover": 50,
+      "z": -0.19282,
+      "style": null,
+      "since": null,
+      "hh": [
+        -1.00577,
+        -3.06925
+      ],
+      "hv": [
+        -9.86264,
+        -13.26592
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 132
+    },
+    {
+      "id": "DEL r30 c5",
+      "lat": 28.598671875,
+      "lon": 77.201796875,
+      "cover": 10,
+      "z": 1.38744,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.25028,
+        -4.64635
+      ],
+      "hv": [
+        -9.21265,
+        -8.63482
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 156
+    },
+    {
+      "id": "DEL r23 c26",
+      "lat": 28.604140625,
+      "lon": 77.218203125,
+      "cover": 10,
+      "z": 1.31003,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.13372,
+        -3.84951
+      ],
+      "hv": [
+        -10.05202,
+        -8.77941
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 205
+    },
+    {
+      "id": "DEL r12 c17",
+      "lat": 28.612734375,
+      "lon": 77.211171875,
+      "cover": 40,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -13.24536,
+        -16.58877
+      ],
+      "hv": [
+        -19.47129,
+        -19.53213
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 1
+    },
+    {
+      "id": "DEL r6 c8",
+      "lat": 28.617421874999998,
+      "lon": 77.20414062500001,
+      "cover": 10,
+      "z": -1.36299,
+      "style": null,
+      "since": null,
+      "hh": [
+        -15.13054,
+        -10.3103
+      ],
+      "hv": [
+        -18.04309,
+        -16.16643
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 120
+    },
+    {
+      "id": "DEL r5 c9",
+      "lat": 28.618203124999997,
+      "lon": 77.204921875,
+      "cover": 50,
+      "z": 2.36538,
+      "style": null,
+      "since": null,
+      "hh": [
+        6.54964,
+        5.97892
+      ],
+      "hv": [
+        -3.14452,
+        -2.76783
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 191
+    },
+    {
+      "id": "DEL r23 c18",
+      "lat": 28.604140625,
+      "lon": 77.211953125,
+      "cover": 50,
+      "z": -1.37388,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.98888,
+        -6.13427
+      ],
+      "hv": [
+        -16.43166,
+        -17.08142
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 158
+    },
+    {
+      "id": "DEL r29 c23",
+      "lat": 28.599453125,
+      "lon": 77.215859375,
+      "cover": 10,
+      "z": -0.87808,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.53655,
+        -8.71603
+      ],
+      "hv": [
+        -14.66323,
+        -15.2356
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 185
+    },
+    {
+      "id": "DEL r16 c23",
+      "lat": 28.609609374999998,
+      "lon": 77.215859375,
+      "cover": 50,
+      "z": 1.96248,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.2358,
+        -4.14653
+      ],
+      "hv": [
+        -6.94125,
+        -5.65134
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 171
+    },
+    {
+      "id": "DEL r8 c18",
+      "lat": 28.615859375,
+      "lon": 77.211953125,
+      "cover": 50,
+      "z": 0.22653,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.15472,
+        -7.46216
+      ],
+      "hv": [
+        -8.64894,
+        -11.60124
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 230
+    }
+  ],
+  "requested_candidate": null,
+  "limitations": [
+    "WorldCover 2021 may be outdated",
+    "Sparse samples, no area or continuous raster",
+    "Curve shapes are not confirmed clearing, flood, earthquake or subsidence",
+    "No weather correction or labelled accuracy estimate"
+  ]
+}

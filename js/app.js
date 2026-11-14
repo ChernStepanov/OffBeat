@@ -6,9 +6,10 @@
     $('sb-state').textContent = error.message;
     $('sb-src').textContent = 'No measurements loaded';
     $('play-hint').textContent = 'Cannot load real data. Check the static server and data/mexico.json.';
+    $('card-empty-message').textContent = 'Measured data could not be loaded. Check your connection and reload the page.';
     return;
   }
-  const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
+  const state = { site: null, pixel: null, cell: null, date: 0, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
 
   // Identical imagery and zoom limits; grey basemap under the colour NISAR layer.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
@@ -38,6 +39,19 @@
     return L.tileLayer(isData ? CANVAS_LABELS : LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 16, attribution: isData ? canvasCredit : labelsCredit }).addTo(m);
   });
   let areaLayers = [];
+  let rankingData = null;
+  // the map window's Win98 maximize button: cover the desk, status bar stays on top
+  const mapWin = $('map-win'), maxBtn = $('map-max');
+  function setMapMaximized(on) {
+    mapWin.classList.toggle('win--max', on);
+    document.body.classList.toggle('win-max-open', on);
+    maxBtn.setAttribute('aria-pressed', String(on));
+    maxBtn.title = on ? 'Restore window / Восстановить окно' : 'Maximize map / Развернуть карту';
+    // Leaflet measures its container: re-measure both maps once the new layout settles
+    setTimeout(() => { map.invalidateSize(); optic.invalidateSize(); }, 60);
+  }
+  maxBtn.addEventListener('click', () => setMapMaximized(!mapWin.classList.contains('win--max')));
+  window.addEventListener('keydown', e => { if (e.key === 'Escape' && mapWin.classList.contains('win--max')) setMapMaximized(false); });
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
@@ -76,9 +90,20 @@
   }
   map.on('moveend', saveViewport);
   const box = () => L.rectangle([[0, 0], [0, 0]], {
-    pane: 'selectedCell', color: '#ffcc00', weight: 3, fill: false, interactive: false,
+    pane: 'selectedCell', color: '#67217a', weight: 3, fill: false, interactive: false,
   });
   const cellBox = box(), cellBoxOptic = box();
+  // the picked sample: a ring around its point on both maps (a point, never an area)
+  const rings = [map, optic].map(m => [
+    L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#000', weight: 4, fill: false, interactive: false }),
+    L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#fff', weight: 2, fill: false, interactive: false }),
+  ]);
+  function markSample(latlng) {
+    rings.forEach((pair, i) => pair.forEach(r => { r.setLatLng(latlng); if (!(i ? optic : map).hasLayer(r)) r.addTo(i ? optic : map); }));
+  }
+  function unmarkSample() {
+    rings.forEach((pair, i) => pair.forEach(r => { const m = i ? optic : map; if (m.hasLayer(r)) m.removeLayer(r); }));
+  }
   function showCellBounds(bounds) {
     const [a, b] = bounds.map(corner => map.project(corner, 0));
     const center = map.unproject(a.add(b).divideBy(2), 0);
@@ -105,6 +130,51 @@
     updateWaterLabels(labelsVisible());
     drawAreaLabels();
   });
+
+  const ranking = OB.amazonRanking({ map, leaflet: L, panel: $('ranking-controls'), polarization: $('ranking-pol'), radius: $('ranking-radius'), status: $('ranking-status'), onPick: point => {
+    if (!state.site || state.site.id !== 'amazon') return;
+    const idx = point.row * state.site.grid.w + point.col;
+    if (idx >= 0 && idx < state.site.grid.w * state.site.grid.h) pickCell(idx, false);
+  }});
+  $('ranking-visible').addEventListener('change', () => {
+    ranking.setVisible(!!state.site && state.site.id === 'amazon' && $('ranking-visible').checked);
+    $('ranking-controls').hidden = !state.site || state.site.id !== 'amazon';
+  });
+  function loadRanking() {
+    ranking.load(fetch, 'data/amazon-ranking-experiment.json').then(data => {
+      if (!data) return;
+      rankingData = data;
+      $('ranking-dates').textContent = `Fixed event window ${rankingData.event_window.join(' → ')}; the map date slider does not change this analysis. Later acquisitions excluded from ranking. Window neighbors are not dashboard peers within 1 km. Minimum neighbors: ${rankingData.minimum_local_peers}.`;
+    });
+  }
+  loadRanking();
+
+  function updateAcquisition() {
+    const s = state.site;
+    const measured = !!s.pixels && s.dates.length > 0;
+    $('acquisition').hidden = !measured;
+    if (!measured) return;
+    const date = s.dates[state.date], available = OB.acquisitions.available(s, state.date);
+    $('date-index').max = String(s.dates.length - 1);
+    $('date-index').value = String(state.date);
+    $('date-index').disabled = s.dates.length < 2;
+    $('date-index').setAttribute('aria-valuetext', date);
+    $('date-label').textContent = date;
+    $('date-prev').disabled = state.date === 0;
+    $('date-next').disabled = state.date === s.dates.length - 1;
+    const value = state.pixel && state.pixel.hv[state.date];
+    const sample = state.pixel ? ` Selected sample: ${Number.isFinite(value) ? value.toFixed(2) + ' dB' : 'unavailable'}.` : '';
+    $('date-status').textContent = `${state.date + 1} of ${s.dates.length}: ${available}/${s.pixels.length} samples with measured HV.${sample}`;
+  }
+  function selectAcquisition(index) {
+    if (!state.site || $('acquisition').hidden) return;
+    OB.sonify.stop(); $('stop').disabled = true;
+    state.date = Math.max(0, Math.min(state.site.dates.length - 1, index));
+    updateAcquisition(); optical.setDate(state.site.dates[state.date]); drawCharts();
+  }
+  $('date-index').addEventListener('input', e => selectAcquisition(+e.target.value));
+  $('date-prev').addEventListener('click', () => selectAcquisition(state.date - 1));
+  $('date-next').addEventListener('click', () => selectAcquisition(state.date + 1));
 
   // The endpoint can be replaced by the operator without changing the UI.
   const geocoder = window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/';
@@ -139,6 +209,11 @@
   }
   function clearPixel() {
     OB.sonify.stop(); state.cell = null; state.pixel = null;
+    $('card-content').hidden = true;
+    $('card-empty').hidden = false;
+    $('card-empty-message').textContent = 'No prepared measurements at this location. Choose a marked site to see its data and listen to a sample.';
+    $('card-empty-sites').hidden = false;
+    unmarkSample();
     $('val-win').hidden = true;
     [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
     $('px-id').textContent = 'No prepared measurement series here';
@@ -158,6 +233,7 @@
     document.dispatchEvent(new Event('ob:manual-navigation'));
     const site = OB.SITES.find(s => { const b = s.grid.bbox; return place.lat >= b.s && place.lat <= b.n && place.lon >= b.w && place.lon <= b.e; });
     clearSearchMarkers();
+    ranking.setVisible(false); $('ranking-controls').hidden = true;
     if (site) await loadSite(site.id);
     if (ticket !== navigationSerial) return false;
     if (site) {
@@ -175,6 +251,7 @@
       $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
       $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'Pixel series unavailable at this location';
       $('source-link').hidden = true; $('site-layers').hidden = true;
+      $('acquisition').hidden = true;
       $('sb-state').textContent = 'No prepared NISAR series at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Context: Esri basemap and photo mosaic';
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
       $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
@@ -353,7 +430,7 @@
         state.extra[k] = L.layerGroup(pts).addTo(map);
         state.extra[k + "_o"] = L.layerGroup(s.context.fires.map(f => L.circleMarker([f.lat, f.lon], { radius: 2.5, color: "#ff6600", weight: 1, fill: false }))).addTo(optic);
       } else if (k === "alerts") {
-        const style = { color: "#ffff00", weight: 1, fill: false };
+        const style = { color: "#67217a", weight: 2, fill: false };
         state.extra[k] = L.geoJSON(s.context.alerts, { style, onEachFeature: (f, l) => l.bindTooltip(`Alert ${f.properties.date}, ${f.properties.area_ha ? f.properties.area_ha.toFixed(1) + " ha" : ""}`) }).addTo(map);
         state.extra[k + "_o"] = L.geoJSON(s.context.alerts, { style }).addTo(optic);
       } else {
@@ -415,11 +492,26 @@
 
   function drawTop() {
     const s = state.site, g = s.grid, rows = state.patches.slice(0, 10);
+    if (s.pixels && s.analysis_status === 'exploratory_sparse_samples') {
+      const off = s.pixels.map((p, i) => ({ p, i })).filter(({ p }) => Number.isFinite(p.z) && Math.abs(p.z) >= state.z && p.cover !== 80)
+        .sort((a, b) => Math.abs(b.p.z) - Math.abs(a.p.z)).slice(0, 10);
+      if (off.length) {
+        $("top").tBodies[0].innerHTML = off.map(({ p, i }, k) => {
+          const st = p.style ? OB.STYLES[p.style] : null;
+          return `<tr data-cell="${i}" tabindex="0" aria-selected="${state.cell === i}">
+            <td>${k + 1}</td><td>${st ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : (p.z < 0 ? 'Below neighbours' : 'Above neighbours')}</td>
+            <td>1 sample, ${OB.COVER[p.cover] ? OB.COVER[p.cover].name : 'class ' + p.cover}</td><td>${(p.z > 0 ? '+' : '') + p.z.toFixed(1)}</td><td>${p.since || '-'}</td></tr>`;
+        }).join("");
+        return;
+      }
+      $("top").tBodies[0].innerHTML = `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `No samples pass |z| ≥ ${state.z}.` : 'No valid peer deviations.'}</td></tr>`;
+      return;
+    }
     $("top").tBodies[0].innerHTML = rows.length ? rows.map((p, i) => {
       const st = OB.STYLES[p.style], since = g.since[p.peak] >= 0 ? s.dates[g.since[p.peak]] : "-";
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
-        <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
+        <td>${area(p.cells)}</td><td>${g.z[p.peak].toFixed(1)}</td><td>${since}</td></tr>`;
     }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `No classified shape passes |z| ≥ ${state.z}.` : 'No classified candidates with valid peer measurements.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true).then(pixelSound); };
@@ -432,7 +524,7 @@
     // every sample past the threshold, as the map draws them; styles are not assigned on sparse samples
     let px = 0; for (let i = 0; i < g.z.length; i++) if (Number.isFinite(g.z[i]) && Math.abs(g.z[i]) >= state.z && g.cover[i] !== 80) px++;
     drawRaster(); drawTop();
-    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} candidates · ${px} samples at |z| ≥ ${state.z}; area unknown` : 'No valid peer deviations';
+    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${px} off-beat sample${px === 1 ? '' : 's'} at |z| ≥ ${state.z}, ${state.patches.length} with a classified shape` : 'No valid peer deviations';
   }
 
   // --- validation summary (Amazon, from pipeline) ---
@@ -500,6 +592,9 @@
     const p = await s.series(x, y);
     if (state.cell !== i || state.site !== s) return;      // another click won the race
     state.pixel = p;
+    $('card-empty').hidden = true;
+    $('card-content').hidden = false;
+    updateAcquisition();
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;
     $('map-caption').textContent = $('l-offbeat').checked ? 'Measured samples: grey in step, blue below and red above their same-class neighbours' : 'Measured samples hidden; switch them on under Layers';
@@ -519,6 +614,7 @@
       map.unproject(origin.add([(x + 1) * width, (y + 1) * height]), 0),
     ];
     showCellBounds(rect);
+    if (Number.isFinite(p.lat) && Number.isFinite(p.lon)) markSample([p.lat, p.lon]);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
     optical.setDate(p.since || s.dates.at(-1));
@@ -531,7 +627,8 @@
   function sinceIdx() { const p = state.pixel; return p && p.since ? state.site.dates.indexOf(p.since) : null; }
   function drawCharts(head) {
     const p = state.pixel; if (!p) return;
-    OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
+    const selectedDate = !$('acquisition').hidden ? state.date : null;
+    OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head ?? selectedDate);
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
     const op = state.site.context && state.site.context.opera_disp;
@@ -580,6 +677,8 @@
     // Optical metadata must not delay the map or radar measurements.
     optical.load(s,s.dates.at(-1));
     if (ticket !== state.loading) return;
+    state.date = s.dates.length - 1;
+    updateAcquisition();
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
     $('source-link').hidden = false;
@@ -592,6 +691,9 @@
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();
+    $('ranking-controls').hidden = s.id !== 'amazon';
+    ranking.setVisible(s.id === 'amazon' && $('ranking-visible').checked);
+    $('ranking-controls').hidden = s.id !== 'amazon';
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
     $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;

@@ -76,8 +76,9 @@ NISAR L-band is approximately **24 cm**; Sentinel-1 C-band is about **5.55 cm**.
 Longer wavelengths can interact more with woody structure, while canopy penetration,
 biomass saturation and moisture sensitivity depend on surface and acquisition
 conditions. HH/HV and VV/VH values at different frequencies and geometries cannot
-be treated as equivalent measurements. The numerical C/L contrast is not yet
-computed. [NASA NISAR facts](https://science.nasa.gov/mission/nisar/mission-overview/),
+be treated as equivalent measurements. A descriptive comparison for the sampled
+Amazon site is documented in [the OPERA RTC analysis](amazon-opera-rtc-comparison.md).
+[NASA NISAR facts](https://science.nasa.gov/mission/nisar/mission-overview/),
 [ESA Sentinel-1 instrument](https://sentiwiki.copernicus.eu/web/s1-mission).
 
 Longer NISAR histories could support season-aware vegetation monitoring, groundwater
@@ -96,8 +97,7 @@ granule IDs, dates, footprints and source links are preserved in
 [Mexico evidence](../data/evidence/mexico-opera-disp.json) and
 [Amazon evidence](../data/evidence/amazon-opera-rtc.json).
 Footprint overlap does not establish usable pixel coverage or processing compatibility.
-Earthdata is excluded by user choice for this run: no OPERA velocity or C/L numeric
-comparison is claimed. These issues remain open.
+Subsequent authenticated observations are described below.
 
 
 ## Authenticated ASF observations (14 November 2026)
@@ -109,3 +109,4 @@ For Mexico, 15 OPERA DISP-S1 F01088 products sharing the 2025-12-25 reference we
 Three Caracas baseline GUNW pairs (2026-05-08→05-20, 05-20→06-01, and 06-01→06-13) were sampled with the unchanged mask. As with the 06-13→06-25 event pair, none of 1024 samples in each pair met the ionospheric uncertainty <=1 rad condition, hence the full mask accepted zero. The [subset receipts](../data/subsets/venezuela-gunw/) retain IDs, hashes and individual quality counts. No damage proxy or coseismic deformation estimate follows from these samples.
 
 For the Amazon candidate AMA r5 c15, two matching native GCOV windows (2026-08-23 and 2026-09-04, 20 m, 141×141 cells) are retained with masks and source hashes in [the subset directory](../data/subsets/amazon-dense/). The [exploratory receipt](../data/analysis/amazon-dense-pair.json) reports the nearest-cell HV change of −7.420 dB and the median of the nine valid 3×3 native cells of −4.122 dB. This is a two-date radar observation, not confirmation of deforestation or a defensible area estimate; moisture, speckle and processing effects are not ruled out.
+

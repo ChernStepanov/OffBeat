@@ -1,0 +1,514 @@
+{
+  "site": "nairobi",
+  "dates": [
+    "2026-06-30",
+    "2026-07-12"
+  ],
+  "input_sha256": "f2fc7a55b969919ef1567b3bc971e4659f3cc94d4c5060d5b940d984574d198b",
+  "valid_latest_z": 983,
+  "shape_counts": {
+    "drop": 0,
+    "flood": 0,
+    "drift": 0,
+    "step": 0
+  },
+  "class_medians": [
+    {
+      "date": "2026-06-30",
+      "classes": {
+        "10": {
+          "n": 203,
+          "hv_median_db": -12.68198
+        },
+        "20": {
+          "n": 31,
+          "hv_median_db": -15.83456
+        },
+        "30": {
+          "n": 46,
+          "hv_median_db": -17.36247
+        },
+        "40": {
+          "n": 11,
+          "hv_median_db": -17.00625
+        },
+        "50": {
+          "n": 710,
+          "hv_median_db": -12.63563
+        },
+        "60": {
+          "n": 20,
+          "hv_median_db": -15.03754
+        },
+        "80": {
+          "n": 3,
+          "hv_median_db": -19.85541
+        }
+      }
+    },
+    {
+      "date": "2026-07-12",
+      "classes": {
+        "10": {
+          "n": 203,
+          "hv_median_db": -12.85392
+        },
+        "20": {
+          "n": 31,
+          "hv_median_db": -15.556
+        },
+        "30": {
+          "n": 46,
+          "hv_median_db": -17.71231
+        },
+        "40": {
+          "n": 11,
+          "hv_median_db": -16.25619
+        },
+        "50": {
+          "n": 710,
+          "hv_median_db": -12.50671
+        },
+        "60": {
+          "n": 20,
+          "hv_median_db": -14.28699
+        },
+        "80": {
+          "n": 3,
+          "hv_median_db": -22.34488
+        }
+      }
+    }
+  ],
+  "review_top10": [
+    {
+      "id": "NAI r0 c0",
+      "lat": -1.2778906250000002,
+      "lon": 36.807890625,
+      "cover": 50,
+      "z": -2.0048,
+      "style": null,
+      "since": null,
+      "hh": [
+        -12.43979,
+        -10.74959
+      ],
+      "hv": [
+        -18.42418,
+        -22.71908
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 44
+    },
+    {
+      "id": "NAI r0 c1",
+      "lat": -1.2778906250000002,
+      "lon": 36.808671874999995,
+      "cover": 10,
+      "z": -0.21806,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.59128,
+        -8.97441
+      ],
+      "hv": [
+        -12.4984,
+        -13.61192
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 64
+    },
+    {
+      "id": "NAI r0 c2",
+      "lat": -1.2778906250000002,
+      "lon": 36.809453125,
+      "cover": 10,
+      "z": 0.40085,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.47797,
+        -5.39415
+      ],
+      "hv": [
+        -12.19869,
+        -11.59957
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 66
+    },
+    {
+      "id": "NAI r0 c3",
+      "lat": -1.2778906250000002,
+      "lon": 36.810234375,
+      "cover": 10,
+      "z": 0.3402,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.24688,
+        -2.39482
+      ],
+      "hv": [
+        -10.4268,
+        -11.79691
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 70
+    },
+    {
+      "id": "NAI r0 c4",
+      "lat": -1.2778906250000002,
+      "lon": 36.811015624999996,
+      "cover": 10,
+      "z": -0.10597,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.5051,
+        -2.84905
+      ],
+      "hv": [
+        -11.5952,
+        -13.2642
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 70
+    },
+    {
+      "id": "NAI r0 c5",
+      "lat": -1.2778906250000002,
+      "lon": 36.811796875,
+      "cover": 50,
+      "z": -1.26086,
+      "style": null,
+      "since": null,
+      "hh": [
+        -14.40291,
+        -11.18989
+      ],
+      "hv": [
+        -20.56647,
+        -18.06953
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 86
+    },
+    {
+      "id": "NAI r0 c6",
+      "lat": -1.2778906250000002,
+      "lon": 36.812578125,
+      "cover": 50,
+      "z": -1.57695,
+      "style": null,
+      "since": null,
+      "hh": [
+        -11.42981,
+        -10.46019
+      ],
+      "hv": [
+        -18.91345,
+        -19.21126
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 95
+    },
+    {
+      "id": "NAI r0 c7",
+      "lat": -1.2778906250000002,
+      "lon": 36.813359375,
+      "cover": 10,
+      "z": -1.31878,
+      "style": null,
+      "since": null,
+      "hh": [
+        5.67974,
+        2.13658
+      ],
+      "hv": [
+        -12.3939,
+        -17.00849
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 74
+    },
+    {
+      "id": "NAI r0 c8",
+      "lat": -1.2778906250000002,
+      "lon": 36.814140625,
+      "cover": 50,
+      "z": -0.92432,
+      "style": null,
+      "since": null,
+      "hh": [
+        0.06505,
+        -1.38103
+      ],
+      "hv": [
+        -15.21239,
+        -15.89325
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 110
+    },
+    {
+      "id": "NAI r0 c9",
+      "lat": -1.2778906250000002,
+      "lon": 36.814921874999996,
+      "cover": 50,
+      "z": -0.17697,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.64064,
+        -3.53577
+      ],
+      "hv": [
+        -12.17929,
+        -12.82144
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 122
+    }
+  ],
+  "controls": [
+    {
+      "id": "NAI r0 c12",
+      "lat": -1.2778906250000002,
+      "lon": 36.817265625,
+      "cover": 50,
+      "z": 0.12124,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.08083,
+        -3.09819
+      ],
+      "hv": [
+        -12.75924,
+        -11.49675
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 144
+    },
+    {
+      "id": "NAI r30 c5",
+      "lat": -1.301328125,
+      "lon": 36.811796875,
+      "cover": 50,
+      "z": -0.30862,
+      "style": null,
+      "since": null,
+      "hh": [
+        -8.00549,
+        -9.40873
+      ],
+      "hv": [
+        -18.99492,
+        -14.48682
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 143
+    },
+    {
+      "id": "NAI r23 c26",
+      "lat": -1.295859375,
+      "lon": 36.828203125,
+      "cover": 10,
+      "z": -1.23504,
+      "style": null,
+      "since": null,
+      "hh": [
+        -9.55626,
+        -7.98675
+      ],
+      "hv": [
+        -18.42163,
+        -16.23743
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 43
+    },
+    {
+      "id": "NAI r12 c17",
+      "lat": -1.287265625,
+      "lon": 36.821171875,
+      "cover": 10,
+      "z": -1.50098,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.45539,
+        -6.98803
+      ],
+      "hv": [
+        -14.60323,
+        -17.08899
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 62
+    },
+    {
+      "id": "NAI r6 c8",
+      "lat": -1.2825781250000001,
+      "lon": 36.814140625,
+      "cover": 10,
+      "z": -0.35539,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.66615,
+        -5.38854
+      ],
+      "hv": [
+        -17.65056,
+        -13.74456
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 113
+    },
+    {
+      "id": "NAI r5 c9",
+      "lat": -1.2817968750000002,
+      "lon": 36.814921874999996,
+      "cover": 40,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -15.90077,
+        -11.76085
+      ],
+      "hv": [
+        -20.56016,
+        -17.60367
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 5
+    },
+    {
+      "id": "NAI r23 c18",
+      "lat": -1.295859375,
+      "lon": 36.821953125,
+      "cover": 10,
+      "z": 0.11978,
+      "style": null,
+      "since": null,
+      "hh": [
+        -14.29457,
+        -10.0605
+      ],
+      "hv": [
+        -15.51647,
+        -13.15926
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 58
+    },
+    {
+      "id": "NAI r29 c23",
+      "lat": -1.300546875,
+      "lon": 36.825859375,
+      "cover": 50,
+      "z": 0.1821,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.26037,
+        -8.2668
+      ],
+      "hv": [
+        -11.34363,
+        -12.09263
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 162
+    },
+    {
+      "id": "NAI r16 c23",
+      "lat": -1.2903906250000001,
+      "lon": 36.825859375,
+      "cover": 50,
+      "z": -0.36304,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.30856,
+        -4.56057
+      ],
+      "hv": [
+        -10.10012,
+        -13.72948
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 290
+    },
+    {
+      "id": "NAI r8 c18",
+      "lat": -1.284140625,
+      "lon": 36.821953125,
+      "cover": 50,
+      "z": -0.23367,
+      "style": null,
+      "since": null,
+      "hh": [
+        -6.47762,
+        -3.95535
+      ],
+      "hv": [
+        -13.1195,
+        -12.98732
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 306
+    }
+  ],
+  "requested_candidate": null,
+  "limitations": [
+    "WorldCover 2021 may be outdated",
+    "Sparse samples, no area or continuous raster",
+    "Curve shapes are not confirmed clearing, flood, earthquake or subsidence",
+    "No weather correction or labelled accuracy estimate"
+  ]
+}

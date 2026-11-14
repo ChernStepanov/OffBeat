@@ -1,6 +1,20 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'Welcome to OffBeat':'Добро пожаловать в OffBeat',
+    'Measured HH/HV on 2 dates; exploratory peer deviations only. Too few dates for curve-shape classification. No GUNW displacement samples passed quality checks.':'Измерения HH/HV за две даты; отклонения от соседей требуют проверки. Для определения формы кривой дат недостаточно. Ни одно измерение смещения GUNW не прошло проверку качества.',
+    'Measured HH/HV on 2 dates; exploratory peer deviations only. Too few dates for curve-shape classification. GUNW has quality-filtered samples on a separate date axis.':'Измерения HH/HV за две даты; отклонения от соседей требуют проверки. Для определения формы кривой дат недостаточно. Прошедшие проверку точки GUNW показаны на отдельной временной шкале.',
+    'No prepared measurements at this location. Choose a marked site to see its data and listen to a sample.':'Для этого места нет подготовленных измерений. Выберите отмеченный участок, чтобы увидеть данные и прослушать точку.',
+    'Choose a prepared measurement site':'Выбрать участок с измерениями',
+    'Measured data could not be loaded. Check your connection and reload the page.':'Не удалось загрузить измерения. Проверьте соединение и обновите страницу.',
+    'Amazon change experiment':'Эксперимент по изменениям в Амазонии',
+    'Explore the fixed-window analysis':'Посмотреть анализ за выбранный период',
+    'Polarization':'Поляризация', 'Neighborhood':'Окрестность', 'Show experiment on map':'Показать эксперимент на карте',
+    'Radar sees through cloud and at night, but almost nobody can read it.':'Радар видит сквозь облака и ночью, но читать его почти никто не умеет.',
+    'OffBeat compares every NISAR sample with its neighbours of the same land cover, flags the ones that fall out of step, and lets you hear them.':'OffBeat сравнивает каждую точку NISAR с соседями того же класса покрова, отмечает выбившиеся из ритма и даёт их услышать.',
+    'The tour takes about two minutes and uses real NISAR measurements.':'Тур занимает около двух минут и идёт по настоящим измерениям NISAR.',
+    'Take the tour':'Пройти тур',
+    'Explore the map':'Открыть карту',
     'NISAR measurements are available at the marked demo sites. Search the archive at the map centre for source acquisitions elsewhere.':'Измерения NISAR доступны на отмеченных демоучастках. Для других мест можно найти исходные съёмки через поиск архива в центре карты.',
     'No prepared NISAR series at this location. Select a marked demo site; the basemap and optical mosaic provide geographic context.':'В этой точке нет подготовленного ряда NISAR. Выберите отмеченный демоучасток; фон карты и оптическая мозаика служат географическим контекстом.',
     'Peer deviations and curve shapes are candidates for investigation, not confirmed events. Sparse samples do not define event areas. The light map shows NISAR sample locations; the optical map shows Esri context or a selected Sentinel-2 image with cloud and missing-data masks. Measured HH/HV are shown in the charts. Missing and quality-rejected measurements remain unavailable.':'Отклонения от соседей и формы кривых — кандидаты для проверки, а не подтверждённые события. Разреженные точки измерений не задают площадь события. Светлая карта показывает расположение образцов NISAR; оптическая карта — контекст Esri или выбранный снимок Sentinel-2 с масками облаков и пропусков. Измеренные HH/HV показаны на графиках. Отсутствующие и отклонённые по качеству измерения остаются недоступными.',
@@ -26,7 +40,7 @@
     'NISAR archive':'Архив NISAR', 'Search at map centre':'Искать в центре карты', 'Find ASF acquisitions and source files for the point at the centre of the map.':'Найти снимки ASF и исходные файлы для точки в центре карты.', 'Load more':'Показать ещё',
     'Pixel card -':'Карточка пикселя —', 'click the map':'нажмите на карту', 'WorldCover class':'Класс WorldCover', 'Peers':'Соседи', 'Style':'Тип', 'Since':'С', 'Location':'Координаты', 'GUNW quality':'Качество GUNW',
     'Backscatter, dB - HH':'Обратное рассеяние, дБ — HH', 'peers':'соседи', 'Apparent relative LOS change, cm (GUNW); + toward sensor':'Видимое относительное изменение по линии визирования, см (GUNW); + к спутнику',
-    'Stop':'Остановить', 'Ranked curve-shape candidates':'Предполагаемые изменения формы кривой', 'Shape':'Форма', 'Samples / area':'Измерения / площадь', 'Latest |z|':'Последний |z|', 'Shift date':'Дата сдвига', 'How OffBeat finds a pixel out of step':'Как OffBeat находит отклоняющийся пиксель',
+    'Stop':'Остановить', 'Ranked curve-shape candidates':'Предполагаемые изменения формы кривой', 'Most off-beat samples':'Самые выбившиеся точки', 'Departure':'Отклонение', 'Sample':'Точка', 'Below neighbours':'Ниже соседей', 'Above neighbours':'Выше соседей', 'Shape':'Форма', 'Samples / area':'Измерения / площадь', 'Latest |z|':'Последний |z|', 'Latest z':'Последний z', 'Shift date':'Дата сдвига', 'How OffBeat finds a pixel out of step':'Как OffBeat находит отклоняющийся пиксель',
     'No classified shape':'Форма не определена', 'No prepared measurement series here':'Для этой точки нет подготовленного ряда измерений', 'No classified shape passes |z| >= 2.5.':'Нет определённых форм с |z| ≥ 2,5.', 'Sound on':'Звук включён', 'Sound off':'Звук выключен', 'Loading…':'Загрузка…', 'Source: no measurements loaded':'Источник: измерения не загружены',
     'These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.':'Здесь показаны измерения NISAR HH/HV в отдельных точках. Каждый результат GUNW получен по одной реальной паре снимков; отбракованные измерения недоступны. Соседние точки обратного рассеяния относятся к тому же историческому классу WorldCover 2021 и находятся в радиусе 1 км; полоса — медиана ± 2 × 1,4826 MAD при наличии не менее 10 пригодных соседних измерений.',
     'GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.':'GUNW отсчитывается от одной когерентной точки в той же связной области. Ионосферная фаза удалена; влияние тропосферы и приливов сохраняется. Стабильность опорной точки не подтверждена. Видимое изменение по линии визирования не является скоростью оседания или вертикальным смещением. Первой эпохе по определению присвоен ноль.',
@@ -34,7 +48,7 @@
   };
   // Match the punctuation normalization performed by text98, including text inserted later.
   const punctuation={'–':'-','—':'-','−':'-','·':',','≤':'<=','≥':'>=','±':'+/-','×':'x','²':'2','…':'...','©':'(c)','°':' deg','µ':'u','σ':'sd','Δ':'d','→':'->','←':'<-','≈':'~','′':"'",'″':'"','«':'"','»':'"','▶':'>','■':''};
-  const normalize=value=>value.replace(/[–—−·≤≥±×²…©°µσΔ→←≈′″«»▶■]/g, c=>punctuation[c]);
+  const normalize=value=>value.replace(/[\s\u00a0]*·[\s\u00a0]*/g, ', ').replace(/[–—−·≤≥±×²…©°µσΔ→←≈′″«»▶■]/g, c=>punctuation[c]);
   const normalizedTranslations=Object.fromEntries(Object.entries(translations).map(([en,ru])=>[normalize(en),normalize(ru)]));
   const key='offbeat.language.v1', originals=new WeakMap();
   let lang='en';

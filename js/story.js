@@ -55,7 +55,7 @@ window.OB = window.OB || {};
       return !!(s && s.grid.style.some((v, i) => v === c && Number.isFinite(s.grid.z[i]) && Math.abs(s.grid.z[i]) >= 2.5)); },
     site: id => () => !!siteById(id)
   };
-  const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y); return b.length ? b[Math.floor(b.length / 2)] : NaN; };
+  const median = a => { const b = a.filter(Number.isFinite).sort((x, y) => x - y), n = b.length; return n ? (b[Math.floor((n - 1) / 2)] + b[Math.floor(n / 2)]) / 2 : NaN; };
   // class median of HV per date, then the median over dates: the same measure the C-band comparison uses
   const lastHv = (s, cls) => median(s.dates.map((_, t) => median(s.pixels.filter(p => p.cover === cls).map(p => p.hv[t]))));
   const dispSamples = s => s.pixels.map(p => p.disp && p.disp[p.disp.length - 1]).filter(Number.isFinite);
@@ -77,9 +77,9 @@ window.OB = window.OB || {};
     if (!g || !Number.isFinite(g.C_VH)) return "";
     const l = lastHv(s, 10) - lastHv(s, 30);              // the same NISAR gap the paragraph above states
     if (!Number.isFinite(l)) return "";
-    return `<p>Sentinel-1 (NASA OPERA RTC, 5.6 cm waves against NISAR's 24 cm) at the same samples and weeks puts the
+    return `<p>Sentinel-1 (NASA OPERA RTC, 5.6 cm waves against NISAR's 24 cm) at the same sample locations and roughly the same season puts the
       tree-cover and grassland samples ${Math.abs(g.C_VH).toFixed(1)} dB apart in VH, against ${Math.abs(l).toFixed(1)} dB in NISAR's HV.
-      ${Math.abs(l) > Math.abs(g.C_VH) ? "The longer wavelength separates the two classes more clearly, consistent with deeper penetration into the canopy." : "Here the shorter wavelength separates them about as well."}</p>`;
+      The sensors, acquisition dates and viewing geometries differ; this descriptive comparison does not establish the cause of the difference.</p>`;
   };
 
   // ---- chapters ------------------------------------------------------------
@@ -90,7 +90,7 @@ window.OB = window.OB || {};
       site: "mexico", needs: has.site("mexico"), layers: { offbeat: true }, pick: measuredSample,
       title: "Radar sees what cameras miss",
       text: (s, p) => `<p>This is real NISAR data: L-band radar over Mexico City's airport, ${fmtDate(s.dates[s.dates.length - 1])}.
-        Измеренные кривые HH/HV находятся в карточке точки. Слева показаны точки измерений на светлой карте; справа — оптический контекст или выбранный датированный снимок. Фон карты не является измерением радара.</p>
+        Each dot on the left is one measured sample; its HH/HV curves are in the pixel card below. The photo on the right is optical context, or a dated Sentinel-2 image you pick. The map background is not a radar measurement.</p>
         <p>Radar supplies its own illumination and can observe at night and through clouds. Surface moisture, geometry and quality still affect the measurement.</p>`
     },
     {
@@ -254,6 +254,22 @@ window.OB = window.OB || {};
     if (s) { const url = new URL(location.href); url.searchParams.set('site', s.id); url.hash = ''; history.replaceState(null, "", url); }
   }
 
+  // First visit with a bare address: a welcome dialog offers the tour instead of starting it unasked.
+  function welcome() {
+    const KEY = "offbeat.welcome.v1", box = $("welcome");
+    const params = new URL(location.href).searchParams;
+    let seen = false;
+    try { seen = localStorage.getItem(KEY) === "seen"; } catch (e) { /* storage off: show it */ }
+    if (!box || seen || location.hash || params.has("site") || params.has("lat")) return;
+    const close = () => { box.hidden = true; try { localStorage.setItem(KEY, "seen"); } catch (e) { /* ignore */ } document.removeEventListener("keydown", onKey); };
+    const onKey = e => { if (e.key === "Escape") close(); };
+    $("welcome-tour").addEventListener("click", () => { close(); open(0); $("tour-win").scrollIntoView({ block: "start" }); });
+    $("welcome-explore").addEventListener("click", close);
+    document.addEventListener("keydown", onKey);
+    box.hidden = false;
+    $("welcome-tour").focus();
+  }
+
   function wire() {
     document.addEventListener('ob:manual-navigation', () => { if (OB.tourActive) close(); });
     CHAPTERS = ALL.filter(c => !c.needs || c.needs());
@@ -268,6 +284,7 @@ window.OB = window.OB || {};
       if (e.key === "ArrowLeft" && !$("tour-back").disabled) $("tour-back").click();
     });
     if (OB.tourWanted) open(startAt);
+    else welcome();
   }
 
   // app.js loads its data asynchronously and announces itself when ready

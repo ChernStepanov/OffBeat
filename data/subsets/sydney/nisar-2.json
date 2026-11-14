@@ -1,0 +1,48 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GUNW_023_167_A_161_024_4000_SH_20260625T195356_20260625T195435_20260707T195355_20260707T195434_P05023_N_F_J_001",
+    "concept_id": "G4253409503-ASF",
+    "collection": "C2854335566-ASF",
+    "start": "2026-06-25T19:53:56.000Z",
+    "end": "2026-07-07T19:54:34.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GUNW_PROVISIONAL_V1/NISAR_L2_PR_GUNW_023_167_A_161_024_4000_SH_20260625T195356_20260625T195435_20260707T195355_20260707T195434_P05023_N_F_J_001/NISAR_L2_PR_GUNW_023_167_A_161_024_4000_SH_20260625T195356_20260625T195435_20260707T195355_20260707T195434_P05023_N_F_J_001.h5"
+  },
+  "identification": {
+    "trackNumber": 167,
+    "frameNumber": 161,
+    "orbitPassDirection": "Ascending",
+    "productVersion": "1.0.11",
+    "lookDirection": "Left",
+    "radarBand": "L"
+  },
+  "grid": {
+    "epsg": 32756,
+    "spacing": [
+      80.0,
+      -80.0
+    ],
+    "window": [
+      3144,
+      3179,
+      2222,
+      2251
+    ],
+    "paths": {
+      "phase": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/unwrappedPhase",
+      "coherence": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/coherenceMagnitude",
+      "component": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/connectedComponents",
+      "iono": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreen",
+      "iono_sd": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreenUncertainty",
+      "mask": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/mask"
+    },
+    "center_frequency_hz": 1239000000.0,
+    "reference_date": "2026-06-25",
+    "secondary_date": "2026-07-07",
+    "flattening": {
+      "ellipsoidalFlatteningApplied": "True",
+      "topographicFlatteningApplied": "True"
+    }
+  },
+  "subset_file": "nisar-2.npz",
+  "sha256": "b8e54a94d8b20aeaf8695efb7d7af5f8ec0aae2187f8350fc1b70bac1d8601ea"
+}

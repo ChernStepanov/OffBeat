@@ -21,7 +21,7 @@ This audit does not claim every issue is fixed. Earthdata/ASF authentication is 
 | #28 | Implemented as requested draft | English submission text and six-slide PPTX, with source notes and embedded measured chart values |
 | #29 | Implemented | Five-minute static launch, current data, reproduction, sources and licence gaps |
 | #33 | Partial | Own-history vs neighbour-relative baselines, candidates, controls and coarse retrospective ERA5 precipitation context; two native 20 m windows before/after the Amazon candidate were extracted and checked; dense multi-date series, weather-corrected model, labels and held-out evaluation remain absent |
-| #35 | Implemented | Existing 86-date RTC-S1 sample series and 219 granule IDs are in `data/amazon/sentinel1.json`; independently recomputed six matched-date, matched-point C/L comparison is in `data/analysis/amazon-c-l-matched.json` (C VH forest–grassland 1.16 dB; L HV 6.15 dB). Exploratory only. |
+| #35 | Implemented | Existing 86-date RTC-S1 sample series and 219 granule IDs are in `data/amazon/sentinel1.json`; independently recomputed six matched-date, matched-point C/L comparison is in `data/analysis/amazon-c-l-matched.json` (C VH forest–grassland 1.16 dB; L HV 6.15 dB). Exploratory only; see also [method and limitations](amazon-opera-rtc-comparison.md). |
 | #36 | Partial | 15 same-reference OPERA DISP-S1 products were sampled at the Mexico points; recommended-mask-accepted short-wavelength LOS series are shown with provenance and limitations. No validated velocity or vertical motion is claimed. |
 
 Raw HH/HV, GUNW and original source receipts are preserved. Analysis provenance

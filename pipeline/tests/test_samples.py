@@ -43,6 +43,15 @@ def test_real_sample_recalculation_is_reproducible_and_preserves_raw_measurement
         assert before['z']==after['z']
 
 
+def test_two_acquisition_site_does_not_compare_overlapping_windows():
+    site=json.loads((ROOT/'data/delhi.json').read_text())
+    report=analyze(site)
+    assert all(value == 0 for value in report['shape_counts'].values())
+    assert all(item['own_history_hv_change_db'] is None and item['peer_relative_hv_change_db'] is None
+               for item in report['review_top10'] + report['controls'])
+    assert 'Too few dates' in site['message']
+
+
 def test_optical_date_window_is_inclusive_and_does_not_choose_old_context():
     items=[{'id':d,'properties':{'datetime':d+'T00:00:00Z','eo:cloud_cover':c}}
            for d,c in [('2026-01-01',0),('2026-01-16',5),('2026-01-17',0),('2026-02-01',0)]]

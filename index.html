@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=9b25795ae6c8">
+<link rel="stylesheet" href="css/offbeat.css?v=b020f5a74ca8">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -135,8 +135,19 @@
       </section>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
-        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
+        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
         <div class="win-b win-b--flush">
+          <fieldset class="group acquisition" id="acquisition" hidden>
+            <legend>Measured HV acquisition</legend>
+            <div class="acquisition__controls">
+              <button type="button" class="btn" id="date-prev" aria-label="Previous acquisition">&lt;</button>
+              <label for="date-index">Date <output id="date-label" for="date-index"></output></label>
+              <input type="range" id="date-index" min="0" max="0" step="1" value="0" aria-describedby="date-status">
+              <button type="button" class="btn" id="date-next" aria-label="Next acquisition">&gt;</button>
+            </div>
+            <p id="date-status" role="status" aria-live="polite"></p>
+            <small>Acquisitions are not equally spaced. The date marks the chart; map colours show the latest peer deviation. A selected dated optical image follows the radar date.</small>
+          </fieldset>
           <div class="maps">
             <div class="maps__pane">
               <div class="pane-label" id="map-caption">Measured HV gamma0, blue −25 to red 0 dB; click a sample</div>
@@ -152,6 +163,20 @@
         </div>
       </section>
 
+      <section class="win" id="ranking-controls" aria-labelledby="ranking-title" hidden>
+        <div class="win-t"><h2 id="ranking-title">Amazon change experiment</h2></div>
+        <div class="win-b"><details>
+          <summary>Explore the fixed-window analysis</summary>
+            <div class="acquisition__controls">
+              <label for="ranking-pol">Polarization</label><select id="ranking-pol"><option value="hh">HH</option><option value="hv">HV</option></select>
+              <label for="ranking-radius">Neighborhood</label><select id="ranking-radius"><option value="3x3">3×3</option><option value="5x5" selected>5×5</option><option value="9x9">9×9</option></select>
+            </div>
+            <label><input type="checkbox" id="ranking-visible"> Show experiment on map</label>
+            <p id="ranking-dates"></p><p id="ranking-status" role="status" aria-live="polite">Choose a sampled point.</p>
+            <small>Colored dots show fixed-window change. Window neighbors (3×3/5×5/9×9) are not the dashboard’s 1 km peers. “Rank” is position in the sample, not probability; cause unknown. Dots are sampled cells, not area. WorldCover 2021 class is contextual; weather is unavailable. Optical imagery is geographic context, not event confirmation.</small>
+        </details></div>
+      </section>
+
       <section class="win" aria-labelledby="t-archive">
         <div class="win-t"><h2 id="t-archive">NISAR archive</h2></div>
         <div class="win-b">
@@ -165,6 +190,11 @@
       <section class="win" id="card-win" aria-labelledby="t-card">
         <div class="win-t"><h2 id="t-card">Pixel card - <span id="px-id">click the map</span></h2></div>
         <div class="win-b">
+          <div id="card-empty" class="card-empty" role="status">
+            <p id="card-empty-message">Loading measured data...</p>
+            <a href="#sites" id="card-empty-sites" hidden>Choose a prepared measurement site</a>
+          </div>
+          <div id="card-content" hidden>
           <div class="card">
             <table class="props" id="px-props">
             <tbody>
@@ -203,14 +233,15 @@
             <button type="button" class="btn" id="stop" data-sfx="none" disabled>Stop</button>
             <span class="hint" id="play-hint">Peers keep the beat, the pixel plays the HV curve. When it slips, you hear it.</span>
           </div>
+          </div>
         </div>
       </section>
 
       <section class="win" id="top-win" aria-labelledby="t-top">
-        <div class="win-t"><h2 id="t-top">Ranked curve-shape candidates</h2></div>
+        <div class="win-t"><h2 id="t-top">Most off-beat samples</h2></div>
         <div class="win-b">
           <table class="grid" id="top">
-            <thead><tr><th scope="col">#</th><th scope="col">Shape</th><th scope="col">Samples / area</th><th scope="col">Latest |z|</th><th scope="col">Shift date</th></tr></thead>
+            <thead><tr><th scope="col">#</th><th scope="col">Departure</th><th scope="col">Sample</th><th scope="col">Latest z</th><th scope="col">Shift date</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -240,6 +271,25 @@
   </div>
 </div>
 
+<div class="modal" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title" hidden>
+  <section class="win modal__win">
+    <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2 id="welcome-title">Welcome to OffBeat</h2></div>
+    <div class="win-b modal__body">
+      <svg class="modal__icon" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" shape-rendering="crispEdges"><rect x="1" y="1" width="30" height="30" fill="#000080" stroke="#000"/><path d="M3 20h6l2-10 4 18 4-14 2 6h8" fill="none" stroke="#ffcc00" stroke-width="2" shape-rendering="auto"/></svg>
+      <div>
+        <p><b>Radar sees through cloud and at night, but almost nobody can read it.</b></p>
+        <p>OffBeat compares every NISAR sample with its neighbours of the same land cover, flags the ones that fall out of step, and lets you hear them.</p>
+        <p>The tour takes about two minutes and uses real NISAR measurements.</p>
+      </div>
+    </div>
+    <div class="tour__bar">
+      <span class="tour__gap"></span>
+      <button type="button" class="btn btn--default" id="welcome-tour">Take the tour</button>
+      <button type="button" class="btn" id="welcome-explore">Explore the map</button>
+    </div>
+  </section>
+</div>
+
 <div class="sbar" role="status" aria-live="polite">
   <span id="sb-state">Loading…</span>
   <span id="sb-count">—</span>
@@ -254,18 +304,21 @@
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"></script>
 <script src="js/map-cache.js?v=48304a06b06c"></script>
-<script src="js/text98.js?v=3a09b6bebbf6"></script>
+<script src="js/text98.js?v=85fdf4481a27"></script>
 <script src="js/styles.js?v=1c84dd9b23f5"></script>
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
-<script src="js/data.js?v=9c2542b6bcfc"></script>
-<script src="js/chart.js?v=83a2c7255cda"></script>
+<script src="js/data.js?v=577138d53c06"></script>
+<script src="js/acquisitions.js?v=faedaefccc8f"></script>
+<script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
+<script src="js/chart.js?v=dceb6523aa2c"></script>
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
-<script src="js/story.js?v=75066844aed3"></script>
-<script src="js/optical.js?v=cf8e7ee05aa4"></script>
-<script src="js/i18n.js?v=6fa33d68c5b7"></script>
-<script src="js/app.js?v=205eb7a6b072"></script>
+<script src="js/story.js?v=24122e4b536d"></script>
+<script src="js/optical.js?v=c3dd4a20cf5f"></script>
+<script src="js/i18n.js?v=ec98c6cbf23c"></script>
+<script src="js/select98.js?v=e6ed0b7b748b"></script>
+<script src="js/app.js?v=a597954ae56e"></script>
 </body>
 </html>

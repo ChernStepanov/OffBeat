@@ -8,7 +8,7 @@
     "′": "'", "″": "\"", "«": "\"", "»": "\"", "▶": ">", "■": "" };
   const RE = new RegExp("[" + Object.keys(MAP).join("") + "]", "g");
   // " · " reads best as ", "; a lone middle dot inside a word stays a comma too
-  const fix = t => t.replace(/ · /g, ", ").replace(RE, c => MAP[c]);
+  const fix = t => t.replace(/[\s\u00a0]*\u00b7[\s\u00a0]*/g, ", ").replace(RE, c => MAP[c]);
   const skip = n => n.parentElement && n.parentElement.closest("script, style, textarea, code, pre, #place-results");
 
   function clean(root) {

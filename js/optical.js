@@ -4,6 +4,7 @@ OB.bindOptical = function (map, select, status) {
   function clear() { if (overlay) map.removeLayer(overlay); overlay=null; }
   function draw() {
     clear();
+    select.dispatchEvent(new Event('ob:select-sync'));
     const entry=index?.entries[Number(select.value)];
     if (select.value==='context' || !entry) {
       status.textContent='Esri context mosaic: dates vary, not date-matched validation.'; return;
@@ -12,12 +13,22 @@ OB.bindOptical = function (map, select, status) {
       status.textContent=`No dated optical image for NISAR ${entry.nisar_date}: ${entry.reason || 'no suitable observation'}. Context mosaic remains visible.`; return;
     }
     const b=entry.bounds;
-    overlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
-    overlay.on('error',()=>{clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
-    overlay.addTo(map);
+    const current=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
+    overlay=current;
+    current.on('error',()=>{if (overlay!==current) return; clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
+    current.on?.('load',()=>{if (overlay===current) sharpen();});
+    current.addTo(map);
     status.textContent=`${entry.source} | ${entry.date} | NISAR ${entry.nisar_date} | AOI cloud/shadow/snow ${Math.round(entry.aoi_cloud_shadow_snow_fraction*100)}% | ${entry.scene_id}`;
     select.title=status.textContent;
   }
+  // Sentinel-2 is 10 m per pixel. Stretched past twice its size the browser's smoothing turns it
+  // into a blur next to the sharp basemap, so from there it is drawn as the honest 10 m squares.
+  function sharpen() {
+    const img=overlay?.getElement?.();
+    if (!img || !img.naturalWidth) return;
+    img.style.imageRendering=img.getBoundingClientRect().width/img.naturalWidth>=2 ? 'pixelated' : 'auto';
+  }
+  map.on?.('zoomend',sharpen);
   function setDate(date) {
     if (!followDate || !index?.entries?.length) return;
     const target=Date.parse(date);
@@ -46,6 +57,7 @@ OB.bindOptical = function (map, select, status) {
     context() {
       serial++;index=null;followDate=false;clear();select.value='context';select.disabled=true;
       select.title='Dated Sentinel-2 images are prepared for the demo sites only';
+      select.dispatchEvent(new Event('ob:select-sync'));
       status.textContent='Dated Sentinel-2 images exist for the demo sites only; here the Esri photo mosaic is shown (dates vary).';
     }
   };

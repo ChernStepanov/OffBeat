@@ -22,7 +22,7 @@ def catalogue(site,bbox,track,frame):
 
 def main():
     candidates=[]
-    for site,name,bbox,track,frame in CASES:
+    for site,name,bbox,track,frame in (case for case in CASES if case[0] in ('amazon', 'venezuela')):
         path=sub.ROOT/'data'/f'{site}.json';data=json.loads(path.read_text())
         query,records=catalogue(site,bbox,track,frame)
         pending=[r for r in records if r['start'][:10]>data['dates'][-1]][:4]
