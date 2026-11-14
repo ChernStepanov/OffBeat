@@ -1,6 +1,9 @@
 # Real NISAR integration — Mexico first
 
 Status: **real GCOV and GUNW subsets are connected and browser-verified**.
+The Mexico GCOV series can be extended with `scripts/extend_mexico.py`; each
+additional acquisition is an independently verified, hashed HDF5 subset. The
+GUNW panel retains its separate original pair dates and is not extrapolated.
 The first case covers about 2.6 × 2.8 km in Mexico City with 1024 preview locations,
 two acquisitions (2025-10-30 and 2025-11-11), and their GUNW pair. All 1024 locations
 have HH/HV on both dates; 357 GUNW locations pass the selected quality filters.

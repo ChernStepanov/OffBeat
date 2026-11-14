@@ -27,12 +27,13 @@ for (const loaded of context.OB.SITES) {
 context.fetch = async path=>({ok:true,json:async()=>({...JSON.parse(fs.readFileSync(path,'utf8')),source:'synthetic'})});
 await assert.rejects(context.OB.loadData(), /measured provenance required/);
 if (site.status === 'measured_pair') {
-  assert.equal(site.dates.length,2);
-  assert(site.pixels.some(p=>p.hh.every(Number.isFinite)&&p.hv.every(Number.isFinite)));
+  assert(site.dates.length>=2);
+  assert(site.pixels.some(p=>p.hh.slice(0,2).every(Number.isFinite)&&p.hv.slice(0,2).every(Number.isFinite)));
   assert(site.pixels.some(p=>p.disp&&p.disp.length===site.displacement_dates.length));
   assert(site.pixels.some(p=>p.disp===null));
   assert(site.pixels.every(p=>p.z===null&&p.style===null));
   assert(site.provenance.inputs.every(r=>r.sha256.length===64));
+  for (const r of site.provenance.additional_gcov || []) assert.equal(createHash('sha256').update(fs.readFileSync(r.subset_path)).digest('hex'),r.sha256);
   assert(site.pixels.filter(p=>p.disp).every(p=>p.coherence>=.7&&p.component===site.provenance.reference.component));
 }
 context.fetch = async()=>({ok:false,status:503});
