@@ -1,13 +1,14 @@
-// Focused exploration keeps the original Leaflet maps alive and links each dot to its pixel card.
+// The focused terrain workspace keeps the original maps and measured NISAR selections alive.
 (() => {
   const $ = id => document.getElementById(id), cloud = OB.pointCloud;
   const scene = $('scene-win'), launcher = $('scene-open'), mapWindow = $('map-win');
-  const canvas = $('cloud-canvas'), context = canvas.getContext('2d');
+  const canvas = $('cloud-canvas');
   const home = document.createComment('Map window returns here after Scene view');
   mapWindow.before(home);
-  const camera = { yaw: -.55, pitch: .53, zoom: 1 };
-  let active = false, channel = 'hv', view = 'orbit', frame = 0, projected = [], points = [];
+  let active = false, channel = 'hv', view = 'orbit', frame = 0, points = [];
   let selectedSite = null, date = 0, selection = null, dragging = null, hovered = null, returnFocus = null;
+  let gpu = null, gpuPromise = null, terrain = null, terrainSite = null, terrainTicket = 0, loadedSignalKey = '';
+  const terrainCache = new Map();
   const ru = () => document.documentElement.lang === 'ru';
   const phrase = (en, russian) => ru() ? russian : en;
   const fixed = value => Number.isFinite(value) ? value.toFixed(2) : '-';
@@ -26,52 +27,41 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     return { ctx, width, height };
   }
-  function line(a, b, width, height, color, dash = []) {
-    const p = cloud.project(a, camera, width, height), q = cloud.project(b, camera, width, height);
-    context.strokeStyle = color; context.setLineDash(dash);
-    context.beginPath(); context.moveTo(p.x, p.y); context.lineTo(q.x, q.y); context.stroke();
-    context.setLineDash([]);
-  }
   function render() {
-    const { width, height } = fitCanvas(canvas);
-    if (!width || !height) return;
-    context.clearRect(0, 0, width, height);
-    context.fillStyle = '#091322'; context.fillRect(0, 0, width, height);
-    // Quiet pixel grid on the viewport, with a separate geographic reference plane.
-    context.fillStyle = '#1a2839';
-    for (let y = 12; y < height; y += 24) for (let x = 12; x < width; x += 24) context.fillRect(x, y, 1, 1);
-    context.lineWidth = 1;
-    for (let i = -5; i <= 5; i++) {
-      line({ x: i / 5, y: -1, z: 0 }, { x: i / 5, y: 1, z: 0 }, width, height, '#24374b');
-      line({ x: -1, y: i / 5, z: 0 }, { x: 1, y: i / 5, z: 0 }, width, height, '#24374b');
-    }
-    const origin = { x: -1.13, y: -1.13, z: 0 };
-    const axes = [[{ x: 1.18, y: -1.13, z: 0 }, 'E / longitude'], [{ x: -1.13, y: 1.18, z: 0 }, 'N / latitude']];
-    if (view !== 'plan') axes.push([{ x: -1.13, y: -1.13, z: 1.35 }, channel.toUpperCase() + ' / dB']);
-    context.font = '12.5px W95FA, Tahoma, sans-serif';
-    axes.forEach(([end, label]) => {
-      line(origin, end, width, height, '#6b8198');
-      const p = cloud.project(end, camera, width, height);
-      context.fillStyle = '#9aaec7'; context.fillText(label, cloud.clamp(p.x + 6, 8, Math.max(8, width - 95)), cloud.clamp(p.y, 18, height - 60));
-    });
-    projected = points.map(p => ({ ...p, ...cloud.project(p, camera, width, height) })).sort((a, b) => b.depth - a.depth);
-    const selectionIndex = selectedSite?.pixels.indexOf(selection);
-    for (const p of projected) {
-      const size = Math.max(2, Math.min(5, 3 * p.perspective * Math.sqrt(camera.zoom)));
-      const faded = .6 + .4 * cloud.clamp(p.perspective - .7, 0, 1);
-      context.fillStyle = `rgba(${p.color.join(',')},${faded})`;
-      context.fillRect(Math.round(p.x - size / 2), Math.round(p.y - size / 2), size, size);
-    }
-    for (const index of [hovered, selectionIndex]) {
-      const p = projected.find(p => p.index === index); if (!p) continue;
-      line({ ...points.find(p => p.index === index), z: 0 }, points.find(p => p.index === index), width, height, '#f4e29c', [2, 3]);
-      context.strokeStyle = index === selectionIndex ? '#fff0a8' : '#fff';
-      context.lineWidth = 1; context.strokeRect(Math.round(p.x) - 6.5, Math.round(p.y) - 6.5, 13, 13);
-      context.fillStyle = '#fff0a8'; context.fillRect(Math.round(p.x) - 1, Math.round(p.y) - 1, 3, 3);
-    }
-    // The compass follows the rotation; top view always resets to north up.
-    document.querySelector('.cloud__compass svg').style.transform = `rotate(${-camera.yaw * 180 / Math.PI}deg)`;
+    gpu?.render();
+    if (gpu) document.querySelector('.cloud__compass svg').style.transform = `rotate(${-gpu.info().yaw * 180 / Math.PI}deg)`;
     drawHistory();
+  }
+
+  function empty(title, message) {
+    $('cloud-empty').hidden = false;
+    $('cloud-empty').querySelector('strong').textContent = title;
+    $('cloud-empty').querySelector('span').textContent = message;
+  }
+  async function loadTerrain(site) {
+    const ticket = ++terrainTicket;
+    terrainSite = site?.id || null; terrain = null; loadedSignalKey = '';
+    gpu?.setTerrain(null, null);
+    if (!site) { empty(phrase('No measured samples here', 'Здесь нет измерений'), phrase('Choose a study area', 'Выберите участок')); return; }
+    empty(phrase('Loading real terrain...', 'Загрузка реального рельефа...'), 'Mapzen Terrain Tiles / DEM');
+    $('terrain-status').textContent = phrase('Loading elevation data...', 'Загрузка модели высот...');
+    try {
+      if (!terrainCache.has(site.id)) terrainCache.set(site.id, fetch(`data/terrain/${site.id}.json`).then(async response => {
+        if (!response.ok) throw new Error(`DEM HTTP ${response.status}`);
+        return OB.terrain.validate(await response.json(), site);
+      }).catch(error => { terrainCache.delete(site.id); throw error; }));
+      const data = await terrainCache.get(site.id);
+      if (ticket !== terrainTicket) return;
+      terrain = data;
+      gpu.setTerrain(data, site); gpu.setView(view);
+      $('terrain-low').textContent = Math.round(data.min_m).toLocaleString();
+      $('terrain-high').textContent = Math.round(data.max_m).toLocaleString();
+      update();
+    } catch (error) {
+      if (ticket !== terrainTicket) return;
+      $('terrain-status').textContent = error.message;
+      empty(phrase('Terrain unavailable', 'Рельеф недоступен'), error.message);
+    }
   }
 
   function drawHistory() {
@@ -106,23 +96,41 @@
     selectedSite = $('acquisition').hidden ? null : OB.app.site();
     selection = selectedSite ? OB.app.pixel() : null;
     date = OB.app.date();
-    points = cloud.samples(selectedSite, date, channel);
+    points = selectedSite ? selectedSite.pixels.flatMap((p, index) => Number.isFinite(p[channel]?.[date]) && Number.isFinite(p.lat) && Number.isFinite(p.lon) ? [{ index, value: p[channel][date] }] : []) : [];
     $('scene-site').value = selectedSite?.id || '';
     $('scene-site').dispatchEvent(new Event('ob:select-sync'));
     $('cloud-site-name').textContent = selectedSite?.name || 'NISAR / L-BAND';
     $('cloud-date').textContent = selectedSite?.dates[date] || '-';
+    $('terrain-date-label').textContent = selectedSite?.dates[date] || '-';
+    $('terrain-date').max = String(Math.max(0, (selectedSite?.dates.length || 1) - 1));
+    $('terrain-date').value = String(date);
+    $('terrain-date').setAttribute('aria-valuetext', selectedSite?.dates[date] || '-');
+    $('terrain-date').disabled = !selectedSite || selectedSite.dates.length < 2;
+    $('terrain-date-prev').disabled = !selectedSite || date === 0;
+    $('terrain-date-next').disabled = !selectedSite || date >= selectedSite.dates.length - 1;
     $('cloud-count').textContent = `${points.length.toLocaleString(ru() ? 'ru-RU' : 'en-US')} / ${selectedSite?.pixels.length || 0} ${phrase('measured samples', 'точек с измерениями')}`;
-    $('cloud-empty').hidden = points.length > 0;
+    if (gpu && terrainSite !== (selectedSite?.id || null)) loadTerrain(selectedSite);
+    if (terrain && gpu) {
+      const signalKey = `${selectedSite.id}/${date}/${channel}/${terrainSite}`;
+      if (signalKey !== loadedSignalKey) { gpu.setSamples(selectedSite, date, channel); loadedSignalKey = signalKey; }
+      gpu.select(selectedSite.pixels.indexOf(selection));
+      $('cloud-empty').hidden = true;
+      $('terrain-status').textContent = `${terrain.n.toLocaleString()} x ${terrain.n.toLocaleString()} DEM / ${(terrain.n ** 2).toLocaleString()} ${phrase('elevation nodes', 'точек высот')}`;
+      const f = OB.terrain.frame(terrain);
+      $('terrain-scale').textContent = `${(f.width_m / 1000).toFixed(1)} x ${(f.depth_m / 1000).toFixed(1)} km / ${phrase('height', 'высота')} ${$('terrain-exaggeration').value}x`;
+    }
     $('cloud-sample-id').textContent = selection?.id || phrase('Select a measured sample', 'Выберите точку измерения');
     $('cloud-value').textContent = selection ? (Number.isFinite(selection[channel][date]) ? `${channel.toUpperCase()} ${fixed(selection[channel][date])} dB` : phrase('Unavailable', 'Недоступно')) : '-';
     $('cloud-cover').textContent = selection ? (OB.COVER[selection.cover]?.name || phrase('Unavailable', 'Недоступно')) : '-';
     $('cloud-coordinates').textContent = selection ? `${selection.lat.toFixed(5)}, ${selection.lon.toFixed(5)}` : '-';
+    const elevation = selection && terrain ? OB.terrain.heightAt(terrain, selection.lon, selection.lat) : null;
+    $('terrain-elevation').textContent = Number.isFinite(elevation) ? `${elevation.toFixed(1)} m` : '-';
     $('cloud-history-label').textContent = selectedSite ? `${channel.toUpperCase()} / ${selectedSite.dates[0]} - ${selectedSite.dates.at(-1)}` : phrase('Sample history', 'История измерений');
     $('scene-status').textContent = selectedSite ? `${selectedSite.name} / ${selectedSite.dates[date]} / ${channel.toUpperCase()} / ${points.length} ${phrase('samples', 'точек')}` : phrase('Choose a prepared study area', 'Выберите подготовленный участок');
     for (const id of ['cloud-prev', 'cloud-next']) $(id).disabled = !points.length;
     $('cloud-card').disabled = !selection;
     $('scene-fit').disabled = !selectedSite;
-    canvas.setAttribute('aria-label', phrase(`Interactive ${channel.toUpperCase()} sample cloud, ${points.length} measured points. Drag or use arrow keys to rotate; plus and minus zoom.`, `Облако ${channel.toUpperCase()}: ${points.length} точек. Перетаскивание или стрелки вращают облако; плюс и минус изменяют масштаб.`));
+    canvas.setAttribute('aria-label', phrase(`3D terrain map with ${points.length} measured ${channel.toUpperCase()} samples. Drag or use arrow keys to orbit; shift-drag to pan; plus and minus zoom.`, `3D-карта рельефа: ${points.length} точек ${channel.toUpperCase()}. Перетаскивание или стрелки вращают карту; Shift - перемещение; плюс и минус - масштаб.`));
     schedule();
   }
   function setChannel(next) {
@@ -131,12 +139,12 @@
     hovered = null; update();
   }
   function setView(next) {
-    view = next; camera.yaw = next === 'plan' ? 0 : -.55; camera.pitch = next === 'plan' ? Math.PI / 2 : .53; camera.zoom = 1;
+    view = next; gpu?.setView(next);
     $('cloud-orbit').setAttribute('aria-pressed', String(next === 'orbit'));
     $('cloud-plan').setAttribute('aria-pressed', String(next === 'plan'));
     schedule();
   }
-  function zoom(factor) { camera.zoom = cloud.clamp(camera.zoom * factor, .5, 2.5); schedule(); }
+  function zoom(factor) { gpu?.zoom(factor); schedule(); }
   function setURL(on) {
     const url = new URL(location.href);
     if (on) url.searchParams.set('view', 'scene'); else url.searchParams.delete('view');
@@ -156,13 +164,26 @@
     OB.app.resizeMaps();
     if ($('acquisition').hidden) {
       const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url);
-      await OB.app.loadSite('amazon');
+      await OB.app.loadSite('venezuela');
     }
     if (!active) return;
+    empty(phrase('Starting 3D terrain...', 'Запуск 3D-рельефа...'), 'WebGL / DEM / NISAR');
+    try {
+      if (!gpuPromise) gpuPromise = OB.createTerrainRenderer(canvas);
+      gpu = await gpuPromise;
+      OB.terrainView = gpu;
+      if (!active) return;
+      $('cloud-viewport').classList.toggle('terrain-crt', $('terrain-crt').checked);
+    } catch (error) {
+      gpuPromise = null;
+      empty(phrase('3D renderer unavailable', '3D-рендерер недоступен'), error.message);
+      $('terrain-status').textContent = error.message;
+    }
     OB.app.resizeMaps(); update();
   }
   function close() {
     if (!active) return;
+    if (OB.windows.active()) { OB.windows.restore(); return; }
     active = false; dragging = null; hovered = null;
     if (frame) cancelAnimationFrame(frame); frame = 0;
     home.after(mapWindow); scene.hidden = true;
@@ -174,6 +195,10 @@
     (returnFocus?.isConnected && !returnFocus.closest('#scene-win') ? returnFocus : launcher).focus({ preventScroll: true });
     window.dispatchEvent(new Event('resize'));
   }
+  async function leave() {
+    if (OB.windows.active()) await OB.windows.restore();
+    close();
+  }
   async function step(direction) {
     if (!points.length) return;
     const current = points.findIndex(p => p.index === selectedSite.pixels.indexOf(selection));
@@ -182,8 +207,8 @@
   }
 
   launcher.addEventListener('click', open);
-  $('scene-close').addEventListener('click', close);
-  $('scene-back').addEventListener('click', close);
+  $('scene-close').addEventListener('click', leave);
+  $('scene-back').addEventListener('click', leave);
   $('scene-fit').addEventListener('click', () => OB.app.fit());
   $('scene-site').addEventListener('change', async event => {
     const id = event.target.value;
@@ -198,14 +223,22 @@
   $('cloud-zoom-out').addEventListener('click', () => zoom(1 / 1.15));
   $('cloud-prev').addEventListener('click', () => step(-1));
   $('cloud-next').addEventListener('click', () => step(1));
-  $('cloud-card').addEventListener('click', () => { close(); $('card-win').scrollIntoView({ block: 'start' }); });
+  $('cloud-card').addEventListener('click', async () => { await leave(); $('card-win').scrollIntoView({ block: 'start' }); });
+  $('terrain-mode').addEventListener('change', event => { gpu?.setMode(event.target.value); schedule(); });
+  $('terrain-exaggeration').addEventListener('change', event => { gpu?.setExaggeration(+event.target.value); update(); });
+  $('terrain-radar').addEventListener('change', event => { gpu?.setPointsVisible(event.target.checked); schedule(); });
+  $('terrain-contours').addEventListener('change', event => { gpu?.setContours(event.target.checked); schedule(); });
+  $('terrain-crt').addEventListener('change', event => { $('cloud-viewport').classList.toggle('terrain-crt', event.target.checked); });
+  $('terrain-date-prev').addEventListener('click', () => OB.app.selectDate(date - 1));
+  $('terrain-date-next').addEventListener('click', () => OB.app.selectDate(date + 1));
+  $('terrain-date').addEventListener('input', event => OB.app.selectDate(+event.target.value));
 
   function pointer(event) { const rect = canvas.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; }
   canvas.addEventListener('pointerdown', event => {
-    if (event.button !== 0 || dragging) return;
+    if (![0, 2].includes(event.button) || dragging) return;
     canvas.focus({ preventScroll: true });
     const start = pointer(event);
-    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false };
+    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, pan: event.shiftKey || event.button === 2 };
     canvas.setPointerCapture(event.pointerId);
     canvas.classList.add('is-dragging');
   });
@@ -215,35 +248,35 @@
       const dx = p.x - dragging.x, dy = p.y - dragging.y;
       if (Math.hypot(p.x - dragging.startX, p.y - dragging.startY) > 3) dragging.moved = true;
       if (dragging.moved) {
-        camera.yaw += dx * .008;
-        if (view === 'orbit') camera.pitch = cloud.clamp(camera.pitch + dy * .006, .08, 1.48);
+        if (dragging.pan) gpu?.pan(dx, dy); else gpu?.rotate(dx, dy);
       }
       dragging.x = p.x; dragging.y = p.y;
     } else {
-      const hit = cloud.hitTest(projected, p.x, p.y);
+      const hit = gpu?.pick(p.x, p.y);
       hovered = hit?.index ?? null;
-      canvas.title = hit ? `${selectedSite.pixels[hit.index].id} / ${channel.toUpperCase()} ${hit.value.toFixed(2)} dB` : '';
+      canvas.title = hit ? `${selectedSite.pixels[hit.index].id} / ${hit.height_m.toFixed(1)} m / ${channel.toUpperCase()} ${hit.value.toFixed(2)} dB` : '';
     }
     schedule();
   });
   canvas.addEventListener('pointerup', event => {
     if (!dragging || dragging.id !== event.pointerId) return;
-    if (!dragging.moved) { const p = pointer(event), hit = cloud.hitTest(projected, p.x, p.y); if (hit) OB.app.pickCell(hit.index, false); }
+    if (!dragging.moved) { const p = pointer(event), hit = gpu?.pick(p.x, p.y); if (hit) OB.app.pickCell(hit.index, false); }
     dragging = null; canvas.classList.remove('is-dragging');
     if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
   });
   const cancelDrag = () => { dragging = null; canvas.classList.remove('is-dragging'); };
   canvas.addEventListener('pointercancel', cancelDrag); canvas.addEventListener('lostpointercapture', cancelDrag);
+  canvas.addEventListener('contextmenu', event => event.preventDefault());
   canvas.addEventListener('pointerleave', () => { hovered = null; schedule(); });
   canvas.addEventListener('wheel', event => { event.preventDefault(); zoom(Math.exp(-event.deltaY * .001)); }, { passive: false });
   canvas.addEventListener('dblclick', () => setView(view));
   canvas.addEventListener('keydown', event => {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', '0'].includes(event.key)) return;
     event.preventDefault();
-    if (event.key === 'ArrowLeft') camera.yaw -= .1;
-    if (event.key === 'ArrowRight') camera.yaw += .1;
-    if (event.key === 'ArrowUp' && view === 'orbit') camera.pitch = cloud.clamp(camera.pitch + .1, .08, 1.48);
-    if (event.key === 'ArrowDown' && view === 'orbit') camera.pitch = cloud.clamp(camera.pitch - .1, .08, 1.48);
+    if (event.key === 'ArrowLeft') gpu?.rotate(-15, 0);
+    if (event.key === 'ArrowRight') gpu?.rotate(15, 0);
+    if (event.key === 'ArrowUp') gpu?.rotate(0, -15);
+    if (event.key === 'ArrowDown') gpu?.rotate(0, 15);
     if (['+', '='].includes(event.key)) zoom(1.15);
     if (event.key === '-') zoom(1 / 1.15);
     if (event.key === '0') setView(view);
@@ -254,7 +287,7 @@
   }, true);
   scene.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
-      if (event.sceneHadPopup) return;
+      if (event.sceneHadPopup || OB.windows.active()) return;
       event.preventDefault(); close();
     } else if (event.key === 'Tab') {
       const focusable = [...scene.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]')].filter(el => el.getClientRects().length && !el.closest('[hidden]'));
@@ -264,6 +297,11 @@
     }
   });
   document.addEventListener('ob:sample-change', () => { if (active) requestAnimationFrame(update); });
+  document.addEventListener('ob:window-resize', schedule);
+  canvas.addEventListener('ob:gpu-status', event => {
+    if (event.detail === 'lost') empty(phrase('Graphics connection lost', 'Графический контекст потерян'), phrase('Waiting for WebGL to recover...', 'Ожидание восстановления WebGL...'));
+    else update();
+  });
   new ResizeObserver(() => { if (active) { OB.app?.resizeMaps(); schedule(); } }).observe($('cloud-viewport'));
   new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   document.addEventListener('ob:ready', () => {

@@ -1,4 +1,4 @@
-// A small, dependency-free projection of measured SAR samples, not a terrain model.
+// Signal colours are independent of geographic elevation in the 3D terrain view.
 window.OB = window.OB || {};
 OB.pointCloud = (() => {
   const LOW = -35, HIGH = 5;
@@ -10,30 +10,6 @@ OB.pointCloud = (() => {
     const i = Math.min(stops.length - 2, Math.floor(t)), f = t - i;
     return stops[i].map((v, j) => Math.round(v + (stops[i + 1][j] - v) * f));
   }
-  function samples(site, date, channel) {
-    if (!site?.pixels || !site.dates?.[date] || !['hh', 'hv'].includes(channel)) return [];
-    const b = site.grid.bbox, midlat = (b.s + b.n) * Math.PI / 360;
-    const width = (b.e - b.w) * Math.cos(midlat), depth = b.n - b.s;
-    const scale = Math.max(width, depth);
-    if (!(scale > 0)) return [];
-    return site.pixels.flatMap((p, index) => {
-      const value = p[channel]?.[date];
-      if (![p.lat, p.lon, value].every(Number.isFinite)) return [];
-      return [{ index, value, x: (p.lon - (b.w + b.e) / 2) * Math.cos(midlat) / scale * 2,
-        y: (p.lat - (b.s + b.n) / 2) / scale * 2,
-        z: (value - LOW) / (HIGH - LOW) * 1.25, color: color(value) }];
-    });
-  }
-  function project(point, camera, width, height) {
-    const c = Math.cos(camera.yaw), s = Math.sin(camera.yaw);
-    const x = point.x * c - point.y * s, depth = point.x * s + point.y * c;
-    const cp = Math.cos(camera.pitch), sp = Math.sin(camera.pitch);
-    const vertical = depth * sp + (point.z - .45) * cp;
-    const distance = depth * cp - (point.z - .45) * sp;
-    const perspective = Math.abs(cp) < 1e-8 ? 1 : 5 / Math.max(1, 5 + distance);
-    const scale = Math.min(width * .31, height * .31) * camera.zoom * perspective;
-    return { x: width / 2 + x * scale, y: height * .54 - vertical * scale, depth: distance, perspective };
-  }
   function hitTest(points, x, y, radius = 10) {
     // Prefer the nearest dot; equal-distance overlaps resolve to the frontmost one.
     let best = null, distance = radius;
@@ -43,5 +19,5 @@ OB.pointCloud = (() => {
     }
     return best;
   }
-  return { LOW, HIGH, clamp, color, samples, project, hitTest };
+  return { LOW, HIGH, clamp, color, hitTest };
 })();

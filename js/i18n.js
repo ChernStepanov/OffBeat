@@ -1,6 +1,23 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    '3D terrain':'3D-рельеф',
+    'OffBeat Terrain Lab - 3D field view':'OffBeat Terrain Lab - 3D-рельеф',
+    'Terrain / NISAR - 3D':'Рельеф / NISAR - 3D',
+    'Radar / sample map':'Радар / карта измерений',
+    'Optical / geographic context':'Оптика / географический контекст',
+    'Render':'Режим',
+    'Relief + cloud':'Рельеф + точки',
+    'Solid relief':'Поверхность',
+    'Point cloud':'Облако точек',
+    'Height':'Высота',
+    'Contours':'Изолинии',
+    'Elevation':'Высота рельефа',
+    'Acquisition':'Съёмка',
+    'Elevation / m':'Высота / м',
+    'OFFBEAT / TOPOGRAPHIC RECON':'OFFBEAT / ТОПОГРАФИЯ',
+    'Drag: orbit / Shift-drag: pan / Scroll: zoom / Click: inspect':'Тяните: вращение / Shift: сдвиг / Прокрутка: масштаб / Клик: точка',
+    'Surface height and colour: DEM elevation in metres. NISAR dots keep their measured coordinates; dot colour shows HH/HV. Height exaggeration is visual only.':'Высота и цвет поверхности: DEM в метрах. Точки NISAR сохраняют исходные координаты; цвет показывает HH/HV. Усиление рельефа влияет только на отображение.',
     'Scene view':'Режим сцены',
     'OffBeat Explorer - maps & point cloud':'OffBeat Explorer - карты и облако точек',
     '< Back to dashboard':'< Назад к обзору',

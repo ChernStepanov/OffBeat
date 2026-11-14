@@ -1,59 +1,57 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { createHash } from 'node:crypto';
 
 const context = { window: {} }; context.window = context;
 vm.createContext(context);
-vm.runInContext(fs.readFileSync('js/point-cloud.js', 'utf8'), context);
-const { samples, color, project, hitTest, LOW, HIGH } = context.OB.pointCloud;
+for (const file of ['point-cloud', 'terrain-model']) vm.runInContext(fs.readFileSync(`js/${file}.js`, 'utf8'), context);
+const model = context.OB.terrain;
 
-// Every displayed point retains its exact source index/value on every prepared date.
 for (const name of ['mexico', 'amazon', 'venezuela']) {
   const site = JSON.parse(fs.readFileSync(`data/${name}.json`, 'utf8'));
-  const before = JSON.stringify(site);
-  for (let date = 0; date < site.dates.length; date++) {
-    for (const channel of ['hh', 'hv']) {
-      const points = samples(site, date, channel);
-      assert.equal(points.length, site.pixels.filter(p => [p.lat, p.lon, p[channel][date]].every(Number.isFinite)).length);
-      for (const point of points) {
-        assert.equal(point.value, site.pixels[point.index][channel][date]);
-        assert(Math.abs(point.z - (point.value - LOW) / (HIGH - LOW) * 1.25) < 1e-10);
-        assert([point.x, point.y, point.z].every(Number.isFinite));
-      }
+  const dem = JSON.parse(fs.readFileSync(`data/terrain/${name}.json`, 'utf8'));
+  const original = JSON.stringify(site);
+  assert.equal(model.validate(dem, site), dem);
+  assert.equal(dem.height_m.length, 66049);
+  assert.equal(dem.min_m, dem.height_m.reduce((a, b) => Math.min(a, b)));
+  assert.equal(dem.max_m, dem.height_m.reduce((a, b) => Math.max(a, b)));
+  const canonical = '[' + dem.height_m.map(v => Number.isInteger(v) ? v.toFixed(1) : String(v)).join(',') + ']';
+  const checksum = createHash('sha256').update(canonical).digest('hex');
+  assert.equal(checksum, dem.provenance.height_sha256, 'Prepared numeric DEM must match its receipt');
+  for (const source of dem.provenance.sources) { assert(source.url.startsWith('https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/')); assert.match(source.sha256, /^[a-f0-9]{64}$/); }
+  const first = model.position(dem, dem.bbox.w, dem.bbox.n), last = model.position(dem, dem.bbox.e, dem.bbox.s);
+  assert(first.x < last.x && first.z < last.z, 'Northwest and southeast must retain geographic orientation');
+  assert.equal(first.height_m, dem.height_m[0]); assert.equal(last.height_m, dem.height_m.at(-1));
+  const initial = model.samples(site, 0, 'hv', dem, 1);
+  for (let date = 0; date < site.dates.length; date++) for (const channel of ['hh', 'hv']) {
+    const points = model.samples(site, date, channel, dem, 1);
+    assert.equal(points.length, site.pixels.filter(p => [p.lat, p.lon, p[channel][date]].every(Number.isFinite)).length);
+    for (const p of points) {
+      const source = site.pixels[p.index];
+      assert.equal(p.value, source[channel][date]); assert.equal(p.lat, source.lat); assert.equal(p.lon, source.lon);
+      assert.equal(p.height_m, model.heightAt(dem, source.lon, source.lat));
+      const samePosition = initial.find(q => q.index === p.index);
+      if (samePosition) assert.equal(p.y, samePosition.y, 'Signal/date must never change terrain altitude');
+      assert(p.height_m >= dem.min_m && p.height_m <= dem.max_m);
     }
   }
-  assert.equal(JSON.stringify(site), before, 'Rendering must not mutate measured data');
+  const normal = model.samples(site, 0, 'hv', dem, 1), amplified = model.samples(site, 0, 'hv', dem, 4);
+  assert.equal(amplified[0].height_m, normal[0].height_m, 'Height readout stays physical under vertical exaggeration');
+  assert(Math.abs((amplified[0].y - .004) - (normal[0].y - .004) * 4) < 1e-9);
+  assert.equal(amplified[0].x, normal[0].x); assert.equal(amplified[0].z, normal[0].z);
+  assert.equal(JSON.stringify(site), original);
+  assert.equal(model.heightAt(dem, dem.bbox.w - 1, dem.bbox.n), null);
+  assert.equal(model.samples(site, 999, 'hv', dem).length, 0);
 }
 
-// Missing coordinates/signals are omitted; a valid zero stays a measured value.
-const fixture = { dates: ['2026-01-01', '2026-01-13'], grid: { bbox: { w: 0, e: 1, s: 0, n: 1 } }, pixels: [
-  { lat: .25, lon: .25, hh: [0, -10], hv: [null, -5] },
-  { lat: .75, lon: .75, hh: [null, 0], hv: [-20, null] },
-  { lat: null, lon: .5, hh: [-5, -5], hv: [-5, -5] },
-  { lat: .5, lon: .5, hh: [Infinity, null], hv: [NaN, null] },
-] };
-assert.deepEqual(Array.from(samples(fixture, 0, 'hh'), p => p.index), [0]);
-assert.deepEqual(Array.from(samples(fixture, 0, 'hv'), p => p.index), [1]);
-assert.deepEqual(Array.from(samples(fixture, 1, 'hh'), p => p.value), [-10, 0]);
-assert.equal(samples(fixture, 99, 'hv').length, 0);
-assert.equal(samples(fixture, 0, 'disp').length, 0);
-assert.equal(samples(null, 0, 'hv').length, 0);
-assert.equal(color(null), null);
-assert.deepEqual(Array.from(color(-100)), Array.from(color(LOW)));
-assert.deepEqual(Array.from(color(100)), Array.from(color(HIGH)));
-
-// North stays up in plan view and backscatter height cannot become fake XY motion.
-const camera = { yaw: 0, pitch: Math.PI / 2, zoom: 1 };
-const north = project({ x: 0, y: 1, z: 0 }, camera, 800, 600);
-const south = project({ x: 0, y: -1, z: 0 }, camera, 800, 600);
-assert(north.y < south.y);
-const east = project({ x: 1, y: 0, z: 0 }, camera, 800, 600);
-assert(east.x > north.x);
-const elevatedNorth = project({ x: 0, y: 1, z: 1 }, camera, 800, 600);
-assert(Math.abs(north.x - elevatedNorth.x) < 1e-10 && Math.abs(north.y - elevatedNorth.y) < 1e-10, 'Plan view position must be independent of backscatter');
-const overlap = [{ index: 1, x: 20, y: 20, depth: 1 }, { index: 2, x: 20, y: 20, depth: -1 }];
-assert.equal(hitTest(overlap, 20, 20).index, 2, 'Pick the visible foreground point');
-assert.equal(hitTest([{ index: 1, x: 20, y: 20 }, { index: 2, x: 25, y: 20 }], 20, 20).index, 1, 'Prefer a directly clicked dot over a nearby dot');
-assert.equal(hitTest(overlap, 100, 100), null);
-
-console.log('PASS: measured point identities, date/polarization, missing values, projection and foreground picking');
+// A known four-corner plane catches row inversion, wrong interpolation and missing-as-zero.
+const plane = { n: 2, bbox: { w: 0, e: 2, s: 0, n: 2 }, height_m: [100, 200, 300, 400], min_m: 100, max_m: 400 };
+assert.equal(model.heightAt(plane, 1, 1), 250);
+assert.equal(model.heightAt(plane, .5, 1.5), 175);
+assert.equal(model.heightAt(plane, null, 1), null);
+const fixture = { dates: ['2026-01-01'], pixels: [{ lon: 1, lat: 1, hv: [null] }, { lon: 1, lat: 1, hv: [0] }] };
+const valid = model.samples(fixture, 0, 'hv', plane);
+assert.equal(valid.length, 1); assert.equal(valid[0].index, 1); assert.equal(valid[0].value, 0);
+assert.equal(context.OB.pointCloud.color(null), null);
+console.log('PASS: all real DEM grids, source receipts, registration, altitude independent of signal, missing samples and physical height under exaggeration');

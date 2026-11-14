@@ -82,30 +82,44 @@ node scripts/version_assets.mjs --check
 
 Synthetic numerical fixtures exist only in offline tests, never in application data.
 
-## Scene view
+## 3D terrain and expandable windows
 
-Click **Scene view** in the map window's title bar to open a focused workspace.
-The original synchronized maps stay on the left; an interactive NISAR point
-cloud appears on the right. From the world overview, it opens the prepared
-Amazon study area. Use the study-area selector to switch sites, the acquisition
-slider to change dates, and **HH / HV** to change the cloud's polarization.
+Click **3D terrain** in the map title bar. The workspace combines the existing
+synchronized maps with a real WebGL elevation map and NISAR samples registered
+to its surface. From the world overview it opens the mountainous Caracas case.
+A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
 
-Drag the cloud to orbit, scroll or use **+ / -** to zoom, and click a sample to
-select the same location on both maps. **Top view**, **Reset view**, sample
-navigation and the **Pixel card** button are also available. The focused canvas
-supports arrow keys, **+ / -** and **0**; **Esc** returns to the dashboard.
-On phones the cloud and maps stack vertically. A direct local link is
-`http://localhost:8765/?site=amazon&view=scene`.
+The surface and dense terrain point cloud use **66,049 DEM nodes per site**,
+prepared from [Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).
+Surface colour represents elevation in metres. The separate **1,024 NISAR dots**
+keep their actual lat/lon; their colour represents the selected HH/HV backscatter,
+not elevation. Changing acquisition or polarization does not move them vertically.
+No extra NISAR observations are invented. **Height 1x / 2x / 4x / 8x** changes only
+visual exaggeration; elevation readouts remain physical metres.
 
-Cloud X/Y follow geographic coordinates, with longitude scaled by latitude.
-Height and colour encode the selected acquisition's measured gamma0 backscatter
-in dB, not terrain elevation or ground displacement. Colour uses a fixed
-−35 to +5 dB range; numeric readouts keep the original values. Missing values
-are omitted. The map's peer-deviation colours still represent the latest date;
-the cloud, sample history and selected dated optical image follow the date slider.
-Rendering uses browser Canvas 2D without an additional runtime dependency.
-Run `node scripts/test_point_cloud.mjs` to check source identities, missing values,
-date/polarization changes, projection and picking.
+Choose **Relief + cloud**, **Solid relief** or **Point cloud**; toggle contours,
+NISAR dots and the static CRT grain. Drag to orbit, Shift-drag/right-drag to pan,
+scroll or use **+ / -** to zoom. **Top view**, **Reset view**, keyboard arrows and
+**0** are available. Click a visible NISAR point to update both maps, the pixel
+card and its measured history. The 3D window has its own synchronized acquisition
+slider, including when it occupies the whole screen. On phones the panels stack.
+
+Every instrument window, including each map separately, has title-bar buttons for
+**Enlarge window**, **Maximize window** and **Browser fullscreen**. Press the same
+size button or **Esc** to restore it. Double-click a title bar to maximize it.
+Browser fullscreen uses the browser's native Fullscreen API; leaving it restores
+the preceding window size. Map instances, data, input and selection are retained.
+
+The 3D renderer uses locally vendored Three.js r160.1 (MIT). Prepared DEM files
+are included, so terrain viewing requires no Earthdata login or elevation API.
+Rebuild them with `python3 scripts/prepare_terrain.py` (Python standard library;
+internet required). Source tile URLs, SHA-256 receipts, sampling, coverage and
+limits are retained in `data/terrain/*.json`. The DEM is historical context;
+resampling and a denser mesh do not increase the source's ground resolution.
+See [terrain processing and validation](docs/terrain-scene.md).
+
+Run `node scripts/test_point_cloud.mjs` for numeric DEM integrity, physical
+registration, date/channel independence, missing samples and exaggeration checks.
 
 After editing JS or CSS, run `node scripts/version_assets.mjs` before committing.
 The generated content hashes prevent the browser from combining new HTML with
@@ -116,5 +130,10 @@ old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
 NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. OPERA is catalogue evidence only until actual additional measurements are processed.
 
 Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA font uses SIL OFL 1.1, see `fonts/W95FA-OFL.txt`.
+
+Terrain: Mapzen Terrain Tiles, including USGS SRTM/GMTED2010 and Mexico INEGI
+Continental relief (2016). Attribution and upstream terms:
+[Tilezen/Joerd](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
+Three.js is MIT-licensed; its notice is preserved in `js/vendor/THREE-LICENSE.txt`.
 
 No software LICENSE is currently declared. Public visibility does not itself grant an open-source licence; copyright holders must choose one before claiming OSI licensing for submission.
