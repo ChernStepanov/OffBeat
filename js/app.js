@@ -26,14 +26,16 @@
   const labelLayers = [map, optic].map(m => {
     m.attributionControl.setPrefix('Leaflet');
     const isData = m === map;
-    L.tileLayer(isData ? CANVAS : IMAGERY, { maxZoom: 19, maxNativeZoom: isData ? 16 : 19, className: isData ? 'context-canvas' : 'context-imagery', attribution: isData ? canvasCredit : imageryCredit }).addTo(m);
+    // Esri returns placeholder images at high zooms in many locations, rather than
+    // an error Leaflet can recover from. Enlarge the available level-16 tiles instead.
+    L.tileLayer(isData ? CANVAS : IMAGERY, { maxZoom: 19, maxNativeZoom: 16, className: isData ? 'context-canvas' : 'context-imagery', attribution: isData ? canvasCredit : imageryCredit }).addTo(m);
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
     m.getPane('placeLabels').style.pointerEvents = 'none';
     m.createPane('selectedCell');
     m.getPane('selectedCell').style.zIndex = 640;
     m.getPane('selectedCell').style.pointerEvents = 'none';
-    return L.tileLayer(isData ? CANVAS_LABELS : LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: isData ? 16 : 19, attribution: isData ? canvasCredit : labelsCredit }).addTo(m);
+    return L.tileLayer(isData ? CANVAS_LABELS : LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 16, attribution: isData ? canvasCredit : labelsCredit }).addTo(m);
   });
   let areaLayers = [];
   let syncing = false;
