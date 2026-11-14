@@ -426,7 +426,7 @@
 
   function drawTop() {
     const s = state.site, g = s.grid, rows = state.patches.slice(0, 10);
-    if (s.pixels) {                                        // sparse samples: rank single points, classified shapes first by |z|
+    if (s.pixels && s.analysis_status === 'exploratory_sparse_samples') {
       const off = s.pixels.map((p, i) => ({ p, i })).filter(({ p }) => Number.isFinite(p.z) && Math.abs(p.z) >= state.z && p.cover !== 80)
         .sort((a, b) => Math.abs(b.p.z) - Math.abs(a.p.z)).slice(0, 10);
       if (off.length) {
@@ -438,12 +438,14 @@
         }).join("");
         return;
       }
+      $("top").tBodies[0].innerHTML = `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `No samples pass |z| ≥ ${state.z}.` : 'No valid peer deviations.'}</td></tr>`;
+      return;
     }
     $("top").tBodies[0].innerHTML = rows.length ? rows.map((p, i) => {
       const st = OB.STYLES[p.style], since = g.since[p.peak] >= 0 ? s.dates[g.since[p.peak]] : "-";
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
-        <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
+        <td>${area(p.cells)}</td><td>${g.z[p.peak].toFixed(1)}</td><td>${since}</td></tr>`;
     }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `No classified shape passes |z| ≥ ${state.z}.` : 'No classified candidates with valid peer measurements.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true).then(pixelSound); };

@@ -12,10 +12,11 @@ OB.bindOptical = function (map, select, status) {
       status.textContent=`No dated optical image for NISAR ${entry.nisar_date}: ${entry.reason || 'no suitable observation'}. Context mosaic remains visible.`; return;
     }
     const b=entry.bounds;
-    overlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
-    overlay.on('error',()=>{clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
-    overlay.on?.('load',sharpen);
-    overlay.addTo(map);
+    const current=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
+    overlay=current;
+    current.on('error',()=>{if (overlay!==current) return; clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
+    current.on?.('load',()=>{if (overlay===current) sharpen();});
+    current.addTo(map);
     status.textContent=`${entry.source} | ${entry.date} | NISAR ${entry.nisar_date} | AOI cloud/shadow/snow ${Math.round(entry.aoi_cloud_shadow_snow_fraction*100)}% | ${entry.scene_id}`;
     select.title=status.textContent;
   }
