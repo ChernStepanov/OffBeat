@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OffBeat — NISAR pixels out of step with their neighbours</title>
+<meta name="description" content="OffBeat compares every NISAR pixel with nearby pixels of the same land cover and flags the ones that fall out of step: clearings, floods, subsidence, earthquakes.">
+<meta name="theme-color" content="#0a246a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a246a'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="css/offbeat.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the map</a>
+
+<div id="desk">
+
+  <!-- Title + menu bar -->
+  <header class="win app-bar">
+    <div class="win-t">
+      <span class="win-t__icon" aria-hidden="true"></span>
+      <h1>OffBeat — NISAR change finder</h1>
+      <span class="win-t__btns" aria-hidden="true"><b>_</b><b>□</b><b>×</b></span>
+    </div>
+    <nav class="menu" aria-label="Main">
+      <a href="#map-win"><u>M</u>ap</a>
+      <a href="#card-win"><u>P</u>ixel card</a>
+      <a href="#top-win"><u>T</u>op anomalies</a>
+      <a href="#about-win"><u>H</u>ow it works</a>
+      <a href="https://nisar-docs.asf.alaska.edu/" rel="noopener">NISAR data guide</a>
+    </nav>
+  </header>
+
+  <div id="cols">
+
+    <!-- Left column: controls -->
+    <aside id="side">
+
+      <section class="win" aria-labelledby="t-site">
+        <div class="win-t"><h2 id="t-site">Demo sites</h2></div>
+        <div class="win-b">
+          <ul class="sites" id="sites"></ul>
+        </div>
+      </section>
+
+      <section class="win" aria-labelledby="t-layers">
+        <div class="win-t"><h2 id="t-layers">Layers</h2></div>
+        <div class="win-b">
+          <fieldset class="group">
+            <legend>Map</legend>
+            <label><input type="checkbox" id="l-offbeat" checked> Off-Beat heat map</label>
+            <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
+          </fieldset>
+          <fieldset class="group">
+            <legend>Threshold</legend>
+            <label for="z">Show pixels with |z| ≥ <output id="z-out" for="z">2.5</output></label>
+            <input type="range" id="z" min="1.5" max="6" step="0.5" value="2.5">
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="win" aria-labelledby="t-styles">
+        <div class="win-t"><h2 id="t-styles">Change styles</h2></div>
+        <div class="win-b">
+          <ul class="styles" id="styles"></ul>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- Main column -->
+    <main id="main">
+
+      <section class="win" id="map-win" aria-labelledby="t-map">
+        <div class="win-t"><h2 id="t-map">Off-Beat map — <span id="site-name">…</span></h2></div>
+        <div class="win-b win-b--flush">
+          <div class="maps">
+            <div class="maps__pane">
+              <div class="pane-label">NISAR L-band · z-score vs. same-class peers</div>
+              <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
+            </div>
+            <div class="maps__pane">
+              <div class="pane-label">Optical check · Sentinel-2 cloudless (EOX)</div>
+              <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="card-win" aria-labelledby="t-card">
+        <div class="win-t"><h2 id="t-card">Pixel card — <span id="px-id">pick a pixel on the map</span></h2></div>
+        <div class="win-b">
+          <div class="card">
+            <table class="props" id="px-props">
+              <tr><th scope="row">Land cover</th><td id="p-cover">—</td></tr>
+              <tr><th scope="row">Peers</th><td id="p-peers">—</td></tr>
+              <tr><th scope="row">z-score</th><td id="p-z">—</td></tr>
+              <tr><th scope="row">Style</th><td id="p-style">—</td></tr>
+              <tr><th scope="row">Since</th><td id="p-since">—</td></tr>
+              <tr><th scope="row">Location</th><td id="p-loc">—</td></tr>
+            </table>
+            <div class="plots">
+              <div class="plot">
+                <div class="pane-label">Backscatter, dB — HH <i class="sw sw--hh"></i> HV <i class="sw sw--hv"></i> peers <i class="sw sw--peer"></i></div>
+                <canvas id="c-bs" height="190" aria-label="HH and HV backscatter of the pixel against its peers"></canvas>
+              </div>
+              <div class="plot">
+                <div class="pane-label">Line-of-sight displacement, cm (GUNW)</div>
+                <canvas id="c-disp" height="120" aria-label="Displacement of the pixel against its peers"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar">
+            <button type="button" class="btn" id="play" disabled>▶ Play the pixel</button>
+            <button type="button" class="btn" id="stop" disabled>■ Stop</button>
+            <span class="hint" id="play-hint">Peers keep the beat, the pixel plays the HV curve. When it slips, you hear it.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="top-win" aria-labelledby="t-top">
+        <div class="win-t"><h2 id="t-top">Top anomalies at this site</h2></div>
+        <div class="win-b">
+          <table class="grid" id="top">
+            <thead><tr><th scope="col">#</th><th scope="col">Pixel</th><th scope="col">Cover</th><th scope="col">Style</th><th scope="col">|z|</th><th scope="col">Since</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="win" id="about-win" aria-labelledby="t-about">
+        <div class="win-t"><h2 id="t-about">How OffBeat finds a pixel out of step</h2></div>
+        <div class="win-b">
+          <div class="paper">
+            <p>NISAR has only a few months of history, so a pixel's own past is too short to compare against. OffBeat compares it with its neighbours instead: every pixel of the same ESA WorldCover class within a few kilometres.</p>
+            <p>If all the rice paddies around scatter alike and one drops sharply in HV, that pixel gets a z-score against its peers. A classifier then reads the shape of the curve and names the style: a drop, a flood jump, a slow drift or a step.</p>
+            <p>The optical pane on the right follows the map, so every finding can be checked against a picture.</p>
+          </div>
+        </div>
+      </section>
+
+      <p class="foot">
+        Data: NASA-ISRO NISAR via ASF DAAC · ESA WorldCover 10 m · Sentinel-2 cloudless by EOX · base map © Esri.
+        Built for NASA Space Apps 2026, “Dancing with the SARs”. Open source.
+      </p>
+    </main>
+  </div>
+</div>
+
+<div class="sbar" role="status" aria-live="polite">
+  <span id="sb-state">Loading…</span>
+  <span id="sb-count">—</span>
+  <span id="sb-src">Source: synthetic</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/styles.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/sonify.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
