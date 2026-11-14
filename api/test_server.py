@@ -29,7 +29,7 @@ class APITest(unittest.TestCase):
 
     def test_sites_and_pixel_series(self):
         sites = self.get('/sites')
-        self.assertEqual({s['id'] for s in sites['items']}, {'mexico', 'amazon', 'venezuela'})
+        self.assertEqual({s['id'] for s in sites['items']}, {'mexico', 'amazon', 'venezuela', 'delhi', 'tokyo'})
         pixel = self.get('/sites/mexico/pixels/0')
         self.assertEqual(len(pixel['dates']), len(pixel['pixel']['hv']))
         self.assertEqual(len(pixel['displacement_dates']), len(pixel['pixel']['disp']))

@@ -22,8 +22,12 @@ and rejects a synthetic source. Offline scientific test fixtures remain in tests
 | Mexico City | 29 dates, 2025-10-30 to 2026-10-13 | 1024 each date | 357 (one pair) |
 | Itupiranga, Pará | 6 dates, 2026-07-18 to 2026-09-28 | 1024 each date | 0 |
 | Caracas | 6 dates, 2025-11-09 to 2026-01-08 | 1024 each date | 0 |
+| New Delhi, India | 2 dates, 2025-11-21 to 2025-12-03 | 1024 each date | 0 |
+| Tokyo, Japan | 2 dates, 2025-10-31 to 2025-11-12 | 1024 each date | 803 (one pair) |
 
-The last two cases have real GCOV and real downloaded GUNW subsets, but none of
+Delhi (track 156A/016) and Tokyo (038A/020) are separate 0.025° windows, not city-wide coverage. The downloaded GCOV/GUNW granules, WGS84 sample coordinates, native window receipts and hashes are in `data/<site>-manifest.json` and `data/subsets/<site>/`. Reproduce each initial extraction with `python scripts/build_real_demos.py --site delhi` or `--site tokyo`, followed by `python -m scripts.analyze_samples`; catalogue selection may change as products are added. No dated optical previews are prepared for these sites. With only two GCOV dates no curve-shape classification is claimed. Delhi's GUNW is unavailable after quality filtering; Tokyo's accepted relative LOS measurements are one pair with no independently established stable reference or rate.
+
+The Amazon and Caracas cases have real GCOV and downloaded GUNW subsets, but none of
 their GUNW samples pass the unchanged quality filters. Displacement stays null;
 there is no synthetic curve and no reference zero for a rejected sample. The
 24-day Amazon pair spans an acquisition gap. The earlier candidate (2026-06-24 /

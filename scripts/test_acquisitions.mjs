@@ -17,7 +17,7 @@ assert.deepEqual(Array.from(color(-25)), [0, 70, 255, 180]);
 assert.deepEqual(Array.from(color(0)), [255, 70, 0, 180]);
 assert.deepEqual(Array.from(color(-100)), Array.from(color(-25)));
 assert.deepEqual(Array.from(color(10)), Array.from(color(0)));
-for (const id of ['mexico', 'amazon', 'venezuela']) {
+for (const id of ['mexico', 'amazon', 'venezuela', 'delhi', 'tokyo']) {
   const real = JSON.parse(fs.readFileSync(`data/${id}.json`, 'utf8'));
   real.dates.forEach((date, index) => {
     assert.equal(available(real, index), real.pixels.filter(p => color(p.hv[index]) !== null).length, `${id}: ${date}`);

@@ -51,9 +51,9 @@ def analyze(site, radius=1000, minimum=10):
         p['interpretation']='unverified curve-shape candidate' if style else 'no classified shape'
         # Simple own-history baseline and neighbour-relative change, both on the same dates.
         before=signals['hv'][i,:2]; after=signals['hv'][i,-2:]
-        own=float(np.mean(after)-np.mean(before)) if np.isfinite(before).all() and np.isfinite(after).all() else np.nan
+        own=float(np.mean(after)-np.mean(before)) if len(dates)>=4 and np.isfinite(before).all() and np.isfinite(after).all() else np.nan
         relative=signals['hv'][i]-np.array([np.nan if v is None else v for v in p['peer']['hv_med']])
-        rel=float(relative[-2:].mean()-relative[:2].mean()) if np.isfinite(relative[:2]).all() and np.isfinite(relative[-2:]).all() else np.nan
+        rel=float(relative[-2:].mean()-relative[:2].mean()) if len(dates)>=4 and np.isfinite(relative[:2]).all() and np.isfinite(relative[-2:]).all() else np.nan
         reviews.append({'id':p['id'],'lat':p['lat'],'lon':p['lon'],'cover':p['cover'],'z':p['z'],
             'style':style,'since':p['since'],'hh':p['hh'],'hv':p['hv'],
             'own_history_hv_change_db':finite(own),'peer_relative_hv_change_db':finite(rel),
@@ -66,7 +66,11 @@ def analyze(site, radius=1000, minimum=10):
         'limitations':['WorldCover 2021 may be outdated','Sparse samples, no area or continuous raster',
             'Curve shapes are not confirmed clearing, flood, earthquake or subsidence','No weather correction or labelled accuracy estimate']}
     site['analysis_status']='exploratory_sparse_samples'
-    site['message']=f"Measured HH/HV on {len(dates)} dates; exploratory peer deviations and curve shapes. Event cause unverified; GUNW remains separate."
+    if len(dates) < 4:
+        displacement = 'GUNW has quality-filtered samples on a separate date axis.' if any(p.get('disp') for p in pixels) else 'No GUNW displacement samples passed quality checks.'
+        site['message']=f"Measured HH/HV on {len(dates)} dates; exploratory peer deviations only. Too few dates for curve-shape classification. {displacement}"
+    else:
+        site['message']=f"Measured HH/HV on {len(dates)} dates; exploratory peer deviations and curve shapes. Event cause unverified; GUNW remains separate."
     medians=[]
     for t,d in enumerate(dates):
         medians.append({'date':d,'classes':{str(c):{'n':int(np.isfinite(signals['hv'][cover==c,t]).sum()),
@@ -83,7 +87,7 @@ def analyze(site, radius=1000, minimum=10):
 
 if __name__=='__main__':
     folder=ROOT/'data/analysis';folder.mkdir(exist_ok=True)
-    for identifier in ['mexico','amazon','venezuela']:
+    for identifier in ['mexico','amazon','venezuela','delhi','tokyo']:
         path=ROOT/f'data/{identifier}.json';site=json.loads(path.read_text())
         report=analyze(site)
         path.write_text(json.dumps(site,allow_nan=False,separators=(',',':'))+'\n')

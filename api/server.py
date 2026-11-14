@@ -8,7 +8,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'data'
-SITES = ('mexico', 'amazon', 'venezuela')
+SITES = ('mexico', 'amazon', 'venezuela', 'delhi', 'tokyo')
 CONTEXT = {'fires': 'amazon/fires.json', 'alerts': 'amazon/alerts.geojson',
            'ranking': 'amazon-ranking-experiment.json'}
 

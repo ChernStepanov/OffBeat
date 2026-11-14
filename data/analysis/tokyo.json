@@ -1,0 +1,498 @@
+{
+  "site": "tokyo",
+  "dates": [
+    "2025-10-31",
+    "2025-11-12"
+  ],
+  "input_sha256": "43441cea384b1e6907c9dc61041229e76bdba32eb4af51384e75a8a465a69a18",
+  "valid_latest_z": 998,
+  "shape_counts": {
+    "drop": 0,
+    "flood": 0,
+    "drift": 0,
+    "step": 0
+  },
+  "class_medians": [
+    {
+      "date": "2025-10-31",
+      "classes": {
+        "10": {
+          "n": 86,
+          "hv_median_db": -11.25765
+        },
+        "30": {
+          "n": 1,
+          "hv_median_db": -13.98526
+        },
+        "50": {
+          "n": 919,
+          "hv_median_db": -8.71578
+        },
+        "60": {
+          "n": 2,
+          "hv_median_db": -11.88851
+        },
+        "80": {
+          "n": 16,
+          "hv_median_db": -8.83663
+        }
+      }
+    },
+    {
+      "date": "2025-11-12",
+      "classes": {
+        "10": {
+          "n": 86,
+          "hv_median_db": -10.28046
+        },
+        "30": {
+          "n": 1,
+          "hv_median_db": -11.03972
+        },
+        "50": {
+          "n": 919,
+          "hv_median_db": -8.47507
+        },
+        "60": {
+          "n": 2,
+          "hv_median_db": -12.83486
+        },
+        "80": {
+          "n": 16,
+          "hv_median_db": -10.23327
+        }
+      }
+    }
+  ],
+  "review_top10": [
+    {
+      "id": "TOK r0 c0",
+      "lat": 35.702109375,
+      "lon": 139.677890625,
+      "cover": 50,
+      "z": -0.41214,
+      "style": null,
+      "since": null,
+      "hh": [
+        1.84661,
+        0.91324
+      ],
+      "hv": [
+        -6.35494,
+        -9.42299
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 137
+    },
+    {
+      "id": "TOK r0 c1",
+      "lat": 35.702109375,
+      "lon": 139.67867187500002,
+      "cover": 50,
+      "z": -0.33603,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.76438,
+        -4.91796
+      ],
+      "hv": [
+        -7.60958,
+        -8.93897
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 146
+    },
+    {
+      "id": "TOK r0 c2",
+      "lat": 35.702109375,
+      "lon": 139.679453125,
+      "cover": 50,
+      "z": 0.41476,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.14138,
+        -4.26234
+      ],
+      "hv": [
+        -5.20753,
+        -6.4149
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 158
+    },
+    {
+      "id": "TOK r0 c3",
+      "lat": 35.702109375,
+      "lon": 139.680234375,
+      "cover": 50,
+      "z": 0.37291,
+      "style": null,
+      "since": null,
+      "hh": [
+        -1.01287,
+        -4.44415
+      ],
+      "hv": [
+        -3.935,
+        -6.78952
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 169
+    },
+    {
+      "id": "TOK r0 c4",
+      "lat": 35.702109375,
+      "lon": 139.68101562500001,
+      "cover": 50,
+      "z": 0.22603,
+      "style": null,
+      "since": null,
+      "hh": [
+        -1.18166,
+        -8.9682
+      ],
+      "hv": [
+        -5.80031,
+        -7.36725
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 179
+    },
+    {
+      "id": "TOK r0 c5",
+      "lat": 35.702109375,
+      "lon": 139.681796875,
+      "cover": 50,
+      "z": -1.02572,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.99353,
+        -4.14666
+      ],
+      "hv": [
+        -13.31327,
+        -12.81605
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 189
+    },
+    {
+      "id": "TOK r0 c6",
+      "lat": 35.702109375,
+      "lon": 139.682578125,
+      "cover": 50,
+      "z": 0.00277,
+      "style": null,
+      "since": null,
+      "hh": [
+        -5.94349,
+        -5.16015
+      ],
+      "hv": [
+        -15.00306,
+        -8.45042
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 199
+    },
+    {
+      "id": "TOK r0 c7",
+      "lat": 35.702109375,
+      "lon": 139.683359375,
+      "cover": 50,
+      "z": 1.92372,
+      "style": null,
+      "since": null,
+      "hh": [
+        -0.05639,
+        1.41147
+      ],
+      "hv": [
+        -0.80183,
+        0.31678
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 209
+    },
+    {
+      "id": "TOK r0 c8",
+      "lat": 35.702109375,
+      "lon": 139.684140625,
+      "cover": 50,
+      "z": 0.69078,
+      "style": null,
+      "since": null,
+      "hh": [
+        1.52185,
+        0.18163
+      ],
+      "hv": [
+        -3.54149,
+        -5.50625
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 219
+    },
+    {
+      "id": "TOK r0 c9",
+      "lat": 35.702109375,
+      "lon": 139.68492187500001,
+      "cover": 50,
+      "z": 0.73344,
+      "style": null,
+      "since": null,
+      "hh": [
+        -4.19449,
+        -3.41034
+      ],
+      "hv": [
+        -7.24949,
+        -5.24784
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 227
+    }
+  ],
+  "controls": [
+    {
+      "id": "TOK r0 c12",
+      "lat": 35.702109375,
+      "lon": 139.687265625,
+      "cover": 50,
+      "z": 0.58045,
+      "style": null,
+      "since": null,
+      "hh": [
+        0.11871,
+        -2.89127
+      ],
+      "hv": [
+        -7.64937,
+        -5.84756
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 251
+    },
+    {
+      "id": "TOK r30 c5",
+      "lat": 35.678671875,
+      "lon": 139.681796875,
+      "cover": 10,
+      "z": null,
+      "style": null,
+      "since": null,
+      "hh": [
+        -3.83078,
+        -4.04074
+      ],
+      "hv": [
+        -17.29914,
+        -12.97481
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 5
+    },
+    {
+      "id": "TOK r23 c26",
+      "lat": 35.684140625000005,
+      "lon": 139.698203125,
+      "cover": 50,
+      "z": -1.40848,
+      "style": null,
+      "since": null,
+      "hh": [
+        -2.91844,
+        -6.18466
+      ],
+      "hv": [
+        -12.82018,
+        -14.90964
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 277
+    },
+    {
+      "id": "TOK r12 c17",
+      "lat": 35.692734375,
+      "lon": 139.691171875,
+      "cover": 50,
+      "z": -0.90841,
+      "style": null,
+      "since": null,
+      "hh": [
+        -7.28477,
+        -7.71725
+      ],
+      "hv": [
+        -12.68167,
+        -12.80028
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 459
+    },
+    {
+      "id": "TOK r6 c8",
+      "lat": 35.697421875,
+      "lon": 139.684140625,
+      "cover": 50,
+      "z": -0.34526,
+      "style": null,
+      "since": null,
+      "hh": [
+        -2.71526,
+        -1.81776
+      ],
+      "hv": [
+        -11.31848,
+        -10.11846
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 334
+    },
+    {
+      "id": "TOK r5 c9",
+      "lat": 35.698203125,
+      "lon": 139.68492187500001,
+      "cover": 50,
+      "z": 0.3906,
+      "style": null,
+      "since": null,
+      "hh": [
+        -0.57825,
+        -2.72207
+      ],
+      "hv": [
+        -7.71563,
+        -6.80402
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 329
+    },
+    {
+      "id": "TOK r23 c18",
+      "lat": 35.684140625000005,
+      "lon": 139.691953125,
+      "cover": 10,
+      "z": 1.66155,
+      "style": null,
+      "since": null,
+      "hh": [
+        -0.30009,
+        -5.40305
+      ],
+      "hv": [
+        -7.46687,
+        -4.8998
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 65
+    },
+    {
+      "id": "TOK r29 c23",
+      "lat": 35.679453125,
+      "lon": 139.695859375,
+      "cover": 10,
+      "z": -0.36882,
+      "style": null,
+      "since": null,
+      "hh": [
+        -2.63763,
+        -3.87245
+      ],
+      "hv": [
+        -12.93844,
+        -10.93127
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 47
+    },
+    {
+      "id": "TOK r16 c23",
+      "lat": 35.689609375,
+      "lon": 139.695859375,
+      "cover": 50,
+      "z": 1.38829,
+      "style": null,
+      "since": null,
+      "hh": [
+        4.16003,
+        1.68933
+      ],
+      "hv": [
+        -3.06451,
+        -2.06006
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 386
+    },
+    {
+      "id": "TOK r8 c18",
+      "lat": 35.695859375,
+      "lon": 139.691953125,
+      "cover": 50,
+      "z": 1.26831,
+      "style": null,
+      "since": null,
+      "hh": [
+        3.0548,
+        -0.17301
+      ],
+      "hv": [
+        -5.58939,
+        -2.76996
+      ],
+      "own_history_hv_change_db": null,
+      "peer_relative_hv_change_db": null,
+      "status": "unknown: no independent dated validation",
+      "valid_peer_count": 419
+    }
+  ],
+  "requested_candidate": null,
+  "limitations": [
+    "WorldCover 2021 may be outdated",
+    "Sparse samples, no area or continuous raster",
+    "Curve shapes are not confirmed clearing, flood, earthquake or subsidence",
+    "No weather correction or labelled accuracy estimate"
+  ]
+}

@@ -8,7 +8,9 @@ import earthaccess
 import subset_nisar as subset
 
 CASES=[('amazon','Itupiranga, Pará',dict(w=-49.2875,s=-4.7875,e=-49.2625,n=-4.7625),146,175),
-       ('venezuela','Caracas and Catia La Mar',dict(w=-67.0925,s=10.4575,e=-67.0675,n=10.4825),162,7)]
+       ('venezuela','Caracas and Catia La Mar',dict(w=-67.0925,s=10.4575,e=-67.0675,n=10.4825),162,7),
+       ('delhi','New Delhi, India',dict(w=77.1975,s=28.5975,e=77.2225,n=28.6225),156,16),
+       ('tokyo','Tokyo, Japan',dict(w=139.6775,s=35.6775,e=139.7025,n=35.7025),38,20)]
 
 def discover(site,bbox,track,frame,pair_index=0):
     products={}
@@ -42,7 +44,7 @@ def discover(site,bbox,track,frame,pair_index=0):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--site',choices=['all','amazon','venezuela'],default='all')
+    parser.add_argument('--site',choices=['all']+[c[0] for c in CASES],default='all')
     parser.add_argument('--pair-index',type=int,default=None)
     args=parser.parse_args()
     cases=[c for c in CASES if args.site=='all' or c[0]==args.site]
