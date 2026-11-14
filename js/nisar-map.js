@@ -70,16 +70,52 @@ OB.bindNisarMap = function (map, toggle, status) {
       const [first, last = first] = part.trim().split('/');
       return [Date.parse(first), Date.parse(last)];
     });
-    const end = Math.max(...ranges.map(([, last]) => last));
-    if (!Number.isFinite(end)) throw new Error('GIBS returned no default date');
+    const latest = Math.max(...ranges.map(([, last]) => last));
+    if (!Number.isFinite(latest)) throw new Error('GIBS returned no default date');
+    const available = date => ranges.some(([first, last]) => date >= first && date <= last);
+    const iso = date => new Date(date).toISOString().slice(0, 10);
+    const end = await lastCompleteDay(latest, available, iso);
     const dates = [];
     for (let date = end - (mosaicDays - 1) * day; date <= end; date += day) {
-      if (ranges.some(([first, last]) => date >= first && date <= last)) {
-        dates.push(new Date(date).toISOString().slice(0, 10));
-      }
+      if (available(date)) dates.push(iso(date));
     }
     if (!dates.length) throw new Error('GIBS returned no mosaic dates');
+    dates.latest = iso(latest);
     return dates;
+  }
+
+  // NASA publishes browse tiles with a lag: the newest week or so is nearly empty. A mosaic that
+  // ends on the newest listed day therefore shows a fraction of the world. Probe one whole-world
+  // tile per recent day (about 30 tiny requests, under a second, once a day per browser) and end
+  // the mosaic on the last day whose coverage is normal. If the probe fails, keep the newest day.
+  async function lastCompleteDay(latest, available, iso) {
+    const key = `offbeat.nisarEnd.${iso(latest)}`;
+    try { const kept = localStorage.getItem(key); if (kept) return Date.parse(kept); } catch { /* storage off */ }
+    const days = [];
+    for (let date = latest; days.length < 30 && date > latest - 60 * day; date -= day) if (available(date)) days.unshift(date);
+    try {
+      const counts = await Promise.all(days.map(async date => {
+        const image = await loadImage(`${base}/wmts/epsg3857/best/${product}/default/${iso(date)}/${matrix}/0/0/0.png`);
+        if (!image) return null;
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = tileSize;
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+        const alpha = context.getImageData(0, 0, tileSize, tileSize).data;
+        let n = 0;
+        for (let i = 3; i < alpha.length; i += 4) if (alpha[i]) n++;
+        return n;
+      }));
+      const known = counts.filter(Number.isFinite).sort((a, b) => a - b);
+      if (known.length < 8) return latest;
+      const normal = known[Math.floor(known.length / 2)];      // median day: most recent days are complete
+      let end = latest;
+      for (let i = days.length - 1; i >= 0; i--) if (counts[i] >= 0.6 * normal) { end = days[i]; break; }
+      try { localStorage.setItem(key, iso(end)); } catch { /* storage off */ }
+      return end;
+    } catch {
+      return latest;
+    }
   }
 
   function createMosaic(dates) {
@@ -163,7 +199,8 @@ OB.bindNisarMap = function (map, toggle, status) {
         status.textContent = 'Loading NISAR radar coverage…';
         const dates = await getDates();
         layer = createMosaic(dates);
-        caption = `NASA NISAR quick-look | ${mosaicDays}-day mosaic through ${dates.at(-1)} | Blue to red: browse brightness, not calibrated; straight seams come from NASA's tiles`;
+        const lag = dates.latest !== dates.at(-1) ? ` (NASA tiles after this are still incomplete, newest ${dates.latest})` : '';
+        caption = `NASA NISAR quick-look | ${mosaicDays}-day mosaic through ${dates.at(-1)}${lag} | Blue to red: browse brightness, not calibrated; straight seams come from NASA's tiles`;
       }
       if (toggle.checked) {
         layer.addTo(map);
