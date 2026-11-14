@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=6c9475d50eaa">
+<link rel="stylesheet" href="css/offbeat.css?v=68e7971de49a">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -283,7 +283,7 @@
           <div class="paper">
             <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
-            <p>Peer deviations and curve shapes are candidates for investigation, not confirmed events. Sparse samples do not define event areas. The light map shows NISAR sample locations; the optical map shows Esri context or a selected Sentinel-2 image with cloud and missing-data masks. Measured HH/HV are shown in the charts. Missing and quality-rejected measurements remain unavailable.</p>
+            <p>Peer deviations and curve shapes are candidates for investigation, not confirmed events. Sparse samples do not define event areas. The left map shows NISAR samples and date-coloured coverage over a grayscale copy of the Esri context or selected Sentinel-2 image on the right. Measured HH/HV are shown in the charts. Missing and quality-rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
@@ -397,13 +397,14 @@
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"></script>
 <script src="js/map-cache.js?v=48304a06b06c"></script>
+<script src="js/map-imagery.js?v=20897c14414f"></script>
 <script src="js/text98.js?v=85fdf4481a27"></script>
 <script src="js/styles.js?v=1c84dd9b23f5"></script>
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
-<script src="js/nisar-map.js?v=a87ffc4f217b"></script>
+<script src="js/nisar-map.js?v=71f079b03428"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
-<script src="js/data.js?v=8df64657e918"></script>
+<script src="js/data.js?v=f9ff3a213960"></script>
 <script src="js/suggestions.js?v=eb8c52544811"></script>
 <script src="js/acquisitions.js?v=faedaefccc8f"></script>
 <script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
@@ -411,8 +412,8 @@
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=1dcbeeed16fe"></script>
-<script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=17574282bfbc"></script>
+<script src="js/optical.js?v=148479260097"></script>
+<script src="js/i18n.js?v=49f165be104d"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
@@ -420,6 +421,6 @@
 <script src="js/terrain-renderer.js?v=ac64afde1586"></script>
 <script src="js/windows.js?v=29471bd56346"></script>
 <script src="js/scene.js?v=5ef338d83ef9"></script>
-<script src="js/app.js?v=873afe21999c"></script>
+<script src="js/app.js?v=231b039fd5cf"></script>
 </body>
 </html>

@@ -226,6 +226,7 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .leaflet-container .leaflet-bottom.leaflet-right .leaflet-control-attribution { float: right; max-width: 100%; }
 .leaflet-container .leaflet-control-attribution a { color: #0000ee; }
 .raster { image-rendering: pixelated; image-rendering: crisp-edges; }
+.grayscale-imagery { filter: grayscale(100%); }
 #map { cursor: crosshair; }
 /* demo sites on the data map: a Win98 tooltip with a small square, clickable */
 .site-pin { display: flex; align-items: center; gap: 4px; width: max-content !important; transform: translate(-6px, -50%); cursor: pointer; }

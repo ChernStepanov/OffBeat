@@ -26,3 +26,9 @@ select.value='2';listener();assert.match(status.textContent,/No readable clear s
 select.value='context';listener();assert(removed>=1);
 optic.setDate('2026-01-01');assert.equal(select.value,'context');assert.equal(overlays,2);
 console.log('PASS: sharp context by default, dated images only when selected');
+const beforeMirror=created.length; let mirroredRemoved=0;
+const withMirror=context.OB.bindOptical({removeLayer(){}},select,{}, {removeLayer(){mirroredRemoved++;}});
+await withMirror.load({id:'a'});select.value='0';listener();
+assert.equal(created.length,beforeMirror+2,'Dated observation must appear on both maps');
+select.value='context';listener();assert.equal(mirroredRemoved,1,'Returning to context removes the mirrored image');
+console.log('PASS: dated optical images follow on both maps');

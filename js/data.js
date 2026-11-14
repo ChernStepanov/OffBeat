@@ -25,10 +25,10 @@ OB.loadData = async function () {
     site.series = (x, y) => site.pixels[y * g.n + x];
     // measured context next to a site (NASA FIRMS / INPE fires, INPE DETER / UMD GLAD alerts)
     site.context = {};
-    for (const [key, file] of Object.entries(CONTEXT[id] || {})) {
+    await Promise.all(Object.entries(CONTEXT[id] || {}).map(async ([key, file]) => {
       try { const r = await fetch(`data/${id}/${file}`); if (r.ok) site.context[key] = await r.json(); }
       catch (e) { console.warn(`${id}: ${file} unavailable`, e); }
-    }
+    }));
     return site;
   }));
   OB.SITES = results.filter(r => r.status === 'fulfilled').map(r => r.value);

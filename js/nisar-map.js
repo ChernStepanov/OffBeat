@@ -188,21 +188,20 @@ OB.bindNisarMap = function (map, toggle, status) {
         let shown = false;
         const show = error => { if (!shown) { shown = true; done(error, tile); } };
         const levels = new Array(dates.length).fill(null);     // per date: coverage mask
+        let paintPending = false;
         const paint = () => {
+          paintPending = false;
+          if (tile.unloaded) return;
           const owner = new Int8Array(tileSize * tileSize).fill(-1);
           levels.forEach((mask, d) => { if (mask) for (let p = 0; p < mask.length; p++) if (mask[p]) owner[p] = d; });  // newest wins
           const out = new ImageData(tileSize, tileSize);
+          const colours = dates.map((_, d) => dateColour(d, dates.length));
           for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
             const p = y * tileSize + x, d = owner[p];
             if (d < 0) continue;
-            // edge of a swath: a neighbour that is empty or from another date
-            const edge = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
-              const X = x + dx, Y = y + dy;
-              return X >= 0 && Y >= 0 && X < tileSize && Y < tileSize && owner[Y * tileSize + X] !== d;
-            });
-            const [r, g, b] = dateColour(d, dates.length), i = p * 4;
-            out.data[i] = edge ? r * 0.55 : r; out.data[i + 1] = edge ? g * 0.55 : g; out.data[i + 2] = edge ? b * 0.55 : b;
-            out.data[i + 3] = edge ? 230 : 150;
+            const [r, g, b] = colours[d], i = p * 4;
+            out.data[i] = r; out.data[i + 1] = g; out.data[i + 2] = b;
+            out.data[i + 3] = 150;
           }
           tile.radar = { coords, cells: out, owner, dates };
           context.putImageData(out, 0, 0);
@@ -214,7 +213,7 @@ OB.bindNisarMap = function (map, toggle, status) {
           if (image) {
             slots[i] = image;
             levels[i] = coverage(image);
-            try { paint(); } catch (error) { context.clearRect(0, 0, tileSize, tileSize); show(error); return; }
+            if (!paintPending) { paintPending = true; requestAnimationFrame(paint); }
             show(null);
             return;
           }
@@ -257,13 +256,19 @@ OB.bindNisarMap = function (map, toggle, status) {
     ctx.drawImage(image, 0, 0);
     const px = ctx.getImageData(0, 0, tileSize, tileSize).data;
     const mask = new Uint8Array(tileSize * tileSize);
-    for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
-      let a = 0, cells = 0;
-      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-        const X = x + dx, Y = y + dy;
-        if (X < 0 || Y < 0 || X >= tileSize || Y >= tileSize) continue;
-        a += px[(Y * tileSize + X) * 4 + 3]; cells++;
+    const stride = tileSize + 1, sums = new Uint32Array(stride * stride);
+    for (let y = 0; y < tileSize; y++) {
+      let row = 0;
+      for (let x = 0; x < tileSize; x++) {
+        row += px[(y * tileSize + x) * 4 + 3];
+        sums[(y + 1) * stride + x + 1] = sums[y * stride + x + 1] + row;
       }
+    }
+    for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
+      const x0 = Math.max(0, x - 1), x1 = Math.min(tileSize, x + 2);
+      const y0 = Math.max(0, y - 1), y1 = Math.min(tileSize, y + 2);
+      const a = sums[y1 * stride + x1] - sums[y0 * stride + x1] - sums[y1 * stride + x0] + sums[y0 * stride + x0];
+      const cells = (x1 - x0) * (y1 - y0);
       if (a / (255 * cells) >= MIN_COVER) mask[y * tileSize + x] = 1;
     }
     return mask;

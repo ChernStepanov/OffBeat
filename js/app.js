@@ -14,29 +14,27 @@
   // Identical imagery and zoom limits; grey basemap under the colour NISAR layer.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
   const LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
-  // the data map gets a quiet light canvas so measurements read clearly; the photo stays on the right
-  const CANVAS = "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
-  const CANVAS_LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}";
-  const canvasCredit = 'Basemap &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
   const imageryCredit = 'Imagery &copy; Esri, Vantor, Earthstar Geographics';
   const labelsCredit = 'Labels &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
   // minZoom 2 keeps the world filling the panel instead of grey margins around a tiny globe
   const map = L.map("map", { zoomControl: true, maxZoom: 19, minZoom: 2, worldCopyJump: true });
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19, minZoom: 2, worldCopyJump: true });
-  const optical = OB.bindOptical(optic, $('optical-date'), $('optical-status'));
+  map.createPane('opticalMirror');
+  map.getPane('opticalMirror').style.zIndex = 225;
+  map.getPane('opticalMirror').style.pointerEvents = 'none';
+  const optical = OB.bindOptical(optic, $('optical-date'), $('optical-status'), map);
   const labelLayers = [map, optic].map(m => {
     m.attributionControl.setPrefix('Leaflet');
     const isData = m === map;
-    // Esri returns placeholder images at high zooms in many locations, rather than
-    // an error Leaflet can recover from. Enlarge the available level-16 tiles instead.
-    L.tileLayer(isData ? CANVAS : IMAGERY, { maxZoom: 19, maxNativeZoom: 16, className: isData ? 'context-canvas' : 'context-imagery', attribution: isData ? canvasCredit : imageryCredit }).addTo(m);
+    // Detailed imagery sits above a level-16 fallback where Esri has no detailed tile.
+    OB.bindImagery(m, IMAGERY, {className: isData ? 'context-imagery grayscale-imagery' : 'context-imagery', attribution: imageryCredit});
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
     m.getPane('placeLabels').style.pointerEvents = 'none';
     m.createPane('selectedCell');
     m.getPane('selectedCell').style.zIndex = 640;
     m.getPane('selectedCell').style.pointerEvents = 'none';
-    return L.tileLayer(isData ? CANVAS_LABELS : LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 16, attribution: isData ? canvasCredit : labelsCredit }).addTo(m);
+    return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 16, attribution: labelsCredit }).addTo(m);
   });
   let areaLayers = [];
   let rankingData = null;
