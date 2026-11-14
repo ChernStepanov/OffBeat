@@ -10,11 +10,11 @@ OB.bindNisarMap = function (map, toggle, status) {
   const nativeZoom = 13;
   const tiles = new Set();
   const imageCache = new Map();
-  let failedTiles = 0;
+  let failedTiles = 0, inflight = 0, statusTimer;
   let layer, loading, caption;
-  // Square, hard-edged pixels only when a native tile is magnified; at or below the native
-  // level the browser scales smoothly, so fractional screen scales (125 %, 150 %) stay even.
-  const rendering = () => map.getZoom() > nativeZoom ? 'pixelated' : 'auto';
+  // Smooth scaling at every zoom: hard-edged magnified pixels read as noise and blocks, and the
+  // tiles Leaflet stretches while the next zoom loads look broken when they are pixelated.
+  const rendering = () => 'auto';
 
   map.createPane('nisarRadar');
   map.getPane('nisarRadar').style.zIndex = 250;
@@ -22,6 +22,7 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   function loadImage(url) {
     if (imageCache.has(url)) return imageCache.get(url);
+    inflight++; scheduleStatus();
     const attempt = () => new Promise(resolve => {
       const image = new Image();
       let timer;
@@ -42,6 +43,7 @@ OB.bindNisarMap = function (map, toggle, status) {
       }
       // Never cache a failed request as missing satellite coverage.
       if (!image) imageCache.delete(url);
+      inflight--; scheduleStatus();
       return image;
     })();
     imageCache.set(url, pending);
@@ -49,10 +51,16 @@ OB.bindNisarMap = function (map, toggle, status) {
     return pending;
   }
 
+  function scheduleStatus() {
+    if (statusTimer) return;
+    statusTimer = setTimeout(() => { statusTimer = null; showStatus(); }, 150);
+  }
+
   function showStatus() {
     if (!caption) return;
-    status.textContent = caption + (failedTiles
-      ? ` | ${failedTiles} incomplete tiles: NASA requests failed. Toggle radar to retry; these gaps are not confirmed missing coverage.`
+    const busy = inflight > 0 ? ` | Loading NASA radar: ${inflight} request${inflight === 1 ? '' : 's'} left` : '';
+    status.textContent = caption + busy + (failedTiles
+      ? ` | ${failedTiles} incomplete tile${failedTiles === 1 ? '' : 's'}: NASA did not answer, retrying. These gaps are not confirmed missing coverage.`
       : ' | Transparent gaps: no browse coverage in this time window.');
   }
 
@@ -118,6 +126,47 @@ OB.bindNisarMap = function (map, toggle, status) {
     }
   }
 
+  // Which mosaic dates have any data under a tile, read from one ancestor tile 4 levels up
+  // (it covers 256 tiles). A tile then requests only those dates, usually 1 to 3 of the 12,
+  // and a tile over ocean or outside any swath requests nothing at all.
+  const ANCESTOR_LEVELS = 4, MASK = 64;                      // coverage kept at 64 x 64 per date
+  const ancestors = new Map();                               // "z/x/y" -> Promise<Uint8Array[] | null>
+  function ancestorMasks(dates, z, x, y) {
+    const key = `${z}/${x}/${y}`;
+    if (!ancestors.has(key)) {
+      ancestors.set(key, Promise.all(dates.map(async date => {
+        const image = await loadImage(`${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${z}/${y}/${x}.png`);
+        if (!image) return undefined;                        // unknown: a failed request is never "no data"
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = tileSize;
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+        const alpha = context.getImageData(0, 0, tileSize, tileSize).data, step = tileSize / MASK;
+        const mask = new Uint8Array(MASK * MASK);
+        for (let py = 0; py < tileSize; py++) for (let px = 0; px < tileSize; px++)
+          if (alpha[(py * tileSize + px) * 4 + 3]) mask[Math.floor(py / step) * MASK + Math.floor(px / step)] = 1;
+        return mask;
+      })));
+      if (ancestors.size > 64) ancestors.delete(ancestors.keys().next().value);
+    }
+    return ancestors.get(key);
+  }
+  async function datesFor(dates, coords) {
+    const k = Math.min(ANCESTOR_LEVELS, coords.z);
+    if (k === 0) return dates.map((_, i) => i);
+    const ax = coords.x >> k, ay = coords.y >> k, masks = await ancestorMasks(dates, coords.z - k, ax, ay);
+    // the child's square inside the ancestor, one mask cell wider on each side for thin swath edges
+    const cells = MASK >> k, ox = (coords.x - (ax << k)) * cells, oy = (coords.y - (ay << k)) * cells;
+    return dates.map((_, i) => i).filter(i => {
+      const mask = masks[i];
+      if (!mask) return true;                                // ancestor unknown for this date: ask the tile
+      for (let my = Math.max(0, oy - 1); my < Math.min(MASK, oy + cells + 1); my++)
+        for (let mx = Math.max(0, ox - 1); mx < Math.min(MASK, ox + cells + 1); mx++)
+          if (mask[my * MASK + mx]) return true;
+      return false;
+    });
+  }
+
   function createMosaic(dates) {
     const Mosaic = L.GridLayer.extend({
       createTile(coords, done) {
@@ -129,27 +178,33 @@ OB.bindNisarMap = function (map, toggle, status) {
         // waiting for the slowest of all the mosaic requests. Older dates are always painted
         // first, so a newer acquisition covers an older one whatever order they arrive in.
         const slots = new Array(dates.length).fill(null);
-        let shown = false, settled = 0;
+        let shown = false;
+        const show = error => { if (!shown) { shown = true; done(error, tile); } };
         const paint = () => {
           context.clearRect(0, 0, tileSize, tileSize);
           for (const image of slots) if (image) context.drawImage(image, 0, 0);
           tile.radar = { coords, pixels: context.getImageData(0, 0, tileSize, tileSize) };
           colorTile(tile);
         };
-        dates.forEach((date, i) => loadImage(
-          `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`
-        ).then(image => {
-          settled++;
+        const url = date => `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`;
+        // one date; a failed request is tried again later (twice), so a slow NASA reply heals itself
+        const fetchDate = (i, tries = 0) => loadImage(url(dates[i])).then(image => {
           if (tile.unloaded) return;
           if (image) {
             slots[i] = image;
-            try { paint(); } catch (error) { context.clearRect(0, 0, tileSize, tileSize); if (!shown) { shown = true; done(error, tile); } return; }
-            if (!shown) { shown = true; done(null, tile); }
-          } else if (!tile.incomplete) {
-            tile.incomplete = true; failedTiles++; showStatus();
+            try { paint(); } catch (error) { context.clearRect(0, 0, tileSize, tileSize); show(error); return; }
+            show(null);
+            return;
           }
-          if (settled === dates.length && !shown) { shown = true; done(new Error('NISAR tiles unavailable'), tile); }
-        }));
+          if (tries < 2) { setTimeout(() => !tile.unloaded && fetchDate(i, tries + 1), 3000 * (tries + 1)); return; }
+          if (!tile.incomplete) { tile.incomplete = true; failedTiles++; showStatus(); }
+          show(null);
+        });
+        datesFor(dates, coords).then(wanted => {
+          if (tile.unloaded) return;
+          if (!wanted.length) { show(null); return; }        // no swath here in this window: nothing to ask for
+          wanted.forEach(i => fetchDate(i));
+        });
         return tile;
       },
     });
@@ -224,7 +279,9 @@ OB.bindNisarMap = function (map, toggle, status) {
     const column = Math.floor(point.x / tileSize);
     const row = Math.floor(point.y / tileSize);
     const wrapped = L.Util.wrapNum(column, [0, 2 ** zoom]);
-    for (const { radar: { coords, cells } } of tiles) {
+    for (const tile of tiles) {
+      if (!tile.radar || !tile.radar.cells) continue;          // a tile with no swath in the window has no cells
+      const { coords, cells } = tile.radar;
       if (coords.z !== zoom || coords.x !== wrapped || coords.y !== row) continue;
       const size = tileSize / cells.width;
       const x = Math.floor((point.x - column * tileSize) / size);
