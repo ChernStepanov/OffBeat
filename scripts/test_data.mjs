@@ -49,6 +49,7 @@ await assert.rejects(context.OB.loadData(), /503/);
 
 const calls=[];
 const drawing = new Proxy({}, {get:(_,name)=> (...args)=>{
+  if (name === 'measureText') return {width: String(args[0]).length * 7};
   assert(!args.some(a=>typeof a==='number' && !Number.isFinite(a)), `${name} nonfinite coordinate`);
   calls.push([name,...args]);
 },set:()=>true});
