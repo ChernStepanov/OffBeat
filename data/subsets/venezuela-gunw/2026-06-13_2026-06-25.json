@@ -1,0 +1,46 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GUNW_022_162_A_007_023_4000_SH_20260613T100656_20260613T100731_20260625T100655_20260625T100730_P05023_N_F_J_001",
+    "concept_id": "G4276300590-ASF",
+    "collection": "C2854335566-ASF",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GUNW_PROVISIONAL_V1/NISAR_L2_PR_GUNW_022_162_A_007_023_4000_SH_20260613T100656_20260613T100731_20260625T100655_20260625T100730_P05023_N_F_J_001/NISAR_L2_PR_GUNW_022_162_A_007_023_4000_SH_20260613T100656_20260613T100731_20260625T100655_20260625T100730_P05023_N_F_J_001.h5"
+  },
+  "catalogue_query": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GUNW_PROVISIONAL_V1&bounding_box=-67.0925%2C10.4575%2C-67.0675%2C10.4825&page_size=2000",
+  "reference_date": "2026-06-13",
+  "secondary_date": "2026-06-25",
+  "center_frequency_hz": 1239000000.0,
+  "grid": {
+    "epsg": 32619,
+    "spacing": [
+      80.0,
+      -80.0
+    ],
+    "window": [
+      2580,
+      2615,
+      3730,
+      3764
+    ],
+    "paths": {
+      "phase": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/unwrappedPhase",
+      "coherence": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/coherenceMagnitude",
+      "component": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/connectedComponents",
+      "iono": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreen",
+      "iono_sd": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreenUncertainty",
+      "mask": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/mask"
+    }
+  },
+  "subset_path": "data/subsets/venezuela-gunw/2026-06-13_2026-06-25.npz",
+  "sha256": "bcd9f57a019013d2fe429943209df38e2d4586988d1689cf257e0b724339eb2e",
+  "valid_samples": 0,
+  "sample_count": 1024,
+  "steps": [
+    "Sample original phase, coherence, components, ionosphere, uncertainty and mask at native locations",
+    "Quality: coherence >=0.7, ionosphere uncertainty <=1 rad, valid nonwater subswaths, valid component and no anomaly flags",
+    "No spatial reference or displacement estimated in this exploratory quality check"
+  ],
+  "quality_counts": {
+    "coherence_at_least_0_7": 81,
+    "ionosphere_uncertainty_at_most_1_rad": 0
+  }
+}

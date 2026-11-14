@@ -39,6 +39,8 @@ per browser. The demo endpoint may throttle or go offline. Operators can set
 Coordinate searches are local. A search outside the prepared NISAR areas shows
 geographic context and explicitly marks the measurement series as unavailable.
 The selected site and searched coordinates are retained in the URL across reloads.
+The last map centre and zoom are also remembered locally in the same browser;
+an explicitly selected site or coordinates in a link take precedence.
 
 ## Layout
 
@@ -83,8 +85,8 @@ Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tes
 ## Data
 
 NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
-Both panes use Esri World Imagery for matching detail, grey under NISAR and colour
-on the right. Place labels, study-area boundaries and metric scales help orientation.
+Both panes use colour Esri World Imagery for matching detail, with NISAR overlaid
+on the left. Place labels, study-area boundaries and metric scales help orientation.
 Imagery dates vary by location; this is context, not date-matched optical validation.
 
 ## Font

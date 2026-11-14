@@ -1,0 +1,32 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_031_146_A_175_2005_DHDH_A_20260928T090408_20260928T090443_P05023_N_F_J_001",
+    "concept_id": "G4328975924-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2026-09-28T09:04:08.000Z",
+    "end": "2026-09-28T09:04:43.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_031_146_A_175_2005_DHDH_A_20260928T090408_20260928T090443_P05023_N_F_J_001/NISAR_L2_PR_GCOV_031_146_A_175_2005_DHDH_A_20260928T090408_20260928T090443_P05023_N_F_J_001.h5"
+  },
+  "grid": {
+    "epsg": 32722,
+    "spacing": [
+      20.0,
+      -20.0
+    ],
+    "window": [
+      6394,
+      6529,
+      13150,
+      13286
+    ],
+    "paths": {
+      "hh": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+      "hv": "/science/LSAR/GCOV/grids/frequencyA/HVHV",
+      "mask": "/science/LSAR/GCOV/grids/frequencyA/mask"
+    }
+  },
+  "date": "2026-09-28",
+  "subset_path": "data/subsets/amazon-series/2026-09-28.npz",
+  "sha256": "6637b4183115429450e3f23eb65868a520b45f06401288ba49bd4e0e4321e2a5",
+  "catalogue_query": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GCOV_PROVISIONAL_V1&bounding_box=-49.2875%2C-4.7875%2C-49.2625%2C-4.7625&page_size=2000&sort_key=start_date"
+}

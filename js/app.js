@@ -10,7 +10,7 @@
   }
   const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
 
-  // Identical imagery and zoom limits on both sides; grey styling only on the SAR pane.
+  // Identical colour imagery and zoom limits on both sides.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
   const LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
   const imageryCredit = 'Imagery &copy; Esri, Vantor, Earthstar Geographics';
@@ -30,6 +30,19 @@
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
+  const viewportKey = 'offbeat.map.viewport.v1';
+  let previousViewport = null, viewportReady = !!OB.tourWanted;
+  try { previousViewport = JSON.parse(localStorage.getItem(viewportKey) || 'null'); } catch (_) { /* storage unavailable */ }
+  function viewportAnchor() {
+    const p = new URL(location.href).searchParams;
+    return JSON.stringify([p.get('lat'), p.get('lon')]);
+  }
+  function saveViewport() {
+    if (!viewportReady || !state.site) return;
+    const c = map.getCenter();
+    try { localStorage.setItem(viewportKey, JSON.stringify({site:state.site.id, anchor:viewportAnchor(), lat:c.lat, lon:c.lng, zoom:map.getZoom()})); } catch (_) { /* storage unavailable */ }
+  }
+  map.on('moveend', saveViewport);
   const box = () => L.rectangle([[0, 0], [0, 0]], { color: "#ffcc00", weight: 2, fill: false, interactive: false });
   const cellBox = box(), cellBoxOptic = box();
 
@@ -91,13 +104,14 @@
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
       $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
     }
+    const url = new URL(location.href); url.searchParams.set('lat', String(place.lat)); url.searchParams.set('lon', String(place.lon)); history.replaceState(null, '', url);
     if (place.bounds && !site) map.fitBounds(place.bounds, { padding: [16, 16], maxZoom: 13 });
     else map.setView([place.lat, place.lon], site ? Math.max(map.getZoom(), 13) : 12);
     [map, optic].forEach(m => {
       const marker = L.circleMarker([place.lat, place.lon], { radius: 7, color: '#fff', weight: 2, fillColor: '#c00000', fillOpacity: 1, interactive: false }).addTo(m);
       searchMarkers.push([m, marker]);
     });
-    const url = new URL(location.href); url.searchParams.set('lat', String(place.lat)); url.searchParams.set('lon', String(place.lon)); history.replaceState(null, '', url);
+    saveViewport();
     $('map-win').scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
   $('place-search').addEventListener('submit', async e => {
@@ -481,11 +495,14 @@
   });
   if (!OB.tourWanted) {
     const legacy = location.hash.slice(1);
-    const params = new URL(location.href).searchParams, saved = params.get('site');
+    const params = new URL(location.href).searchParams, saved = params.get('site') || (previousViewport && previousViewport.site);
     const lat = params.get('lat'), lon = params.get('lon');
     const savedPlace = lat !== null && lon !== null ? OB.parseCoordinates(`${lat}, ${lon}`) : null;
-    loadSite(OB.SITES.some(s => s.id === legacy) ? legacy : saved).then(() => {
-      if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; showPlace(savedPlace); }
+    loadSite(OB.SITES.some(s => s.id === legacy) ? legacy : saved).then(async () => {
+      if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; await showPlace(savedPlace); }
+      const v = previousViewport;
+      if (v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
+      viewportReady = true; saveViewport();
     });
   }
 })();

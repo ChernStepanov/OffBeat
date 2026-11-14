@@ -23,7 +23,15 @@ for (const loaded of context.OB.SITES) {
   for (const receipt of [...loaded.provenance.inputs,loaded.provenance.worldcover]) {
     assert.equal(createHash('sha256').update(fs.readFileSync(receipt.subset_path)).digest('hex'),receipt.sha256);
   }
+  for (const receipt of loaded.provenance.additional_gcov || []) {
+    assert.equal(createHash('sha256').update(fs.readFileSync(receipt.subset_path)).digest('hex'),receipt.sha256);
+    assert(loaded.dates.includes(receipt.date));
+  }
+  assert(loaded.dates.every((date,i)=>i===0 || date>loaded.dates[i-1]));
 }
+const gunw = JSON.parse(fs.readFileSync('data/subsets/venezuela-gunw/2026-06-13_2026-06-25.json','utf8'));
+assert.equal(createHash('sha256').update(fs.readFileSync(gunw.subset_path)).digest('hex'),gunw.sha256);
+assert.equal(gunw.valid_samples,0);
 context.fetch = async path=>({ok:true,json:async()=>({...JSON.parse(fs.readFileSync(path,'utf8')),source:'synthetic'})});
 await assert.rejects(context.OB.loadData(), /measured provenance required/);
 if (site.status === 'measured_pair') {
