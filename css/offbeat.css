@@ -653,6 +653,17 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 }
 @media (prefers-reduced-motion: reduce) { .terrain-crt::after { opacity: .15; } }
 
+/* Embedded terrain sits immediately below the paired maps. */
+.scene.scene--inline { position: static; inset: auto; z-index: auto; display: block; margin: 8px 0; }
+.scene--inline > .scene__title, .scene--inline > .scene__toolbar,
+.scene--inline > .scene__status, .scene--inline .scene__map-slot { display: none; }
+.scene--inline > .scene__layout { display: block; padding: 0; overflow: visible; }
+.scene--inline .terrain-window { width: 100%; min-height: 0; }
+.scene--inline .cloud__viewport { flex: none; height: clamp(300px, 40vw, 520px); }
+@media (max-width: 720px) {
+  .scene--inline .cloud__viewport { height: 320px; }
+}
+
 /* Investigation wizard: the same desktop chrome, a quiet paper workspace. */
 .casebook__intro { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .casebook h3 { font-size: 15px; line-height: 20px; margin: 4px 0 8px; }

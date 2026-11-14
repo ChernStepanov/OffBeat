@@ -1,13 +1,16 @@
-// The focused terrain workspace keeps the original maps and measured NISAR selections alive.
+// Inline terrain keeps the original maps and measured NISAR selections alive.
 (() => {
   const $ = id => document.getElementById(id), cloud = OB.pointCloud;
   const scene = $('scene-win'), launcher = $('scene-open'), mapWindow = $('map-win');
   const canvas = $('cloud-canvas');
-  const home = document.createComment('Map window returns here after Scene view');
-  mapWindow.before(home);
+  // The same terrain panel lives directly below the paired maps.
+  mapWindow.after(scene);
+  scene.hidden = false;
+  scene.classList.add('scene--inline');
+  scene.removeAttribute('role'); scene.removeAttribute('aria-modal');
   let active = false, channel = 'hv', view = 'orbit', frame = 0, points = [];
-  let selectedSite = null, date = 0, selection = null, dragging = null, hovered = null, returnFocus = null;
-  let gpu = null, gpuPromise = null, terrain = null, terrainSite = null, terrainTicket = 0, loadedSignalKey = '';
+  let selectedSite = null, date = 0, selection = null, dragging = null, hovered = null;
+  let gpu = null, gpuPromise = null, starting = false, pendingMapFocus = false, terrain = null, terrainSite = null, terrainTicket = 0, loadedSignalKey = '';
   const terrainCache = new Map();
   const ru = () => document.documentElement.lang === 'ru';
   const phrase = (en, russian) => ru() ? russian : en;
@@ -161,60 +164,38 @@
     schedule();
   }
   function zoom(factor) { gpu?.zoom(factor); schedule(); }
-  function setURL(on) {
-    const url = new URL(location.href);
-    if (on) url.searchParams.set('view', 'scene'); else url.searchParams.delete('view');
-    history.replaceState(null, '', url);
-  }
-  async function open() {
-    if (active || !OB.app) return;
-    document.dispatchEvent(new Event('ob:manual-navigation'));
-    returnFocus = document.activeElement;
-    if (mapWindow.classList.contains('win--max')) $('map-max').click();
-    active = true; scene.hidden = false;
-    $('scene-map-slot').append(mapWindow);
-    $('desk').inert = true;
-    document.body.classList.add('scene-active');
-    launcher.setAttribute('aria-expanded', 'true');
-    setURL(true);
-    $('scene-back').focus();
-    OB.app.resizeMaps();
-    if (!active) return;
+  // Start WebGL only when the embedded panel approaches the viewport. Stop
+  // streaming when it leaves view; map and sample state remain available.
+  async function startInline() {
+    if (!active || !OB.app) return;
+    if (gpu) { gpu.setActive(true); focusMapIfNeeded(); update(); return; }
+    if (starting) return;
+    starting = true;
     empty(phrase('Starting 3D terrain...', 'Запуск 3D-рельефа...'), 'WebGL / DEM / NISAR');
     try {
       if (!gpuPromise) gpuPromise = OB.createTerrainRenderer(canvas);
       gpu = await gpuPromise;
       OB.terrainView = gpu;
+      gpu.setActive(active);
       if (!active) return;
-      gpu.setActive(true);
-      if ($('acquisition').hidden) { const v = OB.app.viewport(); gpu.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); setView('plan'); }
+      if ($('acquisition').hidden) pendingMapFocus = true;
+      focusMapIfNeeded();
       $('cloud-viewport').classList.toggle('terrain-crt', $('terrain-crt').checked);
+      update();
     } catch (error) {
       gpuPromise = null;
       empty(phrase('3D renderer unavailable', '3D-рендерер недоступен'), error.message);
       $('terrain-status').textContent = error.message;
-    }
-    OB.app.resizeMaps(); update();
+    } finally { starting = false; }
   }
-  function close() {
-    if (!active) return;
-    if (OB.windows.active()) { OB.windows.restore(); return; }
-    active = false; dragging = null; hovered = null;
-    cancelSearch();
-    gpu?.setActive(false);
-    if (frame) cancelAnimationFrame(frame); frame = 0;
-    home.after(mapWindow); scene.hidden = true;
-    $('desk').inert = false;
-    document.body.classList.remove('scene-active');
-    launcher.setAttribute('aria-expanded', 'false');
-    setURL(false); OB.app.stop();
-    OB.app.resizeMaps();
-    (returnFocus?.isConnected && !returnFocus.closest('#scene-win') ? returnFocus : launcher).focus({ preventScroll: true });
-    window.dispatchEvent(new Event('resize'));
+  function focusMapIfNeeded() {
+    if (!pendingMapFocus || !gpu) return;
+    pendingMapFocus = false;
+    const v = OB.app.viewport(); gpu.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); setView('plan');
   }
-  async function leave() {
-    if (OB.windows.active()) await OB.windows.restore();
-    close();
+  function showTerrain() {
+    if (mapWindow.classList.contains('win--max')) $('map-max').click();
+    scene.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   async function step(direction) {
     if (!points.length) return;
@@ -223,9 +204,7 @@
     await OB.app.pickCell(points[next].index, false);
   }
 
-  launcher.addEventListener('click', open);
-  $('scene-close').addEventListener('click', leave);
-  $('scene-back').addEventListener('click', leave);
+  launcher.addEventListener('click', showTerrain);
   $('scene-fit').addEventListener('click', () => OB.app.fit());
   $('scene-site').addEventListener('change', async event => {
     const id = event.target.value;
@@ -240,7 +219,7 @@
   $('cloud-zoom-out').addEventListener('click', () => zoom(1 / 1.15));
   $('cloud-prev').addEventListener('click', () => step(-1));
   $('cloud-next').addEventListener('click', () => step(1));
-  $('cloud-card').addEventListener('click', async () => { await leave(); $('card-win').scrollIntoView({ block: 'start' }); });
+  $('cloud-card').addEventListener('click', () => { $('card-win').scrollIntoView({ block: 'start' }); });
   $('terrain-mode').addEventListener('change', event => { gpu?.setMode(event.target.value); schedule(); });
   $('terrain-exaggeration').addEventListener('change', event => { gpu?.setExaggeration(+event.target.value); update(); });
   $('terrain-radar').addEventListener('change', event => { gpu?.setPointsVisible(event.target.checked); schedule(); });
@@ -338,21 +317,12 @@
     if (event.key === '0') setView(view);
     schedule();
   });
-  scene.addEventListener('keydown', event => {
-    if (event.key === 'Escape') event.sceneHadPopup = !!scene.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]');
-  }, true);
-  scene.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
-      if (event.sceneHadPopup || OB.windows.active()) return;
-      event.preventDefault(); close();
-    } else if (event.key === 'Tab') {
-      const focusable = [...scene.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]')].filter(el => el.getClientRects().length && !el.closest('[hidden]'));
-      const index = focusable.indexOf(document.activeElement);
-      if (event.shiftKey && index <= 0) { event.preventDefault(); focusable.at(-1)?.focus(); }
-      else if (!event.shiftKey && index === focusable.length - 1) { event.preventDefault(); focusable[0]?.focus(); }
-    }
-  });
   document.addEventListener('ob:sample-change', () => { if (active) requestAnimationFrame(update); });
+  document.addEventListener('ob:map-navigation', () => {
+    if (!$('acquisition').hidden) return;
+    pendingMapFocus = true;
+    if (active && gpu) { focusMapIfNeeded(); update(); }
+  });
   document.addEventListener('ob:window-resize', schedule);
   canvas.addEventListener('ob:terrain-stream', schedule);
   canvas.addEventListener('ob:gpu-status', event => {
@@ -372,7 +342,14 @@
     for (const option of $('scene-site').options) option.disabled = !OB.SITES.some(site => site.id === option.value);
     $('scene-site').dispatchEvent(new Event('ob:select-sync'));
     launcher.disabled = false;
-    if (new URL(location.href).searchParams.get('view') === 'scene') requestAnimationFrame(open);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        active = entries[0].isIntersecting;
+        if (active) startInline();
+        else { gpu?.setActive(false); if (frame) cancelAnimationFrame(frame); frame = 0; }
+      }, { rootMargin: '250px' }).observe($('terrain-win'));
+    } else { active = true; startInline(); }
+    if (new URL(location.href).searchParams.get('view') === 'scene') requestAnimationFrame(showTerrain);
   });
   if (document.fonts) document.fonts.ready.then(schedule);
 })();
