@@ -162,6 +162,9 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 /* --- maps --- */
 .maps { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 .pane-label { padding: 2px 2px 3px; }
+.optical-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px; }
+.optical-toolbar select { max-width: 100%; background: #fff; color: #000; border: 2px inset #ddd; }
+.optical-detail { margin: 4px; overflow-wrap: anywhere; }
 .map { height: 360px; }
 .leaflet-container { font: 12.5px/16px var(--ui); background: #808080; }
 #map .context-imagery { filter: grayscale(1) brightness(.72) contrast(1.05); }

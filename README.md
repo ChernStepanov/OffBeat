@@ -49,6 +49,12 @@ The selected site and searched coordinates are retained in the URL across reload
 The last map centre and zoom are also remembered locally in the same browser;
 an explicitly selected site or coordinates in a link take precedence.
 
+Справа можно выбрать датированную RGB-вырезку Sentinel-2 или контекстную
+мозаику Esri. Режим Auto выбирает подготовленный снимок, ближайший к дате
+изменения выбранной точки; без неё — к последней дате NISAR.
+Облачность указана для всего тайла, а не для участка. Облака и тени не удалены.
+Подробности: [подготовка оптических снимков](docs/optical.md).
+
 ## Layout
 
 - `index.html`, `css/offbeat.css` — the page, desktop-2005 look on purpose.

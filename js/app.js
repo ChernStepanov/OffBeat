@@ -17,6 +17,7 @@
   const labelsCredit = 'Labels &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
   const map = L.map("map", { zoomControl: true, maxZoom: 19 });
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
+  const optical = OB.createOpticalView(optic);
   const labelLayers = [map, optic].map(m => {
     m.attributionControl.setPrefix('<a href="https://leafletjs.com/" title="A JavaScript library for interactive maps">Leaflet</a>');
     L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
@@ -96,6 +97,7 @@
       $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
     } else {
       clearPixel();
+      optical.clear();
       $('data-status').textContent = 'No prepared NISAR measurements at this location. The map is geographic context only.';
       $('place-status').textContent = 'No prepared NISAR data here. Choose a demo site to return to measurements.';
       $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'No prepared NISAR data at this location';
@@ -379,6 +381,7 @@
     const p = await s.series(x, y);
     if (state.cell !== i || state.site !== s) return;      // another click won the race
     state.pixel = p;
+    optical.pickPixel(p);
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;
     $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
@@ -440,6 +443,7 @@
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
+    const opticalReady = optical.loadSite(s);
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
     $('source-link').hidden = false;
@@ -460,6 +464,7 @@
       const first = s.pixels ? s.pixels.findIndex(p => p.disp && p.disp.some(Number.isFinite) && p.hv.some(Number.isFinite)) : -1;
       await pickCell(first >= 0 ? first : Math.floor(s.grid.h / 2) * s.grid.w + Math.floor(s.grid.w / 2), false);
     }
+    await opticalReady;
     return s;
   }
 

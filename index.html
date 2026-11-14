@@ -125,16 +125,21 @@
       <section class="win" id="map-win" aria-labelledby="t-map">
         <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
         <div class="win-b win-b--flush">
+          <div class="optical-toolbar">
+            <label for="optical-date">Optical image</label>
+            <select id="optical-date" disabled aria-describedby="optical-detail"><option value="context">Esri mosaic (dates vary)</option></select>
+          </div>
           <div class="maps">
             <div class="maps__pane">
               <div class="pane-label" id="map-caption">Measured HV gamma0, blue −25 to red 0 dB; click a sample</div>
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
             <div class="maps__pane">
-              <div class="pane-label">Colour imagery, Esri World Imagery · same basemap on both sides</div>
+              <div class="pane-label" id="optical-caption">Esri mosaic - geographic context</div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>
+          <p class="optical-detail" id="optical-detail" role="status">Prepared Sentinel-2 images are available inside each study area; clouds over the area are not assessed.</p>
         </div>
       </section>
 
@@ -194,13 +199,13 @@
           <div class="paper">
             <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
-            <p>Peer z-scores and candidate HV drops / HH jumps are calculated from measured backscatter. These shapes do not establish clearing, flooding or ground motion. Sparse samples do not measure patch area. Both maps use the same Esri imagery, grey under NISAR on the left and colour on the right. Imagery dates vary by location; this is geographic context, not a date-matched check. Labels and the dashed study-area boundary can be switched off. Missing and rejected measurements remain unavailable.</p>
+            <p>Peer z-scores and candidate HV drops / HH jumps are calculated from measured backscatter. These shapes do not establish clearing, flooding or ground motion. Sparse samples do not measure patch area. The right map can show a dated Sentinel-2 RGB crop inside the study area, with the scene date and tile cloud cover. Clouds and shadows over the study area are not assessed. Esri imagery outside the crop or in mosaic mode is geographic context with varying dates. Labels and the dashed study-area boundary can be switched off. Missing and rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
 
       <p class="foot">
-        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, imagery (c) Esri, Vantor, Earthstar Geographics; labels (c) Esri, HERE, Garmin, OpenStreetMap contributors. Font W95FA by Alina Sava, OFL.
+        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, Contains modified Copernicus Sentinel data (Sentinel-2 via Earth Search), imagery (c) Esri, Vantor, Earthstar Geographics; labels (c) Esri, HERE, Garmin, OpenStreetMap contributors. Font W95FA by Alina Sava, OFL.
         Built for NASA Space Apps 2026, “Dancing with the SARs”. Open source.
       </p>
     </main>
@@ -221,6 +226,7 @@
 <script src="js/styles.js"></script>
 <script src="js/search.js"></script>
 <script src="js/data.js"></script>
+<script src="js/optical.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>
 <script src="js/sfx.js"></script>
