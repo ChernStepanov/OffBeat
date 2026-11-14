@@ -30,6 +30,8 @@
     'Dense HV peer deviation · 2026-09-28':'Плотное отклонение HV от соседей · 2026-09-28',
     '20 m measured samples, fixed 2026-09-28. Full 1 km peer radius required; missing edges are transparent. WorldCover 2021.':'Измерения 20 м за 28.09.2026. Нужна полная окрестность 1 км; края без данных прозрачны. WorldCover 2021.',
     'Source and limitations':'Источник и ограничения',
+    'GUNW quality and sources':'Качество и источники GUNW',
+    'First three GUNW pairs: ascending 0/1024, descending 0/1024 points pass all three pair masks. A continuous rate cannot be estimated from these pairs.':'Первые три пары GUNW: в восходящем и нисходящем направлениях все фильтры проходят 0 из 1024 точек. По этим парам нельзя оценить непрерывную скорость.',
     'Skip to the map':'Перейти к карте', 'OffBeat - NISAR change finder':'OffBeat — поиск изменений NISAR',
     'Take the tour':'Обзор', 'Map':'Карта', 'Pixel card':'Карточка пикселя', 'Top anomalies':'Основные аномалии', 'How it works':'Как это работает', 'NISAR data guide':'Справка по данным NISAR',
     'Location search':'Поиск места', 'Search':'Найти', 'Name in any language or coordinates':'Название на любом языке или координаты',
