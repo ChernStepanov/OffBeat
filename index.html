@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=477744eee931">
+<link rel="stylesheet" href="css/offbeat.css?v=9b25795ae6c8">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -22,12 +22,13 @@
       <h1>OffBeat - NISAR change finder</h1>
     </div>
     <nav class="menu" aria-label="Main">
-      <a href="#tour/1" id="tour-open"><u>T</u>ake the tour</a>
-      <a href="#map-win"><u>M</u>ap</a>
-      <a href="#card-win"><u>P</u>ixel card</a>
-      <a href="#top-win">T<u>o</u>p anomalies</a>
-      <a href="#about-win"><u>H</u>ow it works</a>
+      <a href="#tour/1" id="tour-open">Take the tour</a>
+      <a href="#map-win">Map</a>
+      <a href="#card-win">Pixel card</a>
+      <a href="#top-win">Top anomalies</a>
+      <a href="#about-win">How it works</a>
       <a href="https://nisar-docs.asf.alaska.edu/" rel="noopener">NISAR data guide</a>
+    <button type="button" id="language-switch" class="btn language-switch" aria-label="Switch language / Сменить язык">Русский</button>
     </nav>
   </header>
 
@@ -61,7 +62,7 @@
             <li><button type="button" data-region="oceania">Oceania</button></li>
             <li><button type="button" data-region="americas">Americas</button></li>
           </ul>
-          <p>Измерения NISAR доступны на отмеченных демоучастках. Для других мест можно найти исходные съёмки через поиск архива в центре карты.</p>
+          <p>NISAR measurements are available at the marked demo sites. Search the archive at the map centre for source acquisitions elsewhere.</p>
           <p>Prepared measurement series:</p>
           <ul class="sites" id="sites"></ul>
         </div>
@@ -221,7 +222,7 @@
           <div class="paper">
             <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
-            <p>Отклонения от соседей и формы кривых — кандидаты для проверки, а не подтверждённые события. Разреженные точки измерений не задают площадь события. Светлая карта показывает расположение образцов NISAR; оптическая карта — контекст Esri или выбранный снимок Sentinel-2 с масками облаков и пропусков. Измеренные HH/HV показаны на графиках. Отсутствующие и отклонённые по качеству измерения остаются недоступными.</p>
+            <p>Peer deviations and curve shapes are candidates for investigation, not confirmed events. Sparse samples do not define event areas. The light map shows NISAR sample locations; the optical map shows Esri context or a selected Sentinel-2 image with cloud and missing-data masks. Measured HH/HV are shown in the charts. Missing and quality-rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
@@ -258,6 +259,7 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=75066844aed3"></script>
 <script src="js/optical.js?v=5a4463bfec6a"></script>
-<script src="js/app.js?v=f8a43cc08df8"></script>
+<script src="js/i18n.js?v=877021d7387a"></script>
+<script src="js/app.js?v=46d712743b91"></script>
 </body>
 </html>
