@@ -12,7 +12,7 @@ supports zoom 0–19 and latitude ±85.05112878°. Zooming further does not crea
 additional source resolution. The camera is independent of every NISAR bbox.
 
 The renderer computes tile coverage from the camera frustum and adjusts LOD to
-stay within 64 visible tiles. Tile meshes have 64 or 128 subdivisions depending
+stay within 64 visible tiles. Tile meshes have 32 or 64 subdivisions depending
 on the visible tile budget. Surface coordinates and NISAR overlays use the same
 Mercator frame, including the latitude-dependent conversion of elevation metres.
 Surface and dense terrain point cloud share real DEM elevations. There are no
@@ -108,7 +108,5 @@ measured world fallback. Existing NISAR data and numerical receipts are unchange
 - [Upstream attribution and terms](https://github.com/tilezen/joerd/blob/master/docs/attribution.md)
 - [Three.js](https://threejs.org/), vendored r160.1 with MIT notice
 
-Visual direction uses muted olive, bone and amber, faceted shading, grain and
-scanlines inspired by the field-terminal atmosphere of
-[Buckshot Roulette](https://mikeklubnika.itch.io/buckshot-roulette).
-No game assets are copied; the existing Windows-style window furniture is retained.
+The interface uses the same Windows-style window furniture as the rest of the app.
+The optional CRT overlay is off by default.

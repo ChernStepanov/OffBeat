@@ -10,6 +10,7 @@ OB.bindNisarMap = function (map, toggle, status) {
   const nativeZoom = 13;
   const tiles = new Set();
   const imageCache = new Map();
+  const renderedTiles = new Map();
   let failedTiles = 0, inflight = 0, statusTimer;
   let layer, loading, caption, legend;
   // A NASA browse pixel is ~19 m (native level 13). Up to zoom 16 it spans at most ~8 screen
@@ -181,49 +182,62 @@ OB.bindNisarMap = function (map, toggle, status) {
         tile.width = tile.height = tileSize;
         tile.style.imageRendering = rendering();
         const context = tile.getContext('2d');
-        // Show the tile as soon as any date arrives and repaint as the rest come in, instead of
-        // waiting for the slowest of all the mosaic requests. Older dates are always painted
-        // first, so a newer acquisition covers an older one whatever order they arrive in.
-        const slots = new Array(dates.length).fill(null);
+        // Keep the previous zoom's tiles visible until all dates for this tile have settled.
+        // Otherwise each arriving date replaces the colours and the map flashes while panning.
+        const cacheKey = `${coords.z}/${coords.x}/${coords.y}`;
+        const cached = renderedTiles.get(cacheKey);
+        if (cached) {
+          tile.radar = { coords, ...cached };
+          context.putImageData(cached.cells, 0, 0);
+          requestAnimationFrame(() => { if (!tile.unloaded) done(null, tile); });
+          return tile;
+        }
         let shown = false;
         const show = error => { if (!shown) { shown = true; done(error, tile); } };
         const levels = new Array(dates.length).fill(null);     // per date: coverage mask
-        let paintPending = false;
+        const colours = dates.map((_, i) => dateColour(i, dates.length));
+        let remaining = 0, complete = true;
         const paint = () => {
-          paintPending = false;
           if (tile.unloaded) return;
           const owner = new Int8Array(tileSize * tileSize).fill(-1);
           levels.forEach((mask, d) => { if (mask) for (let p = 0; p < mask.length; p++) if (mask[p]) owner[p] = d; });  // newest wins
           const out = new ImageData(tileSize, tileSize);
-          const colours = dates.map((_, d) => dateColour(d, dates.length));
-          for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
-            const p = y * tileSize + x, d = owner[p];
+          for (let p = 0; p < owner.length; p++) {
+            const d = owner[p];
             if (d < 0) continue;
             const [r, g, b] = colours[d], i = p * 4;
             out.data[i] = r; out.data[i + 1] = g; out.data[i + 2] = b;
-            out.data[i + 3] = 150;
+            out.data[i + 3] = 110;
           }
           tile.radar = { coords, cells: out, owner, dates };
           context.putImageData(out, 0, 0);
+          if (complete) {
+            renderedTiles.set(cacheKey, { cells: out, owner, dates });
+            if (renderedTiles.size > 128) renderedTiles.delete(renderedTiles.keys().next().value);
+          }
+          show(null);
         };
+        const settled = () => { if (--remaining === 0) paint(); };
         const url = date => `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`;
         // one date; a failed request is tried again later (twice), so a slow NASA reply heals itself
         const fetchDate = (i, tries = 0) => loadImage(url(dates[i])).then(image => {
           if (tile.unloaded) return;
           if (image) {
-            slots[i] = image;
-            levels[i] = coverage(image);
-            if (!paintPending) { paintPending = true; requestAnimationFrame(paint); }
-            show(null);
+            try {
+              levels[i] = coverage(image);
+              settled();
+            } catch (error) { complete = false; settled(); }
             return;
           }
           if (tries < 2) { setTimeout(() => !tile.unloaded && fetchDate(i, tries + 1), 3000 * (tries + 1)); return; }
           if (!tile.incomplete) { tile.incomplete = true; failedTiles++; showStatus(); }
-          show(null);
+          complete = false;
+          settled();
         });
         datesFor(dates, coords).then(wanted => {
           if (tile.unloaded) return;
-          if (!wanted.length) { show(null); return; }        // no swath here in this window: nothing to ask for
+          if (!wanted.length) { paint(); return; }           // no swath here in this window
+          remaining = wanted.length;
           wanted.forEach(i => fetchDate(i));
         });
         return tile;
@@ -256,20 +270,16 @@ OB.bindNisarMap = function (map, toggle, status) {
     ctx.drawImage(image, 0, 0);
     const px = ctx.getImageData(0, 0, tileSize, tileSize).data;
     const mask = new Uint8Array(tileSize * tileSize);
-    const stride = tileSize + 1, sums = new Uint32Array(stride * stride);
-    for (let y = 0; y < tileSize; y++) {
-      let row = 0;
-      for (let x = 0; x < tileSize; x++) {
-        row += px[(y * tileSize + x) * 4 + 3];
-        sums[(y + 1) * stride + x + 1] = sums[y * stride + x + 1] + row;
-      }
+    const horizontal = new Uint16Array(tileSize * tileSize);
+    for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
+      const p = y * tileSize + x;
+      horizontal[p] = px[p * 4 + 3] + (x ? px[(p - 1) * 4 + 3] : 0) + (x + 1 < tileSize ? px[(p + 1) * 4 + 3] : 0);
     }
     for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
-      const x0 = Math.max(0, x - 1), x1 = Math.min(tileSize, x + 2);
-      const y0 = Math.max(0, y - 1), y1 = Math.min(tileSize, y + 2);
-      const a = sums[y1 * stride + x1] - sums[y0 * stride + x1] - sums[y1 * stride + x0] + sums[y0 * stride + x0];
-      const cells = (x1 - x0) * (y1 - y0);
-      if (a / (255 * cells) >= MIN_COVER) mask[y * tileSize + x] = 1;
+      const p = y * tileSize + x;
+      const a = horizontal[p] + (y ? horizontal[p - tileSize] : 0) + (y + 1 < tileSize ? horizontal[p + tileSize] : 0);
+      const cells = (x === 0 || x === tileSize - 1 ? 2 : 3) * (y === 0 || y === tileSize - 1 ? 2 : 3);
+      if (a >= 255 * cells * MIN_COVER) mask[p] = 1;
     }
     return mask;
   }
