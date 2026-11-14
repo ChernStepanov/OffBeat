@@ -1,0 +1,122 @@
+{
+  "as_of": "2026-11-14",
+  "fetched_at": "2026-11-14T12:17:23.525288+00:00",
+  "bbox": [
+    -49.292500000000004,
+    -4.7924999999999995,
+    -49.2575,
+    -4.7575
+  ],
+  "start": "2026-06-24",
+  "deter": {
+    "url": "https://terrabrasilis.dpi.inpe.br/geoserver/deter-amz/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=deter-amz%3Adeter_amz&outputFormat=application%2Fjson&CQL_FILTER=BBOX%28geom%2C-49.292500000000004%2C-4.7924999999999995%2C-49.2575%2C-4.7575%29+AND+view_date+BETWEEN+%272026-06-24%27+AND+%272026-11-14%27",
+    "path": "deter-raw.geojson",
+    "sha256": "d7cfe3e76584c8013c823c19ae98742c6daf982f3130754a62621c100318a687",
+    "count": 0
+  },
+  "scl": {
+    "S2C_22MFV_20260703_0_L2A": {
+      "path": "scl-2026-07-03.npz",
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/SCL.tif",
+      "window": [
+        4496,
+        1333,
+        140,
+        139
+      ],
+      "sha256": "900d84195983958d33602589b8905182224453cfb1a8aa82ad81686896832541"
+    },
+    "S2A_22MFV_20260804_0_L2A": {
+      "path": "scl-2026-08-04.npz",
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/SCL.tif",
+      "window": [
+        4496,
+        1333,
+        140,
+        139
+      ],
+      "sha256": "d51fb0691eb82edb61184072213f22202a884d2b4fc059a51fd6809da4ddb022"
+    },
+    "S2A_22MFV_20260814_0_L2A": {
+      "path": "scl-2026-08-14.npz",
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/SCL.tif",
+      "window": [
+        4496,
+        1333,
+        140,
+        139
+      ],
+      "sha256": "faa3aef504ff3ebdc02e1cac7ba99887d9ebebcaaa3b50d0701b36a07d573246"
+    },
+    "S2A_22MFV_20260903_0_L2A": {
+      "path": "scl-2026-09-03.npz",
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/SCL.tif",
+      "window": [
+        4496,
+        1333,
+        140,
+        139
+      ],
+      "sha256": "b61822eb3e5706e07a03635631e51c1f6ad92b1a9704cf89c3ab8efbb6179cb7"
+    },
+    "S2C_22MFV_20260921_0_L2A": {
+      "path": "scl-2026-09-21.npz",
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/SCL.tif",
+      "window": [
+        4496,
+        1333,
+        140,
+        139
+      ],
+      "sha256": "0656c44a29da4979e133000b5f479703725cf1730c40ed7fe106218271ac47c0"
+    }
+  },
+  "glad": {
+    "release": "2026-11-13",
+    "year": 2026,
+    "path": "glad.npz",
+    "sha256": "343d36dd1dd897c9374f4078a039e7c244f84257f1b9425890d90290158f3787",
+    "bands": {
+      "alert": {
+        "url": "https://storage.googleapis.com/earthenginepartners-hansen/GLADalert/C2/2026/11_13/alert26_050W_10S_040W_00N.tif",
+        "window": [
+          2829,
+          19030,
+          141,
+          140
+        ],
+        "transform": [
+          0.00025,
+          0.0,
+          -49.29275,
+          0.0,
+          -0.00025,
+          -4.7575
+        ]
+      },
+      "alertDate": {
+        "url": "https://storage.googleapis.com/earthenginepartners-hansen/GLADalert/C2/2026/11_13/alertDate26_050W_10S_040W_00N.tif",
+        "window": [
+          2829,
+          19030,
+          141,
+          140
+        ],
+        "transform": [
+          0.00025,
+          0.0,
+          -49.29275,
+          0.0,
+          -0.00025,
+          -4.7575
+        ]
+      }
+    },
+    "skipped_releases": [
+      {
+        "release": "2026-11-14",
+        "reason": "Нет обоих растров для выбранного тайла"
+      }
+    ]
+  }
+}

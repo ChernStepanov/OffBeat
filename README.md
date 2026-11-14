@@ -25,6 +25,9 @@ See [download, processing and provenance instructions](docs/real-nisar.md).
 Мехико — без найденных форм, Амазония — 6 HV drop, Каракас — 1 HV drop и 3 HH jump.
 Это кандидаты по форме сигнала; причины изменений независимо не подтверждены.
 [Метод, результаты и проверка десяти кандидатов](docs/preview-analysis.md).
+[Проверка шести кандидатов Амазонии по RGB и DETER/GLAD](docs/amazon-validation.md):
+подтверждённых вырубок нет; три изменения открытого покрытия, один вероятный
+ложный change point и два сигнала с неустановленной причиной.
 Пересчёт сохранённых измерений без сети: `python scripts/analyze_preview.py`.
 Нужны `numpy`, `scipy`, `pyproj`; исходные измерения и ось GUNW сохраняются.
 

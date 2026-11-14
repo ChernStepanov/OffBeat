@@ -356,6 +356,38 @@
     const v = state.site.context && state.site.context.validation;
     $("val-win").hidden = !v;
     if (!v) return;
+    if (v.kind === 'candidate_audit') {
+      const labels = {non_forest_change:'Existing open cover; no clearing confirmed',unresolved:'Unresolved cause',likely_false_change:'Likely false change point',confirmed_forest_loss:'Forest loss supported',unreviewed:'Needs review'};
+      const body = $('val-body'); body.replaceChildren();
+      const intro = document.createElement('p');
+      intro.textContent = `${v.summary.n_candidates} HV-drop candidates checked against dated RGB, SCL masks and DETER / GLAD-L snapshots as of ${v.as_of}. ${v.summary.spatial_temporal_alert_matches} match a confirmed alert within ${v.match_rule.tolerance_m} m and ${v.match_rule.max_days} days.`;
+      body.appendChild(intro);
+      const table = document.createElement('table'); table.className = 'grid';
+      const header = document.createElement('tr');
+      for (const label of ['Sample', 'RGB before / after', 'Assessment']) { const th = document.createElement('th'); th.textContent = label; header.appendChild(th); }
+      const head = document.createElement('thead'); head.appendChild(header); table.appendChild(head);
+      const rows = document.createElement('tbody');
+      for (const candidate of v.candidates) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td'), button = document.createElement('button');
+        button.type = 'button'; button.className = 'btn'; button.textContent = candidate.id;
+        button.addEventListener('click', () => { document.dispatchEvent(new Event('ob:manual-navigation')); const i = state.site.pixels.findIndex(p => p.id === candidate.id); if (i >= 0) pickCell(i, true); });
+        cell.appendChild(button); row.appendChild(cell);
+        for (const text of [`${candidate.clear_before || 'unavailable'} / ${candidate.clear_after || 'unavailable'}`, labels[candidate.review.verdict] || 'Unreviewed']) {
+          const td = document.createElement('td'); td.textContent = text; row.appendChild(td);
+        }
+        rows.appendChild(row);
+      }
+      table.appendChild(rows); body.appendChild(table);
+      const note = document.createElement('p');
+      const counts = v.summary.verdicts;
+      note.textContent = (v.review_status === 'current' ? `Visual assessment: ${counts.non_forest_change || 0} existing open-cover changes; ${counts.likely_false_change || 0} likely false change points; ${counts.unresolved || 0} unresolved; ${counts.confirmed_forest_loss || 0} supported forest-loss cases. ` : 'Visual assessments need review for the current inputs. ') + 'RGB dates use SCL vegetation / bare-ground pixels; shadows are excluded. No alert does not prove no change. No precision, recall or cleared area is estimated.';
+      body.appendChild(note);
+      for (const [label, url] of [['RGB comparison sheet', 'data/amazon/validation/rgb-review.png'], ['Sources and findings', 'docs/amazon-validation.md']]) {
+        const link = document.createElement('a'); link.href = url; link.textContent = label; body.appendChild(link); body.appendChild(document.createTextNode(' '));
+      }
+      return;
+    }
     const pct = x => x == null ? "-" : Math.round(x * 100) + "%";
     $("val-body").innerHTML =
       `<p>${v.n_patches} clearing patches found by OffBeat, checked against ${v.source || "deforestation alerts"}.</p>` +

@@ -2,7 +2,7 @@
 window.OB = window.OB || {};
 OB.STYLE_KEYS = [null, 'drop', 'flood', 'drift', 'step'];
 OB.SITES = [];
-const CONTEXT = { amazon: { fires: 'fires.json', alerts: 'alerts.geojson' } };
+const CONTEXT = { amazon: { fires: 'fires.json', alerts: 'alerts.geojson', validation: 'validation.json' } };
 OB.loadData = async function () {
   const results = await Promise.allSettled(['mexico', 'amazon', 'venezuela'].map(async id => {
     const response = await fetch(`data/${id}.json`);
