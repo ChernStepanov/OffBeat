@@ -15,6 +15,8 @@ entries.delete(request.url);directive='no-store, max-age=3600';await send();asse
 assert.equal(await send(new Request('https://example.org/tile/5/12/8')),null,'unrelated requests must not be intercepted');
 directive='max-age=3600'; const clarity=new Request('https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/5/12/8');
 assert(await send(clarity)); assert(entries.has(clarity.url),'Clarity imagery must be cached according to its response policy');
+const topo=new Request('https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/5/12/8');
+assert(await send(topo)); assert(entries.has(topo.url),'topographic tiles must be cached according to their response policy');
 entries.delete(request.url);directive='max-age=3600';const before=network;
 await Promise.all([send(),send()]);assert.equal(network,before+1,'matching concurrent requests share one download');
 console.log('PASS: map tile reuse, expiration, no-store and origin restriction');

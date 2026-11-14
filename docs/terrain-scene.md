@@ -69,9 +69,9 @@ a small constant clearance avoids z-fighting. There are still only 1,024 sparse
 NISAR locations per site. No interpolated radar points, classifications or areas
 are generated. Height exaggeration defaults to 4x and can be set to 1x.
 
-The default view renders the terrain as a DEM point cloud; users may also select a solid surface or combine the two. A ground-view camera looks across the terrain. Hold the left mouse button and drag in both directions to look; the ground view supports nearly vertical up/down views, and dragging from top view enters free orbit. Shift-drag pans; focus the canvas to move with WASD in ground view. Ground perspective and height exaggeration are illustrative rather than a surveyed observer position. Terrain points are sampled DEM elevations, not additional NISAR measurements.
+The default view drapes Esri World Topographic Map tiles over the real DEM surface using the same Web Mercator tile coordinates. Its cartography has varying dates and is not a current survey. Map tiles are independently cached under the provider response policy; if they fail, the surface uses elevation colours and the status offers a retry. Users may select the DEM point cloud, a solid surface or combine the two. A ground-view camera looks across the terrain. Hold the left mouse button and drag in both directions to look; the ground view supports nearly vertical up/down views, and dragging from top view enters free orbit. Shift-drag pans; focus the canvas to move with WASD in ground view. Ground perspective and height exaggeration are illustrative rather than a surveyed observer position. Terrain points are sampled DEM elevations, not additional NISAR measurements.
 
-The surface uses elevation colours, illumination and optional contour lines.
+The solid and point-cloud modes use elevation colours, illumination and optional computed contour lines. In topographic mode contour markings are part of the source map, so the computed-contours control is disabled.
 A separate depth-tested DEM point cloud and NISAR overlay can be shown together
 or separately. Picking selects the nearest visible dot in screen space and
 checks the terrain ray intersection to reject a sample hidden behind a ridge.

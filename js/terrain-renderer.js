@@ -11,7 +11,7 @@ OB.createTerrainRenderer = async function (canvas) {
   const light = new T.DirectionalLight(0xffedce, 2); light.position.set(-2, 5, 2); scene.add(light);
   const surface = new T.Group(), overlay = new T.Group(), labels = new T.Group(); scene.add(surface, overlay, labels);
   let center = tiles.mercator(-67.08, 10.47), viewZoom = 12.23, yaw = -.65, pitch = .77, plan = false, ground = false, groundTilt = -.08;
-  let exaggeration = 4, mode = 'points', pointsVisible = true, width = 1, height = 1, targetHeight = 0;
+  let exaggeration = 4, mode = 'topo', pointsVisible = true, width = 1, height = 1, targetHeight = 0;
   let site = null, context = null, date = 0, channel = 'hv', selectedIndex = -1, radar = null, marker = null, sampleList = [];
   let coverageDirty = true, overlayDirty = true, paused = false, sourceLevel = 0, wantedKey = '', segments = 64;
   let minHeight = 0, maxHeight = 3000, vertices = 0, nodes = new Map(), desired = [];
@@ -51,7 +51,20 @@ OB.createTerrainRenderer = async function (canvas) {
     }
     notify();
   });
-  const disposeNode = node => { node.mesh.geometry.dispose(); node.cloud.geometry.dispose(); surface.remove(node.group); };
+  // The map is an independent geographic context layer; DEM tiles still determine height.
+  const topoStream = tiles.create(event => {
+    if (event.ready) {
+      const entry = topoStream.cache.get(event.tile.key);
+      if (entry) { entry.texture = new T.Texture(entry.bitmap); entry.texture.colorSpace = T.SRGBColorSpace; entry.texture.flipY = false; entry.texture.needsUpdate = true; }
+    }
+    notify();
+  }, {
+    limit: 96, concurrency: 5, rootUrl: null,
+    decodeImage: async blob => ({ bitmap: await createImageBitmap(blob, { imageOrientation: 'flipY' }) }),
+    onEvict: entry => { entry?.texture?.dispose(); entry?.bitmap?.close(); },
+  });
+  const topoDescriptor = tile => ({ ...tile, url: `https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${tile.z}/${tile.y}/${tiles.wrap(tile.x, 2 ** tile.z)}` });
+  const disposeNode = node => { node.mesh.geometry.dispose(); node.cloud.geometry.dispose(); node.mapMaterial.dispose(); surface.remove(node.group); };
   function location() { return tiles.geographic(center.x, center.y); }
   function elevationAt(lon, lat) {
     const p = tiles.mercator(lon, lat), measured = stream.heightAt(p.x, p.y, 14);
@@ -95,30 +108,32 @@ OB.createTerrainRenderer = async function (canvas) {
         const z = Math.max(0, t.z - 2), shift = 2 ** (t.z - z), p = tiles.descriptor(z, Math.floor(t.x / shift), Math.floor(t.y / shift)); parents.set(p.key, p);
       }
       stream.setWanted([tiles.descriptor(0, 0, 0), ...parents.values(), ...desired]);
+      topoStream.setWanted(mode === 'topo' ? desired.map(topoDescriptor) : []);
       overlayDirty = true;
     }
     coverageDirty = false;
   }
   function buildTile(tile) {
     if (!stream.cache.has('0/0/0')) return false;
-    const count = segments + 1, n = 2 ** tile.z, positions = new Float32Array(count * count * 3), elevations = new Float32Array(count * count);
+    const count = segments + 1, n = 2 ** tile.z, positions = new Float32Array(count * count * 3), elevations = new Float32Array(count * count), uvs = new Float32Array(count * count * 2);
     let low = Infinity, high = -Infinity, detail = 14;
     for (let row = 0; row < count; row++) for (let col = 0; col < count; col++) {
       const i = row * count + col, x = (tile.x + col / segments) / n, y = Math.min(1 - 1e-12, (tile.y + row / segments) / n);
       const measured = stream.heightAt(x, y, tile.z); if (!measured) return false;
       const h = measured.height_m, cosine = Math.cosh(Math.PI * (1 - 2 * y));
-      positions.set([col / segments, h * cosine, row / segments], i * 3); elevations[i] = h;
+      positions.set([col / segments, h * cosine, row / segments], i * 3); elevations[i] = h; uvs.set([col / segments, 1 - row / segments], i * 2);
       low = Math.min(low, h); high = Math.max(high, h); detail = Math.min(detail, measured.level);
     }
-    const geometry = new T.BufferGeometry(); geometry.setAttribute('position', new T.BufferAttribute(positions, 3)); geometry.setAttribute('elevation', new T.BufferAttribute(elevations, 1));
+    const geometry = new T.BufferGeometry(); geometry.setAttribute('position', new T.BufferAttribute(positions, 3)); geometry.setAttribute('elevation', new T.BufferAttribute(elevations, 1)); geometry.setAttribute('uv', new T.BufferAttribute(uvs, 2));
     const indices = [];
     for (let y = 0; y < segments; y++) for (let x = 0; x < segments; x++) { const a = y * count + x; indices.push(a, a + count, a + 1, a + 1, a + count, a + count + 1); }
     geometry.setIndex(indices); geometry.computeVertexNormals(); geometry.computeBoundingBox();
     const cloudGeometry = new T.BufferGeometry(); cloudGeometry.setAttribute('position', geometry.getAttribute('position')); cloudGeometry.setAttribute('elevation', geometry.getAttribute('elevation'));
+    const mapMaterial = new T.MeshStandardMaterial({ roughness: 1, side: T.DoubleSide, toneMapped: false });
     const group = new T.Group(), mesh = new T.Mesh(geometry, landMaterial), cloud = new T.Points(cloudGeometry, cloudMaterial);
     mesh.frustumCulled = cloud.frustumCulled = false; group.add(mesh, cloud);
     const previous = nodes.get(tile.meshKey); if (previous) disposeNode(previous);
-    surface.add(group); nodes.set(tile.meshKey, { group, mesh, cloud, tile, low, high, detail, segments, dirty: false });
+    surface.add(group); nodes.set(tile.meshKey, { group, mesh, cloud, mapMaterial, tile, low, high, detail, segments, dirty: false });
     geometryRevision++;
     return true;
   }
@@ -128,7 +143,10 @@ OB.createTerrainRenderer = async function (canvas) {
       const n = 2 ** node.tile.z;
       node.group.position.set((node.tile.x / n - center.x) * s, 0, (node.tile.y / n - center.y) * s);
       node.group.scale.set(s / n, s / tiles.C * exaggeration, s / n);
-      node.mesh.visible = mode !== 'points'; node.cloud.visible = mode !== 'relief';
+      const tex = mode === 'topo' ? topoStream.cache.get(node.tile.key)?.texture : null;
+      if (tex && node.mapMaterial.map !== tex) { node.mapMaterial.map = tex; node.mapMaterial.needsUpdate = true; }
+      node.mesh.material = tex ? node.mapMaterial : landMaterial;
+      node.mesh.visible = mode !== 'points'; node.cloud.visible = mode === 'points' || mode === 'hybrid';
       minHeight = Math.min(minHeight, node.low); maxHeight = Math.max(maxHeight, node.high); vertices += (node.segments + 1) ** 2;
     }
     if (!nodes.size) { minHeight = 0; maxHeight = 3000; }
@@ -257,15 +275,16 @@ OB.createTerrainRenderer = async function (canvas) {
     zoom(factor) { if (Number.isFinite(factor) && factor > 0) { viewZoom = tiles.clamp(viewZoom + Math.log2(factor), 0, 19); changed(); } },
     setView(view) { plan = view === 'plan'; ground = view === 'ground'; yaw = plan ? 0 : -.65; pitch = .77; groundTilt = -.08; notify(); },
     setExaggeration(value) { exaggeration = value; overlayDirty = true; notify(); },
-    setMode(value) { mode = value; notify(); }, setContours(value) { contours.value = value ? 1 : 0; notify(); },
+    setMode(value) { mode = value; wantedKey = ''; coverageDirty = true; notify(); }, setContours(value) { contours.value = value ? 1 : 0; notify(); },
     setPointsVisible(value) { pointsVisible = value; overlayDirty = true; notify(); },
-    retry: () => stream.retry(),
-    setActive(value) { paused = !value; if (value) { stream.resume(); changed(); } else stream.stop(); },
+    retry: () => { stream.retry(); topoStream.retry(); },
+    setActive(value) { paused = !value; if (value) { stream.resume(); topoStream.resume(); changed(); } else { stream.stop(); topoStream.stop(); } },
     projectSample(index) { const p = sampleList.find(p => p.index === index); if (!p) return null; const v = p.position.clone().project(camera); return { x: (v.x + 1) * width / 2, y: (1 - v.y) * height / 2, depth: v.z }; },
     info: () => {
-      const network = stream.info(), building = desired.filter(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; }).length;
+      const network = stream.info(), topo = topoStream.info(), building = desired.filter(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; }).length;
       return { geometryRevision, terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => stream.cache.has(t.key)).length,
         radarSamples: sampleList.length, exaggeration, mode, view: ground ? 'ground' : plan ? 'plan' : 'orbit', groundTilt, renderer: 'WebGL / Three.js', yaw, pitch, zoom: viewZoom, sourceLevel, center: location(),
+        mapPending: mode === 'topo' ? topo.pending : 0, mapFailed: mode === 'topo' ? topo.failed : 0, mapReady: mode === 'topo' ? desired.filter(t => topoStream.cache.has(t.key)).length : 0,
         min_m: minHeight, max_m: maxHeight, span_m: tiles.C * Math.cos(location().lat * Math.PI / 180) / 2 ** viewZoom,
         ...network, building, loading: coverageDirty || network.pending > 0 || building > 0 };
     },

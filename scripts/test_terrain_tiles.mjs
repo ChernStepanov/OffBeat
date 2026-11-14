@@ -82,3 +82,20 @@ loader.retry(); requests[1].resolve(); await tick(); await tick(); assert.equal(
 assert(loader.info().cached <= 5);
 loader.stop();
 console.log('PASS: bounded downloads/cache, aborted viewport races, measured fallback and failed-tile retry');
+
+// Non-DEM streams use their own URLs and release decoded resources on eviction.
+const mapUrls = [], evicted = [];
+const maps = m.create(() => {}, {
+  limit: 1, concurrency: 1, rootUrl: null,
+  fetcher: async url => { mapUrls.push(url); return { ok: true, blob: async () => ({}) }; },
+  decodeImage: async () => ({ resource: mapUrls.at(-1) }),
+  onEvict: entry => evicted.push(entry.resource),
+});
+const first = { ...m.descriptor(1, 0, 0), url: 'https://example.org/map/1/0/0' };
+const second = { ...m.descriptor(1, 1, 0), url: 'https://example.org/map/1/0/1' };
+maps.setWanted([first]); await tick(); await tick();
+maps.setWanted([second]); await tick(); await tick();
+assert.deepEqual(mapUrls, [first.url, second.url]);
+assert.deepEqual(evicted, [first.url]);
+maps.stop();
+console.log('PASS: independent map URLs and decoded resource eviction');
