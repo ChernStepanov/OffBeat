@@ -24,7 +24,7 @@
     'Topographic map: Esri, HERE, Garmin, OpenStreetMap contributors; dates vary. Terrain heights: DEM. NISAR dots retain their measured coordinates and show HH/HV; terrain points are not extra radar observations. Height exaggeration and ground view are visual approximations.':'Топографическая карта: Esri, HERE, Garmin, участники OpenStreetMap; даты различаются. Высоты рельефа: DEM. Точки NISAR сохраняют измеренные координаты и показывают HH/HV; точки рельефа не являются дополнительными радарными измерениями. Усиление высот и вид с земли приблизительны.',
     'Esri topographic map':'Топографическая карта Esri',
     'Ground view':'Вид с земли',
-    'Hold left mouse and drag: look / Shift-drag: pan / Scroll: zoom / WASD: move in ground view':'Зажмите левую кнопку и двигайте мышь: обзор / Shift: сдвиг / Колесо: масштаб / WASD: движение с земли',
+    'Left drag: look / Right drag or Shift-drag: move / Scroll: zoom / WASD: move in ground view':'Левая кнопка: обзор / Правая кнопка или Shift: перемещение / Колесо: масштаб / WASD: движение с земли',
     'Terrain points show sampled DEM elevations, not additional NISAR measurements. Colored NISAR dots keep their measured coordinates and show HH/HV. Ground view and height exaggeration are visual approximations.':'Точки рельефа показывают высоты DEM и не являются дополнительными измерениями NISAR. Цветные точки NISAR сохраняют измеренные координаты и показывают HH/HV. Вид с земли и усиление высоты приблизительны.',
     'Point cloud':'Облако точек',
     'Height':'Высота',
