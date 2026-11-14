@@ -56,22 +56,21 @@ OB.bindNisarMap = function (map, toggle, status) {
       : ' | Transparent gaps: no browse coverage in this time window.');
   }
 
+  // The layer's own time domain via DescribeDomains: under 1 KB and ~0.3 s, instead of the
+  // 5.8 MB capabilities document for every GIBS layer (~9 s) that this used to download.
   async function getDates() {
-    const response = await fetch(`${base}/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml`, {
-      signal: AbortSignal.timeout(15000),
-    });
-    if (!response.ok) throw new Error('GIBS capabilities unavailable');
-    const xml = new DOMParser().parseFromString(await response.text(), 'application/xml');
-    const children = (node, name) => [...node.children].filter(child => child.localName === name);
-    const source = [...xml.getElementsByTagNameNS('*', 'Layer')].find(node =>
-      children(node, 'Identifier')[0]?.textContent === product);
-    const time = children(source, 'Dimension').find(node =>
-      children(node, 'Identifier')[0]?.textContent === 'Time');
-    const end = Date.parse(children(time, 'Default')[0]?.textContent);
-    const ranges = children(time, 'Value').map(node => {
-      const [first, last = first] = node.textContent.trim().split('/');
+    const url = `${base}/wmts/epsg3857/best/wmts.cgi?SERVICE=WMTS&REQUEST=DescribeDomains&VERSION=1.0.0` +
+      `&LAYER=${product}&TILEMATRIXSET=${matrix}`;
+    const response = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    if (!response.ok) throw new Error('GIBS time domain unavailable');
+    const domain = (await response.text()).match(/<Domain>([^<]*)<\/Domain>/)?.[1];
+    if (!domain) throw new Error('GIBS returned no time domain');
+    // "2025-10-29/2026-03-01/P1D,2026-03-04/..." -> [[first, last], ...]; a bare date is a one-day range
+    const ranges = domain.split(',').map(part => {
+      const [first, last = first] = part.trim().split('/');
       return [Date.parse(first), Date.parse(last)];
     });
+    const end = Math.max(...ranges.map(([, last]) => last));
     if (!Number.isFinite(end)) throw new Error('GIBS returned no default date');
     const dates = [];
     for (let date = end - (mosaicDays - 1) * day; date <= end; date += day) {
@@ -90,33 +89,37 @@ OB.bindNisarMap = function (map, toggle, status) {
         tile.width = tile.height = tileSize;
         tile.style.imageRendering = rendering();
         const context = tile.getContext('2d');
-        const images = dates.map(date => loadImage(
-          `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`));
-        Promise.all(images).then(loaded => {
+        // Show the tile as soon as any date arrives and repaint as the rest come in, instead of
+        // waiting for the slowest of all the mosaic requests. Older dates are always painted
+        // first, so a newer acquisition covers an older one whatever order they arrive in.
+        const slots = new Array(dates.length).fill(null);
+        let shown = false, settled = 0;
+        const paint = () => {
+          context.clearRect(0, 0, tileSize, tileSize);
+          for (const image of slots) if (image) context.drawImage(image, 0, 0);
+          tile.radar = { coords, pixels: context.getImageData(0, 0, tileSize, tileSize) };
+          colorTile(tile);
+        };
+        dates.forEach((date, i) => loadImage(
+          `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`
+        ).then(image => {
+          settled++;
           if (tile.unloaded) return;
-          tile.incomplete = loaded.some(image => !image);
-          if (tile.incomplete) { failedTiles++; showStatus(); }
-          // Paint oldest first so newer acquisitions cover older ones.
-          for (const image of loaded) if (image) context.drawImage(image, 0, 0);
-          if (!loaded.some(Boolean)) {
-            done(new Error('NISAR tiles unavailable'), tile);
-            return;
+          if (image) {
+            slots[i] = image;
+            try { paint(); } catch (error) { context.clearRect(0, 0, tileSize, tileSize); if (!shown) { shown = true; done(error, tile); } return; }
+            if (!shown) { shown = true; done(null, tile); }
+          } else if (!tile.incomplete) {
+            tile.incomplete = true; failedTiles++; showStatus();
           }
-          try {
-            tile.radar = { coords, pixels: context.getImageData(0, 0, tileSize, tileSize) };
-            colorTile(tile);
-            done(null, tile);
-          } catch (error) {
-            context.clearRect(0, 0, tileSize, tileSize);
-            done(error, tile);
-          }
-        });
+          if (settled === dates.length && !shown) { shown = true; done(new Error('NISAR tiles unavailable'), tile); }
+        }));
         return tile;
       },
     });
     const mosaic = new Mosaic({
       pane: 'nisarRadar', maxNativeZoom: nativeZoom, maxZoom: 19, opacity: 0.9,
-      updateWhenIdle: true, updateWhenZooming: false, keepBuffer: 3,
+      updateWhenIdle: true, updateWhenZooming: false, keepBuffer: 1,   // one ring of spare tiles: 12 requests each
       attribution: 'Radar &copy; NASA/ISRO NISAR, NASA GIBS',
     });
     mosaic.on('tileload', e => tiles.add(e.tile));
