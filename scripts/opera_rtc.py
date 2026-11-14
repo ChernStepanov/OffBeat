@@ -6,8 +6,9 @@
 Reads only the window around the site from each cloud-optimised GeoTIFF; whole bursts are never
 downloaded. Writes data/<site>/sentinel1.json: one VV and one VH value (gamma0, dB) per sample
 point and acquisition date, null where the burst does not cover the point or the value is invalid.
-Credentials: ~/.netrc, EARTHDATA_USERNAME/EARTHDATA_PASSWORD, or an interactive prompt that is not
-saved. Nothing secret is written to disk or to the output.
+Credentials: ~/.netrc, EARTHDATA_TOKEN (an Earthdata Login bearer token), EARTHDATA_USERNAME and
+EARTHDATA_PASSWORD, or an interactive prompt that is not saved. Nothing secret is written to disk or
+to the output. Read a token without echoing it:  read -rs EARTHDATA_TOKEN && export EARTHDATA_TOKEN
 """
 from __future__ import annotations
 
