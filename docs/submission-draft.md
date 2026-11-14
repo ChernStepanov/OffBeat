@@ -1,55 +1,25 @@
-# Submission draft (#28)
+# OffBeat — submission draft
 
-**Name:** OffBeat
+**Challenge:** Dancing with the SARs. The selected challenge and the team's registered event still need confirmation on the official project page.
 
-**One sentence:** Explore and hear how real NISAR radar samples depart from
-nearby samples of the same historical land-cover class, with dated optical context.
+**One sentence:** Explore and hear how prepared NASA–ISRO NISAR radar measurements differ from nearby samples of the same historical land-cover class.
 
-**Description:** OffBeat is a browser demo for exploring measured L-band HH/HV
-backscatter from NASA–ISRO NISAR. Three prepared cases retain source granule IDs,
-dates, quality masks and subset checksums. We compare each sampled location with
-at least ten nearby same-class WorldCover locations, excluding itself, and show
-the median and robust spread. A small classifier identifies exploratory curve
-shapes; it does not diagnose clearing, floods or earthquakes. The user can hear
-the measured signal and its departure from neighbours through a designed mapping
-of pitch, delay and detuning.
+**Problem and audience:** Radar observations can reveal changes through clouds and at night, but the signal is difficult to interpret. OffBeat is an exploratory prototype for learners and researchers; its potential benefit has not been evaluated with users.
 
-Dated Copernicus Sentinel-2 previews are selected within ±15 days and checked for
-cloud/shadow/snow and missing data over each exact AOI. The global NASA GIBS browse
-mosaic is explicitly separate from calibrated sample measurements. A relative
-12-day Mexico GUNW pair illustrates interferometric quality filtering, not an
-annual subsidence rate. All rejected observations remain unavailable.
+**What we built:** A browser app plots real L-band NISAR GCOV HH/HV series at sparse locations in eight prepared sites. It compares samples with at least ten eligible nearby same-class WorldCover 2021 samples, excluding the selected sample, and highlights exploratory departures. Some sites have as few as two acquisition dates. Users can inspect maps, quality-filtered GUNW line-of-sight results where available, and hear a designed mapping of measurements. Sound and candidate labels are not independent event detectors. Causes, areas, prediction accuracy and vertical subsidence rates are not established.
 
-**Measured findings:** The latest Amazon date has tree-cover / grassland HV medians
-of −12.0055 / −15.54589 dB (28 September 2026). Six HV-drop curve candidates are
-unverified: none matches a dated forest alert within ±60 days; one has nearby
-fire context. Mexico has 357 accepted GUNW samples with apparent relative LOS
-change from −0.87276 to +1.00370 cm. Optical previews cover 29/29, 6/6 and 5/6
-radar dates in Mexico, Amazonia and Caracas respectively.
+**An example:** In the Itupiranga, Pará window on 28 September 2026, median HV is −12.01 dB for 575 historical tree-cover samples and −15.55 dB for 449 grassland samples. The difference describes these selected observations; it is not a biomass estimate or a confirmed forest-loss event. Six native 20 m GCOV windows also support a bounded retrospective dense experiment: one four-cell candidate met a post-hoc rule, with no matching records in the checked local alert/fire subsets. Incomplete archives and post-hoc selection prevent conclusions about event absence, cause, area or recall. See [science review](https://github.com/ChernStepanov/OffBeat/blob/master/docs/science-review.md) and [external audit](https://github.com/ChernStepanov/OffBeat/blob/master/docs/amazon-external-audit-v2.md).
 
-**What is next:** Dense geolocated windows, weather-aware baselines, independent
-labels and held-out event/region tests, OPERA C-band comparisons and assessed
-ascending/descending deformation time series. No prediction accuracy is claimed.
+**Independent context and limits:** Quality-filtered Mexico OPERA DISP-S1 and Amazon OPERA RTC-S1 observations provide separate C-band context; dates, geometry and reference conditions differ from NISAR. A nearby GNSS station is not an established radar reference. Dated Sentinel-2 optical previews are prepared for Mexico, Amazonia and Caracas only: 29/29, 6/6 and 5/6 radar dates have a selected preview within ±15 days, respectively. Some dates share an image; cloud, shadow, snow and missing data remain masked, and an unavailable date is explicit. Esri context mosaics have varying dates and are not date-matched validation.
 
-**NASA data:** NISAR GCOV and GUNW via ASF DAAC; NASA GIBS NISAR browse imagery;
-NASA FIRMS context where identified in the saved fire records. OPERA is currently
-catalogue evidence, not an additional measured series. NASA GPM/HLS are planned,
-not counted as already used measurements.
+**NASA data used:** NASA–ISRO NISAR provisional GCOV and GUNW products via ASF DAAC, NASA GIBS browse coverage, and NASA OPERA products. NASA FIRMS appears as source context where identified in the retained records. GIBS browse colours show acquisition coverage, not calibrated backscatter or a global event map. [Granule IDs, dates and processing](https://github.com/ChernStepanov/OffBeat/blob/master/docs/real-nisar.md) and [site manifests](https://github.com/ChernStepanov/OffBeat/tree/master/data) are available.
 
-**Partner/context data:** Copernicus Sentinel-2 via Earth Search; ESA WorldCover
-2021 v200; INPE fire/DETER and UMD GLAD records, as identified per file. Esri
-imagery is geographic context. See source manifests and science review.
+**Other sources:** ESA WorldCover 2021, Copernicus Sentinel-2 through Earth Search, and INPE/GLAD/FIRMS contextual records where individually identified. Retained sources and caveats are linked in the scientific review. Third-party terms and project licence still require rights-holder verification before submission.
 
-**Links:** [Demo](https://offbeat.chern.su/),
-[repository](https://github.com/ChernStepanov/OffBeat),
-[scientific evidence](science-review.md), [six-slide draft](submission/offbeat-draft.pptx). Check public availability and certificate
-behaviour before submission. The six-slide PPTX is a draft for team review.
+**Links:** [Live demo](https://offbeat.chern.su/), [source repository](https://github.com/ChernStepanov/OffBeat), [reviewed six-slide draft](https://github.com/ChernStepanov/OffBeat/blob/master/docs/submission/offbeat-reviewed.pptx). Test the final actual links in a private browser; a link in this draft is not proof of accessibility or submission.
 
-**AI disclosure draft:** OpenAI Codex assisted with implementation, tests,
-data-processing code, scientific text review and draft materials. Real satellite
-measurements were not generated by AI. The team must verify this description
-against its complete use of AI tools and add any other tools used.
+**AI disclosure draft:** OpenAI Codex assisted with implementation, tests, data-processing code, evidence review and draft materials. Satellite measurements were not generated by AI. Team members must complete this description with any other AI tools and uses before submission.
 
-**Before submitting:** confirm team/location, final official guide and licence
-decision; verify links in a private window; review the draft and actual user flow.
-No application has been submitted by this work.
+**Next work:** Validate event candidates with independent labels, assess atmosphere and reference stability, build weather-aware baselines, and evaluate on held-out regions and events. No operational alert performance is claimed.
+
+**Before submission:** Complete [the checklist](submission-checklist.md), confirm team, local deadlines and licence rights, check final 2026 guidance and public links, and submit through the team's Project tab. This file is a draft; no submission is asserted.

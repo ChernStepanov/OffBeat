@@ -1,32 +1,15 @@
-# Submission checklist (#24) — provisional, checked 14 November 2026
+# Submission checklist (#24) — checked 15 November 2026
 
-The official 2026 landing/resources pages could not be fetched reliably during
-this audit. The points below use linked accepted answers in NASA's Space Apps
-discussion repository and the indexed official legal page. The final submission
-guide remains the authority; do not mark this issue fully resolved yet.
+This is a preparation checklist, not proof of submission, team acknowledgement, or legal compliance. The official 2026 [submission guide](https://www.spaceappschallenge.org/resources/project-submission-guide/) and [judging guide](https://www.spaceappschallenge.org/resources/judging-awards-guide/) returned 502 during this audit. Recheck them from the team's network and follow the registered event's instructions. See the [evidence and discrepancy audit](hackathon-alignment.md).
 
-- [ ] Confirm the registered team, selected 2026 challenge and local-event time zone.
-- [ ] Submit through the Project tab on the official Space Apps team page.
-- [ ] Include the project description, how NASA data were used, public demo link,
-  separate final-project link and disclosure of AI tools used.
-- [ ] Keep submission text in English; other-language videos need English subtitles.
-- [ ] Use **under 30 seconds** of video, or **at most 7 slides**. Under 30 seconds
-  satisfies both linked answers' slightly different wording.
-- [ ] Test all reviewer links in a private window without access requests.
-- [ ] Forum guidance gives **15 November 2026, 23:59 local time**. If the registered
-  event uses Europe/Moscow, that is **15 November 23:59 MSK / 20:59 UTC**. The
-  computer's time zone alone does not establish the registered event's deadline.
-- [ ] Confirm final guide file-size limits; none was verified from the available
-  sources. Do not invent a maximum MB value.
-- [ ] Resolve the software licence with copyright holders. The public repository
-  currently lacks a LICENSE. Original content must satisfy official open-content /
-  open-source requirements; a public GitHub URL alone is insufficient.
-- [ ] Preserve upstream data, imagery and font attributions and licence terms.
-
-Sources: [accepted submission answer](https://github.com/nasa/spaceapps/discussions/1973),
-[accepted hosting/demo clarification](https://github.com/nasa/spaceapps/discussions/1991),
-[official legal terms](https://www.spaceappschallenge.org/legal/),
-[official resources](https://www.spaceappschallenge.org/resources/).
-
-This checklist is not proof that all team members have read the rules or that
-the project has been submitted. Team confirmation and final-guide review remain.
+- [x] Identify the challenge: [Dancing with the SARs](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/); use the [Athlone local-event reproduction](https://hackathlone.com/challenges/dancing-with-the-sars) while the official page is inaccessible. Its objectives ask for an interactive NISAR surface-change application, an area, NISAR observations and an interpretation; hypotheses are not confirmations.
+- [x] Verify official [2026 timeline](https://www.spaceappschallenge.org/2026/): submit on the team's Project tab by **15 November, 23:59 local time**. Team size is at most six. This is not proof of registration.
+- [x] Document five criteria listed by the official-site [Ajmer local event](https://www.spaceappschallenge.org/2026/local-events/ajmer/): Impact, Creativity, Validity, Relevance, Presentation. Local-event-authored content is not the inaccessible global 2026 judging guide; do not assign unverified weights.
+- [x] Prepare six English [reviewed draft slides](submission/offbeat-reviewed.pptx), and an English [submission draft](submission-draft.md) with actual NISAR use and limitations. Six slides fit the seven-slide limit described in an [accepted 2026 forum answer](https://github.com/nasa/spaceapps/discussions/1973); it is not a substitute for the final guide. The slides are a draft, not an uploaded submission or a verified public demo link.
+- [x] Identify [2026 legal terms](https://www.spaceappschallenge.org/legal/): original project content must be freely available without restriction or OSI-open-source; absent a specified licence NASA says it distributes original content under Apache 2.0. Required non-NASA materials must satisfy its availability/open-source conditions and have licence documentation and source citations. A public repo alone does not establish those rights.
+- [x] Record an AI disclosure draft and distinguish measured data from generated analysis. The team must complete its own disclosure.
+- [ ] Confirm registered event, selected challenge, participants, local event deadline and time zone. For an event actually using Europe/Moscow, the global website deadline is 15 November 23:59 MSK (20:59 UTC); local judging may close earlier. Do not infer the registered event from this computer's time zone.
+- [ ] Team and rights holders: decide an OSI licence for original project code and verify the terms and attribution of every required third-party asset and service, including Esri imagery, fonts, basemaps and scientific datasets. Do not assert compatibility without a rights review.
+- [ ] Each team member reads the rules and records acknowledgement. This is part of issue #24's explicit acceptance criterion; it is not evidenced by the files or issue comments.
+- [ ] Recheck the final 2026 guides, required form fields, any local requirements and permitted upload sizes. File-size limits have not been verified. Confirm any demo length and format with those guides.
+- [ ] Test the actual submitted slides/video, repository, demo and references without login; ensure English project text and any required subtitles. Confirm the final AI disclosure and submit on the team's Project tab. Do not mark complete until the team has actually submitted.

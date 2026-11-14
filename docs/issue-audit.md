@@ -15,7 +15,7 @@ This audit does not claim every issue is fixed. Earthdata/ASF authentication is 
 | #18 | Partial — reopened | An exploratory six-date dense window yields one four-cell group, with no matches in the available local alert and fire archives. Independent confirmation, event area and recall remain unverified. |
 | #19–22 | Implemented | Recalculated dated values and primary NASA/ESA/USGS/literature sources in science review |
 | #23 | Implemented | Tour separates browse, calibrated samples, exploratory shapes and unvalidated LOS |
-| #24 | Partial | Sourced submission checklist; final guide, event time zone and software licence need confirmation |
+| #24 | Partial | Sourced rules, five judging lenses, discrepancy audit, revised draft and reviewed slides; official guides unavailable, registered event/time zone, rights and team acknowledgement remain unconfirmed |
 | #26 | Partial | Available-browser and numerical QA; Safari/iPhone and physical-device/listening coverage not claimed |
 | #27 | Partial | English recording script; no narrated screen recording produced |
 | #28 | Implemented as requested draft | English submission text and six-slide PPTX, with source notes and embedded measured chart values |
