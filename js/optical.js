@@ -14,10 +14,19 @@ OB.bindOptical = function (map, select, status) {
     const b=entry.bounds;
     overlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
     overlay.on('error',()=>{clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
+    overlay.on?.('load',sharpen);
     overlay.addTo(map);
     status.textContent=`${entry.source} | ${entry.date} | NISAR ${entry.nisar_date} | AOI cloud/shadow/snow ${Math.round(entry.aoi_cloud_shadow_snow_fraction*100)}% | ${entry.scene_id}`;
     select.title=status.textContent;
   }
+  // Sentinel-2 is 10 m per pixel. Stretched past twice its size the browser's smoothing turns it
+  // into a blur next to the sharp basemap, so from there it is drawn as the honest 10 m squares.
+  function sharpen() {
+    const img=overlay?.getElement?.();
+    if (!img || !img.naturalWidth) return;
+    img.style.imageRendering=img.getBoundingClientRect().width/img.naturalWidth>=2 ? 'pixelated' : 'auto';
+  }
+  map.on?.('zoomend',sharpen);
   function setDate(date) {
     if (!followDate || !index?.entries?.length) return;
     const target=Date.parse(date);

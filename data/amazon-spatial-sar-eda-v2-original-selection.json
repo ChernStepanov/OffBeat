@@ -1,0 +1,105 @@
+{
+  "algorithm": "previous: lowest average signed HH/HV change; low control ranked by abs((dHH+dHV)/2)",
+  "candidates": [
+    {
+      "role": "strong",
+      "row": 5,
+      "col": 15,
+      "lat": -4.766796875,
+      "lon": -49.275390625,
+      "delta_hh_db": -10.347918848125143,
+      "delta_hv_db": -7.420062184769167,
+      "combined_delta_db": -8.883990516447156
+    },
+    {
+      "role": "strong",
+      "row": 12,
+      "col": 20,
+      "lat": -4.772265625,
+      "lon": -49.271484375,
+      "delta_hh_db": -4.8120836400284155,
+      "delta_hv_db": -7.7814693233239005,
+      "combined_delta_db": -6.296776481676158
+    },
+    {
+      "role": "strong",
+      "row": 11,
+      "col": 10,
+      "lat": -4.771484375,
+      "lon": -49.279296875,
+      "delta_hh_db": -6.8195104768531145,
+      "delta_hv_db": -3.662535873489926,
+      "combined_delta_db": -5.24102317517152
+    },
+    {
+      "role": "strong",
+      "row": 13,
+      "col": 7,
+      "lat": -4.773046875,
+      "lon": -49.281640625,
+      "delta_hh_db": -6.381571730852043,
+      "delta_hv_db": -3.72478449997522,
+      "combined_delta_db": -5.0531781154136315
+    },
+    {
+      "role": "random_control",
+      "row": 19,
+      "col": 13,
+      "lat": -4.777734375,
+      "lon": -49.276953125,
+      "delta_hh_db": -1.6023709516786746,
+      "delta_hv_db": -0.8316582325980859,
+      "combined_delta_db": -1.2170145921383804
+    },
+    {
+      "role": "random_control",
+      "row": 26,
+      "col": 16,
+      "lat": -4.783203125,
+      "lon": -49.274609375000004,
+      "delta_hh_db": 1.2781058374948926,
+      "delta_hv_db": -1.5125518087883008,
+      "combined_delta_db": -0.11722298564670408
+    },
+    {
+      "role": "random_control",
+      "row": 26,
+      "col": 26,
+      "lat": -4.783203125,
+      "lon": -49.266796875000004,
+      "delta_hh_db": 1.8463899509348172,
+      "delta_hv_db": 0.37309980760759265,
+      "combined_delta_db": 1.1097448792712048
+    },
+    {
+      "role": "low_change_control",
+      "row": 15,
+      "col": 28,
+      "lat": -4.774609375,
+      "lon": -49.265234375000006,
+      "delta_hh_db": -1.6450179559636955,
+      "delta_hv_db": 1.6419912965210917,
+      "combined_delta_db": -0.0015133297213019148
+    },
+    {
+      "role": "low_change_control",
+      "row": 0,
+      "col": 6,
+      "lat": -4.762890625,
+      "lon": -49.282421875000004,
+      "delta_hh_db": -1.893262558912285,
+      "delta_hv_db": 1.9136093433240098,
+      "combined_delta_db": 0.010173392205862442
+    },
+    {
+      "role": "low_change_control",
+      "row": 17,
+      "col": 21,
+      "lat": -4.776171875,
+      "lon": -49.270703125000004,
+      "delta_hh_db": -0.23280444852790003,
+      "delta_hv_db": 0.20851547213354865,
+      "combined_delta_db": -0.012144488197175687
+    }
+  ]
+}

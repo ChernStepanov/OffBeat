@@ -1,0 +1,1183 @@
+{
+  "study": "Amazon/Itupiranga, local provisional NISAR GCOV sample",
+  "pair": [
+    "2026-08-23",
+    "2026-09-04"
+  ],
+  "sar_acquisitions": [
+    {
+      "date": "2026-08-23",
+      "granule_id": "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001",
+      "start_utc": "2026-08-23T09:04:09Z",
+      "end_utc": "2026-08-23T09:04:43Z"
+    },
+    {
+      "date": "2026-09-04",
+      "granule_id": "NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001",
+      "start_utc": "2026-09-04T09:04:08Z",
+      "end_utc": "2026-09-04T09:04:43Z"
+    }
+  ],
+  "random_seed": 33017,
+  "sampling": {
+    "strong": "four largest RMS(dHH,dHV), requiring dHH < 0 and dHV < 0",
+    "controls": "three seeded-random and three lowest RMS(dHH,dHV) paired changes",
+    "rms_definition": "sqrt((dHH^2+dHV^2)/2), dB-change magnitudes",
+    "selection_revision": "replaces the prior signed-mean rule; the former selection is retained for comparison, not endorsed",
+    "minimum_grid_cell_gap": 3,
+    "warning": "spatially separated candidates are not independent events",
+    "posthoc_note": "analysis choices are retrospective, not preregistered"
+  },
+  "provenance": {
+    "granules": [
+      "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001",
+      "NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001"
+    ],
+    "grid": {
+      "epsg": 32722,
+      "spacing": [
+        20.0,
+        -20.0
+      ],
+      "window": [
+        6394,
+        6529,
+        13150,
+        13286
+      ],
+      "paths": {
+        "hh": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+        "hv": "/science/LSAR/GCOV/grids/frequencyA/HVHV",
+        "mask": "/science/LSAR/GCOV/grids/frequencyA/mask"
+      }
+    },
+    "shape": [
+      32,
+      32
+    ],
+    "paired_valid_cells": 1024,
+    "power_conversion": "10*log10(after/before); excludes mask 0/255, nonfinite, nonpositive HH/HV",
+    "alerts_file": "data/amazon/alerts.geojson",
+    "fires_file": "data/amazon/fires.json",
+    "date_precision_policy": "SAR granule start/end timestamps are exact UTC; GLAD/DETER date fields without time are date-only and same-calendar-day ordering is ambiguous"
+  },
+  "local_alert_geometry_validation": {
+    "feature_count": 373,
+    "invalid_geometry_count": 200,
+    "invalid_geometry_reasons": [
+      {
+        "feature_index": 1,
+        "reason": "Ring Self-intersection[-49.084 -4.852]"
+      },
+      {
+        "feature_index": 2,
+        "reason": "Ring Self-intersection[-49.178 -4.87475]"
+      },
+      {
+        "feature_index": 3,
+        "reason": "Ring Self-intersection[-49.06075 -4.96225]"
+      },
+      {
+        "feature_index": 4,
+        "reason": "Interior is disconnected[-49.38425 -4.9675]"
+      },
+      {
+        "feature_index": 5,
+        "reason": "Ring Self-intersection[-49.38275 -4.96775]"
+      },
+      {
+        "feature_index": 8,
+        "reason": "Ring Self-intersection[-49.3879 -4.7739]"
+      },
+      {
+        "feature_index": 17,
+        "reason": "Ring Self-intersection[-49.3175 -4.5625]"
+      },
+      {
+        "feature_index": 19,
+        "reason": "Ring Self-intersection[-49.401 -4.5745]"
+      },
+      {
+        "feature_index": 21,
+        "reason": "Interior is disconnected[-49.4785 -4.61175]"
+      },
+      {
+        "feature_index": 22,
+        "reason": "Ring Self-intersection[-49.32825 -4.6215]"
+      },
+      {
+        "feature_index": 23,
+        "reason": "Ring Self-intersection[-49.494 -4.646]"
+      },
+      {
+        "feature_index": 27,
+        "reason": "Interior is disconnected[-49.3875 -4.662]"
+      },
+      {
+        "feature_index": 28,
+        "reason": "Ring Self-intersection[-49.46975 -4.663]"
+      },
+      {
+        "feature_index": 30,
+        "reason": "Interior is disconnected[-49.492 -4.6795]"
+      },
+      {
+        "feature_index": 31,
+        "reason": "Ring Self-intersection[-49.4115 -4.67875]"
+      },
+      {
+        "feature_index": 32,
+        "reason": "Ring Self-intersection[-49.4905 -4.68]"
+      },
+      {
+        "feature_index": 33,
+        "reason": "Interior is disconnected[-49.4995 -4.69025]"
+      },
+      {
+        "feature_index": 34,
+        "reason": "Ring Self-intersection[-49.389 -4.79525]"
+      },
+      {
+        "feature_index": 35,
+        "reason": "Ring Self-intersection[-49.45475 -4.8465]"
+      },
+      {
+        "feature_index": 36,
+        "reason": "Ring Self-intersection[-49.421 -4.84925]"
+      },
+      {
+        "feature_index": 37,
+        "reason": "Ring Self-intersection[-49.4565 -4.84925]"
+      },
+      {
+        "feature_index": 42,
+        "reason": "Ring Self-intersection[-49.29625 -4.6615]"
+      },
+      {
+        "feature_index": 44,
+        "reason": "Ring Self-intersection[-49.15325 -4.93275]"
+      },
+      {
+        "feature_index": 45,
+        "reason": "Ring Self-intersection[-49.14925 -4.935]"
+      },
+      {
+        "feature_index": 46,
+        "reason": "Interior is disconnected[-49.11575 -4.9385]"
+      },
+      {
+        "feature_index": 47,
+        "reason": "Ring Self-intersection[-49.36525 -4.60425]"
+      },
+      {
+        "feature_index": 50,
+        "reason": "Ring Self-intersection[-49.219 -4.60775]"
+      },
+      {
+        "feature_index": 52,
+        "reason": "Ring Self-intersection[-49.4705 -4.898]"
+      },
+      {
+        "feature_index": 55,
+        "reason": "Ring Self-intersection[-49.39275 -4.83975]"
+      },
+      {
+        "feature_index": 56,
+        "reason": "Ring Self-intersection[-49.455 -4.88]"
+      },
+      {
+        "feature_index": 57,
+        "reason": "Ring Self-intersection[-49.3695 -4.89175]"
+      },
+      {
+        "feature_index": 58,
+        "reason": "Ring Self-intersection[-49.4865 -4.69375]"
+      },
+      {
+        "feature_index": 60,
+        "reason": "Ring Self-intersection[-49.364 -4.978]"
+      },
+      {
+        "feature_index": 61,
+        "reason": "Ring Self-intersection[-49.36425 -4.98675]"
+      },
+      {
+        "feature_index": 63,
+        "reason": "Ring Self-intersection[-49.34825 -4.989]"
+      },
+      {
+        "feature_index": 64,
+        "reason": "Ring Self-intersection[-49.2725 -4.625]"
+      },
+      {
+        "feature_index": 65,
+        "reason": "Ring Self-intersection[-49.37225 -4.75525]"
+      },
+      {
+        "feature_index": 67,
+        "reason": "Ring Self-intersection[-49.32125 -4.57025]"
+      },
+      {
+        "feature_index": 69,
+        "reason": "Ring Self-intersection[-49.472 -4.607]"
+      },
+      {
+        "feature_index": 70,
+        "reason": "Ring Self-intersection[-49.32825 -4.62075]"
+      },
+      {
+        "feature_index": 71,
+        "reason": "Ring Self-intersection[-49.368 -4.75375]"
+      },
+      {
+        "feature_index": 72,
+        "reason": "Ring Self-intersection[-49.28125 -4.8225]"
+      },
+      {
+        "feature_index": 74,
+        "reason": "Ring Self-intersection[-49.1315 -4.87]"
+      },
+      {
+        "feature_index": 76,
+        "reason": "Interior is disconnected[-49.16525 -4.899]"
+      },
+      {
+        "feature_index": 78,
+        "reason": "Ring Self-intersection[-49.16675 -4.901]"
+      },
+      {
+        "feature_index": 80,
+        "reason": "Ring Self-intersection[-49.4925 -4.63575]"
+      },
+      {
+        "feature_index": 81,
+        "reason": "Ring Self-intersection[-49.4995 -4.64325]"
+      },
+      {
+        "feature_index": 82,
+        "reason": "Ring Self-intersection[-49.498 -4.6435]"
+      },
+      {
+        "feature_index": 83,
+        "reason": "Ring Self-intersection[-49.3615 -4.67475]"
+      },
+      {
+        "feature_index": 85,
+        "reason": "Ring Self-intersection[-49.338 -4.90675]"
+      },
+      {
+        "feature_index": 87,
+        "reason": "Ring Self-intersection[-49.34175 -4.91175]"
+      },
+      {
+        "feature_index": 91,
+        "reason": "Ring Self-intersection[-49.28525 -4.637]"
+      },
+      {
+        "feature_index": 92,
+        "reason": "Ring Self-intersection[-49.3055 -4.65075]"
+      },
+      {
+        "feature_index": 93,
+        "reason": "Ring Self-intersection[-49.48375 -4.74825]"
+      },
+      {
+        "feature_index": 96,
+        "reason": "Ring Self-intersection[-49.41575 -4.85725]"
+      },
+      {
+        "feature_index": 98,
+        "reason": "Ring Self-intersection[-49.48025 -4.86375]"
+      },
+      {
+        "feature_index": 99,
+        "reason": "Ring Self-intersection[-49.39925 -4.89775]"
+      },
+      {
+        "feature_index": 102,
+        "reason": "Ring Self-intersection[-49.2365 -4.5875]"
+      },
+      {
+        "feature_index": 103,
+        "reason": "Ring Self-intersection[-49.0915 -4.60525]"
+      },
+      {
+        "feature_index": 104,
+        "reason": "Ring Self-intersection[-49.31125 -4.61525]"
+      },
+      {
+        "feature_index": 105,
+        "reason": "Ring Self-intersection[-49.0525 -4.61575]"
+      },
+      {
+        "feature_index": 106,
+        "reason": "Ring Self-intersection[-49.2135 -4.66725]"
+      },
+      {
+        "feature_index": 108,
+        "reason": "Ring Self-intersection[-49.21375 -4.6905]"
+      },
+      {
+        "feature_index": 113,
+        "reason": "Ring Self-intersection[-49.37125 -4.75525]"
+      },
+      {
+        "feature_index": 114,
+        "reason": "Ring Self-intersection[-49.26675 -4.756]"
+      },
+      {
+        "feature_index": 117,
+        "reason": "Interior is disconnected[-49.26325 -4.77225]"
+      },
+      {
+        "feature_index": 120,
+        "reason": "Ring Self-intersection[-49.35725 -4.7935]"
+      },
+      {
+        "feature_index": 122,
+        "reason": "Ring Self-intersection[-49.295 -4.84575]"
+      },
+      {
+        "feature_index": 123,
+        "reason": "Ring Self-intersection[-49.253 -4.85325]"
+      },
+      {
+        "feature_index": 124,
+        "reason": "Ring Self-intersection[-49.2545 -4.8555]"
+      },
+      {
+        "feature_index": 127,
+        "reason": "Ring Self-intersection[-49.13425 -4.873]"
+      },
+      {
+        "feature_index": 128,
+        "reason": "Ring Self-intersection[-49.4645 -4.89275]"
+      },
+      {
+        "feature_index": 130,
+        "reason": "Interior is disconnected[-49.16425 -4.896]"
+      },
+      {
+        "feature_index": 132,
+        "reason": "Ring Self-intersection[-49.14175 -4.914]"
+      },
+      {
+        "feature_index": 133,
+        "reason": "Ring Self-intersection[-49.15625 -4.935]"
+      },
+      {
+        "feature_index": 134,
+        "reason": "Ring Self-intersection[-49.0965 -4.942]"
+      },
+      {
+        "feature_index": 136,
+        "reason": "Ring Self-intersection[-49.18375 -4.955]"
+      },
+      {
+        "feature_index": 139,
+        "reason": "Ring Self-intersection[-49.3995 -4.9685]"
+      },
+      {
+        "feature_index": 141,
+        "reason": "Ring Self-intersection[-49.36625 -4.976]"
+      },
+      {
+        "feature_index": 146,
+        "reason": "Ring Self-intersection[-49.34725 -4.77375]"
+      },
+      {
+        "feature_index": 147,
+        "reason": "Ring Self-intersection[-49.346 -4.78775]"
+      },
+      {
+        "feature_index": 148,
+        "reason": "Ring Self-intersection[-49.35125 -4.7965]"
+      },
+      {
+        "feature_index": 149,
+        "reason": "Ring Self-intersection[-49.4785 -4.8625]"
+      },
+      {
+        "feature_index": 151,
+        "reason": "Ring Self-intersection[-49.34025 -4.9065]"
+      },
+      {
+        "feature_index": 152,
+        "reason": "Ring Self-intersection[-49.34275 -4.9075]"
+      },
+      {
+        "feature_index": 153,
+        "reason": "Ring Self-intersection[-49.34075 -4.9115]"
+      },
+      {
+        "feature_index": 154,
+        "reason": "Interior is disconnected[-49.34425 -4.9165]"
+      },
+      {
+        "feature_index": 157,
+        "reason": "Ring Self-intersection[-49.49975 -4.955]"
+      },
+      {
+        "feature_index": 158,
+        "reason": "Ring Self-intersection[-49.3595 -4.971]"
+      },
+      {
+        "feature_index": 159,
+        "reason": "Ring Self-intersection[-49.3535 -4.983]"
+      },
+      {
+        "feature_index": 162,
+        "reason": "Ring Self-intersection[-49.207 -4.60875]"
+      },
+      {
+        "feature_index": 165,
+        "reason": "Ring Self-intersection[-49.2005 -4.6265]"
+      },
+      {
+        "feature_index": 168,
+        "reason": "Ring Self-intersection[-49.21125 -4.66675]"
+      },
+      {
+        "feature_index": 169,
+        "reason": "Ring Self-intersection[-49.22925 -4.66725]"
+      },
+      {
+        "feature_index": 171,
+        "reason": "Ring Self-intersection[-49.2015 -4.672]"
+      },
+      {
+        "feature_index": 172,
+        "reason": "Ring Self-intersection[-49.2255 -4.677]"
+      },
+      {
+        "feature_index": 173,
+        "reason": "Ring Self-intersection[-49.19375 -4.681]"
+      },
+      {
+        "feature_index": 174,
+        "reason": "Ring Self-intersection[-49.19625 -4.69025]"
+      },
+      {
+        "feature_index": 177,
+        "reason": "Ring Self-intersection[-49.203 -4.696]"
+      },
+      {
+        "feature_index": 178,
+        "reason": "Ring Self-intersection[-49.21525 -4.69675]"
+      },
+      {
+        "feature_index": 180,
+        "reason": "Ring Self-intersection[-49.357 -4.75175]"
+      },
+      {
+        "feature_index": 182,
+        "reason": "Ring Self-intersection[-49.27 -4.7695]"
+      },
+      {
+        "feature_index": 183,
+        "reason": "Ring Self-intersection[-49.3075 -4.82675]"
+      },
+      {
+        "feature_index": 184,
+        "reason": "Ring Self-intersection[-49.35225 -4.841]"
+      },
+      {
+        "feature_index": 188,
+        "reason": "Ring Self-intersection[-49.2705 -4.864]"
+      },
+      {
+        "feature_index": 190,
+        "reason": "Ring Self-intersection[-49.46375 -4.6035]"
+      },
+      {
+        "feature_index": 192,
+        "reason": "Ring Self-intersection[-49.18125 -4.633]"
+      },
+      {
+        "feature_index": 193,
+        "reason": "Ring Self-intersection[-49.20125 -4.63825]"
+      },
+      {
+        "feature_index": 196,
+        "reason": "Ring Self-intersection[-49.17875 -4.681]"
+      },
+      {
+        "feature_index": 198,
+        "reason": "Ring Self-intersection[-49.2525 -4.69275]"
+      },
+      {
+        "feature_index": 200,
+        "reason": "Interior is disconnected[-49.2535 -4.70125]"
+      },
+      {
+        "feature_index": 202,
+        "reason": "Ring Self-intersection[-49.13125 -4.78375]"
+      },
+      {
+        "feature_index": 205,
+        "reason": "Ring Self-intersection[-49.48175 -4.86075]"
+      },
+      {
+        "feature_index": 207,
+        "reason": "Ring Self-intersection[-49.30925 -4.903]"
+      },
+      {
+        "feature_index": 209,
+        "reason": "Ring Self-intersection[-49.40275 -4.973]"
+      },
+      {
+        "feature_index": 211,
+        "reason": "Ring Self-intersection[-49.475 -4.70025]"
+      },
+      {
+        "feature_index": 213,
+        "reason": "Ring Self-intersection[-49.47375 -4.8605]"
+      },
+      {
+        "feature_index": 214,
+        "reason": "Ring Self-intersection[-49.351 -4.883]"
+      },
+      {
+        "feature_index": 215,
+        "reason": "Ring Self-intersection[-49.41 -4.938]"
+      },
+      {
+        "feature_index": 217,
+        "reason": "Ring Self-intersection[-49.33675 -4.6735]"
+      },
+      {
+        "feature_index": 218,
+        "reason": "Ring Self-intersection[-49.394 -4.793]"
+      },
+      {
+        "feature_index": 219,
+        "reason": "Ring Self-intersection[-49.48325 -4.86175]"
+      },
+      {
+        "feature_index": 221,
+        "reason": "Ring Self-intersection[-49.45875 -4.9525]"
+      },
+      {
+        "feature_index": 222,
+        "reason": "Ring Self-intersection[-49.4625 -4.9525]"
+      },
+      {
+        "feature_index": 223,
+        "reason": "Ring Self-intersection[-49.35325 -4.9665]"
+      },
+      {
+        "feature_index": 224,
+        "reason": "Ring Self-intersection[-49.36625 -4.97525]"
+      },
+      {
+        "feature_index": 228,
+        "reason": "Ring Self-intersection[-49.2805 -4.81275]"
+      },
+      {
+        "feature_index": 231,
+        "reason": "Interior is disconnected[-49.17225 -4.836]"
+      },
+      {
+        "feature_index": 232,
+        "reason": "Ring Self-intersection[-49.09075 -4.85475]"
+      },
+      {
+        "feature_index": 233,
+        "reason": "Ring Self-intersection[-49.143 -4.938]"
+      },
+      {
+        "feature_index": 236,
+        "reason": "Interior is disconnected[-49.376 -4.958]"
+      },
+      {
+        "feature_index": 238,
+        "reason": "Interior is disconnected[-49.3825 -4.56175]"
+      },
+      {
+        "feature_index": 240,
+        "reason": "Ring Self-intersection[-49.48675 -4.63925]"
+      },
+      {
+        "feature_index": 242,
+        "reason": "Ring Self-intersection[-49.322 -4.76]"
+      },
+      {
+        "feature_index": 243,
+        "reason": "Ring Self-intersection[-49.482 -4.801]"
+      },
+      {
+        "feature_index": 245,
+        "reason": "Ring Self-intersection[-49.45275 -4.85525]"
+      },
+      {
+        "feature_index": 246,
+        "reason": "Ring Self-intersection[-49.45375 -4.85825]"
+      },
+      {
+        "feature_index": 249,
+        "reason": "Ring Self-intersection[-49.457 -4.85875]"
+      },
+      {
+        "feature_index": 250,
+        "reason": "Ring Self-intersection[-49.48275 -4.86775]"
+      },
+      {
+        "feature_index": 251,
+        "reason": "Interior is disconnected[-49.386 -4.88425]"
+      },
+      {
+        "feature_index": 252,
+        "reason": "Ring Self-intersection[-49.38625 -4.885]"
+      },
+      {
+        "feature_index": 254,
+        "reason": "Ring Self-intersection[-49.353 -4.92875]"
+      },
+      {
+        "feature_index": 255,
+        "reason": "Ring Self-intersection[-49.4965 -4.95925]"
+      },
+      {
+        "feature_index": 257,
+        "reason": "Ring Self-intersection[-49.283 -4.73525]"
+      },
+      {
+        "feature_index": 258,
+        "reason": "Ring Self-intersection[-49.2835 -4.7365]"
+      },
+      {
+        "feature_index": 261,
+        "reason": "Ring Self-intersection[-49.09725 -4.807]"
+      },
+      {
+        "feature_index": 262,
+        "reason": "Ring Self-intersection[-49.17175 -4.835]"
+      },
+      {
+        "feature_index": 263,
+        "reason": "Ring Self-intersection[-49.17425 -4.835]"
+      },
+      {
+        "feature_index": 264,
+        "reason": "Ring Self-intersection[-49.1425 -4.91525]"
+      },
+      {
+        "feature_index": 265,
+        "reason": "Ring Self-intersection[-49.15125 -4.931]"
+      },
+      {
+        "feature_index": 266,
+        "reason": "Interior is disconnected[-49.153 -4.93275]"
+      },
+      {
+        "feature_index": 275,
+        "reason": "Ring Self-intersection[-49.36375 -4.678]"
+      },
+      {
+        "feature_index": 276,
+        "reason": "Ring Self-intersection[-49.49475 -4.697]"
+      },
+      {
+        "feature_index": 277,
+        "reason": "Ring Self-intersection[-49.49825 -4.7095]"
+      },
+      {
+        "feature_index": 279,
+        "reason": "Ring Self-intersection[-49.33925 -4.91175]"
+      },
+      {
+        "feature_index": 280,
+        "reason": "Ring Self-intersection[-49.37525 -4.98225]"
+      },
+      {
+        "feature_index": 283,
+        "reason": "Ring Self-intersection[-49.206 -4.6365]"
+      },
+      {
+        "feature_index": 284,
+        "reason": "Ring Self-intersection[-49.20825 -4.636]"
+      },
+      {
+        "feature_index": 286,
+        "reason": "Ring Self-intersection[-49.23025 -4.661]"
+      },
+      {
+        "feature_index": 288,
+        "reason": "Ring Self-intersection[-49.227 -4.66575]"
+      },
+      {
+        "feature_index": 289,
+        "reason": "Ring Self-intersection[-49.121 -4.776]"
+      },
+      {
+        "feature_index": 291,
+        "reason": "Ring Self-intersection[-49.485 -4.8025]"
+      },
+      {
+        "feature_index": 295,
+        "reason": "Ring Self-intersection[-49.283 -4.81875]"
+      },
+      {
+        "feature_index": 296,
+        "reason": "Ring Self-intersection[-49.17525 -4.87975]"
+      },
+      {
+        "feature_index": 302,
+        "reason": "Self-intersection[-49.4946 -4.6991]"
+      },
+      {
+        "feature_index": 304,
+        "reason": "Ring Self-intersection[-49.307 -4.82625]"
+      },
+      {
+        "feature_index": 306,
+        "reason": "Ring Self-intersection[-49.32375 -4.9295]"
+      },
+      {
+        "feature_index": 308,
+        "reason": "Ring Self-intersection[-49.3545 -4.967]"
+      },
+      {
+        "feature_index": 309,
+        "reason": "Interior is disconnected[-49.36 -4.9685]"
+      },
+      {
+        "feature_index": 311,
+        "reason": "Ring Self-intersection[-49.36475 -4.62675]"
+      },
+      {
+        "feature_index": 312,
+        "reason": "Ring Self-intersection[-49.4865 -4.63175]"
+      },
+      {
+        "feature_index": 314,
+        "reason": "Ring Self-intersection[-49.386 -4.6605]"
+      },
+      {
+        "feature_index": 317,
+        "reason": "Ring Self-intersection[-49.4795 -4.743]"
+      },
+      {
+        "feature_index": 320,
+        "reason": "Ring Self-intersection[-49.38925 -4.81575]"
+      },
+      {
+        "feature_index": 321,
+        "reason": "Ring Self-intersection[-49.4565 -4.85025]"
+      },
+      {
+        "feature_index": 323,
+        "reason": "Ring Self-intersection[-49.38575 -4.89775]"
+      },
+      {
+        "feature_index": 329,
+        "reason": "Ring Self-intersection[-49.2335 -4.58875]"
+      },
+      {
+        "feature_index": 330,
+        "reason": "Ring Self-intersection[-49.12075 -4.5955]"
+      },
+      {
+        "feature_index": 333,
+        "reason": "Ring Self-intersection[-49.2065 -4.6695]"
+      },
+      {
+        "feature_index": 334,
+        "reason": "Ring Self-intersection[-49.20325 -4.67075]"
+      },
+      {
+        "feature_index": 335,
+        "reason": "Ring Self-intersection[-49.22475 -4.67875]"
+      },
+      {
+        "feature_index": 336,
+        "reason": "Ring Self-intersection[-49.19325 -4.68575]"
+      },
+      {
+        "feature_index": 337,
+        "reason": "Ring Self-intersection[-49.19325 -4.6865]"
+      },
+      {
+        "feature_index": 338,
+        "reason": "Ring Self-intersection[-49.168 -4.69]"
+      },
+      {
+        "feature_index": 339,
+        "reason": "Ring Self-intersection[-49.2145 -4.699]"
+      },
+      {
+        "feature_index": 340,
+        "reason": "Ring Self-intersection[-49.2125 -4.699]"
+      },
+      {
+        "feature_index": 346,
+        "reason": "Ring Self-intersection[-49.074 -4.7535]"
+      },
+      {
+        "feature_index": 347,
+        "reason": "Ring Self-intersection[-49.2645 -4.7535]"
+      },
+      {
+        "feature_index": 348,
+        "reason": "Ring Self-intersection[-49.30975 -4.76525]"
+      },
+      {
+        "feature_index": 352,
+        "reason": "Interior is disconnected[-49.39825 -4.89575]"
+      },
+      {
+        "feature_index": 358,
+        "reason": "Ring Self-intersection[-49.3725 -4.9595]"
+      },
+      {
+        "feature_index": 359,
+        "reason": "Ring Self-intersection[-49.1995 -4.9635]"
+      },
+      {
+        "feature_index": 360,
+        "reason": "Ring Self-intersection[-49.14975 -4.99875]"
+      },
+      {
+        "feature_index": 361,
+        "reason": "Ring Self-intersection[-49.477 -4.72175]"
+      },
+      {
+        "feature_index": 364,
+        "reason": "Ring Self-intersection[-49.37275 -4.645]"
+      },
+      {
+        "feature_index": 365,
+        "reason": "Ring Self-intersection[-49.40025 -4.5635]"
+      },
+      {
+        "feature_index": 366,
+        "reason": "Ring Self-intersection[-49.08125 -4.6095]"
+      },
+      {
+        "feature_index": 367,
+        "reason": "Ring Self-intersection[-49.09375 -4.81225]"
+      },
+      {
+        "feature_index": 370,
+        "reason": "Ring Self-intersection[-49.39975 -4.971]"
+      },
+      {
+        "feature_index": 372,
+        "reason": "Ring Self-intersection[-49.385 -4.997]"
+      }
+    ],
+    "make_valid_output_types": {
+      "MultiPolygon": 198,
+      "GeometryCollection": 2
+    },
+    "all_repaired_geometries_valid": true,
+    "predicate": "Shapely covers(Point), including polygon boundaries; invalid input repaired with make_valid"
+  },
+  "candidate_results": [
+    {
+      "role": "strong",
+      "row": 5,
+      "col": 15,
+      "lat": -4.766796875,
+      "lon": -49.275390625,
+      "delta_hh_db": -10.347918848125143,
+      "delta_hv_db": -7.420062184769167,
+      "rms_delta_db": 9.003797735212208,
+      "combined_delta_db": -8.883990516447156,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "strong",
+      "row": 12,
+      "col": 20,
+      "lat": -4.772265625,
+      "lon": -49.271484375,
+      "delta_hh_db": -4.8120836400284155,
+      "delta_hv_db": -7.7814693233239005,
+      "rms_delta_db": 6.469444094683099,
+      "combined_delta_db": -6.296776481676158,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "strong",
+      "row": 8,
+      "col": 11,
+      "lat": -4.769140625,
+      "lon": -49.278515625000004,
+      "delta_hh_db": -1.0945893804737725,
+      "delta_hv_db": -8.362949159591714,
+      "rms_delta_db": 5.963935133691585,
+      "combined_delta_db": -4.7287692700327435,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "strong",
+      "row": 7,
+      "col": 30,
+      "lat": -4.768359375,
+      "lon": -49.263671875,
+      "delta_hh_db": -0.39848253423004965,
+      "delta_hv_db": -7.912927607833286,
+      "rms_delta_db": 5.602375016762829,
+      "combined_delta_db": -4.155705071031668,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "random_control",
+      "row": 19,
+      "col": 13,
+      "lat": -4.777734375,
+      "lon": -49.276953125,
+      "delta_hh_db": -1.6023709516786746,
+      "delta_hv_db": -0.8316582325980859,
+      "rms_delta_db": 1.2765672882053247,
+      "combined_delta_db": -1.2170145921383804,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "random_control",
+      "row": 26,
+      "col": 16,
+      "lat": -4.783203125,
+      "lon": -49.274609375000004,
+      "delta_hh_db": 1.2781058374948926,
+      "delta_hv_db": -1.5125518087883008,
+      "rms_delta_db": 1.4002441762255755,
+      "combined_delta_db": -0.11722298564670408,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "random_control",
+      "row": 26,
+      "col": 26,
+      "lat": -4.783203125,
+      "lon": -49.266796875000004,
+      "delta_hh_db": 1.8463899509348172,
+      "delta_hv_db": 0.37309980760759265,
+      "rms_delta_db": 1.3319833552544678,
+      "combined_delta_db": 1.1097448792712048,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "low_change_control",
+      "row": 16,
+      "col": 12,
+      "lat": -4.775390625,
+      "lon": -49.277734375,
+      "delta_hh_db": 0.1376558149244076,
+      "delta_hv_db": 0.020328807458559906,
+      "rms_delta_db": 0.09839304801455731,
+      "combined_delta_db": 0.07899231119148376,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "low_change_control",
+      "row": 5,
+      "col": 27,
+      "lat": -4.766796875,
+      "lon": -49.266015625,
+      "delta_hh_db": 0.06622285958739528,
+      "delta_hv_db": -0.12941311303009262,
+      "rms_delta_db": 0.10279401966085236,
+      "combined_delta_db": -0.03159512672134867,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    },
+    {
+      "role": "low_change_control",
+      "row": 17,
+      "col": 3,
+      "lat": -4.776171875,
+      "lon": -49.284765625,
+      "delta_hh_db": -0.09150690885514166,
+      "delta_hv_db": 0.16787787885715433,
+      "rms_delta_db": 0.1351970720426308,
+      "combined_delta_db": 0.03818548500100633,
+      "alert_polygon_intersections": [],
+      "firms_in_500m": []
+    }
+  ],
+  "selection_comparison": {
+    "previous_algorithm": "previous: lowest average signed HH/HV change; low control ranked by abs((dHH+dHV)/2)",
+    "previous_candidate_roles": [
+      {
+        "role": "strong",
+        "row": 5,
+        "col": 15,
+        "lat": -4.766796875,
+        "lon": -49.275390625,
+        "delta_hh_db": -10.347918848125143,
+        "delta_hv_db": -7.420062184769167,
+        "combined_delta_db": -8.883990516447156
+      },
+      {
+        "role": "strong",
+        "row": 12,
+        "col": 20,
+        "lat": -4.772265625,
+        "lon": -49.271484375,
+        "delta_hh_db": -4.8120836400284155,
+        "delta_hv_db": -7.7814693233239005,
+        "combined_delta_db": -6.296776481676158
+      },
+      {
+        "role": "strong",
+        "row": 11,
+        "col": 10,
+        "lat": -4.771484375,
+        "lon": -49.279296875,
+        "delta_hh_db": -6.8195104768531145,
+        "delta_hv_db": -3.662535873489926,
+        "combined_delta_db": -5.24102317517152
+      },
+      {
+        "role": "strong",
+        "row": 13,
+        "col": 7,
+        "lat": -4.773046875,
+        "lon": -49.281640625,
+        "delta_hh_db": -6.381571730852043,
+        "delta_hv_db": -3.72478449997522,
+        "combined_delta_db": -5.0531781154136315
+      },
+      {
+        "role": "random_control",
+        "row": 19,
+        "col": 13,
+        "lat": -4.777734375,
+        "lon": -49.276953125,
+        "delta_hh_db": -1.6023709516786746,
+        "delta_hv_db": -0.8316582325980859,
+        "combined_delta_db": -1.2170145921383804
+      },
+      {
+        "role": "random_control",
+        "row": 26,
+        "col": 16,
+        "lat": -4.783203125,
+        "lon": -49.274609375000004,
+        "delta_hh_db": 1.2781058374948926,
+        "delta_hv_db": -1.5125518087883008,
+        "combined_delta_db": -0.11722298564670408
+      },
+      {
+        "role": "random_control",
+        "row": 26,
+        "col": 26,
+        "lat": -4.783203125,
+        "lon": -49.266796875000004,
+        "delta_hh_db": 1.8463899509348172,
+        "delta_hv_db": 0.37309980760759265,
+        "combined_delta_db": 1.1097448792712048
+      },
+      {
+        "role": "low_change_control",
+        "row": 15,
+        "col": 28,
+        "lat": -4.774609375,
+        "lon": -49.265234375000006,
+        "delta_hh_db": -1.6450179559636955,
+        "delta_hv_db": 1.6419912965210917,
+        "combined_delta_db": -0.0015133297213019148
+      },
+      {
+        "role": "low_change_control",
+        "row": 0,
+        "col": 6,
+        "lat": -4.762890625,
+        "lon": -49.282421875000004,
+        "delta_hh_db": -1.893262558912285,
+        "delta_hv_db": 1.9136093433240098,
+        "combined_delta_db": 0.010173392205862442
+      },
+      {
+        "role": "low_change_control",
+        "row": 17,
+        "col": 21,
+        "lat": -4.776171875,
+        "lon": -49.270703125000004,
+        "delta_hh_db": -0.23280444852790003,
+        "delta_hv_db": 0.20851547213354865,
+        "combined_delta_db": -0.012144488197175687
+      }
+    ],
+    "revised_candidates_same_cell_as_previous": [
+      {
+        "row": 5,
+        "col": 15,
+        "previous_role": "strong",
+        "revised_role": "strong"
+      },
+      {
+        "row": 12,
+        "col": 20,
+        "previous_role": "strong",
+        "revised_role": "strong"
+      },
+      {
+        "row": 19,
+        "col": 13,
+        "previous_role": "random_control",
+        "revised_role": "random_control"
+      },
+      {
+        "row": 26,
+        "col": 16,
+        "previous_role": "random_control",
+        "revised_role": "random_control"
+      },
+      {
+        "row": 26,
+        "col": 26,
+        "previous_role": "random_control",
+        "revised_role": "random_control"
+      }
+    ],
+    "revised_cells_not_in_previous": [
+      {
+        "row": 5,
+        "col": 27,
+        "role": "low_change_control"
+      },
+      {
+        "row": 7,
+        "col": 30,
+        "role": "strong"
+      },
+      {
+        "row": 8,
+        "col": 11,
+        "role": "strong"
+      },
+      {
+        "row": 16,
+        "col": 12,
+        "role": "low_change_control"
+      },
+      {
+        "row": 17,
+        "col": 3,
+        "role": "low_change_control"
+      }
+    ]
+  },
+  "sentinel2_scl": {
+    "status": "not_locally_available; no dated before/after asset sampled",
+    "limitation": "no network fetch attempted; absent evidence is not a negative observation"
+  },
+  "limitations": [
+    "Provisional SAR product; sampled subset is not contiguous mapped coverage.",
+    "Alert match uses repaired geometry and boundary-inclusive covers; alert record date does not establish publication/vintage.",
+    "FIRMS is a 500 m point-distance screen, not pixel intersection or fire confirmation.",
+    "Nearby same-event detections/candidates are not independent; no event counts inferred.",
+    "Controls are descriptive, not matched causal controls; no training or attribution."
+  ]
+}
