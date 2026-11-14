@@ -328,3 +328,5 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+.language-switch { margin: 1px 3px 1px auto; padding: 2px 8px; }
