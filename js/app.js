@@ -639,6 +639,10 @@
     const qa = quality?.directions?.ascending, qd = quality?.directions?.descending;
     $('gunw-series-note').hidden = !(qa && qd);
     if (qa && qd) $('gunw-series-text').textContent = 'First three GUNW pairs: ascending ' + qa.quality_valid_in_all_pairs + '/1024, descending ' + qd.quality_valid_in_all_pairs + '/1024 points pass all three pair masks. A continuous rate cannot be estimated from these pairs.';
+    const postgap = state.site.context && state.site.context.gunw_postgap;
+    const pa = postgap?.directions?.ascending, pd = postgap?.directions?.descending;
+    $('gunw-postgap-note').hidden = !(pa && pd);
+    if (pa && pd) $('gunw-postgap-text').textContent = 'Later segments: ' + pa.quality_valid_in_all_pairs + ' ascending and ' + pd.quality_valid_in_all_pairs + ' descending points pass their respective pair masks. Dates differ; reference stability and velocity remain unverified.';
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
     const op = state.site.context && state.site.context.opera_disp;

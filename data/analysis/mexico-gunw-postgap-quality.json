@@ -1,0 +1,172 @@
+{
+  "source": "NISAR PROVISIONAL GUNW / ASF DAAC",
+  "sample_grid": "32x32 existing Mexico coordinates, nearest native 80 m samples",
+  "method": "Per pair require finite phase and ionosphere, coherence >=0.7, valid component and nonwater subswaths, no RSLC anomaly flags and ionosphere uncertainty <=1 rad. Then intersect pointwise masks across consecutive pairs. Connected components, stable reference, atmospheric residuals and viewing geometry require separate assessment.",
+  "limitations": "Short selected segments only; quality overlap is necessary but not sufficient for a displacement chain. A zero count is a result of this conservative mask, not proof of no motion. No velocity or vertical/east decomposition is estimated.",
+  "directions": {
+    "ascending": {
+      "pairs": [
+        {
+          "reference_date": "2025-12-17",
+          "secondary_date": "2025-12-29",
+          "granule_id": "NISAR_L2_PR_GUNW_008_019_A_011_009_4000_SH_20251217T120541_20251217T120615_20251229T120541_20251229T120616_P05023_N_F_J_001",
+          "concept_id": "G4275144931-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/ascending/2025-12-17_2025-12-29.json",
+          "valid_count": 438,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 439,
+            "component_valid": 974,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 1024
+          },
+          "flag_bits_set_counts": {
+            "24": 791
+          }
+        },
+        {
+          "reference_date": "2025-12-29",
+          "secondary_date": "2026-01-10",
+          "granule_id": "NISAR_L2_PR_GUNW_009_019_A_011_010_4000_SH_20251229T120541_20251229T120616_20260110T120542_20260110T120616_P05023_N_F_J_001",
+          "concept_id": "G4276264657-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/ascending/2025-12-29_2026-01-10.json",
+          "valid_count": 465,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 465,
+            "component_valid": 962,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 1024
+          },
+          "flag_bits_set_counts": {
+            "24": 803
+          }
+        },
+        {
+          "reference_date": "2026-01-10",
+          "secondary_date": "2026-01-22",
+          "granule_id": "NISAR_L2_PR_GUNW_010_019_A_011_011_4000_SH_20260110T120542_20260110T120616_20260122T120542_20260122T120617_P05023_N_F_J_001",
+          "concept_id": "G4276242250-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/ascending/2026-01-10_2026-01-22.json",
+          "valid_count": 431,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 431,
+            "component_valid": 927,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 1024
+          },
+          "flag_bits_set_counts": {
+            "24": 741
+          }
+        },
+        {
+          "reference_date": "2026-01-22",
+          "secondary_date": "2026-02-03",
+          "granule_id": "NISAR_L2_PR_GUNW_011_019_A_011_012_4000_SH_20260122T120542_20260122T120617_20260203T120543_20260203T120618_P05023_N_F_J_001",
+          "concept_id": "G4276210691-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/ascending/2026-01-22_2026-02-03.json",
+          "valid_count": 340,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 340,
+            "component_valid": 852,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 1024
+          },
+          "flag_bits_set_counts": {
+            "24": 741
+          }
+        }
+      ],
+      "quality_valid_in_all_pairs": 275,
+      "dominant_component_each_pair": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "common_points_in_dominant_components": 275
+    },
+    "descending": {
+      "pairs": [
+        {
+          "reference_date": "2026-01-05",
+          "secondary_date": "2026-01-17",
+          "granule_id": "NISAR_L2_PR_GUNW_009_113_D_079_010_4000_SH_20260105T011332_20260105T011407_20260117T011333_20260117T011407_P05023_N_F_J_001",
+          "concept_id": "G4275973835-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/descending/2026-01-05_2026-01-17.json",
+          "valid_count": 93,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 118,
+            "component_valid": 775,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 579
+          },
+          "flag_bits_set_counts": {
+            "24": 822
+          }
+        },
+        {
+          "reference_date": "2026-01-17",
+          "secondary_date": "2026-01-29",
+          "granule_id": "NISAR_L2_PR_GUNW_010_113_D_079_011_4000_SH_20260117T011333_20260117T011407_20260129T011333_20260129T011408_P05023_N_F_J_001",
+          "concept_id": "G4275957805-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/descending/2026-01-17_2026-01-29.json",
+          "valid_count": 190,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 190,
+            "component_valid": 830,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 1024
+          },
+          "flag_bits_set_counts": {
+            "24": 827
+          }
+        },
+        {
+          "reference_date": "2026-01-29",
+          "secondary_date": "2026-02-10",
+          "granule_id": "NISAR_L2_PR_GUNW_011_113_D_079_012_4000_SH_20260129T011333_20260129T011408_20260210T011334_20260210T011409_P05023_N_F_J_001",
+          "concept_id": "G4275945758-ASF",
+          "subset_receipt": "data/subsets/mexico-gunw-series/descending/2026-01-29_2026-02-10.json",
+          "valid_count": 249,
+          "individual_check_counts": {
+            "phase_finite": 1024,
+            "ionosphere_finite": 1024,
+            "coherence_at_least_0_7": 253,
+            "component_valid": 700,
+            "nonwater_valid_subswaths": 1024,
+            "no_anomaly_flags": 1024,
+            "ionosphere_uncertainty_at_most_1_rad": 1024
+          },
+          "flag_bits_set_counts": {
+            "24": 809
+          }
+        }
+      ],
+      "quality_valid_in_all_pairs": 68,
+      "dominant_component_each_pair": [
+        1,
+        1,
+        1
+      ],
+      "common_points_in_dominant_components": 68
+    }
+  },
+  "both_directions_quality_overlap": 39
+}

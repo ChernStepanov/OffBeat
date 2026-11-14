@@ -6,14 +6,14 @@ import subset_nisar as sub
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('direction',choices=['ascending','descending']);parser.add_argument('--limit',type=int,default=3);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('direction',choices=['ascending','descending']);parser.add_argument('--limit',type=int,default=3);parser.add_argument('--offset',type=int,default=0);args=parser.parse_args()
     spec={'ascending':(19,11,'A','Ascending'),'descending':(113,79,'D','Descending')}[args.direction]
     track,frame,letter,word=spec;sub.configure('mexico','Mexico City',dict(w=-99.09,s=19.415,e=-99.065,n=19.44),track,frame)
     params={'short_name':'NISAR_L2_GUNW_PROVISIONAL_V1','bounding_box':'-99.09,19.415,-99.065,19.44','page_size':2000,'sort_key':'start_date'}
     resp=requests.get('https://cmr.earthdata.nasa.gov/search/granules.json',params=params,timeout=90);resp.raise_for_status()
     if int(resp.headers.get('CMR-Hits',0))>2000:raise RuntimeError('CMR pagination required')
     gs=[g for g in resp.json()['feed']['entry'] if re.search(rf'_GUNW_\d+_{track:03}_{letter}_{frame:03}_',g['producer_granule_id'])]
-    gs.sort(key=lambda g:g['time_start']);gs=gs[:args.limit]
+    gs.sort(key=lambda g:g['time_start']);gs=gs[args.offset:args.offset+args.limit]
     if len(gs)<args.limit:raise ValueError('Too few granules')
     os.environ['EARTHDATA_TOKEN']=(ROOT/'.earthdata_token').read_text().strip()
     if not earthaccess.login(strategy='environment',persist=False).authenticated:raise RuntimeError('Authentication failed')
@@ -34,4 +34,10 @@ def main():
             r={'source':{'id':g['producer_granule_id'],'concept_id':g['id'],'collection':g['collection_concept_id'],'url':url},'catalogue_query':resp.url,'reference_date':ref,'secondary_date':sec,'identification':{'track':track,'frame':frame,'direction':word,'look_direction':sub.scalar(ident['lookDirection'])},'center_frequency_hz':float(base['centerFrequency'][()]),'grid':grid,'subset_path':path.relative_to(ROOT).as_posix(),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'sample_count':int(valid.size),'quality_valid_count':int(valid.sum()),'steps':['Sample native GUNW HH phase, coherence, components, ionosphere and uncertainty at 32x32 existing points','Use previous quality mask coherence >=0.7, valid nonwater subswaths, valid connected component, no anomaly flags and ionosphere uncertainty <=1 rad','No displacement rate or stable reference claimed']}
             path.with_suffix('.json').write_text(json.dumps(r,indent=2)+'\n');print(word,ref,sec,'quality valid',valid.sum(),flush=True)
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    try: main()
+    except Exception as exc:
+        # Exceptions from remote readers can contain temporary signed URLs.
+        import sys
+        print('GUNW inspection failed:', type(exc).__name__, file=sys.stderr)
+        sys.exit(1)
