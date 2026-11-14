@@ -40,6 +40,18 @@
   });
   let areaLayers = [];
   let rankingData = null;
+  // the map window's Win98 maximize button: cover the desk, status bar stays on top
+  const mapWin = $('map-win'), maxBtn = $('map-max');
+  function setMapMaximized(on) {
+    mapWin.classList.toggle('win--max', on);
+    document.body.classList.toggle('win-max-open', on);
+    maxBtn.setAttribute('aria-pressed', String(on));
+    maxBtn.title = on ? 'Restore window / Восстановить окно' : 'Maximize map / Развернуть карту';
+    // Leaflet measures its container: re-measure both maps once the new layout settles
+    setTimeout(() => { map.invalidateSize(); optic.invalidateSize(); }, 60);
+  }
+  maxBtn.addEventListener('click', () => setMapMaximized(!mapWin.classList.contains('win--max')));
+  window.addEventListener('keydown', e => { if (e.key === 'Escape' && mapWin.classList.contains('win--max')) setMapMaximized(false); });
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
