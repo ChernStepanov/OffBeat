@@ -13,8 +13,8 @@ OB.terrainTiles = (() => {
     const n = 2 ** z, canonical = wrap(x, n);
     return { z, x, y, key: `${z}/${canonical}/${y}`, meshKey: `${z}/${x}/${y}`, url: `https://s3.amazonaws.com/elevation-tiles-prod/terrarium/${z}/${canonical}/${y}.png` };
   }
-  function cover(bounds, level, budget = 64) {
-    let z = clamp(Math.floor(level), 0, 14);
+  function cover(bounds, level, budget = 64, maxLevel = 14) {
+    let z = clamp(Math.floor(level), 0, maxLevel);
     while (true) {
       const n = 2 ** z, x0 = Math.floor(bounds.w * n), x1 = Math.floor(bounds.e * n);
       const y0 = clamp(Math.floor(bounds.n * n), 0, n - 1), y1 = clamp(Math.floor(bounds.s * n), 0, n - 1);
@@ -36,11 +36,11 @@ OB.terrainTiles = (() => {
   }
   // Preload an orbit around the geographic centre. Camera yaw/pitch must never
   // choose a different elevation source, tessellation or height colour range.
-  function orbitCoverage(center, zoom) {
+  function orbitCoverage(center, zoom, maxLevel = 14) {
     const radius = 12 / (2 * 2 ** zoom);
     const bounds = { w: center.x - radius, e: center.x + radius, n: center.y - radius, s: center.y + radius };
     if (zoom < 1.5) { bounds.w = Math.max(0, bounds.w); bounds.e = Math.min(1 - 1e-12, bounds.e); }
-    return cover(bounds, zoom + 2, 64);
+    return cover(bounds, zoom + 2, 64, maxLevel);
   }
   function sample(tile, u, v) {
     const s = tile.size, x = clamp(u * s - .5, 0, s - 1), y = clamp(v * s - .5, 0, s - 1);

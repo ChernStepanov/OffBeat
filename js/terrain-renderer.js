@@ -98,16 +98,19 @@ OB.createTerrainRenderer = async function (canvas) {
     camera.up.set(0, 1, 0); camera.lookAt(target); camera.updateMatrixWorld();
   }
   function updateCoverage() {
-    desired = tiles.orbitCoverage(center, viewZoom); sourceLevel = desired[0]?.z || 0;
+    desired = tiles.orbitCoverage(center, viewZoom, mode === 'topo' ? 16 : 14); sourceLevel = Math.min(14, desired[0]?.z || 0);
     segments = 64;
     const keys = desired.map(t => t.meshKey).join('|') + '/' + segments;
     if (keys !== wantedKey) {
       wantedKey = keys;
-      const parents = new Map();
+      const parents = new Map(), detail = new Map();
       for (const t of desired) {
-        const z = Math.max(0, t.z - 2), shift = 2 ** (t.z - z), p = tiles.descriptor(z, Math.floor(t.x / shift), Math.floor(t.y / shift)); parents.set(p.key, p);
+        const fineZ = Math.min(14, t.z), fineShift = 2 ** (t.z - fineZ);
+        const fine = tiles.descriptor(fineZ, Math.floor(t.x / fineShift), Math.floor(t.y / fineShift));
+        detail.set(fine.key, fine);
+        const z = Math.max(0, fineZ - 2), shift = 2 ** (t.z - z), p = tiles.descriptor(z, Math.floor(t.x / shift), Math.floor(t.y / shift)); parents.set(p.key, p);
       }
-      stream.setWanted([tiles.descriptor(0, 0, 0), ...parents.values(), ...desired]);
+      stream.setWanted([tiles.descriptor(0, 0, 0), ...parents.values(), ...detail.values()]);
       topoStream.setWanted(mode === 'topo' ? desired.map(topoDescriptor) : []);
       overlayDirty = true;
     }
@@ -119,7 +122,7 @@ OB.createTerrainRenderer = async function (canvas) {
     let low = Infinity, high = -Infinity, detail = 14;
     for (let row = 0; row < count; row++) for (let col = 0; col < count; col++) {
       const i = row * count + col, x = (tile.x + col / segments) / n, y = Math.min(1 - 1e-12, (tile.y + row / segments) / n);
-      const measured = stream.heightAt(x, y, tile.z); if (!measured) return false;
+      const measured = stream.heightAt(x, y, Math.min(14, tile.z)); if (!measured) return false;
       const h = measured.height_m, cosine = Math.cosh(Math.PI * (1 - 2 * y));
       positions.set([col / segments, h * cosine, row / segments], i * 3); elevations[i] = h; uvs.set([col / segments, 1 - row / segments], i * 2);
       low = Math.min(low, h); high = Math.max(high, h); detail = Math.min(detail, measured.level);
@@ -282,9 +285,9 @@ OB.createTerrainRenderer = async function (canvas) {
     projectSample(index) { const p = sampleList.find(p => p.index === index); if (!p) return null; const v = p.position.clone().project(camera); return { x: (v.x + 1) * width / 2, y: (1 - v.y) * height / 2, depth: v.z }; },
     info: () => {
       const network = stream.info(), topo = topoStream.info(), building = desired.filter(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; }).length;
-      return { geometryRevision, terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => stream.cache.has(t.key)).length,
+      return { geometryRevision, terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => { const z = Math.min(14, t.z), shift = 2 ** (t.z - z); return stream.cache.has(tiles.descriptor(z, Math.floor(t.x / shift), Math.floor(t.y / shift)).key); }).length,
         radarSamples: sampleList.length, exaggeration, mode, view: ground ? 'ground' : plan ? 'plan' : 'orbit', groundTilt, renderer: 'WebGL / Three.js', yaw, pitch, zoom: viewZoom, sourceLevel, center: location(),
-        mapPending: mode === 'topo' ? topo.pending : 0, mapFailed: mode === 'topo' ? topo.failed : 0, mapReady: mode === 'topo' ? desired.filter(t => topoStream.cache.has(t.key)).length : 0,
+        mapLevel: mode === 'topo' ? desired[0]?.z || 0 : 0, mapPending: mode === 'topo' ? topo.pending : 0, mapFailed: mode === 'topo' ? topo.failed : 0, mapReady: mode === 'topo' ? desired.filter(t => topoStream.cache.has(t.key)).length : 0,
         min_m: minHeight, max_m: maxHeight, span_m: tiles.C * Math.cos(location().lat * Math.PI / 180) / 2 ** viewZoom,
         ...network, building, loading: coverageDirty || network.pending > 0 || building > 0 };
     },

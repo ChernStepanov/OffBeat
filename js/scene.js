@@ -44,7 +44,7 @@
     $('terrain-status').textContent = `${phrase('DEM tiles', 'Тайлы DEM')}: ${info.fineTiles}/${info.desiredTiles} / z${info.sourceLevel}`
       + (info.pending ? ` / ${phrase('loading', 'загрузка')}: ${info.pending}` : '')
       + (info.failed ? ` / ${phrase('unavailable', 'недоступно')}: ${info.failed}` : '')
-      + (info.mode === 'topo' ? ` | ${phrase('Map tiles', 'Тайлы карты')}: ${info.mapReady}/${info.desiredTiles}`
+      + (info.mode === 'topo' ? ` | ${phrase('Map tiles', 'Тайлы карты')}: ${info.mapReady}/${info.desiredTiles} / z${info.mapLevel}`
         + (info.mapPending ? ` / ${phrase('loading', 'загрузка')}: ${info.mapPending}` : '')
         + (info.mapFailed ? ` / ${phrase('unavailable; DEM colours shown', 'недоступны; показаны цвета высот')}: ${info.mapFailed}` : '') : '');
     $('terrain-retry').hidden = !info.failed && !info.mapFailed;

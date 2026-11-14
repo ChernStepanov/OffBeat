@@ -38,6 +38,10 @@ for (const [lon, lat] of [[-67.08, 10.47], [86.925, 27.988], [179.99, 80]]) {
     }
   }
 }
+const closeCoverage = m.orbitCoverage(m.mercator(-121.7603, 46.8523), 19, 16);
+assert.equal(closeCoverage[0].z, 16, 'topographic imagery retains detail beyond DEM zoom 14');
+assert(closeCoverage.length <= 64);
+assert.equal(m.orbitCoverage(m.mercator(-121.7603, 46.8523), 19)[0].z, 14, 'DEM remains limited to its supported resolution');
 assert.deepEqual(Array.from(decoded.heights), [0, 100, -100, 1000]);
 assert.equal(m.sample(decoded, .5, .5), 250);
 assert.throws(() => m.decode(new Uint8ClampedArray(16), 2), /transparent/);
