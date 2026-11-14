@@ -97,7 +97,7 @@ charts available in the prepared cases.
 
 NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
 Both panes use Esri World Imagery for matching detail, grey under NISAR on the left
-and colour on the right. Place labels, study-area boundaries and metric scales help orientation.
+and colour on the right. Place labels and metric scales help orientation.
 Imagery dates vary by location; this is context, not date-matched optical validation.
 
 ## Font

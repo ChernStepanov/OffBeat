@@ -89,7 +89,7 @@ p { margin: 0 0 8px; }
 }
 .paper { padding: 8px 10px; line-height: 1.5; }
 /* maps and plots paint over an inset shadow, so their bevel is a border plus an outer shadow */
-.map, canvas {
+.map, .plots canvas {
   border: 1px solid; border-color: var(--dk) var(--lt) var(--lt) var(--dk);
   box-shadow: -1px -1px 0 var(--lo), 1px 1px 0 var(--hi);
   margin: 1px;
@@ -188,7 +188,7 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .props th { width: 42%; font-weight: normal; color: #000; }
 .props td { font-weight: bold; }
 .plots { display: grid; gap: 6px; min-width: 0; }
-canvas { display: block; width: calc(100% - 2px); background: var(--paper); }
+.plots canvas { display: block; width: calc(100% - 2px); background: var(--paper); }
 .sw { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin: 0 4px 0 1px; }
 .sw--hh { background: var(--title-a); }
 .sw--hv { background: var(--st-drop); }

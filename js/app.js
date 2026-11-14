@@ -206,11 +206,10 @@
     if (!state.site || !labelsVisible()) return;
     const s = state.site, b = s.grid.bbox;
     [map, optic].forEach(m => {
-      const outline = L.rectangle([[b.s, b.w], [b.n, b.e]], { color: '#fff', weight: 2, dashArray: '6 4', fill: false, interactive: false }).addTo(m);
       const text = document.createElement('span');
       text.textContent = s.name;
       const label = L.marker([b.n, (b.w + b.e) / 2], { interactive: false, icon: L.divIcon({ className: 'area-label', html: text, iconSize: null }) }).addTo(m);
-      areaLayers.push([m, outline], [m, label]);
+      areaLayers.push([m, label]);
     });
   }
 
