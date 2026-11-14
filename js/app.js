@@ -1,6 +1,12 @@
 // Wires sites, the z-score raster, the pixel card, the patch list and the player.
-(function () {
+(async function () {
   const $ = id => document.getElementById(id);
+  try { await OB.loadData(); } catch (error) {
+    $('sb-state').textContent = error.message;
+    $('sb-src').textContent = 'No measurements loaded';
+    $('play-hint').textContent = 'Cannot load real data. Check the static server and data/mexico.json.';
+    return;
+  }
   const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null };
 
   // --- maps: anomaly raster over greyed imagery + optical map that follows it ---
@@ -50,7 +56,7 @@
     const g = state.site.grid, t = state.z;
     state.raster = paint(i => {
       const a = Math.abs(g.z[i]);
-      if (a < t || g.cover[i] === 80) return null;
+      if (!Number.isFinite(g.z[i]) || a < t || g.cover[i] === 80) return null;
       const [r, gg, b] = STYLE_RGB[g.style[i]];
       return [r, gg, b, Math.round(255 * Math.min(1, 0.55 + (a - t) / 6))];
     }).addTo(map);
@@ -61,7 +67,7 @@
     state.coverRaster = null;
     if (!$("l-cover").checked) return;
     const g = state.site.grid;
-    state.coverRaster = paint(i => rgb(OB.COVER[g.cover[i]].color).concat(150)).addTo(map);
+    state.coverRaster = paint(i => OB.COVER[g.cover[i]] ? rgb(OB.COVER[g.cover[i]].color).concat(150) : null).addTo(map);
     if (state.raster) state.raster.bringToFront();
   }
 
@@ -99,7 +105,7 @@
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
-    }).join("") : `<tr><td colspan="5">Nothing passes |z| ≥ ${state.z}. Lower the threshold.</td></tr>`;
+    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'Anomaly analysis unavailable: measured peers and land cover required.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true); };
   $("top").addEventListener("click", rowPick);
@@ -110,7 +116,7 @@
     state.patches = findPatches();
     let px = 0; for (let i = 0; i < g.z.length; i++) if (g.style[i] && Math.abs(g.z[i]) >= state.z) px++;
     drawRaster(); drawTop();
-    $("sb-count").textContent = `${state.patches.length} patches · ${px} px at |z| ≥ ${state.z} · pixel ${g.cellM} m`;
+    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${state.patches.length} patches · ${px} px at |z| ≥ ${state.z}` : 'No validated anomaly scores';
   }
 
   // --- picking a pixel ---
@@ -126,10 +132,10 @@
     state.cell = i; state.pixel = p;
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
-    $("p-cover").textContent = `${OB.COVER[p.cover].name} (${p.cover})`;
-    $("p-peers").textContent = `${p.peers} px, same class`;
-    $("p-z").textContent = (p.z > 0 ? "+" : "") + p.z.toFixed(2);
-    $("p-style").innerHTML = st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
+    $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
+    $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} px, same class`;
+    $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
+    $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
     $("p-since").textContent = p.since || "—";
     $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
     const b = g.bbox, dl = (b.n - b.s) / g.n, dw = (b.e - b.w) / g.n;
@@ -137,8 +143,9 @@
     cellBox.setBounds(rect).addTo(map); cellBoxOptic.setBounds(rect).addTo(optic);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
-    $("play").disabled = false;
-    $("play-hint").textContent = `Peers keep the beat, the pixel plays its ${channelName(p)} curve. When it slips, you hear it.`;
+    const v = voice(p);
+    $("play").disabled = !v.pix.some((x, i) => Number.isFinite(x) && Number.isFinite(v.med[i]) && Number.isFinite(v.sd[i]));
+    $("play-hint").textContent = $("play").disabled ? 'Audio unavailable: measured pixel and peer series required.' : `Peers keep the beat, the pixel plays its ${channelName(p)} curve.`;
     drawTop();
   }
 
@@ -146,7 +153,7 @@
   function drawCharts(head) {
     const p = state.pixel; if (!p) return;
     OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
-    OB.chart.displacement($("c-disp"), state.site.dates, p, sinceIdx(), head);
+    OB.chart.displacement($("c-disp"), state.site.displacement_dates || state.site.dates, p, null, head);
   }
 
   function channelName(p) {
@@ -175,8 +182,9 @@
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
-    $("sb-state").textContent = `Ready · ${s.dates.length} acquisitions, ${s.dates[0]} – ${s.dates[s.dates.length - 1]}`;
+    $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;
     if (state.patches[0]) pickCell(state.patches[0].peak, false);
+    else pickCell(Math.floor(s.grid.n / 2) * s.grid.n + Math.floor(s.grid.n / 2), false);
     if (location.hash !== "#" + s.id) history.replaceState(null, "", "#" + s.id);
   }
 
