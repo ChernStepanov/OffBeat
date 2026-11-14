@@ -12,7 +12,9 @@ OB.bindNisarMap = function (map, toggle, status) {
   const imageCache = new Map();
   let failedTiles = 0;
   let layer, loading, caption;
-  const blockSize = () => Math.max(1, 16 / 2 ** Math.max(0, map.getZoom() - nativeZoom));
+  // Square, hard-edged pixels only when a native tile is magnified; at or below the native
+  // level the browser scales smoothly, so fractional screen scales (125 %, 150 %) stay even.
+  const rendering = () => map.getZoom() > nativeZoom ? 'pixelated' : 'auto';
 
   map.createPane('nisarRadar');
   map.getPane('nisarRadar').style.zIndex = 250;
@@ -86,7 +88,7 @@ OB.bindNisarMap = function (map, toggle, status) {
       createTile(coords, done) {
         const tile = document.createElement('canvas');
         tile.width = tile.height = tileSize;
-        tile.style.imageRendering = 'pixelated';
+        tile.style.imageRendering = rendering();
         const context = tile.getContext('2d');
         const images = dates.map(date => loadImage(
           `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`));
@@ -126,15 +128,11 @@ OB.bindNisarMap = function (map, toggle, status) {
     return mosaic;
   }
 
+  // Recolour every pixel of the NASA browse tile in place: one screen cell is one data cell at
+  // the tile's own level, never an artificial block whose ground size changes with zoom.
   function colorTile(tile) {
-    const size = blockSize();
     const context = tile.getContext('2d');
-    const small = document.createElement('canvas');
-    small.width = small.height = tileSize / size;
-    const reduced = small.getContext('2d');
-    context.putImageData(tile.radar.pixels, 0, 0);
-    reduced.drawImage(tile, 0, 0, small.width, small.height);
-    const image = reduced.getImageData(0, 0, small.width, small.height);
+    const image = new ImageData(new Uint8ClampedArray(tile.radar.pixels.data), tileSize, tileSize);
     const pixels = image.data;
     for (let i = 0; i < pixels.length; i += 4) {
       if (pixels[i + 3] === 0) continue;
@@ -146,10 +144,7 @@ OB.bindNisarMap = function (map, toggle, status) {
       pixels[i + 3] = 255;
     }
     tile.radar.cells = image;
-    reduced.putImageData(image, 0, 0);
-    context.clearRect(0, 0, tileSize, tileSize);
-    context.imageSmoothingEnabled = false;
-    context.drawImage(small, 0, 0, tileSize, tileSize);
+    context.putImageData(image, 0, 0);
   }
 
   async function update() {
@@ -165,7 +160,7 @@ OB.bindNisarMap = function (map, toggle, status) {
         status.textContent = 'Loading NISAR radar coverage…';
         const dates = await getDates();
         layer = createMosaic(dates);
-        caption = `NASA NISAR | ${mosaicDays}-day mosaic through ${dates.at(-1)} | Blue to red: image brightness`;
+        caption = `NASA NISAR quick-look | ${mosaicDays}-day mosaic through ${dates.at(-1)} | Blue to red: browse brightness, not calibrated; straight seams come from NASA's tiles`;
       }
       if (toggle.checked) {
         layer.addTo(map);
@@ -180,13 +175,7 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   toggle.addEventListener('change', update);
   map.whenReady(update);
-  let previousSize = blockSize();
-  map.on('zoomend', () => {
-    const size = blockSize();
-    if (size === previousSize) return;
-    previousSize = size;
-    for (const tile of tiles) colorTile(tile);
-  });
+  map.on('zoomend', () => { const r = rendering(); for (const tile of tiles) tile.style.imageRendering = r; });
 
   return function cellBounds(latlng) {
     if (!toggle.checked || !layer || !map.hasLayer(layer)) return null;
