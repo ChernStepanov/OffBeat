@@ -570,7 +570,8 @@
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', 'false'));
-    await optical.load(s,s.dates.at(-1));
+    // Optical metadata must not delay the map or radar measurements.
+    optical.load(s,s.dates.at(-1));
     if (ticket !== state.loading) return;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;

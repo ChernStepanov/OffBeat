@@ -21,4 +21,3 @@ select.value='2';listener();assert.match(status.textContent,/No readable clear s
 select.value='context';listener();assert(removed>=1);
 optic.setDate('2026-01-01');assert.equal(select.value,'context');assert.equal(overlays,2);
 console.log('PASS: sharp context by default, dated images only when selected');
-
