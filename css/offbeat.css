@@ -266,6 +266,28 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
   background: var(--face); color: #000; box-shadow: var(--raised); font: bold 12.5px/26px var(--ui);
 }
 .leaflet-bar a:active { box-shadow: var(--pressed); }
+/* Leaflet's default zoom glyphs and link states need the same bevel as our buttons. */
+.leaflet-container .leaflet-control-zoom {
+  display: flex; flex-direction: column; gap: 2px; padding: 2px;
+  background: var(--face); box-shadow: var(--raised) !important;
+}
+.leaflet-container .leaflet-control-zoom a,
+.leaflet-container .leaflet-control-zoom a:hover,
+.leaflet-container .leaflet-control-zoom a:focus {
+  display: grid; place-items: center; width: 24px; height: 24px;
+  margin: 0; padding: 0; background: var(--face); color: #000;
+  font: bold 16px/1 Tahoma, sans-serif; text-decoration: none;
+  box-shadow: var(--raised);
+}
+.leaflet-container .leaflet-control-zoom a:active:not(.leaflet-disabled) {
+  box-shadow: var(--pressed); padding: 1px 0 0 1px;
+}
+.leaflet-container .leaflet-control-zoom a.leaflet-disabled {
+  color: var(--lo); text-shadow: 1px 1px 0 var(--hi); cursor: default;
+}
+.leaflet-container .leaflet-control-zoom a:focus-visible {
+  outline: 1px dotted #000; outline-offset: -5px;
+}
 .leaflet-tooltip { background: #ffffe1; border: 1px solid #000; border-radius: 0; box-shadow: none; padding: 1px 4px; color: #000; }
 
 /* --- pixel card --- */
