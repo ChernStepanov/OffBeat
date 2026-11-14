@@ -2,7 +2,7 @@
 
 ## Checked
 
-- Offline scientific tests, including temporal alert matching, preservation of
+- **36 passed, 6 network tests deselected**: offline scientific tests including temporal alert matching, preservation of
   missing values, no-reference GUNW chaining, real-sample recalculation and optical
   calibration/hash/bounds checks. Exact final totals are recorded in the PR.
 - Node checks for measured data, peer z arithmetic, preserved source-subset

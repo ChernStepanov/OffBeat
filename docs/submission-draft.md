@@ -42,7 +42,7 @@ imagery is geographic context. See source manifests and science review.
 
 **Links:** [Demo](https://offbeat.chern.su/),
 [repository](https://github.com/ChernStepanov/OffBeat),
-[scientific evidence](science-review.md). Check public availability and certificate
+[scientific evidence](science-review.md), [six-slide draft](submission/offbeat-draft.pptx). Check public availability and certificate
 behaviour before submission. The six-slide PPTX is a draft for team review.
 
 **AI disclosure draft:** OpenAI Codex assisted with implementation, tests,
