@@ -18,18 +18,42 @@
   const map = L.map("map", { zoomControl: true, maxZoom: 19 });
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19 });
   const labelLayers = [map, optic].map(m => {
-    m.attributionControl.setPrefix('<a href="https://leafletjs.com/" title="A JavaScript library for interactive maps">Leaflet</a>');
+    m.attributionControl.setPrefix('Leaflet');
     L.tileLayer(IMAGERY, { maxZoom: 19, maxNativeZoom: 19, className: 'context-imagery', attribution: imageryCredit }).addTo(m);
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
     m.getPane('placeLabels').style.pointerEvents = 'none';
-    L.control.scale({ metric: true, imperial: false, maxWidth: 100 }).addTo(m);
+    m.createPane('selectedCell');
+    m.getPane('selectedCell').style.zIndex = 640;
+    m.getPane('selectedCell').style.pointerEvents = 'none';
     return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 19, attribution: labelsCredit }).addTo(m);
   });
   let areaLayers = [];
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
   sync(map, optic); sync(optic, map);
+  function updateViewMetrics() {
+    const size = map.getSize();
+    const center = size.divideBy(2);
+    if (!size.x || !size.y) return;
+    const metersPerPixel = map.distance(
+      map.containerPointToLatLng(center.subtract([1, 0])),
+      map.containerPointToLatLng(center.add([1, 0])),
+    ) / 2;
+    // Equivalent nadir camera altitude for an assumed 45° vertical field of view.
+    const altitude = metersPerPixel * size.y / (2 * Math.tan(Math.PI / 8));
+    const scale = metersPerPixel >= 10 ? Math.round(metersPerPixel)
+      : Number(metersPerPixel.toPrecision(2));
+    const height = altitude >= 1000 ? `${Math.round(altitude / 100) / 10} km` : `${Math.round(altitude)} m`;
+    $('map-view-metrics').textContent = `Scale: ${scale} m/px | Approx. viewing altitude: ${height}`;
+    $('map-view-metrics').title = 'Altitude equivalent for a top-down view with a 45° vertical field of view.';
+  }
+  map.on('move resize', updateViewMetrics);
+  OB.bindArchive(() => map.getCenter().wrap());
+  const radarCellBounds = OB.bindNisarMap(map, $('l-nisar'), $('nisar-status'));
+  const labelsButton = $('l-labels');
+  const labelsVisible = () => labelsButton.getAttribute('aria-pressed') === 'true';
+  const updateWaterLabels = OB.bindWaterLabels([map, optic], $('water-status'));
   const viewportKey = 'offbeat.map.viewport.v1';
   let previousViewport = null, viewportReady = !!OB.tourWanted;
   try { previousViewport = JSON.parse(localStorage.getItem(viewportKey) || 'null'); } catch (_) { /* storage unavailable */ }
@@ -43,8 +67,24 @@
     try { localStorage.setItem(viewportKey, JSON.stringify({site:state.site.id, anchor:viewportAnchor(), lat:c.lat, lon:c.lng, zoom:map.getZoom()})); } catch (_) { /* storage unavailable */ }
   }
   map.on('moveend', saveViewport);
-  const box = () => L.rectangle([[0, 0], [0, 0]], { color: "#ffcc00", weight: 2, fill: false, interactive: false });
+  const box = () => L.rectangle([[0, 0], [0, 0]], {
+    pane: 'selectedCell', color: '#ffcc00', weight: 3, fill: false, interactive: false,
+  });
   const cellBox = box(), cellBoxOptic = box();
+  function showCellBounds(bounds) {
+    const [a, b] = bounds.map(corner => map.project(corner, 0));
+    const center = map.unproject(a.add(b).divideBy(2), 0);
+    const coordinates = `${center.lat.toFixed(6)}, ${center.wrap().lng.toFixed(6)}`;
+    for (const [target, frame] of [[map, cellBox], [optic, cellBoxOptic]]) {
+      frame.setBounds(bounds).addTo(target);
+      if (!frame.getTooltip()) frame.bindTooltip('', {
+        permanent: true, direction: 'top', opacity: 1, offset: [0, -8],
+      });
+      frame.setTooltipContent(coordinates);
+      frame.getTooltip().setLatLng(center);
+    }
+    $('p-loc').textContent = coordinates;
+  }
 
   // --- side lists ---
   $("sites").innerHTML = OB.SITES.map(s =>
@@ -56,11 +96,13 @@
   $("z").addEventListener("input", e => { state.z = +e.target.value; $("z-out").textContent = state.z; refresh(); });
   $("l-offbeat").addEventListener("change", drawRaster);
   $("l-cover").addEventListener("change", drawCover);
-  $('l-labels').addEventListener('change', () => {
+  labelsButton.addEventListener('click', () => {
+    labelsButton.setAttribute('aria-pressed', String(!labelsVisible()));
     [map, optic].forEach((m, i) => {
-      if ($('l-labels').checked) labelLayers[i].addTo(m);
+      if (labelsVisible()) labelLayers[i].addTo(m);
       else m.removeLayer(labelLayers[i]);
     });
+    updateWaterLabels(labelsVisible());
     drawAreaLabels();
   });
 
@@ -96,11 +138,11 @@
       $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
     } else {
       clearPixel();
-      $('data-status').textContent = 'No prepared NISAR measurements at this location. The map is geographic context only.';
-      $('place-status').textContent = 'No prepared NISAR data here. Choose a demo site to return to measurements.';
-      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'No prepared NISAR data at this location';
+      $('data-status').textContent = 'No prepared pixel series at this location. Radar imagery is available where the global mosaic has coverage.';
+      $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
+      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'Pixel series unavailable at this location';
       $('source-link').hidden = true; $('site-layers').hidden = true;
-      $('sb-state').textContent = 'No prepared NISAR data at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Source: geographic context';
+      $('sb-state').textContent = 'No prepared NISAR series at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Context: NASA GIBS and Esri';
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
       $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
     }
@@ -161,7 +203,7 @@
   function drawAreaLabels() {
     areaLayers.forEach(([m, layer]) => m.removeLayer(layer));
     areaLayers = [];
-    if (!state.site || !$('l-labels').checked) return;
+    if (!state.site || !labelsVisible()) return;
     const s = state.site, b = s.grid.bbox;
     [map, optic].forEach(m => {
       const outline = L.rectangle([[b.s, b.w], [b.n, b.e]], { color: '#fff', weight: 2, dashArray: '6 4', fill: false, interactive: false }).addTo(m);
@@ -209,6 +251,14 @@
     ctx.putImageData(img, 0, 0);
     const b = g.bbox;
     return L.imageOverlay(cv.toDataURL(), [[b.s, b.w], [b.n, b.e]], { className: "raster", interactive: false });
+  }
+
+  // Leaflet stretches the raster between its corners in Web Mercator.
+  function projectedGrid(g) {
+    const b = g.bbox;
+    const origin = map.project([b.n, b.w], 0);
+    const end = map.project([b.s, b.e], 0);
+    return { origin, width: (end.x - origin.x) / g.w, height: (end.y - origin.y) / g.h };
   }
 
   function drawRaster() {
@@ -362,9 +412,27 @@
 
   // --- picking a pixel ---
   map.on("click", e => {
-    const g = state.site.grid, b = g.bbox;
-    const x = Math.floor((e.latlng.lng - b.w) / (b.e - b.w) * g.w), y = Math.floor((b.n - e.latlng.lat) / (b.n - b.s) * g.h);
-    if (x >= 0 && y >= 0 && x < g.w && y < g.h) pickCell(y * g.w + x, false).then(pixelSound);
+    if (!state.site) return;
+    const g = state.site.grid;
+    const { origin, width, height } = projectedGrid(g);
+    const point = map.project(e.latlng, 0);
+    const x = Math.floor((point.x - origin.x) / width);
+    const y = Math.floor((point.y - origin.y) / height);
+    const index = y * g.w + x;
+    const localVisible = $('l-offbeat').checked && x >= 0 && y >= 0 && x < g.w && y < g.h;
+    const isAnomaly = Number.isFinite(g.z[index]) && Math.abs(g.z[index]) >= state.z && g.cover[index] !== 80;
+    if (localVisible && (isAnomaly || Number.isFinite(state.site.pixels?.[index]?.hv.at(-1)))) {
+      pickCell(index, false).then(pixelSound);
+      return;
+    }
+    clearPixel();
+    const bounds = radarCellBounds(e.latlng);
+    if (bounds) {
+      showCellBounds(bounds);
+      $('px-id').textContent = 'NISAR mosaic cell';
+    } else if (localVisible) {
+      pickCell(index, false).then(pixelSound);
+    }
   });
   function pixelSound() {
     const p = state.pixel; if (!p || !OB.sfx) return;
@@ -388,13 +456,15 @@
     $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
     $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
     $("p-since").textContent = p.since || "—";
-    $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
     $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;
     $('p-extra').innerHTML = Object.entries(p.extra || {}).filter(([, v]) => Number.isFinite(v))
       .map(([k, v]) => `<tr><th scope="row">${SITE_LAYERS[k].card}</th><td>${SITE_LAYERS[k].fmt(v)}</td></tr>`).join('');
-    const b = g.bbox, dl = (b.n - b.s) / g.h, dw = (b.e - b.w) / g.w;
-    const rect = [[b.n - (y + 1) * dl, b.w + x * dw], [b.n - y * dl, b.w + (x + 1) * dw]];
-    cellBox.setBounds(rect).addTo(map); cellBoxOptic.setBounds(rect).addTo(optic);
+    const { origin, width, height } = projectedGrid(g);
+    const rect = [
+      map.unproject(origin.add([x * width, y * height]), 0),
+      map.unproject(origin.add([(x + 1) * width, (y + 1) * height]), 0),
+    ];
+    showCellBounds(rect);
     if (fly) map.setView([p.lat, p.lon], Math.max(map.getZoom(), 13));
     drawCharts();
     const v = voice(p);

@@ -39,6 +39,10 @@ per browser. The demo endpoint may throttle or go offline. Operators can set
 Coordinate searches are local. A search outside the prepared NISAR areas shows
 geographic context and explicitly marks the measurement series as unavailable.
 The selected site and searched coordinates are retained in the URL across reloads.
+The NISAR archive panel searches NASA CMR across ASF NISAR collections for the
+point at the map centre. Results include official granule records and original
+file links when available. File downloads may require Earthdata Login. Pixel
+charts and sonification use the prepared measured cases.
 The last map centre and zoom are also remembered locally in the same browser;
 an explicitly selected site or coordinates in a link take precedence.
 
@@ -83,6 +87,13 @@ optional binary exports. Missing or quality-rejected samples remain unavailable.
 Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
 
 ## Data
+
+The left map loads a rolling 12-day NISAR GCOV radar mosaic from NASA GIBS.
+Newer tiles take precedence, and transparent coverage gaps show the Esri
+basemap. OffBeat aggregates the GIBS browse image into square cells and maps
+image brightness to blue through red. Clicking a cell outlines its bounds on
+both maps. The local measured HV overlay uses its own dB scale, with pixel
+charts available in the prepared cases.
 
 NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
 Both panes use Esri World Imagery for matching detail, grey under NISAR on the left

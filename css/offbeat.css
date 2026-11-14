@@ -160,7 +160,10 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .styles b { display: block; }
 
 /* --- maps --- */
-.maps { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.maps__pane { display: flex; flex-direction: column; min-width: 0; }
+.maps__pane > .pane-label { flex: 1; }
+.maps__pane > .map { flex-shrink: 0; }
 .pane-label { padding: 2px 2px 3px; }
 .map { height: 360px; }
 .leaflet-container { font: 12.5px/16px var(--ui); background: #808080; }
@@ -200,6 +203,7 @@ canvas { display: block; width: calc(100% - 2px); background: var(--paper); }
   border: 0; box-shadow: var(--raised);
 }
 .btn:active:not(:disabled) { box-shadow: var(--pressed); padding: 5px 11px 3px 13px; }
+#l-labels[aria-pressed="true"] { box-shadow: var(--pressed); }
 .btn:disabled { color: var(--lo); text-shadow: 1px 1px 0 var(--hi); }
 .btn:focus { outline: none; }
 .btn:focus-visible, .sites button:focus-visible, .menu a:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }

@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#000080">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="css/offbeat.css">
 </head>
 <body>
@@ -63,8 +64,10 @@
           <fieldset class="group">
             <legend>Map</legend>
             <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
+            <label><input type="checkbox" id="l-nisar" checked> Global NISAR radar (NASA)</label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
-            <label><input type="checkbox" id="l-labels" checked> Place names and study area</label>
+            <button type="button" class="btn" id="l-labels" aria-pressed="true">Map labels</button>
+            <small id="water-status" role="status" hidden></small>
           </fieldset>
           <fieldset class="group" id="site-layers" hidden>
             <legend>This site</legend>
@@ -135,6 +138,18 @@
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>
+          <div id="nisar-status" class="pane-label" role="status">Loading NISAR radar coverage…</div>
+          <div id="map-view-metrics" class="pane-label"></div>
+        </div>
+      </section>
+
+      <section class="win" aria-labelledby="t-archive">
+        <div class="win-t"><h2 id="t-archive">NISAR archive</h2></div>
+        <div class="win-b">
+          <button id="archive-search" type="button" disabled>Search at map centre</button>
+          <p id="archive-status" role="status">Find ASF acquisitions and source files for the point at the centre of the map.</p>
+          <ul id="archive-results" hidden></ul>
+          <button id="archive-more" type="button" hidden>Load more</button>
         </div>
       </section>
 
@@ -218,8 +233,13 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"></script>
 <script src="js/styles.js"></script>
 <script src="js/search.js"></script>
+<script src="js/archive.js"></script>
+<script src="js/nisar-map.js"></script>
+<script src="js/water-labels.js"></script>
 <script src="js/data.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>
