@@ -635,6 +635,10 @@
     const p = state.pixel; if (!p) return;
     const selectedDate = !$('acquisition').hidden ? state.date : null;
     OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head ?? selectedDate);
+    const quality = state.site.context && state.site.context.gunw_quality;
+    const qa = quality?.directions?.ascending, qd = quality?.directions?.descending;
+    $('gunw-series-note').hidden = !(qa && qd);
+    if (qa && qd) $('gunw-series-text').textContent = 'First three GUNW pairs: ascending ' + qa.quality_valid_in_all_pairs + '/1024, descending ' + qd.quality_valid_in_all_pairs + '/1024 points pass all three pair masks. A continuous rate cannot be estimated from these pairs.';
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
     const op = state.site.context && state.site.context.opera_disp;
