@@ -156,3 +156,25 @@ processed by ESA WorldCover consortium.
 The catalogue normalization helper currently reads local raw CMR snapshots from
 `data/catalog/`. The exact queries needed to recreate those snapshots are in the
 manifest. Raw snapshots are excluded from Git; stable normalized records are included.
+
+
+## Global NASA GIBS mosaic
+
+The optional left-map layer is a live visualisation from NASA GIBS WMS,
+`NISAR_L2_Geocoded_Polarimetric_Covariance` (EPSG:3857). Its time availability
+and default latest date come from the service's WMS GetCapabilities response.
+For the selected end date, the browser requests the available daily GCOV
+false-colour layers for that day and the preceding 11 calendar days, drawing
+newer days above older ones. It does not download or analyse source granules.
+
+The [ASF NISAR Worldview guide](https://hyp3-docs.asf.alaska.edu/nisar-docs/worldview/)
+describes the RGB decomposition, available polarizations, provisional and
+validated inputs, and resampling to a 15.625 m display grid. Individual tiles
+may combine acquisition modes and dates. GIBS WMS does not provide individual
+granule IDs per displayed pixel here; use NASA Worldview/ASF to inspect the
+source acquisitions. This visualisation is not a change, anomaly, deformation,
+or quantitative HV map and does not supply pixel time series. Transparent
+areas have no mosaic imagery and expose the grayscale context basemap. The
+separately prepared site measurements and their manifests remain the sources
+for the sample grid, charts, and GUNW values. The live service needs an internet
+connection and is not stored in this repository.

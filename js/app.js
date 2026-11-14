@@ -26,6 +26,60 @@
     L.control.scale({ metric: true, imperial: false, maxWidth: 100 }).addTo(m);
     return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 19, attribution: labelsCredit }).addTo(m);
   });
+  // Worldview's rolling mosaic is composed of daily GIBS GCOV images, newest on top.
+  // It is a visualisation of backscatter, not a measurement of change.
+  const gibsUrl = 'https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi';
+  const gibsName = 'NISAR_L2_Geocoded_Polarimetric_Covariance';
+  map.createPane('nisarMosaic');
+  map.getPane('nisarMosaic').style.zIndex = 350;
+  map.getPane('nisarMosaic').style.pointerEvents = 'none';
+  let mosaicLayers = [], availableDates = () => false;
+  function renderMosaic() {
+    mosaicLayers.forEach(layer => map.removeLayer(layer));
+    mosaicLayers = [];
+    if (!$('l-global-nisar').checked) { $('nisar-status').textContent = 'NASA mosaic hidden.'; return; }
+    const end = $('nisar-date').value;
+    if (!end) return;
+    const date = new Date(end + 'T00:00:00Z');
+    if (!Number.isFinite(date.getTime())) return;
+    let failures = 0;
+    for (let offset = 11; offset >= 0; offset--) {
+      const day = new Date(date.getTime() - offset * 86400000).toISOString().slice(0, 10);
+      if (!availableDates(day)) continue;
+      const layer = L.tileLayer.wms(gibsUrl, {
+        layers: gibsName, format: 'image/png', transparent: true, version: '1.3.0',
+        time: day, pane: 'nisarMosaic', maxZoom: 19, maxNativeZoom: 14,
+        attribution: 'NISAR imagery: <a href="https://www.earthdata.nasa.gov/data/tools/gibs">NASA GIBS / ESDIS</a>'
+      });
+      layer.on('tileerror', () => { if (++failures === 1) $('nisar-status').textContent = 'Some NASA imagery could not be loaded. Check your connection.'; });
+      layer.addTo(map); mosaicLayers.push(layer);
+    }
+    $('nisar-status').textContent = mosaicLayers.length
+      ? `NASA GCOV mosaic through ${end}; ${mosaicLayers.length} available days. Blank areas have no imagery.`
+      : `No NASA imagery available in the 12 days through ${end}.`;
+  }
+  $('l-global-nisar').addEventListener('change', renderMosaic);
+  $('nisar-date').addEventListener('change', renderMosaic);
+  (async () => {
+    try {
+      const response = await fetch(gibsUrl + '?SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.3.0');
+      if (!response.ok) throw new Error('NASA service unavailable');
+      const xml = new DOMParser().parseFromString(await response.text(), 'application/xml');
+      const layer = [...xml.getElementsByTagNameNS('*', 'Layer')].find(node =>
+        [...node.children].some(child => child.localName === 'Name' && child.textContent === gibsName));
+      const dimension = layer && [...layer.children].find(child => child.localName === 'Dimension' && child.getAttribute('name') === 'time');
+      if (!dimension) throw new Error('NASA availability unavailable');
+      const periods = dimension.textContent.trim().split(',').map(value => value.split('/'));
+      availableDates = day => periods.some(parts => day >= parts[0] && day <= (parts[1] || parts[0]));
+      const latest = dimension.getAttribute('default');
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(latest)) throw new Error('NASA latest date unavailable');
+      $('nisar-date').min = periods[0][0]; $('nisar-date').max = latest;
+      $('nisar-date').value = latest; $('nisar-date').disabled = false;
+      renderMosaic();
+    } catch (_) {
+      $('nisar-status').textContent = 'NASA mosaic unavailable. Check your connection and reload.';
+    }
+  })();
   let areaLayers = [];
   let syncing = false;
   const sync = (a, b) => a.on("move", () => { if (syncing) return; syncing = true; b.setView(a.getCenter(), a.getZoom(), { animate: false }); syncing = false; });
@@ -96,9 +150,9 @@
       $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
     } else {
       clearPixel();
-      $('data-status').textContent = 'No prepared NISAR measurements at this location. The map is geographic context only.';
+      $('data-status').textContent = 'No prepared pixel series at this location. NASA mosaic imagery may be visible where available.';
       $('place-status').textContent = 'No prepared NISAR data here. Choose a demo site to return to measurements.';
-      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'No prepared NISAR data at this location';
+      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'No prepared pixel series here; NASA mosaic coverage may be visible';
       $('source-link').hidden = true; $('site-layers').hidden = true;
       $('sb-state').textContent = 'No prepared NISAR data at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Source: geographic context';
       document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
@@ -380,7 +434,7 @@
     state.pixel = p;
     $('data-status').textContent = s.message || s.source;
     $('site-name').textContent = s.name; $('source-link').hidden = false;
-    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
+    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Sample square: HV ${s.dates.at(-1)}, blue −25 to red 0 dB; outside: NASA mosaic`;
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
@@ -446,7 +500,7 @@
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
     $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
-    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
+    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Sample square: HV ${s.dates.at(-1)}, blue −25 to red 0 dB; outside: NASA mosaic`;
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();

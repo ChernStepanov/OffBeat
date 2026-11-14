@@ -62,6 +62,11 @@
         <div class="win-b">
           <fieldset class="group">
             <legend>Map</legend>
+            <label><input type="checkbox" id="l-global-nisar" checked> NASA NISAR mosaic</label>
+            <label for="nisar-date">Mosaic end date</label>
+            <input type="date" id="nisar-date" disabled>
+            <p id="nisar-status" role="status">Loading NASA mosaic availability...</p>
+            <small>12 days of false-colour radar backscatter; not a change map. Coverage may have gaps. <a href="https://hyp3-docs.asf.alaska.edu/nisar-docs/worldview/">About this imagery</a></small>
             <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
             <label><input type="checkbox" id="l-labels" checked> Place names and study area</label>
