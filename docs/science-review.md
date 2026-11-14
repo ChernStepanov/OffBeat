@@ -28,6 +28,17 @@ Own-history change and spatial outlier scores answer different questions.
 Its cause remains unknown pending dense geolocated windows, weather/quality checks
 and independently interpreted dated optical evidence. No model is trained.
 
+ERA5 reanalysis, accessed retrospectively through Open-Meteo, gives **0.5 mm**
+for the seven full UTC days preceding 23 August and **0.4 mm** preceding
+4 September. These are coarse 0.25° grid estimates, not point rain-gauge
+measurements. The dates exclude the acquisition day to avoid using later hours.
+The per-observation original availability date is unverified, so these values
+must not be used as historical real-time forecast features without further checks.
+No weather correction or causal conclusion is inferred. The request, returned
+grid location, daily values and all six date windows are preserved in
+[ERA5 evidence](../data/analysis/amazon-era5.json); reproduce with
+`python scripts/era5_context.py`. [Open-Meteo ERA5 documentation](https://open-meteo.com/en/docs/historical-weather-api).
+
 ## Mexico (#20)
 
 Urban HH can include wall–ground double bounce when viewing geometry is favourable;
