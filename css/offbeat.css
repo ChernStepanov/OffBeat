@@ -164,6 +164,7 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .pane-label { padding: 2px 2px 3px; }
 .map { height: 360px; }
 .leaflet-container { font: 12.5px/16px var(--ui); background: #808080; }
+#map .context-imagery { filter: grayscale(1) brightness(.72) contrast(1.05); }
 .area-label { width: max-content !important; white-space: nowrap; pointer-events: none; transform-origin: center; }
 .area-label span { display: block; transform: translate(-50%, -100%); padding: 3px 6px; background: #fff; color: #111; border: 1px solid #333; font: 12px/16px Arial, sans-serif; box-shadow: 0 1px 3px #0006; }
 .leaflet-control-attribution { max-width: 260px; font: 9px/12px Arial, sans-serif; }
