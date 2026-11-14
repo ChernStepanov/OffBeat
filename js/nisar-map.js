@@ -9,12 +9,50 @@ OB.bindNisarMap = function (map, toggle, status) {
   const tileSize = 256;
   const nativeZoom = 13;
   const tiles = new Set();
+  const imageCache = new Map();
+  let failedTiles = 0;
   let layer, loading, caption;
   const blockSize = () => Math.max(1, 16 / 2 ** Math.max(0, map.getZoom() - nativeZoom));
 
   map.createPane('nisarRadar');
   map.getPane('nisarRadar').style.zIndex = 250;
   map.getPane('nisarRadar').style.pointerEvents = 'none';
+
+  function loadImage(url) {
+    if (imageCache.has(url)) return imageCache.get(url);
+    const attempt = () => new Promise(resolve => {
+      const image = new Image();
+      let timer;
+      const finish = value => {
+        clearTimeout(timer); image.onload = image.onerror = null; resolve(value);
+      };
+      image.crossOrigin = 'anonymous';
+      image.onload = () => finish(image);
+      image.onerror = () => finish(null);
+      timer = setTimeout(() => finish(null), 15000);
+      image.src = url;
+    });
+    const pending = (async () => {
+      let image = await attempt();
+      if (!image) {
+        await new Promise(resolve => setTimeout(resolve, 800));
+        image = await attempt();
+      }
+      // Never cache a failed request as missing satellite coverage.
+      if (!image) imageCache.delete(url);
+      return image;
+    })();
+    imageCache.set(url, pending);
+    if (imageCache.size > 384) imageCache.delete(imageCache.keys().next().value);
+    return pending;
+  }
+
+  function showStatus() {
+    if (!caption) return;
+    status.textContent = caption + (failedTiles
+      ? ` | ${failedTiles} incomplete tiles: NASA requests failed. Toggle radar to retry; these gaps are not confirmed missing coverage.`
+      : ' | Transparent gaps: no browse coverage in this time window.');
+  }
 
   async function getDates() {
     const response = await fetch(`${base}/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml`, {
@@ -50,14 +88,12 @@ OB.bindNisarMap = function (map, toggle, status) {
         tile.width = tile.height = tileSize;
         tile.style.imageRendering = 'pixelated';
         const context = tile.getContext('2d');
-        const images = dates.map(date => new Promise(resolve => {
-          const image = new Image();
-          image.crossOrigin = 'anonymous';
-          image.onload = () => resolve(image);
-          image.onerror = () => resolve(null);
-          image.src = `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`;
-        }));
+        const images = dates.map(date => loadImage(
+          `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`));
         Promise.all(images).then(loaded => {
+          if (tile.unloaded) return;
+          tile.incomplete = loaded.some(image => !image);
+          if (tile.incomplete) { failedTiles++; showStatus(); }
           // Paint oldest first so newer acquisitions cover older ones.
           for (const image of loaded) if (image) context.drawImage(image, 0, 0);
           if (!loaded.some(Boolean)) {
@@ -78,10 +114,15 @@ OB.bindNisarMap = function (map, toggle, status) {
     });
     const mosaic = new Mosaic({
       pane: 'nisarRadar', maxNativeZoom: nativeZoom, maxZoom: 19, opacity: 0.9,
+      updateWhenIdle: true, updateWhenZooming: false, keepBuffer: 3,
       attribution: 'Radar &copy; NASA/ISRO NISAR, NASA GIBS',
     });
     mosaic.on('tileload', e => tiles.add(e.tile));
-    mosaic.on('tileunload', e => tiles.delete(e.tile));
+    mosaic.on('tileunload', e => {
+      tiles.delete(e.tile);
+      e.tile.unloaded = true;
+      if (e.tile.incomplete) { failedTiles = Math.max(0, failedTiles - 1); showStatus(); }
+    });
     return mosaic;
   }
 
@@ -128,7 +169,7 @@ OB.bindNisarMap = function (map, toggle, status) {
       }
       if (toggle.checked) {
         layer.addTo(map);
-        status.textContent = caption;
+        showStatus();
       }
     } catch {
       status.textContent = 'NASA radar imagery unavailable. Toggle the layer to retry.';
