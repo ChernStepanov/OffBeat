@@ -31,14 +31,14 @@ function newMap() {
     containerPointToLatLng:()=>({lat:0,lng:0}),project:p=>vector(p.lng??p[1],p.lat??p[0]),unproject:p=>({lat:p.y,lng:p.x,wrap(){return this;}}),
     hasLayer:()=>false,removeLayer(){},getBounds:()=>({})};maps.push(map);return map;
 }
-const layer=()=>({addTo(){return this;},setBounds(){return this;},bringToFront(){},bindTooltip(){return this;},on(){return this;}});
+const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){return this;},setContent(){return this;},bringToFront(){},bindTooltip(){return this;},on(){return this;}});
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
 const opticalLoads=[];let holdMexico=null;
 const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
-  L:{map:newMap,tileLayer:layer,rectangle:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
+  L:{map:newMap,tileLayer:layer,rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
 };context.window=context;vm.createContext(context);
 for(const file of ['styles','search','data'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
@@ -90,3 +90,10 @@ assert.equal($('site-name').textContent,'World');
 assert.equal(regionButtons[0].getAttribute('aria-pressed'),'true');
 
 console.log('PASS: restart tour after world, region selection, stale geocoding and stale coordinates');
+
+for (const m of maps) {
+  m.handlers.click({latlng:{lat:48.8566,lng:2.3522,wrap(){return this;}}});
+  assert.equal($('p-loc').textContent,'48.856600, 2.352200');
+  assert.equal($('px-id').textContent,'No prepared measurement series here');
+}
+console.log('PASS: coordinates outside measured coverage on both maps');
