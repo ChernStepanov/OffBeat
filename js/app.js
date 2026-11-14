@@ -36,7 +36,7 @@
   // --- side lists ---
   $("sites").innerHTML = OB.SITES.map(s =>
     `<li><button type="button" data-site="${s.id}" aria-pressed="false">${s.name}<small>${s.region}</small></button></li>`).join("");
-  $("sites").addEventListener("click", e => { const b = e.target.closest("button"); if (b) loadSite(b.dataset.site); });
+  $("sites").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { ++searchSerial; $('place-results').replaceChildren(); $('place-status').textContent = ''; $('place-query').value = ''; document.dispatchEvent(new Event('ob:manual-navigation')); clearSearchMarkers(); const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url); loadSite(b.dataset.site); } });
   $("styles").innerHTML = Object.entries(OB.STYLES).map(([k, s]) =>
     `<li><i class="dot" style="background:${s.color}"></i><div><b>${s.name}</b><span class="d">${s.what}</span></div></li>`).join("");
 
@@ -49,6 +49,99 @@
       else m.removeLayer(labelLayers[i]);
     });
     drawAreaLabels();
+  });
+
+  // The endpoint can be replaced by the operator without changing the UI.
+  const geocoder = window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/';
+  const searchCache = new Map();
+  let lastSearch = 0, searchMarkers = [], searchSerial = 0;
+  function clearSearchMarkers() {
+    searchMarkers.forEach(([m, marker]) => m.removeLayer(marker));
+    searchMarkers = [];
+  }
+  function clearPixel() {
+    OB.sonify.stop(); state.cell = null; state.pixel = null;
+    [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
+    $('px-id').textContent = 'No NISAR data at this location';
+    for (const id of ['p-cover','p-peers','p-z','p-style','p-since','p-loc','p-quality']) $(id).textContent = 'Unavailable';
+    $('p-extra').innerHTML = '';
+    for (const id of ['c-bs','c-disp']) { const canvas = $(id); canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); }
+    $('play').disabled = true; $('stop').disabled = true;
+    $('play-hint').textContent = 'No measured series covers the selected location.';
+  }
+  async function showPlace(place) {
+    document.dispatchEvent(new Event('ob:manual-navigation'));
+    const site = OB.SITES.find(s => { const b = s.grid.bbox; return place.lat >= b.s && place.lat <= b.n && place.lon >= b.w && place.lon <= b.e; });
+    clearSearchMarkers();
+    if (site) await loadSite(site.id);
+    if (site) {
+      const g = site.grid, b = g.bbox;
+      const x = Math.min(g.w - 1, Math.floor((place.lon - b.w) / (b.e - b.w) * g.w));
+      const y = Math.min(g.h - 1, Math.floor((b.n - place.lat) / (b.n - b.s) * g.h));
+      await pickCell(y * g.w + x, false);
+      $('data-status').textContent = `${site.message} Showing a measured sample at the selected location.`;
+      $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
+    } else {
+      clearPixel();
+      $('data-status').textContent = 'No prepared NISAR measurements at this location. The map is geographic context only.';
+      $('place-status').textContent = 'No prepared NISAR data here. Choose a demo site to return to measurements.';
+      $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'No prepared NISAR data at this location';
+      $('source-link').hidden = true; $('site-layers').hidden = true;
+      $('sb-state').textContent = 'No prepared NISAR data at search location'; $('sb-count').textContent = 'No measured series'; $('sb-src').textContent = 'Source: geographic context';
+      document.querySelectorAll('#sites button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      $('top').tBodies[0].innerHTML = '<tr><td colspan="5">No prepared NISAR data at this location.</td></tr>';
+    }
+    if (place.bounds && !site) map.fitBounds(place.bounds, { padding: [16, 16], maxZoom: 13 });
+    else map.setView([place.lat, place.lon], site ? Math.max(map.getZoom(), 13) : 12);
+    [map, optic].forEach(m => {
+      const marker = L.circleMarker([place.lat, place.lon], { radius: 7, color: '#fff', weight: 2, fillColor: '#c00000', fillOpacity: 1, interactive: false }).addTo(m);
+      searchMarkers.push([m, marker]);
+    });
+    const url = new URL(location.href); url.searchParams.set('lat', String(place.lat)); url.searchParams.set('lon', String(place.lon)); history.replaceState(null, '', url);
+    $('map-win').scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }
+  $('place-search').addEventListener('submit', async e => {
+    e.preventDefault();
+    const query = $('place-query').value.trim(), parsed = OB.parseCoordinates(query), results = $('place-results');
+    results.replaceChildren();
+    if (!query) return;
+    if (parsed.kind === 'invalid') { $('place-status').textContent = 'Enter latitude, longitude (for example 19.43, -99.08). Latitude must be between -85.05 and 85.05; longitude between -180 and 180.'; return; }
+    if (parsed.kind === 'coordinates') { ++searchSerial; await showPlace(parsed); return; }
+    if (query.length > 200) { $('place-status').textContent = 'Search text is too long.'; return; }
+    const serial = ++searchSerial;
+    $('place-submit').disabled = true; $('place-status').textContent = 'Searching places...';
+    try {
+      let features = searchCache.get(query.toLowerCase());
+      if (!features) {
+        const delay = Math.max(0, 1000 - (Date.now() - lastSearch));
+        if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+        const url = new URL(geocoder); url.searchParams.set('q', query); url.searchParams.set('limit', '8');
+        lastSearch = Date.now();
+        const response = await fetch(url, { signal: AbortSignal.timeout(12000) });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json(); features = Array.isArray(data.features) ? data.features : [];
+        searchCache.set(query.toLowerCase(), features);
+      }
+      if (serial !== searchSerial) return;
+      for (const feature of features) {
+        const coords = feature.geometry && feature.geometry.coordinates;
+        if (!Array.isArray(coords) || !Number.isFinite(coords[0]) || !Number.isFinite(coords[1]) || Math.abs(coords[0]) > 180 || Math.abs(coords[1]) > 85.05112878) continue;
+        const props = feature.properties || {}, names = [props.name, props.city, props.county, props.state, props.country].filter((v,i,a) => typeof v === 'string' && v && a.indexOf(v) === i);
+        const label = names.join(', ') || `${coords[1].toFixed(4)}, ${coords[0].toFixed(4)}`;
+        const li = document.createElement('li'), button = document.createElement('button');
+        button.type = 'button'; button.textContent = label;
+        button.addEventListener('click', async () => {
+          results.replaceChildren(); $('place-query').value = label;
+          let bounds = null; const extent = props.extent;
+          if (Array.isArray(extent) && extent.length === 4 && extent.every(Number.isFinite) && extent[0] <= extent[2] && extent[3] <= extent[1] && extent[0] >= -180 && extent[2] <= 180 && extent[3] >= -85.05112878 && extent[1] <= 85.05112878) bounds = [[extent[3],extent[0]],[extent[1],extent[2]]];
+          await showPlace({lat:coords[1],lon:coords[0],bounds});
+        });
+        li.appendChild(button); results.appendChild(li);
+      }
+      $('place-status').textContent = results.children.length ? 'Choose a result.' : 'No places found. Try another name or coordinates.';
+    } catch (error) {
+      if (serial === searchSerial) $('place-status').textContent = 'Place search is unavailable. Try again or enter coordinates.';
+    } finally { $('place-submit').disabled = false; }
   });
 
   function drawAreaLabels() {
@@ -271,6 +364,9 @@
     const p = await s.series(x, y);
     if (state.cell !== i || state.site !== s) return;      // another click won the race
     state.pixel = p;
+    $('data-status').textContent = s.message || s.source;
+    $('site-name').textContent = s.name; $('source-link').hidden = false;
+    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
@@ -331,6 +427,7 @@
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
+    $('source-link').hidden = false;
     $('source-link').href = `data/${s.id}-manifest.json`;
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
@@ -342,7 +439,7 @@
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
     $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;
-    if (location.hash !== "#" + s.id && !OB.tourActive) history.replaceState(null, "", "#" + s.id);
+    if (!OB.tourActive) { const url = new URL(location.href); url.searchParams.set('site', s.id); if (OB.SITES.some(x => url.hash === '#' + x.id)) url.hash = ''; history.replaceState(null, '', url); }
     if (state.patches[0]) await pickCell(state.patches[0].peak, false);
     else {
       const first = s.pixels ? s.pixels.findIndex(p => p.disp && p.disp.some(Number.isFinite) && p.hv.some(Number.isFinite)) : -1;
@@ -382,5 +479,13 @@
     const id = location.hash.slice(1);
     if (OB.SITES.some(s => s.id === id) && (!state.site || state.site.id !== id)) loadSite(id);
   });
-  if (!OB.tourWanted) loadSite((location.hash || "").slice(1));
+  if (!OB.tourWanted) {
+    const legacy = location.hash.slice(1);
+    const params = new URL(location.href).searchParams, saved = params.get('site');
+    const lat = params.get('lat'), lon = params.get('lon');
+    const savedPlace = lat !== null && lon !== null ? OB.parseCoordinates(`${lat}, ${lon}`) : null;
+    loadSite(OB.SITES.some(s => s.id === legacy) ? legacy : saved).then(() => {
+      if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; showPlace(savedPlace); }
+    });
+  }
 })();

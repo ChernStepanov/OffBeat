@@ -104,6 +104,14 @@ p { margin: 0 0 8px; }
 }
 .sites button small { display: block; color: #000; }
 .sites button[aria-pressed="true"], .sites button[aria-pressed="true"] small { background: var(--sel); color: #fff; }
+.place-search { display: grid; gap: 5px; }
+.place-search input { min-width: 0; width: 100%; padding: 4px; border: 0; background: #fff; box-shadow: var(--sunken); font: inherit; }
+.place-search .btn { justify-self: start; }
+.place-hint { margin: 6px 0; }
+#place-status:empty { display: none; }
+.place-results { list-style: none; padding: 0; margin: 4px 0; }
+.place-results button { width: 100%; text-align: left; font: inherit; padding: 5px; border: 0; background: #fff; cursor: pointer; }
+.place-results button:hover, .place-results button:focus-visible { background: var(--sel); color: #fff; }
 
 /* group box: etched line, grey then white */
 .group {

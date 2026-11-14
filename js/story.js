@@ -6,7 +6,7 @@ window.OB = window.OB || {};
 (function () {
   const $ = id => document.getElementById(id);
   const hash = location.hash.slice(1);
-  OB.tourWanted = hash === "" || hash === "tour" || hash.startsWith("tour/");
+  OB.tourWanted = hash === "tour" || hash.startsWith("tour/");
   const startAt = hash.startsWith("tour/") ? Math.max(0, parseInt(hash.slice(5), 10) - 1 || 0) : 0;
 
   const fmtDate = d => new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -240,10 +240,11 @@ window.OB = window.OB || {};
     busy++;
     $("tour-win").hidden = true;
     const s = OB.app.site();
-    if (s) history.replaceState(null, "", "#" + s.id);
+    if (s) { const url = new URL(location.href); url.searchParams.set('site', s.id); url.hash = ''; history.replaceState(null, "", url); }
   }
 
   function wire() {
+    document.addEventListener('ob:manual-navigation', () => { if (OB.tourActive) close(); });
     CHAPTERS = ALL.filter(c => !c.needs || c.needs());
     $("tour-back").addEventListener("click", () => go(at - 1));
     $("tour-next").addEventListener("click", () => at === CHAPTERS.length - 1 ? close() : go(at + 1));
