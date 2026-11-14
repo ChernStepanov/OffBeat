@@ -1,0 +1,128 @@
+{
+  "kind": "experimental_dense_candidate_validation",
+  "source": "NISAR PROVISIONAL GCOV, ESA WorldCover 2021, locally archived GLAD-L/DETER and FIRMS/INPE context",
+  "radar_dates": [
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28"
+  ],
+  "inputs": [
+    {
+      "path": "data/subsets/amazon-dense/2026-07-18.npz",
+      "sha256": "463465935e74e676d15cfc7daf2a56a6714ea72c7c1ea9de42d2155c67006a44",
+      "granule_id": "NISAR_L2_PR_GCOV_025_146_A_175_2005_DHDH_A_20260718T090411_20260718T090445_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-11.npz",
+      "sha256": "beea9a1438427dfa89d2fa79f18749099649e2e83e810cb35cd34b8a83fa94d4",
+      "granule_id": "NISAR_L2_PR_GCOV_027_146_A_175_2005_DHDH_A_20260811T090409_20260811T090444_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-23.npz",
+      "sha256": "7d0b33e3e0e6972e44ef58ad05a5b6ae9a6680181c682d38d2ef121473d3621d",
+      "granule_id": "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-04.npz",
+      "sha256": "4b677e61a240699402752a44d71ee229bde5fde727171b83859d40707fcdd0d3",
+      "granule_id": "NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-16.npz",
+      "sha256": "0b5f6d0b6b872e438757d67bced674c2904446e8c4c5699f8e592c311215be04",
+      "granule_id": "NISAR_L2_PR_GCOV_030_146_A_175_2005_DHDH_A_20260916T090408_20260916T090443_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-28.npz",
+      "sha256": "2f0c8b51deee3e10ec5aadb6849e1e1a3b1beaf4440244291bbdae848bb18b4b",
+      "granule_id": "NISAR_L2_PR_GCOV_031_146_A_175_2005_DHDH_A_20260928T090408_20260928T090443_P05023_N_F_J_001"
+    }
+  ],
+  "worldcover": {
+    "path": "data/subsets/amazon-dense/worldcover-2021.npz",
+    "sha256": "648b9fc59932e8083f53dc3ad93bc7b969c6a049c4288d4fdfb802055a8c1f5c",
+    "source": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S06W051_Map.tif"
+  },
+  "peer_z_path": "data/subsets/amazon-dense/peer-z.npz",
+  "peer_z_sha256": "8983f9469b5b16f120bbd7edac236fdc9bf5a510df15d520148ffc7700c84526",
+  "context_inputs": [
+    {
+      "path": "data/amazon/alerts.geojson",
+      "sha256": "33bc029381fb4abda7b01e021c14bf81c83673a355023cfbdbeddb4395266d41"
+    },
+    {
+      "path": "data/amazon/fires.json",
+      "sha256": "ff726f1edff03760766dd9a7016f6775f0c49c9edd4affaca479832536387105"
+    }
+  ],
+  "method": "Retrospective exploratory rule, not preregistered: 2021 forest class, six valid native 20 m HV observations, full 1 km peer-neighbourhood coverage, median of 3 post minus median of 3 pre <= -3 dB, at least 2 of 3 post observations <= pre median -3 dB, then 8-connected groups of at least 4 cells. Fixed 60-day window around first post date for alert polygon intersection and fire point within 1 km of candidate footprint.",
+  "limitations": "Flagged footprint is the nominal area of selected radar grid cells, not validated event area. Results depend on post-hoc thresholds, 2021 land classes, weather, speckle and provisional data; missing data and analysis boundaries are not absence of change. Alert and fire archives are incomplete local subsets, date precision may be day-only, fire proximity is not proof of cause. No independent confirmed-event labels, precision, recall, or causal attribution are calculated.",
+  "quality": {
+    "eligible_forest_cells": 590,
+    "thresholded_cells": 44,
+    "minimum_component_cells": 4,
+    "candidate_count": 1
+  },
+  "context_window": [
+    "2026-07-06",
+    "2026-11-03"
+  ],
+  "candidates": [
+    {
+      "id": "EXP-004",
+      "cells": 4,
+      "flagged_grid_footprint_ha": 0.16,
+      "touches_analysis_boundary": false,
+      "median_hv_shift_db": -3.473,
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -49.2742507368483,
+              -4.772710191010488
+            ],
+            [
+              -49.274250284919454,
+              -4.772891042093246
+            ],
+            [
+              -49.2744305587793,
+              -4.772891495454197
+            ],
+            [
+              -49.27442965496394,
+              -4.7732531976512425
+            ],
+            [
+              -49.274249381009774,
+              -4.773252744255781
+            ],
+            [
+              -49.274249832973275,
+              -4.773071893175009
+            ],
+            [
+              -49.274069559083586,
+              -4.773071439749497
+            ],
+            [
+              -49.27407046305292,
+              -4.772709737619489
+            ],
+            [
+              -49.2742507368483,
+              -4.772710191010488
+            ]
+          ]
+        ]
+      },
+      "alert_matches": [],
+      "fire_matches": [],
+      "interpretation": "candidate; cause and event status unknown"
+    }
+  ]
+}

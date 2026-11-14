@@ -536,6 +536,14 @@
 
   // --- validation summary (Amazon, from pipeline) ---
   function drawValidation() {
+    const dense = state.site.context && state.site.context.dense_validation;
+    $('dense-validation').hidden = !dense;
+    if (dense) {
+      const candidates = dense.candidates || [];
+      const alerts = candidates.filter(c => c.alert_matches.length).length;
+      const fires = candidates.filter(c => c.fire_matches.length).length;
+      $('dense-validation-text').textContent = 'Dense experiment: ' + candidates.length + ' candidate group(s); ' + alerts + ' overlap local dated alerts and ' + fires + ' have a nearby fire record. Grid footprint is not confirmed event area; incomplete archives and post-hoc thresholds prevent recall or causal conclusions.';
+    }
     const v = state.site.context && state.site.context.validation;
     $("val-win").hidden = !v;
     if (!v) return;

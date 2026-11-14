@@ -38,6 +38,8 @@
     'GNSS MMX1 vertical position change, cm, since 2025-12-17 (IGS20)':'Изменение вертикального положения GNSS MMX1, см, с 17.12.2025 (IGS20)',
     'Independent daily GNSS, not NISAR line of sight. Nearest sampled radar point is about 21 m away and fails some GUNW quality checks; no direct validation or stable reference is established.':'Независимые ежедневные измерения GNSS, не линия визирования NISAR. Ближайшая радарная точка находится примерно в 21 м и не проходит часть проверок GUNW; прямое подтверждение и стабильная опора не установлены.',
     'GNSS source and quality':'Источник и качество GNSS',
+    'Dense analysis and sources':'Плотный анализ и источники',
+    'Dense experiment: 1 candidate group(s); 0 overlap local dated alerts and 0 have a nearby fire record. Grid footprint is not confirmed event area; incomplete archives and post-hoc thresholds prevent recall or causal conclusions.':'Плотный эксперимент: 1 группа-кандидат; 0 пересекаются с локальными оповещениями и 0 имеют рядом записи о пожаре. Площадь ячеек не равна подтверждённой площади события; неполные архивы и пороги, выбранные после просмотра данных, не позволяют оценить полноту или установить причину.',
     'Skip to the map':'Перейти к карте', 'OffBeat - NISAR change finder':'OffBeat — поиск изменений NISAR',
     'Take the tour':'Обзор', 'Map':'Карта', 'Pixel card':'Карточка пикселя', 'Top anomalies':'Основные аномалии', 'How it works':'Как это работает', 'NISAR data guide':'Справка по данным NISAR',
     'Location search':'Поиск места', 'Search':'Найти', 'Name in any language or coordinates':'Название на любом языке или координаты',
