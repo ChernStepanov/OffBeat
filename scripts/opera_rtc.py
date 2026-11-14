@@ -81,12 +81,33 @@ def login():
     return earthaccess
 
 
-def sample(fs, url, lats, lons):
+def gdal_env(token):
+    import rasterio
+    return rasterio.Env(GDAL_HTTP_HEADERS=f"Authorization: Bearer {token}",
+                        GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR", CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif",
+                        GDAL_HTTP_TIMEOUT="60", GDAL_HTTP_MAX_RETRY="4", GDAL_HTTP_RETRY_DELAY="3",
+                        VSI_CACHE="TRUE")
+
+
+def preflight(url, token):
+    """One authorised request before the batch: stop with a clear message instead of 400 timeouts."""
+    r = requests.get(url, headers={"Authorization": f"Bearer {token}", "Range": "bytes=0-1023"}, timeout=60)
+    if r.status_code in (401, 403):
+        try:
+            info = r.json()
+        except Exception:
+            info = {}
+        msg = info.get("error_description") or f"HTTP {r.status_code}"
+        hint = f"\n  Accept it here (once, signed in to Earthdata), then run again:\n  {info['resolution_url']}" if info.get("resolution_url") else ""
+        sys.exit(f"ASF refused the download: {msg}.{hint}")
+
+
+def sample(token, url, lats, lons):
     """dB values at the points (nearest 30 m cell); NaN outside the burst or where invalid."""
     import rasterio
     from rasterio.windows import from_bounds
     from pyproj import Transformer
-    with rasterio.open(url, opener=fs.open) as src:
+    with gdal_env(token), rasterio.open("/vsicurl/" + url) as src:
         tr = Transformer.from_crs(4326, src.crs, always_xy=True)
         xs, ys = tr.transform(lons, lats)
         pad = 2 * abs(src.transform.a)
@@ -146,14 +167,18 @@ def main():
     if a.dry_run:
         return
 
-    ea = login()
-    fs = ea.get_fsspec_https_session()
+    import os
+    login()
+    token = os.environ.get("EARTHDATA_TOKEN")
+    if not token:
+        sys.exit("This reader needs an Earthdata bearer token: EARTHDATA_TOKEN or the .earthdata_token file.")
+    preflight(granules[-1]["vh"], token)
     lats = [p[0] for p in pts]
     lons = [p[1] for p in pts]
 
     def work(g):
         try:
-            return g, sample(fs, g["vv"], lats, lons), sample(fs, g["vh"], lats, lons)
+            return g, sample(token, g["vv"], lats, lons), sample(token, g["vh"], lats, lons)
         except Exception as e:                        # a failed read is a gap, never a value
             print(f"  skip {g['id']}: {e}", file=sys.stderr)
             return g, None, None
@@ -162,7 +187,7 @@ def main():
     vv = {d: np.full(len(pts), np.nan) for d in dates}
     vh = {d: np.full(len(pts), np.nan) for d in dates}
     used = []
-    with cf.ThreadPoolExecutor(8) as pool:
+    with cf.ThreadPoolExecutor(4) as pool:
         for i, (g, a_vv, a_vh) in enumerate(pool.map(work, granules), 1):
             if a_vv is not None:
                 d = g["date"]
