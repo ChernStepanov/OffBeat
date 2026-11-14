@@ -14,7 +14,7 @@ supports zoom 0–19 and latitude ±85.05112878°. Zooming further does not crea
 additional source resolution. The camera is independent of every NISAR bbox.
 
 The renderer preloads a geographic square covering the full orbit around the
-map centre and adjusts LOD to stay within 64 tiles. Every tile has 64 subdivisions.
+map centre and adjusts LOD to stay within 64 tiles. Topographic imagery may use tiles up to zoom 16 independently of the DEM zoom-14 limit; terrain geometry samples the available DEM and does not gain measured elevation detail. Every tile has 64 subdivisions.
 Coverage, source LOD, geometry and elevation colours remain fixed during camera
 rotation; panning or zooming may load a new area or level. Surface coordinates and NISAR overlays use the same
 Mercator frame, including the latitude-dependent conversion of elevation metres.
