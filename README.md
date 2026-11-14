@@ -32,11 +32,11 @@ python3 -m http.server 8765
 Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
 
 «Поиск локаций» accepts place, region and forest names or decimal `latitude, longitude`.
-Names are sent only on submit to the public Photon / Komoot demo service, based on
+Names in any script are sent only on submit to Open-Meteo / GeoNames, with Photon / Komoot as fallback based on
 OpenStreetMap; requests are cached during the session and limited to one per second
 per browser. The demo endpoint may throttle or go offline. Operators can set
 `window.OB_GEOCODER_URL` before loading `js/app.js` to use a suitable Photon endpoint.
-Coordinate searches are local. A search outside the prepared NISAR areas shows
+Set window.OB_MULTILINGUAL_GEOCODER_URL to replace the primary Open-Meteo endpoint. Unicode names and right-to-left scripts are preserved; matching depends on provider name coverage. Coordinate searches are local. A search outside the prepared NISAR areas shows
 geographic context and explicitly marks the measurement series as unavailable.
 The selected site and searched coordinates are retained in the URL across reloads.
 The NISAR archive panel searches NASA CMR across ASF NISAR collections for the

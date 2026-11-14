@@ -9,7 +9,7 @@
   const RE = new RegExp("[" + Object.keys(MAP).join("") + "]", "g");
   // " · " reads best as ", "; a lone middle dot inside a word stays a comma too
   const fix = t => t.replace(/ · /g, ", ").replace(RE, c => MAP[c]);
-  const skip = n => n.parentElement && n.parentElement.closest("script, style, textarea, code, pre");
+  const skip = n => n.parentElement && n.parentElement.closest("script, style, textarea, code, pre, #place-results");
 
   function clean(root) {
     if (root.nodeType === 3) { if (!skip(root) && RE.test(root.data)) { RE.lastIndex = 0; root.data = fix(root.data); } RE.lastIndex = 0; return; }

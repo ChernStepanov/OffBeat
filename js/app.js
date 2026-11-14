@@ -172,7 +172,7 @@
   }
   $('place-search').addEventListener('submit', async e => {
     e.preventDefault();
-    const query = $('place-query').value.trim(), parsed = OB.parseCoordinates(query), results = $('place-results');
+    const query = OB.normalizePlaceQuery($('place-query').value), parsed = OB.parseCoordinates(query), results = $('place-results');
     results.replaceChildren();
     if (!query) return;
     if (parsed.kind === 'invalid') { $('place-status').textContent = 'Enter latitude, longitude (for example 19.43, -99.08). Latitude must be between -85.05 and 85.05; longitude between -180 and 180.'; return; }
@@ -185,11 +185,8 @@
       if (!features) {
         const delay = Math.max(0, 1000 - (Date.now() - lastSearch));
         if (delay) await new Promise(resolve => setTimeout(resolve, delay));
-        const url = new URL(geocoder); url.searchParams.set('q', query); url.searchParams.set('limit', '8');
         lastSearch = Date.now();
-        const response = await fetch(url, { signal: AbortSignal.timeout(12000) });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json(); features = Array.isArray(data.features) ? data.features : [];
+        features = await OB.geocodePlace(query, geocoder);
         searchCache.set(query.toLowerCase(), features);
       }
       if (serial !== searchSerial) return;
@@ -199,7 +196,7 @@
         const props = feature.properties || {}, names = [props.name, props.city, props.county, props.state, props.country].filter((v,i,a) => typeof v === 'string' && v && a.indexOf(v) === i);
         const label = names.join(', ') || `${coords[1].toFixed(4)}, ${coords[0].toFixed(4)}`;
         const li = document.createElement('li'), button = document.createElement('button');
-        button.type = 'button'; button.textContent = label;
+        button.type = 'button'; button.textContent = label; button.dir = 'auto'; button.translate = false;
         button.addEventListener('click', async () => {
           results.replaceChildren(); $('place-query').value = label;
           let bounds = null; const extent = props.extent;
