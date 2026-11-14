@@ -236,7 +236,16 @@ OB.createTerrainRenderer = async function (canvas) {
     setTerrain(data, s) { context = data; if (s) site = s; overlayDirty = true; },
     setSamples(s, t, pol) { site = s; date = t; channel = pol; overlayDirty = true; },
     select: setSelection,
-    rotate(dx, dy) { yaw -= dx * .007; if (ground) groundTilt = tiles.clamp(groundTilt - dy * .006, -.55, .55); else if (!plan) pitch = tiles.clamp(pitch + dy * .006, .04, 1.45); notify(); },
+    rotate(dx, dy) {
+      if (ground) {
+        yaw += dx * .007;
+        groundTilt = tiles.clamp(groundTilt - dy * .006, -1.48, 1.48);
+      } else if (!plan) {
+        yaw -= dx * .007;
+        pitch = tiles.clamp(pitch + dy * .006, -1.48, 1.48);
+      }
+      notify();
+    },
     pan(dx, dy) { const unit = camera.position.distanceTo(target) / height / scale(); center.x += (-dx * Math.cos(yaw) + dy * Math.sin(yaw)) * unit; center.y += (dx * Math.sin(yaw) + dy * Math.cos(yaw)) * unit; center.x = tiles.wrap(center.x, 1); center.y = tiles.clamp(center.y, 0, 1); changed(); },
     walk(forward, right) {
       if (!ground || !Number.isFinite(forward) || !Number.isFinite(right)) return;

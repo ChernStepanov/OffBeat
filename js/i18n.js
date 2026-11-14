@@ -21,7 +21,7 @@
     'Relief + cloud':'Рельеф + точки',
     'Solid relief':'Поверхность',
     'Ground view':'Вид с земли',
-    'Drag: look / Shift-drag: pan / Scroll: zoom / WASD: move in ground view / Click: inspect':'Тяните: обзор / Shift: сдвиг / Прокрутка: масштаб / WASD: движение с земли / Клик: точка',
+    'Hold left mouse and drag: look / Shift-drag: pan / Scroll: zoom / WASD: move in ground view':'Зажмите левую кнопку и двигайте мышь: обзор / Shift: сдвиг / Колесо: масштаб / WASD: движение с земли',
     'Terrain points show sampled DEM elevations, not additional NISAR measurements. Colored NISAR dots keep their measured coordinates and show HH/HV. Ground view and height exaggeration are visual approximations.':'Точки рельефа показывают высоты DEM и не являются дополнительными измерениями NISAR. Цветные точки NISAR сохраняют измеренные координаты и показывают HH/HV. Вид с земли и усиление высоты приблизительны.',
     'Point cloud':'Облако точек',
     'Height':'Высота',
