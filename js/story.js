@@ -265,9 +265,10 @@ window.OB = window.OB || {};
     const onKey = e => { if (e.key === "Escape") close(); };
     $("welcome-tour").addEventListener("click", () => { close(); open(0); $("tour-win").scrollIntoView({ block: "start" }); });
     $("welcome-explore").addEventListener("click", close);
+    $("welcome-case").addEventListener("click", () => { close(); OB.evidence.open('amazon-hv-step'); });
     document.addEventListener("keydown", onKey);
     box.hidden = false;
-    $("welcome-tour").focus();
+    $("welcome-case").focus();
   }
 
   function wire() {

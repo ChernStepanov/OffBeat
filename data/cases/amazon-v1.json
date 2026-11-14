@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "id": "amazon-casebook-v1",
+  "evaluation": {
+    "eligible_positive_events": 0,
+    "independently_labelled_negative_controls": 0,
+    "independent_test_groups": 0,
+    "precision": null,
+    "recall": null,
+    "false_positive_rate": null
+  },
+  "policy": "Radar corroboration is not independent evidence. No alert absence becomes a negative label. No event area is inferred from sample spacing.",
+  "input_sha256": {
+    "data/amazon.json": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729",
+    "data/amazon/optical/index.json": "4c2f9af0e52209d4e47c5de4f33a5c3a988fdae8dfe1518e90bcf2acdfdede86",
+    "data/analysis/amazon-dense-pair.json": "c9843da5611ba8bb7587526ce411ce9e3f523c8f2b7826edf3a575d215d5e49a",
+    "data/benchmark/amazon-v1/evidence.json": "5567cd9a401215f04b6fc520aa7680616dbb85d85f25f632cd299879c3d0a67e",
+    "archive/preview-2026-11-14/data/amazon/positive-eval/results.json": "c9a0d3307362ee52352ea88b0866b19d6c02d1e9a664e102cd7b81eea4d55ce5",
+    "docs/amazon-benchmark-v1.md": "68ecd8e601de46ec2a8b44931d1cab1095592e2adec8d1879818566ac868ade9",
+    "archive/preview-2026-11-14/docs/amazon-positive-eval.md": "d3296cf5f234e1aed3997c9a01b1216270ef4ac3b579e8ec25e2bff38fbc501d",
+    "data/amazon-spatial-external-audit-v2.json": "3b17ab4fbc699d15dcc36eae402df6a2b2b976bc1028521062491704b1dfce4c",
+    "docs/amazon-external-audit-v2.md": "454cc6d8e08cf88f73dd6b86becc68daf4a376fa4e1177e2e91d6c6c3e96eaa8"
+  },
+  "cases": [
+    {
+      "id": "amazon-hv-step",
+      "site": "amazon",
+      "sample_index": 175,
+      "sample_id": "AMA r5 c15",
+      "status": "unknown",
+      "title": {
+        "en": "A radar change worth checking",
+        "ru": "Изменение радара, которое стоит проверить"
+      },
+      "question": {
+        "en": "HV fell between 23 August and 4 September. Does that mean forest loss?",
+        "ru": "HV снизился между 23 августа и 4 сентября. Означает ли это потерю леса?"
+      },
+      "observed": {
+        "en": "The native 20 m cell fell by 7.420 dB; its 3 x 3 neighbourhood median fell by 4.122 dB. These are radar measurements, not independent confirmation.",
+        "ru": "На исходной сетке 20 м HV упал на 7.420 dB, медиана окрестности 3 x 3 — на 4.122 dB. Это радарные измерения, а не независимое подтверждение."
+      },
+      "independent": {
+        "en": "The dated optical pair spans a wider interval than the radar pair. No reviewed independent evidence establishes forest loss at this sample. Missing alerts do not establish stability.",
+        "ru": "Датированная оптика охватывает более широкий интервал, чем радарная пара. Проверенные независимые данные не устанавливают потерю леса в этой точке. Отсутствие алертов не доказывает стабильность."
+      },
+      "interpretation": {
+        "en": "Cause unknown. Moisture, vegetation changes and radar acquisition effects remain possible; none is established.",
+        "ru": "Причина неизвестна. Возможны влажность, изменения растительности и эффекты радарной съёмки; ни одна причина не установлена."
+      },
+      "action": {
+        "en": "Prioritise independent image review or field inspection. Obtain additional clear imagery and SAR history before classifying a disturbance.",
+        "ru": "Приоритет — независимая проверка снимков или участка. Нужны дополнительные ясные снимки и SAR-история до классификации события."
+      },
+      "radar_pair": [
+        2,
+        3
+      ],
+      "optical": [
+        {
+          "nisar_date": "2026-08-23",
+          "source": "Copernicus Sentinel-2 L2A / Earth Search",
+          "scene_id": "S2A_22MFV_20260814_0_L2A",
+          "date": "2026-08-14",
+          "scene_cloud_percent": 0.000332,
+          "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260814_0_L2A",
+          "assets": {
+            "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/B04.tif",
+            "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/B03.tif",
+            "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/B02.tif",
+            "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/SCL.tif"
+          },
+          "status": "ready",
+          "aoi_cloud_shadow_snow_fraction": 0.0,
+          "aoi_clear_fraction": 0.9993896484375,
+          "path": "data/amazon/optical/S2A_22MFV_20260814_0_L2A.png",
+          "sha256": "7b8230c6a73aabd918c05a28853cf6535ea7cbeeeb6dac501b7301a9340316c4",
+          "bounds": {
+            "w": -49.2875,
+            "s": -4.7875,
+            "e": -49.2625,
+            "n": -4.7625
+          },
+          "calibration": {
+            "red": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "green": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "blue": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            }
+          },
+          "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+        },
+        {
+          "nisar_date": "2026-09-28",
+          "source": "Copernicus Sentinel-2 L2A / Earth Search",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "date": "2026-09-21",
+          "scene_cloud_percent": 11.651859,
+          "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260921_0_L2A",
+          "assets": {
+            "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B04.tif",
+            "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B03.tif",
+            "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B02.tif",
+            "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/SCL.tif"
+          },
+          "status": "ready",
+          "aoi_cloud_shadow_snow_fraction": 0.0211334228515625,
+          "aoi_clear_fraction": 0.9782562255859375,
+          "path": "data/amazon/optical/S2C_22MFV_20260921_0_L2A.png",
+          "sha256": "06efd7d10ed86177403cc9a584179fd63d7f2680056b5a3f81248f41b33afefc",
+          "bounds": {
+            "w": -49.2875,
+            "s": -4.7875,
+            "e": -49.2625,
+            "n": -4.7625
+          },
+          "calibration": {
+            "red": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "green": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "blue": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            }
+          },
+          "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+        }
+      ],
+      "sources": [
+        "data/amazon.json",
+        "data/amazon/optical/index.json",
+        "docs/amazon-benchmark-v1.md",
+        "data/analysis/amazon-dense-pair.json",
+        "data/amazon-spatial-external-audit-v2.json",
+        "docs/amazon-external-audit-v2.md"
+      ],
+      "review_independence": "retrospective development review; not blind test labels"
+    },
+    {
+      "id": "amazon-visible-clearing",
+      "site": "amazon",
+      "sample_index": 142,
+      "sample_id": "AMA r4 c14",
+      "status": "visible_change_insufficient_sar",
+      "title": {
+        "en": "Visible clearing, missing radar history",
+        "ru": "Видимая расчистка, недостаточная история радара"
+      },
+      "question": {
+        "en": "A real visible change can still be unsuitable for testing a detector.",
+        "ru": "Реальное видимое изменение может не подходить для проверки детектора."
+      },
+      "observed": {
+        "en": "The reviewed clearing occurred after 5 July and by 4 August. At most one SAR date could precede it; the detector requires two observations on each side.",
+        "ru": "По визуальной проверке расчистка произошла после 5 июля и не позднее 4 августа. До неё могла быть максимум одна SAR-дата; детектор требует минимум две с каждой стороны."
+      },
+      "independent": {
+        "en": "Archived RGB review shows canopy in early July and clearing by 4 August. The GLAD alert is dated 24 August, at least 20 days after visible clearing; it is not the event date.",
+        "ru": "Архивный разбор RGB показывает кроны в начале июля и расчистку к 4 августа. Алерт GLAD датирован 24 августа — минимум на 20 дней позже видимой расчистки; это не дата события."
+      },
+      "interpretation": {
+        "en": "Visible clearing is supported by the archived review. Detector performance cannot be evaluated on this case: no guaranteed pre-event SAR history.",
+        "ru": "Видимая расчистка подтверждается архивным разбором. Оценить качество детектора на этом случае нельзя: нет гарантированной SAR-истории до события."
+      },
+      "action": {
+        "en": "Acquire earlier valid NISAR dates or choose a later independently dated event. Do not count this as a successful detection or a measured recall failure.",
+        "ru": "Получить более ранние валидные NISAR-даты или выбрать более позднее независимо датированное событие. Не считать этот случай успешной детекцией или измеренным провалом полноты."
+      },
+      "radar_pair": [
+        0,
+        1
+      ],
+      "optical": [
+        {
+          "nisar_date": "2026-07-18",
+          "source": "Copernicus Sentinel-2 L2A / Earth Search",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "date": "2026-07-03",
+          "scene_cloud_percent": 0.003835,
+          "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260703_0_L2A",
+          "assets": {
+            "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B04.tif",
+            "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B03.tif",
+            "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B02.tif",
+            "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/SCL.tif"
+          },
+          "status": "ready",
+          "aoi_cloud_shadow_snow_fraction": 0.0,
+          "aoi_clear_fraction": 0.9993896484375,
+          "path": "data/amazon/optical/S2C_22MFV_20260703_0_L2A.png",
+          "sha256": "f19ca700c9575c9fa7b2722a52666abff94f7fa88ce5770bad33d92b3bab0366",
+          "bounds": {
+            "w": -49.2875,
+            "s": -4.7875,
+            "e": -49.2625,
+            "n": -4.7625
+          },
+          "calibration": {
+            "red": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "green": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "blue": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            }
+          },
+          "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+        },
+        {
+          "nisar_date": "2026-08-11",
+          "source": "Copernicus Sentinel-2 L2A / Earth Search",
+          "scene_id": "S2A_22MFV_20260804_0_L2A",
+          "date": "2026-08-04",
+          "scene_cloud_percent": 0.000305,
+          "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260804_0_L2A",
+          "assets": {
+            "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/B04.tif",
+            "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/B03.tif",
+            "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/B02.tif",
+            "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/SCL.tif"
+          },
+          "status": "ready",
+          "aoi_cloud_shadow_snow_fraction": 0.0,
+          "aoi_clear_fraction": 0.9993896484375,
+          "path": "data/amazon/optical/S2A_22MFV_20260804_0_L2A.png",
+          "sha256": "b3d22772387cbd76ebcaff26be7faf521e6af2406a3bb3147e1d7d4e4a2cccf5",
+          "bounds": {
+            "w": -49.2875,
+            "s": -4.7875,
+            "e": -49.2625,
+            "n": -4.7625
+          },
+          "calibration": {
+            "red": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "green": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "blue": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            }
+          },
+          "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+        }
+      ],
+      "sources": [
+        "data/amazon.json",
+        "data/amazon/optical/index.json",
+        "docs/amazon-benchmark-v1.md",
+        "archive/preview-2026-11-14/data/amazon/positive-eval/results.json",
+        "archive/preview-2026-11-14/docs/amazon-positive-eval.md"
+      ],
+      "review_independence": "retrospective development review; not blind test labels"
+    },
+    {
+      "id": "amazon-transient",
+      "site": "amazon",
+      "sample_index": 897,
+      "sample_id": "AMA r28 c1",
+      "status": "likely_false_persistent_change",
+      "title": {
+        "en": "A temporary signal, not verified forest loss",
+        "ru": "Временный сигнал без подтверждённой потери леса"
+      },
+      "question": {
+        "en": "Check an apparent anomaly against both the whole series and optical evidence.",
+        "ru": "Сверьте предполагаемую аномалию со всем рядом и оптикой."
+      },
+      "observed": {
+        "en": "The archived review found the drop in only 2 of 6 leave-one-date-out runs. The latest peer deviation returned to about -0.18.",
+        "ru": "Архивный разбор сохранил падение лишь в 2 из 6 прогонов с исключением одной даты. Последнее отклонение от соседей вернулось примерно к -0.18."
+      },
+      "independent": {
+        "en": "Tree cover around the point persists in all five reviewed RGB dates. This is a retrospective visual review, not a blind negative control.",
+        "ru": "Древесный покров вокруг точки сохраняется на всех пяти проверенных RGB-датах. Это ретроспективный визуальный разбор, а не слепой отрицательный контроль."
+      },
+      "interpretation": {
+        "en": "Likely false selection of persistent change. Neither instrument noise nor a specific physical cause has been demonstrated.",
+        "ru": "Вероятное ложное выделение устойчивого изменения. Инструментальный шум и конкретная физическая причина не доказаны."
+      },
+      "action": {
+        "en": "Keep monitoring; do not report confirmed clearing. Use independently labelled control events to evaluate false positives.",
+        "ru": "Продолжить наблюдение; не сообщать о подтверждённой вырубке. Для оценки ложных срабатываний нужны независимо размеченные контрольные события."
+      },
+      "radar_pair": [
+        0,
+        5
+      ],
+      "optical": [
+        {
+          "nisar_date": "2026-07-18",
+          "source": "Copernicus Sentinel-2 L2A / Earth Search",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "date": "2026-07-03",
+          "scene_cloud_percent": 0.003835,
+          "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260703_0_L2A",
+          "assets": {
+            "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B04.tif",
+            "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B03.tif",
+            "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B02.tif",
+            "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/SCL.tif"
+          },
+          "status": "ready",
+          "aoi_cloud_shadow_snow_fraction": 0.0,
+          "aoi_clear_fraction": 0.9993896484375,
+          "path": "data/amazon/optical/S2C_22MFV_20260703_0_L2A.png",
+          "sha256": "f19ca700c9575c9fa7b2722a52666abff94f7fa88ce5770bad33d92b3bab0366",
+          "bounds": {
+            "w": -49.2875,
+            "s": -4.7875,
+            "e": -49.2625,
+            "n": -4.7625
+          },
+          "calibration": {
+            "red": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "green": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "blue": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            }
+          },
+          "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+        },
+        {
+          "nisar_date": "2026-09-28",
+          "source": "Copernicus Sentinel-2 L2A / Earth Search",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "date": "2026-09-21",
+          "scene_cloud_percent": 11.651859,
+          "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260921_0_L2A",
+          "assets": {
+            "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B04.tif",
+            "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B03.tif",
+            "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B02.tif",
+            "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/SCL.tif"
+          },
+          "status": "ready",
+          "aoi_cloud_shadow_snow_fraction": 0.0211334228515625,
+          "aoi_clear_fraction": 0.9782562255859375,
+          "path": "data/amazon/optical/S2C_22MFV_20260921_0_L2A.png",
+          "sha256": "06efd7d10ed86177403cc9a584179fd63d7f2680056b5a3f81248f41b33afefc",
+          "bounds": {
+            "w": -49.2875,
+            "s": -4.7875,
+            "e": -49.2625,
+            "n": -4.7625
+          },
+          "calibration": {
+            "red": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "green": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            },
+            "blue": {
+              "scale": 0.0001,
+              "offset": 0,
+              "provider_boa_offset_applied": true
+            }
+          },
+          "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+        }
+      ],
+      "sources": [
+        "data/amazon.json",
+        "data/amazon/optical/index.json",
+        "docs/amazon-benchmark-v1.md",
+        "data/benchmark/amazon-v1/evidence.json"
+      ],
+      "review_independence": "retrospective development review; not blind test labels"
+    }
+  ]
+}

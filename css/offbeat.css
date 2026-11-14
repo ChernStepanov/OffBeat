@@ -652,3 +652,37 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
   #map-win.window-expanded .maps { overflow: auto; grid-template-rows: repeat(2, minmax(260px, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .terrain-crt::after { opacity: .15; } }
+
+/* Investigation wizard: the same desktop chrome, a quiet paper workspace. */
+.casebook__intro { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.casebook h3 { font-size: 15px; line-height: 20px; margin: 4px 0 8px; }
+.casebook p { margin: 8px 0; }
+.casebook__intro .btn { flex-shrink: 0; min-height: 36px; }
+.casebook__scope { padding: 7px 9px; background: #ffffe1; box-shadow: var(--sunken); }
+.casebook__choices, .casebook__steps, .casebook__exports, .casebook__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 10px 0; }
+.casebook__choices .btn[aria-pressed="true"], .casebook__steps .btn[aria-current] { box-shadow: var(--pressed); background: #dfdfdf; }
+.casebook__steps .btn[aria-current] { font-weight: bold; border-bottom: 3px solid var(--sel); }
+.casebook__paper { background: var(--paper); padding: 16px; box-shadow: var(--sunken); min-height: 220px; }
+.casebook__paper:focus { outline: 1px dotted #000; outline-offset: -5px; }
+.casebook__paper > svg { display: block; width: 100%; max-width: 740px; height: auto; margin: 14px 0; font-family: var(--ui); }
+.casebook__facts { width: 100%; border-collapse: collapse; margin: 12px 0; }
+.casebook__facts th { width: 28%; text-align: left; font-weight: normal; color: #555; }
+.casebook__facts th, .casebook__facts td { padding: 7px 8px; border-bottom: 1px solid #ddd; vertical-align: top; }
+.casebook__optics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 840px; }
+.casebook__optics figure { min-width: 0; margin: 6px 0; }
+.casebook__image { position: relative; aspect-ratio: 1; overflow: hidden; background: #292929; box-shadow: var(--sunken); }
+.casebook__image img { position: absolute; width: 400%; max-width: none; height: 400%; image-rendering: pixelated; }
+.casebook__image p { padding: 14px; color: #fff; }
+.casebook__cross { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #fff; font: 30px/30px monospace; text-shadow: 1px 1px #000, -1px -1px #000; }
+.casebook figcaption { padding: 7px 0; }
+.casebook details { margin-top: 14px; border-top: 1px solid #ccc; padding-top: 10px; }
+.casebook details li { margin: 8px 0; overflow-wrap: anywhere; }
+.casebook code { display: block; font: 11px/16px monospace; color: #555; overflow-wrap: anywhere; }
+#evidence-link-fallback { width: 100%; }
+@media (max-width: 600px) {
+  .casebook__intro { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .casebook__paper { padding: 12px; }
+  .casebook__steps .btn { flex: 1 0 44%; }
+  .casebook__facts th { width: 34%; }
+  .casebook__optics { gap: 8px; }
+}
