@@ -10,6 +10,7 @@ OB.bindNisarMap = function (map, toggle, status) {
   const nativeZoom = 13;
   const tiles = new Set();
   const imageCache = new Map();
+  const renderedTiles = new Map();
   let failedTiles = 0, inflight = 0, statusTimer;
   let layer, loading, caption, legend;
   // A NASA browse pixel is ~19 m (native level 13). Up to zoom 16 it spans at most ~8 screen
@@ -181,16 +182,22 @@ OB.bindNisarMap = function (map, toggle, status) {
         tile.width = tile.height = tileSize;
         tile.style.imageRendering = rendering();
         const context = tile.getContext('2d');
-        // Show the tile as soon as any date arrives and repaint as the rest come in, instead of
-        // waiting for the slowest of all the mosaic requests. Older dates are always painted
-        // first, so a newer acquisition covers an older one whatever order they arrive in.
+        // Keep the previous zoom's tiles visible until all dates for this tile have settled.
+        // Otherwise each arriving date replaces the colours and the map flashes while panning.
+        const cacheKey = `${coords.z}/${coords.x}/${coords.y}`;
+        const cached = renderedTiles.get(cacheKey);
+        if (cached) {
+          tile.radar = { coords, ...cached };
+          context.putImageData(cached.cells, 0, 0);
+          requestAnimationFrame(() => { if (!tile.unloaded) done(null, tile); });
+          return tile;
+        }
         let shown = false;
         const show = error => { if (!shown) { shown = true; done(error, tile); } };
         const levels = new Array(dates.length).fill(null);     // per date: coverage mask
         const colours = dates.map((_, i) => dateColour(i, dates.length));
-        let scheduled = false;
+        let remaining = 0, complete = true;
         const paint = () => {
-          scheduled = false;
           if (tile.unloaded) return;
           const owner = new Int8Array(tileSize * tileSize).fill(-1);
           levels.forEach((mask, d) => { if (mask) for (let p = 0; p < mask.length; p++) if (mask[p]) owner[p] = d; });  // newest wins
@@ -204,7 +211,13 @@ OB.bindNisarMap = function (map, toggle, status) {
           }
           tile.radar = { coords, cells: out, owner, dates };
           context.putImageData(out, 0, 0);
+          if (complete) {
+            renderedTiles.set(cacheKey, { cells: out, owner, dates });
+            if (renderedTiles.size > 128) renderedTiles.delete(renderedTiles.keys().next().value);
+          }
+          show(null);
         };
+        const settled = () => { if (--remaining === 0) paint(); };
         const url = date => `${base}/wmts/epsg3857/best/${product}/default/${date}/${matrix}/${coords.z}/${coords.y}/${coords.x}.png`;
         // one date; a failed request is tried again later (twice), so a slow NASA reply heals itself
         const fetchDate = (i, tries = 0) => loadImage(url(dates[i])).then(image => {
@@ -212,18 +225,19 @@ OB.bindNisarMap = function (map, toggle, status) {
           if (image) {
             try {
               levels[i] = coverage(image);
-              if (!shown) { paint(); show(null); }
-              else if (!scheduled) { scheduled = true; requestAnimationFrame(paint); }
-            } catch (error) { context.clearRect(0, 0, tileSize, tileSize); show(error); }
+              settled();
+            } catch (error) { complete = false; settled(); }
             return;
           }
           if (tries < 2) { setTimeout(() => !tile.unloaded && fetchDate(i, tries + 1), 3000 * (tries + 1)); return; }
           if (!tile.incomplete) { tile.incomplete = true; failedTiles++; showStatus(); }
-          show(null);
+          complete = false;
+          settled();
         });
         datesFor(dates, coords).then(wanted => {
           if (tile.unloaded) return;
-          if (!wanted.length) { show(null); return; }        // no swath here in this window: nothing to ask for
+          if (!wanted.length) { paint(); return; }           // no swath here in this window
+          remaining = wanted.length;
           wanted.forEach(i => fetchDate(i));
         });
         return tile;
