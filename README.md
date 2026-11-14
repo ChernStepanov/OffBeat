@@ -8,11 +8,11 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 
 Состояние на 14 ноября 2026; актуальные статусы и обсуждение — в [issues](https://github.com/ChernStepanov/OffBeat/issues). Подробные результаты и ограничения приведены в [аудите задач](docs/issue-audit.md).
 
-**Сделано:** подключены реальные выборки NISAR и ссылки на гранулы; рассчитаны сравнения с соседями и предварительные формы кривых; добавлены датированные снимки Sentinel-2 и переключение дат. Исправлены проверка дат лесных alert и смешение кэшированных версий сайта. Подготовлены [научный разбор](docs/science-review.md), [черновик заявки](docs/submission-draft.md) и [слайды](docs/submission/offbeat-draft.pptx). Отсутствующие данные показываются явно.
+**Сделано:** подключены реальные выборки NISAR и ссылки на гранулы; рассчитаны сравнения с соседями и предварительные формы кривых; добавлены датированные снимки Sentinel-2 и переключение дат. Исправлены проверка дат лесных alert и смешение кэшированных версий сайта. Подготовлены [научный разбор](docs/science-review.md), [черновик заявки](docs/submission-draft.md) и [проверенный черновик слайдов](docs/submission/offbeat-reviewed.pptx). Отсутствующие данные показываются явно.
 
-**Частично сделано:** z-score рассчитан для разреженных точек, но плотного растра ещё нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)); выполнена сверка точек с alert и пожарами, но проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Есть простые базовые сравнения для ML, но погодная коррекция и независимая оценка ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)).
+**Частично сделано:** z-score рассчитан для разреженных точек и ограниченного плотного участка Амазонии; глобального плотного растра нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)); выполнена сверка точек с alert и пожарами, но проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Есть простые базовые сравнения для ML, но погодная коррекция и независимая оценка ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)).
 
-**Осталось:** обработать HLS ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)), дополнительные ряды GUNW ([#16](https://github.com/ChernStepanov/OffBeat/issues/16), [#17](https://github.com/ChernStepanov/OffBeat/issues/17)) и данные OPERA DISP-S1 ([#36](https://github.com/ChernStepanov/OffBeat/issues/36)); для загрузки нужен Earthdata Login. Ряд OPERA RTC-S1 для Амазонии и его ограничения описаны [отдельно](docs/amazon-opera-rtc-comparison.md). Также не завершены проверка правил и лицензии ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), запись видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)).
+**Осталось:** найти подходящий оптический снимок после проверки кандидатов HLS ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)), валидацию дополнительных рядов GUNW ([#16](https://github.com/ChernStepanov/OffBeat/issues/16), [#17](https://github.com/ChernStepanov/OffBeat/issues/17)) и данных OPERA DISP-S1 ([#36](https://github.com/ChernStepanov/OffBeat/issues/36)); подготовленные выборки уже доступны, для повторной загрузки нужен Earthdata Login. Ряд OPERA RTC-S1 для Амазонии и его ограничения описаны [отдельно](docs/amazon-opera-rtc-comparison.md). Также не завершены проверка правил и лицензии ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), запись видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)).
 
 Проверены 36 научных тестов и сценарии данных, поиска и тура; шесть сетевых тестов не запускались. Заявку и видео ещё не сдавали.
 
@@ -24,7 +24,7 @@ No build or NASA login is needed for the prepared demo. Clone the repository, se
 python -m http.server 8765
 ```
 
-Выберите подготовленный участок для просмотра измеренных HH/HV. Слева — светлая карта с отметками демоучастков и разреженными точками измерений. Цвет точек показывает отклонение от соседей; это не сплошной растр и не площадь события. Справа по умолчанию показан оптический контекст Esri; датированный Sentinel-2 выбирается в селекторе. Пропуски показаны явно. Для внешних тайлов и поиска нужен интернет. Звук запускается после нажатия.
+Выберите подготовленный участок для просмотра измеренных HH/HV. Слева — чёрно-белая спутниковая подложка, обзорное покрытие NISAR по датам и разреженные точки измерений. Цвет точек показывает отклонение от соседей; это не сплошной растр и не площадь события. Справа по умолчанию показан оптический контекст Esri; датированный Sentinel-2 выбирается в селекторе. Пропуски показаны явно. Для внешних тайлов и поиска нужен интернет. Звук запускается после нажатия.
 
 Исторический аудит GLAD/RGB из прежней исследовательской ветки сохранён
 в [архиве эксперимента](archive/preview-2026-11-14/README.md); он не является оценкой текущего детектора.
@@ -151,7 +151,7 @@ old cached scripts; optical PNG URLs use their recorded SHA-256 as well.
 
 ## Sources and licences
 
-NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. Amazon OPERA RTC-S1 provides sampled C-band measurements; Mexico OPERA DISP-S1 remains catalogue evidence only.
+NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. Amazon OPERA RTC-S1 provides sampled C-band measurements; Mexico OPERA DISP-S1 includes a quality-masked relative LOS series, with atmospheric and reference limitations.
 
 Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA by Alina Sava and Ark Pixel 12px proportional by TakWolf (version 2026.11.10, https://github.com/TakWolf/ark-pixel-font) use SIL OFL 1.1; see `fonts/W95FA-OFL.txt` and `fonts/ark-pixel-OFL.txt`. Ark Pixel supplies Cyrillic glyphs only.
 
