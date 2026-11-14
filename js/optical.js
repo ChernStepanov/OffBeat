@@ -9,7 +9,7 @@ OB.bindOptical = function (map, select, status) {
       status.textContent='Esri context mosaic: dates vary, not date-matched validation.'; return;
     }
     if (entry.status!=='ready' || !entry.path || !entry.bounds) {
-      status.textContent=`No dated optical image for NISAR ${entry.nisar_date}: ${entry.reason || entry.status}. Context mosaic remains visible.`; return;
+      status.textContent=`No dated optical image for NISAR ${entry.nisar_date}: ${entry.reason || 'no suitable observation'}. Context mosaic remains visible.`; return;
     }
     const b=entry.bounds;
     overlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
@@ -39,7 +39,7 @@ OB.bindOptical = function (map, select, status) {
         if(data.site!==site.id || data.schema_version!==1 || !Array.isArray(data.entries)) throw Error('Invalid optical index');
         index=data;
         index.entries.forEach((entry,i)=>select.add(new Option(entry.status==='ready'
-          ? `${entry.date} / radar ${entry.nisar_date}` : `Unavailable / radar ${entry.nisar_date}`,String(i))));
+          ? `${entry.date} / radar ${entry.nisar_date}` : `No clear optical image / radar ${entry.nisar_date}`,String(i))));
         select.disabled=false;select.value='context';draw();
       } catch {if(ticket===serial)status.textContent='No prepared dated optical observations. Esri mosaic is geographic context only.';}
     },
