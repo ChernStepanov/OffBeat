@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=1409895cd693">
+<link rel="stylesheet" href="css/offbeat.css?v=450faf2d7dec">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -148,16 +148,6 @@
             <p id="date-status" role="status" aria-live="polite"></p>
             <small>Acquisitions are not equally spaced. The date marks the chart; map colours show the latest peer deviation. A selected dated optical image follows the radar date.</small>
           </fieldset>
-          <fieldset class="group acquisition" id="ranking-controls" hidden>
-            <legend>Amazon change signals · fixed experiment window</legend>
-            <div class="acquisition__controls">
-              <label for="ranking-pol">Polarization</label><select id="ranking-pol"><option value="hh">HH</option><option value="hv">HV</option></select>
-              <label for="ranking-radius">Neighborhood</label><select id="ranking-radius"><option value="3x3">3×3</option><option value="5x5" selected>5×5</option><option value="9x9">9×9</option></select>
-            </div>
-            <label><input type="checkbox" id="ranking-visible"> Show experiment on map</label>
-            <p id="ranking-dates"></p><p id="ranking-status" role="status" aria-live="polite">Choose a sampled point.</p>
-            <small>Colored dots show fixed-window change. Window neighbors (3×3/5×5/9×9) are not the dashboard’s 1 km peers. “Rank” is position in the sample, not probability; cause unknown. Dots are sampled cells, not area. WorldCover 2021 class is contextual; weather is unavailable. Optical imagery is geographic context, not event confirmation.</small>
-          </fieldset>
           <div class="maps">
             <div class="maps__pane">
               <div class="pane-label" id="map-caption">Measured HV gamma0, blue −25 to red 0 dB; click a sample</div>
@@ -171,6 +161,20 @@
           <div id="optical-status" class="pane-label" role="status">Context imagery is not date-matched validation.</div>
           <div id="map-view-metrics" class="pane-label"></div>
         </div>
+      </section>
+
+      <section class="win" id="ranking-controls" aria-labelledby="ranking-title" hidden>
+        <div class="win-t"><h2 id="ranking-title">Amazon change experiment</h2></div>
+        <div class="win-b"><details>
+          <summary>Explore the fixed-window analysis</summary>
+            <div class="acquisition__controls">
+              <label for="ranking-pol">Polarization</label><select id="ranking-pol"><option value="hh">HH</option><option value="hv">HV</option></select>
+              <label for="ranking-radius">Neighborhood</label><select id="ranking-radius"><option value="3x3">3×3</option><option value="5x5" selected>5×5</option><option value="9x9">9×9</option></select>
+            </div>
+            <label><input type="checkbox" id="ranking-visible"> Show experiment on map</label>
+            <p id="ranking-dates"></p><p id="ranking-status" role="status" aria-live="polite">Choose a sampled point.</p>
+            <small>Colored dots show fixed-window change. Window neighbors (3×3/5×5/9×9) are not the dashboard’s 1 km peers. “Rank” is position in the sample, not probability; cause unknown. Dots are sampled cells, not area. WorldCover 2021 class is contextual; weather is unavailable. Optical imagery is geographic context, not event confirmation.</small>
+        </details></div>
       </section>
 
       <section class="win" aria-labelledby="t-archive">
@@ -297,13 +301,13 @@
 <script src="js/data.js?v=d7e029cc1f6c"></script>
 <script src="js/acquisitions.js?v=faedaefccc8f"></script>
 <script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
-<script src="js/chart.js?v=ccd9e09bcb99"></script>
+<script src="js/chart.js?v=057eb40b9b80"></script>
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=6b95008e6f4d"></script>
 <script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=f709385eef5c"></script>
+<script src="js/i18n.js?v=d261f176b003"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
-<script src="js/app.js?v=55a5446c8aaa"></script>
+<script src="js/app.js?v=add92f88fa7e"></script>
 </body>
 </html>

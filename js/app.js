@@ -77,13 +77,13 @@
   }
   map.on('moveend', saveViewport);
   const box = () => L.rectangle([[0, 0], [0, 0]], {
-    pane: 'selectedCell', color: '#ffcc00', weight: 3, fill: false, interactive: false,
+    pane: 'selectedCell', color: '#67217a', weight: 3, fill: false, interactive: false,
   });
   const cellBox = box(), cellBoxOptic = box();
   // the picked sample: a ring around its point on both maps (a point, never an area)
   const rings = [map, optic].map(m => [
     L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#000', weight: 4, fill: false, interactive: false }),
-    L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#ffcc00', weight: 2, fill: false, interactive: false }),
+    L.circleMarker([0, 0], { pane: 'selectedCell', radius: 8, color: '#fff', weight: 2, fill: false, interactive: false }),
   ]);
   function markSample(latlng) {
     rings.forEach((pair, i) => pair.forEach(r => { r.setLatLng(latlng); if (!(i ? optic : map).hasLayer(r)) r.addTo(i ? optic : map); }));
@@ -412,7 +412,7 @@
         state.extra[k] = L.layerGroup(pts).addTo(map);
         state.extra[k + "_o"] = L.layerGroup(s.context.fires.map(f => L.circleMarker([f.lat, f.lon], { radius: 2.5, color: "#ff6600", weight: 1, fill: false }))).addTo(optic);
       } else if (k === "alerts") {
-        const style = { color: "#ffff00", weight: 1, fill: false };
+        const style = { color: "#67217a", weight: 2, fill: false };
         state.extra[k] = L.geoJSON(s.context.alerts, { style, onEachFeature: (f, l) => l.bindTooltip(`Alert ${f.properties.date}, ${f.properties.area_ha ? f.properties.area_ha.toFixed(1) + " ha" : ""}`) }).addTo(map);
         state.extra[k + "_o"] = L.geoJSON(s.context.alerts, { style }).addTo(optic);
       } else {

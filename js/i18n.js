@@ -2,6 +2,9 @@
 (() => {
   const translations = {
     'Welcome to OffBeat':'Добро пожаловать в OffBeat',
+    'Amazon change experiment':'Эксперимент по изменениям в Амазонии',
+    'Explore the fixed-window analysis':'Посмотреть анализ за выбранный период',
+    'Polarization':'Поляризация', 'Neighborhood':'Окрестность', 'Show experiment on map':'Показать эксперимент на карте',
     'Radar sees through cloud and at night, but almost nobody can read it.':'Радар видит сквозь облака и ночью, но читать его почти никто не умеет.',
     'OffBeat compares every NISAR sample with its neighbours of the same land cover, flags the ones that fall out of step, and lets you hear them.':'OffBeat сравнивает каждую точку NISAR с соседями того же класса покрова, отмечает выбившиеся из ритма и даёт их услышать.',
     'The tour takes about two minutes and uses real NISAR measurements.':'Тур занимает около двух минут и идёт по настоящим измерениям NISAR.',

@@ -69,7 +69,7 @@ OB.chart = (function () {
     if (label) { g.fillStyle = "#000"; g.textAlign = "left"; g.fillText(label, x + 3, PAD.t + 10); }
   }
   function playhead(g, X, h, i) {
-    const x = Math.round(X(i)) + 0.5; g.strokeStyle = "#ffcc00"; g.lineWidth = 2;
+    const x = Math.round(X(i)) + 0.5; g.strokeStyle = "#67217a"; g.lineWidth = 2;
     g.beginPath(); g.moveTo(x, PAD.t); g.lineTo(x, h - PAD.b); g.stroke(); g.lineWidth = 1;
   }
 

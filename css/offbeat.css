@@ -172,6 +172,9 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .acquisition__controls input { flex: 1; min-width: 100px; width: auto; }
 .acquisition__controls .btn { min-width: 28px; padding: 4px 8px; }
 #date-status { margin: 6px 0 2px; }
+#ranking-controls summary { cursor: pointer; }
+#ranking-controls details[open] summary { margin-bottom: 8px; }
+#ranking-controls .acquisition__controls { margin-bottom: 6px; }
 .pane-label { padding: 2px 2px 3px; }
 #optical-date { max-width: 100%; font: inherit; }
 #optical-status { overflow-wrap: anywhere; }
