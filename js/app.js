@@ -73,6 +73,7 @@
   }
   map.on('move resize', updateViewMetrics);
   OB.bindArchive(() => map.getCenter().wrap());
+  OB.bindNisarMap(map, $('l-nisar'), $('nisar-status'));
   const labelsButton = $('l-labels');
   const labelsVisible = () => labelsButton.getAttribute('aria-pressed') === 'true';
   const updateWaterLabels = OB.bindWaterLabels([map, optic], $('water-status'));
