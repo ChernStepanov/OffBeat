@@ -152,6 +152,7 @@
     const value = state.pixel && state.pixel.hv[state.date];
     const sample = state.pixel ? ` Selected sample: ${Number.isFinite(value) ? value.toFixed(2) + ' dB' : 'unavailable'}.` : '';
     $('date-status').textContent = `${state.date + 1} of ${s.dates.length}: ${available}/${s.pixels.length} samples with measured HV.${sample}`;
+    document.dispatchEvent(new Event('ob:sample-change'));
   }
   function selectAcquisition(index) {
     if (!state.site || $('acquisition').hidden) return;
@@ -206,6 +207,7 @@
     for (const id of ['c-bs','c-disp']) OB.chart.empty($(id), 'No measured NISAR series here. Open a demo site on the map or in the list.');
     $('play').disabled = true; $('stop').disabled = true;
     $('play-hint').textContent = 'No measured series covers the selected location.';
+    document.dispatchEvent(new Event('ob:sample-change'));
   }
   async function showPlace(place) {
     const ticket = ++navigationSerial;
@@ -699,6 +701,18 @@
     sites: () => OB.SITES,
     site: () => state.site,
     pixel: () => state.pixel,
+    date: () => state.date,
+    selectDate: index => selectAcquisition(index),
+    resizeMaps() {
+      const center = map.getCenter(), zoom = map.getZoom();
+      // Resizing one pane must not synchronize its temporary pixel origin into the other.
+      syncing = true;
+      try {
+        map.invalidateSize({ pan: false }); optic.invalidateSize({ pan: false });
+        map.setView(center, zoom, { animate: false }); optic.setView(center, zoom, { animate: false });
+      } finally { syncing = false; }
+      updateViewMetrics();
+    },
     loadSite(id) {
       ++navigationSerial; ++searchSerial; $('place-submit').disabled = false; $('place-results').replaceChildren();
       $('place-status').textContent = '';

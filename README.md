@@ -82,6 +82,31 @@ node scripts/version_assets.mjs --check
 
 Synthetic numerical fixtures exist only in offline tests, never in application data.
 
+## Scene view
+
+Click **Scene view** in the map window's title bar to open a focused workspace.
+The original synchronized maps stay on the left; an interactive NISAR point
+cloud appears on the right. From the world overview, it opens the prepared
+Amazon study area. Use the study-area selector to switch sites, the acquisition
+slider to change dates, and **HH / HV** to change the cloud's polarization.
+
+Drag the cloud to orbit, scroll or use **+ / -** to zoom, and click a sample to
+select the same location on both maps. **Top view**, **Reset view**, sample
+navigation and the **Pixel card** button are also available. The focused canvas
+supports arrow keys, **+ / -** and **0**; **Esc** returns to the dashboard.
+On phones the cloud and maps stack vertically. A direct local link is
+`http://localhost:8765/?site=amazon&view=scene`.
+
+Cloud X/Y follow geographic coordinates, with longitude scaled by latitude.
+Height and colour encode the selected acquisition's measured gamma0 backscatter
+in dB, not terrain elevation or ground displacement. Colour uses a fixed
+−35 to +5 dB range; numeric readouts keep the original values. Missing values
+are omitted. The map's peer-deviation colours still represent the latest date;
+the cloud, sample history and selected dated optical image follow the date slider.
+Rendering uses browser Canvas 2D without an additional runtime dependency.
+Run `node scripts/test_point_cloud.mjs` to check source identities, missing values,
+date/polarization changes, projection and picking.
+
 After editing JS or CSS, run `node scripts/version_assets.mjs` before committing.
 The generated content hashes prevent the browser from combining new HTML with
 old cached scripts; optical PNG URLs use their recorded SHA-256 as well.

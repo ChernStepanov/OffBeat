@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=1409895cd693">
+<link rel="stylesheet" href="css/offbeat.css?v=d43f1de4da20">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -135,10 +135,10 @@
       </section>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
-        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2></div>
+        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" aria-expanded="false" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>Scene view</span></button></div>
         <div class="win-b win-b--flush">
           <fieldset class="group acquisition" id="acquisition" hidden>
-            <legend>Measured HV acquisition</legend>
+            <legend>Measured acquisition</legend>
             <div class="acquisition__controls">
               <button type="button" class="btn" id="date-prev" aria-label="Previous acquisition">&lt;</button>
               <label for="date-index">Date <output id="date-label" for="date-index"></output></label>
@@ -148,6 +148,7 @@
             <p id="date-status" role="status" aria-live="polite"></p>
             <small>Acquisitions are not equally spaced. The date marks the chart; map colours show the latest peer deviation. A selected dated optical image follows the radar date.</small>
           </fieldset>
+          <small class="scene-map-note">Map colours show the latest peer deviation; the cloud follows the date slider.</small>
           <fieldset class="group acquisition" id="ranking-controls" hidden>
             <legend>Amazon change signals · fixed experiment window</legend>
             <div class="acquisition__controls">
@@ -256,6 +257,50 @@
   </div>
 </div>
 
+<!-- The existing maps move here while exploring; their layers and selection stay intact. -->
+<section class="win scene" id="scene-win" role="dialog" aria-modal="true" aria-labelledby="scene-title" hidden>
+  <div class="win-t scene__title">
+    <span class="win-t__icon" aria-hidden="true"></span>
+    <h2 id="scene-title">OffBeat Explorer - maps &amp; point cloud</h2>
+    <button type="button" id="scene-close" class="scene__close" aria-label="Close scene view"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="m1 1 8 8m0-8L1 9" stroke="currentColor" stroke-width="2"/></svg></button>
+  </div>
+  <div class="scene__toolbar">
+    <button type="button" class="btn" id="scene-back">&lt; Back to dashboard</button>
+    <span class="scene__separator" aria-hidden="true"></span>
+    <label for="scene-site">Study area</label>
+    <select id="scene-site"><option value="" disabled>Choose a study area</option><option value="mexico">Mexico City</option><option value="amazon">Itupiranga, Pará</option><option value="venezuela">Caracas and Catia La Mar</option></select>
+    <button type="button" class="btn" id="scene-fit">Fit maps</button>
+    <span class="scene__live"><i aria-hidden="true"></i> Measured NISAR samples</span>
+  </div>
+  <div class="scene__layout">
+    <div class="scene__map-slot" id="scene-map-slot"></div>
+    <section class="win cloud" aria-labelledby="cloud-title">
+      <div class="win-t"><h2 id="cloud-title">Signal space - NISAR point cloud</h2><span class="cloud__file">GCOV / L-band</span></div>
+      <div class="cloud__toolbar">
+        <div class="cloud__buttons" role="group" aria-label="Point cloud polarization"><button type="button" id="cloud-hv" aria-pressed="true">HV</button><button type="button" id="cloud-hh" aria-pressed="false">HH</button></div>
+        <span class="scene__separator" aria-hidden="true"></span>
+        <div class="cloud__buttons" role="group" aria-label="Point cloud view"><button type="button" id="cloud-orbit" aria-pressed="true">3D orbit</button><button type="button" id="cloud-plan" aria-pressed="false">Top view</button></div>
+        <div class="cloud__buttons cloud__zoom"><button type="button" id="cloud-zoom-out" aria-label="Zoom out point cloud">-</button><button type="button" id="cloud-zoom-in" aria-label="Zoom in point cloud">+</button><button type="button" id="cloud-reset">Reset view</button></div>
+      </div>
+      <div class="cloud__viewport" id="cloud-viewport">
+        <canvas id="cloud-canvas" tabindex="0" role="img" aria-label="Interactive NISAR sample cloud. Drag to rotate, scroll to zoom. Arrow keys rotate; plus and minus zoom. Select a sample below with the Previous and Next buttons." aria-describedby="cloud-help cloud-explanation"></canvas>
+        <div class="cloud__hud"><span id="cloud-site-name">NISAR / L-BAND</span><strong id="cloud-date">-</strong><span id="cloud-count">0 samples</span></div>
+        <div class="cloud__compass" aria-hidden="true"><span>N</span><svg width="28" height="32" viewBox="0 0 28 32"><path d="M14 2 4 27l10-5 10 5z" fill="none" stroke="#9aaec7"/><path d="M14 2v20l10 5z" fill="#9aaec7"/></svg></div>
+        <div class="cloud__empty" id="cloud-empty" hidden><strong>No measured samples here</strong><span>Choose a prepared study area to explore its signal.</span></div>
+        <div class="cloud__key"><span>Backscatter</span><i aria-hidden="true"></i><span>-35</span><span>+5 dB</span></div>
+        <div class="cloud__interaction" id="cloud-help">Drag to rotate / scroll to zoom / click a point</div>
+      </div>
+      <div class="cloud__selection">
+        <div class="cloud__sample-heading"><strong id="cloud-sample-id">Select a measured sample</strong><div class="cloud__buttons"><button type="button" id="cloud-prev" aria-label="Previous measured sample">&lt;</button><button type="button" id="cloud-next" aria-label="Next measured sample">&gt;</button><button type="button" id="cloud-card">Pixel card</button></div></div>
+        <div class="cloud__readout" aria-live="polite"><div><span>Signal</span><strong id="cloud-value">-</strong></div><div><span>Land cover (2021)</span><strong id="cloud-cover">-</strong></div><div><span>Coordinates</span><strong id="cloud-coordinates">-</strong></div></div>
+        <div class="cloud__history"><span id="cloud-history-label">Sample history</span><canvas id="cloud-history" height="46" role="img" aria-label="Selected sample backscatter history; gaps mean missing observations"></canvas></div>
+      </div>
+      <p class="cloud__explanation" id="cloud-explanation">X/Y: geographic position. Height and colour: measured backscatter (dB), not terrain elevation. Sparse samples; missing values are omitted.</p>
+    </section>
+  </div>
+  <div class="scene__status"><span id="scene-status" role="status">Ready</span><span>NASA-ISRO NISAR / ASF DAAC</span><span>Esc to return</span></div>
+</section>
+
 <div class="modal" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title" hidden>
   <section class="win modal__win">
     <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2 id="welcome-title">Welcome to OffBeat</h2></div>
@@ -302,8 +347,10 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=6b95008e6f4d"></script>
 <script src="js/optical.js?v=c3dd4a20cf5f"></script>
-<script src="js/i18n.js?v=f709385eef5c"></script>
+<script src="js/i18n.js?v=97acf36919da"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
-<script src="js/app.js?v=55a5446c8aaa"></script>
+<script src="js/point-cloud.js?v=3325bd510edf"></script>
+<script src="js/scene.js?v=f4174d7ce0f5"></script>
+<script src="js/app.js?v=8e5459bc0601"></script>
 </body>
 </html>
