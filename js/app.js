@@ -781,11 +781,13 @@
   });
 
   // --- demo sites as clickable labels on the data map, while zoomed out far enough to need them ---
+  map.createPane('sitePins');
+  map.getPane('sitePins').style.zIndex = 650;
   const sitePins = L.layerGroup(OB.SITES.map(s => {
     const b = s.grid.bbox;
     const pin = L.marker([(b.s + b.n) / 2, (b.w + b.e) / 2], {
       icon: L.divIcon({ className: 'site-pin', html: `<span class="site-pin__dot"></span><span class="site-pin__name"></span>`, iconSize: null }),
-      keyboard: true, title: `Open ${s.name}`, riseOnHover: true,
+      pane: 'sitePins', keyboard: true, title: `Open ${s.name}`, riseOnHover: true,
     });
     pin.on('add', () => { const el = pin.getElement(); if (el) el.querySelector('.site-pin__name').textContent = s.name; });
     pin.on('click', () => { document.dispatchEvent(new Event('ob:manual-navigation')); loadSite(s.id); });
