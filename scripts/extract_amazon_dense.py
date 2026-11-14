@@ -11,12 +11,19 @@ def scalar(ds):
 
 def main():
     site=json.loads((ROOT/'data/amazon.json').read_text()); bbox=site['grid']['bbox']
-    dates=('2026-08-23','2026-09-04');source=site['provenance']['additional_gcov']
-    recs=[next(r for r in source if r['date']==d) for d in dates]
+    dates=tuple(site['dates']);source=site['provenance']['inputs']+site['provenance']['additional_gcov']
+    recs=[next(r for r in source if r.get('date',r.get('grid',{}).get('date'))==d) for d in dates]
     os.environ['EARTHDATA_TOKEN']=(ROOT/'.earthdata_token').read_text().strip()
     if not earthaccess.login(strategy='environment',persist=False).authenticated:raise RuntimeError('Earthdata authentication failed')
     fs=earthaccess.get_fsspec_https_session();target=ROOT/'data/subsets/amazon-dense';target.mkdir(parents=True,exist_ok=True);lastgrid=None
     for d,r in zip(dates,recs):
+        cached=target/f'{d}.json'
+        if cached.exists():
+            existing=json.loads(cached.read_text())
+            path=ROOT/existing['subset_path']
+            if existing['source']['id']!=r['source']['id'] or hashlib.sha256(path.read_bytes()).hexdigest()!=existing['sha256']:raise ValueError('Cached subset mismatch')
+            if lastgrid and existing['grid']!=lastgrid:raise ValueError('Source grids differ')
+            lastgrid=existing['grid'];print(d,'reused',flush=True);continue
         with fs.open(r['source']['url'],block_size=1024*1024,cache_type='blockcache') as f,h5py.File(f,'r') as h:
             ident=h['science/LSAR/identification'];actual=(int(ident['trackNumber'][()]),int(ident['frameNumber'][()]),scalar(ident['orbitPassDirection']),scalar(ident['zeroDopplerStartTime'])[:10])
             if actual!=(146,175,'Ascending',d):raise ValueError('Acquisition mismatch')

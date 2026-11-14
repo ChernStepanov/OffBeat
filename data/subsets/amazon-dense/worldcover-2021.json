@@ -1,0 +1,24 @@
+{
+  "source": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S06W051_Map.tif",
+  "source_year": 2021,
+  "grid": {
+    "epsg": 32722,
+    "window": [
+      6391,
+      6532,
+      13147,
+      13288
+    ],
+    "x_first": 689910.0,
+    "y_first": 9473370.0,
+    "x_step": 20.0,
+    "y_step": -20.0,
+    "shape": [
+      141,
+      141
+    ]
+  },
+  "subset_path": "data/subsets/amazon-dense/worldcover-2021.npz",
+  "sha256": "648b9fc59932e8083f53dc3ad93bc7b969c6a049c4288d4fdfb802055a8c1f5c",
+  "method": "Nearest-neighbour WorldCover 2021 to native GCOV 20 m grid; zero means unavailable. Classes predate radar observations."
+}
