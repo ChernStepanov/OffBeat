@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=7e633851a4a9">
+<link rel="stylesheet" href="css/offbeat.css?v=9b039bb9aa01">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -346,7 +346,7 @@
       <div class="cloud__viewport" id="cloud-viewport">
         <canvas id="cloud-canvas" tabindex="0" role="img" aria-label="Interactive 3D elevation map with geographically registered NISAR samples. Drag to orbit, shift-drag to pan, scroll to zoom. Arrow keys rotate; plus and minus zoom." aria-describedby="cloud-help cloud-explanation"></canvas>
         <div class="cloud__hud"><span class="terrain-terminal">OFFBEAT / TOPOGRAPHIC RECON</span><strong id="cloud-site-name">NISAR / L-BAND</strong><span id="cloud-date">-</span><span id="cloud-count">0 samples</span><span id="terrain-status" role="status">Loading elevation data...</span><span id="terrain-centre"></span></div>
-        <div class="cloud__compass" aria-hidden="true"><span>N</span><svg width="28" height="32" viewBox="0 0 28 32"><path d="M14 2 4 27l10-5 10 5z" fill="none" stroke="#9aaec7"/><path d="M14 2v20l10 5z" fill="#9aaec7"/></svg></div>
+        <div class="cloud__compass" aria-hidden="true"><span>N</span><svg width="28" height="28" viewBox="0 0 28 28"><path d="M14 2 23 24 14 20 5 24z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="miter"/><path d="M14 3v17l9 4z" fill="#000080"/></svg></div>
         <div class="cloud__empty" id="cloud-empty" hidden><strong>No measured samples here</strong><span>Choose a prepared study area to explore its signal.</span></div>
         <div class="cloud__key terrain-height-key"><span>Elevation / m</span><i aria-hidden="true"></i><span id="terrain-low">-</span><span id="terrain-high">-</span></div>
         <div class="cloud__key terrain-signal-key"><span>NISAR / dB</span><i aria-hidden="true"></i><span>-35</span><span>+5 dB</span></div>
