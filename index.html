@@ -50,6 +50,7 @@
             <legend>Map</legend>
             <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
+            <label><input type="checkbox" id="l-labels" checked> Place names and study area</label>
           </fieldset>
           <fieldset class="group" id="site-layers" hidden>
             <legend>This site</legend>
@@ -116,7 +117,7 @@
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
             <div class="maps__pane">
-              <div class="pane-label">Optical context, Sentinel-2 cloudless 2020 (EOX)</div>
+              <div class="pane-label">Colour imagery, Esri World Imagery · same basemap on both sides</div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>
@@ -179,13 +180,13 @@
           <div class="paper">
             <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
-            <p>No anomaly classifier or patch areas are published from this short case. Optical imagery is a 2020 composite for context, not a date-matched check. Missing and rejected measurements remain unavailable.</p>
+            <p>No anomaly classifier or patch areas are published from this short case. Both maps use the same Esri imagery, shown in colour on the right and grey beneath NISAR on the left. Imagery dates vary by location; this is geographic context, not a date-matched check. Labels and the dashed study-area boundary can be switched off. Missing and rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
 
       <p class="foot">
-        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, Sentinel-2 cloudless by EOX, imagery (c) Esri. Font W95FA by Alina Sava, OFL.
+        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, imagery (c) Esri, Vantor, Earthstar Geographics; labels (c) Esri, HERE, Garmin, OpenStreetMap contributors. Font W95FA by Alina Sava, OFL.
         Built for NASA Space Apps 2026, “Dancing with the SARs”. Open source.
       </p>
     </main>
