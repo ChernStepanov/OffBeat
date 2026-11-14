@@ -1,5 +1,12 @@
 /* OffBeat — Windows 98 look: MS Sans Serif 8pt, #c0c0c0 face, two-line bevels. */
 /* W95FA by Alina Sava: a pixel re-creation of MS Sans Serif, SIL OFL 1.1 (fonts/W95FA-OFL.txt) */
+/* Ark Pixel by TakWolf supplies Cyrillic missing from W95FA; SIL OFL 1.1. */
+@font-face {
+  font-family: "Ark Pixel Cyrillic";
+  src: url("../fonts/ark-pixel-12px-proportional.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0400-052F, U+2DE0-2DFF, U+A640-A69F;
+}
 @font-face {
   font-family: "W95FA";
   src: url("../fonts/w95fa.woff2") format("woff2");
@@ -19,7 +26,7 @@
   --title-b: #1084d0;
   --sel: #000080;
   --link: #0000ee;
-  --ui: "W95FA", "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Arial, "Liberation Sans", sans-serif;
+  --ui: "Ark Pixel Cyrillic", "W95FA", "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Arial, "Liberation Sans", sans-serif;
 
   /* the four bevels every control is built from */
   --raised:  inset -1px -1px 0 var(--dk), inset 1px 1px 0 var(--hi), inset -2px -2px 0 var(--lo), inset 2px 2px 0 var(--lt);
