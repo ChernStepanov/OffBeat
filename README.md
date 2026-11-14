@@ -85,8 +85,8 @@ Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tes
 ## Data
 
 NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
-Both panes use colour Esri World Imagery for matching detail, with NISAR overlaid
-on the left. Place labels, study-area boundaries and metric scales help orientation.
+Both panes use Esri World Imagery for matching detail, grey under NISAR on the left
+and colour on the right. Place labels, study-area boundaries and metric scales help orientation.
 Imagery dates vary by location; this is context, not date-matched optical validation.
 
 ## Font

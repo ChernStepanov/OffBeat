@@ -10,7 +10,7 @@
   }
   const state = { site: null, pixel: null, cell: null, z: 2.5, patches: [], raster: null, coverRaster: null, extra: {}, vectors: [], loading: 0 };
 
-  // Identical colour imagery and zoom limits on both sides.
+  // Identical imagery and zoom limits; grey basemap under the colour NISAR layer.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
   const LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
   const imageryCredit = 'Imagery &copy; Esri, Vantor, Earthstar Geographics';
