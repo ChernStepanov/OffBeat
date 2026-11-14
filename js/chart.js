@@ -26,7 +26,13 @@ OB.chart = (function () {
       g.textAlign = "right"; g.fillText(+v.toFixed(1), PAD.l - 4, y + 3);
     }
     g.textAlign = "center";
-    for (let i = 0; i < dates.length; i += Math.ceil(dates.length / 6)) g.fillText(dates[i].slice(2, 7), X(i), h - 6);
+    // date ticks; the ones at the ends hug the frame instead of spilling past it
+    for (let i = 0; i < dates.length; i += Math.ceil(dates.length / 6)) {
+      const x = X(i), half = g.measureText(dates[i].slice(2, 7)).width / 2;
+      g.textAlign = x - half < 0 ? "left" : x + half > w ? "right" : "center";
+      g.fillText(dates[i].slice(2, 7), g.textAlign === "left" ? 0 : g.textAlign === "right" ? w : x, h - 6);
+    }
+    g.textAlign = "center";
     g.strokeStyle = "#808080"; g.strokeRect(PAD.l + 0.5, PAD.t + 0.5, w - PAD.l - PAD.r, h - PAD.t - PAD.b);
     return { X, Y };
   }
