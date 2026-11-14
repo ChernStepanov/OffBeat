@@ -393,3 +393,6 @@ button.select98__button:disabled { color: var(--lo); background-color: var(--fac
 }
 
 .language-switch { margin: 1px 3px 1px auto; padding: 2px 8px; }
+
+.suggestions__list { display: flex; flex-wrap: wrap; gap: 5px; }
+.suggestions__list .btn { text-align: left; }

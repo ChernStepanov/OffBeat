@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const context={window:{}};context.window=context;vm.createContext(context);
+vm.runInContext(fs.readFileSync('js/suggestions.js','utf8'),context);
+const site=(id,pixels)=>({id,name:id,dates:['2026-01-01','2026-01-13'],pixels});
+const p=(z,cover=10,hv=[-12,-11])=>({z,cover,hv});
+const list=context.OB.suggestPlaces([site('A',[p(3),p(-5),p(99,80)]),site('B',[p(8,10,[-3,null]),p(3.4)]),site('C',[p(null),p(2.4)])]);
+assert.deepEqual(Array.from(list,x=>[x.site.id,x.index]),[['A',1],['B',1]]);
+assert.equal(context.OB.suggestPlaces([site('C',[p(null),p(2.4)])]).length,0);
+assert.equal(context.OB.suggestPlaces([site('A',[p(4)]),site('B',[p(-5)]),site('C',[p(3)])],2.5,1)[0].site.id,'B');
+console.log('PASS: suggestions require real latest data, exclude water and missing values, and rank one per site');
