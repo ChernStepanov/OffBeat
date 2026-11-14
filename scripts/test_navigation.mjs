@@ -32,13 +32,14 @@ function newMap() {
     hasLayer:()=>false,removeLayer(){},getBounds:()=>({})};maps.push(map);return map;
 }
 const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){return this;},setContent(){return this;},bringToFront(){},bindTooltip(){return this;},on(){return this;}});
+const tileLayers=[];
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
 const opticalLoads=[];let holdMexico=null;
 const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
-  L:{map:newMap,tileLayer:layer,rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
+  L:{map:newMap,tileLayer:(url,options)=>{tileLayers.push({url,options});return layer();},rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
 };context.window=context;vm.createContext(context);
 for(const file of ['styles','search','data'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
@@ -48,6 +49,11 @@ Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:()=>()=>null,bind
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 await tick();await tick();assert(OB.app);
+for (const {options} of tileLayers) {
+  assert.equal(options.maxNativeZoom,16,'High zoom must enlarge available tiles instead of requesting Esri placeholders');
+  assert.equal(options.maxZoom,19,'Both maps must remain zoomable');
+}
+assert.equal(tileLayers.length,4);
 await OB.app.loadSite('mexico');
 const clicks=(id,button)=>$(id).listeners.click({target:button});
 clicks('regions',regionButtons[0]);await tick();
