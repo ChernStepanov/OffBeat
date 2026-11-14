@@ -5,7 +5,7 @@ OB.SITES = [];
 const CONTEXT = { amazon: { fires: 'fires.json', alerts: 'alerts.geojson', sentinel1: 'sentinel1.json', validation: 'validation.json' } };
 OB.loadData = async function () {
   const results = await Promise.allSettled(['mexico', 'amazon', 'venezuela'].map(async id => {
-    const response = await fetch(`data/${id}.json`);
+    const response = await fetch(`data/${id}.json`,{cache:'no-cache'});
     if (!response.ok) throw new Error(`${id}: data request failed (${response.status})`);
     const site = await response.json();
     if (/synthetic|mock/i.test(site.source || '') || !site.provenance?.inputs?.length) throw new Error(`${id}: measured provenance required`);

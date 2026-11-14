@@ -12,7 +12,7 @@ OB.bindOptical = function (map, select, status) {
       status.textContent=`No dated optical image for NISAR ${entry.nisar_date}: ${entry.reason || entry.status}. Context mosaic remains visible.`; return;
     }
     const b=entry.bounds;
-    overlay=L.imageOverlay(entry.path,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
+    overlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
     overlay.on('error',()=>{clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
     overlay.addTo(map);
     status.textContent=`${entry.source} | ${entry.date} | NISAR ${entry.nisar_date} | AOI cloud/shadow/snow ${Math.round(entry.aoi_cloud_shadow_snow_fraction*100)}% | ${entry.scene_id}`;
@@ -33,7 +33,7 @@ OB.bindOptical = function (map, select, status) {
       select.replaceChildren(new Option('Context mosaic (date varies)','context'));
       select.disabled=true;status.textContent='Loading dated optical observations…';
       try {
-        const response=await fetch(`data/${site.id}/optical/index.json`,{signal:AbortSignal.timeout(12000)});
+        const response=await fetch(`data/${site.id}/optical/index.json`,{cache:'no-cache',signal:AbortSignal.timeout(12000)});
         if(!response.ok) throw Error('No optical index');
         const data=await response.json();if(ticket!==serial)return;
         if(data.site!==site.id || data.schema_version!==1 || !Array.isArray(data.entries)) throw Error('Invalid optical index');
