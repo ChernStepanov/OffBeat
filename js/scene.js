@@ -280,7 +280,12 @@
       const dx = p.x - dragging.x, dy = p.y - dragging.y;
       if (Math.hypot(p.x - dragging.startX, p.y - dragging.startY) > 3) dragging.moved = true;
       if (dragging.moved) {
-        if (dragging.pan) gpu?.pan(dx, dy); else gpu?.rotate(dx, dy);
+        if (dragging.pan) gpu?.pan(dx, dy);
+        else {
+          // A drag from the fixed top view becomes a free 3D orbit.
+          if (view === 'plan') setView('orbit');
+          gpu?.rotate(dx, dy);
+        }
       }
       dragging.x = p.x; dragging.y = p.y;
     } else {
