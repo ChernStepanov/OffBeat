@@ -110,6 +110,28 @@
   const geocoder = window.OB_GEOCODER_URL || 'https://photon.komoot.io/api/';
   const searchCache = new Map();
   let lastSearch = 0, searchMarkers = [], searchSerial = 0;
+  const regions = {
+    world: [[-60, -180], [80, 180]],
+    europe: [[35, -12], [71, 45]],
+    africa: [[-35, -18], [37, 52]],
+    asia: [[-10, 40], [75, 180]],
+    oceania: [[-48, 110], [10, 180]],
+    americas: [[-56, -170], [72, -34]],
+  };
+  async function showRegion(id) {
+    const bounds = regions[id];
+    $('l-offbeat').checked = false; drawRaster();
+    $('l-cover').checked = false; drawCover(); clearSiteLayers();
+    await showPlace({lat: (bounds[0][0] + bounds[1][0]) / 2, lon: (bounds[0][1] + bounds[1][1]) / 2, bounds});
+    clearSearchMarkers();
+    $('site-name').textContent = id === 'world' ? 'World' : id[0].toUpperCase() + id.slice(1);
+    $('map-caption').textContent = 'Global NASA NISAR browse mosaic; blue to red: image brightness. Gaps show the basemap.';
+    document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.region === id)));
+  }
+  $('regions').addEventListener('click', event => {
+    const button = event.target.closest('button[data-region]');
+    if (button) showRegion(button.dataset.region);
+  });
   function clearSearchMarkers() {
     searchMarkers.forEach(([m, marker]) => m.removeLayer(marker));
     searchMarkers = [];
@@ -117,7 +139,7 @@
   function clearPixel() {
     OB.sonify.stop(); state.cell = null; state.pixel = null;
     [map, optic].forEach((m, i) => { const layer = i ? cellBoxOptic : cellBox; if (m.hasLayer(layer)) m.removeLayer(layer); });
-    $('px-id').textContent = 'No NISAR data at this location';
+    $('px-id').textContent = 'No prepared measurement series here';
     for (const id of ['p-cover','p-peers','p-z','p-style','p-since','p-loc','p-quality']) $(id).textContent = 'Unavailable';
     $('p-extra').innerHTML = '';
     for (const id of ['c-bs','c-disp']) { const canvas = $(id); canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); }
@@ -204,13 +226,6 @@
     areaLayers.forEach(([m, layer]) => m.removeLayer(layer));
     areaLayers = [];
     if (!state.site || !labelsVisible()) return;
-    const s = state.site, b = s.grid.bbox;
-    [map, optic].forEach(m => {
-      const text = document.createElement('span');
-      text.textContent = s.name;
-      const label = L.marker([b.n, (b.w + b.e) / 2], { interactive: false, icon: L.divIcon({ className: 'area-label', html: text, iconSize: null }) }).addTo(m);
-      areaLayers.push([m, label]);
-    });
   }
 
   // --- colours ---
@@ -514,8 +529,8 @@
     $('source-link').href = `data/${s.id}-manifest.json`;
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
-    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
-    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
+    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Local Off-Beat raster (optional)' : 'Local measured HV overlay (optional)';
+    $('map-caption').textContent = 'Global NASA NISAR browse mosaic; local measurement overlay is optional.';
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();
@@ -568,9 +583,11 @@
     const lat = params.get('lat'), lon = params.get('lon');
     const savedPlace = lat !== null && lon !== null ? OB.parseCoordinates(`${lat}, ${lon}`) : null;
     loadSite(OB.SITES.some(s => s.id === legacy) ? legacy : saved).then(async () => {
+      const worldStart = !params.has('site') && !OB.SITES.some(s => s.id === legacy) && !savedPlace;
+      if (worldStart) await showRegion('world');
       if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; await showPlace(savedPlace); }
       const v = previousViewport;
-      if (v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
+      if (!worldStart && v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
       viewportReady = true; saveViewport();
     });
   }

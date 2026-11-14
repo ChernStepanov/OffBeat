@@ -51,8 +51,18 @@
       </section>
 
       <section class="win" aria-labelledby="t-site">
-        <div class="win-t"><h2 id="t-site">Demo sites</h2></div>
+        <div class="win-t"><h2 id="t-site">Explore the world</h2></div>
         <div class="win-b">
+          <ul class="sites" id="regions">
+            <li><button type="button" data-region="world">World</button></li>
+            <li><button type="button" data-region="europe">Europe</button></li>
+            <li><button type="button" data-region="africa">Africa</button></li>
+            <li><button type="button" data-region="asia">Asia</button></li>
+            <li><button type="button" data-region="oceania">Oceania</button></li>
+            <li><button type="button" data-region="americas">Americas</button></li>
+          </ul>
+          <p>NASA NISAR imagery where available. Coverage gaps remain transparent. Search anywhere for source acquisitions.</p>
+          <p>Prepared measurement series:</p>
           <ul class="sites" id="sites"></ul>
         </div>
       </section>
@@ -62,7 +72,7 @@
         <div class="win-b">
           <fieldset class="group">
             <legend>Map</legend>
-            <label><input type="checkbox" id="l-offbeat" checked> <span id="raster-label">Measured HV backscatter</span></label>
+            <label><input type="checkbox" id="l-offbeat"> <span id="raster-label">Local measured HV overlay (optional)</span></label>
             <label><input type="checkbox" id="l-nisar" checked> Global NISAR radar (NASA)</label>
             <label><input type="checkbox" id="l-cover"> WorldCover classes</label>
             <button type="button" class="btn" id="l-labels" aria-pressed="true">Map labels</button>
