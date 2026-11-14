@@ -337,6 +337,7 @@
     coseismic: { label: "Ground motion in the quake",    unit: "cm, line of sight", lo: "-10", hi: "+10", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(10), card: "Quake motion", fmt: v => v.toFixed(1) + " cm" },
     up:        { label: "Vertical motion",               unit: "cm/yr", lo: "-30", hi: "+30", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(30), card: "Vertical", fmt: v => v.toFixed(1) + " cm/yr" },
     east:      { label: "East-west motion",              unit: "cm/yr, east +", lo: "-8", hi: "+8", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(8), card: "East-west", fmt: v => v.toFixed(1) + " cm/yr" },
+    dense_z:   { label: "Dense HV peer deviation · 2026-09-28", unit: "z · latest date only", lo: "-4 or less", hi: "+4 or more", ramp: "linear-gradient(90deg,#1846d2,#ebebeb,#d22823)" },
     fires:     { label: "Active fires (NASA FIRMS)" },
     alerts:    { label: "Deforestation alerts" }
   };
@@ -407,11 +408,13 @@
   // --- site layers: list only what this site has ---
   function buildSiteLayers() {
     const s = state.site, have = Object.keys(s.grid.extra || {});
+    if (s.context && s.context.dense_z) have.push("dense_z");
     if (s.context && s.context.fires) have.push("fires");
     if (s.context && s.context.alerts) have.push("alerts");
     $("site-layers").hidden = !have.length;
     $("site-layer-list").innerHTML = have.map(k =>
       `<label><input type="checkbox" data-layer="${k}"> ${SITE_LAYERS[k].label}</label>`).join("");
+    if (s.context && s.context.dense_z) $("site-layer-list").insertAdjacentHTML("beforeend", `<small>20 m measured samples, fixed 2026-09-28. Full 1 km peer radius required; missing edges are transparent. WorldCover 2021. <a href="data/amazon/dense-peer-z.json">Source and limitations</a>.</small>`);
     $("legend").hidden = true;
   }
   $("site-layer-list").addEventListener("change", e => {
@@ -424,7 +427,10 @@
     if (state.extra[k]) { [map, optic].forEach(m => m.hasLayer(state.extra[k]) && m.removeLayer(state.extra[k])); delete state.extra[k]; }
     if (state.extra[k + "_o"]) { optic.removeLayer(state.extra[k + "_o"]); delete state.extra[k + "_o"]; }
     if (on) {
-      if (k === "fires") {
+      if (k === "dense_z") {
+        const d = s.context.dense_z, b = d.bounds;
+        if (b && d.image_path) state.extra[k] = L.imageOverlay(d.image_path + '?v=' + d.image_sha256, [[b.s,b.w],[b.n,b.e]], { className:'raster', interactive:false, attribution:'NISAR GCOV / ESA WorldCover 2021' }).addTo(map);
+      } else if (k === "fires") {
         const pts = s.context.fires.map(f => L.circleMarker([f.lat, f.lon], { radius: 2.5, color: "#000", weight: 1, fillColor: "#ff6600", fillOpacity: 1 })
           .bindTooltip(`Fire ${f.date}${f.source ? ", " + f.source : ""}`));
         state.extra[k] = L.layerGroup(pts).addTo(map);

@@ -9,6 +9,7 @@ class Element {
   getAttribute(name) { return this.attrs[name]; }
   replaceChildren() { this.children=[]; }
   appendChild(node) { this.children.push(node); }
+  insertAdjacentHTML() {}
   closest() { return this; }
   scrollIntoView() {}
   getContext() { return {clearRect(){}}; }
@@ -32,14 +33,14 @@ function newMap() {
     hasLayer:()=>false,removeLayer(){},getBounds:()=>({})};maps.push(map);return map;
 }
 const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){return this;},setContent(){return this;},bringToFront(){},bindTooltip(){return this;},on(){return this;}});
-const tileLayers=[];
+const tileLayers=[], imageLayers=[];
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
 const opticalLoads=[];let holdMexico=null;
 const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
-  L:{map:newMap,tileLayer:(url,options)=>{tileLayers.push({url,options});return layer();},rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
+  L:{map:newMap,tileLayer:(url,options)=>{tileLayers.push({url,options});return layer();},imageOverlay:(url,bounds,options)=>{imageLayers.push({url,bounds,options});return layer();},rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
 };context.window=context;vm.createContext(context);
 for(const file of ['styles','search','data','acquisitions','amazon-ranking','suggestions'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
@@ -90,6 +91,10 @@ assert.equal(OB.app.site().id,'amazon');
 assert(OB.app.pixel().id.startsWith('AMA'));
 assert(!$('place-status').textContent.includes('Inside Mexico'));
 assert(!new URL(href).searchParams.has('lat'));
+$('site-layer-list').listeners.change({target:{dataset:{layer:'dense_z'},checked:true}});
+assert.equal(imageLayers.length,1);
+assert(imageLayers[0].url.startsWith('data/amazon/dense-peer-z.png?v='));
+assert.equal($('legend').hidden,false);
 
 // Переход в World отменяет незавершённую загрузку участка.
 holdMexico=new Promise(resolve=>release=resolve);

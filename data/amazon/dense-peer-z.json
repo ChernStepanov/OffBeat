@@ -1,0 +1,87 @@
+{
+  "site": "amazon",
+  "dates": [
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28"
+  ],
+  "layer_date": "2026-09-28",
+  "source": "NISAR PROVISIONAL GCOV HV gamma0; ESA WorldCover 2021",
+  "inputs": [
+    {
+      "path": "data/subsets/amazon-dense/2026-07-18.npz",
+      "sha256": "463465935e74e676d15cfc7daf2a56a6714ea72c7c1ea9de42d2155c67006a44",
+      "granule_id": "NISAR_L2_PR_GCOV_025_146_A_175_2005_DHDH_A_20260718T090411_20260718T090445_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-11.npz",
+      "sha256": "beea9a1438427dfa89d2fa79f18749099649e2e83e810cb35cd34b8a83fa94d4",
+      "granule_id": "NISAR_L2_PR_GCOV_027_146_A_175_2005_DHDH_A_20260811T090409_20260811T090444_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-23.npz",
+      "sha256": "7d0b33e3e0e6972e44ef58ad05a5b6ae9a6680181c682d38d2ef121473d3621d",
+      "granule_id": "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-04.npz",
+      "sha256": "4b677e61a240699402752a44d71ee229bde5fde727171b83859d40707fcdd0d3",
+      "granule_id": "NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-16.npz",
+      "sha256": "0b5f6d0b6b872e438757d67bced674c2904446e8c4c5699f8e592c311215be04",
+      "granule_id": "NISAR_L2_PR_GCOV_030_146_A_175_2005_DHDH_A_20260916T090408_20260916T090443_P05023_N_F_J_001"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-28.npz",
+      "sha256": "2f0c8b51deee3e10ec5aadb6849e1e1a3b1beaf4440244291bbdae848bb18b4b",
+      "granule_id": "NISAR_L2_PR_GCOV_031_146_A_175_2005_DHDH_A_20260928T090408_20260928T090443_P05023_N_F_J_001"
+    }
+  ],
+  "worldcover": {
+    "path": "data/subsets/amazon-dense/worldcover-2021.npz",
+    "sha256": "648b9fc59932e8083f53dc3ad93bc7b969c6a049c4288d4fdfb802055a8c1f5c",
+    "source": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S06W051_Map.tif"
+  },
+  "method": "Per date and native 20 m pixel: finite positive HV, mask 1..254, same 2021 WorldCover class within 1 km; exclude target pixel, water and no-data, require at least 10 peers and non-zero 1.4826 MAD. z=(HV dB - peer median)/MAD. Full 1 km neighbourhood required within extracted window; boundaries lacking full coverage remain unavailable.",
+  "limits": "Exploratory same-class deviation, not a change, event, or probability. WorldCover is from 2021. Values reflect provisional products; weather and speckle remain. Dated to last radar observation, independent of time slider. Geographic rendering uses nearest-neighbour reprojection; no missing values are filled.",
+  "grid": {
+    "epsg": 32722,
+    "window": [
+      6391,
+      6532,
+      13147,
+      13288
+    ],
+    "x_first": 689910.0,
+    "y_first": 9473370.0,
+    "x_step": 20.0,
+    "y_step": -20.0,
+    "shape": [
+      141,
+      141
+    ]
+  },
+  "valid_per_date": [
+    1681,
+    1681,
+    1681,
+    1681,
+    1681,
+    1681
+  ],
+  "bounds": {
+    "w": -49.28779729809565,
+    "s": -4.787754804007247,
+    "e": -49.26231487585239,
+    "n": -4.762190867525926
+  },
+  "data_path": "data/subsets/amazon-dense/peer-z.npz",
+  "sha256": "8983f9469b5b16f120bbd7edac236fdc9bf5a510df15d520148ffc7700c84526",
+  "image_path": "data/amazon/dense-peer-z.png",
+  "image_sha256": "694939eee36f665a23f5e514346ba893644856eed4631383bb7b2aa78c6db230"
+}
