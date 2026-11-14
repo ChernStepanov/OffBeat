@@ -297,7 +297,8 @@
   function drawCharts(head) {
     const p = state.pixel; if (!p) return;
     OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
-    OB.chart.displacement($("c-disp"), state.site.displacement_dates || state.site.dates, p, null, head);
+    const dispDates = state.site.displacement_dates || state.site.dates;
+    OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
   }
 
   function channelName(p) {
@@ -334,7 +335,7 @@
     $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
     $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
-    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : 'Measured HV gamma0, blue −25 to red 0 dB; click a sample';
+    $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : `Measured HV ${s.dates.at(-1)}, blue −25 to red 0 dB; click a sample`;
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16] });
     drawAreaLabels();
     buildSiteLayers(); drawValidation();
