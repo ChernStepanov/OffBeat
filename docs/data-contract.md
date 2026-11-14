@@ -16,16 +16,19 @@ HH/HV are gamma0 power converted to dB. Missing entries are JSON null.
 With no WorldCover, `cover`, `peers`, `z`, `style`, `since` are null and peer
 arrays contain only nulls. Do not infer land cover or a normal/in-step result.
 
-`disp` and `peer_disp` are null until GUNW conversion is validated. Future
-displacement arrays use `displacement_dates`, independently of GCOV dates;
+`disp` contains [0, apparent_relative_LOS_cm] for the accepted GUNW pair and is
+null for rejected samples. `peer_disp` is null: no deformation peer band is estimated.
+`coherence`, `component`, `ionosphere_interpolated`, `ionosphere_sd_rad` retain
+per-sample quality information. First epoch zero is a reference definition.
+Displacement arrays use `displacement_dates`, independently of GCOV dates;
 each result must name its pair/reference, units, sign convention, connected
 component, masks, corrections and reference location in provenance. A missing
 measurement is never represented as zero or carried across a gap. An optional
 `peer_disp_sd` must contain measured robust spread; the plot supplies no fixed band.
 
-`provenance` records input producer and CMR IDs, dates, URLs, SHA-256, processing
-steps, creation time and limitations. Before download, the checked-in file has
-empty dates and all-null measurements and points to the public CMR manifest.
+`provenance` records input producer and CMR IDs, dates, URLs, SHA-256 of saved subsets,
+processing steps, creation time and limitations. The checked-in file contains real
+measurements and points to the public CMR manifest and reproducible numeric subsets.
 
 The earlier pipeline design described irregular pixel samples, but the running
 map actually required square arrays plus a `series(x,y)` function. The loader

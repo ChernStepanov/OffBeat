@@ -55,6 +55,15 @@
     state.raster = null;
     if (!$("l-offbeat").checked) return;
     const g = state.site.grid, t = state.z;
+    if (!g.z.some(Number.isFinite)) {
+      state.raster = paint(i => {
+        const value = state.site.pixels[i].hv.at(-1);
+        if (!Number.isFinite(value)) return null;
+        const q = Math.max(0, Math.min(1, (value + 25) / 25));
+        return [Math.round(255*q), 70, Math.round(255*(1-q)), 180];
+      }).addTo(map);
+      return;
+    }
     state.raster = paint(i => {
       const a = Math.abs(g.z[i]);
       if (!Number.isFinite(g.z[i]) || a < t || g.cover[i] === 80) return null;
@@ -106,7 +115,7 @@
       return `<tr data-cell="${p.peak}" tabindex="0" aria-selected="${state.cell === p.peak}">
         <td>${i + 1}</td><td><i class="tag" style="background:${st.color}"></i>${st.name}</td>
         <td>${area(p.cells)}</td><td>${Math.abs(g.z[p.peak]).toFixed(1)}</td><td>${since}</td></tr>`;
-    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'Anomaly analysis unavailable: measured peers and land cover required.'}</td></tr>`;
+    }).join("") : `<tr><td colspan="5">${g.z.some(Number.isFinite) ? `Nothing passes |z| ≥ ${state.z}.` : 'No anomaly classification: one measured pair is insufficient for a trend.'}</td></tr>`;
   }
   const rowPick = e => { const tr = e.target.closest("tr[data-cell]"); if (tr) pickCell(+tr.dataset.cell, true); };
   $("top").addEventListener("click", rowPick);
@@ -134,11 +143,12 @@
     const st = p.style ? OB.STYLES[p.style] : null;
     $("px-id").textContent = p.id;
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
-    $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} px, same class`;
+    $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} valid HV samples at latest date; same class, ≤1 km`;
     $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
     $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st && Math.abs(p.z) >= 2 ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : "in step";
     $("p-since").textContent = p.since || "—";
     $("p-loc").textContent = `${p.lat.toFixed(4)}, ${p.lon.toFixed(4)}`;
+    $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;
     const b = g.bbox, dl = (b.n - b.s) / g.n, dw = (b.e - b.w) / g.n;
     const rect = [[b.n - (y + 1) * dl, b.w + x * dw], [b.n - y * dl, b.w + (x + 1) * dw]];
     cellBox.setBounds(rect).addTo(map); cellBoxOptic.setBounds(rect).addTo(optic);
@@ -181,12 +191,17 @@
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
     $('data-status').textContent = s.message || s.source;
+    $('z').disabled = !s.grid.z.some(Number.isFinite);
+    $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
     const b = s.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { padding: [4, 4] });
     drawCover(); refresh();
     $("sb-src").textContent = "Source: " + s.source;
     $("sb-state").textContent = s.message || `Ready · ${s.dates.length} acquisitions`;
     if (state.patches[0]) pickCell(state.patches[0].peak, false);
-    else pickCell(Math.floor(s.grid.n / 2) * s.grid.n + Math.floor(s.grid.n / 2), false);
+    else {
+      const first = s.pixels.findIndex(p => p.disp && p.disp.some(Number.isFinite) && p.hv.some(Number.isFinite));
+      pickCell(first >= 0 ? first : Math.floor(s.grid.n / 2) * s.grid.n + Math.floor(s.grid.n / 2), false);
+    }
     if (location.hash !== "#" + s.id) history.replaceState(null, "", "#" + s.id);
   }
 

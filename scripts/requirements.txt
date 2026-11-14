@@ -2,3 +2,4 @@ earthaccess>=0.15,<1
 h5py>=3.12,<4
 numpy>=2,<3
 pyproj>=3.7,<4
+rasterio>=1.4,<2

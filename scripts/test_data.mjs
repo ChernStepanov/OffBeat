@@ -14,6 +14,15 @@ vm.createContext(context);
 vm.runInContext(fs.readFileSync('js/data.js','utf8'), context);
 await context.OB.loadData();
 assert.equal(context.OB.SITES[0].series(0,0).hh.length,site.dates.length);
+if (site.status === 'measured_pair') {
+  assert.equal(site.dates.length,2);
+  assert(site.pixels.some(p=>p.hh.every(Number.isFinite)&&p.hv.every(Number.isFinite)));
+  assert(site.pixels.some(p=>p.disp&&p.disp.length===site.displacement_dates.length));
+  assert(site.pixels.some(p=>p.disp===null));
+  assert(site.pixels.every(p=>p.z===null&&p.style===null));
+  assert(site.provenance.inputs.every(r=>r.sha256.length===64));
+  assert(site.pixels.filter(p=>p.disp).every(p=>p.coherence>=.7&&p.component===site.provenance.reference.component));
+}
 context.fetch = async()=>({ok:false,status:503});
 await assert.rejects(context.OB.loadData(), /503/);
 
