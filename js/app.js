@@ -75,14 +75,6 @@
     const [a, b] = bounds.map(corner => map.project(corner, 0));
     const center = map.unproject(a.add(b).divideBy(2), 0);
     const coordinates = `${center.lat.toFixed(6)}, ${center.wrap().lng.toFixed(6)}`;
-    for (const [target, frame] of [[map, cellBox], [optic, cellBoxOptic]]) {
-      frame.setBounds(bounds).addTo(target);
-      if (!frame.getTooltip()) frame.bindTooltip('', {
-        permanent: true, direction: 'top', opacity: 1, offset: [0, -8],
-      });
-      frame.setTooltipContent(coordinates);
-      frame.getTooltip().setLatLng(center);
-    }
     $('p-loc').textContent = coordinates;
   }
 
@@ -281,12 +273,7 @@
     if (!$("l-offbeat").checked) return;
     const g = state.site.grid, t = state.z;
     if (!g.z.some(Number.isFinite) && state.site.pixels) {
-      state.raster = paint(i => {
-        const value = state.site.pixels[i].hv.at(-1);
-        if (!Number.isFinite(value)) return null;
-        const q = Math.max(0, Math.min(1, (value + 25) / 25));
-        return [Math.round(255*q), 70, Math.round(255*(1-q)), 180];
-      }).addTo(map);
+      // Prepared series belong in the charts, not a separate square on the map.
       return;
     }
     state.raster = paint(i => {
