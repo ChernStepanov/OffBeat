@@ -283,18 +283,19 @@
   // --- site switch ---
   async function loadSite(id) {
     OB.sonify.stop();
-    const fallback = OB.SITES.find(x => x.id === id) || OB.SITES[0];
+    const selected = OB.SITES.find(x => x.id === id) || OB.SITES[0];
     const ticket = ++state.loading;
-    $("sb-state").textContent = `Loading ${fallback.name}...`;
+    $("sb-state").textContent = `Loading ${selected.name}...`;
     let s;
-    try { s = fallback.binary ? await OB.data.load(fallback.dataId || fallback.id, fallback) : fallback; if (fallback.binary) s.id = fallback.id; }
+    try { s = selected; }
     catch (e) { $('data-status').textContent = `Real data unavailable: ${e.message}`; $('sb-state').textContent = 'Load failed'; return; }
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
     document.querySelectorAll("#sites button").forEach(b => b.setAttribute("aria-pressed", b.dataset.site === s.id));
     $("site-name").textContent = s.name;
-    $('data-status').textContent = s.message || s.source;
+    $('source-link').href = `data/${s.id}-manifest.json`;
+    $('data-status').textContent = (s.message || s.source) + (OB.dataErrors.length ? ' Unavailable: ' + OB.dataErrors.join('; ') : '');
     $('z').disabled = !s.grid.z.some(Number.isFinite);
     $('raster-label').textContent = s.grid.z.some(Number.isFinite) ? 'Off-Beat raster' : 'Measured HV backscatter';
     $('map-caption').textContent = s.grid.z.some(Number.isFinite) ? 'z-score vs. same-class peers, click any pixel' : 'Measured HV gamma0, blue −25 to red 0 dB; click a sample';

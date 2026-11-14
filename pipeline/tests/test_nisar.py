@@ -201,6 +201,18 @@ def test_gunw_mask_decoding():
     assert nisar._gunw_valid(m).tolist() == [True, True, False, False, False, False, True]
 
 
+@pytest.mark.parametrize('frequency',[None,0.,-1.,np.nan])
+def test_gunw_requires_measured_frequency(tmp_path,patched_open,frequency):
+    path=tmp_path/'u.h5'
+    make_gunw(path,phase_fn=lambda X,Y:np.ones_like(X),losx_fn=lambda X:np.full_like(X,.6))
+    with h5py.File(path,'r+') as hdf:
+        key='/science/LSAR/GUNW/grids/frequencyA/centerFrequency'
+        if frequency is None:del hdf[key]
+        else:hdf[key][...]=frequency
+    with pytest.raises(ValueError,match='centerFrequency'):
+        nisar.read_gunw(_granule(path,'GUNW'),SITE)
+
+
 def test_cache_round_trip(tmp_path, monkeypatch, patched_open):
     make_gcov(tmp_path / "g.h5")
     monkeypatch.setattr(nisar, "RAW_DIR", tmp_path / "raw")
