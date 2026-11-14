@@ -1,0 +1,13 @@
+{
+  "query": "https://terrabrasilis.dpi.inpe.br/geoserver/deter-amz/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=deter-amz%3Adeter_amz&outputFormat=application%2Fjson&CQL_FILTER=BBOX%28geom%2C-49.3375%2C-4.8375%2C-49.2125%2C-4.7125%29+AND+view_date+BETWEEN+%272026-07-01%27+AND+%272026-11-14%27",
+  "sha256": "1bbd86b7c09c669b0391ce86185cc82cadca634722ddae18965919ee5fc61d1d",
+  "number_matched": 0,
+  "bbox": [
+    -49.3375,
+    -4.8375,
+    -49.2125,
+    -4.7125
+  ],
+  "start": "2026-07-01",
+  "end": "2026-11-14"
+}

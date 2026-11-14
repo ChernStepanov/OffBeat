@@ -386,6 +386,20 @@
       for (const [label, url] of [['RGB comparison sheet', 'data/amazon/validation/rgb-review.png'], ['Sources and findings', 'docs/amazon-validation.md']]) {
         const link = document.createElement('a'); link.href = url; link.textContent = label; body.appendChild(link); body.appendChild(document.createTextNode(' '));
       }
+      const positive = state.site.context.positive;
+      if (positive && positive.kind === 'positive_control_audit') {
+        const p = document.createElement('p'), summary = positive.summary;
+        p.textContent = `Independent GLAD selection: ${summary.samples} matched radar samples; ${summary.glad_matched_detections} HV-drop detections. ${summary.verified_forest_loss_samples} sample has visible forest loss in RGB, but ${summary.eligible_positive_samples} verified positive samples have sufficient before/after radar history. Recall is not established.`;
+        body.appendChild(p);
+        const found = positive.samples.find(sample => sample.review.status === 'forest_loss_visible');
+        if (found) {
+          const button = document.createElement('button'); button.type = 'button'; button.className = 'btn';
+          button.textContent = `Inspect visible clearing: ${found.id}`;
+          button.addEventListener('click', () => { document.dispatchEvent(new Event('ob:manual-navigation')); const i = state.site.pixels.findIndex(pixel => pixel.id === found.id); if (i >= 0) pickCell(i, true); });
+          body.appendChild(button); body.appendChild(document.createTextNode(' '));
+        }
+        const link = document.createElement('a'); link.href = 'docs/amazon-positive-eval.md'; link.textContent = 'Positive-control test and limitations'; body.appendChild(link);
+      }
       return;
     }
     const pct = x => x == null ? "-" : Math.round(x * 100) + "%";

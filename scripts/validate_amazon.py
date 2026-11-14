@@ -146,12 +146,12 @@ def match_alerts(pixel, features, tolerance_m=30, max_days=60):
     return matches,nearest
 
 
-def pixel_rgb(pixel, scene, receipt):
+def pixel_rgb(pixel, scene, receipt,image_directory=None,scl_directory=None):
     render=scene['render'];w,s,e,n=render['bbox'];height,width=render['height'],render['width']
     x=min(width-1,max(0,int((pixel['lon']-w)/(e-w)*width)))
     y=min(height-1,max(0,int((n-pixel['lat'])/(n-s)*height)))
-    with Image.open(ROOT/'data/amazon/optical'/render['file']) as image:rgba=np.array(image)
-    with np.load(DIRECTORY/receipt['path']) as data:scl=data['scl']
+    with Image.open((image_directory or ROOT/'data/amazon/optical')/render['file']) as image:rgba=np.array(image)
+    with np.load((scl_directory or DIRECTORY)/receipt['path']) as data:scl=data['scl']
     center=int(scl[y,x]);window=scl[max(0,y-3):min(height,y+4),max(0,x-3):min(width,x+4)]
     return dict(date=scene['date'],scene_id=scene['scene_id'],file=render['file'],png_sha256=render['sha256'],scl=center,
                 clear_land=center in (4,5) and bool(rgba[y,x,3]),
@@ -181,13 +181,14 @@ def attach_reviews(output, reviews):
                            verdicts=dict(Counter(row['review']['verdict'] for row in output['candidates'])))
 
 
-def inspection_sheet(pixels,scenes):
-    sheet=Image.new('RGB',(1100,30+len(pixels)*210),'#ddd');draw=ImageDraw.Draw(sheet)
+def inspection_sheet(pixels,scenes,output=None,image_directories=None):
+    sheet=Image.new('RGB',(max(1100,180+len(scenes)*180),30+len(pixels)*210),'#ddd');draw=ImageDraw.Draw(sheet)
     for j,scene in enumerate(scenes):draw.text((185+j*180,5),scene['date'],fill='black')
     for i,pixel in enumerate(pixels):
         y=30+i*210;draw.text((4,y+20),pixel['id']+'\n'+pixel['since']+'\nclass '+str(pixel['cover']),fill='black')
         for j,scene in enumerate(scenes):
-            with Image.open(ROOT/'data/amazon/optical'/scene['render']['file']) as original:im=original.convert('RGB')
+            directory=image_directories[scene['scene_id']] if image_directories else ROOT/'data/amazon/optical'
+            with Image.open(directory/scene['render']['file']) as original:im=original.convert('RGB')
             w,s,e,n=scene['render']['bbox'];x=(pixel['lon']-w)/(e-w)*im.width;row=(n-pixel['lat'])/(n-s)*im.height
             pad=Image.new('RGB',(im.width+42,im.height+42),'#888');pad.paste(im,(21,21))
             left,top=int(np.floor(x)),int(np.floor(row))
@@ -196,7 +197,7 @@ def inspection_sheet(pixels,scenes):
             cx,cy=round((x+21-left)*4),round((row+21-top)*4)
             for coords in [(cx-7,cy,cx-3,cy),(cx+3,cy,cx+7,cy),(cx,cy-7,cx,cy-3),(cx,cy+3,cx,cy+7)]:marker.line(coords,fill='white',width=2)
             sheet.paste(crop,(180+j*180,y))
-    sheet.save(DIRECTORY/'rgb-review.png')
+    sheet.save(output or DIRECTORY/'rgb-review.png')
 
 
 def main():
