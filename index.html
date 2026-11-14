@@ -36,6 +36,21 @@
     <!-- Left column: controls -->
     <aside id="side">
 
+      <section class="win" aria-labelledby="t-search">
+        <div class="win-t"><h2 id="t-search">Поиск локаций</h2></div>
+        <div class="win-b">
+          <form id="place-search" class="place-search">
+            <label for="place-query">Place, region, forest or coordinates</label>
+            <input id="place-query" type="search" placeholder="Amazon forest or 19.43, -99.08" autocomplete="off" required>
+            <button class="btn" type="submit" id="place-submit">Search</button>
+          </form>
+          <p class="place-hint">Coordinates: latitude, longitude. Names are sent to Photon / Komoot.</p>
+          <p id="place-status" role="status" aria-live="polite"></p>
+          <ul id="place-results" class="place-results"></ul>
+          <small>Search data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>; <a href="https://github.com/komoot/photon">Photon</a>.</small>
+        </div>
+      </section>
+
       <section class="win" aria-labelledby="t-site">
         <div class="win-t"><h2 id="t-site">Demo sites</h2></div>
         <div class="win-b">
@@ -205,6 +220,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="js/styles.js"></script>
+<script src="js/search.js"></script>
 <script src="js/data.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/sonify.js"></script>
