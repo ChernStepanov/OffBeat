@@ -13,6 +13,7 @@
 
   // Identical imagery and zoom limits; grey basemap under the colour NISAR layer.
   const IMAGERY = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+  const CLARITY = "https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
   const LABELS = "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
   const imageryCredit = 'Imagery &copy; Esri, Vantor, Earthstar Geographics';
   const labelsCredit = 'Labels &copy; Esri, HERE, Garmin, OpenStreetMap contributors';
@@ -23,11 +24,16 @@
   map.getPane('opticalMirror').style.zIndex = 225;
   map.getPane('opticalMirror').style.pointerEvents = 'none';
   const optical = OB.bindOptical(optic, $('optical-date'), $('optical-status'), map);
+  let clarity = true;
+  try { clarity = localStorage.getItem('offbeat.imagery.clarity') !== 'false'; } catch (_) {}
+  const imageryButton = $('imagery-clarity');
+  imageryButton.setAttribute('aria-pressed', String(clarity));
+  const imageryLayers = [];
   const labelLayers = [map, optic].map(m => {
     m.attributionControl.setPrefix('Leaflet');
     const isData = m === map;
     // Detailed imagery sits above a level-16 fallback where Esri has no detailed tile.
-    OB.bindImagery(m, IMAGERY, {className: isData ? 'context-imagery grayscale-imagery' : 'context-imagery', attribution: imageryCredit});
+    imageryLayers.push(OB.bindImagery(m, clarity ? CLARITY : IMAGERY, {className: isData ? 'context-imagery grayscale-imagery' : 'context-imagery', attribution: imageryCredit}));
     m.createPane('placeLabels');
     m.getPane('placeLabels').style.zIndex = 625;
     m.getPane('placeLabels').style.pointerEvents = 'none';
@@ -35,6 +41,12 @@
     m.getPane('selectedCell').style.zIndex = 640;
     m.getPane('selectedCell').style.pointerEvents = 'none';
     return L.tileLayer(LABELS, { pane: 'placeLabels', maxZoom: 19, maxNativeZoom: 16, attribution: labelsCredit }).addTo(m);
+  });
+  imageryButton.addEventListener('click', () => {
+    clarity = !clarity;
+    imageryButton.setAttribute('aria-pressed', String(clarity));
+    imageryLayers.forEach(layer => layer.setUrl(clarity ? CLARITY : IMAGERY));
+    try { localStorage.setItem('offbeat.imagery.clarity', String(clarity)); } catch (_) {}
   });
   let areaLayers = [];
   let rankingData = null;

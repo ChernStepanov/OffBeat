@@ -29,5 +29,5 @@ OB.bindImagery = function (map, url, options) {
     ...options, crossOrigin: 'anonymous', minZoom: level,
     maxNativeZoom: level, maxZoom: 19, keepBuffer: 1,
   }).addTo(map));
-  return {base, details};
+  return {base, details, setUrl(next) { for (const layer of [base, ...details]) layer.setUrl(next); }};
 };

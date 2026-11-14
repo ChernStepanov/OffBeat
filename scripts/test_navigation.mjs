@@ -45,7 +45,7 @@ const context={URL,AbortSignal,Event,console,document,location,history:{replaceS
 for(const file of ['styles','search','data','acquisitions','amazon-ranking','suggestions'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
 Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:(map,toggle,status)=>{radarBinding={map,toggle,status};return ()=>null;},bindWaterLabels:()=>()=>{},
-  bindImagery:(map,url,options)=>imagery.push({map,url,options}),
+  bindImagery:(map,url,options)=>{const entry={map,url,options,setUrl(next){this.url=next;}};imagery.push(entry);return entry;},
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),
   chart:{backscatter(){},displacement(){},cband(){},opera(){},gnss(){},empty(){}},sonify:{stop(){},play(){}}});
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
@@ -61,6 +61,11 @@ for (const {options} of tileLayers) {
 assert.equal(tileLayers.length,2);
 assert.equal(imagery.length,2);
 assert.equal(imagery[0].url,imagery[1].url,'Both maps must use the same imagery');
+assert.match(imagery[0].url,/clarity\.maptiles/,'Sharper archival imagery is selected by default');
+$('imagery-clarity').listeners.click();
+assert.equal(imagery[0].url,imagery[1].url,'Switching imagery must affect both maps');
+assert.match(imagery[0].url,/services\.arcgisonline/);
+assert.equal($('imagery-clarity').getAttribute('aria-pressed'),'false');
 assert.match(imagery[0].options.className,/grayscale/);
 assert.doesNotMatch(imagery[1].options.className,/grayscale/);
 await OB.app.loadSite('mexico');

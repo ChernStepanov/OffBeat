@@ -1,6 +1,8 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'Sharper archive imagery':'Более чёткий архивный снимок',
+    'Esri Clarity can be clearer but older. Switch off for the current mosaic.':'Архив Esri Clarity может быть чётче, но старее. Выключите для обычной мозаики.',
     'Global NISAR coverage (NASA)':'Глобальное покрытие NISAR (NASA)',
     'Colours show approximate acquisition dates, not measured change. Gaps may remain.':'Цвета показывают приблизительные даты съёмки, а не измеренное изменение. Возможны пробелы покрытия.',
     'Loading NISAR radar coverage…':'Загрузка покрытия радара NISAR…',
