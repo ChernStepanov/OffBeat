@@ -93,11 +93,7 @@ Synthetic numerical fixtures exist only in offline tests, never in application d
 
 ## 3D terrain and expandable windows
 
-Click **3D terrain** in the map title bar. The workspace combines the existing
-synchronized maps with a real WebGL elevation map and NISAR samples registered
-to its surface. Terrain now streams worldwide as the camera moves; the map is
-not cropped to the study areas. Opening from the 2D overview keeps its centre.
-A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
+The interactive 3D terrain appears below the two maps; **3D terrain** in the map title bar scrolls to it. The panel can be maximized independently. Terrain streams worldwide as the camera moves and is not cropped to the study areas. NISAR samples retain their measured coordinates. Rendering starts near the viewport and pauses when the panel is out of view. A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
 
 The surface and dense terrain point cloud load visible elevation tiles from
 [Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).

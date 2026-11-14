@@ -273,6 +273,7 @@
     const url = new URL(location.href); url.searchParams.set('lat', String(place.lat)); url.searchParams.set('lon', String(place.lon)); history.replaceState(null, '', url);
     if (place.bounds && !site) map.fitBounds(place.bounds, { padding: [16, 16], maxZoom: 13 });
     else map.setView([place.lat, place.lon], site ? Math.max(map.getZoom(), 13) : 12);
+    document.dispatchEvent(new Event('ob:map-navigation'));
     [map, optic].forEach(m => {
       const marker = L.circleMarker([place.lat, place.lon], { radius: 7, color: '#fff', weight: 2, fillColor: '#c00000', fillOpacity: 1, interactive: false }).addTo(m);
       searchMarkers.push([m, marker]);

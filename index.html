@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=b522658eb17a">
+<link rel="stylesheet" href="css/offbeat.css?v=b3147dbf1cab">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -174,7 +174,7 @@
       </section>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
-        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" aria-expanded="false" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>3D terrain</span></button><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
+        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>3D terrain</span></button><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
         <div class="win-b win-b--flush">
           <fieldset class="group acquisition" id="acquisition" hidden>
             <legend>Measured acquisition</legend>
@@ -325,7 +325,7 @@
 </div>
 
 <!-- The existing maps move here while exploring; their layers and selection stay intact. -->
-<section class="win scene" id="scene-win" role="dialog" aria-modal="true" aria-labelledby="scene-title" hidden>
+<section class="win scene" id="scene-win" aria-labelledby="scene-title" hidden>
   <div class="win-t scene__title">
     <span class="win-t__icon" aria-hidden="true"></span>
     <h2 id="scene-title">OffBeat Terrain Lab - 3D field view</h2>
@@ -449,9 +449,9 @@
 <script src="js/terrain-tiles.js?v=ecaf17dffa38"></script>
 <script src="js/terrain-renderer.js?v=edc8dce38b35"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=5ef338d83ef9"></script>
+<script src="js/scene.js?v=c451f8cea206"></script>
 <script src="js/evidence-model.js?v=c0c6d5385778"></script>
 <script src="js/evidence.js?v=1edadc35150d"></script>
-<script src="js/app.js?v=498e1d93f53e"></script>
+<script src="js/app.js?v=a9f50a946bf2"></script>
 </body>
 </html>

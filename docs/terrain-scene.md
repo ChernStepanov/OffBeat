@@ -4,6 +4,8 @@ The former Canvas signal-height cloud has been replaced with WebGL terrain.
 Geographic elevation comes from a DEM; NISAR backscatter changes dot colour.
 The sample's height therefore stays fixed when its HH/HV signal changes.
 
+The 3D panel is embedded below the two maps. The map-title button scrolls to it; its window control can maximize the panel. Rendering and tile streaming start when the panel approaches the viewport and pause when it leaves view.
+
 ## Continuous global terrain
 
 `js/terrain-tiles.js` addresses the full Web Mercator world, wraps longitude at
@@ -78,8 +80,7 @@ The static CRT effect is optional and reduced for reduced-motion preference.
 The shared window manager handles large floating windows, maximization to the
 browser content area and native browser fullscreen. It moves the existing panel
 and restores it at a placeholder; it does not re-create maps, charts or inputs.
-Resize events update Leaflet and the WebGL projection. Escape restores a promoted
-panel before it exits the scene; open selector popups consume their first Escape.
+Resize events update Leaflet and the WebGL projection. Escape restores a maximized panel; open selector popups consume their first Escape.
 
 `node scripts/test_point_cloud.mjs` verifies all three numeric DEM receipts,
 finite grids, source references, coordinate registration on every prepared date
