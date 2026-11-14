@@ -193,3 +193,17 @@ def test_validate_fire_window_and_radius():
 def test_validate_empty_inputs():
     r = ca.validate([], [], [], grid=GRID)
     assert r["summary"]["n_patches"] == 0 and r["summary"]["share_confirmed"] is None
+
+
+def test_alert_requires_time_match_and_old_overlap_does_not_hide_new():
+    patch = [{'id':'candidate', 'cells':cells(4,4,6,6), 'since':'2026-06-01', 'style':'drop'}]
+    old = alert(rect(4,4,6,6), '2025-01-01', 'GLAD')
+    recent = alert(rect(4,4,6,6), '2026-06-05', 'DETER')
+    result = ca.validate(patch, [old], [], grid=GRID)
+    assert not result['patches'][0]['alert']
+    assert result['summary']['caught_alert_area_ha'] == 0
+    result = ca.validate(patch, [old, recent], [], grid=GRID)
+    assert result['patches'][0]['alert_date'] == '2026-06-05'
+    assert result['patches'][0]['alert_sources'] == ['DETER']
+    assert result['summary']['recall_by_source']['GLAD'] == 0
+    assert result['summary']['recall_by_source']['DETER'] == 1

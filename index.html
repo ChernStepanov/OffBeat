@@ -143,10 +143,11 @@
               <div id="map" class="map" role="application" aria-label="Anomaly map"></div>
             </div>
             <div class="maps__pane">
-              <div class="pane-label">Colour imagery, Esri World Imagery · same basemap on both sides</div>
+              <div class="pane-label"><label for="optical-date">Optical observation:</label> <select id="optical-date" disabled><option value="context">Context mosaic (date varies)</option></select></div>
               <div id="optic" class="map" role="application" aria-label="Optical map, follows the anomaly map"></div>
             </div>
           </div>
+          <div id="optical-status" class="pane-label" role="status">Context imagery is not date-matched validation.</div>
           <div id="nisar-status" class="pane-label" role="status">Loading NISAR radar coverage…</div>
           <div id="map-view-metrics" class="pane-label"></div>
         </div>
@@ -202,10 +203,10 @@
       </section>
 
       <section class="win" id="top-win" aria-labelledby="t-top">
-        <div class="win-t"><h2 id="t-top">Largest off-beat patches</h2></div>
+        <div class="win-t"><h2 id="t-top">Ranked curve-shape candidates</h2></div>
         <div class="win-b">
           <table class="grid" id="top">
-            <thead><tr><th scope="col">#</th><th scope="col">Style</th><th scope="col">Area</th><th scope="col">Peak |z|</th><th scope="col">Since</th></tr></thead>
+            <thead><tr><th scope="col">#</th><th scope="col">Shape</th><th scope="col">Samples / area</th><th scope="col">Latest |z|</th><th scope="col">Shift date</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -222,13 +223,13 @@
           <div class="paper">
             <p>These cases show measured NISAR HH/HV at sparse sample locations. Each GUNW result uses one actual acquisition pair; rejected samples remain unavailable. Backscatter peers are sampled locations of the same historical WorldCover 2021 class within 1 km; the band is median ± 2 × 1.4826 MAD, with at least 10 valid peers.</p>
             <p>GUNW is referenced to one coherent location in the same connected component. Ionospheric phase is removed; troposphere and tides remain. The reference is not proven stable. This apparent LOS change is not a subsidence rate or vertical displacement. The first epoch is zero by definition.</p>
-            <p>No anomaly classifier or patch areas are published from this short case. Both maps use the same Esri imagery, grey under NISAR on the left and colour on the right. Imagery dates vary by location; this is geographic context, not a date-matched check. Map labels can be switched off. Missing and rejected measurements remain unavailable.</p>
+            <p>Peer deviations and curve shapes are exploratory candidates, not confirmed events. Sparse sample points do not define event areas. The global NASA browse mosaic has its own dates and brightness scale, separate from calibrated HH/HV charts. The optical selector offers dated Sentinel-2 observations with cloud and nodata masks; the Esri mosaic remains geographic context. Missing and rejected measurements remain unavailable.</p>
           </div>
         </div>
       </section>
 
       <p class="foot">
-        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, imagery (c) Esri, Vantor, Earthstar Geographics; labels (c) Esri, HERE, Garmin, OpenStreetMap contributors. Font W95FA by Alina Sava, OFL.
+        Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, Copernicus Sentinel-2 via Earth Search; imagery (c) Esri, Vantor, Earthstar Geographics; labels (c) Esri, HERE, Garmin, OpenStreetMap contributors. Font W95FA by Alina Sava, OFL.
         Built for NASA Space Apps 2026, “Dancing with the SARs”. Open source.
       </p>
     </main>
@@ -259,6 +260,7 @@
 <script src="js/sonify.js"></script>
 <script src="js/sfx.js"></script>
 <script src="js/story.js"></script>
+<script src="js/optical.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

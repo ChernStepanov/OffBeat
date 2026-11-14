@@ -1,107 +1,71 @@
 # OffBeat
 
-NISAR change finder for NASA Space Apps 2026, challenge “Dancing with the SARs”.
+Explore real NISAR radar samples, compare them with nearby samples of the same historical land-cover class, and hear the measured curves. Curve shapes are candidates for checking, not automatic event diagnoses.
 
-Rice paddies, swamps and forests each have their own backscatter rhythm. OffBeat compares every
-NISAR pixel with nearby pixels of the same ESA WorldCover class, flags the ones that fall out of
-step (z-score against peers), names the shape of the change and lets you hear it.
+[Demo](https://offbeat.chern.su/) | [Repository](https://github.com/ChernStepanov/OffBeat)
 
-| Style | Signal | Usual cause |
-|---|---|---|
-| HV drop | sharp fall in HV | clearing, fire |
-| HH jump | HH rises by double bounce | flooded vegetation |
-| Slow drift | phase drifts over months (GUNW) | subsidence |
-| Step | displacement jumps on one date | earthquake |
+## Run in five minutes
 
-## Real data status
+No build or NASA login is needed for the prepared demo. Clone the repository, serve its root with Python 3, then open http://localhost:8765/:
 
-The default application uses real NISAR subsets for Mexico: measured HH/HV on
-29 dates from 2025-10-30 through 2026-10-13, plus an exploratory relative GUNW LOS pair. The prepared
-case works without login. Earthdata authorization is needed only to re-extract
-source data. Missing and quality-rejected measurements remain unavailable.
-See [download, processing and provenance instructions](docs/real-nisar.md).
-
-## Run
-
-No build step. Any static server:
-
-```bash
-python3 -m http.server 8765
+```sh
+python -m http.server 8765
 ```
 
-Then open http://localhost:8765/#mexico (also `#amazon`, `#venezuela`).
+Choose a prepared site for measured HH/HV charts. The default global NASA GIBS map is a browse mosaic with separate dates and a brightness scale, not calibrated backscatter. The optional local analysis layer displays sparse sample points, never a continuous event raster or event area. Use the optical selector for dated Sentinel-2 previews. Missing observations are explicit; the Esri mosaic is geographic context only. External map tiles and search require internet. Audio starts after a user click.
 
-«Поиск локаций» accepts place, region and forest names or decimal `latitude, longitude`.
-Names in any script are sent only on submit to Open-Meteo / GeoNames, with Photon / Komoot as fallback based on
-OpenStreetMap; requests are cached during the session and limited to one per second
-per browser. The demo endpoint may throttle or go offline. Operators can set
-`window.OB_GEOCODER_URL` before loading `js/app.js` to use a suitable Photon endpoint.
-Set window.OB_MULTILINGUAL_GEOCODER_URL to replace the primary Open-Meteo endpoint. Unicode names and right-to-left scripts are preserved; matching depends on provider name coverage. Coordinate searches are local. A search outside the prepared NISAR areas shows
-geographic context and explicitly marks the measurement series as unavailable.
-The selected site and searched coordinates are retained in the URL across reloads.
-The NISAR archive panel searches NASA CMR across ASF NISAR collections for the
-point at the map centre. Results include official granule records and original
-file links when available. File downloads may require Earthdata Login. Pixel
-charts and sonification use the prepared measured cases.
-The last map centre and zoom are also remembered locally in the same browser;
-an explicitly selected site or coordinates in a link take precedence.
+Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Names are sent only on submit, cached in the session and throttled. Coordinate searches are local. Operators can override `OB_MULTILINGUAL_GEOCODER_URL` and `OB_GEOCODER_URL` before app.js. Translated-name coverage depends on the providers.
 
-## Layout
+## Actual prepared data
 
-- `index.html`, `css/offbeat.css` — the page, desktop-2005 look on purpose.
-- `js/data.js` — loads measured site JSON files; rejects synthetic sources or missing provenance.
-- `scripts/subset_nisar.py` — local authenticated extraction, GUNW quality filtering and provenance.
-- `js/chart.js` — HH/HV and displacement plots against the peer band.
-- `js/sonify.js` — WebAudio: peers keep the beat, the pixel plays its curve, slips late and sour when it strays.
-- `js/app.js` — maps (Leaflet), pixel card, top list, player.
+| Site | GCOV dates | Accepted GUNW samples | Optical matches |
+|---|---|---|---|
+| Mexico City | 29, 2025-10-30 to 2026-10-13 | 357/1024, one 12-day pair | 29/29 radar dates |
+| Itupiranga, Para | 6, 2026-07-18 to 2026-09-28 | 0 | 6/6 radar dates |
+| Caracas | 6, 2025-11-09 to 2026-01-08 | 0 | 5/6 radar dates |
 
-## Pipeline
+Each site has 1024 sparse nearest-native sample locations. Missing and rejected observations stay null. GUNW has a separate date axis; its first zero is a reference convention. No vertical velocity, building-damage map, confirmed clearing area or forecast accuracy is claimed.
 
-Python, in `pipeline/`. Set up once:
+- `data/<site>.json`: measured values, leave-one-out peer bands, latest robust z, exploratory curve shapes and GUNW quality/provenance.
+- `data/<site>-manifest.json`: producer/CMR IDs, dates, tracks, footprints, polarizations and URLs. `data/subsets/`: numeric subsets and SHA-256 receipts.
+- `data/<site>/optical/index.json`: radar/optical date match, scene ID, source COG URLs, AOI mask fractions, calibration, bounds and PNG SHA-256. Several radar dates may share one real image.
+- `data/analysis/`: dated class medians, candidate examples, random controls and own-history versus neighbour-relative baselines.
+- `data/amazon/validation.json`: dated sparse point/alert and point/fire context matches. No area, recall or accuracy estimate.
+- `data/evidence/`: exact OPERA catalogue and USGS query evidence.
 
-```bash
-python3 -m venv .venv && .venv/bin/pip install numpy scipy h5py rasterio pyproj earthaccess asf_search requests pillow pytest
+[Science review](docs/science-review.md) | [Issue completion audit](docs/issue-audit.md) | [Data contract](docs/data-contract.md) | [Original extraction](docs/real-nisar.md)
+
+## Reproduce
+
+```sh
+python -m venv .venv
+.venv/bin/python -m pip install -r scripts/requirements.txt
+.venv/bin/python -m scripts.analyze_samples
+.venv/bin/python scripts/validate_samples.py
+.venv/bin/python scripts/optical.py
+.venv/bin/python scripts/catalog_checks.py
 ```
 
-Re-extract the small real cases used by the page (local interactive Earthdata login):
+On Windows use `.venv\Scripts\python.exe` in place of `.venv/bin/python`.
 
-```bash
-.venv/Scripts/python.exe scripts/subset_nisar.py
-.venv/Scripts/python.exe scripts/build_real_demos.py
+Peers use the same WorldCover 2021 class within 1 km, excluding self, with at least 10 valid neighbours. Spread is 1.4826 MAD; zero spread is unavailable. Curve shapes use at least two valid observations per segment. The z-score is a spatial departure, not a Gaussian probability or a weather-corrected change score.
+
+Optical processing searches Earth Search within +/-15 days, checks the local SCL mask, reads only AOI COG windows, and reprojects to the exact site bbox. All dates use reflectance 0 to 0.3 and gamma 2.2; provider harmonisation flags prevent applying the BOA offset twice.
+
+Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. Without login, catalogue overlap is checkable but OPERA velocities and numerical C/L comparisons remain unavailable.
+
+```sh
+node scripts/test_data.mjs
+node scripts/test_search.mjs
+.venv/bin/python -m pytest pipeline/tests -q -m "not network"
 ```
 
-| Step | Module | What it does |
-|---|---|---|
-| search, read | `nisar.py` | CMR search by AOI and track; reads only the AOI window of each remote HDF5 (GCOV backscatter, GUNW phase, coherence, LOS vectors) |
-| land cover | `cover.py` | ESA WorldCover 2021 straight from the public COGs on AWS |
-| peers | `peers.py` | per class and date: median and 1.4826 x MAD in 1 km blocks, averaged over 3 km |
-| styles | `classify.py` | one change point per pixel; HV drop, HH jump, displacement step or steady drift |
-| InSAR | `insar.py` | chains GUNW pairs into displacement; ascending + descending -> vertical and east; coherence loss in built-up areas -> damage proxy |
-| context | `context_amazon.py` | NASA FIRMS fires and INPE DETER alerts; checks OffBeat's clearings against them |
-| export | `export.py` | `meta.json`, `grid.bin`, `peers.bin`, per-pixel series in 32 x 32 tiles |
+Synthetic numerical fixtures exist only in offline tests, never in application data.
 
-The research pipeline can also export full real-data grids with `python -m pipeline.run <site>`.
-It has no synthetic mode. The browser uses the prepared small cases above, rather than these
-optional binary exports. Missing or quality-rejected samples remain unavailable.
+## Sources and licences
 
-Tests: `node scripts/test_data.mjs` and `.venv/bin/python -m pytest pipeline/tests -q -m "not network"`.
+NISAR GCOV/GUNW: NASA-ISRO via ASF DAAC / Earthdata; preserve granule attribution and metadata. Sentinel-2: Copernicus Sentinel data via Earth Search. ESA WorldCover 2021 v200: CC BY 4.0, historical context. Fires/alerts retain their NASA FIRMS, INPE or UMD GLAD source. OPERA is catalogue evidence only until actual additional measurements are processed.
 
-## Data
+Esri imagery/labels are attributed online context services, not redistributed imagery. Photon uses OpenStreetMap (ODbL); Open-Meteo geocoding uses GeoNames. W95FA font uses SIL OFL 1.1, see `fonts/W95FA-OFL.txt`.
 
-The left map loads a rolling 12-day NISAR GCOV radar mosaic from NASA GIBS.
-Newer tiles take precedence, and transparent coverage gaps show the Esri
-basemap. OffBeat aggregates the GIBS browse image into square cells and maps
-image brightness to blue through red. Clicking a cell outlines its bounds on
-both maps. The local measured HV overlay uses its own dB scale, with pixel
-charts available in the prepared cases.
-
-NASA-ISRO NISAR (L2 GCOV, L2 GUNW) via ASF DAAC and ESA WorldCover 10 m.
-Both panes use Esri World Imagery for matching detail, grey under NISAR on the left
-and colour on the right. Place labels and metric scales help orientation.
-Imagery dates vary by location; this is context, not date-matched optical validation.
-
-## Font
-
-W95FA by Alina Sava, a pixel re-creation of MS Sans Serif, SIL Open Font License 1.1 (`fonts/W95FA-OFL.txt`).
-It sits on its pixel grid at 12.5px (80 font units = 1px), so the UI uses that size. The font has no `— – · ≥ ² … ▶`,
-so the UI writes `-`, `>=`, `...` and `sq km` instead.
+No software LICENSE is currently declared. Public visibility does not itself grant an open-source licence; copyright holders must choose one before claiming OSI licensing for submission.

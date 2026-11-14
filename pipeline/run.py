@@ -62,9 +62,8 @@ def analyze(site: Site, cover, gcov: list[dict], gunw: dict[int, list[dict]]):
         ddates, dcm = chain_pairs(gunw[tracks[0]], ref_mask=ref)
         disp = np.full(hh.shape, np.nan, np.float32)
         for i, d in enumerate(dates):
-            j = int(np.argmin([abs((np.datetime64(d) - np.datetime64(x)).astype(int)) for x in ddates]))
-            if abs((np.datetime64(d) - np.datetime64(ddates[j])).astype(int)) <= 6:
-                disp[i] = dcm[j]
+            if d in ddates:
+                disp[i] = dcm[ddates.index(d)]
         out["disp"] = disp
         out["disp_med"], out["disp_sd"], out["disp_blocks"] = peer_stats_blocks(disp, cover, site.pixel_m, sd_floor=1.5)
         # deformation is spatially coherent, single-pixel phase noise is not: smooth z over 3 x 3

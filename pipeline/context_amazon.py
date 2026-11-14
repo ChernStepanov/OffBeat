@@ -492,6 +492,9 @@ def validate(patches, alerts, fires, max_days=60, grid: Grid | None = None, fire
     lag_days = since - alert date (negative: we saw it before the alert).
     """
     from scipy.spatial import cKDTree
+    if max_days < 0 or fire_km < 0:
+        raise ValueError('Time window and fire radius must be non-negative')
+    patches = list(patches)
     grid = grid or site_grid(SITES["amazon"])
     shape = grid.shape
     # distances and areas in metres even when the grid is in degrees (site grids are EPSG:4326)
@@ -520,20 +523,32 @@ def validate(patches, alerts, fires, max_days=60, grid: Grid | None = None, fire
         fday = np.array([day_number(f["date"]) for f in fires])
 
     union = np.zeros(shape, bool)
+    matched_cells = np.zeros(shape, bool)
+    matched_by_src = {src: np.zeros(shape, bool) for src in by_src}
     rows = []
     for p in patches:
         m = _patch_mask(p["cells"], shape)
         union |= m
         since = day_number(p["since"])
-        hit = first[m]
+        # Filter BEFORE rasterising: an old overlapping alert must not hide a recent one.
+        eligible = [f for f in feats if abs(day_number(f['properties']['date']) - since) <= max_days]
+        _, nearby_dates = rasterize_alerts(None, grid, eligible) if eligible else (None, np.zeros(shape, np.int32))
+        hit = nearby_dates[m]
         hit = hit[hit > 0]
+        matched_cells |= m & (nearby_dates > 0)
+        sources = []
+        for src in by_src:
+            subset = [f for f in eligible if f['properties'].get('source', '?') == src]
+            src_mask = rasterize_alerts(None, grid, subset)[0] > 0 if subset else np.zeros(shape, bool)
+            matched_by_src[src] |= src_mask & m
+            if (src_mask & m).any(): sources.append(src)
         rec = {"id": p.get("id"), "style": p.get("style"), "since": _date(p["since"]).isoformat(),
                "n_cells": int(m.sum()), "area_ha": round(float(m.sum() * px_ha), 2),
                "alert": bool(hit.size), "alert_date": None, "lag_days": None,
-               "alert_sources": [s for s, sm in by_src.items() if (sm & m).any()],
+               "alert_sources": sources,
                "fire": False, "fire_date": None, "fire_dist_m": None, "fire_source": None}
         if hit.size:
-            a = int(hit.min())
+            a = int(hit[np.argmin(np.abs(hit.astype(np.int64) - since))])
             rec["alert_date"] = day_to_iso(a)
             rec["lag_days"] = since - a
         if fires and m.any():
@@ -555,7 +570,7 @@ def validate(patches, alerts, fires, max_days=60, grid: Grid | None = None, fire
     n = len(rows)
     lags = [r["lag_days"] for r in rows if r["lag_days"] is not None]
     alert_cells = first > 0
-    caught = alert_cells & union
+    caught = matched_cells
     summary = {
         "n_patches": n,
         "share_confirmed": (sum(r["alert"] for r in rows) / n) if n else None,
@@ -564,9 +579,10 @@ def validate(patches, alerts, fires, max_days=60, grid: Grid | None = None, fire
         "alert_area_ha": round(float(alert_cells.sum() * px_ha), 2),
         "caught_alert_area_ha": round(float(caught.sum() * px_ha), 2),
         "recall_area": (float(caught.sum() / alert_cells.sum())) if alert_cells.any() else None,
-        "recall_by_source": {s: (float((sm & union).sum() / sm.sum()) if sm.any() else None)
+        "recall_by_source": {s: (float(matched_by_src[s].sum() / sm.sum()) if sm.any() else None)
                              for s, sm in by_src.items()},
         "max_days": max_days, "fire_km": fire_km,
+        "matching": "spatial overlap AND absolute date difference <= max_days; not independent causal confirmation",
     }
     return {"patches": rows, "summary": summary}
 

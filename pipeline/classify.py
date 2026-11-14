@@ -87,17 +87,17 @@ def classify(z_hh: np.ndarray, z_hv: np.ndarray, z_disp: np.ndarray | None = Non
     H, W = z_hh.shape[1:]
     style = np.zeros((H, W), np.uint8)
     since = np.full((H, W), -1, np.int16)
-    zout = np.nan_to_num(z_hv[-1]).astype(np.float32)
+    zout = z_hv[-1].astype(np.float32).copy()
 
     i_hv, j_hv = change_point(z_hv)
     i_hh, j_hh = change_point(z_hh)
 
-    drop = j_hv <= -k
+    drop = (j_hv <= -k) & np.isfinite(z_hv[-1])
     # HV measured across the same split as the HH jump, not at HV's own (noise-chosen) best split
-    flood = (j_hh >= k) & (np.abs(jump_at(z_hv, i_hh)) < flood_hv_max) & ~drop
+    flood = (j_hh >= k) & np.isfinite(z_hh[-1]) & np.isfinite(z_hv[-1]) & (np.abs(jump_at(z_hv, i_hh)) < flood_hv_max) & ~drop
     style[drop], since[drop] = CODE["drop"], i_hv[drop]
     style[flood], since[flood] = CODE["flood"], i_hh[flood]
-    zout[flood] = np.nan_to_num(z_hh[-1])[flood]
+    zout[flood] = z_hh[-1][flood]
 
     if z_disp is not None:
         i_d, j_d = change_point(z_disp)
@@ -110,8 +110,8 @@ def classify(z_hh: np.ndarray, z_hv: np.ndarray, z_disp: np.ndarray | None = Non
         syy = np.where(ok, (z_disp - mean) ** 2, 0).sum(0)
         with np.errstate(invalid="ignore", divide="ignore"):
             r2_step = np.nan_to_num(j_d ** 2 * nb * (n - nb) / np.maximum(n, 1) / syy)
-        last = np.nan_to_num(z_disp[-1])
-        moved = (np.abs(last) >= k) | (np.abs(j_d) >= k)
+        last = z_disp[-1]
+        moved = np.isfinite(last) & ((np.abs(last) >= k) | (np.abs(j_d) >= k))
         step = moved & (np.abs(j_d) >= k) & (r2_step > lin)
         drift = moved & ~step & (lin >= 0.6)
         first = np.argmax(np.abs(np.nan_to_num(z_disp)) >= 2, axis=0).astype(np.int16)  # drift: first date past 2 sigma

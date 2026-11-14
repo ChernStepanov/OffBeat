@@ -39,7 +39,17 @@ if (site.status === 'measured_pair') {
   assert(site.pixels.some(p=>p.hh.slice(0,2).every(Number.isFinite)&&p.hv.slice(0,2).every(Number.isFinite)));
   assert(site.pixels.some(p=>p.disp&&p.disp.length===site.displacement_dates.length));
   assert(site.pixels.some(p=>p.disp===null));
-  assert(site.pixels.every(p=>p.z===null&&p.style===null));
+  assert(site.pixels.some(p=>Number.isFinite(p.z)));
+  assert.equal(site.analysis_status,'exploratory_sparse_samples');
+  for (const p of site.pixels) {
+    if (Number.isFinite(p.z)) {
+      const channel=p.style==='flood'?'hh':'hv';
+      const t=site.dates.length-1;
+      assert(Number.isFinite(p[channel][t]) && Number.isFinite(p.peer[channel+'_med'][t]));
+      assert(p.peer[channel+'_sd'][t]>0);
+      assert(Math.abs(p.z-(p[channel][t]-p.peer[channel+'_med'][t])/p.peer[channel+'_sd'][t])<1e-3);
+    }
+  }
   assert(site.provenance.inputs.every(r=>r.sha256.length===64));
   for (const r of site.provenance.additional_gcov || []) assert.equal(createHash('sha256').update(fs.readFileSync(r.subset_path)).digest('hex'),r.sha256);
   assert(site.pixels.filter(p=>p.disp).every(p=>p.coherence>=.7&&p.component===site.provenance.reference.component));
