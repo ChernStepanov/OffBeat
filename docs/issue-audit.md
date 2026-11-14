@@ -8,7 +8,7 @@ are excluded at the user's request.
 | #10 | Implemented | Per-date Sentinel-2 indexes for all sites; 29/29, 6/6 and 5/6 available |
 | #11 | Implemented and visually checked | AOI-only COG reads, SCL mask, exact bbox, fixed stretch/gamma, PNG hashes |
 | #12 | Implemented and browser-checked | Dated selector, nearest radar date, source/date/quality and unavailable state |
-| #13 | Open | One Caracas date lacks suitable Sentinel-2; HLS extraction requires Earthdata |
+| #13 | Open | One Caracas date lacks suitable Sentinel-2. Fourteen first-page HLS T19PGM quality masks were inspected; best clear AOI 40.3% (threshold 80%). Further catalogue pages are unexamined; see `data/subsets/venezuela-hls/2025-11-21-quality.json`. |
 | #14 | Partial — reopened | Leave-self-out 1 km same-class peers, >=10 valid samples and latest robust z are available for sparse points. The requested continuous real-data z raster has not been produced; it requires dense gridded measurements, not interpolation of the sparse sample points. |
 | #15 | Implemented | 6 Amazon and 4 Venezuela curve shapes; none in Mexico; top-10 examples and deterministic controls |
 | #16 | Open | Ascending/descending GUNW series, assessed reference, rates and uncertainties not available |
