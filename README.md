@@ -24,7 +24,10 @@ No build or NASA login is needed for the prepared demo. Clone the repository, se
 python -m http.server 8765
 ```
 
-Choose a prepared site for measured HH/HV charts. The default global NASA GIBS map is a browse mosaic coloured by acquisition date, not calibrated backscatter. The optional local analysis layer displays sparse sample points, never a continuous event raster or event area. Use the optical selector for dated Sentinel-2 previews. Missing observations are explicit; the Esri mosaic is geographic context only. External map tiles and search require internet. Audio starts after a user click.
+Выберите подготовленный участок для просмотра измеренных HH/HV. Слева — светлая карта с отметками демоучастков и разреженными точками измерений. Цвет точек показывает отклонение от соседей; это не сплошной растр и не площадь события. Справа по умолчанию показан оптический контекст Esri; датированный Sentinel-2 выбирается в селекторе. Пропуски показаны явно. Для внешних тайлов и поиска нужен интернет. Звук запускается после нажатия.
+
+Исторический аудит GLAD/RGB из прежней исследовательской ветки сохранён
+в [архиве эксперимента](archive/preview-2026-11-14/README.md); он не является оценкой текущего детектора.
 
 Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Names are sent only on submit, cached in the session and throttled. Coordinate searches are local. Operators can override `OB_MULTILINGUAL_GEOCODER_URL` and `OB_GEOCODER_URL` before app.js. Translated-name coverage depends on the providers.
 

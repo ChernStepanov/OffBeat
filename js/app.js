@@ -170,7 +170,7 @@
     } else {
       optical.context();
       clearPixel();
-      $('data-status').textContent = 'No prepared pixel series at this location. Radar imagery is available where the global mosaic has coverage.';
+      $('data-status').textContent = 'В этой точке нет подготовленного ряда NISAR. Выберите отмеченный демоучасток; фон карты и оптическая мозаика служат географическим контекстом.';
       $('place-status').textContent = 'No pixel series here. Choose a demo site for charts and audio.';
       $('site-name').textContent = 'Search location'; $('map-caption').textContent = 'Pixel series unavailable at this location';
       $('source-link').hidden = true; $('site-layers').hidden = true;

@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "kind": "positive_control_audit",
+  "source": "GLAD-L confirmed code 3; snapshot as of 2026-11-14",
+  "input_sha256": {
+    "site": "cc5e5de69db63d1c85180b58d45e0dfec57ea00bb95de2a915f3ff724217db74",
+    "alerts": "2c39fff6980184c9e77d0fbe4df438abe86d4317370927a33c0e7ed3218cdad5",
+    "optical": "7f00c3f52154e375819a8803399b5e40c719970c6cc21aaf046b7b533dfa96ce",
+    "extra": "537060575d005f9e48a3de6b16090635b8387610a523e5a78c9dc143c5dc52be"
+  },
+  "selection": "Все точные пересечения сетки с подтверждёнными GLAD-пикселями в период NISAR, независимо от результата детектора",
+  "excluded_alert_pixels": {
+    "alert_outside_radar_period": 36,
+    "no_exact_preview_sample": 37
+  },
+  "dates": [
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28"
+  ],
+  "frozen_parameters": {
+    "k": 2.5,
+    "min_segment": 2
+  },
+  "classifier_sha256": "813b1f15e3753ea31ea5400fa73983997a79c26cd9f4fae18864f5a424bb5143",
+  "review_current": true,
+  "deter": {
+    "query": "https://terrabrasilis.dpi.inpe.br/geoserver/deter-amz/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=deter-amz%3Adeter_amz&outputFormat=application%2Fjson&CQL_FILTER=BBOX%28geom%2C-49.3375%2C-4.8375%2C-49.2125%2C-4.7125%29+AND+view_date+BETWEEN+%272026-07-01%27+AND+%272026-11-14%27",
+    "sha256": "1bbd86b7c09c669b0391ce86185cc82cadca634722ddae18965919ee5fc61d1d",
+    "number_matched": 0,
+    "bbox": [
+      -49.3375,
+      -4.8375,
+      -49.2125,
+      -4.7125
+    ],
+    "start": "2026-07-01",
+    "end": "2026-11-14"
+  },
+  "samples": [
+    {
+      "id": "AMA r12 c22",
+      "lat": -4.772265625,
+      "lon": -49.269921875,
+      "cover": 10,
+      "alert_dates": [
+        "2026-08-24"
+      ],
+      "rgb": [
+        {
+          "date": "2026-07-03",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "file": "2026-07-03-c473d62a78.png",
+          "png_sha256": "d73408829c307eb1f58c2ce2ed9525fd289667b817e78324f6903911bf35e615",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            133,
+            127,
+            99
+          ]
+        },
+        {
+          "date": "2026-07-05",
+          "scene_id": "S2A_22MFV_20260705_0_L2A",
+          "file": "2026-07-05-3a3ed1b413.png",
+          "png_sha256": "7efb70ac978a712f4009a6dbc07724fa6ac7ed2a45c03d3876ae6d3dc6b4fc61",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            137,
+            129,
+            103
+          ]
+        },
+        {
+          "date": "2026-07-13",
+          "scene_id": "S2C_22MFV_20260713_0_L2A",
+          "file": "2026-07-13-222b4d86da.png",
+          "png_sha256": "a3af5572b9f23e52efd45d3f4d836bdee8349cdeb5f8975dc19a9f76ac9c1baa",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "scene_id": "S2B_22MFV_20260718_0_L2A",
+          "file": "2026-07-18-45f058484e.png",
+          "png_sha256": "bea5ce35405a422c9d2b0f5c5bc06af8bb3d91d364b47d525b1ec6b75e51d549",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "scene_id": "S2C_22MFV_20260723_0_L2A",
+          "file": "2026-07-23-b94fd5b413.png",
+          "png_sha256": "443492ae3351021317f09e2f16e89358c60e2c48e81358ec6d380eeacca1193f",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            138,
+            130,
+            101
+          ]
+        },
+        {
+          "date": "2026-08-04",
+          "scene_id": "S2A_22MFV_20260804_0_L2A",
+          "file": "2026-08-04-7abf098658.png",
+          "png_sha256": "0cdf903f9b2bf62f6d881cb57d4ce689972e22a583b2a821546f0602fc0478eb",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            131,
+            126,
+            101
+          ]
+        },
+        {
+          "date": "2026-08-14",
+          "scene_id": "S2A_22MFV_20260814_0_L2A",
+          "file": "2026-08-14-c653852bf0.png",
+          "png_sha256": "8a36bb664e5fb3604bbec3b71e6f9835ee0945cbbd8b50268b5b210002a3577b",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            128,
+            127,
+            100
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "scene_id": "S2A_22MFV_20260903_0_L2A",
+          "file": "2026-09-03-c6b01ec6ff.png",
+          "png_sha256": "87063fbe3b8e5d9a919b6a88023dfab1f6cf2fa7810410298e3b9d4974b83061",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            162,
+            141,
+            121
+          ]
+        },
+        {
+          "date": "2026-09-21",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "file": "2026-09-21-72d0cc9040.png",
+          "png_sha256": "0bd33e14c0c137c9a7cd7bc392815b7dee884ebe4d495e80edac122beb3b734c",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            175,
+            149,
+            130
+          ]
+        }
+      ],
+      "detector": {
+        "style_code": 0,
+        "detected_drop": false,
+        "hv_jump": 0.3302305340766907,
+        "best_split": "2026-09-04",
+        "hv_z": [
+          -0.92912,
+          -1.04461,
+          -1.15326,
+          -0.30789,
+          -0.73793,
+          -1.09049
+        ],
+        "stored_style": null,
+        "latest_z": -1.09049
+      },
+      "review": {
+        "status": "ambiguous_at_sample",
+        "observation": "Пятнистое открытое покрытие и отдельные тёмные полосы присутствуют с начала июля. К сентябрю меняется цвет; ясной смены древесной кроны на расчистку в точке не установлено.",
+        "qualification": "Исторический WorldCover 2021 имеет код 10, но сам по себе не устанавливает покрытие в июле 2026 года."
+      },
+      "temporal_support": {
+        "before": [],
+        "after": [],
+        "max_possible_before": [],
+        "eligible": false,
+        "note": "Минимум 2 наблюдения с каждой стороны требуется неизменённым классификатором"
+      }
+    },
+    {
+      "id": "AMA r13 c22",
+      "lat": -4.773046875,
+      "lon": -49.269921875,
+      "cover": 10,
+      "alert_dates": [
+        "2026-08-24"
+      ],
+      "rgb": [
+        {
+          "date": "2026-07-03",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "file": "2026-07-03-c473d62a78.png",
+          "png_sha256": "d73408829c307eb1f58c2ce2ed9525fd289667b817e78324f6903911bf35e615",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            134,
+            128,
+            99
+          ]
+        },
+        {
+          "date": "2026-07-05",
+          "scene_id": "S2A_22MFV_20260705_0_L2A",
+          "file": "2026-07-05-3a3ed1b413.png",
+          "png_sha256": "7efb70ac978a712f4009a6dbc07724fa6ac7ed2a45c03d3876ae6d3dc6b4fc61",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            139,
+            131,
+            104
+          ]
+        },
+        {
+          "date": "2026-07-13",
+          "scene_id": "S2C_22MFV_20260713_0_L2A",
+          "file": "2026-07-13-222b4d86da.png",
+          "png_sha256": "a3af5572b9f23e52efd45d3f4d836bdee8349cdeb5f8975dc19a9f76ac9c1baa",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "scene_id": "S2B_22MFV_20260718_0_L2A",
+          "file": "2026-07-18-45f058484e.png",
+          "png_sha256": "bea5ce35405a422c9d2b0f5c5bc06af8bb3d91d364b47d525b1ec6b75e51d549",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "scene_id": "S2C_22MFV_20260723_0_L2A",
+          "file": "2026-07-23-b94fd5b413.png",
+          "png_sha256": "443492ae3351021317f09e2f16e89358c60e2c48e81358ec6d380eeacca1193f",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            141,
+            132,
+            104
+          ]
+        },
+        {
+          "date": "2026-08-04",
+          "scene_id": "S2A_22MFV_20260804_0_L2A",
+          "file": "2026-08-04-7abf098658.png",
+          "png_sha256": "0cdf903f9b2bf62f6d881cb57d4ce689972e22a583b2a821546f0602fc0478eb",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            137,
+            129,
+            105
+          ]
+        },
+        {
+          "date": "2026-08-14",
+          "scene_id": "S2A_22MFV_20260814_0_L2A",
+          "file": "2026-08-14-c653852bf0.png",
+          "png_sha256": "8a36bb664e5fb3604bbec3b71e6f9835ee0945cbbd8b50268b5b210002a3577b",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            134,
+            129,
+            104
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "scene_id": "S2A_22MFV_20260903_0_L2A",
+          "file": "2026-09-03-c6b01ec6ff.png",
+          "png_sha256": "87063fbe3b8e5d9a919b6a88023dfab1f6cf2fa7810410298e3b9d4974b83061",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            166,
+            143,
+            122
+          ]
+        },
+        {
+          "date": "2026-09-21",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "file": "2026-09-21-72d0cc9040.png",
+          "png_sha256": "0bd33e14c0c137c9a7cd7bc392815b7dee884ebe4d495e80edac122beb3b734c",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            174,
+            151,
+            129
+          ]
+        }
+      ],
+      "detector": {
+        "style_code": 0,
+        "detected_drop": false,
+        "hv_jump": -0.12552261352539062,
+        "best_split": "2026-09-16",
+        "hv_z": [
+          -0.8396,
+          -0.62274,
+          -0.86661,
+          -0.68038,
+          -0.8833,
+          -0.87242
+        ],
+        "stored_style": null,
+        "latest_z": -0.87242
+      },
+      "review": {
+        "status": "ambiguous_at_sample",
+        "observation": "На всех ясных датах точка в неоднородном уже открытом покрытии. Побурение к сентябрю не позволяет уверенно выделить свежую потерю кроны в точке.",
+        "qualification": "Подтверждённый GLAD — повод для дополнительной проверки, а не автоматическая точечная эталонная метка."
+      },
+      "temporal_support": {
+        "before": [],
+        "after": [],
+        "max_possible_before": [],
+        "eligible": false,
+        "note": "Минимум 2 наблюдения с каждой стороны требуется неизменённым классификатором"
+      }
+    },
+    {
+      "id": "AMA r4 c14",
+      "lat": -4.7660156250000005,
+      "lon": -49.276171875,
+      "cover": 10,
+      "alert_dates": [
+        "2026-08-24"
+      ],
+      "rgb": [
+        {
+          "date": "2026-07-03",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "file": "2026-07-03-c473d62a78.png",
+          "png_sha256": "d73408829c307eb1f58c2ce2ed9525fd289667b817e78324f6903911bf35e615",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            70,
+            97,
+            63
+          ]
+        },
+        {
+          "date": "2026-07-05",
+          "scene_id": "S2A_22MFV_20260705_0_L2A",
+          "file": "2026-07-05-3a3ed1b413.png",
+          "png_sha256": "7efb70ac978a712f4009a6dbc07724fa6ac7ed2a45c03d3876ae6d3dc6b4fc61",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            71,
+            95,
+            67
+          ]
+        },
+        {
+          "date": "2026-07-13",
+          "scene_id": "S2C_22MFV_20260713_0_L2A",
+          "file": "2026-07-13-222b4d86da.png",
+          "png_sha256": "a3af5572b9f23e52efd45d3f4d836bdee8349cdeb5f8975dc19a9f76ac9c1baa",
+          "scl": 3,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            90,
+            110,
+            103
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "scene_id": "S2B_22MFV_20260718_0_L2A",
+          "file": "2026-07-18-45f058484e.png",
+          "png_sha256": "bea5ce35405a422c9d2b0f5c5bc06af8bb3d91d364b47d525b1ec6b75e51d549",
+          "scl": 8,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "scene_id": "S2C_22MFV_20260723_0_L2A",
+          "file": "2026-07-23-b94fd5b413.png",
+          "png_sha256": "443492ae3351021317f09e2f16e89358c60e2c48e81358ec6d380eeacca1193f",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.2449,
+          "rgb": [
+            200,
+            204,
+            188
+          ]
+        },
+        {
+          "date": "2026-08-04",
+          "scene_id": "S2A_22MFV_20260804_0_L2A",
+          "file": "2026-08-04-7abf098658.png",
+          "png_sha256": "0cdf903f9b2bf62f6d881cb57d4ce689972e22a583b2a821546f0602fc0478eb",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            131,
+            124,
+            101
+          ]
+        },
+        {
+          "date": "2026-08-14",
+          "scene_id": "S2A_22MFV_20260814_0_L2A",
+          "file": "2026-08-14-c653852bf0.png",
+          "png_sha256": "8a36bb664e5fb3604bbec3b71e6f9835ee0945cbbd8b50268b5b210002a3577b",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            154,
+            131,
+            110
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "scene_id": "S2A_22MFV_20260903_0_L2A",
+          "file": "2026-09-03-c6b01ec6ff.png",
+          "png_sha256": "87063fbe3b8e5d9a919b6a88023dfab1f6cf2fa7810410298e3b9d4974b83061",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            158,
+            145,
+            136
+          ]
+        },
+        {
+          "date": "2026-09-21",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "file": "2026-09-21-72d0cc9040.png",
+          "png_sha256": "0bd33e14c0c137c9a7cd7bc392815b7dee884ebe4d495e80edac122beb3b734c",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            148,
+            131,
+            123
+          ]
+        }
+      ],
+      "detector": {
+        "style_code": 0,
+        "detected_drop": false,
+        "hv_jump": -0.19326937198638916,
+        "best_split": "2026-09-04",
+        "hv_z": [
+          0.20451,
+          1.23348,
+          1.33833,
+          0.65979,
+          0.60081,
+          0.9359
+        ],
+        "stored_style": null,
+        "latest_z": 0.9359
+      },
+      "review": {
+        "status": "forest_loss_visible",
+        "last_forest": "2026-07-05",
+        "first_clear": "2026-08-04",
+        "observation": "В начале июля в точке и вокруг неё сплошной тёмно-зелёный участок кроны. 4 августа и позднее видна геометрически очерченная расчистка, включающая точку. GLAD подтверждён, дата 24 августа.",
+        "qualification": "13 июля — SCL=3, тень; 18 июля — SCL=8, облако. 23 июля SCL=5 в точке, но около 24.5% соседних пикселей относятся к облакам/теням: дата не принята как надёжная правая граница события. Точное время вырубки между 5 июля и 4 августа не установлено."
+      },
+      "temporal_support": {
+        "before": [],
+        "after": [
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "max_possible_before": [
+          "2026-07-18"
+        ],
+        "eligible": false,
+        "note": "Минимум 2 наблюдения с каждой стороны требуется неизменённым классификатором"
+      }
+    },
+    {
+      "id": "AMA r9 c22",
+      "lat": -4.769921875,
+      "lon": -49.269921875,
+      "cover": 10,
+      "alert_dates": [
+        "2026-08-24"
+      ],
+      "rgb": [
+        {
+          "date": "2026-07-03",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "file": "2026-07-03-c473d62a78.png",
+          "png_sha256": "d73408829c307eb1f58c2ce2ed9525fd289667b817e78324f6903911bf35e615",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            131,
+            131,
+            98
+          ]
+        },
+        {
+          "date": "2026-07-05",
+          "scene_id": "S2A_22MFV_20260705_0_L2A",
+          "file": "2026-07-05-3a3ed1b413.png",
+          "png_sha256": "7efb70ac978a712f4009a6dbc07724fa6ac7ed2a45c03d3876ae6d3dc6b4fc61",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            135,
+            134,
+            103
+          ]
+        },
+        {
+          "date": "2026-07-13",
+          "scene_id": "S2C_22MFV_20260713_0_L2A",
+          "file": "2026-07-13-222b4d86da.png",
+          "png_sha256": "a3af5572b9f23e52efd45d3f4d836bdee8349cdeb5f8975dc19a9f76ac9c1baa",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "scene_id": "S2B_22MFV_20260718_0_L2A",
+          "file": "2026-07-18-45f058484e.png",
+          "png_sha256": "bea5ce35405a422c9d2b0f5c5bc06af8bb3d91d364b47d525b1ec6b75e51d549",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "scene_id": "S2C_22MFV_20260723_0_L2A",
+          "file": "2026-07-23-b94fd5b413.png",
+          "png_sha256": "443492ae3351021317f09e2f16e89358c60e2c48e81358ec6d380eeacca1193f",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            133,
+            132,
+            102
+          ]
+        },
+        {
+          "date": "2026-08-04",
+          "scene_id": "S2A_22MFV_20260804_0_L2A",
+          "file": "2026-08-04-7abf098658.png",
+          "png_sha256": "0cdf903f9b2bf62f6d881cb57d4ce689972e22a583b2a821546f0602fc0478eb",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            127,
+            133,
+            103
+          ]
+        },
+        {
+          "date": "2026-08-14",
+          "scene_id": "S2A_22MFV_20260814_0_L2A",
+          "file": "2026-08-14-c653852bf0.png",
+          "png_sha256": "8a36bb664e5fb3604bbec3b71e6f9835ee0945cbbd8b50268b5b210002a3577b",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            125,
+            134,
+            100
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "scene_id": "S2A_22MFV_20260903_0_L2A",
+          "file": "2026-09-03-c6b01ec6ff.png",
+          "png_sha256": "87063fbe3b8e5d9a919b6a88023dfab1f6cf2fa7810410298e3b9d4974b83061",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            162,
+            144,
+            122
+          ]
+        },
+        {
+          "date": "2026-09-21",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "file": "2026-09-21-72d0cc9040.png",
+          "png_sha256": "0bd33e14c0c137c9a7cd7bc392815b7dee884ebe4d495e80edac122beb3b734c",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            175,
+            152,
+            130
+          ]
+        }
+      ],
+      "detector": {
+        "style_code": 0,
+        "detected_drop": false,
+        "hv_jump": -0.494476854801178,
+        "best_split": "2026-09-04",
+        "hv_z": [
+          -0.12044,
+          -0.18073,
+          -0.05437,
+          -0.72035,
+          -0.13681,
+          -0.98181
+        ],
+        "stored_style": null,
+        "latest_z": -0.98181
+      },
+      "review": {
+        "status": "ambiguous_at_sample",
+        "observation": "Подтверждённый GLAD-пиксель содержит радарную точку. На RGB уже в начале июля виден неоднородный открытый/низкий растительный покров; к сентябрю он буреет. Потеря древесной кроны именно в этой 10-метровой точке однозначно не выделяется.",
+        "qualification": "GLAD не объявляется ошибочным: его 30-метровая поддержка и маска отличаются от точечного отбора NISAR. Не включать в знаменатель визуально подтверждённых положительных примеров."
+      },
+      "temporal_support": {
+        "before": [],
+        "after": [],
+        "max_possible_before": [],
+        "eligible": false,
+        "note": "Минимум 2 наблюдения с каждой стороны требуется неизменённым классификатором"
+      }
+    },
+    {
+      "id": "AMA r9 c23",
+      "lat": -4.769921875,
+      "lon": -49.269140625000006,
+      "cover": 10,
+      "alert_dates": [
+        "2026-08-24"
+      ],
+      "rgb": [
+        {
+          "date": "2026-07-03",
+          "scene_id": "S2C_22MFV_20260703_0_L2A",
+          "file": "2026-07-03-c473d62a78.png",
+          "png_sha256": "d73408829c307eb1f58c2ce2ed9525fd289667b817e78324f6903911bf35e615",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            127,
+            130,
+            98
+          ]
+        },
+        {
+          "date": "2026-07-05",
+          "scene_id": "S2A_22MFV_20260705_0_L2A",
+          "file": "2026-07-05-3a3ed1b413.png",
+          "png_sha256": "7efb70ac978a712f4009a6dbc07724fa6ac7ed2a45c03d3876ae6d3dc6b4fc61",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            130,
+            132,
+            103
+          ]
+        },
+        {
+          "date": "2026-07-13",
+          "scene_id": "S2C_22MFV_20260713_0_L2A",
+          "file": "2026-07-13-222b4d86da.png",
+          "png_sha256": "a3af5572b9f23e52efd45d3f4d836bdee8349cdeb5f8975dc19a9f76ac9c1baa",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "scene_id": "S2B_22MFV_20260718_0_L2A",
+          "file": "2026-07-18-45f058484e.png",
+          "png_sha256": "bea5ce35405a422c9d2b0f5c5bc06af8bb3d91d364b47d525b1ec6b75e51d549",
+          "scl": 9,
+          "clear_land": false,
+          "nearby_cloud_shadow_fraction": 1.0,
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "scene_id": "S2C_22MFV_20260723_0_L2A",
+          "file": "2026-07-23-b94fd5b413.png",
+          "png_sha256": "443492ae3351021317f09e2f16e89358c60e2c48e81358ec6d380eeacca1193f",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            130,
+            132,
+            101
+          ]
+        },
+        {
+          "date": "2026-08-04",
+          "scene_id": "S2A_22MFV_20260804_0_L2A",
+          "file": "2026-08-04-7abf098658.png",
+          "png_sha256": "0cdf903f9b2bf62f6d881cb57d4ce689972e22a583b2a821546f0602fc0478eb",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            125,
+            128,
+            101
+          ]
+        },
+        {
+          "date": "2026-08-14",
+          "scene_id": "S2A_22MFV_20260814_0_L2A",
+          "file": "2026-08-14-c653852bf0.png",
+          "png_sha256": "8a36bb664e5fb3604bbec3b71e6f9835ee0945cbbd8b50268b5b210002a3577b",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            120,
+            129,
+            98
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "scene_id": "S2A_22MFV_20260903_0_L2A",
+          "file": "2026-09-03-c6b01ec6ff.png",
+          "png_sha256": "87063fbe3b8e5d9a919b6a88023dfab1f6cf2fa7810410298e3b9d4974b83061",
+          "scl": 4,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            158,
+            142,
+            119
+          ]
+        },
+        {
+          "date": "2026-09-21",
+          "scene_id": "S2C_22MFV_20260921_0_L2A",
+          "file": "2026-09-21-72d0cc9040.png",
+          "png_sha256": "0bd33e14c0c137c9a7cd7bc392815b7dee884ebe4d495e80edac122beb3b734c",
+          "scl": 5,
+          "clear_land": true,
+          "nearby_cloud_shadow_fraction": 0.0,
+          "rgb": [
+            170,
+            151,
+            126
+          ]
+        }
+      ],
+      "detector": {
+        "style_code": 0,
+        "detected_drop": false,
+        "hv_jump": -0.7198970913887024,
+        "best_split": "2026-09-04",
+        "hv_z": [
+          0.26332,
+          0.03818,
+          -0.16517,
+          -0.72459,
+          -0.2229,
+          -1.07588
+        ],
+        "stored_style": null,
+        "latest_z": -1.07588
+      },
+      "review": {
+        "status": "ambiguous_at_sample",
+        "observation": "Точка лежит в подтверждённом GLAD-пикселе, но уже ранние RGB показывают пятнистое низкое/открытое покрытие. Изменение к сентябрю видно, удаления сплошной кроны в координате уверенно не видно.",
+        "qualification": "Не подтверждать и не опровергать GLAD только по этой RGB-вырезке."
+      },
+      "temporal_support": {
+        "before": [],
+        "after": [],
+        "max_possible_before": [],
+        "eligible": false,
+        "note": "Минимум 2 наблюдения с каждой стороны требуется неизменённым классификатором"
+      }
+    }
+  ],
+  "summary": {
+    "samples": 5,
+    "glad_matched_detections": 0,
+    "verified_forest_loss_samples": 1,
+    "eligible_positive_samples": 0,
+    "review_statuses": {
+      "ambiguous_at_sample": 4,
+      "forest_loss_visible": 1
+    },
+    "eligible_positive_detections": 0,
+    "local_recall": null
+  },
+  "limitations": [
+    "30-метровый пиксель GLAD не гарантирует потери кроны в каждой 10-метровой точке",
+    "Дата алерта может запаздывать; временная пригодность определяется ясными RGB до/после",
+    "Параметры и радарные ряды не менялись; локальная диагностическая выборка не даёт общей оценки recall"
+  ]
+}

@@ -90,7 +90,7 @@ window.OB = window.OB || {};
       site: "mexico", needs: has.site("mexico"), layers: { offbeat: true }, pick: measuredSample,
       title: "Radar sees what cameras miss",
       text: (s, p) => `<p>This is real NISAR data: L-band radar over Mexico City's airport, ${fmtDate(s.dates[s.dates.length - 1])}.
-        The measured HH/HV curves are in the pixel card. The global map is a NASA browse mosaic with its own dates and brightness scale; it is not this sample's calibrated HV.</p>
+        Измеренные кривые HH/HV находятся в карточке точки. Слева показаны точки измерений на светлой карте; справа — оптический контекст или выбранный датированный снимок. Фон карты не является измерением радара.</p>
         <p>Radar supplies its own illumination and can observe at night and through clouds. Surface moisture, geometry and quality still affect the measurement.</p>`
     },
     {
