@@ -586,9 +586,11 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .terrain-window .cloud__hud { top: 8px; left: 8px; z-index: 4; gap: 1px; padding: 4px 7px; max-width: calc(100% - 85px); background: #c0c0c0; color: #000; box-shadow: var(--window); text-shadow: none; line-height: 16px; }
 .terrain-window .cloud__hud strong { color: #000080; font-size: 14px; line-height: 18px; font-weight: bold; }
 .terrain-terminal { color: #000; letter-spacing: 0; padding-bottom: 2px; border-bottom: 1px solid #808080; }
-.terrain-window .cloud__compass { top: 8px; right: 8px; z-index: 4; gap: 1px; width: 45px; padding: 3px; color: #000; background: #c0c0c0; box-shadow: var(--window); font-weight: bold; line-height: 14px; }
-.terrain-window .cloud__compass svg path:first-child { stroke: #000; }
-.terrain-window .cloud__compass svg path:last-child { fill: #000080; stroke: none; }
+.terrain-window .cloud__compass { top: 8px; right: 8px; z-index: 4; width: 44px; height: 44px; padding: 3px; background: #c0c0c0; box-shadow: var(--window); }
+.terrain-window .cloud__compass svg { display: block; shape-rendering: crispEdges; }
+.terrain-window .cloud__compass text { font: bold 9px sans-serif; fill: #000; }
+.terrain-window .cloud__compass path { fill: #000080; stroke: #000080; stroke-width: 1; }
+.terrain-window .cloud__compass path:last-child { fill: none; stroke: #000; }
 .terrain-window .cloud__empty { z-index: 5; background: #101410e8; }
 .terrain-window .cloud__key { z-index: 4; left: 8px; bottom: 31px; width: 138px; padding: 3px 5px; color: #000; background: #c0c0c0; box-shadow: var(--window); text-shadow: none; }
 .terrain-window .terrain-height-key i { background: linear-gradient(90deg, #536c68, #789080, #a4aa8a, #c2bd9f, #d6d2bd, #eeeade); }
