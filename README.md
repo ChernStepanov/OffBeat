@@ -16,7 +16,7 @@ step (z-score against peers), names the shape of the change and lets you hear it
 ## Real data status
 
 The default application uses real NISAR subsets for Mexico: measured HH/HV on
-six dates beginning 2025-10-30, plus an exploratory relative GUNW LOS pair. The prepared
+29 dates from 2025-10-30 through 2026-10-13, plus an exploratory relative GUNW LOS pair. The prepared
 case works without login. Earthdata authorization is needed only to re-extract
 source data. Missing and quality-rejected measurements remain unavailable.
 See [download, processing and provenance instructions](docs/real-nisar.md).
