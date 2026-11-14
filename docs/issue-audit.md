@@ -9,11 +9,11 @@ are excluded at the user's request.
 | #11 | Implemented and visually checked | AOI-only COG reads, SCL mask, exact bbox, fixed stretch/gamma, PNG hashes |
 | #12 | Implemented and browser-checked | Dated selector, nearest radar date, source/date/quality and unavailable state |
 | #13 | Open | One Caracas date lacks suitable Sentinel-2; HLS extraction requires Earthdata |
-| #14 | Implemented | Leave-self-out 1 km same-class peers, >=10 valid samples, latest robust z; sparse points replace an invalid continuous raster |
+| #14 | Partial — reopened | Leave-self-out 1 km same-class peers, >=10 valid samples and latest robust z are available for sparse points. The requested continuous real-data z raster has not been produced; it requires dense gridded measurements, not interpolation of the sparse sample points. |
 | #15 | Implemented | 6 Amazon and 4 Venezuela curve shapes; none in Mexico; top-10 examples and deterministic controls |
 | #16 | Open | Ascending/descending GUNW series, assessed reference, rates and uncertainties not available |
 | #17 | Open | Event-pair receipt exists but 0 samples pass full mask; compatible pre-event baseline not downloaded |
-| #18 | Implemented for sparse samples | 6 candidates, 0 dated alert overlaps, 1 fire-context match; no event area or recall |
+| #18 | Partial — reopened | 6 sparse candidates, 0 dated alert overlaps and 1 fire-context match were checked. The requested patch-level validation, defensible area and recall remain unavailable without dense measured coverage. |
 | #19–22 | Implemented | Recalculated dated values and primary NASA/ESA/USGS/literature sources in science review |
 | #23 | Implemented | Tour separates browse, calibrated samples, exploratory shapes and unvalidated LOS |
 | #24 | Partial | Sourced submission checklist; final guide, event time zone and software licence need confirmation |
