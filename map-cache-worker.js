@@ -6,7 +6,9 @@ self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
-  if (event.request.method !== 'GET' || url.origin !== 'https://services.arcgisonline.com' || !/^\/ArcGIS\/rest\/services\/(?:World_Imagery|Reference\/World_Boundaries_and_Places|Canvas\/World_Light_Gray_(?:Base|Reference))\/MapServer\/tile\/\d+\/\d+\/\d+$/.test(url.pathname)) return;
+  const standard = url.origin === 'https://services.arcgisonline.com' && /^\/ArcGIS\/rest\/services\/(?:World_Imagery|Reference\/World_Boundaries_and_Places|Canvas\/World_Light_Gray_(?:Base|Reference))\/MapServer\/tile\/\d+\/\d+\/\d+$/.test(url.pathname);
+  const clarity = url.origin === 'https://clarity.maptiles.arcgis.com' && /^\/arcgis\/rest\/services\/World_Imagery\/MapServer\/tile\/\d+\/\d+\/\d+$/.test(url.pathname);
+  if (event.request.method !== 'GET' || (!standard && !clarity)) return;
   event.respondWith(tile(event.request));
 });
 async function tile(request) {
