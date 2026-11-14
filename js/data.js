@@ -2,7 +2,7 @@
 window.OB = window.OB || {};
 OB.STYLE_KEYS = [null, 'drop', 'flood', 'drift', 'step'];
 OB.SITES = [];
-const CONTEXT = { amazon: { fires: 'fires.json', alerts: 'alerts.geojson', sentinel1: 'sentinel1.json', validation: 'validation.json' } };
+const CONTEXT = { mexico: { opera_disp: 'opera-disp.json' }, amazon: { fires: 'fires.json', alerts: 'alerts.geojson', sentinel1: 'sentinel1.json', validation: 'validation.json' } };
 OB.loadData = async function () {
   const results = await Promise.allSettled(['mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'khimki', 'nairobi', 'sydney'].map(async id => {
     const response = await fetch(`data/${id}.json`,{cache:'no-cache'});

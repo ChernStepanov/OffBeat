@@ -96,6 +96,16 @@ not a processed 2024–2026 series. Query URLs, collection IDs, first 20 returne
 granule IDs, dates, footprints and source links are preserved in
 [Mexico evidence](../data/evidence/mexico-opera-disp.json) and
 [Amazon evidence](../data/evidence/amazon-opera-rtc.json).
-Footprint overlap alone does not establish usable pixel coverage or processing compatibility.
-Subsequent authenticated RTC-S1 extraction produced a sampled VV/VH series and the
-descriptive comparison linked above. No OPERA displacement velocity is claimed; #36 remains open.
+Footprint overlap does not establish usable pixel coverage or processing compatibility.
+Subsequent authenticated observations are described below.
+
+
+## Authenticated ASF observations (14 November 2026)
+
+Amazon RTC-S1 is already available as an 86-date series (2024-01-10 through 2026-11-02), with 219 granule identifiers in [the source data](../data/amazon/sentinel1.json). An independently reproducible comparison restricted to the same valid points and six nearest dates within six days gives forest-minus-grassland median contrasts of 1.16 dB for C-band VH and 6.149 dB for L-band HV. The [comparison receipt](../data/analysis/amazon-c-l-matched.json) records matched dates, granules, input hashes and per-class counts. These are descriptive contrasts, not proof of causal mechanisms; sensing geometry, spatial resolutions and times differ, and WorldCover dates from 2021.
+
+For Mexico, 15 OPERA DISP-S1 F01088 products sharing the 2025-12-25 reference were sampled at the NISAR points from 2025-12-31 through 2026-03-25. The [receipt and values](../data/mexico/opera-disp.json) preserve source IDs, dates and processing; each product retains 1018–1021 of 1024 samples under its recommended quality mask. The interface shows short-wavelength relative LOS in cm as independent Sentinel-1 context. Spatial filtering removes wavelengths above 30 km. Atmospheric residuals, component changes and reference stability remain unassessed; this is not vertical displacement or a validated subsidence velocity. See the [ASF DISP FAQ](https://docs.asf.alaska.edu/datasets/disp_faq/) for the product's reference and filtering.
+
+Three Caracas baseline GUNW pairs (2026-05-08→05-20, 05-20→06-01, and 06-01→06-13) were sampled with the unchanged mask. As with the 06-13→06-25 event pair, none of 1024 samples in each pair met the ionospheric uncertainty <=1 rad condition, hence the full mask accepted zero. The [subset receipts](../data/subsets/venezuela-gunw/) retain IDs, hashes and individual quality counts. No damage proxy or coseismic deformation estimate follows from these samples.
+
+For the Amazon candidate AMA r5 c15, two matching native GCOV windows (2026-08-23 and 2026-09-04, 20 m, 141×141 cells) are retained with masks and source hashes in [the subset directory](../data/subsets/amazon-dense/). The [exploratory receipt](../data/analysis/amazon-dense-pair.json) reports the nearest-cell HV change of −7.420 dB and the median of the nine valid 3×3 native cells of −4.122 dB. This is a two-date radar observation, not confirmation of deforestation or a defensible area estimate; moisture, speckle and processing effects are not ruled out.
