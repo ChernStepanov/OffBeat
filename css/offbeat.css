@@ -199,6 +199,33 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .maps__pane { display: flex; flex-direction: column; min-width: 0; }
 .maps__pane > .pane-label { flex: 1; }
 .maps__pane > .map { flex-shrink: 0; }
+/* Share title, caption and map rows so wrapping either caption cannot shift one map. */
+@media (min-width: 721px) {
+  .maps:not(:has(.maps__pane.window-expanded)) {
+    grid-template-rows: auto auto 360px;
+  }
+  .maps:not(:has(.maps__pane.window-expanded)) > .maps__pane {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+  }
+  .maps:not(:has(.maps__pane.window-expanded)) > .maps__pane > .map {
+    height: 100%; min-height: 0;
+  }
+  .win--max .maps:not(:has(.maps__pane.window-expanded)),
+  #map-win.window-expanded .maps:not(:has(.maps__pane.window-expanded)) {
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+  .scene .maps:not(:has(.maps__pane.window-expanded)) {
+    grid-template-rows: repeat(2, minmax(150px, 1fr));
+  }
+  .scene .maps:not(:has(.maps__pane.window-expanded)) > .maps__pane {
+    display: flex; grid-row: auto;
+  }
+  .scene .maps:not(:has(.maps__pane.window-expanded)) > .maps__pane > .map {
+    height: auto; min-height: 115px;
+  }
+}
 .acquisition { margin: 4px 2px 8px; }
 .acquisition__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .acquisition__controls label { white-space: nowrap; }
