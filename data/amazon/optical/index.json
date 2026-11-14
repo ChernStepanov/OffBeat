@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "site": "amazon",
+  "bbox": [
+    -49.2875,
+    -4.7875,
+    -49.2625,
+    -4.7625
+  ],
+  "created_at": "2026-11-14T11:53:13.201095+00:00",
+  "catalogue": "https://earth-search.aws.element84.com/v1",
+  "collection": "sentinel-2-l2a",
+  "query": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&bbox=-49.2875%2C-4.7875%2C-49.2625%2C-4.7625&datetime=2026-07-03T00%3A00%3A00Z%2F2026-10-13T23%3A59%3A59.999999Z&limit=100",
+  "pages": 2,
+  "window_days": 15,
+  "catalogue_items": 32,
+  "eligible_items": 32,
+  "selection": "Минимум eo:cloud_cover в пределах ±window_days календарных дней UTC; затем близость к дате NISAR и ID сцены",
+  "limitations": [
+    "Облачность сообщается по целому тайлу; облака, тени и валидность пикселей над участком не проверены",
+    "Выбранная сцена может быть облачной; selected не означает чистый снимок или подтверждение радарной аномалии",
+    "Проверено включение bbox участка в bbox сцены, а не полное покрытие валидными пикселями",
+    "Изображения не скачаны и ещё не подключены к карте; текущая подложка Esri остаётся географическим контекстом"
+  ],
+  "summary": {
+    "nisar_dates": 6,
+    "selected": 6,
+    "unavailable": 0,
+    "selected_scene_cloud_le_20_pct": 6
+  },
+  "entries": [
+    {
+      "nisar_date": "2026-07-18",
+      "status": "selected",
+      "candidate_count": 10,
+      "scene": {
+        "scene_id": "S2C_22MFV_20260703_0_L2A",
+        "source": "Copernicus Sentinel-2 L2A via Earth Search",
+        "collection": "sentinel-2-l2a",
+        "datetime": "2026-07-03T13:43:47.500000Z",
+        "date": "2026-07-03",
+        "scene_cloud_cover_pct": 0.003835,
+        "aoi_cloud_cover_pct": null,
+        "aoi_valid_fraction": null,
+        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "scene_bbox": [
+          -50.098565,
+          -5.516006,
+          -49.106225,
+          -4.520921
+        ],
+        "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260703_0_L2A",
+        "assets": {
+          "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B04.tif",
+          "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B03.tif",
+          "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/B02.tif"
+        },
+        "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/7/S2C_22MFV_20260703_0_L2A/SCL.tif",
+        "epsg": 32722
+      },
+      "delta_days": -15,
+      "reason": null
+    },
+    {
+      "nisar_date": "2026-08-11",
+      "status": "selected",
+      "candidate_count": 9,
+      "scene": {
+        "scene_id": "S2A_22MFV_20260804_0_L2A",
+        "source": "Copernicus Sentinel-2 L2A via Earth Search",
+        "collection": "sentinel-2-l2a",
+        "datetime": "2026-08-04T13:44:06.123000Z",
+        "date": "2026-08-04",
+        "scene_cloud_cover_pct": 0.000305,
+        "aoi_cloud_cover_pct": null,
+        "aoi_valid_fraction": null,
+        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "scene_bbox": [
+          -50.098565,
+          -5.516006,
+          -49.106225,
+          -4.520921
+        ],
+        "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260804_0_L2A",
+        "assets": {
+          "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/B04.tif",
+          "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/B03.tif",
+          "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/B02.tif"
+        },
+        "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260804_0_L2A/SCL.tif",
+        "epsg": 32722
+      },
+      "delta_days": -7,
+      "reason": null
+    },
+    {
+      "nisar_date": "2026-08-23",
+      "status": "selected",
+      "candidate_count": 9,
+      "scene": {
+        "scene_id": "S2A_22MFV_20260814_0_L2A",
+        "source": "Copernicus Sentinel-2 L2A via Earth Search",
+        "collection": "sentinel-2-l2a",
+        "datetime": "2026-08-14T13:44:04.495000Z",
+        "date": "2026-08-14",
+        "scene_cloud_cover_pct": 0.000332,
+        "aoi_cloud_cover_pct": null,
+        "aoi_valid_fraction": null,
+        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "scene_bbox": [
+          -50.098565,
+          -5.516006,
+          -49.106225,
+          -4.520921
+        ],
+        "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260814_0_L2A",
+        "assets": {
+          "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/B04.tif",
+          "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/B03.tif",
+          "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/B02.tif"
+        },
+        "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/8/S2A_22MFV_20260814_0_L2A/SCL.tif",
+        "epsg": 32722
+      },
+      "delta_days": -9,
+      "reason": null
+    },
+    {
+      "nisar_date": "2026-09-04",
+      "status": "selected",
+      "candidate_count": 9,
+      "scene": {
+        "scene_id": "S2A_22MFV_20260903_0_L2A",
+        "source": "Copernicus Sentinel-2 L2A via Earth Search",
+        "collection": "sentinel-2-l2a",
+        "datetime": "2026-09-03T13:44:03.550000Z",
+        "date": "2026-09-03",
+        "scene_cloud_cover_pct": 0.555426,
+        "aoi_cloud_cover_pct": null,
+        "aoi_valid_fraction": null,
+        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "scene_bbox": [
+          -50.098565,
+          -5.516006,
+          -49.106225,
+          -4.520921
+        ],
+        "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260903_0_L2A",
+        "assets": {
+          "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/B04.tif",
+          "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/B03.tif",
+          "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/B02.tif"
+        },
+        "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/SCL.tif",
+        "epsg": 32722
+      },
+      "delta_days": -1,
+      "reason": null
+    },
+    {
+      "nisar_date": "2026-09-16",
+      "status": "selected",
+      "candidate_count": 10,
+      "scene": {
+        "scene_id": "S2A_22MFV_20260903_0_L2A",
+        "source": "Copernicus Sentinel-2 L2A via Earth Search",
+        "collection": "sentinel-2-l2a",
+        "datetime": "2026-09-03T13:44:03.550000Z",
+        "date": "2026-09-03",
+        "scene_cloud_cover_pct": 0.555426,
+        "aoi_cloud_cover_pct": null,
+        "aoi_valid_fraction": null,
+        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "scene_bbox": [
+          -50.098565,
+          -5.516006,
+          -49.106225,
+          -4.520921
+        ],
+        "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260903_0_L2A",
+        "assets": {
+          "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/B04.tif",
+          "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/B03.tif",
+          "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/B02.tif"
+        },
+        "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260903_0_L2A/SCL.tif",
+        "epsg": 32722
+      },
+      "delta_days": -13,
+      "reason": null
+    },
+    {
+      "nisar_date": "2026-09-28",
+      "status": "selected",
+      "candidate_count": 10,
+      "scene": {
+        "scene_id": "S2C_22MFV_20260921_0_L2A",
+        "source": "Copernicus Sentinel-2 L2A via Earth Search",
+        "collection": "sentinel-2-l2a",
+        "datetime": "2026-09-21T13:43:48.815000Z",
+        "date": "2026-09-21",
+        "scene_cloud_cover_pct": 11.651859,
+        "aoi_cloud_cover_pct": null,
+        "aoi_valid_fraction": null,
+        "coverage_check": "scene_bbox_contains_aoi; valid pixels not checked",
+        "scene_bbox": [
+          -50.098565,
+          -5.516006,
+          -49.106225,
+          -4.520921
+        ],
+        "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260921_0_L2A",
+        "assets": {
+          "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B04.tif",
+          "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B03.tif",
+          "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/B02.tif"
+        },
+        "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2C_22MFV_20260921_0_L2A/SCL.tif",
+        "epsg": 32722
+      },
+      "delta_days": -7,
+      "reason": null
+    }
+  ]
+}
