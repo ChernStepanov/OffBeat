@@ -160,6 +160,7 @@
   function setView(next) {
     view = next; gpu?.setView(next);
     $('cloud-orbit').setAttribute('aria-pressed', String(next === 'orbit'));
+    $('cloud-ground').setAttribute('aria-pressed', String(next === 'ground'));
     $('cloud-plan').setAttribute('aria-pressed', String(next === 'plan'));
     schedule();
   }
@@ -213,7 +214,7 @@
     cancelSearch(); hovered = null; await OB.app.loadSite(id); OB.app.fit(); setView('orbit'); gpu?.focusSite(OB.app.site()); update();
   });
   ['hh', 'hv'].forEach(key => $('cloud-' + key).addEventListener('click', () => setChannel(key)));
-  ['orbit', 'plan'].forEach(key => $('cloud-' + key).addEventListener('click', () => setView(key)));
+  ['orbit', 'ground', 'plan'].forEach(key => $('cloud-' + key).addEventListener('click', () => setView(key)));
   $('cloud-reset').addEventListener('click', () => setView(view));
   $('cloud-zoom-in').addEventListener('click', () => zoom(1.15));
   $('cloud-zoom-out').addEventListener('click', () => zoom(1 / 1.15));
@@ -306,6 +307,10 @@
   canvas.addEventListener('wheel', event => { event.preventDefault(); cancelSearch(); zoom(Math.exp(-event.deltaY * .001)); }, { passive: false });
   canvas.addEventListener('dblclick', () => setView(view));
   canvas.addEventListener('keydown', event => {
+    const key = /^Key[WASD]$/.test(event.code) ? event.code.slice(3).toLowerCase() : event.key.toLowerCase();
+    if (view === 'ground' && ['w', 'a', 's', 'd'].includes(key)) {
+      event.preventDefault(); gpu?.walk(key === 'w' ? 1 : key === 's' ? -1 : 0, key === 'd' ? 1 : key === 'a' ? -1 : 0); schedule(); return;
+    }
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', '0'].includes(event.key)) return;
     event.preventDefault();
     if (event.key === 'ArrowLeft') gpu?.rotate(-15, 0);

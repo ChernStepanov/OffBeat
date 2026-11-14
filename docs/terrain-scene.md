@@ -69,6 +69,8 @@ a small constant clearance avoids z-fighting. There are still only 1,024 sparse
 NISAR locations per site. No interpolated radar points, classifications or areas
 are generated. Height exaggeration defaults to 4x and can be set to 1x.
 
+The default view renders the terrain as a DEM point cloud; users may also select a solid surface or combine the two. A ground-view camera looks across the terrain. Drag to look, Shift-drag to pan, and focus the canvas to move with WASD in ground view. Ground perspective and height exaggeration are illustrative rather than a surveyed observer position. Terrain points are sampled DEM elevations, not additional NISAR measurements.
+
 The surface uses elevation colours, illumination and optional contour lines.
 A separate depth-tested DEM point cloud and NISAR overlay can be shown together
 or separately. Picking selects the nearest visible dot in screen space and

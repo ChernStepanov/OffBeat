@@ -10,8 +10,8 @@ OB.createTerrainRenderer = async function (canvas) {
   scene.add(new T.HemisphereLight(0xe3e2b7, 0x263027, 1.5));
   const light = new T.DirectionalLight(0xffedce, 2); light.position.set(-2, 5, 2); scene.add(light);
   const surface = new T.Group(), overlay = new T.Group(), labels = new T.Group(); scene.add(surface, overlay, labels);
-  let center = tiles.mercator(-67.08, 10.47), viewZoom = 12.23, yaw = -.65, pitch = .77, plan = false;
-  let exaggeration = 4, mode = 'hybrid', pointsVisible = true, width = 1, height = 1, targetHeight = 0;
+  let center = tiles.mercator(-67.08, 10.47), viewZoom = 12.23, yaw = -.65, pitch = .77, plan = false, ground = false, groundTilt = -.08;
+  let exaggeration = 4, mode = 'points', pointsVisible = true, width = 1, height = 1, targetHeight = 0;
   let site = null, context = null, date = 0, channel = 'hv', selectedIndex = -1, radar = null, marker = null, sampleList = [];
   let coverageDirty = true, overlayDirty = true, paused = false, sourceLevel = 0, wantedKey = '', segments = 64;
   let minHeight = 0, maxHeight = 3000, vertices = 0, nodes = new Map(), desired = [];
@@ -37,7 +37,7 @@ OB.createTerrainRenderer = async function (canvas) {
     `);
   }
   const landMaterial = new T.MeshStandardMaterial({ roughness: 1, flatShading: true, side: T.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }); landMaterial.onBeforeCompile = terrainShader;
-  const cloudMaterial = new T.PointsMaterial({ size: 1.3, sizeAttenuation: false, transparent: true, opacity: .65, depthWrite: false }); cloudMaterial.onBeforeCompile = terrainShader;
+  const cloudMaterial = new T.PointsMaterial({ size: 2, sizeAttenuation: false, transparent: true, opacity: .9, depthWrite: false }); cloudMaterial.onBeforeCompile = terrainShader;
   const signalMaterial = new T.PointsMaterial({ vertexColors: true, size: 4, sizeAttenuation: false, toneMapped: false });
   const scale = () => 2 * 2 ** viewZoom;
   const notify = () => canvas.dispatchEvent(new Event('ob:terrain-stream'));
@@ -72,9 +72,16 @@ OB.createTerrainRenderer = async function (canvas) {
     const previousHeight = targetHeight;
     targetHeight = Number.isFinite(h) ? h / (tiles.C * Math.cos(geo.lat * Math.PI / 180)) * scale() * exaggeration : 0;
     if (Math.abs(previousHeight - targetHeight) > .15) coverageDirty = true;
-    target.set(0, targetHeight, 0);
-    const angle = plan ? Math.PI / 2 - .001 : pitch, distance = 3.95 * Math.max(1, 1.15 / camera.aspect);
-    camera.position.set(distance * Math.cos(angle) * Math.sin(yaw), targetHeight + distance * Math.sin(angle), distance * Math.cos(angle) * Math.cos(yaw));
+    if (ground) {
+      // An illustrative near-ground view of the DEM, not a surveyed observer position.
+      const eyeHeight = Math.max(.015, 20 / (tiles.C * Math.cos(geo.lat * Math.PI / 180)) * scale() * exaggeration);
+      camera.position.set(0, targetHeight + eyeHeight, 0);
+      target.set(2 * Math.sin(yaw), camera.position.y + 2 * Math.tan(groundTilt), -2 * Math.cos(yaw));
+    } else {
+      target.set(0, targetHeight, 0);
+      const angle = plan ? Math.PI / 2 - .001 : pitch, distance = 3.95 * Math.max(1, 1.15 / camera.aspect);
+      camera.position.set(distance * Math.cos(angle) * Math.sin(yaw), targetHeight + distance * Math.sin(angle), distance * Math.cos(angle) * Math.cos(yaw));
+    }
     camera.up.set(0, 1, 0); camera.lookAt(target); camera.updateMatrixWorld();
   }
   function updateCoverage() {
@@ -187,7 +194,12 @@ OB.createTerrainRenderer = async function (canvas) {
       for (const [key, node] of nodes) if (!keep.has(key)) { disposeNode(node); nodes.delete(key); }
     }
     positionTiles(); if (overlayDirty || built) rebuildSamples();
-    positionPins(); if (marker) marker.quaternion.copy(camera.quaternion);
+    positionPins();
+    if (marker) {
+      marker.quaternion.copy(camera.quaternion);
+      const unit = camera.position.distanceTo(marker.position) * Math.tan(camera.fov * Math.PI / 360) * 2 / height;
+      marker.scale.setScalar(unit * 10 / .025);
+    }
     renderer.render(scene, camera);
     if (built && pendingMeshes) notify();
   }
@@ -224,10 +236,17 @@ OB.createTerrainRenderer = async function (canvas) {
     setTerrain(data, s) { context = data; if (s) site = s; overlayDirty = true; },
     setSamples(s, t, pol) { site = s; date = t; channel = pol; overlayDirty = true; },
     select: setSelection,
-    rotate(dx, dy) { yaw -= dx * .007; if (!plan) pitch = tiles.clamp(pitch + dy * .006, .32, 1.45); notify(); },
+    rotate(dx, dy) { yaw -= dx * .007; if (ground) groundTilt = tiles.clamp(groundTilt - dy * .006, -.55, .55); else if (!plan) pitch = tiles.clamp(pitch + dy * .006, .04, 1.45); notify(); },
     pan(dx, dy) { const unit = camera.position.distanceTo(target) / height / scale(); center.x += (-dx * Math.cos(yaw) + dy * Math.sin(yaw)) * unit; center.y += (dx * Math.sin(yaw) + dy * Math.cos(yaw)) * unit; center.x = tiles.wrap(center.x, 1); center.y = tiles.clamp(center.y, 0, 1); changed(); },
+    walk(forward, right) {
+      if (!ground || !Number.isFinite(forward) || !Number.isFinite(right)) return;
+      const unit = .16 / scale();
+      center.x = tiles.wrap(center.x + (Math.sin(yaw) * forward + Math.cos(yaw) * right) * unit, 1);
+      center.y = tiles.clamp(center.y + (-Math.cos(yaw) * forward + Math.sin(yaw) * right) * unit, 0, 1);
+      changed();
+    },
     zoom(factor) { if (Number.isFinite(factor) && factor > 0) { viewZoom = tiles.clamp(viewZoom + Math.log2(factor), 0, 19); changed(); } },
-    setView(view) { plan = view === 'plan'; yaw = plan ? 0 : -.65; pitch = .77; notify(); },
+    setView(view) { plan = view === 'plan'; ground = view === 'ground'; yaw = plan ? 0 : -.65; pitch = .77; groundTilt = -.08; notify(); },
     setExaggeration(value) { exaggeration = value; overlayDirty = true; notify(); },
     setMode(value) { mode = value; notify(); }, setContours(value) { contours.value = value ? 1 : 0; notify(); },
     setPointsVisible(value) { pointsVisible = value; overlayDirty = true; notify(); },
@@ -237,7 +256,7 @@ OB.createTerrainRenderer = async function (canvas) {
     info: () => {
       const network = stream.info(), building = desired.filter(t => { const n = nodes.get(t.meshKey); return !n || n.dirty || n.segments !== segments; }).length;
       return { geometryRevision, terrainVertices: vertices, terrainTiles: nodes.size, desiredTiles: desired.length, fineTiles: desired.filter(t => stream.cache.has(t.key)).length,
-        radarSamples: sampleList.length, exaggeration, mode, renderer: 'WebGL / Three.js', yaw, pitch, zoom: viewZoom, sourceLevel, center: location(),
+        radarSamples: sampleList.length, exaggeration, mode, view: ground ? 'ground' : plan ? 'plan' : 'orbit', groundTilt, renderer: 'WebGL / Three.js', yaw, pitch, zoom: viewZoom, sourceLevel, center: location(),
         min_m: minHeight, max_m: maxHeight, span_m: tiles.C * Math.cos(location().lat * Math.PI / 180) / 2 ** viewZoom,
         ...network, building, loading: coverageDirty || network.pending > 0 || building > 0 };
     },

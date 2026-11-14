@@ -346,11 +346,11 @@
       <div class="cloud__toolbar">
         <div class="cloud__buttons" role="group" aria-label="Point cloud polarization"><button type="button" id="cloud-hv" aria-pressed="true">HV</button><button type="button" id="cloud-hh" aria-pressed="false">HH</button></div>
         <span class="scene__separator" aria-hidden="true"></span>
-        <div class="cloud__buttons" role="group" aria-label="Point cloud view"><button type="button" id="cloud-orbit" aria-pressed="true">3D orbit</button><button type="button" id="cloud-plan" aria-pressed="false">Top view</button></div>
+        <div class="cloud__buttons" role="group" aria-label="Point cloud view"><button type="button" id="cloud-orbit" aria-pressed="true">3D orbit</button><button type="button" id="cloud-ground" aria-pressed="false">Ground view</button><button type="button" id="cloud-plan" aria-pressed="false">Top view</button></div>
         <div class="cloud__buttons cloud__zoom"><button type="button" id="cloud-zoom-out" aria-label="Zoom out point cloud">-</button><button type="button" id="cloud-zoom-in" aria-label="Zoom in point cloud">+</button><button type="button" id="cloud-reset">Reset view</button></div>
       </div>
       <div class="terrain-controls">
-        <label for="terrain-mode">Render</label><select id="terrain-mode"><option value="hybrid">Relief + cloud</option><option value="relief">Solid relief</option><option value="points">Point cloud</option></select>
+        <label for="terrain-mode">Render</label><select id="terrain-mode"><option value="hybrid">Relief + cloud</option><option value="relief">Solid relief</option><option value="points" selected>Point cloud</option></select>
         <label for="terrain-exaggeration">Height</label><select id="terrain-exaggeration"><option value="1">1x</option><option value="2">2x</option><option value="4" selected>4x</option><option value="8">8x</option></select>
         <label><input type="checkbox" id="terrain-radar" checked> NISAR</label>
         <label><input type="checkbox" id="terrain-contours" checked> Contours</label>
@@ -379,14 +379,14 @@
         <div class="cloud__key terrain-height-key"><span>Elevation / m</span><i aria-hidden="true"></i><span id="terrain-low">-</span><span id="terrain-high">-</span></div>
         <div class="cloud__key terrain-signal-key"><span>NISAR / dB</span><i aria-hidden="true"></i><span>-35</span><span>+5 dB</span></div>
         <div class="terrain-scale" id="terrain-scale">DEM / measured elevations</div>
-        <div class="cloud__interaction" id="cloud-help">Drag: orbit / Shift-drag: pan / Scroll: zoom / Click: inspect</div>
+        <div class="cloud__interaction" id="cloud-help">Drag: look / Shift-drag: pan / Scroll: zoom / WASD: move in ground view / Click: inspect</div>
       </div>
       <div class="cloud__selection">
         <div class="cloud__sample-heading"><strong id="cloud-sample-id">Select a measured sample</strong><div class="cloud__buttons"><button type="button" id="cloud-prev" aria-label="Previous measured sample">&lt;</button><button type="button" id="cloud-next" aria-label="Next measured sample">&gt;</button><button type="button" id="cloud-card">Pixel card</button></div></div>
         <div class="cloud__readout" aria-live="polite"><div><span>Signal</span><strong id="cloud-value">-</strong></div><div><span>Elevation</span><strong id="terrain-elevation">-</strong></div><div><span>Land cover (2021)</span><strong id="cloud-cover">-</strong></div><div><span>Coordinates</span><strong id="cloud-coordinates">-</strong></div></div>
         <div class="cloud__history"><span id="cloud-history-label">Sample history</span><canvas id="cloud-history" height="46" role="img" aria-label="Selected sample backscatter history; gaps mean missing observations"></canvas></div>
       </div>
-      <p class="cloud__explanation" id="cloud-explanation">Surface height and colour: DEM elevation in metres. NISAR dots keep their measured coordinates; dot colour shows HH/HV. Height exaggeration is visual only. <a href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noopener">DEM: Mapzen / upstream credits</a>.</p>
+      <p class="cloud__explanation" id="cloud-explanation">Terrain points show sampled DEM elevations, not additional NISAR measurements. Colored NISAR dots keep their measured coordinates and show HH/HV. Ground view and height exaggeration are visual approximations. <a href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noopener">DEM: Mapzen / upstream credits</a>.</p>
     </section>
   </div>
   <div class="scene__status"><span id="scene-status" role="status">Ready</span><span>NASA-ISRO NISAR / ASF DAAC</span><span>Esc to return</span></div>
@@ -442,14 +442,14 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=1ee9521cc520"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=b636e0596302"></script>
+<script src="js/i18n.js?v=4f19d436313f"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
 <script src="js/terrain-tiles.js?v=ecaf17dffa38"></script>
-<script src="js/terrain-renderer.js?v=edc8dce38b35"></script>
+<script src="js/terrain-renderer.js?v=e5e45b283418"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=c451f8cea206"></script>
+<script src="js/scene.js?v=b06c9aecc616"></script>
 <script src="js/evidence-model.js?v=c0c6d5385778"></script>
 <script src="js/evidence.js?v=1edadc35150d"></script>
 <script src="js/app.js?v=a9f50a946bf2"></script>
