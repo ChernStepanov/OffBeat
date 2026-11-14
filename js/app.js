@@ -221,6 +221,7 @@
     $('p-extra').innerHTML = '';
     $('plot-s1').hidden = true;
     $('plot-opera').hidden = true;
+    $('gnss-context').hidden = true;
     for (const id of ['c-bs','c-disp']) OB.chart.empty($(id), 'No measured NISAR series here. Open a demo site on the map or in the list.');
     $('play').disabled = true; $('stop').disabled = true;
     $('play-hint').textContent = 'No measured series covers the selected location.';
@@ -645,6 +646,19 @@
     if (pa && pd) $('gunw-postgap-text').textContent = 'Later segments: ' + pa.quality_valid_in_all_pairs + ' ascending and ' + pd.quality_valid_in_all_pairs + ' descending points pass their respective pair masks. Dates differ; reference stability and velocity remain unverified.';
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
+    const gnss = state.site.context && state.site.context.mmx1_gnss;
+    const nearStation = gnss && Number.isInteger(state.cell) && state.cell === gnss.nearest_nisar_sample.index;
+    $('gnss-context').hidden = !gnss;
+    $('gnss-plot').hidden = !nearStation;
+    if (nearStation && gnss.records.length) {
+      const records = new Map(gnss.records.map(r => [r.date, r.up_m]));
+      const dates = [], values = [], reference = gnss.records[0].up_m;
+      for (let d = Date.parse(gnss.window[0] + 'T00:00:00Z'), end = Date.parse(gnss.window[1] + 'T00:00:00Z'); d <= end; d += 86400000) {
+        const date = new Date(d).toISOString().slice(0,10), value = records.get(date);
+        dates.push(date); values.push(Number.isFinite(value) ? (value-reference)*100 : NaN);
+      }
+      OB.chart.gnss($('c-gnss'), dates, values);
+    }
     const op = state.site.context && state.site.context.opera_disp;
     const oi = state.cell;
     const og = op && Number.isInteger(oi) ? op.granules.filter(g => g.values && g.secondary_date) : [];
@@ -658,6 +672,11 @@
     $("plot-s1").hidden = !(vv && vv.concat(vh).some(Number.isFinite));
     if (!$("plot-s1").hidden) OB.chart.cband($("c-s1"), s1.dates, vv, vh, state.site.dates);
   }
+
+  $('gnss-open').addEventListener('click', () => {
+    const g = state.site && state.site.context && state.site.context.mmx1_gnss;
+    if (g && Number.isInteger(g.nearest_nisar_sample.index)) pickCell(g.nearest_nisar_sample.index, true);
+  });
 
   function channelName(p) {
     if ((p.style === "drift" || p.style === "step") && p.disp) return "displacement";
