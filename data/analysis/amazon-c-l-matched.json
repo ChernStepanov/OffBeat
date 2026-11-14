@@ -1,0 +1,245 @@
+{
+  "source": "NISAR GCOV L-band HV and NASA OPERA RTC-S1 C-band VH; ESA WorldCover 2021 classes",
+  "inputs": [
+    {
+      "path": "data/amazon.json",
+      "sha256": "b55c6310128993fab59dc7d4548131904a2d4192a16c32d71a580ab6d0f405eb"
+    },
+    {
+      "path": "data/amazon/sentinel1.json",
+      "sha256": "05e8439158f2fc6514692b1dca936629dfd154b86ec9edb571dbe905c33bce52"
+    }
+  ],
+  "method": "For each NISAR date select nearest RTC date within 6 days, then use same sample points valid in both bands. For each class compute the median dB per date, then the median of those date medians. Forest minus grassland contrasts use these class medians.",
+  "limitations": "Exploratory descriptive sample, not a causal or independent validation. WorldCover classes are from 2021; geometry, wavelength, spatial resolution, and sensing time differ. Samples are spatially correlated; no error bars or statistical significance are estimated.",
+  "pairs": [
+    {
+      "nisar_date": "2026-07-18",
+      "rtc_date": "2026-07-17",
+      "rtc_granules": [
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0",
+          "concept_id": "G4356548110-ASF",
+          "date": "2026-07-17"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0",
+          "concept_id": "G4356548408-ASF",
+          "date": "2026-07-17"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0",
+          "concept_id": "G4356529890-ASF",
+          "date": "2026-07-17"
+        }
+      ]
+    },
+    {
+      "nisar_date": "2026-08-11",
+      "rtc_date": "2026-08-10",
+      "rtc_granules": [
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0",
+          "concept_id": "G4356991731-ASF",
+          "date": "2026-08-10"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0",
+          "concept_id": "G4356991732-ASF",
+          "date": "2026-08-10"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0",
+          "concept_id": "G4356978570-ASF",
+          "date": "2026-08-10"
+        }
+      ]
+    },
+    {
+      "nisar_date": "2026-08-23",
+      "rtc_date": "2026-08-22",
+      "rtc_granules": [
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0",
+          "concept_id": "G4358085847-ASF",
+          "date": "2026-08-22"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0",
+          "concept_id": "G4358085751-ASF",
+          "date": "2026-08-22"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0",
+          "concept_id": "G4358098530-ASF",
+          "date": "2026-08-22"
+        }
+      ]
+    },
+    {
+      "nisar_date": "2026-09-04",
+      "rtc_date": "2026-09-03",
+      "rtc_granules": [
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0",
+          "concept_id": "G4359411242-ASF",
+          "date": "2026-09-03"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0",
+          "concept_id": "G4359421367-ASF",
+          "date": "2026-09-03"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0",
+          "concept_id": "G4359384764-ASF",
+          "date": "2026-09-03"
+        }
+      ]
+    },
+    {
+      "nisar_date": "2026-09-16",
+      "rtc_date": "2026-09-15",
+      "rtc_granules": [
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0",
+          "concept_id": "G4358433107-ASF",
+          "date": "2026-09-15"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0",
+          "concept_id": "G4358433079-ASF",
+          "date": "2026-09-15"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0",
+          "concept_id": "G4358424954-ASF",
+          "date": "2026-09-15"
+        }
+      ]
+    },
+    {
+      "nisar_date": "2026-09-28",
+      "rtc_date": "2026-09-27",
+      "rtc_granules": [
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0",
+          "concept_id": "G4358970829-ASF",
+          "date": "2026-09-27"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0",
+          "concept_id": "G4358993572-ASF",
+          "date": "2026-09-27"
+        },
+        {
+          "id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0",
+          "concept_id": "G4358985739-ASF",
+          "date": "2026-09-27"
+        }
+      ]
+    }
+  ],
+  "classes": {
+    "forest": {
+      "per_date": [
+        {
+          "nisar_date": "2026-07-18",
+          "rtc_date": "2026-07-17",
+          "count": 575,
+          "c_vh_db": -13.65,
+          "l_hv_db": -12.065
+        },
+        {
+          "nisar_date": "2026-08-11",
+          "rtc_date": "2026-08-10",
+          "count": 575,
+          "c_vh_db": -13.61,
+          "l_hv_db": -12.179
+        },
+        {
+          "nisar_date": "2026-08-23",
+          "rtc_date": "2026-08-22",
+          "count": 575,
+          "c_vh_db": -13.71,
+          "l_hv_db": -12.34
+        },
+        {
+          "nisar_date": "2026-09-04",
+          "rtc_date": "2026-09-03",
+          "count": 575,
+          "c_vh_db": -14.07,
+          "l_hv_db": -12.532
+        },
+        {
+          "nisar_date": "2026-09-16",
+          "rtc_date": "2026-09-15",
+          "count": 575,
+          "c_vh_db": -14.22,
+          "l_hv_db": -12.541
+        },
+        {
+          "nisar_date": "2026-09-28",
+          "rtc_date": "2026-09-27",
+          "count": 575,
+          "c_vh_db": -13.86,
+          "l_hv_db": -12.005
+        }
+      ],
+      "c_vh_db": -13.785,
+      "l_hv_db": -12.259
+    },
+    "grassland": {
+      "per_date": [
+        {
+          "nisar_date": "2026-07-18",
+          "rtc_date": "2026-07-17",
+          "count": 449,
+          "c_vh_db": -14.4,
+          "l_hv_db": -17.398
+        },
+        {
+          "nisar_date": "2026-08-11",
+          "rtc_date": "2026-08-10",
+          "count": 449,
+          "c_vh_db": -14.59,
+          "l_hv_db": -18.051
+        },
+        {
+          "nisar_date": "2026-08-23",
+          "rtc_date": "2026-08-22",
+          "count": 449,
+          "c_vh_db": -15.02,
+          "l_hv_db": -18.765
+        },
+        {
+          "nisar_date": "2026-09-04",
+          "rtc_date": "2026-09-03",
+          "count": 449,
+          "c_vh_db": -15.78,
+          "l_hv_db": -19.693
+        },
+        {
+          "nisar_date": "2026-09-16",
+          "rtc_date": "2026-09-15",
+          "count": 449,
+          "c_vh_db": -16.23,
+          "l_hv_db": -20.017
+        },
+        {
+          "nisar_date": "2026-09-28",
+          "rtc_date": "2026-09-27",
+          "count": 449,
+          "c_vh_db": -14.87,
+          "l_hv_db": -15.546
+        }
+      ],
+      "c_vh_db": -14.945,
+      "l_hv_db": -18.408
+    }
+  },
+  "forest_minus_grassland_db": {
+    "c_vh_db": 1.16,
+    "l_hv_db": 6.149
+  }
+}

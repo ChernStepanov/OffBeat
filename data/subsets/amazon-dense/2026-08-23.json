@@ -1,0 +1,35 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001",
+    "concept_id": "G4289088978-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2026-08-23T09:04:09.000Z",
+    "end": "2026-08-23T09:04:43.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001/NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001.h5"
+  },
+  "grid": {
+    "epsg": 32722,
+    "window": [
+      6391,
+      6532,
+      13147,
+      13288
+    ],
+    "x_first": 689910.0,
+    "y_first": 9473370.0,
+    "x_step": 20.0,
+    "y_step": -20.0,
+    "shape": [
+      141,
+      141
+    ]
+  },
+  "date": "2026-08-23",
+  "subset_path": "data/subsets/amazon-dense/2026-08-23.npz",
+  "sha256": "7d0b33e3e0e6972e44ef58ad05a5b6ae9a6680181c682d38d2ef121473d3621d",
+  "steps": [
+    "Read native frequency A HHHH, HVHV and mask within bounding window",
+    "No resampling, classification, smoothing or imputation"
+  ],
+  "warning": "Uncalculated native power; mask is retained and needs interpretation before display or change inference."
+}

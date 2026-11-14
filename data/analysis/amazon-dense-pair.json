@@ -1,0 +1,47 @@
+{
+  "source": "NASA-ISRO NISAR PROVISIONAL GCOV frequency A HHHH/HVHV, ASF DAAC",
+  "dates": [
+    "2026-08-23",
+    "2026-09-04"
+  ],
+  "source_receipts": [
+    "data/subsets/amazon-dense/2026-08-23.json",
+    "data/subsets/amazon-dense/2026-09-04.json"
+  ],
+  "grid": {
+    "epsg": 32722,
+    "window": [
+      6391,
+      6532,
+      13147,
+      13288
+    ],
+    "x_first": 689910.0,
+    "y_first": 9473370.0,
+    "x_step": 20.0,
+    "y_step": -20.0,
+    "shape": [
+      141,
+      141
+    ]
+  },
+  "valid_count": 19881,
+  "total_count": 19881,
+  "method": "Same native 20 m grid and mask for both dates; require mask 1..254 and finite positive HV linear gamma0; calculate 10*log10(after/before). Candidate is nearest native cell to existing sample AMA r5 c15; neighbourhood is its 3x3 native cells.",
+  "limitations": "Exploratory two-date change only; speckle, moisture, viewing geometry and provisional-product issues are not corrected. No event, area, cause, or validation is inferred; bbox window extends slightly beyond the geographic AOI.",
+  "window_median_hv_change_db": -0.618,
+  "window_hv_change_p10_p90_db": [
+    -3.167,
+    1.976
+  ],
+  "candidate": {
+    "sample": "AMA r5 c15",
+    "lat": -4.766796875,
+    "lon": -49.275390625,
+    "native_row": 25,
+    "native_col": 68,
+    "hv_change_db": -7.42,
+    "local_3x3_valid": 9,
+    "local_3x3_median_change_db": -4.122
+  }
+}

@@ -187,6 +187,11 @@
                 <div class="pane-label">Apparent relative LOS change, cm (GUNW); + toward sensor</div>
                 <canvas id="c-disp" height="120" aria-label="Displacement of the pixel against its peers"></canvas>
               </div>
+              <div class="plot" id="plot-opera" hidden>
+                <div class="pane-label">Sentinel-1 OPERA DISP-S1, short-wavelength relative LOS, cm; + toward satellite (<a href="data/mexico/opera-disp.json">source and quality</a>)</div>
+                <canvas id="c-opera" height="120" aria-label="Quality-masked Sentinel-1 OPERA relative line of sight displacement"></canvas>
+                <small>Common reference date; locally filtered. Uncorrected atmosphere; not vertical motion or a validated subsidence rate.</small>
+              </div>
               <div class="plot" id="plot-s1" hidden>
                 <div class="pane-label">Sentinel-1 C band, dB (NASA OPERA RTC) - VV <i class="sw sw--vv"></i> VH <i class="sw sw--vh"></i> NISAR period <i class="sw sw--nisar"></i></div>
                 <canvas id="c-s1" height="120" aria-label="Sentinel-1 C-band backscatter at the same point since 2024"></canvas>
@@ -254,13 +259,13 @@
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
-<script src="js/data.js?v=d7e029cc1f6c"></script>
-<script src="js/chart.js?v=ccd9e09bcb99"></script>
+<script src="js/data.js?v=9c2542b6bcfc"></script>
+<script src="js/chart.js?v=83a2c7255cda"></script>
 <script src="js/sonify.js?v=3f8899f65716"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=75066844aed3"></script>
 <script src="js/optical.js?v=cf8e7ee05aa4"></script>
-<script src="js/i18n.js?v=877021d7387a"></script>
-<script src="js/app.js?v=c0f01be1bc15"></script>
+<script src="js/i18n.js?v=6fa33d68c5b7"></script>
+<script src="js/app.js?v=205eb7a6b072"></script>
 </body>
 </html>

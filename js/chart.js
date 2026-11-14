@@ -124,6 +124,15 @@ OB.chart = (function () {
     g.lineWidth = 1;
   }
 
+  // OPERA is an independent Sentinel-1 LOS measurement, not a NISAR vertical rate.
+  function opera(cv, dates, values) {
+    const { g, w, h } = setup(cv);
+    if (!dates.length || !values.some(Number.isFinite)) { empty(g,w,h,'No quality-accepted OPERA samples.'); return; }
+    const [lo,hi] = range(values, 1);
+    const {X,Y} = frame(g,w,h,dates,lo,hi);
+    g.lineWidth = 1.6; g.strokeStyle = '#006a73'; line(g,X,Y,values); dots(g,X,Y,values,'#006a73'); g.lineWidth = 1;
+  }
+
   // a plot with nothing to show says so, instead of an empty white box
   function placeholder(cv, message) {
     const { g, w, h } = setup(cv);
@@ -131,5 +140,5 @@ OB.chart = (function () {
     g.fillText(message, w / 2, h / 2 + 4);
   }
 
-  return { backscatter, displacement, cband, empty: placeholder };
+  return { backscatter, displacement, cband, opera, empty: placeholder };
 })();

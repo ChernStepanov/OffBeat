@@ -45,7 +45,7 @@ for(const file of ['styles','search','data'])vm.runInContext(fs.readFileSync(`js
 const OB=context.OB;
 Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:()=>()=>null,bindWaterLabels:()=>()=>{},
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),
-  chart:{backscatter(){},displacement(){},cband(){},empty(){}},sonify:{stop(){},play(){}}});
+  chart:{backscatter(){},displacement(){},cband(){},opera(){},empty(){}},sonify:{stop(){},play(){}}});
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 await tick();await tick();assert(OB.app);

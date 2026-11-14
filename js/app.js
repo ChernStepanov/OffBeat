@@ -145,6 +145,7 @@
     for (const id of ['p-cover','p-peers','p-z','p-style','p-since','p-loc','p-quality']) $(id).textContent = 'Unavailable';
     $('p-extra').innerHTML = '';
     $('plot-s1').hidden = true;
+    $('plot-opera').hidden = true;
     for (const id of ['c-bs','c-disp']) OB.chart.empty($(id), 'No measured NISAR series here. Open a demo site on the map or in the list.');
     $('play').disabled = true; $('stop').disabled = true;
     $('play-hint').textContent = 'No measured series covers the selected location.';
@@ -533,6 +534,12 @@
     OB.chart.backscatter($("c-bs"), state.site.dates, p, sinceIdx(), head);
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
+    const op = state.site.context && state.site.context.opera_disp;
+    const oi = state.cell;
+    const og = op && Number.isInteger(oi) ? op.granules.filter(g => g.values && g.secondary_date) : [];
+    const ov = og.map(g => { const x = g.values.short_wavelength_displacement[oi]; return x == null ? NaN : x * 100; });
+    $('plot-opera').hidden = !(op && Number.isInteger(oi));
+    if (!$('plot-opera').hidden) OB.chart.opera($('c-opera'), og.map(g => g.secondary_date), ov);
     // Sentinel-1 at the same sample point, when the site has it (data/<site>/sentinel1.json)
     const s1 = state.site.context && state.site.context.sentinel1, i = state.cell;
     const vv = s1 && Number.isInteger(i) ? s1.points.vv.map(row => row[i] ?? NaN) : null;

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GUNW_020_162_A_007_021_4000_SH_20260520T100658_20260520T100732_20260601T100657_20260601T100731_P05023_N_F_J_001",
+    "concept_id": "G4275711650-ASF",
+    "collection": "C2854335566-ASF",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GUNW_PROVISIONAL_V1/NISAR_L2_PR_GUNW_020_162_A_007_021_4000_SH_20260520T100658_20260520T100732_20260601T100657_20260601T100731_P05023_N_F_J_001/NISAR_L2_PR_GUNW_020_162_A_007_021_4000_SH_20260520T100658_20260520T100732_20260601T100657_20260601T100731_P05023_N_F_J_001.h5"
+  },
+  "catalogue_query": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GUNW_PROVISIONAL_V1&bounding_box=-67.0925%2C10.4575%2C-67.0675%2C10.4825&page_size=2000&sort_key=start_date",
+  "reference_date": "20260520",
+  "secondary_date": "20260601",
+  "grid": {
+    "epsg": 32619,
+    "spacing": [
+      80.0,
+      -80.0
+    ],
+    "window": [
+      2580,
+      2615,
+      3730,
+      3764
+    ],
+    "paths": {
+      "coherence": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/coherenceMagnitude",
+      "component": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/connectedComponents",
+      "iono_sd": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreenUncertainty",
+      "mask": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/mask"
+    }
+  },
+  "subset_path": "data/subsets/venezuela-gunw/20260520_20260601-baseline.npz",
+  "sha256": "2a9d30558e34e2f2c18136075b9b26312e3475133010a4d839e34735979cf0e3",
+  "sample_count": 1024,
+  "valid_quality_samples": 0,
+  "quality_counts": {
+    "coherence_at_least_0_7": 104,
+    "ionosphere_uncertainty_at_most_1_rad": 0
+  },
+  "method": "Sample native GUNW quality and coherence at original 32x32 points; same geometric and quality thresholds as earthquake-pair receipt. This is not a damage estimate."
+}
