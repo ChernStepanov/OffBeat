@@ -1,7 +1,7 @@
 window.OB = window.OB || {};
-OB.bindOptical = function (map, select, status) {
-  let site, index, overlay, serial=0, followDate=false;
-  function clear() { if (overlay) map.removeLayer(overlay); overlay=null; }
+OB.bindOptical = function (map, select, status, mirror) {
+  let site, index, overlay, mirrorOverlay, serial=0, followDate=false;
+  function clear() { if (overlay) map.removeLayer(overlay); if (mirrorOverlay) mirror.removeLayer(mirrorOverlay); overlay=null; mirrorOverlay=null; }
   function draw() {
     clear();
     select.dispatchEvent(new Event('ob:select-sync'));
@@ -15,6 +15,7 @@ OB.bindOptical = function (map, select, status) {
     const b=entry.bounds;
     const current=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{attribution:'Copernicus Sentinel-2 / Earth Search'});
     overlay=current;
+    if (mirror) mirrorOverlay=L.imageOverlay(`${entry.path}?v=${entry.sha256}`,[[b.s,b.w],[b.n,b.e]],{pane:'opticalMirror',className:'grayscale-imagery',interactive:false}).addTo(mirror);
     current.on('error',()=>{if (overlay!==current) return; clear();status.textContent='Dated optical image failed to load. Context mosaic remains visible.';});
     current.on?.('load',()=>{if (overlay===current) sharpen();});
     current.addTo(map);
@@ -24,9 +25,9 @@ OB.bindOptical = function (map, select, status) {
   // Sentinel-2 is 10 m per pixel. Stretched past twice its size the browser's smoothing turns it
   // into a blur next to the sharp basemap, so from there it is drawn as the honest 10 m squares.
   function sharpen() {
-    const img=overlay?.getElement?.();
-    if (!img || !img.naturalWidth) return;
-    img.style.imageRendering=img.getBoundingClientRect().width/img.naturalWidth>=2 ? 'pixelated' : 'auto';
+    for (const img of [overlay?.getElement?.(), mirrorOverlay?.getElement?.()]) {
+      if (img && img.naturalWidth) img.style.imageRendering=img.getBoundingClientRect().width/img.naturalWidth>=2 ? 'pixelated' : 'auto';
+    }
   }
   map.on?.('zoomend',sharpen);
   function setDate(date) {

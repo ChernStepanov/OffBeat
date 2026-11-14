@@ -1,6 +1,7 @@
 // Only cache Esri map tiles the user actually views. Respect the server's cache lifetime.
 const CACHE = 'offbeat-esri-tiles-v1';
 const LIMIT = 256;
+const inFlight = new Map();
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 self.addEventListener('fetch', event => {
@@ -13,6 +14,15 @@ async function tile(request) {
     const cache = await caches.open(CACHE);
     const stored = await cache.match(request.url);
     if (stored && Number(stored.headers.get('x-offbeat-expires')) > Date.now()) return stored;
+    if (inFlight.has(request.url)) return (await inFlight.get(request.url)).clone();
+    const pending = fetchAndStore(request, cache, stored);
+    inFlight.set(request.url, pending);
+    try {
+      return (await pending).clone();
+    } finally { inFlight.delete(request.url); }
+  } catch (_) { return fetch(request); }
+}
+async function fetchAndStore(request, cache, stored) {
     try {
       // Esri exposes these tiles with CORS, so cache directives and status are visible.
       const response = await fetch(request.url, { mode: 'cors', credentials: 'omit' });
@@ -31,5 +41,4 @@ async function tile(request) {
       if (stored) return stored;
       return fetch(request);
     }
-  } catch (_) { return fetch(request); }
 }

@@ -13,4 +13,6 @@ const saved=entries.get(request.url);const h=new Headers(saved.headers);h.set('x
 assert.equal(await (await send()).text(),'tile');assert.equal(network,2,'expired tile must refresh');
 entries.delete(request.url);directive='no-store, max-age=3600';await send();assert.equal(entries.size,0,'no-store must not be cached');
 assert.equal(await send(new Request('https://example.org/tile/5/12/8')),null,'unrelated requests must not be intercepted');
+entries.delete(request.url);directive='max-age=3600';const before=network;
+await Promise.all([send(),send()]);assert.equal(network,before+1,'matching concurrent requests share one download');
 console.log('PASS: map tile reuse, expiration, no-store and origin restriction');

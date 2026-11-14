@@ -36,7 +36,7 @@ const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){re
 const tileLayers=[], imageLayers=[];
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
-const opticalLoads=[];let holdMexico=null; let radarBinding=null;
+const opticalLoads=[];let holdMexico=null; let radarBinding=null; const imagery=[];
 const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
@@ -45,6 +45,7 @@ const context={URL,AbortSignal,Event,console,document,location,history:{replaceS
 for(const file of ['styles','search','data','acquisitions','amazon-ranking','suggestions'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const OB=context.OB;
 Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:(map,toggle,status)=>{radarBinding={map,toggle,status};return ()=>null;},bindWaterLabels:()=>()=>{},
+  bindImagery:(map,url,options)=>imagery.push({map,url,options}),
   bindOptical:()=>({load(s){opticalLoads.push(s.id);return s.id==='mexico'&&holdMexico?holdMexico:Promise.resolve();},setDate(){},context(){}}),
   chart:{backscatter(){},displacement(){},cband(){},opera(){},gnss(){},empty(){}},sonify:{stop(){},play(){}}});
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
@@ -57,7 +58,11 @@ for (const {options} of tileLayers) {
   assert.equal(options.maxNativeZoom,16,'High zoom must enlarge available tiles instead of requesting Esri placeholders');
   assert.equal(options.maxZoom,19,'Both maps must remain zoomable');
 }
-assert.equal(tileLayers.length,4);
+assert.equal(tileLayers.length,2);
+assert.equal(imagery.length,2);
+assert.equal(imagery[0].url,imagery[1].url,'Both maps must use the same imagery');
+assert.match(imagery[0].options.className,/grayscale/);
+assert.doesNotMatch(imagery[1].options.className,/grayscale/);
 await OB.app.loadSite('mexico');
 const clicks=(id,button)=>$(id).listeners.click({target:button});
 clicks('regions',regionButtons[0]);await tick();
