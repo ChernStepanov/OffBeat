@@ -857,6 +857,7 @@
       if (savedPlace && savedPlace.kind === 'coordinates') { $('place-query').value = `${savedPlace.lat}, ${savedPlace.lon}`; await showPlace(savedPlace); }
       const v = previousViewport;
       if (!worldStart && v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
+      await OB.evidence?.restore();
       viewportReady = true; saveViewport();
     });
   }
