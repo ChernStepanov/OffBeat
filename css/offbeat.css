@@ -75,6 +75,32 @@ p { margin: 0 0 8px; }
 .win-b { padding: 8px 6px 6px; }
 .win-b--flush { padding: 4px 2px 2px; }
 
+/* --- title-bar button: the Win98 16x14 square, black frame, pixel glyph --- */
+.win-btn {
+  flex: none; width: 16px; height: 14px; padding: 0; border: 0; min-width: 0; min-height: 0;
+  background: var(--face) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9' shape-rendering='crispEdges'%3E%3Crect width='9' height='9' fill='%23000'/%3E%3Crect x='1' y='3' width='7' height='5' fill='%23c0c0c0'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
+  box-shadow: inset 1px 1px 0 var(--hi), inset -1px -1px 0 var(--lo), 0 0 0 1px var(--dk);
+}
+.win-btn:active { box-shadow: inset 1px 1px 0 var(--lo), inset -1px -1px 0 var(--hi), 0 0 0 1px var(--dk); background-position: 1px 1px; }
+.win-btn:focus { outline: none; }
+.win-btn:focus-visible { outline: 1px dotted #fff; outline-offset: -4px; }
+.win-btn[aria-pressed="true"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9' shape-rendering='crispEdges'%3E%3Crect width='9' height='9' fill='%23000'/%3E%3Crect x='3' y='1' width='5' height='4' fill='%23c0c0c0'/%3E%3Crect x='1' y='4' width='5' height='4' fill='%23000'/%3E%3Crect x='2' y='5' width='3' height='2' fill='%23c0c0c0'/%3E%3C/svg%3E");
+}
+
+/* --- maximized map window: covers the desk, the status bar stays on top --- */
+:root { --sbar-h: 24px; }
+.win--max {
+  position: fixed; inset: 0 0 var(--sbar-h) 0; z-index: 900;
+  margin: 0; display: flex; flex-direction: column; overflow: hidden;
+}
+.win--max .win-b--flush { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: auto; }
+.win--max .maps { flex: 1; min-height: 0; grid-auto-rows: minmax(0, 1fr); }   /* equal panes stacked or side by side */
+.win--max .maps__pane { min-height: 0; }
+.win--max .maps__pane > .pane-label { flex: 0 0 auto; }   /* maximized, the map takes the slack, not the caption */
+.win--max .maps__pane > .map { flex: 1; height: auto; min-height: 0; }
+body.win-max-open { overflow: hidden; }
+
 /* --- menu bar: flat, raises 1px on hover, sinks on press --- */
 .menu { display: flex; flex-wrap: wrap; padding: 2px 0 0; }
 .menu a { color: #000; text-decoration: none; padding: 3px 7px; }
