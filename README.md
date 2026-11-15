@@ -27,7 +27,7 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 
 **Осталось сделать людям:** финально сверить правила ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание звука ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), записать видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)) и сдать заявку до 15 ноября, 23:59 по местному времени.
 
-Проходят 102 Python-теста (6 сетевых не запускались) и 19 JS-сценариев данных, поиска, карты и тура.
+Проходят 102 Python-теста (6 сетевых не запускались) и 20 JS-сценариев данных, поиска, карты и тура.
 
 ## Run in five minutes
 
