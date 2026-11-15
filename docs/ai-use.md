@@ -31,8 +31,7 @@ used AI coding assistants on their own tasks, the way one uses an editor or a co
 - **rimgro:** the SAR anomaly exploration dashboard and the reproducible Amazon ranking benchmark.
 - **Fedor:** pull-request review and merges.
 
-People also logged in to NASA Earthdata and accepted data-use terms themselves and kept credentials
-out of every AI tool, tested the app, and checked AI output. For example, a team member's
+People also tested the app, and checked AI output. For example, a team member's
 reference-sensitivity audit showed that an earlier AI-written sentence overstated the GNSS/OPERA
 difference, and the team corrected the claim on the site, in the video, README and slides.
 
