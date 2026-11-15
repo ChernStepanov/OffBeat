@@ -1,6 +1,18 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'The Earth is always moving.':'Земля постоянно меняется.',
+    'Listen for the unexpected.':'Прислушайся к необычному.',
+    'Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.':'Изучай реальные измерения радара, сравнивай точку с соседями и исследуй возможные изменения.',
+    'Explore an example':'Изучить пример',
+    'Open the map':'Открыть карту',
+    'Exploratory prototype · Causes require independent verification':'Исследовательский прототип · Причины требуют независимой проверки',
+    'Choose a place':'Выбери место',
+    'Start with a prepared site':'Начни с подготовленного участка',
+    'Compare signals':'Сравни сигналы',
+    'Explore points and neighbours':'Изучи точку и её соседей',
+    'Check the evidence':'Проверь свидетельства',
+    'Review dates and limitations':'Посмотри даты и ограничения',
     'Sharper archive imagery':'Более чёткий архивный снимок',
     'Esri Clarity can be clearer but older. Switch off for the current mosaic.':'Архив Esri Clarity может быть чётче, но старее. Выключите для обычной мозаики.',
     'Global NISAR coverage (NASA)':'Глобальное покрытие NISAR (NASA)',

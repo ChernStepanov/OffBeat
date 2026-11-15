@@ -236,6 +236,9 @@ OB.evidence = (() => {
     const a = el('a'); a.href = url; a.download = `offbeat-${latestReport.site}-${latestReport.sample_id.replace(/\W+/g, '-')}.${geo ? 'geojson' : 'json'}`;
     a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
+  $('launch-example').addEventListener('click', event => {
+    if (!$('case-start').disabled) { event.preventDefault(); open('amazon-hv-step'); }
+  });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
   $('case-visible-clearing').addEventListener('click', () => open('amazon-visible-clearing', {step: 2}));
   $('evidence-selection').addEventListener('click', () => open(null));

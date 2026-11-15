@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=cb1492faf263">
+<link rel="stylesheet" href="css/offbeat.css?v=262b5a21ee46">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -31,6 +31,25 @@
     <button type="button" id="language-switch" class="btn language-switch" aria-label="Switch language / Сменить язык">Русский</button>
     </nav>
   </header>
+
+  <section class="win launch" aria-labelledby="launch-title">
+    <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2>OFFBEAT / EARTH OBSERVATION</h2><span class="launch__title-meta">NISAR / FIELD NOTES 01</span></div>
+    <div class="launch__body">
+      <div class="launch__copy">
+        <p class="launch__eyebrow">NASA + ISRO · NISAR DATA EXPLORER</p>
+        <h2 id="launch-title">The Earth is always moving.<br><span>Listen for the unexpected.</span></h2>
+        <p class="launch__lead">Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.</p>
+        <div class="launch__actions"><a class="btn launch__primary" id="launch-example" href="#evidence-win">Explore an example <span aria-hidden="true">→</span></a><a class="btn launch__secondary" href="#map-win">Open the map <span aria-hidden="true">↗</span></a></div>
+        <p class="launch__note"><span aria-hidden="true">●</span> Exploratory prototype · Causes require independent verification</p>
+      </div>
+      <div class="launch__visual" aria-hidden="true">
+        <div class="launch__visual-top"><span>ILLUSTRATION / 01</span><span>NOT MEASURED DATA</span></div>
+        <svg viewBox="0 0 420 160" preserveAspectRatio="none" focusable="false"><defs><pattern id="launch-grid" width="28" height="24" patternUnits="userSpaceOnUse"><path d="M28 0H0V24" fill="none" stroke="#c7d7e9" stroke-width=".7"/></pattern></defs><rect width="420" height="160" fill="url(#launch-grid)"/><path d="M0 100 L30 94 L55 102 L82 90 L108 97 L134 84 L158 96 L184 88 L210 94 L237 81 L261 88 L287 85 L313 90 L340 80 L367 86 L393 77 L420 81" fill="none" stroke="#94a9c3" stroke-width="2"/><path d="M0 111 L30 105 L55 110 L82 102 L108 106 L134 96 L158 102 L184 93 L210 104 L237 62 L261 93 L287 82 L313 88 L340 75 L367 85 L393 70 L420 75" fill="none" stroke="#073ba8" stroke-width="3"/><circle cx="237" cy="62" r="6" fill="#f3c800" stroke="#073ba8" stroke-width="2"/></svg>
+        <div class="launch__visual-bottom"><span>AN EXPLORER, NOT A FORECAST</span><span>•••</span></div>
+      </div>
+    </div>
+    <div class="launch__steps" aria-label="How to explore"><div><b>01</b><span><strong>Choose a place</strong><small>Start with a prepared site</small></span></div><div><b>02</b><span><strong>Compare signals</strong><small>Explore points and neighbours</small></span></div><div><b>03</b><span><strong>Check the evidence</strong><small>Review dates and limitations</small></span></div></div>
+  </section>
 
   <div id="cols">
 
@@ -443,7 +462,7 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=1ee9521cc520"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=be77027a7580"></script>
+<script src="js/i18n.js?v=c723c42fc5e8"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
@@ -452,7 +471,7 @@
 <script src="js/windows.js?v=e532fc6f132d"></script>
 <script src="js/scene.js?v=d42f0d32e184"></script>
 <script src="js/evidence-model.js?v=9baffce8c54e"></script>
-<script src="js/evidence.js?v=534a78b39e2a"></script>
+<script src="js/evidence.js?v=bc00b1709814"></script>
 <script src="js/app.js?v=33d96c0fdaa7"></script>
 </body>
 </html>
