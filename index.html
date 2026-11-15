@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=262b5a21ee46">
+<link rel="stylesheet" href="css/offbeat.css?v=464a3f187a2b">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -138,6 +138,7 @@
         <p class="notice__links"><a id="source-link" href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a>, <a href="docs/real-nisar.md">Processing and limitations</a></p>
       </div>
 
+      <details class="panel-disclosure" id="evidence-disclosure"><summary>Explore a change story</summary>
       <section class="win casebook" id="evidence-win" aria-labelledby="evidence-title">
         <div class="win-t"><h2 id="evidence-title">OffBeat / Change investigation</h2></div>
         <div class="win-b">
@@ -146,6 +147,7 @@
             <button type="button" class="btn btn--default" id="case-start" disabled data-case-text="start">Investigate a change</button>
           </div>
           <p><button type="button" class="btn" id="case-visible-clearing" disabled data-case-text="visibleClearing">See visually reviewed clearing</button> <span data-case-text="visibleCaveat">Optical review; NISAR detection has not been validated.</span></p>
+          <div class="story-prompt"><div><strong data-case-text="surpriseTitle">Not sure where to start?</strong><p data-case-text="surpriseHint">Open one of three prepared Amazon investigations, then follow its evidence.</p></div><button type="button" class="btn story-prompt__button" id="case-surprise" disabled data-case-text="surprise">Surprise me ✦</button></div>
           <p class="casebook__scope" data-case-text="scope">Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.</p>
           <div class="casebook__choices" id="case-choices" role="group" aria-label="Reviewed examples"></div>
           <button type="button" class="btn" id="evidence-selection" disabled data-case-text="selection">Evidence for selected sample</button>
@@ -153,7 +155,7 @@
           <div id="case-workspace" hidden>
             <nav id="case-steps" class="casebook__steps" aria-label="Investigation steps"></nav>
             <div class="casebook__paper" id="case-page" tabindex="-1"></div>
-            <div class="casebook__bar"><button type="button" class="btn" id="case-back">&lt;</button><span id="case-progress"></span><button type="button" class="btn btn--default" id="case-next">&gt;</button></div>
+            <div class="casebook__bar"><button type="button" class="btn" id="case-back">&lt;</button><span id="case-progress"></span><button type="button" class="btn btn--default" id="case-next">&gt;</button><button type="button" class="btn" id="case-close" data-case-text="close">Close story</button></div>
             <div class="casebook__exports">
               <button type="button" class="btn" id="evidence-copy" data-case-text="copy">Copy point link</button>
               <button type="button" class="btn" id="evidence-json" data-case-text="json">Download evidence / JSON</button>
@@ -165,6 +167,8 @@
         </div>
       </section>
 
+      </details>
+      <details class="panel-disclosure"><summary>Suggested places to investigate</summary>
       <section class="win suggestions" aria-labelledby="suggestions-title">
         <div class="win-t"><h2 id="suggestions-title">Suggested places to investigate</h2></div>
         <div class="win-b">
@@ -174,6 +178,7 @@
         </div>
       </section>
 
+      </details>
       <section class="win tour" id="tour-win" aria-labelledby="tour-title" hidden>
         <div class="win-t"><h2>OffBeat Tour - <span id="tour-count">Step 1</span></h2></div>
         <div class="win-b tour__body">
@@ -240,6 +245,7 @@
         </details></div>
       </section>
 
+      <details class="panel-disclosure"><summary>Search the NISAR archive</summary>
       <section class="win" aria-labelledby="t-archive">
         <div class="win-t"><h2 id="t-archive">NISAR archive</h2></div>
         <div class="win-b">
@@ -250,6 +256,7 @@
         </div>
       </section>
 
+      </details>
       <section class="win" id="card-win" aria-labelledby="t-card">
         <div class="win-t"><h2 id="t-card">Pixel card - <span id="px-id">click the map</span></h2></div>
         <div class="win-b">
@@ -310,6 +317,7 @@
         </div>
       </section>
 
+      <details class="panel-disclosure"><summary>Most off-beat samples</summary>
       <section class="win" id="top-win" aria-labelledby="t-top">
         <div class="win-t"><h2 id="t-top">Most off-beat samples</h2></div>
         <div class="win-b">
@@ -320,11 +328,13 @@
         </div>
       </section>
 
+      </details>
       <section class="win" id="val-win" aria-labelledby="t-val" hidden>
         <div class="win-t"><h2 id="t-val">Check against deforestation alerts</h2></div>
         <div class="win-b"><div class="paper"><div id="val-body"></div><p id="dense-validation" hidden><span id="dense-validation-text"></span> <a href="data/amazon/dense-validation.json">Dense analysis and sources</a>.</p></div></div>
       </section>
 
+      <details class="panel-disclosure"><summary>How OffBeat works</summary>
       <section class="win" id="about-win" aria-labelledby="t-about">
         <div class="win-t"><h2 id="t-about">How OffBeat finds a pixel out of step</h2></div>
         <div class="win-b">
@@ -336,6 +346,7 @@
         </div>
       </section>
 
+      </details>
       <p class="foot">
         Data: NASA-ISRO NISAR via ASF DAAC, ESA WorldCover 10 m, Copernicus Sentinel-2 via Earth Search; imagery (c) Esri, Vantor, Earthstar Geographics; labels (c) Esri, HERE, Garmin, OpenStreetMap contributors. Font W95FA by Alina Sava, OFL.
         Built for NASA Space Apps 2026, “Dancing with the SARs”. Open source.
@@ -462,7 +473,7 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=1ee9521cc520"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=c723c42fc5e8"></script>
+<script src="js/i18n.js?v=956792472e79"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
@@ -471,7 +482,8 @@
 <script src="js/windows.js?v=e532fc6f132d"></script>
 <script src="js/scene.js?v=d42f0d32e184"></script>
 <script src="js/evidence-model.js?v=9baffce8c54e"></script>
-<script src="js/evidence.js?v=bc00b1709814"></script>
+<script src="js/panels.js?v=4170805a19d9"></script>
+<script src="js/evidence.js?v=4ed311ba921c"></script>
 <script src="js/app.js?v=33d96c0fdaa7"></script>
 </body>
 </html>

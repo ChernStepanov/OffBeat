@@ -1,6 +1,9 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'Explore a change story':'Открыть историю изменения',
+    'Search the NISAR archive':'Поиск в архиве NISAR',
+    'How OffBeat works':'Как работает OffBeat',
     'The Earth is always moving.':'Земля постоянно меняется.',
     'Listen for the unexpected.':'Прислушайся к необычному.',
     'Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.':'Изучай реальные измерения радара, сравнивай точку с соседями и исследуй возможные изменения.',

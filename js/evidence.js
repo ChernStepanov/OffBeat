@@ -12,6 +12,10 @@ OB.evidence = (() => {
     start: ['Investigate a change', 'Исследовать пример изменения'],
     visibleClearing: ['See visually reviewed clearing', 'Посмотреть расчистку на снимках'],
     visibleCaveat: ['Optical review; NISAR detection has not been validated.', 'Визуальная проверка по снимкам; обнаружение радаром не подтверждено.'],
+    surpriseTitle: ['Not sure where to start?', 'Не знаете, с чего начать?'],
+    surpriseHint: ['Open one of three prepared Amazon investigations, then follow its evidence.', 'Откройте одно из трёх подготовленных исследований Амазонии и проверьте доказательства.'],
+    surprise: ['Surprise me ✦', 'Удиви меня ✦'],
+    close: ['Close story', 'Закрыть историю'],
     scope: ['Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.', 'Исследовательские примеры: 0 пригодных подтверждённых событий для оценки детектора. Точность не установлена.'],
     selection: ['Evidence for selected sample', 'Доказательства для выбранной точки'],
     copy: ['Copy point link', 'Скопировать ссылку на точку'], json: ['Download evidence / JSON', 'Скачать доказательства / JSON'],
@@ -98,6 +102,27 @@ OB.evidence = (() => {
       caption.append(el('p', t(`AOI clear: ${(100 * image.aoi_clear_fraction).toFixed(1)}%; not point quality.`, `Ясная площадь AOI: ${(100 * image.aoi_clear_fraction).toFixed(1)}%; не качество точки.`)));
       figure.append(viewport, caption); pair.append(figure);
     }); $('case-page').append(pair);
+    if (dossier.optical.length === 2) {
+      const compare = el('div', undefined, 'story-compare');
+      const frame = el('div', undefined, 'story-compare__frame');
+      frame.setAttribute('aria-hidden', 'true');
+      const layers = dossier.optical.map(image => {
+        const layer = el('div', undefined, 'story-compare__layer');
+        const b = image.bounds, px = (pixel.lon - b.w) / (b.e - b.w), py = (b.n - pixel.lat) / (b.n - b.s);
+        const img = document.createElement('img'); img.src = image.path; img.alt = '';
+        img.style.left = `${50 - px * 400}%`; img.style.top = `${50 - py * 400}%`;
+        layer.append(img); frame.append(layer); return layer;
+      });
+      frame.append(el('span', '+', 'casebook__cross'));
+      const slider = document.createElement('input'); slider.type = 'range'; slider.min = '0'; slider.max = '100'; slider.value = '50';
+      slider.setAttribute('aria-label', t('Compare earlier and later optical images', 'Сравнить ранний и поздний оптические снимки'));
+      const update = () => { layers[1].style.clipPath = `inset(0 0 0 ${slider.value}%)`; };
+      slider.addEventListener('input', update); update();
+      const labels = el('div', undefined, 'story-compare__labels');
+      labels.append(el('span', `${t('Earlier', 'Раньше')} / ${dossier.optical[0].date}`), el('span', `${t('Later', 'Позже')} / ${dossier.optical[1].date}`));
+      compare.append(el('strong', t('Slide to compare', 'Передвиньте ползунок для сравнения')), frame, slider, labels);
+      $('case-page').append(compare);
+    }
     paragraph(t('Same geographic crop, 4x preview; cross marks the sample. Transparent pixels are masked. Optical dates differ from radar dates. AOI-wide clarity cannot rule out cloud or shadow at this point.', 'Одинаковый географический фрагмент, превью 4x; крест — точка. Прозрачные пиксели замаскированы. Даты оптики отличаются от радара. Ясность всего AOI не исключает облако или тень в точке.'));
   }
   function setStep(n, focus = true) {
@@ -213,6 +238,7 @@ OB.evidence = (() => {
         OB.app.zoomTo(OB.app.pixel().lat, OB.app.pixel().lon, 15);
       }
       active = dossier?.id || null; engaged = true; step = options.step ?? (dossier ? 0 : 3);
+      $('evidence-disclosure').open = true;
       render(); persist();
       if (options.scroll !== false) { $('evidence-win').scrollIntoView({behavior: 'smooth', block: 'start'}); $('case-page').focus({preventScroll: true}); }
     } catch (_) {
@@ -240,10 +266,22 @@ OB.evidence = (() => {
     if (!$('case-start').disabled) { event.preventDefault(); open('amazon-hv-step'); }
   });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
+  $('case-surprise').addEventListener('click', () => {
+    const choices = (book?.cases || []).filter(c => c.id !== active);
+    if (choices.length) open(choices[Math.floor(Math.random() * choices.length)].id);
+  });
   $('case-visible-clearing').addEventListener('click', () => open('amazon-visible-clearing', {step: 2}));
   $('evidence-selection').addEventListener('click', () => open(null));
   $('case-back').addEventListener('click', () => setStep(step - 1));
   $('case-next').addEventListener('click', () => setStep(step + 1));
+  $('case-close').addEventListener('click', () => {
+    serial++; opening = false; engaged = false; active = null; latestReport = null;
+    OB.app?.stop(); $('case-workspace').hidden = true;
+    const url = new URL(location.href);
+    ['case', 'step', 'sample'].forEach(key => url.searchParams.delete(key));
+    history.replaceState(null, '', url);
+    render(); $('case-surprise').focus();
+  });
   $('evidence-json').addEventListener('click', () => download(false));
   $('evidence-geojson').addEventListener('click', () => download(true));
   $('evidence-copy').addEventListener('click', async () => {
@@ -254,7 +292,7 @@ OB.evidence = (() => {
   });
   document.addEventListener('ob:ready', async () => {
     const available = await ready;
-    ['case-start', 'case-visible-clearing', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
+    ['case-start', 'case-visible-clearing', 'case-surprise', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
   }, {once: true});
   document.addEventListener('ob:sample-change', () => requestAnimationFrame(() => {
     if (!opening) { OB.app?.stop(); render(); persist(); }
