@@ -34,6 +34,11 @@ def database():
 
 
 def validate(site, marker, dataset):
+    if site.startswith('reference-'):
+        item = next((c for c in load(DATA / 'observed-events' / 'index.json')['cases'] if 'reference-' + c['id'] == site), None)
+        if not item or marker != 'comparison' or dataset != '.'.join(i['sha256'][:16] for i in item['images']):
+            raise ReviewError(404, 'Unknown reference or dataset')
+        return {'kind': 'published_reference', 'reference': item}
     catalog = load(CATALOG)
     entry = next((s for s in catalog['sites'] if s['id'] == site), None)
     if not entry:
@@ -53,7 +58,32 @@ def counts(site, marker, dataset):
     validate(site, marker, dataset)
     with closing(database()) as db:
         rows = db.execute('SELECT verdict, COUNT(*) FROM reviews WHERE dataset=? AND site=? AND marker=? GROUP BY verdict', (dataset, site, marker)).fetchall()
-    return {'counts': {name: dict(rows).get(name, 0) for name in VERDICTS}, 'note': 'Unverified anonymous reviews; not independent validation.'}
+    totals = {name: dict(rows).get(name, 0) for name in VERDICTS}
+    return {'counts': totals, 'status': review_status(totals), 'note': 'Unverified anonymous reviews; not independent validation.'}
+
+
+def review_status(totals):
+    return 'rejected' if totals['no_visible_change'] else 'visible' if totals['visible_change'] else 'pending'
+
+
+def queue():
+    with closing(database()) as db:
+        rows = db.execute('SELECT dataset,site,marker,verdict,COUNT(*) FROM reviews GROUP BY dataset,site,marker,verdict').fetchall()
+    totals = {}
+    for dataset, site, marker, verdict, count in rows:
+        totals.setdefault((site, marker, dataset), {v: 0 for v in VERDICTS})[verdict] = count
+    items = []
+    def add(site, marker, dataset, **extra):
+        counts = totals.get((site, marker, dataset), {v: 0 for v in VERDICTS})
+        items.append(dict(site=site, marker=marker, dataset=dataset, counts=counts, status=review_status(counts), **extra))
+    for entry in load(CATALOG)['sites']:
+        data = load(DATA.parent / entry['path'])
+        dataset = '.'.join(i['sha256'][:16] for i in data['inputs'] + data.get('optical_images', []))
+        for marker in data['markers']:
+            add(data['site'], marker['id'], dataset, lat=marker['lat'], lon=marker['lon'])
+    for item in load(DATA / 'observed-events' / 'index.json')['cases']:
+        add('reference-' + item['id'], 'comparison', '.'.join(i['sha256'][:16] for i in item['images']))
+    return {'items': items}
 
 
 def save(payload):
@@ -69,10 +99,15 @@ def save(payload):
     if verdict not in VERDICTS + ('clear',) or (verdict != 'clear' and basis not in BASES):
         raise ReviewError(400, 'Invalid review')
     if verdict != 'clear' and basis in ('optical', 'both'):
-        point = next(m for m in data['markers'] if m['id'] == marker)
-        covered = {i.get('date') for i in data.get('optical_images', []) if i.get('bounds')
-                   and i['bounds']['w'] <= point['lon'] <= i['bounds']['e']
-                   and i['bounds']['s'] <= point['lat'] <= i['bounds']['n']}
+        if data.get('kind') == 'published_reference':
+            if 'NISAR GSLC' in data['reference']['credit']:
+                raise ReviewError(400, 'This reference uses radar, not optical imagery')
+            covered = {i['date'] for i in data['reference']['images']}
+        else:
+            point = next(m for m in data['markers'] if m['id'] == marker)
+            covered = {i.get('date') for i in data.get('optical_images', []) if i.get('bounds')
+                       and i['bounds']['w'] <= point['lon'] <= i['bounds']['e']
+                       and i['bounds']['s'] <= point['lat'] <= i['bounds']['n']}
         if not covered or (len(covered) < 2 and verdict != 'uncertain'):
             raise ReviewError(400, 'Insufficient optical coverage')
     voter = hashlib.sha256(token.encode('ascii')).hexdigest()

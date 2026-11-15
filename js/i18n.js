@@ -1,6 +1,11 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'Choose Explore another area to switch regions. Nearby points from the same radar window share one place in the rotation. Each card identifies an OffBeat candidate or a documented NASA example.':'Нажмите «Исследовать другой район», чтобы сменить регион. Соседние точки одной радарной пары занимают одно место в очереди. В карточке указан источник: кандидат OffBeat или документированный пример NASA.',
+    'Choose Change visible, No visible change or Cannot tell. Rejected cards leave the shared queue; skipped cards go to other reviewers without comments.':'Выберите «изменение видно», «изменения нет» или «не видно». Отклонённые карточки уходят из общей очереди, а пропущенные передаются другим людям без комментариев.',
+    'Explore another area':'Исследовать другой район',
+    'Explore different study areas and compare dated images. Each card identifies its source and review status.':'Исследуйте разные районы и сравнивайте снимки с датами. В каждой карточке указан источник и статус проверки.',
+
     'How to review detected changes':'Как проверять найденные изменения',
     'See a reviewed clearing':'Посмотреть разобранную расчистку',
     'Choose Review a detected change to open an automatic radar candidate with two dated optical images. Press again for another candidate.':'Нажмите «Проверить найденное изменение»: откроется точка, найденная по радарным данным, с двумя датированными оптическими снимками. Нажмите ещё раз для другой точки.',

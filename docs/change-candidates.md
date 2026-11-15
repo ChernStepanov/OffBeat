@@ -62,3 +62,26 @@ replace the versioned site data. Other sites are `venezuela`, `delhi`, `tokyo`,
 `nairobi`, and `sydney`. To retrieve the original windows again, see
 `scripts/extract_world_dense.py`; authenticated Earthdata access is required and
 credentials must stay local. Never commit tokens, signed URLs or credentials.
+
+
+## Review rotation (15 November 2026)
+
+The main review button rotates study areas, not individual nearby cells. The five
+rural Amazon candidates share one area; seven existing NASA-published rural image
+comparisons each have their own area. Every available area appears once before
+starting another round, with no consecutive area repeat when alternatives exist.
+Individual Amazon cells rotate between rounds. Rotation history persists in the
+browser and is pruned when datasets or shared moderation state remove cards.
+Urban radar windows remain outside this rural discovery rotation.
+
+Published comparisons are explicitly labelled as external NASA examples, never
+OffBeat detections. Dates, image receipts and sources remain in
+`data/observed-events/index.json`. These examples do not supply georeferenced
+OffBeat detections or accuracy labels. Shared review decisions use image SHA-256
+fingerprints so that changing an image pair starts a separate review record.
+Review and evidence download controls have been removed from the UI. Comments
+are neither collected in these cards nor transmitted to another reviewer.
+
+Validation: `node scripts/test_review_rotation.mjs` exercises 80 visits over ten
+rounds, region isolation, per-area cell rotation, reloadable state and removals;
+`python -m unittest api.test_reviews` checks shared queue decisions and undo.

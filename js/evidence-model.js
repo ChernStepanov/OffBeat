@@ -67,6 +67,30 @@ OB.evidenceModel = (() => {
     const id = candidates[Math.floor(random() * candidates.length)];
     return {id, history: [...cycle, id]};
   }
+  // Rotate whole study areas before revisiting another cell in the same image pair.
+  // Keep per-area item history across rounds, so the larger groups cannot dominate.
+  function nextInvestigation(choices, state, current, random = Math.random) {
+    const unique = [...new Map(choices.filter(c => c.id && c.region).map(c => [c.id, c])).values()];
+    if (!unique.length) return null;
+    const ids = new Set(unique.map(c => c.id)), regions = [...new Set(unique.map(c => c.region))];
+    const previous = unique.find(c => c.id === current);
+    let visited = Array.isArray(state?.regions) ? [...new Set(state.regions.filter(r => regions.includes(r)))] : [];
+    let history = Array.isArray(state?.history) ? [...new Set(state.history.filter(id => ids.has(id)))] : [];
+    if (previous && !visited.includes(previous.region)) visited.push(previous.region);
+    let remaining = regions.filter(r => !visited.includes(r));
+    if (!remaining.length) { visited = []; remaining = regions; }
+    if (remaining.length > 1 && previous) remaining = remaining.filter(r => r !== previous.region);
+    const pick = list => list[Math.min(list.length - 1, Math.max(0, Math.floor(random() * list.length)))];
+    const region = pick(remaining), members = unique.filter(c => c.region === region);
+    let unseen = members.filter(c => !history.includes(c.id));
+    if (!unseen.length) {
+      const memberIds = new Set(members.map(c => c.id));
+      history = history.filter(id => !memberIds.has(id)); unseen = members;
+    }
+    if (unseen.length > 1) unseen = unseen.filter(c => c.id !== current);
+    const choice = pick(unseen);
+    return {id: choice.id, state: {history: [...history, choice.id], regions: [...visited, region]}, totalRegions: regions.length};
+  }
   function opticalCrop(bounds, pixel) {
     const x = (pixel.lon - bounds.w) / (bounds.e - bounds.w);
     const y = (bounds.n - pixel.lat) / (bounds.n - bounds.s);
@@ -74,5 +98,5 @@ OB.evidenceModel = (() => {
     const left = clamp(x), top = clamp(y);
     return {left: -200 * left, top: -200 * top, x: 200 * (x - left), y: 200 * (y - top)};
   }
-  return {timeline, link, selection, report, geojson, nextSurprise, opticalCrop};
+  return {timeline, link, selection, report, geojson, nextSurprise, nextInvestigation, opticalCrop};
 })();

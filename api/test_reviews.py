@@ -50,6 +50,21 @@ class SharedReviewsTest(unittest.TestCase):
             with self.subTest(changes=changes), self.assertRaises(HTTPError):
                 self.post(**changes)
 
+    def test_shared_queue_moderation(self):
+        def current():
+            with urlopen(self.url.replace('/reviews', '/review-queue')) as response:
+                items = json.load(response)['items']
+            self.assertEqual(len(items), 192)
+            return next(i for i in items if i['site'] == self.base['site'] and i['marker'] == self.base['marker'])
+        self.post(verdict='uncertain')
+        self.assertEqual(current()['status'], 'pending')
+        self.post(verdict='visible_change')
+        self.assertEqual(current()['status'], 'visible')
+        self.post(token='b' * 64, verdict='no_visible_change')
+        self.assertEqual(current()['status'], 'rejected')
+        self.post(token='b' * 64, verdict='clear')
+        self.assertEqual(current()['status'], 'visible')
+
     def test_database_must_be_configured(self):
         with patch.dict(os.environ, {}, clear=True), self.assertRaises(HTTPError) as error:
             urlopen(self.url + '?' + urlencode(self.base))

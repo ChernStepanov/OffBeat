@@ -95,3 +95,24 @@ return their source documents unmodified. The API does not control another user'
 browser, play audio, or proxy place-name search.
 
 Test with `python3 -m unittest api.test_server`.
+
+
+## Shared investigation queue
+
+`GET /api/v1/review-queue` returns the current source-versioned candidates and
+published-reference comparisons, aggregate verdict counts, and `pending`,
+`visible` or `rejected` status. No voter tokens, voter hashes or comments are
+returned. A negative `no_visible_change` vote excludes a card from the shared
+rotation and the reviewed map; it takes priority over conflicting positive votes.
+A voter can undo their own decision with `clear`. `uncertain` keeps a card pending
+for other browsers; that browser skips cards it has already reviewed or passed.
+This is browser-token identity, not a registered-user account or consensus test.
+Open pages refresh shared status every 30 seconds and before choosing a new card.
+
+Positive radar reviews create green points on the map, labelled as user reviews,
+not verified events. Published reference JPEGs have no verified detection
+coordinates, so they do not create fabricated map points. Their votes stay separate
+from detector evaluation. The public worker source is versioned in Sites project
+`appgprj_6af9cf16c13c8191add5ba9ffc84a1d1`; `scripts/update-catalog.mjs` in that
+source exports identifiers, input-image fingerprints and real radar coordinates
+from an OffBeat checkout. Rebuild it whenever the image set changes.

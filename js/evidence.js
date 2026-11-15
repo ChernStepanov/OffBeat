@@ -13,8 +13,8 @@ OB.evidence = (() => {
     visibleClearing: ['See visually reviewed clearing', 'Посмотреть расчистку на снимках'],
     visibleCaveat: ['Optical review; NISAR detection has not been validated.', 'Визуальная проверка по снимкам; обнаружение радаром не подтверждено.'],
     surpriseTitle: ['Review detected changes', 'Проверка найденных изменений'],
-    surpriseHint: ['Explore a rural Amazon radar candidate with two dated optical images. The candidate is not independently confirmed; the reviewed clearing above is a separate example.', 'Изучите точку в сельской Амазонии с двумя датированными оптическими снимками. Кандидат не подтверждён; разобранная расчистка выше — отдельный пример.'],
-    surprise: ['Review a detected change', 'Проверить найденное изменение'],
+    surpriseHint: ['Each click opens a different study area: a rural radar candidate or a documented NASA image comparison. The source and detection status are shown in the card.', 'Каждое нажатие открывает другой район: сельский радарный кандидат или документированное сравнение снимков NASA. Источник и статус находки указаны в карточке.'],
+    surprise: ['Explore another area', 'Исследовать другой район'],
     close: ['Close story', 'Закрыть историю'],
     scope: ['Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.', 'Исследовательские примеры: 0 пригодных подтверждённых событий для оценки детектора. Точность не установлена.'],
     selection: ['Evidence for selected sample', 'Доказательства для выбранной точки'],
@@ -22,7 +22,7 @@ OB.evidence = (() => {
     geojson: ['Download point / GeoJSON', 'Скачать точку / GeoJSON'], permalink: ['Open saved view', 'Открыть сохранённый вид'],
   };
   const t = (en, rus) => ru() ? rus : en;
-  let book, active = null, step = 0, engaged = false, opening = false, serial = 0, surpriseHistory = [];
+  let book, active = null, step = 0, engaged = false, opening = false, serial = 0, surpriseState = {}, choosing = false;
   let latestReport = null;
   // Attach rejection handling immediately; a failed casebook must not break the map.
   const ready = fetch('data/cases/amazon-v1.json').then(r => {
@@ -168,7 +168,7 @@ OB.evidence = (() => {
     book.cases.forEach(c => { const b = button(local(c.title), () => open(c.id)); b.setAttribute('aria-pressed', String(c.id === active)); choices.append(b); });
     if (!engaged) return;
     const site = OB.app.site(), pixel = OB.app.pixel();
-    ['evidence-copy', 'evidence-json', 'evidence-geojson'].forEach(id => { $(id).disabled = !site || !pixel; });
+    ['evidence-copy'].forEach(id => { $(id).disabled = !site || !pixel; });
     if (!site || !pixel) {
       latestReport = null; $('case-workspace').hidden = true; return;
     }
@@ -264,7 +264,7 @@ OB.evidence = (() => {
     const ticket = ++serial; opening = true;
     try {
       if (!await ready || !OB.app) return;
-      document.dispatchEvent(new Event('ob:manual-navigation')); OB.app.stop(); OB.detected?.dismiss();
+      document.dispatchEvent(new Event('ob:manual-navigation')); OB.app.stop(); OB.detected?.dismiss(); OB.observedEvents?.dismiss();
       const dossier = book.cases.find(c => c.id === id);
       if (dossier) {
         await OB.app.loadSite(dossier.site);
@@ -292,30 +292,36 @@ OB.evidence = (() => {
     if (pixel) OB.app.zoomTo(pixel.lat, pixel.lon, 15);
     await open(saved.caseId, {date: saved.date, step: saved.step, scroll: false});
   }
-  function download(geo) {
-    if (!latestReport) return;
-    const data = geo ? model.geojson(latestReport) : latestReport;
-    const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2) + '\n'], {type: geo ? 'application/geo+json' : 'application/json'}));
-    const a = el('a'); a.href = url; a.download = `offbeat-${latestReport.site}-${latestReport.sample_id.replace(/\W+/g, '-')}.${geo ? 'geojson' : 'json'}`;
-    a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
   $('launch-example').addEventListener('click', event => {
     if (!$('case-visible-clearing').disabled) { event.preventDefault(); open('amazon-visible-clearing', {step: 2}); }
   });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
   async function surprise() {
-    const key = 'offbeat.detected-review.history.v1';
-    const dense = await OB.detected?.choices() || [];
-    const choices = dense;
-    let history = surpriseHistory;
-    try { history = JSON.parse(localStorage.getItem(key)) || history; } catch (_) {}
-    const next = model.nextSurprise(choices.map(c => c.id), history, active);
-    if (!next) { $('launch-review-status').textContent = $('case-status').textContent = t('No candidate with two dated images is available right now.', 'Сейчас нет доступных точек с двумя датированными снимками.'); return; }
-    $('launch-review-status').textContent = $('case-status').textContent = '';
-    surpriseHistory = next.history;
-    try { localStorage.setItem(key, JSON.stringify(next.history)); } catch (_) {}
-    const choice = choices.find(c => c.id === next.id);
-    if (!await OB.detected.openCandidate(choice.site, choice.marker)) $('launch-review-status').textContent = $('case-status').textContent = t('Could not open this candidate. Try another.', 'Не удалось открыть точку. Попробуйте другую.');
+    if (choosing) return;
+    choosing = true;
+    const buttons = [...document.querySelectorAll('#case-surprise, #launch-surprise, #detected-next, [data-review-next]')];
+    buttons.forEach(b => { b.disabled = true; });
+    const status = text => { $('launch-review-status').textContent = $('case-status').textContent = text; };
+    status(t('Opening another study area…', 'Открываем другой район…'));
+    try {
+      const results = await Promise.allSettled([OB.detected?.choices(), OB.observedEvents?.choices()]);
+      const choices = results.flatMap(r => r.status === 'fulfilled' ? r.value || [] : []);
+      const key = 'offbeat.investigation.rotation.v2';
+      let state = surpriseState;
+      try { state = JSON.parse(localStorage.getItem(key)) || state; } catch (_) {}
+      const params = new URL(location.href).searchParams;
+      const current = params.has('candidate') ? `dense:${params.get('site')}:${params.get('candidate')}` : params.has('reference') ? `reference:${params.get('reference')}` : null;
+      const next = model.nextInvestigation(choices, state, current);
+      if (!next) { status(t('No study area with two dated images is available right now.', 'Сейчас нет доступных районов с двумя датированными снимками.')); return; }
+      const choice = choices.find(c => c.id === next.id);
+      const opened = choice.kind === 'reference' ? await OB.observedEvents.open(choice.reference) : await OB.detected.openCandidate(choice.site, choice.marker);
+      if (!opened) throw Error('Could not open study area');
+      // Failed loads must not consume a place in the rotation.
+      surpriseState = next.state;
+      try { localStorage.setItem(key, JSON.stringify(next.state)); } catch (_) {}
+      status(t(`${next.totalRegions} study areas in rotation. All areas appear before a repeat; nearby points share one area.`, `В очереди ${next.totalRegions} районов. Сначала показываем все районы, потом повторяем; соседние точки считаются одним районом.`));
+    } catch (_) { status(t('Could not open this area. Please try again.', 'Не удалось открыть район. Попробуйте ещё раз.')); }
+    finally { choosing = false; buttons.forEach(b => { b.disabled = false; }); }
   }
   $('case-surprise').addEventListener('click', surprise);
   $('launch-surprise').addEventListener('click', surprise);
@@ -333,8 +339,6 @@ OB.evidence = (() => {
     render();
   }
   $('case-close').addEventListener('click', () => { dismiss(); $('case-surprise').focus(); });
-  $('evidence-json').addEventListener('click', () => download(false));
-  $('evidence-geojson').addEventListener('click', () => download(true));
   $('evidence-copy').addEventListener('click', async () => {
     if (!latestReport) return;
     const href = latestReport.permalink;
@@ -349,5 +353,5 @@ OB.evidence = (() => {
     if (!opening) { OB.app?.stop(); render(); persist(); }
   }));
   new MutationObserver(() => render()).observe(document.documentElement, {attributes: true, attributeFilter: ['lang']});
-  return {open, restore, dismiss, report: () => latestReport};
+  return {open, restore, dismiss, surprise, report: () => latestReport};
 })();

@@ -179,6 +179,8 @@ class Handler(BaseHTTPRequestHandler):
             params = parse_qs(url.query, keep_blank_values=True)
             if url.path == '/api/v1/reviews':
                 result = reviews.counts(*(params.get(k, [''])[0] for k in ('site', 'marker', 'dataset')))
+            elif url.path == '/api/v1/review-queue':
+                result = reviews.queue()
             else:
                 result = dispatch(url.path, params)
             status = 200
