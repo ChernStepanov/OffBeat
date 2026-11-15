@@ -90,6 +90,33 @@ Nairobi and Sydney likewise cover only small 0.025° × 0.025° windows, with tw
 
 [Science review](docs/science-review.md) | [Issue completion audit](docs/issue-audit.md) | [Data contract](docs/data-contract.md) | [Original extraction](docs/real-nisar.md)
 
+## Исследование matching и абляций
+
+[Указатель экспериментов и данных](docs/experiment-index.md) объединяет отчёты,
+протоколы, данные, скрипты и страницы результатов.
+
+Отдельная страница [Research results](research.html) доступна также из меню
+дашборда. Она отделяет наблюдаемое согласие NISAR/OPERA RTC-S1 от устойчивости
+пространственных аномалий при изменении метода обработки. Это разведочный
+анализ одного участка Амазонии, **не оценка точности детектора событий**.
+
+[Человекочитаемый итог](docs/research-summary.md) |
+[Протокол и критерии вывода](docs/research-protocol.md). Численные результаты,
+таблицы сопоставления и provenance сохраняются в `data/research/`, а расчёты —
+в `scripts/research_*.py`. Подробные отчёты связаны со страницей исследования.
+Для просмотра достаточно того же статического сервера, что и для дашборда.
+
+Продолжение — [находки на карте](candidates.html): географические карточки
+SAR-кандидатов и контролей, новые датированные оптические окна, история
+лесного покрова Hansen, рельеф, погода ERA5/ERA5-Land и независимый
+резервуарный ряд VIIRS. Региональные INPE DETER-полигоны с оптическими
+проверками показаны отдельно: они вне подготовленного SAR-окна и не
+выдаются за NISAR-обнаружения. Два выбранных региональных случая имеют
+дополнительное локальное снижение NDVI относительно окрестности; третий
+такой проверки не выдержал. [Человекочитаемый разбор](docs/investigation-summary.md)
+и [протокол](docs/investigation-protocol.md); данные и provenance —
+`data/investigation/`.
+
 ## Reproduce
 
 ```sh
@@ -107,7 +134,9 @@ Peers use the same WorldCover 2021 class within 1 km, excluding self, with at le
 
 Optical processing searches Earth Search within +/-15 days, checks the local SCL mask, reads only AOI COG windows, and reprojects to the exact site bbox. All dates use reflectance 0 to 0.3 and gamma 2.2; provider harmonisation flags prevent applying the BOA offset twice.
 
-Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. The prepared Amazon RTC-S1 series and comparison are available offline; no OPERA displacement velocity has been calculated.
+Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. The prepared Amazon RTC-S1 series and comparison are available offline; OPERA/GNSS rate estimates remain exploratory.
+
+Для Мехико подготовлен [полный воспроизводимый аудит GUNW](docs/mexico-long-series.md): догружены оставшиеся 38 окон гранул, проверены все 54 пары каталога, маски, связные интервалы, кандидаты опоры и покрытие OPERA. Подтверждённая стабильная опора, скорость грунта и вертикальное разложение не получены; это явно показано в интерфейсе. Запуск без Earthdata: `.venv/bin/python -m scripts.mexico_long_series`; проверки: `.venv/bin/python -m pytest scripts/test_mexico_long_series.py -q`. [Исходный расчёт первых 16 пар](docs/mexico-displacement.md) сохранён отдельно.
 
 ```sh
 node scripts/test_data.mjs

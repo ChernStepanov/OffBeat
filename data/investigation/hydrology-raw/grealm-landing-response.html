@@ -1,0 +1,460 @@
+﻿
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IPAD retired � USDA FAS production site</title>
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --border: #e1e6ea;
+            --text: #111;
+            --muted: #6b7780;
+            --ipad-blue: #1f4e9e;
+            --ipad-green: #1f6a4a;
+            --link: #0b67ff;
+            --link-hover: #084fc2;
+            --maxw: 1100px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ---------- Header ---------- */
+        .ipad-header {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ipad-header-inner {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .ipad-header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+            .ipad-header a:focus {
+                outline: 2px solid var(--link);
+                outline-offset: 3px;
+                border-radius: 6px;
+            }
+
+        /* USDA logo scales down smoothly */
+        .fas-logo {
+            width: clamp(200px, 52vw, 340px);
+            max-height: 56px;
+            display: block;
+        }
+
+        /* IPAD block */
+        .ipad-header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+            margin-left: auto;
+        }
+
+        .ipad-title {
+            font-size: clamp(30px, 7vw, 38px);
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1;
+            color: var(--ipad-blue);
+            white-space: nowrap;
+        }
+
+        .ipad-subtitle {
+            font-size: clamp(11px, 2.8vw, 13px);
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--ipad-green);
+            margin-top: 2px;
+        }
+
+            .ipad-subtitle span {
+                display: block;
+            }
+
+        /* Phone layout: stack + center, more like your screenshot wants */
+        @media (max-width: 520px) {
+            .ipad-header-inner {
+                padding: 12px 14px;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .fas-logo {
+                width: clamp(180px, 78vw, 280px);
+                max-height: 52px;
+            }
+
+            .ipad-header-right {
+                margin-left: 0;
+                align-self: center;
+                text-align: left;
+            }
+        }
+
+        /* ---------- Content card ---------- */
+        .wrap {
+            max-width: 920px;
+            margin: 6vh auto;
+            background: var(--card-bg);
+            padding: 26px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 20px rgba(20,30,40,0.06);
+        }
+
+        /* Make card feel natural on phones */
+        @media (max-width: 520px) {
+            .wrap {
+                max-width: none;
+                margin: 14px 12px;
+                padding: 18px;
+                border-radius: 12px;
+            }
+        }
+
+        /* ---------- Typography ---------- */
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: clamp(20px, 5.5vw, 26px);
+            line-height: 1.15;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.55;
+            color: #20262b;
+            font-size: clamp(14px, 3.8vw, 16px);
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 0.95em;
+        }
+
+        .small {
+            font-size: 0.92em;
+            color: #5a6670;
+            margin-top: 12px;
+        }
+
+        code {
+            background: #f1f5f8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+            font-size: 0.95em;
+            /* important for mobile: allow long code fragments to wrap */
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+
+        /* ---------- Links / buttons ---------- */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+            a:hover {
+                color: var(--link-hover);
+            }
+
+            /* Button wraps long URLs instead of blowing out */
+            a.btn {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 10px 14px;
+                border-radius: 10px;
+                background: var(--link);
+                color: #fff;
+                text-decoration: none;
+                font-weight: 800;
+                max-width: 100%;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+                white-space: normal;
+            }
+
+                a.btn:hover {
+                    background: var(--link-hover);
+                    color: #fff;
+                }
+    </style>
+</head>
+<body>
+    <header class="ipad-header" role="banner">
+        <div class="ipad-header-inner">
+
+            <!-- Left: USDA / FAS logo (SVG only, clickable) -->
+            <div class="ipad-header-left">
+                <a href="https://www.fas.usda.gov"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="USDA Foreign Agricultural Service (opens in a new tab)"
+                   title="USDA Foreign Agricultural Service">
+
+                    <img src="https://ipad.fas.usda.gov/images/logo.svg"
+                         alt="USDA Foreign Agricultural Service, U.S. Department of Agriculture"
+                         class="fas-logo" />
+
+                </a>
+            </div>
+
+            <!-- Right: IPAD branding (not clickable) -->
+            <div class="ipad-header-right"
+                 aria-label="IPAD International Production Assessment Division">
+                <div class="ipad-title">IPAD</div>
+                <div class="ipad-subtitle">
+                    <span>International</span>
+                    <span>Production</span>
+                    <span>Assessment</span>
+                    <span>Division</span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <div class="wrap" id="content"></div>
+
+    <script>
+  /*
+    IPAD retirement + redirect page
+    Behavior:
+    - /countrysummary?id=XX        -> /data/production/XX?source=ipad_redirect
+    - /countrysummary (no id)     -> /data/production?source=ipad_redirect
+    - any other path              -> informational message only with link
+  */
+
+  const COUNTRIES = [
+    {code:'US',name:'United States'},{code:'AF',name:'Afghanistan'},{code:'AL',name:'Albania'},
+    {code:'AG',name:'Algeria'},{code:'AO',name:'Angola'},{code:'AR',name:'Argentina'},
+    {code:'AM',name:'Armenia'},{code:'AS',name:'Australia'},{code:'AJ',name:'Azerbaijan'},
+    {code:'BG',name:'Bangladesh'},{code:'BO',name:'Belarus'},{code:'DM',name:'Benin'},
+    {code:'BT',name:'Bhutan'},{code:'BL',name:'Bolivia'},{code:'BC',name:'Botswana'},
+    {code:'BR',name:'Brazil'},{code:'BX',name:'Brunei'},{code:'UV',name:'Burkina Faso'},
+    {code:'BM',name:'Burma'},{code:'BY',name:'Burundi'},{code:'CB',name:'Cambodia'},
+    {code:'CM',name:'Cameroon'},{code:'CA',name:'Canada'},{code:'CT',name:'Central African Republic'},
+    {code:'CD',name:'Chad'},{code:'CI',name:'Chile'},{code:'CH',name:'China'},
+    {code:'CO',name:'Colombia'},{code:'CF',name:'Congo (Brazzaville)'},{code:'CG',name:'Congo (Kinshasa)'},
+    {code:'CS',name:'Costa Rica'},{code:'IV',name:"Cote d'Ivoire"},{code:'CU',name:'Cuba'},
+    {code:'DR',name:'Dominican Republic'},{code:'EC',name:'Ecuador'},{code:'EG',name:'Egypt'},
+    {code:'ES',name:'El Salvador'},{code:'ER',name:'Eritrea'},{code:'WZ',name:'Eswatini'},
+    {code:'ET',name:'Ethiopia'},{code:'E4',name:'European Union'},
+    {code:'GA',name:'Gambia'},{code:'GG',name:'Georgia'},{code:'GH',name:'Ghana'},
+    {code:'GR',name:'Greece'},{code:'GT',name:'Guatemala'},{code:'GU',name:'Guinea'},
+    {code:'PU',name:'Guinea-Bissau'},{code:'GY',name:'Guyana'},{code:'HA',name:'Haiti'},
+    {code:'HO',name:'Honduras'},{code:'IN',name:'India'},{code:'ID',name:'Indonesia'},
+    {code:'IR',name:'Iran'},{code:'IZ',name:'Iraq'},{code:'IS',name:'Israel'},
+    {code:'JM',name:'Jamaica'},{code:'JA',name:'Japan'},{code:'JO',name:'Jordan'},
+    {code:'KZ',name:'Kazakhstan'},{code:'KE',name:'Kenya'},{code:'KG',name:'Kyrgyzstan'},
+    {code:'LA',name:'Laos'},{code:'LE',name:'Lebanon'},{code:'LT',name:'Lesotho'},
+    {code:'LI',name:'Liberia'},{code:'LY',name:'Libya'},{code:'MA',name:'Madagascar'},
+    {code:'MI',name:'Malawi'},{code:'MY',name:'Malaysia'},{code:'ML',name:'Mali'},
+    {code:'MR',name:'Mauritania'},{code:'MX',name:'Mexico'},{code:'MD',name:'Moldova'},
+    {code:'MG',name:'Mongolia'},{code:'MO',name:'Morocco'},{code:'MZ',name:'Mozambique'},
+    {code:'WA',name:'Namibia'},{code:'NP',name:'Nepal'},{code:'NZ',name:'New Zealand'},
+    {code:'NU',name:'Nicaragua'},{code:'NG',name:'Niger'},{code:'NI',name:'Nigeria'},
+    {code:'KN',name:'North Korea'},{code:'MK',name:'North Macedonia'},
+    {code:'NO',name:'Norway'},{code:'MU',name:'Oman'},{code:'PK',name:'Pakistan'},
+    {code:'PN',name:'Panama'},{code:'PP',name:'Papua New Guinea'},
+    {code:'PA',name:'Paraguay'},{code:'PE',name:'Peru'},{code:'RP',name:'Philippines'},
+    {code:'RS',name:'Russia'},{code:'RW',name:'Rwanda'},{code:'SA',name:'Saudi Arabia'},
+    {code:'SG',name:'Senegal'},{code:'RB',name:'Serbia'},{code:'SL',name:'Sierra Leone'},
+    {code:'SO',name:'Somalia'},{code:'SF',name:'South Africa'},
+    {code:'KS',name:'South Korea'},{code:'OD',name:'South Sudan'},
+    {code:'SP',name:'Spain'},{code:'CE',name:'Sri Lanka'},
+    {code:'SU',name:'Sudan'},{code:'NS',name:'Suriname'},
+    {code:'SZ',name:'Switzerland'},{code:'SY',name:'Syria'},
+    {code:'TW',name:'Taiwan'},{code:'TI',name:'Tajikistan'},
+    {code:'TZ',name:'Tanzania'},{code:'TH',name:'Thailand'},
+    {code:'TO',name:'Togo'},{code:'TD',name:'Trinidad and Tobago'},
+    {code:'TS',name:'Tunisia'},{code:'TU',name:'Turkey'},
+    {code:'TX',name:'Turkmenistan'},{code:'UG',name:'Uganda'},
+    {code:'UP',name:'Ukraine'},{code:'UK',name:'United Kingdom'},
+    {code:'UY',name:'Uruguay'},{code:'UZ',name:'Uzbekistan'},
+    {code:'VE',name:'Venezuela'},{code:'VM',name:'Vietnam'},
+    {code:'YM',name:'Yemen'},{code:'ZA',name:'Zambia'},
+    {code:'RH',name:'Zimbabwe'}
+  ];
+
+  function findCountryName(code){
+    const up = code.toUpperCase();
+    const c = COUNTRIES.find(x => x.code === up);
+    return c ? c.name : null;
+  }
+
+  function show(html){
+    document.getElementById('content').innerHTML = html;
+  }
+
+  const path = (window.location.pathname || '').toLowerCase();
+  const params = new URLSearchParams(window.location.search || '');
+
+  // Use the real query string for id=XX etc.
+  // (id still comes from the URL's query parameters)
+  const idRaw = params.get('id');
+  const id = (idRaw || '').trim();
+
+  const base = 'https://www.fas.usda.gov/data/production';
+  const tracking = 'source=ipad_redirect';
+
+  const fips = id.trim().toUpperCase();
+
+  // what the browser actually goes to
+  const redirectUrl = `${base}/${encodeURIComponent(fips)}?${tracking}`;
+
+  // what the user sees
+  const displayUrl = `${base}/${encodeURIComponent(fips)}`;
+  
+        
+  /* ---------- countrysummary handling ---------- */
+  if (path.includes('/countrysummary'))
+  {
+
+    // case 1: countrysummary with country id
+    if (id.length > 0) {
+      const fips = id.toUpperCase()
+      const country = findCountryName(fips) || 'requested country';
+      const target = `${base}/${encodeURIComponent(fips)}?${tracking}`;
+
+      show(`
+      <h1>IPAD country summary moved</h1>
+      <p>Due to U.S. Department of Agriculture (USDA) guidance, the International Production Assessment Division (IPAD) website is no longer available to the public.</p>
+	  <p>Country production data and related resources are available on the USDA Foreign Agricultural Service production site:</p>
+      <p>You requested <strong>${country}</strong> (code <code>${fips}</code>).</p>
+      <p>
+        <a class="btn"
+           href="${redirectUrl}"
+           target="_blank"
+           rel="noopener noreferrer">
+          ${displayUrl}
+        </a>
+      </p>
+      <p class="muted">You will be redirected automatically in <strong id="countdown">5</strong> seconds.</p>
+      <p class="small">Additional parameters such as <code>&crop=...</code> are ignored.</p>
+    `);
+
+      let seconds = 10;
+      const timer = setInterval(() => {
+        seconds--;
+        const el = document.getElementById('countdown');
+        if (el) el.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(timer);
+          window.location.replace(target);
+        }
+      }, 1000);
+
+      // case 2: countrysummary with NO id
+    } else {
+      const target = `${base}?${tracking}`;
+
+      show(`
+      <h1>IPAD country summary moved</h1>
+      <p>Due to U.S. Department of Agriculture (USDA) guidance, the International Production Assessment Division (IPAD) website is no longer available to the public.</p>
+	  <p>Country production data and related resources are available on the USDA Foreign Agricultural Service production site:</p>
+      <p>
+        <a class="btn"
+           href="${redirectUrl}"
+           target="_blank"
+           rel="noopener noreferrer">
+          ${displayUrl}
+        </a>
+      </p>
+      <p class="muted">You will be redirected automatically in <strong id="countdown">5</strong> seconds.</p>
+    `);
+
+      let seconds = 10;
+      const timer = setInterval(() => {
+        seconds--;
+        const el = document.getElementById('countdown');
+        if (el) el.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(timer);
+          window.location.replace(target);
+        }
+      }, 1000);
+    }
+
+    
+  }/* ---------- G-REALM handling ------------------*/
+  else if (path.includes('/global_reservoir'))
+  {
+      const target = 'https://earth.gsfc.nasa.gov/gwm/lake/Index';
+      show(`
+        <h1>Global Reservoirs and Lakes Monitor (G-REALM) site no longer available</h1>
+        <p>You will be redirected to NASA’s GWM (Global Water Measurements for Lakes and Reservoirs) web site at:</p>
+        <p>
+             <a class="btn"
+            href="https://earth.gsfc.nasa.gov/gwm/lake/Index"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://earth.gsfc.nasa.gov/gwm/lake/Index
+        </a>
+        </p>
+        <p class="muted">You will be redirected automatically in <strong id="countdown">5</strong> seconds.</p>
+        <p class="small">Thank you for visiting. Please direct all queries and correspondence to <a href="mailto:Press-fas@usda.gov">Press-fas@usda.gov</a>.</p>
+    `);
+
+      let seconds = 10;
+      const timer = setInterval(() => {
+          seconds--;
+          const el = document.getElementById('countdown');
+          if (el) el.textContent = seconds;
+          if (seconds <= 0) {
+              clearInterval(timer);
+              window.location.replace(target);
+          }
+      }, 1000);
+
+  }/* ---------- all other paths ---------- */  
+  else {
+    show(`
+    <h1>IPAD site no longer available.</h1>
+    <p>Due to U.S. Department of Agriculture (USDA) guidance, the International Production Assessment Division (IPAD) website is no longer available to the public.</p>
+    <p>Country production data and related resources are available on the USDA Foreign Agricultural Service production site:</p>
+    <p><a class="btn" href="${base}" target="_blank" rel="noopener noreferrer">${base}</a></p>
+    <p class="small">Country pages follow the format <code>${base}/[country_fips]</code>.</p>
+    <p class="small">Thank you for visiting. Please direct all queries and correspondence to <a href="mailto:Press-fas@usda.gov">Press-fas@usda.gov</a>.</p>
+  `);
+  }
+    </script>
+</body>
+</html>
+

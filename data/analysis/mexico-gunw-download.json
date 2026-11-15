@@ -1,0 +1,181 @@
+{
+  "catalogue_sha256": "5f882b7460851f76087f485b66e9d957bc02e470224fc636fc758e7fe3b6ab3f",
+  "catalogue_granules": 54,
+  "previous_receipts": {
+    "NISAR_L2_PR_GUNW_006_019_A_011_007_4000_SH_20251123T120540_20251123T120614_20251205T120540_20251205T120615_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2025-11-23_2025-12-05.json",
+    "NISAR_L2_PR_GUNW_005_019_A_011_006_4000_SH_20251111T120539_20251111T120614_20251123T120540_20251123T120614_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2025-11-11_2025-11-23.json",
+    "NISAR_L2_PR_GUNW_010_019_A_011_011_4000_SH_20260110T120542_20260110T120616_20260122T120542_20260122T120617_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2026-01-10_2026-01-22.json",
+    "NISAR_L2_PR_GUNW_007_019_A_011_008_4000_SH_20251205T120540_20251205T120615_20251217T120541_20251217T120615_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2025-12-05_2025-12-17.json",
+    "NISAR_L2_PR_GUNW_011_019_A_011_012_4000_SH_20260122T120542_20260122T120617_20260203T120543_20260203T120618_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2026-01-22_2026-02-03.json",
+    "NISAR_L2_PR_GUNW_008_019_A_011_009_4000_SH_20251217T120541_20251217T120615_20251229T120541_20251229T120616_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2025-12-17_2025-12-29.json",
+    "NISAR_L2_PR_GUNW_004_019_A_011_005_4000_SH_20251030T120539_20251030T120613_20251111T120539_20251111T120614_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2025-10-30_2025-11-11.json",
+    "NISAR_L2_PR_GUNW_009_019_A_011_010_4000_SH_20251229T120541_20251229T120616_20260110T120542_20260110T120616_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/ascending/2025-12-29_2026-01-10.json",
+    "NISAR_L2_PR_GUNW_010_113_D_079_011_4000_SH_20260117T011333_20260117T011407_20260129T011333_20260129T011408_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2026-01-17_2026-01-29.json",
+    "NISAR_L2_PR_GUNW_011_113_D_079_012_4000_SH_20260129T011333_20260129T011408_20260210T011334_20260210T011409_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2026-01-29_2026-02-10.json",
+    "NISAR_L2_PR_GUNW_004_113_D_079_005_4000_SH_20251106T011330_20251106T011404_20251118T011330_20251118T011405_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2025-11-06_2025-11-18.json",
+    "NISAR_L2_PR_GUNW_009_113_D_079_010_4000_SH_20260105T011332_20260105T011407_20260117T011333_20260117T011407_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2026-01-05_2026-01-17.json",
+    "NISAR_L2_PR_GUNW_007_113_D_079_008_4000_SH_20251212T011331_20251212T011406_20251224T011332_20251224T011406_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2025-12-12_2025-12-24.json",
+    "NISAR_L2_PR_GUNW_008_113_D_079_009_4000_SH_20251224T011332_20251224T011406_20260105T011332_20260105T011407_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2025-12-24_2026-01-05.json",
+    "NISAR_L2_PR_GUNW_006_113_D_079_007_4000_SH_20251130T011331_20251130T011405_20251212T011331_20251212T011406_P05023_N_F_J_001": "data/subsets/mexico-gunw-series/descending/2025-11-30_2025-12-12.json",
+    "NISAR_L2_PR_GUNW_005_113_D_079_006_4000_SH_20251118T011330_20251118T011405_20251130T011331_20251130T011405_P05023_F_F_J_001": "data/subsets/mexico-gunw-series/descending/2025-11-18_2025-11-30.json"
+  },
+  "expected_remaining": 38,
+  "completed": {
+    "NISAR_L2_PR_GUNW_012_019_A_011_013_4000_SH_20260203T120543_20260203T120618_20260215T120544_20260215T120618_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-02-03_2026-02-15.json",
+      "valid": 368
+    },
+    "NISAR_L2_PR_GUNW_013_019_A_011_014_4000_SH_20260215T120544_20260215T120618_20260227T120544_20260227T120618_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-02-15_2026-02-27.json",
+      "valid": 477
+    },
+    "NISAR_L2_PR_GUNW_012_113_D_079_013_4000_SH_20260210T011334_20260210T011409_20260222T011335_20260222T011409_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-02-10_2026-02-22.json",
+      "valid": 243
+    },
+    "NISAR_L2_PR_GUNW_014_019_A_011_015_4000_SH_20260227T120544_20260227T120618_20260311T120544_20260311T120619_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-02-27_2026-03-11.json",
+      "valid": 465
+    },
+    "NISAR_L2_PR_GUNW_013_113_D_079_014_4000_SH_20260222T011335_20260222T011409_20260306T011335_20260306T011409_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-02-22_2026-03-06.json",
+      "valid": 70
+    },
+    "NISAR_L2_PR_GUNW_014_113_D_079_015_4000_SH_20260306T011335_20260306T011409_20260318T011335_20260318T011410_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-03-06_2026-03-18.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_015_019_A_011_016_4000_SH_20260311T120544_20260311T120619_20260323T120544_20260323T120619_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-03-11_2026-03-23.json",
+      "valid": 148
+    },
+    "NISAR_L2_PR_GUNW_017_019_A_011_018_4000_SH_20260404T120545_20260404T120619_20260416T120544_20260416T120619_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-04-04_2026-04-16.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_015_113_D_079_017_4000_SH_20260318T011335_20260318T011410_20260411T011336_20260411T011410_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-03-18_2026-04-11.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_017_113_D_079_018_4000_SH_20260411T011336_20260411T011410_20260423T011335_20260423T011410_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-04-11_2026-04-23.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_016_019_A_011_017_4000_SH_20260323T120544_20260323T120619_20260404T120545_20260404T120619_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-03-23_2026-04-04.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_018_019_A_011_019_4000_SH_20260416T120544_20260416T120619_20260428T120544_20260428T120619_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-04-16_2026-04-28.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_019_019_A_011_020_4000_SH_20260428T120544_20260428T120619_20260510T120543_20260510T120618_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-04-28_2026-05-10.json",
+      "valid": 437
+    },
+    "NISAR_L2_PR_GUNW_019_113_D_079_020_4000_SH_20260505T011335_20260505T011409_20260517T011334_20260517T011409_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-05-05_2026-05-17.json",
+      "valid": 193
+    },
+    "NISAR_L2_PR_GUNW_018_113_D_079_019_4000_SH_20260423T011335_20260423T011410_20260505T011335_20260505T011409_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-04-23_2026-05-05.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_020_113_D_079_021_4000_SH_20260517T011334_20260517T011409_20260529T011334_20260529T011408_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-05-17_2026-05-29.json",
+      "valid": 186
+    },
+    "NISAR_L2_PR_GUNW_020_019_A_011_021_4000_SH_20260510T120543_20260510T120618_20260522T120543_20260522T120617_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-05-10_2026-05-22.json",
+      "valid": 430
+    },
+    "NISAR_L2_PR_GUNW_021_019_A_011_022_4000_SH_20260522T120543_20260522T120617_20260603T120542_20260603T120617_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-05-22_2026-06-03.json",
+      "valid": 352
+    },
+    "NISAR_L2_PR_GUNW_022_113_D_079_023_4000_SH_20260610T011333_20260610T011407_20260622T011332_20260622T011407_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-06-10_2026-06-22.json",
+      "valid": 208
+    },
+    "NISAR_L2_PR_GUNW_022_019_A_011_023_4000_SH_20260603T120542_20260603T120617_20260615T120541_20260615T120616_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-06-03_2026-06-15.json",
+      "valid": 303
+    },
+    "NISAR_L2_PR_GUNW_021_113_D_079_022_4000_SH_20260529T011334_20260529T011408_20260610T011333_20260610T011407_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-05-29_2026-06-10.json",
+      "valid": 155
+    },
+    "NISAR_L2_PR_GUNW_023_113_D_079_024_4000_SH_20260622T011332_20260622T011407_20260704T011332_20260704T011406_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-06-22_2026-07-04.json",
+      "valid": 36
+    },
+    "NISAR_L2_PR_GUNW_024_019_A_011_025_4000_SH_20260627T120541_20260627T120615_20260709T120540_20260709T120615_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-06-27_2026-07-09.json",
+      "valid": 22
+    },
+    "NISAR_L2_PR_GUNW_023_019_A_011_024_4000_SH_20260615T120541_20260615T120616_20260627T120541_20260627T120615_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-06-15_2026-06-27.json",
+      "valid": 246
+    },
+    "NISAR_L2_PR_GUNW_025_019_A_011_026_4000_SH_20260709T120540_20260709T120615_20260721T120539_20260721T120614_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-07-09_2026-07-21.json",
+      "valid": 239
+    },
+    "NISAR_L2_PR_GUNW_025_113_D_079_028_4000_SH_20260716T011331_20260716T011405_20260821T011329_20260821T011403_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-07-16_2026-08-21.json",
+      "valid": 135
+    },
+    "NISAR_L2_PR_GUNW_024_113_D_079_025_4000_SH_20260704T011332_20260704T011406_20260716T011331_20260716T011405_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-07-04_2026-07-16.json",
+      "valid": 77
+    },
+    "NISAR_L2_PR_GUNW_028_019_A_011_029_4000_SH_20260814T120538_20260814T120613_20260826T120538_20260826T120612_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-08-14_2026-08-26.json",
+      "valid": 409
+    },
+    "NISAR_L2_PR_GUNW_026_019_A_011_028_4000_SH_20260721T120539_20260721T120614_20260814T120538_20260814T120613_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-07-21_2026-08-14.json",
+      "valid": 307
+    },
+    "NISAR_L2_PR_GUNW_028_113_D_079_029_4000_SH_20260821T011329_20260821T011403_20260902T011329_20260902T011403_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-08-21_2026-09-02.json",
+      "valid": 168
+    },
+    "NISAR_L2_PR_GUNW_029_113_D_079_030_4000_SH_20260902T011329_20260902T011403_20260914T011329_20260914T011403_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-09-02_2026-09-14.json",
+      "valid": 223
+    },
+    "NISAR_L2_PR_GUNW_030_113_D_079_031_4000_SH_20260914T011329_20260914T011403_20260926T011329_20260926T011403_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-09-14_2026-09-26.json",
+      "valid": 213
+    },
+    "NISAR_L2_PR_GUNW_029_019_A_011_030_4000_SH_20260826T120538_20260826T120612_20260907T120538_20260907T120612_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-08-26_2026-09-07.json",
+      "valid": 253
+    },
+    "NISAR_L2_PR_GUNW_030_019_A_011_031_4000_SH_20260907T120538_20260907T120612_20260919T120538_20260919T120612_P05023_F_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-09-07_2026-09-19.json",
+      "valid": 201
+    },
+    "NISAR_L2_PR_GUNW_031_019_A_011_032_4000_SH_20260919T120538_20260919T120612_20261001T120538_20261001T120612_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-09-19_2026-10-01.json",
+      "valid": 213
+    },
+    "NISAR_L2_PR_GUNW_031_113_D_079_032_4000_SH_20260926T011329_20260926T011403_20261008T011329_20261008T011403_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-09-26_2026-10-08.json",
+      "valid": 110
+    },
+    "NISAR_L2_PR_GUNW_032_113_D_079_033_4000_SH_20261008T011329_20261008T011403_20261020T011329_20261020T011403_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/descending/2026-10-08_2026-10-20.json",
+      "valid": 0
+    },
+    "NISAR_L2_PR_GUNW_032_019_A_011_033_4000_SH_20261001T120538_20261001T120612_20261013T120538_20261013T120612_P05023_N_F_J_001": {
+      "receipt": "data/subsets/mexico-gunw-remaining/ascending/2026-10-01_2026-10-13.json",
+      "valid": 294
+    }
+  },
+  "errors": [],
+  "selected_count": 38,
+  "complete": true,
+  "mode": "native_aoi_windows_not_full_hdf5"
+}

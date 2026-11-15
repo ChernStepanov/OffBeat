@@ -1,0 +1,1 @@
+SSLError: HTTPSConnectionPool(host='ipad.fas.usda.gov', port=443): Max retries exceeded with url: /cropexplorer/global_reservoir/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1082)')))

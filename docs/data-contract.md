@@ -40,6 +40,14 @@ measurement is never represented as zero or carried across a gap. An optional
 processing steps, creation time and limitations. The checked-in file contains real
 measurements and points to the public CMR manifest and reproducible numeric subsets.
 
+Для Мехико дополнительный `context.long_displacement_audit` содержит полный
+аудит 54 гранул: маски, все последовательные окна, проверку доступности опоры
+и `ui.velocity_available` / `ui.vertical_east_available`. Статус доступности
+подтверждённой скорости показывается отдельно от исходной одиночной пары.
+Условные начальные нули не считаются независимыми наблюдениями; отклонённые
+пары не заполняются и не склеиваются. Результат и источники:
+`data/analysis/mexico-long-series.json`, `docs/mexico-long-series.md`.
+
 The earlier pipeline design described irregular pixel samples, but the running
 map actually required square arrays plus a `series(x,y)` function. The loader
 adapts this square JSON to those arrays. Future native geospatial rasters need

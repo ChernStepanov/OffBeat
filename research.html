@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000080">
+<title>OffBeat — research results</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/offbeat.css?v=7d84634c9a81">
+<link rel="stylesheet" href="css/research.css?v=d27cba689616">
+</head>
+<body>
+<a class="skip" href="#research-main" data-i18n="skip">К результатам</a>
+<div id="desk" class="research-desk">
+  <header class="win app-bar">
+    <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h1>OffBeat — <span data-i18n="title">результаты исследования</span></h1></div>
+    <nav class="menu" aria-label="Навигация">
+      <a href="index.html" data-i18n="dashboard">← Обзор</a>
+      <a href="#finding" data-i18n="finding">Находка</a>
+      <a href="#matching" data-i18n="matching">Matching</a>
+      <a href="#ablation" data-i18n="ablation">Абляции</a>
+      <a href="candidates.html" data-i18n="mapCandidates">Map candidates</a>
+      <button type="button" id="research-language" class="btn" aria-label="Switch language">EN</button>
+    </nav>
+  </header>
+  <main id="research-main">
+    <section class="win research-intro" aria-labelledby="research-heading">
+      <div class="win-t"><h2 id="research-heading" data-i18n="heading">Что выдерживает проверку: сопоставление радаров и устойчивость аномалий</h2></div>
+      <div class="win-b paper"><p id="research-intro-copy" data-i18n="intro">Исследование проверяет согласованность наблюдений NISAR L-band и Sentinel-1 C-band и устойчивость пространственных кандидатов к выбору дат, порогов и масштаба.</p>
+      <p><a id="research-amazon-link" href="index.html?site=amazon" hidden data-i18n="openAmazon">Открыть участок Амазонии в dashboard</a></p>
+      <p id="research-status" role="status" aria-live="polite" data-i18n="loading">Загрузка результатов…</p></div>
+    </section>
+    <div id="research-content" hidden>
+      <section class="research-cards" id="research-cards" aria-label="Ключевые показатели"></section>
+      <section class="win" id="finding"><div class="win-t"><h2 data-i18n="finding">Находка</h2></div><div class="win-b paper" id="finding-content"></div></section>
+      <section class="research-grid">
+        <section class="win"><div class="win-t"><h2 data-i18n="evidence">Сила и ограничения доказательств</h2></div><div class="win-b paper" id="evidence-content"></div></section>
+        <section class="win" id="matching"><div class="win-t"><h2 data-i18n="matching">SAR matching</h2></div><div class="win-b" id="matching-content"></div></section>
+      </section>
+      <section class="win" id="ablation"><div class="win-t"><h2 data-i18n="ablation">Абляции</h2></div><div class="win-b" id="ablation-content"></div></section>
+      <section class="research-grid">
+        <section class="win"><div class="win-t"><h2 data-i18n="sources">Источники</h2></div><div class="win-b" id="sources-content"></div></section>
+        <section class="win"><div class="win-t"><h2 data-i18n="repro">Воспроизводимость</h2></div><div class="win-b" id="repro-content"></div></section>
+      </section>
+    </div>
+    <footer class="research-footer"><a href="index.html" data-i18n="back">Вернуться к dashboard</a></footer>
+  </main>
+</div>
+<script src="js/research.js?v=7b3148e41b92"></script>
+</body>
+</html>

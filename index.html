@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=mobile-layout-5">
+<link rel="stylesheet" href="css/offbeat.css?v=7d84634c9a81">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -27,6 +27,8 @@
       <a href="#card-win">Pixel card</a>
       <a href="#top-win">Top anomalies</a>
       <a href="#about-win">How it works</a>
+      <a href="research.html">Research results</a>
+      <a href="candidates.html">Map findings</a>
       <a href="https://nisar-docs.asf.alaska.edu/" rel="noopener">NISAR data guide</a>
     <button type="button" id="language-switch" class="btn language-switch" aria-label="Switch language / Сменить язык">Русский</button>
     </nav>
@@ -342,6 +344,7 @@
                 <canvas id="c-disp" height="120" aria-label="Displacement of the pixel against its peers"></canvas>
                 <small id="gunw-series-note" hidden><span id="gunw-series-text"></span> <a href="data/analysis/mexico-gunw-quality.json">GUNW quality and sources</a>.</small>
                 <small id="gunw-postgap-note" hidden><span id="gunw-postgap-text"></span> <a href="data/analysis/mexico-gunw-postgap-quality.json">Later-pair quality and sources</a>.</small>
+                <small id="displacement-audit-note" hidden><span id="displacement-audit-text"></span> <a id="displacement-audit-report" href="docs/mexico-long-series.md">Calculation, figures and sources</a>.</small>
               </div>
               <div class="plot" id="gnss-context" hidden>
                 <button type="button" class="btn" id="gnss-open">Inspect nearby GNSS station MMX1</button>
@@ -546,7 +549,7 @@
 <script src="js/archive.js?v=a69beae81229"></script>
 <script src="js/nisar-map.js?v=f588ff3b2ef0"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
-<script src="js/data.js?v=deb732bde122"></script>
+<script src="js/data.js?v=63baff3f9b1b"></script>
 <script src="js/suggestions.js?v=eb8c52544811"></script>
 <script src="js/acquisitions.js?v=faedaefccc8f"></script>
 <script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
@@ -555,22 +558,22 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=review-queue-1-review-candidates-1"></script>
+<script src="js/i18n.js?v=cdd075bf39e8"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
 <script src="js/terrain-tiles.js?v=d7bcae7cc86b"></script>
 <script src="js/terrain-renderer.js?v=d8d5b822896a"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=mobile-touch-4"></script>
-<script src="js/reviews.js?v=shared-queue-1"></script>
-<script src="js/observed-events.js?v=region-rotation-1"></script>
-<script src="js/music-places.js?v=1"></script>
-<script src="js/evidence-model.js?v=region-rotation-1"></script>
-<script src="js/dense-candidates.js?v=shared-queue-1"></script>
+<script src="js/scene.js?v=32daa6876328"></script>
+<script src="js/reviews.js?v=62a5cd7c817d"></script>
+<script src="js/observed-events.js?v=f13648ff71d4"></script>
+<script src="js/music-places.js?v=52acb924d6e3"></script>
+<script src="js/evidence-model.js?v=acea90329609"></script>
+<script src="js/dense-candidates.js?v=3f8199d88536"></script>
 <script src="js/panels.js?v=6e020a23003e"></script>
-<script src="js/evidence.js?v=region-rotation-1"></script>
+<script src="js/evidence.js?v=7302b8710eb5"></script>
 <script src="js/findings.js?v=86ea53095e87"></script>
-<script src="js/app.js?v=touch-map-1"></script>
+<script src="js/app.js?v=76bb088dbe8a"></script>
 </body>
 </html>
