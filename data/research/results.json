@@ -1,0 +1,1112 @@
+{
+  "schema_version": 1,
+  "headline": {
+    "ru": "Что выдерживает проверку: сопоставление радаров и устойчивость аномалий",
+    "en": "What withstands scrutiny: radar matching and anomaly robustness"
+  },
+  "intro": {
+    "ru": "По всей лесной части dense-сетки медианы HH и HV меняют знак между 16 и 28 сентября. Межсенсорные уровни связаны умеренно, а последовательные изменения — слабее. Способ сводки тоже меняет знак общей оценки HV. Это наблюдаемые ограничения кандидатов, не подтверждённые события.",
+    "en": "Across the dense-grid forest cells, HH and HV medians change sign between 16 and 28 September. Cross-sensor levels are moderately associated, while consecutive changes are less so. The aggregation choice also changes the sign of the overall HV estimate. These are observed limits on candidate interpretation, not confirmed events."
+  },
+  "summary": {
+    "ru": "Один участок Амазонии, шесть дат NISAR; исследовательские результаты проверены, но не являются метками событий.",
+    "en": "One Amazon site and six NISAR dates; these are research findings, not event labels."
+  },
+  "dashboard_link": {
+    "label": {
+      "ru": "Открыть участок Амазонии в dashboard",
+      "en": "Open Amazon in the dashboard"
+    },
+    "href": "index.html?site=amazon"
+  },
+  "cards": [
+    {
+      "label": {
+        "ru": "Лесная сетка · собственная база · 16 → 28 сентября",
+        "en": "Forest grid · own baseline · 16 → 28 September"
+      },
+      "values": [
+        {
+          "label": "HH · 16 Sep",
+          "value": -0.5286
+        },
+        {
+          "label": "HV · 16 Sep",
+          "value": -0.5723
+        },
+        {
+          "label": "HH · 28 Sep",
+          "value": 0.8243
+        },
+        {
+          "label": "HV · 28 Sep",
+          "value": 0.5746
+        }
+      ],
+      "unit": "dB",
+      "note": {
+        "ru": "Медианы по всем ячейкам лесного класса, не по экстремально выбранным точкам.",
+        "en": "Medians across all forest-class cells, not extreme-value-selected points."
+      }
+    },
+    {
+      "label": {
+        "ru": "HV · выбор временной сводки меняет знак",
+        "en": "HV · temporal summary choice changes the sign"
+      },
+      "values": [
+        {
+          "label": {
+            "ru": "разность медиан дат",
+            "en": "difference of date medians"
+          },
+          "value": -0.5351
+        },
+        {
+          "label": {
+            "ru": "ratio средних power → dB",
+            "en": "ratio of mean power → dB"
+          },
+          "value": 0.1337
+        }
+      ],
+      "unit": "dB",
+      "note": {
+        "ru": "Обе оценки по всей dense-сетке; это разные estimands, не выбор между «ложью» и истиной.",
+        "en": "Both estimates use the full dense grid; they are different estimands, not a choice between ‘wrong’ and truth."
+      }
+    },
+    {
+      "label": {
+        "ru": "Связь уровней сильнее связи изменений",
+        "en": "Levels associate more than changes"
+      },
+      "values": [
+        {
+          "label": {
+            "ru": "уровни",
+            "en": "levels"
+          },
+          "value": 0.4617586941787225
+        },
+        {
+          "label": {
+            "ru": "после центрирования",
+            "en": "after centering"
+          },
+          "value": 0.36216223182855395
+        },
+        {
+          "label": {
+            "ru": "последовательные изменения",
+            "en": "consecutive changes"
+          },
+          "value": 0.1721321228042645
+        }
+      ],
+      "unit": "r",
+      "signed": false,
+      "note": {
+        "ru": "NISAR HV / OPERA VH; описательная корреляция, не причинная связь.",
+        "en": "NISAR HV / OPERA VH; descriptive correlation, not a causal relationship."
+      }
+    }
+  ],
+  "finding": {
+    "summary": {
+      "ru": "По всей лесной части dense-сетки медианы HH и HV меняют знак между 16 и 28 сентября. Межсенсорные уровни связаны умеренно, а последовательные изменения — слабее. Способ сводки тоже меняет знак общей оценки HV. Это наблюдаемые ограничения кандидатов, не подтверждённые события.",
+      "en": "Across the dense-grid forest cells, HH and HV medians change sign between 16 and 28 September. Cross-sensor levels are moderately associated, while consecutive changes are less so. The aggregation choice also changes the sign of the overall HV estimate. These are observed limits on candidate interpretation, not confirmed events."
+    },
+    "charts": [
+      {
+        "title": {
+          "ru": "Лес: HH/HV относительно медианы первых трёх дат",
+          "en": "Forest: HH/HV relative to the first-three-date median"
+        },
+        "series": [
+          {
+            "label": "HH",
+            "values": [
+              {
+                "label": "09-04",
+                "value": -0.4644
+              },
+              {
+                "label": "09-16",
+                "value": -0.5286
+              },
+              {
+                "label": "09-28",
+                "value": 0.8243
+              }
+            ]
+          },
+          {
+            "label": "HV",
+            "values": [
+              {
+                "label": "09-04",
+                "value": -0.5591
+              },
+              {
+                "label": "09-16",
+                "value": -0.5723
+              },
+              {
+                "label": "09-28",
+                "value": 0.5746
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "bar",
+        "title": {
+          "ru": "NISAR L-band / Sentinel-1 C-band: корреляция уровней и изменений",
+          "en": "NISAR L-band / Sentinel-1 C-band: correlation of levels and changes"
+        },
+        "labels": [
+          {
+            "ru": "уровни",
+            "en": "levels"
+          },
+          {
+            "ru": "центрированные уровни",
+            "en": "centered levels"
+          },
+          {
+            "ru": "изменения",
+            "en": "changes"
+          }
+        ],
+        "series": [
+          {
+            "label": "HV / VH",
+            "values": [
+              0.4617586941787225,
+              0.36216223182855395,
+              0.1721321228042645
+            ]
+          },
+          {
+            "label": "HH / VV",
+            "values": [
+              0.4810679149335431,
+              0.35538827884300556,
+              0.1728283086496195
+            ]
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "title": {
+          "ru": "Траектория по всем ячейкам WorldCover forest",
+          "en": "Trajectory across all WorldCover forest cells"
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "date",
+              "label": {
+                "ru": "Дата",
+                "en": "Date"
+              }
+            },
+            {
+              "key": "HH",
+              "label": {
+                "ru": "HH · dB",
+                "en": "HH · dB"
+              }
+            },
+            {
+              "key": "HV",
+              "label": {
+                "ru": "HV · dB",
+                "en": "HV · dB"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "date": "2026-09-04",
+              "HH": -0.4644,
+              "HV": -0.5591
+            },
+            {
+              "date": "2026-09-16",
+              "HH": -0.5286,
+              "HV": -0.5723
+            },
+            {
+              "date": "2026-09-28",
+              "HH": 0.8243,
+              "HV": 0.5746
+            }
+          ]
+        },
+        "note": {
+          "ru": "База каждого пикселя — собственная медиана 18 июля, 11 и 23 августа; сетка 141×141, 20 м.",
+          "en": "Each pixel uses its own median from 18 July, 11 and 23 August; 141×141 grid at 20 m."
+        }
+      },
+      {
+        "title": {
+          "ru": "Корреляции HV/VH и HH/VV",
+          "en": "HV/VH and HH/VV correlations"
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "pair",
+              "label": {
+                "ru": "Каналы",
+                "en": "Channels"
+              }
+            },
+            {
+              "key": "levels",
+              "label": {
+                "ru": "Уровни r",
+                "en": "Levels r"
+              }
+            },
+            {
+              "key": "centered",
+              "label": {
+                "ru": "Центрированные уровни r",
+                "en": "Centered levels r"
+              }
+            },
+            {
+              "key": "changes",
+              "label": {
+                "ru": "Изменения r",
+                "en": "Changes r"
+              }
+            },
+            {
+              "key": "centered_changes",
+              "label": {
+                "ru": "Центрированные изменения r",
+                "en": "Centered changes r"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "pair": "HV / VH",
+              "levels": 0.4617586941787225,
+              "centered": 0.36216223182855395,
+              "changes": 0.1721321228042645,
+              "centered_changes": 0.06512960133031723
+            },
+            {
+              "pair": "HH / VV",
+              "levels": 0.4810679149335431,
+              "centered": 0.35538827884300556,
+              "changes": 0.1728283086496195,
+              "centered_changes": 0.05411227026188641
+            }
+          ]
+        },
+        "note": {
+          "ru": "Центрирование уровней — по классу WorldCover и дате; центрирование изменений — по классу и интервалу. 6 144 point-date строки уровней и 5 120 парных точек-интервалов изменений — зависимые записи, не независимые события.",
+          "en": "Level centering is by WorldCover class and date; change centering is by class and interval. 6,144 level point-date rows and 5,120 paired point-interval change rows are dependent observations, not independent events."
+        }
+      },
+      {
+        "title": {
+          "ru": "Выбор временной сводки меняет знак HV по всей сетке",
+          "en": "Temporal summary choice changes the all-grid HV sign"
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "band",
+              "label": {
+                "ru": "Поляризация",
+                "en": "Polarization"
+              }
+            },
+            {
+              "key": "dB_median",
+              "label": {
+                "ru": "Разность медиан дат, dB",
+                "en": "Difference of date medians, dB"
+              },
+              "digits": 4,
+              "signed": true
+            },
+            {
+              "key": "linear_ratio",
+              "label": {
+                "ru": "dB отношения средних power",
+                "en": "dB of mean-power ratio"
+              },
+              "digits": 4,
+              "signed": true
+            }
+          ],
+          "rows": [
+            {
+              "band": "HH",
+              "dB_median": -0.5273,
+              "linear_ratio": 0.2515
+            },
+            {
+              "band": "HV",
+              "dB_median": -0.5351,
+              "linear_ratio": 0.1337
+            }
+          ]
+        },
+        "note": {
+          "ru": "Сначала для каждой ячейки: медиана трёх post-дат минус медиана трёх pre-дат в dB; затем пространственная медиана по n=19 881 dense-ячейкам. Это не медиана отдельных парных разностей. Оценки отвечают на разные вопросы.",
+          "en": "First, per cell: median of three post dates minus median of three pre dates in dB; then the spatial median over n=19,881 dense cells. This is not the median of paired date differences. The estimates answer different questions."
+        }
+      }
+    ],
+    "details": [
+      {
+        "title": {
+          "ru": "Контраст r уровней − r изменений и block-bootstrap CI",
+          "en": "Contrast r levels − r changes and block-bootstrap CI"
+        },
+        "text": {
+          "ru": "Для HV/VH разность корреляций рассчитана в парном spatial block bootstrap: в каждом повторе уровни и изменения используют одни и те же spatial blocks. Интервал условен на данном участке и шести датах.",
+          "en": "For HV/VH, the correlation difference is estimated with paired spatial block bootstrap: each replicate uses the same spatial blocks for levels and changes. The interval is conditional on this site and six dates."
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "block",
+              "label": {
+                "ru": "Блок, cells/side",
+                "en": "Block, cells/side"
+              }
+            },
+            {
+              "key": "contrast",
+              "label": {
+                "ru": "r уровни − изменения",
+                "en": "r levels − changes"
+              },
+              "digits": 3
+            },
+            {
+              "key": "lower",
+              "label": {
+                "ru": "95% CI · нижняя",
+                "en": "95% CI · lower"
+              },
+              "digits": 3
+            },
+            {
+              "key": "upper",
+              "label": {
+                "ru": "95% CI · верхняя",
+                "en": "95% CI · upper"
+              },
+              "digits": 3
+            },
+            {
+              "key": "blocks",
+              "label": {
+                "ru": "Spatial blocks",
+                "en": "Spatial blocks"
+              }
+            },
+            {
+              "key": "replicates",
+              "label": {
+                "ru": "Валидных повторов",
+                "en": "Valid replicates"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "block": 2,
+              "contrast": 0.289626571374458,
+              "lower": 0.24897244959287337,
+              "upper": 0.32436552152735093,
+              "blocks": 256,
+              "replicates": 1000
+            },
+            {
+              "block": 4,
+              "contrast": 0.289626571374458,
+              "lower": 0.23884139804770885,
+              "upper": 0.3303739655840009,
+              "blocks": 64,
+              "replicates": 1000
+            },
+            {
+              "block": 8,
+              "contrast": 0.289626571374458,
+              "lower": 0.23400102711530668,
+              "upper": 0.3227127016793919,
+              "blocks": 16,
+              "replicates": 1000
+            }
+          ]
+        },
+        "note": {
+          "ru": "Это пространственная неопределённость при фиксированных датах/участке, не временная или event-level репликация.",
+          "en": "This is spatial uncertainty conditional on dates/site, not temporal or event-level replication."
+        }
+      }
+    ]
+  },
+  "evidence": {
+    "strength": {
+      "ru": "Траектория рассчитана для всех 11 265 forest-ячеек dense-grid, а не для точек, выбранных по экстремуму. Cross-sensor корреляции используют проверенный общий порядок 1 024 sparse sample-координат; matching и допуски дат приведены явно.",
+      "en": "The trajectory uses all 11,265 dense-grid forest cells, not points selected for an extreme value. Cross-sensor correlations use the checked common order of 1,024 sparse sample coordinates; matching and date tolerances are explicit."
+    },
+    "limitations": [
+      {
+        "ru": "Один участок и шесть дат NISAR; соседние ячейки и point-date строки зависимы.",
+        "en": "One site and six NISAR dates; neighboring cells and point-date rows are dependent."
+      },
+      {
+        "ru": "NISAR GCOV provisional. WorldCover 2021 — историческая стратификация, а не актуальная наземная метка.",
+        "en": "NISAR GCOV is provisional. WorldCover 2021 is historical stratification, not a current ground label."
+      },
+      {
+        "ru": "NISAR — ascending, OPERA гранулы — descending; различаются геометрия, каналы и время съёмки. Это не изолированный эффект длины волны.",
+        "en": "NISAR is ascending and OPERA granules are descending; geometry, channels and acquisition time differ. This does not isolate wavelength effects."
+      },
+      {
+        "ru": "Нет source-granule, geometry и quality mask на уровне точки для OPERA RTC. Полнота маски NISAR 100% означает только прохождение заданного фильтра, не достоверность измерений.",
+        "en": "OPERA RTC has no per-point source-granule, geometry or quality mask. A 100% NISAR mask pass rate means only that the stated filter passed, not that measurements are trustworthy."
+      },
+      {
+        "ru": "Нет независимых меток событий: причинность, accuracy/recall и площадь подтверждённых событий не оценивались.",
+        "en": "There are no independent event labels: causation, accuracy/recall and confirmed event area were not evaluated."
+      },
+      {
+        "ru": "Падение числа кандидатов при сглаживании не означает, что удалились только false positives: фильтр может стереть небольшие реальные объекты.",
+        "en": "Fewer candidates after smoothing does not mean only false positives were removed: filtering can erase small real features."
+      }
+    ],
+    "details": [
+      {
+        "title": {
+          "ru": "Что именно означает 100% валидных dense-ячеек",
+          "en": "What 100% valid dense cells means"
+        },
+        "text": {
+          "ru": "Источник сообщает 19 881/19 881 ячеек после применения сохранённых масок, конечности и положительной мощности на шести датах. Это покрытие данного фильтра в этом clipped subset; оно не подтверждает калибровку, геометрическую сопоставимость или отсутствие ошибок.",
+          "en": "The source reports 19,881/19,881 cells passing the saved-mask, finite-value and positive-power checks on all six dates. This is coverage under that filter in this clipped subset; it does not verify calibration, geometric comparability or absence of errors."
+        }
+      }
+    ]
+  },
+  "matching": {
+    "summary": {
+      "ru": "При допуске 6 дней найдены 6 уникальных пар; все OPERA даты на один календарный день раньше NISAR. Каталожные burst-времена дают общий диапазон примерно -24,1…-24,1 часа (около −24,1 ч), но это не время вклада каждого пикселя.",
+      "en": "At a 6-day tolerance, 6 unique pairs were found; every OPERA date is one calendar day before NISAR. Catalogue burst times span about -24.1 to -24.1 hours (about −24.1 h), but do not identify each pixel’s contributing acquisition time."
+    },
+    "table": {
+      "columns": [
+        {
+          "key": "nisar",
+          "label": {
+            "ru": "Дата NISAR",
+            "en": "NISAR date"
+          }
+        },
+        {
+          "key": "rtc",
+          "label": {
+            "ru": "Дата OPERA",
+            "en": "OPERA date"
+          }
+        },
+        {
+          "key": "lag",
+          "label": {
+            "ru": "Календарный лаг, дни",
+            "en": "Calendar lag, days"
+          }
+        },
+        {
+          "key": "utc_range",
+          "label": {
+            "ru": "Каталожный UTC lag, ч",
+            "en": "Catalogue UTC lag range, h"
+          }
+        }
+      ],
+      "rows": [
+        {
+          "nisar": "2026-07-18",
+          "rtc": "2026-07-17",
+          "lag": -1,
+          "utc_range": {
+            "ru": "-24,100…-24,099 ч · гранулы",
+            "en": "-24.100…-24.099 h · granules"
+          }
+        },
+        {
+          "nisar": "2026-08-11",
+          "rtc": "2026-08-10",
+          "lag": -1,
+          "utc_range": {
+            "ru": "-24,099…-24,099 ч · гранулы",
+            "en": "-24.099…-24.099 h · granules"
+          }
+        },
+        {
+          "nisar": "2026-08-23",
+          "rtc": "2026-08-22",
+          "lag": -1,
+          "utc_range": {
+            "ru": "-24,099…-24,098 ч · гранулы",
+            "en": "-24.099…-24.098 h · granules"
+          }
+        },
+        {
+          "nisar": "2026-09-04",
+          "rtc": "2026-09-03",
+          "lag": -1,
+          "utc_range": {
+            "ru": "-24,099…-24,098 ч · гранулы",
+            "en": "-24.099…-24.098 h · granules"
+          }
+        },
+        {
+          "nisar": "2026-09-16",
+          "rtc": "2026-09-15",
+          "lag": -1,
+          "utc_range": {
+            "ru": "-24,099…-24,098 ч · гранулы",
+            "en": "-24.099…-24.098 h · granules"
+          }
+        },
+        {
+          "nisar": "2026-09-28",
+          "rtc": "2026-09-27",
+          "lag": -1,
+          "utc_range": {
+            "ru": "-24,099…-24,098 ч · гранулы",
+            "en": "-24.099…-24.098 h · granules"
+          }
+        }
+      ]
+    },
+    "details": [
+      {
+        "title": {
+          "ru": "Разные выборки и support — counts не складывать",
+          "en": "Different samples and support — do not combine counts"
+        },
+        "text": {
+          "ru": "Cross-sensor matching использует sparse sample points. Spatial robustness анализирует отдельную dense-сетку. Sparse и dense геометрии не соединялись и не задают общий знаменатель.",
+          "en": "Cross-sensor matching uses sparse sample points. Spatial robustness analyzes a separate dense grid. Sparse and dense geometries were not joined and do not share a denominator."
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "design",
+              "label": {
+                "ru": "Дизайн",
+                "en": "Design"
+              }
+            },
+            {
+              "key": "support",
+              "label": {
+                "ru": "Поддержка",
+                "en": "Support"
+              }
+            },
+            {
+              "key": "count",
+              "label": {
+                "ru": "Размер",
+                "en": "Count"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "design": {
+                "ru": "Cross-sensor NISAR/OPERA",
+                "en": "Cross-sensor NISAR/OPERA"
+              },
+              "support": {
+                "ru": "sparse, общий ordered-coordinate hash",
+                "en": "sparse, shared ordered-coordinate hash"
+              },
+              "count": 1024
+            },
+            {
+              "design": {
+                "ru": "NISAR temporal robustness",
+                "en": "NISAR temporal robustness"
+              },
+              "support": {
+                "ru": "dense 141×141 native grid, 20 м",
+                "en": "dense 141×141 native grid, 20 m"
+              },
+              "count": 19881
+            }
+          ]
+        }
+      },
+      {
+        "title": {
+          "ru": "Чувствительность числа matched dates к допуску",
+          "en": "Matched-date count by temporal tolerance"
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "tolerance",
+              "label": {
+                "ru": "Допуск, дни",
+                "en": "Tolerance, days"
+              }
+            },
+            {
+              "key": "count",
+              "label": {
+                "ru": "Уникальных пар",
+                "en": "Unique pairs"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "tolerance": 0,
+              "count": 0
+            },
+            {
+              "tolerance": 3,
+              "count": 6
+            },
+            {
+              "tolerance": 6,
+              "count": 6
+            },
+            {
+              "tolerance": 12,
+              "count": 6
+            }
+          ]
+        },
+        "text": {
+          "ru": "Ноль пар при нулевом допуске — отсутствие календарного совпадения, а не отрицательный результат sensor comparison.",
+          "en": "Zero pairs at zero-day tolerance means no calendar-date match, not a negative sensor-comparison result."
+        }
+      },
+      {
+        "title": {
+          "ru": "Точность сопоставления и геометрия",
+          "en": "Matching precision and geometry"
+        },
+        "items": [
+          {
+            "ru": "NISAR track 146 ascending; matched OPERA burst IDs относятся к descending Sentinel-1. Поляризации HV/VH и HH/VV не считаются эквивалентными.",
+            "en": "NISAR track 146 is ascending; matched OPERA burst IDs are descending Sentinel-1. HV/VH and HH/VV are not treated as equivalent."
+          },
+          {
+            "ru": "UTC lag рассчитан по гранулам каталога; неизвестно, какой burst заполнил конкретную точку.",
+            "en": "UTC lag comes from catalogue granules; the burst contributing to each point is unknown."
+          },
+          {
+            "ru": "RTC JSON не содержит per-point source granule или quality/geometry mask; finite value не равен quality-checked observation.",
+            "en": "RTC JSON contains no per-point source granule or quality/geometry mask; a finite value is not a quality-checked observation."
+          }
+        ]
+      }
+    ]
+  },
+  "ablations": {
+    "summary": {
+      "ru": "При пороге 3 dB: 83 ячейки по правилу ≥2/3 для каждой поляризации отдельно против 9 при требовании обеих поздних дат. При сглаживании кандидатов меньше, но малые реальные объекты тоже могут исчезнуть.",
+      "en": "At a 3 dB threshold: 83 cells under ≥2/3 for each polarization independently versus 9 requiring both late dates. Smoothing reduces candidates, but can also erase small real features."
+    },
+    "charts": [
+      {
+        "type": "bar",
+        "title": {
+          "ru": "Совместная доля лесных ячеек с HH и HV ≤ −3 dB по окну сглаживания",
+          "en": "Joint forest fraction with HH and HV ≤ −3 dB by smoothing window"
+        },
+        "labels": [
+          "20",
+          "60",
+          "100",
+          "180"
+        ],
+        "series": [
+          {
+            "label": {
+              "ru": "Доля forest, %",
+              "en": "Forest fraction, %"
+            },
+            "values": [
+              {
+                "label": "20",
+                "value": 0.737
+              },
+              {
+                "label": "60",
+                "value": 0.249
+              },
+              {
+                "label": "100",
+                "value": 0.186
+              },
+              {
+                "label": "180",
+                "value": 0.018000000000000002
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "title": {
+          "ru": "Пространственный масштаб: медианные сдвиги и доля совместного −3 dB критерия",
+          "en": "Spatial scale: median shifts and joint −3 dB criterion fraction"
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "scale",
+              "label": {
+                "ru": "Окно, м",
+                "en": "Window, m"
+              }
+            },
+            {
+              "key": "HH",
+              "label": {
+                "ru": "HH медиана, dB",
+                "en": "HH median, dB"
+              }
+            },
+            {
+              "key": "HV",
+              "label": {
+                "ru": "HV медиана, dB",
+                "en": "HV median, dB"
+              }
+            },
+            {
+              "key": "joint_fraction",
+              "label": {
+                "ru": "HH и HV ≤ −3 dB, % forest",
+                "en": "HH and HV ≤ −3 dB, % forest"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "scale": 20,
+              "HH": -0.267,
+              "HV": -0.3399,
+              "joint_fraction": 0.737
+            },
+            {
+              "scale": 60,
+              "HH": -0.2336,
+              "HV": -0.3616,
+              "joint_fraction": 0.249
+            },
+            {
+              "scale": 100,
+              "HH": -0.2308,
+              "HV": -0.3632,
+              "joint_fraction": 0.186
+            },
+            {
+              "scale": 180,
+              "HH": -0.2282,
+              "HV": -0.3284,
+              "joint_fraction": 0.018000000000000002
+            }
+          ]
+        },
+        "note": {
+          "ru": "Падение частоты кандидатов при сглаживании не доказывает удаление ложных срабатываний: малые реальные объекты тоже могут исчезать.",
+          "en": "Fewer candidates after smoothing does not prove false positives were removed: small real features can also disappear."
+        }
+      }
+    ],
+    "details": [
+      {
+        "title": {
+          "ru": "Порог и persistence — два разных правила подсчёта",
+          "en": "Threshold and persistence are two different counting rules"
+        },
+        "text": {
+          "ru": "Мягкое правило: каждая поляризация отдельно ниже собственной pre-period базы на заданный порог минимум в 2 из 3 дат 4/16/28 сентября; HH и HV не обязаны проходить критерий в одни и те же даты. Строгое late persistence требует выполнения критерия и 16, и 28 сентября. Это retrospective candidates, не false/true event labels.",
+          "en": "Soft rule: each polarization independently falls below its own pre-period baseline by the threshold on at least 2 of 3 dates (4/16/28 September); HH and HV need not pass on the same dates. Strict late persistence requires the condition on both 16 and 28 September. These are retrospective candidates, not false/true event labels."
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "threshold",
+              "label": {
+                "ru": "Порог, dB",
+                "en": "Threshold, dB"
+              }
+            },
+            {
+              "key": "soft_count",
+              "label": {
+                "ru": "≥2 из 3: ячеек",
+                "en": "≥2 of 3: cells"
+              }
+            },
+            {
+              "key": "soft_percent",
+              "label": {
+                "ru": "≥2 из 3: % forest",
+                "en": "≥2 of 3: % forest"
+              }
+            },
+            {
+              "key": "late_count",
+              "label": {
+                "ru": "16 и 28 Sep: ячеек",
+                "en": "16 and 28 Sep: cells"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "threshold": 1,
+              "soft_count": 1452,
+              "soft_percent": 12.889000000000001,
+              "late_count": 289
+            },
+            {
+              "threshold": 2,
+              "soft_count": 372,
+              "soft_percent": 3.302,
+              "late_count": 55
+            },
+            {
+              "threshold": 3,
+              "soft_count": 83,
+              "soft_percent": 0.737,
+              "late_count": 9
+            },
+            {
+              "threshold": 4,
+              "soft_count": 16,
+              "soft_percent": 0.14200000000000002,
+              "late_count": 2
+            },
+            {
+              "threshold": 5,
+              "soft_count": 4,
+              "soft_percent": 0.036000000000000004,
+              "late_count": 1
+            }
+          ]
+        },
+        "note": {
+          "ru": "При 3 dB: 83 ячейки по мягкому правилу против 9 по late persistence. Счётчики используют те же post-даты, независимого temporal holdout нет.",
+          "en": "At 3 dB: 83 cells under the soft rule versus 9 under late persistence. Counts use the same post dates; there is no independent temporal holdout."
+        }
+      },
+      {
+        "title": {
+          "ru": "Выбор временной сводки и знак all-grid HV",
+          "en": "Temporal summary choice and the all-grid HV sign"
+        },
+        "text": {
+          "ru": "Первая оценка: для каждой ячейки медиана трёх post-дат минус медиана трёх pre-дат в dB, затем пространственная медиана этих ячеечных значений. Это не медиана отдельных парных разностей. Вторая оценка — dB отношения средних линейных мощностей. Это разные estimands; ни один не выбран как ground truth.",
+          "en": "First estimate: for each cell, median of three post dates minus median of three pre dates in dB, followed by the spatial median across cells. This is not the median of paired date differences. The second estimate is dB of the ratio of mean linear powers. These are distinct estimands; neither is selected as ground truth."
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "band",
+              "label": {
+                "ru": "Поляризация",
+                "en": "Polarization"
+              }
+            },
+            {
+              "key": "dB_median",
+              "label": {
+                "ru": "Разность медиан дат, dB",
+                "en": "Difference of date medians, dB"
+              },
+              "digits": 4,
+              "signed": true
+            },
+            {
+              "key": "linear_ratio",
+              "label": {
+                "ru": "dB отношения средних power",
+                "en": "dB of mean-power ratio"
+              },
+              "digits": 4,
+              "signed": true
+            },
+            {
+              "key": "n",
+              "label": {
+                "ru": "Dense cells",
+                "en": "Dense cells"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "band": "HH",
+              "dB_median": -0.5273,
+              "linear_ratio": 0.2515,
+              "n": 19881
+            },
+            {
+              "band": "HV",
+              "dB_median": -0.5351,
+              "linear_ratio": 0.1337,
+              "n": 19881
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": {
+        "ru": "Отчёт: cross-sensor matching",
+        "en": "Report: cross-sensor matching"
+      },
+      "href": "docs/research-cross-sensor.md"
+    },
+    {
+      "label": {
+        "ru": "Отчёт: spatial robustness",
+        "en": "Report: spatial robustness"
+      },
+      "href": "docs/research-spatial-robustness.md"
+    },
+    {
+      "label": {
+        "ru": "Протокол исследования",
+        "en": "Research protocol"
+      },
+      "href": "docs/research-protocol.md"
+    },
+    {
+      "label": {
+        "ru": "Сводный синтез",
+        "en": "Research synthesis"
+      },
+      "href": "docs/research-summary.md"
+    },
+    {
+      "label": {
+        "ru": "Исходный JSON: cross-sensor",
+        "en": "Raw JSON: cross-sensor"
+      },
+      "href": "data/research/cross-sensor.json",
+      "download": true
+    },
+    {
+      "label": {
+        "ru": "Исходный JSON: spatial robustness",
+        "en": "Raw JSON: spatial robustness"
+      },
+      "href": "data/research/spatial-robustness.json",
+      "download": true
+    },
+    {
+      "label": {
+        "ru": "Dashboard: участок Амазонии",
+        "en": "Dashboard: Amazon site"
+      },
+      "href": "index.html?site=amazon"
+    }
+  ],
+  "reproducibility": {
+    "summary": {
+      "ru": "Генератор offline: читает два сохранённых результата анализа, извлекает метрики/пары, вычисляет сводные проценты и SHA-256 входных JSON. Числа на странице не поддерживаются отдельной ручной копией.",
+      "en": "The generator is offline: it reads the two saved analysis outputs, extracts metrics/pairs, computes summary percentages and SHA-256 hashes of the input JSON. Page values are not maintained as a separate hand-copied set."
+    },
+    "commands": [
+      {
+        "label": {
+          "ru": "Собрать страницу",
+          "en": "Build page data"
+        },
+        "command": "python3 scripts/build_research_page.py"
+      },
+      {
+        "label": {
+          "ru": "Проверить generator",
+          "en": "Test generator"
+        },
+        "command": "python3 -m pytest scripts/test_build_research_page.py -q"
+      },
+      {
+        "label": {
+          "ru": "Повторить cross-sensor анализ",
+          "en": "Re-run cross-sensor analysis"
+        },
+        "command": "python scripts/research_cross_sensor.py"
+      },
+      {
+        "label": {
+          "ru": "Повторить spatial robustness",
+          "en": "Re-run spatial robustness"
+        },
+        "command": "python scripts/research_spatial_robustness.py"
+      }
+    ],
+    "details": [
+      {
+        "title": {
+          "ru": "Входные JSON и SHA-256",
+          "en": "Input JSON files and SHA-256"
+        },
+        "table": {
+          "columns": [
+            {
+              "key": "path",
+              "label": {
+                "ru": "Файл",
+                "en": "File"
+              }
+            },
+            {
+              "key": "sha256",
+              "label": {
+                "ru": "SHA-256",
+                "en": "SHA-256"
+              }
+            }
+          ],
+          "rows": [
+            {
+              "path": "data/research/cross-sensor.json",
+              "sha256": "eb02775e962c04264c94120f5e3e23ae0cda3d92c9f7e7917c1f3eb691a8654f"
+            },
+            {
+              "path": "data/research/spatial-robustness.json",
+              "sha256": "465ad0fb258887f2b4cc86e939c4d2dd6d533b17e4813f2756e9df822dc0e032"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

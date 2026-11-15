@@ -1,0 +1,561 @@
+{
+  "Home": {
+    "fr": "Accueil",
+    "de": "Startseite",
+    "it": "Home",
+    "es": "Inicio",
+    "pt": "Início",
+    "ja": "ホーム",
+    "ar": "الرئيسية"
+  },
+  "Map workspace": {
+    "fr": "Carte",
+    "de": "Karte",
+    "it": "Mappa",
+    "es": "Mapa",
+    "pt": "Mapa",
+    "ja": "地図",
+    "ar": "الخريطة"
+  },
+  "Change stories": {
+    "fr": "Histoires de changements",
+    "de": "Veränderungen",
+    "it": "Storie di cambiamento",
+    "es": "Historias de cambios",
+    "pt": "Histórias de mudanças",
+    "ja": "変化の事例",
+    "ar": "قصص التغيّر"
+  },
+  "Review queue": {
+    "fr": "À vérifier",
+    "de": "Prüfliste",
+    "it": "Da verificare",
+    "es": "Por revisar",
+    "pt": "Para verificar",
+    "ja": "確認待ち",
+    "ar": "قائمة المراجعة"
+  },
+  "Data and methods": {
+    "fr": "Données et méthodes",
+    "de": "Daten und Methoden",
+    "it": "Dati e metodi",
+    "es": "Datos y métodos",
+    "pt": "Dados e métodos",
+    "ja": "データと手法",
+    "ar": "البيانات والمنهجية"
+  },
+  "Classic overview": {
+    "fr": "Vue classique",
+    "de": "Klassische Übersicht",
+    "it": "Vista classica",
+    "es": "Vista clásica",
+    "pt": "Visão clássica",
+    "ja": "従来の一覧",
+    "ar": "العرض الكلاسيكي"
+  },
+  "Use workspaces": {
+    "fr": "Espaces de travail",
+    "de": "Arbeitsbereiche",
+    "it": "Aree di lavoro",
+    "es": "Espacios de trabajo",
+    "pt": "Áreas de trabalho",
+    "ja": "ワークスペース",
+    "ar": "مساحات العمل"
+  },
+  "Language": {
+    "fr": "Langue",
+    "de": "Sprache",
+    "it": "Lingua",
+    "es": "Idioma",
+    "pt": "Idioma",
+    "ja": "言語",
+    "ar": "اللغة"
+  },
+  "Send": {
+    "fr": "Envoyer",
+    "de": "Senden",
+    "it": "Invia",
+    "es": "Enviar",
+    "pt": "Enviar",
+    "ja": "送信",
+    "ar": "إرسال"
+  },
+  "Stop": {
+    "fr": "Arrêter",
+    "de": "Stopp",
+    "it": "Interrompi",
+    "es": "Detener",
+    "pt": "Parar",
+    "ja": "停止",
+    "ar": "إيقاف"
+  },
+  "Joint HH/HV <= {0} dB flag": {
+    "fr": "Indicateur conjoint HH/HV <= {0} dB",
+    "de": "Gleichzeitige HH/HV-Änderung <= {0} dB",
+    "it": "Indicatore congiunto HH/HV <= {0} dB",
+    "es": "Indicador conjunto HH/HV <= {0} dB",
+    "pt": "Indicador conjunto HH/HV <= {0} dB",
+    "ja": "HH/HV 両方 <= {0} dB のフラグ",
+    "ar": "إشارة HH/HV المشتركة <= {0} dB"
+  },
+  "Hide image": {
+    "ru": "Скрыть изображение",
+    "fr": "Masquer l’image",
+    "de": "Bild ausblenden",
+    "it": "Nascondi immagine",
+    "es": "Ocultar imagen",
+    "pt": "Ocultar imagem",
+    "ja": "画像を非表示",
+    "ar": "إخفاء الصورة"
+  },
+  "All sites": {
+    "ru": "Все участки",
+    "fr": "Tous les sites",
+    "de": "Alle Gebiete",
+    "it": "Tutti i siti",
+    "es": "Todos los sitios",
+    "pt": "Todos os locais",
+    "ja": "すべての地域",
+    "ar": "جميع المواقع"
+  },
+  "How SAR points were selected": {
+    "ru": "Как выбирались точки SAR",
+    "fr": "Sélection des points SAR",
+    "de": "Auswahl der SAR-Punkte",
+    "it": "Selezione dei punti SAR",
+    "es": "Selección de los puntos SAR",
+    "pt": "Seleção dos pontos SAR",
+    "ja": "SAR観測点の選定方法",
+    "ar": "كيفية اختيار نقاط SAR"
+  },
+  "Review a detected change": {
+    "ru": "Проверить обнаруженное изменение",
+    "fr": "Examiner un changement détecté",
+    "de": "Erkannte Änderung prüfen",
+    "it": "Esamina un cambiamento rilevato",
+    "es": "Revisar un cambio detectado",
+    "pt": "Revisar uma mudança detectada",
+    "ja": "検出された変化を確認",
+    "ar": "مراجعة تغير مكتشف"
+  },
+  "Active fires (NASA FIRMS)": {
+    "ru": "Активные пожары (NASA FIRMS)",
+    "fr": "Feux actifs (NASA FIRMS)",
+    "de": "Aktive Brände (NASA FIRMS)",
+    "it": "Incendi attivi (NASA FIRMS)",
+    "es": "Incendios activos (NASA FIRMS)",
+    "pt": "Incêndios ativos (NASA FIRMS)",
+    "ja": "活動中の火災（NASA FIRMS）",
+    "ar": "حرائق نشطة (NASA FIRMS)"
+  },
+  "Deforestation alerts": {
+    "ru": "Оповещения о вырубках",
+    "fr": "Alertes de déforestation",
+    "de": "Entwaldungswarnungen",
+    "it": "Avvisi di deforestazione",
+    "es": "Alertas de deforestación",
+    "pt": "Alertas de desmatamento",
+    "ja": "森林減少アラート",
+    "ar": "تنبيهات إزالة الغابات"
+  },
+  "Strong": {
+    "ru": "Сильная",
+    "fr": "Forte",
+    "de": "Stark",
+    "it": "Forte",
+    "es": "Fuerte",
+    "pt": "Forte",
+    "ja": "強い",
+    "ar": "قوي"
+  },
+  "Show all {0} findings": {
+    "ru": "Показать все {0} результатов",
+    "fr": "Afficher les {0} résultats",
+    "de": "Alle {0} Ergebnisse anzeigen",
+    "it": "Mostra tutti i {0} risultati",
+    "es": "Mostrar los {0} resultados",
+    "pt": "Mostrar os {0} resultados",
+    "ja": "全{0}件の結果を表示",
+    "ar": "عرض جميع النتائج الـ{0}"
+  },
+  "Evidence for selected sample": {
+    "ru": "Свидетельства для выбранной точки",
+    "fr": "Éléments pour le point sélectionné",
+    "de": "Belege zum ausgewählten Messpunkt",
+    "it": "Evidenze per il punto selezionato",
+    "es": "Evidencias del punto seleccionado",
+    "pt": "Evidências do ponto selecionado",
+    "ja": "選択した観測点の根拠",
+    "ar": "أدلة النقطة المختارة"
+  },
+  "Close story": {
+    "ru": "Закрыть историю",
+    "fr": "Fermer le récit",
+    "de": "Bericht schließen",
+    "it": "Chiudi storia",
+    "es": "Cerrar historia",
+    "pt": "Fechar história",
+    "ja": "ストーリーを閉じる",
+    "ar": "إغلاق القصة"
+  },
+  "Copy point link": {
+    "ru": "Скопировать ссылку на точку",
+    "fr": "Copier le lien du point",
+    "de": "Punktlink kopieren",
+    "it": "Copia link del punto",
+    "es": "Copiar enlace del punto",
+    "pt": "Copiar link do ponto",
+    "ja": "観測点のリンクをコピー",
+    "ar": "نسخ رابط النقطة"
+  },
+  "Download evidence / JSON": {
+    "ru": "Скачать свидетельства / JSON",
+    "fr": "Télécharger les éléments / JSON",
+    "de": "Belege herunterladen / JSON",
+    "it": "Scarica evidenze / JSON",
+    "es": "Descargar evidencias / JSON",
+    "pt": "Baixar evidências / JSON",
+    "ja": "根拠をダウンロード / JSON",
+    "ar": "تنزيل الأدلة / JSON"
+  },
+  "Download point / GeoJSON": {
+    "ru": "Скачать точку / GeoJSON",
+    "fr": "Télécharger le point / GeoJSON",
+    "de": "Punkt herunterladen / GeoJSON",
+    "it": "Scarica punto / GeoJSON",
+    "es": "Descargar punto / GeoJSON",
+    "pt": "Baixar ponto / GeoJSON",
+    "ja": "観測点をダウンロード / GeoJSON",
+    "ar": "تنزيل النقطة / GeoJSON"
+  },
+  "Open saved view": {
+    "ru": "Открыть сохранённый вид",
+    "fr": "Ouvrir la vue enregistrée",
+    "de": "Gespeicherte Ansicht öffnen",
+    "it": "Apri vista salvata",
+    "es": "Abrir vista guardada",
+    "pt": "Abrir visualização salva",
+    "ja": "保存した表示を開く",
+    "ar": "فتح العرض المحفوظ"
+  },
+  "Enable map gestures": {
+    "ru": "Включить жесты карты",
+    "fr": "Activer les gestes sur la carte",
+    "de": "Kartengesten aktivieren",
+    "it": "Attiva gesti sulla mappa",
+    "es": "Activar gestos del mapa",
+    "pt": "Ativar gestos do mapa",
+    "ja": "地図のジェスチャー操作を有効化",
+    "ar": "تفعيل إيماءات الخريطة"
+  },
+  "Browse automatic candidates": {
+    "ru": "Просмотреть автоматических кандидатов",
+    "fr": "Parcourir les candidats automatiques",
+    "de": "Automatische Kandidaten durchsuchen",
+    "it": "Esplora candidati automatici",
+    "es": "Explorar candidatos automáticos",
+    "pt": "Explorar candidatos automáticos",
+    "ja": "自動検出候補を表示",
+    "ar": "استعراض المرشحين الآليين"
+  },
+  "Touch:": {
+    "ru": "Касание:",
+    "fr": "Tactile :",
+    "de": "Touch:",
+    "it": "Tocco:",
+    "es": "Táctil:",
+    "pt": "Toque:",
+    "ja": "タッチ操作：",
+    "ar": "اللمس:"
+  },
+  "Move": {
+    "ru": "Перемещение",
+    "fr": "Déplacer",
+    "de": "Verschieben",
+    "it": "Sposta",
+    "es": "Mover",
+    "pt": "Mover",
+    "ja": "移動",
+    "ar": "تحريك"
+  },
+  "Rotate": {
+    "ru": "Вращение",
+    "fr": "Pivoter",
+    "de": "Drehen",
+    "it": "Ruota",
+    "es": "Girar",
+    "pt": "Girar",
+    "ja": "回転",
+    "ar": "تدوير"
+  },
+  "Loading elevation data...": {
+    "ru": "Загрузка данных высот...",
+    "fr": "Chargement des altitudes...",
+    "de": "Höhendaten werden geladen...",
+    "it": "Caricamento quote...",
+    "es": "Cargando elevaciones...",
+    "pt": "Carregando elevações...",
+    "ja": "標高データを読み込み中...",
+    "ar": "جارٍ تحميل بيانات الارتفاع..."
+  },
+  "DEM / measured elevations": {
+    "ru": "DEM / измеренные высоты",
+    "fr": "DEM / altitudes mesurées",
+    "de": "DEM / gemessene Höhen",
+    "it": "DEM / quote misurate",
+    "es": "DEM / elevaciones medidas",
+    "pt": "DEM / elevações medidas",
+    "ja": "DEM / 測定標高",
+    "ar": "DEM / الارتفاعات المقاسة"
+  },
+  "Ready": {
+    "ru": "Готово",
+    "fr": "Prêt",
+    "de": "Bereit",
+    "it": "Pronto",
+    "es": "Listo",
+    "pt": "Pronto",
+    "ja": "準備完了",
+    "ar": "جاهز"
+  },
+  "Image filters": {
+    "ru": "Фильтры изображения",
+    "fr": "Filtres d’image",
+    "de": "Bildfilter",
+    "it": "Filtri immagine",
+    "es": "Filtros de imagen",
+    "pt": "Filtros de imagem",
+    "ja": "画像フィルター",
+    "ar": "مرشحات الصورة"
+  },
+  "Contrast": {
+    "ru": "Контраст",
+    "fr": "Contraste",
+    "de": "Kontrast",
+    "it": "Contrasto",
+    "es": "Contraste",
+    "pt": "Contraste",
+    "ja": "コントラスト",
+    "ar": "التباين"
+  },
+  "Brightness": {
+    "ru": "Яркость",
+    "fr": "Luminosité",
+    "de": "Helligkeit",
+    "it": "Luminosità",
+    "es": "Brillo",
+    "pt": "Brilho",
+    "ja": "明るさ",
+    "ar": "السطوع"
+  },
+  "Tint": {
+    "ru": "Оттенок",
+    "fr": "Teinte",
+    "de": "Farbton",
+    "it": "Tonalità",
+    "es": "Tono",
+    "pt": "Tonalidade",
+    "ja": "色合い",
+    "ar": "الصبغة"
+  },
+  "Original": {
+    "ru": "Исходный",
+    "fr": "Original",
+    "de": "Original",
+    "it": "Originale",
+    "es": "Original",
+    "pt": "Original",
+    "ja": "元の画像",
+    "ar": "الأصل"
+  },
+  "Warm": {
+    "ru": "Тёплый",
+    "fr": "Chaud",
+    "de": "Warm",
+    "it": "Caldo",
+    "es": "Cálido",
+    "pt": "Quente",
+    "ja": "暖色",
+    "ar": "دافئ"
+  },
+  "Cool": {
+    "ru": "Холодный",
+    "fr": "Froid",
+    "de": "Kühl",
+    "it": "Freddo",
+    "es": "Frío",
+    "pt": "Frio",
+    "ja": "寒色",
+    "ar": "بارد"
+  },
+  "Reset filters": {
+    "ru": "Сбросить фильтры",
+    "fr": "Réinitialiser les filtres",
+    "de": "Filter zurücksetzen",
+    "it": "Ripristina filtri",
+    "es": "Restablecer filtros",
+    "pt": "Redefinir filtros",
+    "ja": "フィルターをリセット",
+    "ar": "إعادة ضبط المرشحات"
+  },
+  "Your visual review": {
+    "ru": "Ваша визуальная проверка",
+    "fr": "Votre examen visuel",
+    "de": "Ihre Sichtprüfung",
+    "it": "La tua verifica visiva",
+    "es": "Tu revisión visual",
+    "pt": "Sua revisão visual",
+    "ja": "目視確認",
+    "ar": "مراجعتك البصرية"
+  },
+  "Not reviewed": {
+    "ru": "Не проверено",
+    "fr": "Non examiné",
+    "de": "Nicht geprüft",
+    "it": "Non esaminato",
+    "es": "Sin revisar",
+    "pt": "Não revisado",
+    "ja": "未確認",
+    "ar": "لم تتم المراجعة"
+  },
+  "Change visible": {
+    "ru": "Изменение видно",
+    "fr": "Changement visible",
+    "de": "Änderung sichtbar",
+    "it": "Cambiamento visibile",
+    "es": "Cambio visible",
+    "pt": "Mudança visível",
+    "ja": "変化が見える",
+    "ar": "التغير مرئي"
+  },
+  "No visible change": {
+    "ru": "Видимых изменений нет",
+    "fr": "Aucun changement visible",
+    "de": "Keine sichtbare Änderung",
+    "it": "Nessun cambiamento visibile",
+    "es": "Sin cambio visible",
+    "pt": "Sem mudança visível",
+    "ja": "目に見える変化なし",
+    "ar": "لا تغير مرئياً"
+  },
+  "Uncertain / cannot see": {
+    "ru": "Неопределённо / не видно",
+    "fr": "Incertain / non visible",
+    "de": "Unsicher / nicht erkennbar",
+    "it": "Incerto / non visibile",
+    "es": "Incierto / no visible",
+    "pt": "Incerto / não visível",
+    "ja": "不確実 / 確認できない",
+    "ar": "غير مؤكد / لا يمكن الرؤية"
+  },
+  "Images reviewed": {
+    "ru": "Проверенные изображения",
+    "fr": "Images examinées",
+    "de": "Geprüfte Bilder",
+    "it": "Immagini esaminate",
+    "es": "Imágenes revisadas",
+    "pt": "Imagens revisadas",
+    "ja": "確認した画像",
+    "ar": "الصور التي تمت مراجعتها"
+  },
+  "Choose source": {
+    "ru": "Выбрать источник",
+    "fr": "Choisir la source",
+    "de": "Quelle auswählen",
+    "it": "Scegli fonte",
+    "es": "Elegir fuente",
+    "pt": "Escolher fonte",
+    "ja": "データソースを選択",
+    "ar": "اختيار المصدر"
+  },
+  "Both": {
+    "ru": "Оба",
+    "fr": "Les deux",
+    "de": "Beide",
+    "it": "Entrambi",
+    "es": "Ambos",
+    "pt": "Ambos",
+    "ja": "両方",
+    "ar": "كلاهما"
+  },
+  "Comment (optional)": {
+    "ru": "Комментарий (необязательно)",
+    "fr": "Commentaire (facultatif)",
+    "de": "Kommentar (optional)",
+    "it": "Commento (facoltativo)",
+    "es": "Comentario (opcional)",
+    "pt": "Comentário (opcional)",
+    "ja": "コメント（任意）",
+    "ar": "تعليق (اختياري)"
+  },
+  "Save review": {
+    "ru": "Сохранить проверку",
+    "fr": "Enregistrer l’examen",
+    "de": "Prüfung speichern",
+    "it": "Salva verifica",
+    "es": "Guardar revisión",
+    "pt": "Salvar revisão",
+    "ja": "確認結果を保存",
+    "ar": "حفظ المراجعة"
+  },
+  "Reset review": {
+    "ru": "Сбросить проверку",
+    "fr": "Réinitialiser l’examen",
+    "de": "Prüfung zurücksetzen",
+    "it": "Ripristina verifica",
+    "es": "Restablecer revisión",
+    "pt": "Redefinir revisão",
+    "ja": "確認結果をリセット",
+    "ar": "إعادة ضبط المراجعة"
+  },
+  "Download reviews": {
+    "ru": "Скачать проверки",
+    "fr": "Télécharger les examens",
+    "de": "Prüfungen herunterladen",
+    "it": "Scarica verifiche",
+    "es": "Descargar revisiones",
+    "pt": "Baixar revisões",
+    "ja": "確認結果をダウンロード",
+    "ar": "تنزيل المراجعات"
+  },
+  "Granules and method": {
+    "ru": "Гранулы и метод",
+    "fr": "Granules et méthode",
+    "de": "Granulen und Methode",
+    "it": "Granuli e metodo",
+    "es": "Gránulos y método",
+    "pt": "Grânulos e método",
+    "ja": "グラニュールと手法",
+    "ar": "الحبيبات والمنهج"
+  },
+  "Detection code": {
+    "ru": "Код обнаружения",
+    "fr": "Code de détection",
+    "de": "Erkennungscode",
+    "it": "Codice di rilevamento",
+    "es": "Código de detección",
+    "pt": "Código de detecção",
+    "ja": "検出コード",
+    "ar": "شفرة الكشف"
+  },
+  "Optical sources": {
+    "ru": "Оптические источники",
+    "fr": "Sources optiques",
+    "de": "Optische Quellen",
+    "it": "Fonti ottiche",
+    "es": "Fuentes ópticas",
+    "pt": "Fontes ópticas",
+    "ja": "光学データのソース",
+    "ar": "المصادر البصرية"
+  },
+  "The map separates SAR points from dated regional sites. Status describes evidence, not an established cause.": {
+    "ru": "Карта разделяет точки SAR и региональные участки с датами. Статус описывает свидетельства, а не установленную причину.",
+    "fr": "La carte distingue les points SAR des sites régionaux datés. Le statut décrit les éléments disponibles, pas une cause établie.",
+    "de": "Die Karte trennt SAR-Punkte von datierten regionalen Gebieten. Der Status beschreibt die Belege, keine nachgewiesene Ursache.",
+    "it": "La mappa distingue i punti SAR dai siti regionali datati. Lo stato descrive le evidenze, non una causa accertata.",
+    "es": "El mapa distingue los puntos SAR de los sitios regionales con fecha. El estado describe evidencias, no una causa establecida.",
+    "pt": "O mapa distingue pontos SAR de locais regionais datados. O estado descreve evidências, não uma causa comprovada.",
+    "ja": "地図ではSAR観測点と日付付きの広域調査地点を区別しています。ステータスは根拠の状態を示し、原因が確定したことを意味しません。",
+    "ar": "تفصل الخريطة نقاط SAR عن المواقع الإقليمية المؤرخة. تصف الحالة الأدلة ولا تعني ثبوت السبب."
+  }
+}

@@ -1,0 +1,671 @@
+{
+  "study": "Amazon dense native-grid temporal robustness, NISAR provisional GCOV",
+  "finding": "Dense-grid, retrospective descriptive result; no independent event truth. See report for the robust finding/contradiction, not an event label.",
+  "dates": [
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28"
+  ],
+  "acquisition_intervals_utc": [
+    {
+      "date": "2026-07-18",
+      "start": "2026-07-18T09:04:11.000Z",
+      "end": "2026-07-18T09:04:45.999Z",
+      "granule": "NISAR_L2_PR_GCOV_025_146_A_175_2005_DHDH_A_20260718T090411_20260718T090445_P05023_N_F_J_001"
+    },
+    {
+      "date": "2026-08-11",
+      "start": "2026-08-11T09:04:09.000Z",
+      "end": "2026-08-11T09:04:44.999Z",
+      "granule": "NISAR_L2_PR_GCOV_027_146_A_175_2005_DHDH_A_20260811T090409_20260811T090444_P05023_N_F_J_001"
+    },
+    {
+      "date": "2026-08-23",
+      "start": "2026-08-23T09:04:09.000Z",
+      "end": "2026-08-23T09:04:43.999Z",
+      "granule": "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001"
+    },
+    {
+      "date": "2026-09-04",
+      "start": "2026-09-04T09:04:08.000Z",
+      "end": "2026-09-04T09:04:43.999Z",
+      "granule": "NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001"
+    },
+    {
+      "date": "2026-09-16",
+      "start": "2026-09-16T09:04:08.000Z",
+      "end": "2026-09-16T09:04:43.999Z",
+      "granule": "NISAR_L2_PR_GCOV_030_146_A_175_2005_DHDH_A_20260916T090408_20260916T090443_P05023_N_F_J_001"
+    },
+    {
+      "date": "2026-09-28",
+      "start": "2026-09-28T09:04:08.000Z",
+      "end": "2026-09-28T09:04:43.999Z",
+      "granule": "NISAR_L2_PR_GCOV_031_146_A_175_2005_DHDH_A_20260928T090408_20260928T090443_P05023_N_F_J_001"
+    }
+  ],
+  "matching": {
+    "grid": {
+      "epsg": 32722,
+      "window": [
+        6391,
+        6532,
+        13147,
+        13288
+      ],
+      "x_first": 689910.0,
+      "y_first": 9473370.0,
+      "x_step": 20.0,
+      "y_step": -20.0,
+      "shape": [
+        141,
+        141
+      ]
+    },
+    "alignment": "all six metadata-identical native 20m EPSG:32722 grids; date masks and positive finite HH/HV; paired complete-case intersection",
+    "valid_cells": 19881,
+    "dates": [
+      "2026-07-18",
+      "2026-08-11",
+      "2026-08-23",
+      "2026-09-04",
+      "2026-09-16",
+      "2026-09-28"
+    ],
+    "sparse_32x32_to_dense_141x141_join": "not performed: different geometries/supports; no index-based join. No sparse cells or candidates enter dense statistics.",
+    "dense_receipt_audit": {
+      "track_orbit_frame_tokens": {
+        "track": "146",
+        "orbit_direction": "A",
+        "frame": "175"
+      },
+      "common_product_processing_id_suffix": "P05023_N_F_J_001",
+      "acquisition_sequence_tokens": [
+        "025",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031"
+      ],
+      "grid_metadata_identical": true,
+      "qualification": "common ID suffix and track/frame are consistent; local subset receipts do not expose a separate software build/version field, so processing equivalence beyond ID tokens is unverified"
+    }
+  },
+  "definitions": {
+    "dB": "10*log10(linear gamma0 power)",
+    "own_history": "per-date dB minus pixelwise median of 2026-07-18, 2026-08-11, 2026-08-23",
+    "post_summary": "per-pixel median across 2026-09-04, 2026-09-16, 2026-09-28",
+    "window_filter": "spatial median in dB independently per date, then temporal median difference",
+    "threshold": "threshold sweep uses each polarization separately; >=2/3 post dates, both HH and HV, WorldCover 2021 class 10",
+    "paired_temporal_ablation": "median of paired dB after-before differences for pairs 2026-07-18\u219209-04, 08-11\u219209-16, 08-23\u219209-28; distinct from median(after)-median(before); date lags 48,36,36 days",
+    "seed": 741903
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "path": "data/subsets/amazon-dense/2026-07-18.json",
+        "sha256": "6967e3ee197b6213eda40f0e49affa5e3623973e519c9e0443d9a63e12584259"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-07-18.npz",
+        "sha256": "463465935e74e676d15cfc7daf2a56a6714ea72c7c1ea9de42d2155c67006a44"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-08-11.json",
+        "sha256": "bd5832e7c301bd0755c01731746cf8720899670cba92467d01f85483ba49d017"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-08-11.npz",
+        "sha256": "beea9a1438427dfa89d2fa79f18749099649e2e83e810cb35cd34b8a83fa94d4"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-08-23.json",
+        "sha256": "605021014e0b4ac613533ef58da692656e45f40131af82cc0f235be86f2617a1"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-08-23.npz",
+        "sha256": "7d0b33e3e0e6972e44ef58ad05a5b6ae9a6680181c682d38d2ef121473d3621d"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-09-04.json",
+        "sha256": "126b8f11b7809a7e6884514725003c78418b39df27107c42f56591ba79f6cfe4"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-09-04.npz",
+        "sha256": "4b677e61a240699402752a44d71ee229bde5fde727171b83859d40707fcdd0d3"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-09-16.json",
+        "sha256": "50342f4268566875468db1153b40efb9edd4745d9e6afd7a0e545ffb702ed5b5"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-09-16.npz",
+        "sha256": "0b5f6d0b6b872e438757d67bced674c2904446e8c4c5699f8e592c311215be04"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-09-28.json",
+        "sha256": "1ff6be3b88c363a5df6d6a32f322ab945da7b6bd658abf66f900f23ebbbcaef8"
+      },
+      {
+        "path": "data/subsets/amazon-dense/2026-09-28.npz",
+        "sha256": "2f0c8b51deee3e10ec5aadb6849e1e1a3b1beaf4440244291bbdae848bb18b4b"
+      },
+      {
+        "path": "data/subsets/amazon-dense/worldcover-2021.json",
+        "sha256": "f7a04c37e21833dabb2337740cb3119fa61111cc25686509c0a23245e96c46a8"
+      },
+      {
+        "path": "data/subsets/amazon-dense/worldcover-2021.npz",
+        "sha256": "648b9fc59932e8083f53dc3ad93bc7b969c6a049c4288d4fdfb802055a8c1f5c"
+      },
+      {
+        "path": "data/subsets/amazon-dense/peer-z.npz",
+        "sha256": "8983f9469b5b16f120bbd7edac236fdc9bf5a510df15d520148ffc7700c84526"
+      },
+      {
+        "path": "data/amazon/dense-peer-z.json",
+        "sha256": "75c98b25e53652cb33e0582c95ff0e299543ac1172a70cb015036d42d1b95f48"
+      }
+    ],
+    "grid_m": [
+      20,
+      20
+    ],
+    "mask_policy": "mask 1..254, positive finite HH/HV; all six dates required for primary complete-case estimates"
+  },
+  "quality": {
+    "grid_shape": [
+      141,
+      141
+    ],
+    "grid_cell_m": [
+      20.0,
+      20.0
+    ],
+    "total_cells": 19881,
+    "valid_all_six_both_bands": 19881,
+    "valid_fraction": 1.0,
+    "valid_fraction_per_date": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "outermost_row_or_column_cells": 560,
+    "worldcover_forest_cells_class10": 11265,
+    "nominal_grid_footprint_km2": 7.9524,
+    "warning": "bbox sample footprint only; not contiguous AOI coverage and not event area"
+  },
+  "all_grid_change": {
+    "HH_3post_median_minus_3pre_median_db": {
+      "n": 19881,
+      "median": -0.5273,
+      "mean": -0.5415,
+      "p10": -2.6373,
+      "p90": 1.5251,
+      "negative_fraction": 0.62668
+    },
+    "HV_3post_median_minus_3pre_median_db": {
+      "n": 19881,
+      "median": -0.5351,
+      "mean": -0.5691,
+      "p10": -2.7277,
+      "p90": 1.5635,
+      "negative_fraction": 0.62909
+    },
+    "band_median_combined_db": {
+      "n": 19881,
+      "median": -0.527,
+      "mean": -0.5553,
+      "p10": -2.1592,
+      "p90": 1.0307,
+      "negative_fraction": 0.66943
+    },
+    "forest_class10_HH": {
+      "n": 11265,
+      "median": -0.267,
+      "mean": -0.2839,
+      "p10": -2.3882,
+      "p90": 1.7995,
+      "negative_fraction": 0.56352
+    },
+    "forest_class10_HV": {
+      "n": 11265,
+      "median": -0.3399,
+      "mean": -0.3768,
+      "p10": -2.5346,
+      "p90": 1.7486,
+      "negative_fraction": 0.58553
+    },
+    "forest_class10_band_median_combined": {
+      "n": 11265,
+      "median": -0.3019,
+      "mean": -0.3304,
+      "p10": -1.913,
+      "p90": 1.2476,
+      "negative_fraction": 0.60107
+    },
+    "worldcover_class_support": [
+      {
+        "worldcover_2021_class": 10,
+        "valid_cells": 11265,
+        "grid_fraction": 0.56662,
+        "post3_HV_change": {
+          "n": 11265,
+          "median": -0.3399,
+          "mean": -0.3768,
+          "p10": -2.5346,
+          "p90": 1.7486,
+          "negative_fraction": 0.58553
+        },
+        "both_band_negative_fraction": 0.34523
+      },
+      {
+        "worldcover_2021_class": 20,
+        "valid_cells": 2,
+        "grid_fraction": 0.0001,
+        "post3_HV_change": {
+          "n": 2,
+          "median": -1.9699,
+          "mean": -1.9699,
+          "p10": -2.8479,
+          "p90": -1.0918,
+          "negative_fraction": 1.0
+        },
+        "both_band_negative_fraction": 0.5
+      },
+      {
+        "worldcover_2021_class": 30,
+        "valid_cells": 8614,
+        "grid_fraction": 0.43328,
+        "post3_HV_change": {
+          "n": 8614,
+          "median": -0.7783,
+          "mean": -0.8201,
+          "p10": -2.8951,
+          "p90": 1.2382,
+          "negative_fraction": 0.68598
+        },
+        "both_band_negative_fraction": 0.50081
+      }
+    ]
+  },
+  "persistence_reversion": {
+    "2026-09-04": {
+      "HH": {
+        "n": 11265,
+        "median": -0.4644,
+        "mean": -0.4935,
+        "p10": -2.9236,
+        "p90": 1.9077,
+        "negative_fraction": 0.59929
+      },
+      "HV": {
+        "n": 11265,
+        "median": -0.5591,
+        "mean": -0.576,
+        "p10": -3.022,
+        "p90": 1.8471,
+        "negative_fraction": 0.61687
+      },
+      "both_negative_fraction": 0.38189
+    },
+    "2026-09-16": {
+      "HH": {
+        "n": 11265,
+        "median": -0.5286,
+        "mean": -0.5551,
+        "p10": -3.1236,
+        "p90": 1.9816,
+        "negative_fraction": 0.6055
+      },
+      "HV": {
+        "n": 11265,
+        "median": -0.5723,
+        "mean": -0.6308,
+        "p10": -3.2609,
+        "p90": 1.9894,
+        "negative_fraction": 0.61687
+      },
+      "both_negative_fraction": 0.39157
+    },
+    "2026-09-28": {
+      "HH": {
+        "n": 11265,
+        "median": 0.8243,
+        "mean": 0.874,
+        "p10": -2.5824,
+        "p90": 4.3589,
+        "negative_fraction": 0.37461
+      },
+      "HV": {
+        "n": 11265,
+        "median": 0.5746,
+        "mean": 0.5829,
+        "p10": -3.1213,
+        "p90": 4.2379,
+        "negative_fraction": 0.41394
+      },
+      "both_negative_fraction": 0.21855
+    }
+  },
+  "polarization_agreement": {
+    "forest_n": 11265,
+    "same_sign_fraction": 0.54141,
+    "both_negative_fraction": 0.34523,
+    "HH_HV_correlation": 0.12186
+  },
+  "threshold_sweep": [
+    {
+      "threshold_db": 1,
+      "forest_cells_both_bands_at_least_2_of_3_post_dates": 1452,
+      "forest_fraction": 0.12889,
+      "forest_cells_both_bands_below_threshold_on_both_2026_09_16_and_2026_09_28": 289,
+      "late_persistent_forest_fraction": 0.02565,
+      "area_km2_nominal": 0.5808,
+      "definition": "each HH and HV independently at least 2 of dates 2026-09-04/16/28 <= pre-period (Jul18/Aug11/Aug23 median dB) - threshold; 2021 WorldCover class 10"
+    },
+    {
+      "threshold_db": 2,
+      "forest_cells_both_bands_at_least_2_of_3_post_dates": 372,
+      "forest_fraction": 0.03302,
+      "forest_cells_both_bands_below_threshold_on_both_2026_09_16_and_2026_09_28": 55,
+      "late_persistent_forest_fraction": 0.00488,
+      "area_km2_nominal": 0.1488,
+      "definition": "each HH and HV independently at least 2 of dates 2026-09-04/16/28 <= pre-period (Jul18/Aug11/Aug23 median dB) - threshold; 2021 WorldCover class 10"
+    },
+    {
+      "threshold_db": 3,
+      "forest_cells_both_bands_at_least_2_of_3_post_dates": 83,
+      "forest_fraction": 0.00737,
+      "forest_cells_both_bands_below_threshold_on_both_2026_09_16_and_2026_09_28": 9,
+      "late_persistent_forest_fraction": 0.0008,
+      "area_km2_nominal": 0.0332,
+      "definition": "each HH and HV independently at least 2 of dates 2026-09-04/16/28 <= pre-period (Jul18/Aug11/Aug23 median dB) - threshold; 2021 WorldCover class 10"
+    },
+    {
+      "threshold_db": 4,
+      "forest_cells_both_bands_at_least_2_of_3_post_dates": 16,
+      "forest_fraction": 0.00142,
+      "forest_cells_both_bands_below_threshold_on_both_2026_09_16_and_2026_09_28": 2,
+      "late_persistent_forest_fraction": 0.00018,
+      "area_km2_nominal": 0.0064,
+      "definition": "each HH and HV independently at least 2 of dates 2026-09-04/16/28 <= pre-period (Jul18/Aug11/Aug23 median dB) - threshold; 2021 WorldCover class 10"
+    },
+    {
+      "threshold_db": 5,
+      "forest_cells_both_bands_at_least_2_of_3_post_dates": 4,
+      "forest_fraction": 0.00036,
+      "forest_cells_both_bands_below_threshold_on_both_2026_09_16_and_2026_09_28": 1,
+      "late_persistent_forest_fraction": 9e-05,
+      "area_km2_nominal": 0.0016,
+      "definition": "each HH and HV independently at least 2 of dates 2026-09-04/16/28 <= pre-period (Jul18/Aug11/Aug23 median dB) - threshold; 2021 WorldCover class 10"
+    }
+  ],
+  "spatial_block_bootstrap": [
+    {
+      "block_px": 10,
+      "block_m": 200,
+      "block_count": 196,
+      "mean_ci95": [
+        -0.4075,
+        -0.2609
+      ],
+      "resampling": "iid resampling of non-overlapping blocks with replacement; descriptive, block-boundary and finite-window limitations remain"
+    },
+    {
+      "block_px": 20,
+      "block_m": 400,
+      "block_count": 60,
+      "mean_ci95": [
+        -0.4569,
+        -0.2252
+      ],
+      "resampling": "iid resampling of non-overlapping blocks with replacement; descriptive, block-boundary and finite-window limitations remain"
+    },
+    {
+      "block_px": 40,
+      "block_m": 800,
+      "block_count": 16,
+      "mean_ci95": [
+        -0.5289,
+        -0.1543
+      ],
+      "resampling": "iid resampling of non-overlapping blocks with replacement; descriptive, block-boundary and finite-window limitations remain"
+    }
+  ],
+  "scale_and_nonlinearity_ablation": {
+    "per_band": {
+      "HH": {
+        "median_of_date_dB_difference": {
+          "n": 19881,
+          "median": -0.5273,
+          "mean": -0.5415,
+          "p10": -2.6373,
+          "p90": 1.5251,
+          "negative_fraction": 0.62668
+        },
+        "median_of_three_paired_post_minus_pre_dB_differences": {
+          "n": 19881,
+          "median": -0.4823,
+          "mean": -0.5034,
+          "p10": -2.7331,
+          "p90": 1.7024,
+          "negative_fraction": 0.60686
+        },
+        "paired_dates": [
+          [
+            "2026-07-18",
+            "2026-09-04"
+          ],
+          [
+            "2026-08-11",
+            "2026-09-16"
+          ],
+          [
+            "2026-08-23",
+            "2026-09-28"
+          ]
+        ],
+        "dB_of_linear_mean_ratio": {
+          "n": 19881,
+          "median": 0.2515,
+          "mean": 0.2814,
+          "p10": -1.791,
+          "p90": 2.3847,
+          "negative_fraction": 0.44102
+        },
+        "median_minus_linear_mean_pixelwise_db": {
+          "n": 19881,
+          "median": -0.5193,
+          "mean": -0.8229,
+          "p10": -2.7677,
+          "p90": 0.6525,
+          "negative_fraction": 0.69795
+        }
+      },
+      "HV": {
+        "median_of_date_dB_difference": {
+          "n": 19881,
+          "median": -0.5351,
+          "mean": -0.5691,
+          "p10": -2.7277,
+          "p90": 1.5635,
+          "negative_fraction": 0.62909
+        },
+        "median_of_three_paired_post_minus_pre_dB_differences": {
+          "n": 19881,
+          "median": -0.5132,
+          "mean": -0.5542,
+          "p10": -2.8423,
+          "p90": 1.7153,
+          "negative_fraction": 0.61873
+        },
+        "paired_dates": [
+          [
+            "2026-07-18",
+            "2026-09-04"
+          ],
+          [
+            "2026-08-11",
+            "2026-09-16"
+          ],
+          [
+            "2026-08-23",
+            "2026-09-28"
+          ]
+        ],
+        "dB_of_linear_mean_ratio": {
+          "n": 19881,
+          "median": 0.1337,
+          "mean": 0.1764,
+          "p10": -1.9468,
+          "p90": 2.3409,
+          "negative_fraction": 0.46738
+        },
+        "median_minus_linear_mean_pixelwise_db": {
+          "n": 19881,
+          "median": -0.4659,
+          "mean": -0.7455,
+          "p10": -2.6862,
+          "p90": 0.7723,
+          "negative_fraction": 0.67487
+        }
+      }
+    },
+    "spatial_median_windows": [
+      {
+        "window_cells": 1,
+        "window_m": 20,
+        "HH_delta": {
+          "n": 11265,
+          "median": -0.267,
+          "mean": -0.2839,
+          "p10": -2.3882,
+          "p90": 1.7995,
+          "negative_fraction": 0.56352
+        },
+        "HV_delta": {
+          "n": 11265,
+          "median": -0.3399,
+          "mean": -0.3768,
+          "p10": -2.5346,
+          "p90": 1.7486,
+          "negative_fraction": 0.58553
+        },
+        "both_bands_le_minus_3db_fraction": 0.00737,
+        "edge_policy": "scipy median_filter mode=nearest; clipped-window edge values included; not an area-corrected estimate"
+      },
+      {
+        "window_cells": 3,
+        "window_m": 60,
+        "HH_delta": {
+          "n": 11265,
+          "median": -0.2336,
+          "mean": -0.3041,
+          "p10": -1.5869,
+          "p90": 0.8776,
+          "negative_fraction": 0.6032
+        },
+        "HV_delta": {
+          "n": 11265,
+          "median": -0.3616,
+          "mean": -0.4102,
+          "p10": -1.6038,
+          "p90": 0.7648,
+          "negative_fraction": 0.65246
+        },
+        "both_bands_le_minus_3db_fraction": 0.00249,
+        "edge_policy": "scipy median_filter mode=nearest; clipped-window edge values included; not an area-corrected estimate"
+      },
+      {
+        "window_cells": 5,
+        "window_m": 100,
+        "HH_delta": {
+          "n": 11265,
+          "median": -0.2308,
+          "mean": -0.3463,
+          "p10": -1.4383,
+          "p90": 0.5682,
+          "negative_fraction": 0.63569
+        },
+        "HV_delta": {
+          "n": 11265,
+          "median": -0.3632,
+          "mean": -0.4558,
+          "p10": -1.4397,
+          "p90": 0.4236,
+          "negative_fraction": 0.71229
+        },
+        "both_bands_le_minus_3db_fraction": 0.00186,
+        "edge_policy": "scipy median_filter mode=nearest; clipped-window edge values included; not an area-corrected estimate"
+      },
+      {
+        "window_cells": 9,
+        "window_m": 180,
+        "HH_delta": {
+          "n": 11265,
+          "median": -0.2282,
+          "mean": -0.4244,
+          "p10": -1.4778,
+          "p90": 0.3021,
+          "negative_fraction": 0.68265
+        },
+        "HV_delta": {
+          "n": 11265,
+          "median": -0.3284,
+          "mean": -0.4963,
+          "p10": -1.4309,
+          "p90": 0.182,
+          "negative_fraction": 0.78447
+        },
+        "both_bands_le_minus_3db_fraction": 0.00018,
+        "edge_policy": "scipy median_filter mode=nearest; clipped-window edge values included; not an area-corrected estimate"
+      }
+    ],
+    "warning": "dB median and logarithm of linear arithmetic mean are distinct estimands; neither has been selected as a ground-truth optimum"
+  },
+  "own_history_vs_same_class": {
+    "n": 590,
+    "own_history_post_minus_pre_HV_db": {
+      "n": 590,
+      "median": -0.394,
+      "mean": -0.3941,
+      "p10": -2.5988,
+      "p90": 1.9801,
+      "negative_fraction": 0.60508
+    },
+    "same_class_1km_peer_z_post_minus_pre": {
+      "n": 590,
+      "median": -0.029,
+      "mean": -0.039,
+      "p10": -0.7445,
+      "p90": 0.7333,
+      "negative_fraction": 0.52034
+    },
+    "note": "same-class peer-z is a spatial contextual standardization, not ground truth or matched causal control; requires all six peer-z dates"
+  },
+  "context": {
+    "worldcover": "2021 nearest-neighbour sampled to same native grid; class is stale relative to 2026 and only stratification",
+    "alerts_fires_era5": "not used as labels; local archives not complete. ERA5 is coarse single-cell context and cannot identify pixel events; omit from primary inference."
+  },
+  "limitations": [
+    "one clipped 141x141 native-grid window, not wall-to-wall area; neighboring cells are spatially dependent",
+    "retrospective thresholds and descriptive analyses; no preregistration",
+    "provisional GCOV; seasonal, moisture, geometry and processing effects remain",
+    "same track/frame and product ID suffix, but no explicit software build/version in subset receipts; processing equivalence beyond those tokens unverified",
+    "sparse 32x32 and dense 141x141 supports differ; no index-based join or coordinate crosswalk was attempted",
+    "WorldCover 2021 classes may be stale",
+    "no independent ground truth; candidates are not deforestation, fire, flood or water labels",
+    "spatial bootstrap describes this finite window only and does not create independent sites/events",
+    "peer-z uses same radar time series and class map; it is an alternate spatial reference, not independent validation",
+    "late-return pattern is observational only; no cause (including speckle/artifact) established",
+    "threshold-based late persistence uses the same post observations as candidate selection; regression-to-mean and lack of independent temporal holdout remain"
+  ]
+}

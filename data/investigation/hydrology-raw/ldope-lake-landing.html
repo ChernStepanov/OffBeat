@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LDOPE LAKE TS</title>
+  <script language="javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NASA&subagency=GSFC&dclink=true"></script>
+  <link rel='icon' href='/pic/browse_icon.png'/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+  <link rel='stylesheet' type='text/css' href='/css/fontawesome-free-5.11.2-web/css/all.min.css' />
+  <!-- <link rel='stylesheet' type='text/css' href='/css/iThing.css' /> -->
+  <link rel='stylesheet' type='text/css' href='/css/ts.css?v=0.40' />
+  <link rel='stylesheet' type='text/css' href='/css/sitets.css?v=0.40' />
+  <link rel='stylesheet' href='/css/leaflet/L.Control.MousePosition.css' />
+  <link rel='stylesheet' href='/css/leaflet/L.Control.Zoomslider.css' />
+  <link rel='stylesheet' href='/css/leaflet/leaflet.css' />
+  <link rel='stylesheet' href='/css/nouislider.mod.css' />
+  <script src='/js/url.js?v=0.40' type='text/javascript'></script>
+  <script src='/js/leaflet/leaflet.js'></script>
+  <script src='/js/leaflet/proj4-compressed.js'></script>
+  <script src='/js/leaflet/proj4leaflet.js'></script>
+  <script src='/js/leaflet/L.Control.MousePosition.js'></script>
+  <script src='/js/leaflet/L.Control.Zoomslider.js'></script>
+  <script src='/js/jquery.min.js'></script>
+  <script src='/js/jquery-ui.min.js'></script>
+  <!-- <script src='/js/jQDateRangeSlider-min.js'></script> -->
+  <script src='/js/plotly-latest.min.js'></script>
+  <script src='/js/nouislider.min.js'></script>
+  <script src='/js/ts.js?v=0.40' type='text/javascript'></script>
+  <script src='/js/sitets.js?v=0.40' type='text/javascript'></script>
+  <script src='/js/lakets.js?v=0.40' type='text/javascript'></script>
+  <script src='/js/get_menu_items.js?v=0.40' type='text/javascript'></script>
+  <script>const app_prefix = '';</script>
+</head>
+<body onload="load_sites3()">
+
+<div id='cover'></div>
+<div id='ts-type' class='hidden'>LAKE</div>
+
+<div id="map-container">
+  <div id="map2"></div>
+  <div id='logo'>
+    <img src='/pic/nasa-logo2.png'/>
+    <div id='logo-name'>
+      <span>NASA&nbsp;</span>
+      <a href='/'>LDOPE</a>
+    </div>
+    <div id='logo-title'>Water Reservoir Time Series</div>
+  </div>
+
+  <div id="sites" class="hidden">
+    <div data-siteid='1' data-lakeid='1' data-lon='104.32'
+         data-lat='52.24' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='23615.39', data-areacap='32265.61',
+         data-elevcap='456.88'>
+      Baikal
+    </div>
+    <div data-siteid='2' data-lakeid='2' data-lon='0.06'
+         data-lat='6.3' data-lcountry='Ghana' data-conti='Africa'
+         data-storcap='148', data-areacap='8502',
+         data-elevcap='86.65'>
+      Volta
+    </div>
+    <div data-siteid='3' data-lakeid='3' data-lon='32.89'
+         data-lat='23.97' data-lcountry='Egypt' data-conti='Africa'
+         data-storcap='162', data-areacap='6500',
+         data-elevcap='183.28'>
+      Nasser
+    </div>
+    <div data-siteid='4' data-lakeid='4' data-lon='28.76'
+         data-lat='-16.52' data-lcountry='Zambia' data-conti='Africa'
+         data-storcap='180', data-areacap='5400',
+         data-elevcap='485.41'>
+      KaribaReservoir
+    </div>
+    <div data-siteid='5' data-lakeid='5' data-lon='101.78'
+         data-lat='56.29' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='169.27', data-areacap='5470',
+         data-elevcap='403.85'>
+      BratskReservoir
+    </div>
+    <div data-siteid='6' data-lakeid='6' data-lon='83.35'
+         data-lat='49.66' data-lcountry='Kazakhstan' data-conti='Asia'
+         data-storcap='49.8', data-areacap='5490',
+         data-elevcap='395.74'>
+      Zaysan
+    </div>
+    <div data-siteid='7' data-lakeid='7' data-lon='-63'
+         data-lat='7.77' data-lcountry='Venezuela' data-conti='SouthAmerica'
+         data-storcap='135', data-areacap='4250',
+         data-elevcap='278.38'>
+      GuriReservoir
+    </div>
+    <div data-siteid='8' data-lakeid='8' data-lon='-69.78'
+         data-lat='54.85' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='53.79', data-areacap='4275',
+         data-elevcap='541.08'>
+      CaniapiscauReservoir
+    </div>
+    <div data-siteid='9' data-lakeid='9' data-lon='-77.45'
+         data-lat='53.79' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='61.7', data-areacap='2905',
+         data-elevcap='176.24'>
+      RobertBourassaReservoir
+    </div>
+    <div data-siteid='10' data-lakeid='10' data-lon='-40.82'
+         data-lat='-9.42' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='34.1', data-areacap='3017.9',
+         data-elevcap='392.5'>
+      SobradinhoReservoir
+    </div>
+    <div data-siteid='11' data-lakeid='11' data-lon='-99.29'
+         data-lat='53.16' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='9.64', data-areacap='2668.46',
+         data-elevcap='256.29'>
+      Cedar
+    </div>
+    <div data-siteid='12' data-lakeid='12' data-lon='-75.96'
+         data-lat='53.73' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='60', data-areacap='2451',
+         data-elevcap='257.48'>
+      LaGrande3Reservoir
+    </div>
+    <div data-siteid='13' data-lakeid='13' data-lon='-49.65'
+         data-lat='-3.83' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='45.5', data-areacap='2606',
+         data-elevcap='75.4'>
+      TucuruiReservoir
+    </div>
+    <div data-siteid='14' data-lakeid='14' data-lon='42.11'
+         data-lat='47.61' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='23.86', data-areacap='2702',
+         data-elevcap='39.44'>
+      TsimlyanskoyeReservoir
+    </div>
+    <div data-siteid='15' data-lakeid='15' data-lon='127.31'
+         data-lat='53.77' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='68.4', data-areacap='2420',
+         data-elevcap='316.41'>
+      ZeyskoyeReservoir
+    </div>
+    <div data-siteid='16' data-lakeid='16' data-lon='112.48'
+         data-lat='63.03' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='35.9', data-areacap='2170',
+         data-elevcap='244.62'>
+      VilyuyReservoir
+    </div>
+    <div data-siteid='17' data-lakeid='17' data-lon='87.81'
+         data-lat='68.16' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='23.5', data-areacap='2221.61',
+         data-elevcap='59.64'>
+      KhantayskoyeReservoir
+    </div>
+    <div data-siteid='18' data-lakeid='18' data-lon='32.7'
+         data-lat='-15.58' data-lcountry='Mozambique' data-conti='Africa'
+         data-storcap='55.8', data-areacap='2739',
+         data-elevcap='329.18'>
+      CahoraBassaReservoir
+    </div>
+    <div data-siteid='19' data-lakeid='19' data-lon='-122.2'
+         data-lat='56.02' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='39.47', data-areacap='1773',
+         data-elevcap='674.79'>
+      Williston
+    </div>
+    <div data-siteid='20' data-lakeid='20' data-lon='43.46'
+         data-lat='33.69' data-lcountry='Iraq' data-conti='Asia'
+         data-storcap='85.59', data-areacap='2135.54',
+         data-elevcap='65'>
+      BuhayratathTharthar
+    </div>
+    <div data-siteid='21' data-lakeid='21' data-lon='92.29'
+         data-lat='55.93' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='73.3', data-areacap='2000',
+         data-elevcap='240.04'>
+      KrasnoyarskReservoir
+    </div>
+    <div data-siteid='22' data-lakeid='22' data-lon='56.34'
+         data-lat='58.12' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='12.2', data-areacap='1915',
+         data-elevcap='110.32'>
+      KamaReservoir
+    </div>
+    <div data-siteid='23' data-lakeid='23' data-lon='-81.1'
+         data-lat='26.94' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='5.2', data-areacap='1536.8',
+         data-elevcap='3.9'>
+      Okeechobee
+    </div>
+    <div data-siteid='24' data-lakeid='24' data-lon='118.73'
+         data-lat='33.09' data-lcountry='China' data-conti='Asia'
+         data-storcap='13.5', data-areacap='2074.61',
+         data-elevcap='17'>
+      Hungtze
+    </div>
+    <div data-siteid='25' data-lakeid='25' data-lon='43.89'
+         data-lat='32.7' data-lcountry='Iraq' data-conti='Asia'
+         data-storcap='25.75', data-areacap='1621',
+         data-elevcap='34.69'>
+      Razazah
+    </div>
+    <div data-siteid='26' data-lakeid='26' data-lon='-74.1'
+         data-lat='48.36' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='8.57', data-areacap='1570',
+         data-elevcap='403.98'>
+      GouinReservoir
+    </div>
+    <div data-siteid='27' data-lakeid='27' data-lon='77.1'
+         data-lat='43.92' data-lcountry='Kazakhstan' data-conti='Asia'
+         data-storcap='28.1', data-areacap='1850',
+         data-elevcap='483.71'>
+      QapshaghayBogeniReservoir
+    </div>
+    <div data-siteid='28' data-lakeid='28' data-lon='-101.43'
+         data-lat='47.51' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='29.38', data-areacap='1477.4',
+         data-elevcap='565.1'>
+      FortBertholdReservoir
+    </div>
+    <div data-siteid='29' data-lakeid='29' data-lon='-56.63'
+         data-lat='-27.39' data-lcountry='Paraguay' data-conti='SouthAmerica'
+         data-storcap='21', data-areacap='1600',
+         data-elevcap='84.71'>
+      ApereaReservoir
+    </div>
+    <div data-siteid='30' data-lakeid='30' data-lon='-100.4'
+         data-lat='44.46' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='28.35', data-areacap='1429.57',
+         data-elevcap='493.78'>
+      Oahe
+    </div>
+    <div data-siteid='31' data-lakeid='31' data-lon='-51.38'
+         data-lat='-20.37' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='21.17', data-areacap='1200',
+         data-elevcap='329.78'>
+      IlhaSolteiraReservoir
+    </div>
+    <div data-siteid='32' data-lakeid='32' data-lon='47.76'
+         data-lat='52.05' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='12.9', data-areacap='1117.7',
+         data-elevcap='28.36'>
+      SaratovReservoir
+    </div>
+    <div data-siteid='33' data-lakeid='33' data-lon='32.55'
+         data-lat='67.41' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='10.8', data-areacap='1062.37',
+         data-elevcap='136.07'>
+      Imandra
+    </div>
+    <div data-siteid='34' data-lakeid='34' data-lon='4.61'
+         data-lat='9.87' data-lcountry='Nigeria' data-conti='Africa'
+         data-storcap='15', data-areacap='1071.23',
+         data-elevcap='136.81'>
+      KainjiReservoir
+    </div>
+    <div data-siteid='35' data-lakeid='35' data-lon='83'
+         data-lat='54.84' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='8.8', data-areacap='1070',
+         data-elevcap='113.97'>
+      Novosibirskoye
+    </div>
+    <div data-siteid='36' data-lakeid='36' data-lon='47.46'
+         data-lat='56.14' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='13.85', data-areacap='1080.38',
+         data-elevcap='65.73'>
+      Cheboksary
+    </div>
+    <div data-siteid='37' data-lakeid='37' data-lon='31.28'
+         data-lat='58.46' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='12', data-areacap='1120',
+         data-elevcap='19.28'>
+      Ilmen
+    </div>
+    <div data-siteid='38' data-lakeid='38' data-lon='32.48'
+         data-lat='15.24' data-lcountry='Sudan' data-conti='Africa'
+         data-storcap='3.5', data-areacap='861.19',
+         data-elevcap='380.39'>
+      JebelAuliaReservoir
+    </div>
+    <div data-siteid='39' data-lakeid='39' data-lon='-76.58'
+         data-lat='52.21' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='8.5', data-areacap='1040',
+         data-elevcap='216.1'>
+      OpinacaReservoir
+    </div>
+    <div data-siteid='40' data-lakeid='40' data-lon='-46.31'
+         data-lat='-20.67' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='22.59', data-areacap='1127.07',
+         data-elevcap='769.32'>
+      Furnas
+    </div>
+    <div data-siteid='41' data-lakeid='41' data-lon='-48.3'
+         data-lat='-13.84' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='54.4', data-areacap='1784',
+         data-elevcap='470.07'>
+      SerradaMesaReservoir
+    </div>
+    <div data-siteid='42' data-lakeid='42' data-lon='54.08'
+         data-lat='56.8' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='9.4', data-areacap='850.82',
+         data-elevcap='86.25'>
+      VotkinskReservoir
+    </div>
+    <div data-siteid='43' data-lakeid='43' data-lon='128.74'
+         data-lat='-16.12' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='10.76', data-areacap='981.21',
+         data-elevcap='93.97'>
+      ArgyleReservoir
+    </div>
+    <div data-siteid='44' data-lakeid='44' data-lon='-93.36'
+         data-lat='48.62' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='0.69', data-areacap='829.45',
+         data-elevcap='336.73'>
+      Rainy
+    </div>
+    <div data-siteid='45' data-lakeid='45' data-lon='-106.41'
+         data-lat='48' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='22.77', data-areacap='969.86',
+         data-elevcap='685.76'>
+      FortPeck
+    </div>
+    <div data-siteid='46' data-lakeid='46' data-lon='-45.27'
+         data-lat='-18.21' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='21', data-areacap='1040',
+         data-elevcap='576.06'>
+      TresMariasReservoir
+    </div>
+    <div data-siteid='47' data-lakeid='47' data-lon='-69.77'
+         data-lat='49.36' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='13.9', data-areacap='978',
+         data-elevcap='409.16'>
+      PipmuacanReservoir
+    </div>
+    <div data-siteid='48' data-lakeid='48' data-lon='67.96'
+         data-lat='41.25' data-lcountry='Kazakhstan' data-conti='Asia'
+         data-storcap='5.7', data-areacap='800.66',
+         data-elevcap='252.54'>
+      Chardarinskoye
+    </div>
+    <div data-siteid='49' data-lakeid='49' data-lon='52.28'
+         data-lat='55.7' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='13.8', data-areacap='1084',
+         data-elevcap='65.34'>
+      NizhnekamskReservoir
+    </div>
+    <div data-siteid='50' data-lakeid='50' data-lon='-56.42'
+         data-lat='-32.83' data-lcountry='Uruguay' data-conti='SouthAmerica'
+         data-storcap='8.8', data-areacap='1070',
+         data-elevcap='82.77'>
+      NegroReservoir
+    </div>
+    <div data-siteid='51' data-lakeid='51' data-lon='-68.76'
+         data-lat='-39.27' data-lcountry='Argentina' data-conti='SouthAmerica'
+         data-storcap='22', data-areacap='820',
+         data-elevcap='378.2'>
+      ChoconReservoir
+    </div>
+    <div data-siteid='52' data-lakeid='52' data-lon='38.32'
+         data-lat='37.49' data-lcountry='Turkey' data-conti='Asia'
+         data-storcap='48.7', data-areacap='817',
+         data-elevcap='541.2'>
+      AtaturkDam
+    </div>
+    <div data-siteid='53' data-lakeid='53' data-lon='-38.31'
+         data-lat='-9.14' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='10.7', data-areacap='781.21',
+         data-elevcap='305.4'>
+      ItaparicaReservoir
+    </div>
+    <div data-siteid='54' data-lakeid='54' data-lon='38.55'
+         data-lat='35.86' data-lcountry='Syria' data-conti='Asia'
+         data-storcap='11.7', data-areacap='610',
+         data-elevcap='302.87'>
+      Assad
+    </div>
+    <div data-siteid='55' data-lakeid='55' data-lon='13.69'
+         data-lat='9.06' data-lcountry='Cameroon' data-conti='Africa'
+         data-storcap='7.7', data-areacap='691.12',
+         data-elevcap='216'>
+      LagdoReservoir
+    </div>
+    <div data-siteid='56' data-lakeid='56' data-lon='-93.57'
+         data-lat='31.18' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='5.52', data-areacap='636.18',
+         data-elevcap='52.43'>
+      ToledoBendReservoir
+    </div>
+    <div data-siteid='57' data-lakeid='57' data-lon='-75.89'
+         data-lat='52.19' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='6.94', data-areacap='602.9',
+         data-elevcap='286.82'>
+      EastmainReservoir
+    </div>
+    <div data-siteid='58' data-lakeid='58' data-lon='-68.91'
+         data-lat='49.71' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='24.5', data-areacap='640',
+         data-elevcap='361.53'>
+      Outardes4Reservoir
+    </div>
+    <div data-siteid='59' data-lakeid='59' data-lon='31.76'
+         data-lat='68.6' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='3.7', data-areacap='745',
+         data-elevcap='79.62'>
+      Kovdozero
+    </div>
+    <div data-siteid='60' data-lakeid='60' data-lon='-50.5'
+         data-lat='-19.02' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='12.5', data-areacap='703',
+         data-elevcap='405.94'>
+      SaoSimaoReservoir
+    </div>
+    <div data-siteid='61' data-lakeid='61' data-lon='-114.73'
+         data-lat='36.02' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='34.07', data-areacap='659.3',
+         data-elevcap='374.6'>
+      Mead
+    </div>
+    <div data-siteid='62' data-lakeid='62' data-lon='90.38'
+         data-lat='29.1' data-lcountry='China' data-conti='Asia'
+         data-storcap='14.6', data-areacap='638',
+         data-elevcap='4443.49'>
+      Yamdrok
+    </div>
+    <div data-siteid='63' data-lakeid='63' data-lon='-92.78'
+         data-lat='16.4' data-lcountry='Mexico' data-conti='NorthAmerica'
+         data-storcap='18.2', data-areacap='640',
+         data-elevcap='530.67'>
+      AngosturaReservoir
+    </div>
+    <div data-siteid='64' data-lakeid='64' data-lon='78.9'
+         data-lat='16.09' data-lcountry='India' data-conti='Asia'
+         data-storcap='8.29', data-areacap='534.05',
+         data-elevcap='269.75'>
+      SrisailamReservoir
+    </div>
+    <div data-siteid='65' data-lakeid='65' data-lon='-57.94'
+         data-lat='-31.27' data-lcountry='Argentina' data-conti='SouthAmerica'
+         data-storcap='5', data-areacap='592.83',
+         data-elevcap='35.08'>
+      GrandeReservoir
+    </div>
+    <div data-siteid='66' data-lakeid='66' data-lon='75.55'
+         data-lat='24.7' data-lcountry='India' data-conti='Asia'
+         data-storcap='6.83', data-areacap='619.89',
+         data-elevcap='399.9'>
+      GandhisagarReservoir
+    </div>
+    <div data-siteid='67' data-lakeid='67' data-lon='-49.78'
+         data-lat='-21.3' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='7.41', data-areacap='513.39',
+         data-elevcap='384'>
+      PromissaoReservoir
+    </div>
+    <div data-siteid='68' data-lakeid='68' data-lon='-117.78'
+         data-lat='49.34' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='10.3', data-areacap='504.82',
+         data-elevcap='439.3'>
+      Arrow
+    </div>
+    <div data-siteid='69' data-lakeid='69' data-lon='-50.35'
+         data-lat='-19.87' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='11.03', data-areacap='563.15',
+         data-elevcap='383.3'>
+      AguaVermelhaReservoir
+    </div>
+    <div data-siteid='70' data-lakeid='70' data-lon='83.85'
+         data-lat='21.52' data-lcountry='India' data-conti='Asia'
+         data-storcap='5.38', data-areacap='669.62',
+         data-elevcap='192.02'>
+      HirakudReservoir
+    </div>
+    <div data-siteid='71' data-lakeid='71' data-lon='-5.47'
+         data-lat='7.03' data-lcountry='IvoryCoast' data-conti='Africa'
+         data-storcap='27.68', data-areacap='1058.2',
+         data-elevcap='206'>
+      KossourReservoir
+    </div>
+    <div data-siteid='72' data-lakeid='72' data-lon='88.29'
+         data-lat='66.95' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='9.96', data-areacap='558',
+         data-elevcap='95.63'>
+      Kureiskaya
+    </div>
+    <div data-siteid='73' data-lakeid='73' data-lon='14.47'
+         data-lat='63.3' data-lcountry='Sweden' data-conti='Euro'
+         data-storcap='8.02', data-areacap='484.6',
+         data-elevcap='293.13'>
+      Storsjon
+    </div>
+    <div data-siteid='74' data-lakeid='74' data-lon='-114.23'
+         data-lat='47.68' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='23.2', data-areacap='510',
+         data-elevcap='883.61'>
+      FlatheadLake
+    </div>
+    <div data-siteid='75' data-lakeid='75' data-lon='-70.53'
+         data-lat='50.66' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='2.22', data-areacap='470.44',
+         data-elevcap='494.18'>
+      Kempt
+    </div>
+    <div data-siteid='76' data-lakeid='76' data-lon='150.23'
+         data-lat='62.05' data-lcountry='Russia' data-conti='Asia'
+         data-storcap='15.08', data-areacap='454.6',
+         data-elevcap='453'>
+      Kolymadam
+    </div>
+    <div data-siteid='77' data-lakeid='77' data-lon='35.98'
+         data-lat='-7.14' data-lcountry='UnitedRepublicofTanzania' data-conti='Africa'
+         data-storcap='3.2', data-areacap='478.83',
+         data-elevcap='698.5'>
+      MteraReservoir
+    </div>
+    <div data-siteid='78' data-lakeid='78' data-lon='69.82'
+         data-lat='40.28' data-lcountry='Tajikistan' data-conti='Asia'
+         data-storcap='4.2', data-areacap='513',
+         data-elevcap='346.23'>
+      Kayrakkumskoye
+    </div>
+    <div data-siteid='79' data-lakeid='79' data-lon='-118.57'
+         data-lat='52.08' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='24.76', data-areacap='430',
+         data-elevcap='759.15'>
+      Kinbasket
+    </div>
+    <div data-siteid='80' data-lakeid='80' data-lon='47.03'
+         data-lat='40.8' data-lcountry='Azerbaijan' data-conti='Asia'
+         data-storcap='15.73', data-areacap='567.97',
+         data-elevcap='83'>
+      Mingechaurskoye
+    </div>
+    <div data-siteid='81' data-lakeid='81' data-lon='-54.97'
+         data-lat='-25.37' data-lcountry='Paraguay' data-conti='SouthAmerica'
+         data-storcap='8.47', data-areacap='620',
+         data-elevcap='231.14'>
+      LagodelRioYguazu
+    </div>
+    <div data-siteid='82' data-lakeid='82' data-lon='83'
+         data-lat='24.2' data-lcountry='India' data-conti='Asia'
+         data-storcap='5.65', data-areacap='426.36',
+         data-elevcap='268.22'>
+      GovindBallabahPant
+    </div>
+    <div data-siteid='83' data-lakeid='83' data-lon='38.76'
+         data-lat='38.81' data-lcountry='Turkey' data-conti='Asia'
+         data-storcap='30.6', data-areacap='675',
+         data-elevcap='848.79'>
+      KebanBaraji
+    </div>
+    <div data-siteid='84' data-lakeid='84' data-lon='-68.69'
+         data-lat='-38.58' data-lcountry='Argentina' data-conti='SouthAmerica'
+         data-storcap='27.7', data-areacap='413',
+         data-elevcap='417.11'>
+      LosBarreales
+    </div>
+    <div data-siteid='85' data-lakeid='85' data-lon='81.29'
+         data-lat='24.19' data-lcountry='India' data-conti='Asia'
+         data-storcap='5.17', data-areacap='471.6',
+         data-elevcap='341.64'>
+      BansagarLake
+    </div>
+    <div data-siteid='86' data-lakeid='86' data-lon='-94.11'
+         data-lat='31.07' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='3.55', data-areacap='455.64',
+         data-elevcap='50.11'>
+      SamRayburnReservoir
+    </div>
+    <div data-siteid='87' data-lakeid='87' data-lon='-49.23'
+         data-lat='-23.21' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='7.01', data-areacap='542',
+         data-elevcap='566.48'>
+      BarraBonita
+    </div>
+    <div data-siteid='88' data-lakeid='88' data-lon='73.6'
+         data-lat='21.26' data-lcountry='India' data-conti='Asia'
+         data-storcap='6.62', data-areacap='509.85',
+         data-elevcap='105.16'>
+      Ukal
+    </div>
+    <div data-siteid='89' data-lakeid='89' data-lon='-111.89'
+         data-lat='40.36' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='1.07', data-areacap='380',
+         data-elevcap='1368.28'>
+      UtahLake
+    </div>
+    <div data-siteid='90' data-lakeid='90' data-lon='-117'
+         data-lat='48.18' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='54.2', data-areacap='381.47',
+         data-elevcap='628.8'>
+      PendOreilleLake
+    </div>
+    <div data-siteid='91' data-lakeid='91' data-lon='76.33'
+         data-lat='15.27' data-lcountry='India' data-conti='Asia'
+         data-storcap='3.28', data-areacap='349.42',
+         data-elevcap='497.74'>
+      Tungabhadra
+    </div>
+    <div data-siteid='92' data-lakeid='92' data-lon='42.83'
+         data-lat='36.63' data-lcountry='Iraq' data-conti='Asia'
+         data-storcap='11.1', data-areacap='353.16',
+         data-elevcap='330'>
+      MosulDamLake
+    </div>
+    <div data-siteid='93' data-lakeid='93' data-lon='42.35'
+         data-lat='34.21' data-lcountry='Iraq' data-conti='Asia'
+         data-storcap='8.2', data-areacap='418.4',
+         data-elevcap='144.43'>
+      Habbaniyah
+    </div>
+    <div data-siteid='94' data-lakeid='94' data-lon='78.34'
+         data-lat='18.97' data-lcountry='India' data-conti='Asia'
+         data-storcap='2.3', data-areacap='314.38',
+         data-elevcap='332.54'>
+      SriramsagarReservoir
+    </div>
+    <div data-siteid='95' data-lakeid='95' data-lon='-49.1'
+         data-lat='-18.41' data-lcountry='Brazil' data-conti='SouthAmerica'
+         data-storcap='17', data-areacap='559.6',
+         data-elevcap='520.38'>
+      LagodasBrisas
+    </div>
+    <div data-siteid='96' data-lakeid='96' data-lon='-56.78'
+         data-lat='48.17' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='2.16', data-areacap='314.9',
+         data-elevcap='270.65'>
+      Meelpaeg
+    </div>
+    <div data-siteid='97' data-lakeid='97' data-lon='25.5'
+         data-lat='-30.62' data-lcountry='SouthAfrica' data-conti='Africa'
+         data-storcap='5.34', data-areacap='374',
+         data-elevcap='1261.93'>
+      HendrikVerwoerd
+    </div>
+    <div data-siteid='98' data-lakeid='98' data-lon='-93.6'
+         data-lat='17.18' data-lcountry='Mexico' data-conti='NorthAmerica'
+         data-storcap='9.17', data-areacap='309.45',
+         data-elevcap='182'>
+      Malpaso
+    </div>
+    <div data-siteid='99' data-lakeid='99' data-lon='-101.89'
+         data-lat='18.27' data-lcountry='Mexico' data-conti='NorthAmerica'
+         data-storcap='12', data-areacap='400',
+         data-elevcap='173.13'>
+      Inhernillo
+    </div>
+    <div data-siteid='100' data-lakeid='100' data-lon='28.12'
+         data-lat='-26.88' data-lcountry='SouthAfrica' data-conti='Africa'
+         data-storcap='2.61', data-areacap='320',
+         data-elevcap='1484.27'>
+      Vaaldam
+    </div>
+    <div data-siteid='101' data-lakeid='101' data-lon='100.92'
+         data-lat='36.12' data-lcountry='China' data-conti='Asia'
+         data-storcap='24.7', data-areacap='383',
+         data-elevcap='2589.15'>
+      Longyangxia
+    </div>
+    <div data-siteid='102' data-lakeid='102' data-lon='29.48'
+         data-lat='62.83' data-lcountry='Finland' data-conti='Euro'
+         data-storcap='2.39', data-areacap='293',
+         data-elevcap='88.05'>
+      Hoytiainen
+    </div>
+    <div data-siteid='103' data-lakeid='103' data-lon='-75.98'
+         data-lat='46.72' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='2.63', data-areacap='280',
+         data-elevcap='223.14'>
+      Baskatong
+    </div>
+    <div data-siteid='104' data-lakeid='104' data-lon='107.04'
+         data-lat='11.11' data-lcountry='Vietnam' data-conti='Asia'
+         data-storcap='2.76', data-areacap='323',
+         data-elevcap='62.79'>
+      TriAnLake
+    </div>
+    <div data-siteid='105' data-lakeid='105' data-lon='-71.25'
+         data-lat='49.9' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='5.18', data-areacap='270.72',
+         data-elevcap='440.26'>
+      Peribonka
+    </div>
+    <div data-siteid='106' data-lakeid='106' data-lon='75.37'
+         data-lat='19.49' data-lcountry='India' data-conti='Asia'
+         data-storcap='2.17', data-areacap='382.39',
+         data-elevcap='463.91'>
+      Jayakwadi
+    </div>
+    <div data-siteid='107' data-lakeid='107' data-lon='6.84'
+         data-lat='9.97' data-lcountry='Nigeria' data-conti='Africa'
+         data-storcap='7', data-areacap='312',
+         data-elevcap='377.73'>
+      Shiroro
+    </div>
+    <div data-siteid='108' data-lakeid='108' data-lon='39.12'
+         data-lat='44.99' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='3.05', data-areacap='286.28',
+         data-elevcap='33.68'>
+      Tshchikskoye
+    </div>
+    <div data-siteid='109' data-lakeid='109' data-lon='-103.4'
+         data-lat='53.66' data-lcountry='Canada' data-conti='NorthAmerica'
+         data-storcap='2.2', data-areacap='263.86',
+         data-elevcap='313.59'>
+      Tobin
+    </div>
+    <div data-siteid='110' data-lakeid='110' data-lon='105.43'
+         data-lat='15.21' data-lcountry='Thailand' data-conti='Asia'
+         data-storcap='1.97', data-areacap='288',
+         data-elevcap='145.94'>
+      Noi
+    </div>
+    <div data-siteid='111' data-lakeid='111' data-lon='34.39'
+         data-lat='11.8' data-lcountry='Sudan' data-conti='Africa'
+         data-storcap='7.4', data-areacap='450',
+         data-elevcap='487.12'>
+      RoseiresReservoir
+    </div>
+    <div data-siteid='112' data-lakeid='112' data-lon='72.65'
+         data-lat='41.68' data-lcountry='Kyrgyzstan' data-conti='Asia'
+         data-storcap='19.5', data-areacap='284.3',
+         data-elevcap='901.24'>
+      Toktogulskoye
+    </div>
+    <div data-siteid='113' data-lakeid='113' data-lon='145.98'
+         data-lat='-42.73' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='12.4', data-areacap='278',
+         data-elevcap='311.42'>
+      Gordon
+    </div>
+    <div data-siteid='114' data-lakeid='114' data-lon='75.12'
+         data-lat='18.07' data-lcountry='India' data-conti='Asia'
+         data-storcap='1.52', data-areacap='268.91',
+         data-elevcap='496.83'>
+      Ujani
+    </div>
+    <div data-siteid='115' data-lakeid='115' data-lon='-64.89'
+         data-lat='-27.52' data-lcountry='Argentina' data-conti='SouthAmerica'
+         data-storcap='1.74', data-areacap='330',
+         data-elevcap='276.36'>
+      Hondo
+    </div>
+    <div data-siteid='116' data-lakeid='116' data-lon='37.12'
+         data-lat='56.73' data-lcountry='Russia' data-conti='Euro'
+         data-storcap='1.17', data-areacap='220.57',
+         data-elevcap='123.47'>
+      IvankovoReservoir
+    </div>
+    <div data-siteid='117' data-lakeid='117' data-lon='72.69'
+         data-lat='34.09' data-lcountry='Pakistan' data-conti='Asia'
+         data-storcap='13.69', data-areacap='250',
+         data-elevcap='483.55'>
+      Tarbela
+    </div>
+    <div data-siteid='118' data-lakeid='118' data-lon='79.31'
+         data-lat='16.57' data-lcountry='India' data-conti='Asia'
+         data-storcap='6.84', data-areacap='272.18',
+         data-elevcap='179.83'>
+      Nagarjuna
+    </div>
+    <div data-siteid='119' data-lakeid='119' data-lon='13.34'
+         data-lat='63.43' data-lcountry='Sweden' data-conti='Euro'
+         data-storcap='6.14', data-areacap='189.74',
+         data-elevcap='392.8'>
+      Kallsjon
+    </div>
+    <div data-siteid='120' data-lakeid='120' data-lon='39.14'
+         data-lat='38.23' data-lcountry='Turkey' data-conti='Asia'
+         data-storcap='9.5', data-areacap='298',
+         data-elevcap='697.54'>
+      Karakaya
+    </div>
+    <div data-siteid='121' data-lakeid='121' data-lon='75.95'
+         data-lat='31.97' data-lcountry='India' data-conti='Asia'
+         data-storcap='6.16', data-areacap='254.85',
+         data-elevcap='423.67'>
+      Beas
+    </div>
+    <div data-siteid='122' data-lakeid='122' data-lon='27.24'
+         data-lat='-10.75' data-lcountry='DemocraticRepublicoftheCongo' data-conti='Africa'
+         data-storcap='1.06', data-areacap='225.65',
+         data-elevcap='1126.03'>
+      Tshangalele
+    </div>
+    <div data-siteid='123' data-lakeid='123' data-lon='37.36'
+         data-lat='9.56' data-lcountry='Ethiopia' data-conti='Africa'
+         data-storcap='0.65', data-areacap='196.13',
+         data-elevcap='2220.26'>
+      Finchaa
+    </div>
+    <div data-siteid='124' data-lakeid='124' data-lon='75.89'
+         data-lat='16.33' data-lcountry='India' data-conti='Asia'
+         data-storcap='3.11', data-areacap='293.42',
+         data-elevcap='519.6'>
+      Almatti
+    </div>
+    <div data-siteid='125' data-lakeid='125' data-lon='73.64'
+         data-lat='33.15' data-lcountry='Pakistan' data-conti='Asia'
+         data-storcap='9.12', data-areacap='251',
+         data-elevcap='370.6'>
+      Mangla
+    </div>
+    <div data-siteid='126' data-lakeid='126' data-lon='75.58'
+         data-lat='24.92' data-lcountry='India' data-conti='Asia'
+         data-storcap='1.44', data-areacap='197.66',
+         data-elevcap='352.81'>
+      RanaPratap
+    </div>
+    <div data-siteid='127' data-lakeid='127' data-lon='-0.55'
+         data-lat='11.47' data-lcountry='BurkinaFaso' data-conti='Africa'
+         data-storcap='1.7', data-areacap='255',
+         data-elevcap='238.12'>
+      Bagre
+    </div>
+    <div data-siteid='128' data-lakeid='128' data-lon='-76.19'
+         data-lat='-10.98' data-lcountry='Peru' data-conti='SouthAmerica'
+         data-storcap='1.08', data-areacap='206.71',
+         data-elevcap='4084.62'>
+      Junin
+    </div>
+    <div data-siteid='129' data-lakeid='129' data-lon='79.93'
+         data-lat='22.95' data-lcountry='India' data-conti='Asia'
+         data-storcap='3.18', data-areacap='236.24',
+         data-elevcap='422.76'>
+      BargiDamReservoir
+    </div>
+    <div data-siteid='130' data-lakeid='130' data-lon='146.73'
+         data-lat='-41.98' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='3.36', data-areacap='176',
+         data-elevcap='1040.54'>
+      GreatLake
+    </div>
+    <div data-siteid='131' data-lakeid='131' data-lon='169.25'
+         data-lat='-44.61' data-lcountry='NewZealand' data-conti='Oceania'
+         data-storcap='2.18', data-areacap='150',
+         data-elevcap='345.49'>
+      Hawea
+    </div>
+    <div data-siteid='132' data-lakeid='132' data-lon='13.79'
+         data-lat='-8.96' data-lcountry='Angola' data-conti='Africa'
+         data-storcap='1.56', data-areacap='129.05',
+         data-elevcap='51.93'>
+      AlbufeiradaQuiminha
+    </div>
+    <div data-siteid='133' data-lakeid='133' data-lon='148.62'
+         data-lat='-36.13' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='4.8', data-areacap='145.42',
+         data-elevcap='1165.24'>
+      Eucumbene
+    </div>
+    <div data-siteid='134' data-lakeid='134' data-lon='-99.17'
+         data-lat='26.56' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='3.88', data-areacap='311.84',
+         data-elevcap='93.48'>
+      FalconReservoir
+    </div>
+    <div data-siteid='135' data-lakeid='135' data-lon='-111.49'
+         data-lat='36.94' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='30', data-areacap='609.38',
+         data-elevcap='1127.76'>
+      LakePowell
+    </div>
+    <div data-siteid='136' data-lakeid='136' data-lon='44.96'
+         data-lat='35.96' data-lcountry='Iraq' data-conti='Asia'
+         data-storcap='6.97', data-areacap='270',
+         data-elevcap='513.69'>
+      Dukan
+    </div>
+    <div data-siteid='137' data-lakeid='137' data-lon='-96.07'
+         data-lat='32.18' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='0.8', data-areacap='133.03',
+         data-elevcap='98.15'>
+      CedarCreekReservoir
+    </div>
+    <div data-siteid='138' data-lakeid='138' data-lon='15.05'
+         data-lat='10.83' data-lcountry='Cameroon' data-conti='Africa'
+         data-storcap='0.68', data-areacap='148.72',
+         data-elevcap='312.5'>
+      LakeMaga
+    </div>
+    <div data-siteid='139' data-lakeid='139' data-lon='101.08'
+         data-lat='14.85' data-lcountry='Thailand' data-conti='Asia'
+         data-storcap='0.79', data-areacap='158.87',
+         data-elevcap='42'>
+      PasakChonlasit
+    </div>
+    <div data-siteid='140' data-lakeid='140' data-lon='148.06'
+         data-lat='-23.65' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='2.29', data-areacap='179.43',
+         data-elevcap='209.81'>
+      Fairbairn
+    </div>
+    <div data-siteid='141' data-lakeid='141' data-lon='147.03'
+         data-lat='-36.11' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='3.04', data-areacap='201.9',
+         data-elevcap='192'>
+      Hume
+    </div>
+    <div data-siteid='142' data-lakeid='142' data-lon='37.47'
+         data-lat='-3.82' data-lcountry='UnitedRepublicofTanzania' data-conti='Africa'
+         data-storcap='0.6', data-areacap='126.33',
+         data-elevcap='689.65'>
+      Kikuletwa
+    </div>
+    <div data-siteid='143' data-lakeid='143' data-lon='77.93'
+         data-lat='18.2' data-lcountry='India' data-conti='Asia'
+         data-storcap='0.5', data-areacap='92.75',
+         data-elevcap='428.24'>
+      Nizamsagar
+    </div>
+    <div data-siteid='144' data-lakeid='144' data-lon='141.28'
+         data-lat='-34.04' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='0.68', data-areacap='122',
+         data-elevcap='27.73'>
+      Victoria
+    </div>
+    <div data-siteid='145' data-lakeid='145' data-lon='-89.77'
+         data-lat='33.82' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='1.54', data-areacap='128.29',
+         data-elevcap='65.53'>
+      GrenadaLake
+    </div>
+    <div data-siteid='146' data-lakeid='146' data-lon='-121.09'
+         data-lat='40.18' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='1.61', data-areacap='108.39',
+         data-elevcap='1373.12'>
+      Canyon
+    </div>
+    <div data-siteid='147' data-lakeid='147' data-lon='45.4'
+         data-lat='39.09' data-lcountry='Azerbaijan' data-conti='Asia'
+         data-storcap='1.35', data-areacap='145',
+         data-elevcap='779.94'>
+      ArasDamLake
+    </div>
+    <div data-siteid='148' data-lakeid='148' data-lon='35.9'
+         data-lat='14.93' data-lcountry='Sudan' data-conti='Africa'
+         data-storcap='1.3', data-areacap='125',
+         data-elevcap='474.76'>
+      Khashmel-Girba
+    </div>
+    <div data-siteid='149' data-lakeid='149' data-lon='-116.05'
+         data-lat='44.52' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='0.85', data-areacap='101.98',
+         data-elevcap='1471.57'>
+      LakeCascade
+    </div>
+    <div data-siteid='150' data-lakeid='150' data-lon='18.57'
+         data-lat='66.97' data-lcountry='Sweden' data-conti='Euro'
+         data-storcap='1.68', data-areacap='81',
+         data-elevcap='470.15'>
+      Seitevare
+    </div>
+    <div data-siteid='151' data-lakeid='151' data-lon='40.54'
+         data-lat='10.23' data-lcountry='Ethiopia' data-conti='Africa'
+         data-storcap='2.32', data-areacap='104.87',
+         data-elevcap='568.25'>
+      Yardi
+    </div>
+    <div data-siteid='152' data-lakeid='152' data-lon='-121.08'
+         data-lat='41.93' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='0.65', data-areacap='100.36',
+         data-elevcap='1365.84'>
+      ClearLakeReservoir
+    </div>
+    <div data-siteid='153' data-lakeid='153' data-lon='115.6'
+         data-lat='40.23' data-lcountry='China' data-conti='Asia'
+         data-storcap='4.16', data-areacap='130',
+         data-elevcap='479.09'>
+      GuantingShuiku
+    </div>
+    <div data-siteid='154' data-lakeid='154' data-lon='-7.64'
+         data-lat='32.47' data-lcountry='Morocco' data-conti='Africa'
+         data-storcap='2.76', data-areacap='80',
+         data-elevcap='268.54'>
+      BarrageAlMassira
+    </div>
+    <div data-siteid='155' data-lakeid='155' data-lon='-100.62'
+         data-lat='27.51' data-lcountry='Mexico' data-conti='NorthAmerica'
+         data-storcap='1.31', data-areacap='150.56',
+         data-elevcap='266.53'>
+      VenustianoCarranza
+    </div>
+    <div data-siteid='156' data-lakeid='156' data-lon='44.97'
+         data-lat='34.12' data-lcountry='Iraq' data-conti='Asia'
+         data-storcap='4.61', data-areacap='228',
+         data-elevcap='107.5'>
+      LakeHamrin
+    </div>
+    <div data-siteid='157' data-lakeid='157' data-lon='78.37'
+         data-lat='25.1' data-lcountry='India' data-conti='Asia'
+         data-storcap='0.71', data-areacap='112.07',
+         data-elevcap='308.46'>
+      Matatila
+    </div>
+    <div data-siteid='158' data-lakeid='158' data-lon='-100.52'
+         data-lat='31.37' data-lcountry='UnitedStatesofAmerica' data-conti='NorthAmerica'
+         data-storcap='0.23', data-areacap='29.47',
+         data-elevcap='591.37'>
+      TwinButtes
+    </div>
+    <div data-siteid='159' data-lakeid='159' data-lon='79.3'
+         data-lat='14.49' data-lcountry='India' data-conti='Asia'
+         data-storcap='1.99', data-areacap='153.17',
+         data-elevcap='100.58'>
+      Somasila
+    </div>
+    <div data-siteid='160' data-lakeid='160' data-lon='119.7'
+         data-lat='42.75' data-lcountry='China' data-conti='Asia'
+         data-storcap='2.56', data-areacap='66.9',
+         data-elevcap='437.64'>
+      HongshanReservoir
+    </div>
+    <div data-siteid='161' data-lakeid='161' data-lon='146.74'
+         data-lat='-19.41' data-lcountry='Australia' data-conti='Oceania'
+         data-storcap='0.8', data-areacap='82',
+         data-elevcap='41.77'>
+      LakeRoss
+    </div>
+    <div data-siteid='162' data-lakeid='162' data-lon='82.08'
+         data-lat='17.3' data-lcountry='India' data-conti='Asia'
+         data-storcap='0.51', data-areacap='49.36',
+         data-elevcap='86.56'>
+      YeleruReservoir
+    </div>
+    <div data-siteid='163' data-lakeid='163' data-lon='67.63'
+         data-lat='37.83' data-lcountry='Uzbekistan' data-conti='Asia'
+         data-storcap='0.8', data-areacap='40.26',
+         data-elevcap='411.41'>
+      SouthSurkhanReservoir
+    </div>
+    <div data-siteid='164' data-lakeid='164' data-lon='112.77'
+         data-lat='33.73' data-lcountry='China' data-conti='Asia'
+         data-storcap='0.71', data-areacap='46.5',
+         data-elevcap='174.27'>
+      ZhaopingtaiReservoir
+    </div>
+  </div>
+
+  <div id="rect-geo" class="rect-selection" onmousedown="return false;">
+    <div class="wrap" onmousedown="return false;">
+      <div class="rect-selection-handle ord-nw"></div>
+      <div class="rect-selection-handle ord-ne"></div>
+      <div class="rect-selection-handle ord-se"></div>
+      <div class="rect-selection-handle ord-sw"></div>
+      <div class="rect-selection-handle ord-n"></div>
+      <div class="rect-selection-handle ord-w"></div>
+      <div class="rect-selection-handle ord-e"></div>
+      <div class="rect-selection-handle ord-s"></div>
+    </div>
+  </div>
+
+  <div id="add" title="select sites" onclick="open_sidebar()">&#43;&nbsp; Select Sites</div>
+
+  <div id="side" class="sidenav">
+    <div class="wrap">
+      <div style="overflow:hidden; height:100%;">
+
+        <div class="closebtn" onclick="open_sidebar()">
+          <i id="close-side" class="fas fa-angle-double-right"></i>
+        </div>
+        <div class="side-cap">
+          <i class="fas fa-map-marker-alt"></i> Select Sites
+        </div>
+        <div class="site-note"></div>
+        <div class="side-section">
+          <input id="selectall" type="checkbox" onchange="select_sites_by_all_filters()">
+          <label for="selectall"> Select All</label>
+          <div id="clear-all" class="link-btn" onclick="clear_all()">clear all</div>
+        </div>
+
+        <div class="side-section">
+          Lat/Lon<br>
+          <div id="ord-grp">
+            <input type="text" id="north" onchange="select_sites_by_all_filters()">
+            <input type="text" id="west" onchange="select_sites_by_all_filters()">
+            <input type="text" id="east" onchange="select_sites_by_all_filters()">
+            <input type="text" id="south" onchange="select_sites_by_all_filters()">
+          </div>
+          <div id="clear-geo" class="link-btn" onclick="clear_geos()">clear</div>
+          <div id="mouse-select" class="link-btn" onclick="select_by_mouse()">mouse select</div>
+        </div>
+
+        <div class="side-section">
+          Continent &nbsp;
+          <select id="sel-conti" onchange="select_sites_by_all_filters()">
+            <option value=-1>--</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+            <option value="Africa">Africa</option>
+            <option value="Euro">Euro</option>
+            <option value="Asia">Asia</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </div>
+
+        <div class="side-section">
+          Additional &nbsp;
+          <div id="search-site">
+            <input type="text" id="input-id" placeholder="site name" oninput="auto_complete(this)"/>
+            <span id="add-id" onclick="add_by_id(true)">
+              <i class="fas fa-plus"></i>
+            </span>
+          </div>
+          <span id="additional-counter">0</span>
+          <div id="additional-explain">
+            Sites selected by site ID or mouse clicking
+          </div>
+        </div>
+
+        <div class="side-section">
+          <select id="sel-search-var" onchange="search_lake()">
+            <option value=-1>--</option>
+            <option value="area">Reservoir Area (Sq km)</option>
+            <option value="elevation">Reservoir Elevation (m)</option>
+            <option value="storage">Reservoir Storage (Cubic km)</option>
+            <option value="evap_rate">Evaporation Rate (mm per day)</option>
+            <option value="evap_vol">Evaporation Volume (Cubic million meter per month)</option>
+          </select>
+          <span> DIFF to climatology >=  </span>
+          <span id="threshold-label">10%</span>
+          <div>
+            <input id="threshold" type="range" min="1" max="50" value="10" oninput="set_threshold_label(this)" onchange="search_lake()">
+          </div>
+          <div>Between:
+            <span id="range1"></span>
+            -
+            <span id="range2"></span>
+          </div>
+          <div id="noui-slider"></div>
+        </div>
+
+        <div class="side-section">
+          Selected Sites (<span id="counter">0</span>):
+          <br><br>
+          <div id="selected-list"></div>
+        </div>
+
+        <div class="side-section">
+          <div id="btn-sel-dataset" class="btn" onclick="open_div_dataset()">
+            &#43;&nbsp; Select Datasets
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="side-right" class="sidenav-right">
+    <div class="wrap">
+      <div style="overflow:hidden; height:100%;">
+        <div class="closebtn" onclick="open_sidebar_right()">
+          <i id="close-side-right" class="fas fa-angle-double-left"></i>
+        </div>
+
+        <div id="plot-panel">
+          <div id="div-plotnames"></div>
+          <br>
+          <div id="slider" class="hidden"></div>
+          <br>
+          <div id="plot-div"></div>
+
+          <br>
+          <div id="options">
+            <input type="checkbox" class="apple-switch" id="show-clim"
+              onclick="show_clim(this)" >
+            <label for="show-clim">Show Climatology</label>
+
+            <input type="checkbox" class="apple-switch" id="show-tempavg"
+              onclick="show_tempavg(this)" >
+            <label for="show-tempavg">Temporal Average</label>
+
+            <select id="tempavg" class="hidden" onchange="temporal_average(this)">
+              <option value="8-Day" >8-Day</option>
+              <option value="16-Day" >16-Day</option>
+              <option value="Monthly" selected>Monthly</option>
+              <option value="Yearly" >Yearly</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="div-dataset">
+    <div class="close-btn" onclick="close_div_dataset()">&#x2715;</div>
+    <div id="dataset-cap">
+      <i class="fas fa-server"></i>
+      Select Datasets
+    </div>
+
+    <br>
+    <div id="data-selector">
+      <div>
+        <label for="sel-sensor">Sensor</label>
+        <select id="sel-sensor" name="sel-sensor" onchange="db_select_sensor(this,&#39;Lake TS&#39;)"><option value="-1">-- select sensor --</option><option value="TerraAqua">TerraAqua MODIS</option><option value="SNPPJ1">SNPPJ1 VIIRS</option></select>
+      </div>
+
+      <div>
+        <label for="sel-ver">Collection</label>
+        <select id='sel-ver' onchange='db_select_archiveset(this, "Lake TS")'>
+          <option value=-1>-- select collection --</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="sel-esdt">ESDT</label>
+        <select id='sel-esdt' onchange='db_select_esdt(this, "Lake TS", "bandlist")'>
+          <option value=-1>-- select ESDT --</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="sel-sds">Dataset</label>
+        <select id='sel-sds' onchange='select_sds(this)'>
+          <option value=-1>-- select dataset --</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="sel-sds">Variable</label>
+        <select id='sel-vari'>
+          <option value=-1>-- select variable --</option>
+        </select>
+      </div>
+
+      <div id="add-to-plot" class="btn" onclick="add_dataset()">&#43;&nbsp; Add to Plot</div>
+    </div>
+
+    <br>
+    <h3>Selected Plots</h3>
+    <div id='selected-plots'>
+    </div>
+
+    <br>
+    <div id='average'>
+      <input type='checkbox' id='chk-average' onchange='toggle_average_sites(this)'  >
+      <label for='chk-average'>Average sites</label>
+    </div>
+
+    <div id="do-plot" class="btn" onclick="do_ltdr_plot(true)">PLOT</div>
+
+  </div>';
+
+  <div id="error-box">
+    <div class="wrap">
+      <div class="list-item-close" onclick="close_error()">&#x2715;</div>
+      <div id="error-cap">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span id="box-title">Error<span>
+      </div>
+      <div id="error-msg"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

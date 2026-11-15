@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000080">
+<link rel="icon" href="data:,">
+<title>OffBeat — candidates and findings on the map</title>
+<link rel="stylesheet" href="css/offbeat.css?v=11f4c34dfa2b">
+<link rel="stylesheet" href="css/candidates.css?v=e8abd833765b">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+</head>
+<body>
+<a class="skip" href="#candidate-main" data-i18n="skip">К кандидатам</a>
+<div id="desk" class="candidate-desk">
+  <header class="win app-bar">
+    <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h1>OffBeat — <span data-i18n="title">кандидаты и находки на карте</span></h1></div>
+    <nav class="menu" aria-label="Навигация"><a href="research.html" data-i18n="research">← Результаты исследования</a><a href="index.html" data-i18n="dashboard">Обзор</a><button type="button" id="candidate-language" class="btn" aria-label="Switch language">EN</button></nav>
+  </header>
+  <main id="candidate-main">
+    <section class="win"><div class="win-t"><h2 data-i18n="introTitle">Кандидаты и находки на карте</h2></div><div class="win-b paper"><p data-i18n="intro">На карте: SAR-точки и датированные региональные участки. Статус означает силу свидетельств, а не установленную причину.</p><p id="investigation-summary"></p><div id="overview-counts" class="overview-counts" aria-label="Record counts"></div><p id="regional-headline" class="candidate-status"></p><p id="regional-review-note"></p><details><summary data-i18n="selectionMethod">Как выбраны SAR-точки</summary><p id="selection-note"></p></details><p id="candidate-status" role="status" aria-live="polite">Загрузка наборов данных…</p></div></section>
+    <section class="win" aria-labelledby="filter-heading"><div class="win-t"><h2 id="filter-heading" data-i18n="filters">Фильтры</h2></div><div class="win-b candidate-filters">
+      <label><span data-i18n="kind">Тип</span><select id="filter-kind"><option value="all" data-i18n="all">Все</option><option value="candidate" data-i18n="candidate">Кандидаты</option><option value="control" data-i18n="control">Контроли</option><option value="regional_event" data-i18n="regionalEvent">Региональные находки</option></select></label>
+      <label><span data-i18n="evidenceStatus">Статус доказательств</span><select id="filter-status"><option value="all" data-i18n="all">Все</option><option value="supported" data-i18n="supported">Есть подтверждающие данные</option><option value="mixed" data-i18n="mixed">Смешанные</option><option value="unresolved" data-i18n="unresolved">Не разрешено</option><option value="unknown" data-i18n="unknown">Неизвестно</option></select></label>
+    </div></section>
+    <section class="candidate-layout">
+      <section class="win map-window"><div class="win-t"><h2 data-i18n="map">Карта кандидатов</h2></div><div class="win-b"><div id="scene-controls" class="scene-controls" hidden></div><p id="scene-caption" class="map-note" hidden></p><div id="candidate-map" aria-label="Карта кандидатов"></div><p id="map-fallback" class="map-fallback" hidden data-i18n="mapUnavailable">Интерактивная карта недоступна. Используйте список координат ниже.</p><p class="map-note" data-i18n="mapNote">Подложка OpenStreetMap, если доступна, требует интернет-соединения; атрибуция отображается на карте.</p></div></section>
+      <section class="win"><div class="win-t"><h2 data-i18n="records">Список мест</h2></div><div class="win-b"><ul id="candidate-list" class="candidate-list"></ul><p id="list-empty" data-i18n="noRecords">Опубликованных записей пока нет.</p></div></section>
+    </section>
+    <section class="win" id="candidate-detail"><div class="win-t"><h2 data-i18n="details">Карточка выбранного места</h2></div><div class="win-b paper" id="detail-content"><p data-i18n="selectRecord">Выберите запись в списке или на карте.</p></div></section>
+    <section class="win" id="raster-layer-window" hidden><div class="win-t"><h2 data-i18n="rasterLayers">Внешние растровые слои</h2></div><div class="win-b" id="raster-layer-controls"></div></section>
+    <section class="win" id="weather-window" hidden><div class="win-t"><h2 data-i18n="weatherContext">Погодный контекст исходного SAR-окна</h2></div><div class="win-b" id="weather-content"></div></section>
+    <section class="win" id="hydrology-window" hidden><div class="win-t"><h2 data-i18n="hydrology">Водохранилище и гидрология</h2></div><div class="win-b" id="hydrology-content"></div></section>
+    <section class="win" id="mexico-weather-window" hidden><div class="win-t"><h2 data-i18n="mexicoWeather">Отдельная проверка погодной связи: Мексика</h2></div><div class="win-b" id="mexico-weather-content"></div></section>
+    <section class="win"><div class="win-t"><h2 data-i18n="sourceCatalogue">Каталог источников</h2></div><div class="win-b" id="source-catalogue"></div></section>
+    <section class="win"><div class="win-t"><h2 data-i18n="interpretation">Как читать эти карты</h2></div><div class="win-b paper candidate-interpretation"><p data-i18n="screenMethod">Кандидатный скрининг основан только на изменении HV по всей подготовленной сетке. Это не совместный порог HV + forest class и не подвыборка из 83 forest-кандидатов.</p><p data-i18n="priorClass">Класс лесного покрова — исходная классификация, а не проверка текущего состояния на земле. Он не доказывает наличие или отсутствие вырубки.</p><p data-i18n="sourceTime">Исторические слои дают только исторический контекст; современные источники нужно оценивать по датам, покрытию, разрешению и ограничениям.</p><p data-i18n="controlCaveat">Контрольные точки выбраны для сравнения, но не являются проверенными отрицательными случаями, не подобраны как class-matched лесные контроли и не подтверждают отсутствие события.</p><p data-i18n="weatherScale">Погодные значения относятся к отдельной грубой ячейке/региональному контексту, а не к пикселям радара 20 м.</p><p data-i18n="opticalDates">Даты оптических сцен и доступность полос читаются из provenance набора. Имеющиеся RGB-контактные листы до 21 сентября сами по себе не проверяют 28 сентября; более поздние даты учитываются, если указаны в metadata.</p></div></section>
+    <footer class="win candidate-footer"><div class="win-t"><h2 data-i18n="provenanceFooter">Источники данных и воспроизводимость</h2></div><div class="win-b"><ul><li><a href="docs/investigation-summary.md">docs/investigation-summary.md</a></li><li><a href="docs/investigation-protocol.md">docs/investigation-protocol.md</a></li><li><a href="data/investigation/results.json">data/investigation/results.json</a></li><li><a href="data/investigation/regional-events.json">data/investigation/regional-events.json</a></li></ul><p><code>python3 scripts/build_investigation_page.py --check</code></p></div></footer>
+  </main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/candidates.js?v=25bfabe52d09"></script>
+<script src="js/i18n.js?v=feaf8f24dbe6"></script>
+</body>
+</html>

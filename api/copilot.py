@@ -42,11 +42,11 @@ def complete(payload):
         clean.append({k: v for k, v in m.items() if k in ('role','content','tool_calls','tool_call_id')})
     context = payload.get('context') or {}
     if not isinstance(context, dict): return 400, {'error':'Invalid workspace context'}
-    facts = {'sites': list(SITES), 'selected': None}
+    facts = {'sites': list(SITES), 'selected': None, 'interface_language': context.get('language') if context.get('language') in ('en','ru','fr','de','it','es','pt','ja','ar') else 'en'}
     if context.get('site') in SITES:
         d = site_data(context['site']); index = context.get('sample')
         facts['selected'] = {'site':d['id'],'dates':d['dates'],'sample':d['pixels'][index] if isinstance(index,int) and 0 <= index < len(d['pixels']) else None}
-    body = {'model': MODEL, 'messages': [{'role':'system','content':SYSTEM+'\nServer-measured context: '+json.dumps(facts)}]+clean,
+    body = {'model': MODEL, 'messages': [{'role':'system','content':SYSTEM+'\nAnswer in the interface language unless the user explicitly requests another language.\nServer-measured context: '+json.dumps(facts)}]+clean,
             'tools':TOOLS,'tool_choice':'auto','parallel_tool_calls':False,'max_completion_tokens':2200,'reasoning_effort':'low'}
     request = Request('https://api.groq.com/openai/v1/chat/completions', data=json.dumps(body).encode(), headers={'Authorization':'Bearer '+credential,'Content-Type':'application/json','User-Agent':'OffBeat/1.0'})
     try:
