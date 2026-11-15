@@ -1,0 +1,21 @@
+{
+  "input_sha256": {
+    "data/amazon.json": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729",
+    "data/amazon/alerts.geojson": "33bc029381fb4abda7b01e021c14bf81c83673a355023cfbdbeddb4395266d41"
+  },
+  "alert_window": {
+    "after": "2026-08-11",
+    "through": "2026-09-28"
+  },
+  "alert_records": 65,
+  "unsupported_geometries": 0,
+  "tree_cover_points": 575,
+  "point_alert_matches": [],
+  "limitations": [
+    "Retrospective development AOI, not an independent test.",
+    "Alert date is not necessarily the change date.",
+    "Geometries were not repaired; boundary cases may be excluded.",
+    "Local alert subset is not a complete archive. No match is not a stable-ground label.",
+    "Spatial intersections do not establish cause, event timing, area, precision or recall."
+  ]
+}

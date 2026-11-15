@@ -9,3 +9,6 @@ docs/amazon-benchmark-v1.md text eol=lf
 archive/preview-2026-11-14/docs/amazon-positive-eval.md text eol=lf
 data/amazon-spatial-external-audit-v2.json text eol=lf
 docs/amazon-external-audit-v2.md text eol=lf
+data/analysis/amazon-era5.json text eol=lf
+data/benchmark/amazon-v1/protocol.json text eol=lf
+data/amazon/alerts.geojson text eol=lf
