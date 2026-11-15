@@ -2,6 +2,11 @@ window.OB = window.OB || {};
 OB.copilot = (() => {
   const $ = id => document.getElementById(id), box = $('copilot-win'), log = $('copilot-log');
   let history = [], controller = null, epoch = 0;
+  const home=document.createComment('Copilot dock');box.before(home);
+  const dock=()=>{const floating=box.classList.contains('copilot--float')||box.classList.contains('copilot--full');if(floating&&box.parentElement!==document.body)document.body.append(box);else if(!floating&&box.parentElement===document.body)home.after(box);};
+  new MutationObserver(dock).observe(box,{attributes:true,attributeFilter:['class']});
+  box.addEventListener('keydown',e=>{if(e.key==='Tab'&&(box.classList.contains('copilot--float')||box.classList.contains('copilot--full')))e.stopPropagation();});
+
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   function say(text, role='assistant') { const n=document.createElement('div');n.className='copilot__message copilot__message--'+role;n.textContent=text;log.append(n);n.scrollIntoView({block:'nearest',behavior:reduced()?'auto':'smooth'});return n; }
   function reveal(node) { if(node!==box)box.classList.remove('copilot--full');const parent=node.closest('details');if(parent)parent.open=true;node.hidden=false;node.scrollIntoView({block:'start',behavior:reduced()?'auto':'smooth'});if(!reduced())node.animate([{opacity:.2,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:350,easing:'ease-out'}); }
@@ -33,10 +38,10 @@ OB.copilot = (() => {
       if(cancelled())throw Error('Cancelled');if(a.zoom!==undefined&&(!Number.isInteger(a.zoom)||a.zoom<0||a.zoom>19))throw Error('Invalid zoom');const previous=OB.app.viewport();await OB.app.visitPlace(place);if(cancelled())throw Error('Cancelled');const target=OB.app.viewport();OB.app.zoomTo(previous.lat,previous.lon,previous.zoom);OB.app.flyTo(target.lat,target.lon,a.zoom??target.zoom);reveal($('map-win'));return {place,measurement_available:!!OB.app.pixel(),zoom:a.zoom??target.zoom};
     }
     if(a.action==='window'){
-      const ids={map:'map-win',terrain:'scene-win',evidence:'evidence-win',review:'review-win',charts:'card-win',chat:'copilot-win'};const id=ids[a.window];if(!id)throw Error('Unknown window');const node=$(id);if(!node)throw Error('Window unavailable');
+      const ids={map:'map-win',terrain:'scene-win',evidence:'evidence-win',review:'review-win',charts:'card-win',chat:'copilot-win'};const id=ids[a.window];if(!id)throw Error('Unknown window');const node=$(id);if(!node)throw Error('Window unavailable');if(a.window!=='chat'&&a.mode!=='close'){const active=OB.windows.active();if(active&&active!==node&&!node.contains(active))await OB.windows.restore();if(a.window!=='map'&&$('map-max').getAttribute('aria-pressed')==='true')$('map-max').click();}
       if(a.window==='chat'){if(a.mode==='close')throw Error('Restore chat instead of closing it');reveal(box);box.classList.toggle('copilot--full',a.mode==='maximize');$('copilot-full').setAttribute('aria-pressed',String(a.mode==='maximize'));return {window:a.window,mode:a.mode};}
       if(a.window==='terrain'&&node.hidden&&a.mode!=='close')$('scene-open').click();
-      if(a.mode==='close'){if(a.window==='terrain'&&!node.hidden)$('scene-close').click();else if(node.closest('details'))node.closest('details').open=false;else throw Error('This panel cannot be closed');}
+      if(a.mode==='close'){if(a.window==='terrain'&&OB.windows.active()?.id==='terrain-win')await OB.windows.restore();if(a.window==='terrain'&&!node.hidden)$('scene-close').click();else if(node.closest('details'))node.closest('details').open=false;else throw Error('This panel cannot be closed');}
       else if(a.mode==='maximize'){reveal(node);box.classList.add('copilot--float');const b=a.window==='map'?$('map-max'):node.querySelector('[data-window-action="max"]');if(b&&b.getAttribute('aria-pressed')!=='true')b.click();else if(!b)throw Error('Maximize not available for this panel');}
       else if(a.mode==='restore'){if(a.window==='map'&&$('map-max').getAttribute('aria-pressed')==='true')$('map-max').click();else await OB.windows.restore();}
       else reveal(node);return {window:a.window,mode:a.mode||'open'};
@@ -70,7 +75,7 @@ OB.copilot = (() => {
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){box.classList.remove('copilot--full');$('copilot-full').setAttribute('aria-pressed','false');}});
   document.querySelectorAll('[data-copilot-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.copilotPrompt)));
   let drag=null;box.querySelector('.win-t').addEventListener('pointerdown',e=>{if(!box.classList.contains('copilot--float')||box.classList.contains('copilot--full')||e.target.closest('button'))return;const r=box.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top};e.currentTarget.setPointerCapture(e.pointerId);});
-  box.querySelector('.win-t').addEventListener('pointermove',e=>{if(!drag)return;box.style.left=Math.max(0,Math.min(innerWidth-100,e.clientX-drag.x))+'px';box.style.top=Math.max(0,Math.min(innerHeight-60,e.clientY-drag.y))+'px';box.style.right='auto';box.style.bottom='auto';});box.querySelector('.win-t').addEventListener('pointerup',()=>drag=null);
+  box.querySelector('.win-t').addEventListener('pointermove',e=>{if(!drag)return;box.style.left=Math.max(0,Math.min(innerWidth-box.offsetWidth,e.clientX-drag.x))+'px';box.style.top=Math.max(0,Math.min(innerHeight-box.offsetHeight-32,e.clientY-drag.y))+'px';box.style.right='auto';box.style.bottom='auto';});box.querySelector('.win-t').addEventListener('pointerup',()=>drag=null);box.querySelector('.win-t').addEventListener('pointercancel',()=>drag=null);
   if(OB.app)$('copilot-send').disabled=false;else document.addEventListener('ob:ready',()=>{$('copilot-send').disabled=false;},{once:true});
   return {execute,send};
 })();

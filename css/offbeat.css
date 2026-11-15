@@ -969,9 +969,9 @@ details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
 .copilot__entry textarea { flex: 1; min-width: 180px; padding: 8px; font: inherit; resize: vertical; }
 .copilot figure { margin: 12px 0; padding: 8px; border: 1px solid #808080; }
 .copilot svg { display: block; width: 100%; }
-.copilot--float { position: fixed; right: 20px; bottom: 40px; width: min(600px,95vw); z-index: 1600; box-shadow: 8px 10px 0 #0005; }
+.copilot--float { position: fixed; right: 20px; bottom: 40px; width: min(600px,95vw); z-index: 2300; box-shadow: 8px 10px 0 #0005; }
 .copilot--float .win-t { cursor: move; touch-action: none; }
-.copilot.copilot--full { position: fixed; inset: 8px 8px 32px !important; width: auto; z-index: 2000; display: flex; flex-direction: column; }
+.copilot.copilot--full { position: fixed; inset: 8px 8px 32px !important; width: auto; z-index: 2400; display: flex; flex-direction: column; }
 .copilot--full .copilot__body { flex: 1; min-height: 0; }
 .copilot--full .copilot__log { flex: 1; max-height: none; min-height: 0; }
 @media(prefers-reduced-motion:no-preference){.copilot__message,.copilot figure { animation: copilot-appear .3s ease-out; } @keyframes copilot-appear { from {opacity:0;transform:translateY(8px)} to {opacity:1;transform:translateY(0)} }}
