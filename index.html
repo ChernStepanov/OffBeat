@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OffBeat - NISAR pixels out of step with their neighbours</title>
 <meta name="description" content="OffBeat explores measured NISAR samples and their departures from nearby samples; candidate changes need independent verification.">
 <meta name="theme-color" content="#000080">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=a658b203fa05">
+<link rel="stylesheet" href="css/offbeat.css?v=mobile-layout-5">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -39,16 +39,17 @@
         <p class="launch__eyebrow">NASA-ISRO NISAR radar, explained</p>
         <h2 id="launch-title">Explore changes<br><span>on Earth.</span></h2>
         <p class="launch__lead">Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.</p>
-        <div class="launch__actions"><a class="btn btn--default launch__primary" id="launch-example" href="#evidence-win">Explore an example</a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Surprise me</button><a class="btn launch__secondary" href="#map-win">Open the map</a><button type="button" class="btn" id="video-open">Watch the 30-second video</button></div>
+        <div class="launch__actions"><a class="btn btn--default launch__primary" id="launch-example" href="#evidence-win">See a reviewed clearing</a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Review a detected change</button><a class="btn launch__secondary" href="#map-win">Open the map</a><button type="button" class="btn" id="video-open">Watch the 30-second video</button></div>
+        <p id="launch-review-status" role="status" aria-live="polite"></p>
         <details class="launch-help" id="surprise-help">
-          <summary>How Surprise me works</summary>
+          <summary>How to review detected changes</summary>
           <ol>
-            <li>Press Surprise me to open a prepared story or an automatically selected measured sample.</li>
-            <li>Use the numbered steps or arrows to see the place, radar signal, images and conclusion.</li>
-            <li>Compare the dates and neighbours; where two optical images exist, move the slider to compare them.</li>
-            <li>A signal difference is a clue, not proof of its cause. Some samples lack independent review or a second image.</li>
+            <li>Choose Review a detected change to open an automatic radar candidate with two dated optical images. Press again for another candidate.</li>
+            <li>Use Show on maps or View this place in 3D to explore its location. In a story, use the steps to move between the signal, evidence and conclusion.</li>
+            <li>Compare the available dated images and radar measurements. Colour images show the landscape; black-and-white radar images show signal strength. Some places have no usable image pair.</li>
+            <li>For an automatic candidate, record whether you can see a change. Your review stays in this browser and can be downloaded.</li>
           </ol>
-          <p>Choose Surprise me again for another example. Close story hides the current one.</p>
+          <p>A radar difference is a clue, not proof of what happened. Image dates may differ and the cause may be unknown.</p>
         </details>
         <p class="launch__note">Exploratory prototype. Causes need independent checks.</p>
       </div>
@@ -59,6 +60,12 @@
       </div>
     </div>
   </section>
+
+  <details class="panel-disclosure" id="music-disclosure"><summary id="music-title">Listen to measured places</summary><section class="win"><div class="win-b"><p id="music-note"></p><div class="music-places" id="music-places"></div><p id="music-status" role="status"></p></div></section></details>
+  <details class="panel-disclosure observed-events" id="observed-events-disclosure">
+    <summary id="observed-events-summary">Documented changes: images before and after</summary>
+    <section class="win" aria-labelledby="observed-events-title"><div class="win-t"><h2 id="observed-events-title">Documented changes</h2></div><div class="win-b"><p id="observed-events-note"></p><div id="observed-events-list"></div><p id="observed-events-status" role="status"></p></div></section>
+  </details>
 
   <div id="cols">
 
@@ -168,7 +175,7 @@
             <button type="button" class="btn btn--default" id="case-start" disabled data-case-text="start">Investigate a change</button>
           </div>
           <p><button type="button" class="btn" id="case-visible-clearing" disabled data-case-text="visibleClearing">See visually reviewed clearing</button> <span data-case-text="visibleCaveat">Optical review; NISAR detection has not been validated.</span></p>
-          <div class="story-prompt"><div><strong data-case-text="surpriseTitle">Not sure where to start?</strong><p data-case-text="surpriseHint">Explore a reviewed Amazon story or an automatically selected measured sample. New samples are not independently reviewed.</p></div><button type="button" class="btn story-prompt__button" id="case-surprise" disabled data-case-text="surprise">Surprise me</button></div>
+          <div class="story-prompt"><div><strong data-case-text="surpriseTitle">Review detected changes</strong><p data-case-text="surpriseHint">Explore a rural Amazon radar candidate with two dated optical images. The candidate is not independently confirmed.</p></div><button type="button" class="btn story-prompt__button" id="case-surprise" disabled data-case-text="surprise">Review a detected change</button></div>
           <p class="casebook__scope" data-case-text="scope">Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.</p>
           <div class="casebook__choices" id="case-choices" role="group" aria-label="Reviewed examples"></div>
           <button type="button" class="btn" id="evidence-selection" disabled data-case-text="selection">Evidence for selected sample</button>
@@ -222,6 +229,7 @@
       <section class="win" id="map-win" aria-labelledby="t-map">
         <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" aria-pressed="false" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>3D terrain</span></button><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
         <div class="win-b win-b--flush">
+          <div class="map-touch-controls" id="map-touch-controls" hidden><button type="button" class="btn" id="map-touch-toggle" aria-pressed="false">Enable map gestures</button><span id="map-touch-help">Scroll the page freely. Enable gestures to move and pinch the maps.</span></div>
           <fieldset class="group acquisition" id="acquisition" hidden>
             <legend>Measured acquisition</legend>
             <div class="acquisition__controls">
@@ -256,11 +264,21 @@
 
       <section class="win dense-case" id="detected-panel" hidden aria-labelledby="detected-title">
         <div class="win-t"><h2 id="detected-title">Automatic change candidate</h2><button type="button" class="btn" id="detected-close" data-dense="close">Close</button></div>
-        <div class="win-b"><p id="detected-summary"></p><p class="dense-case__warning" data-dense="warning">Experimental radar signal difference, not a confirmed event or cause. Two-date rankings do not establish accuracy.</p>
-          <h3 data-dense="radar">NISAR radar before and after</h3><div class="dense-case__images" id="detected-radar"></div>
+        <div class="win-b"><p id="detected-summary"></p><p class="dense-case__warning" data-dense="warning">Experimental radar signal difference, not a confirmed event or cause. Two-date rankings do not establish accuracy.</p><div id="detected-visual-check" class="dense-case__warning" hidden></div><div id="detected-polarizations" class="dense-case__warning" hidden></div>
+          <div class="casebook__bar"><button type="button" class="btn" id="detected-locate" data-dense="locate">Show on maps</button><button type="button" class="btn" id="detected-3d" data-dense="terrain">View this place in 3D</button><button type="button" class="btn" id="detected-next" data-case-text="surprise">Review a detected change</button></div>
           <h3 data-dense="optical">Dated optical context</h3><p id="detected-optical-status"></p><div class="dense-case__images" id="detected-optical"></div>
           <p class="dense-case__hint" data-dense="opticalNote">Optical dates differ from radar dates. Clouds, shadows or masks may hide the point; visual differences do not establish the cause.</p>
-          <h3 data-dense="review">Your visual review</h3><p class="dense-case__hint" data-dense="private">Reviews stay in this browser only; they are not shared. A review is not independent validation.</p>
+          <h3 data-dense="radar">NISAR radar images and filters</h3><p class="dense-case__hint" data-dense="radarNote">Black-and-white radar images show signal strength, not a photograph. The cross marks the candidate.</p>
+            <div class="radar-viewer"><div class="dense-case__images" id="detected-radar"></div>
+              <fieldset class="radar-viewer__controls"><legend data-dense="filters">Image filters</legend>
+                <label for="radar-contrast"><span data-dense="contrast">Contrast</span> <output id="radar-contrast-value">100%</output></label><input id="radar-contrast" type="range" min="50" max="200" step="5" value="100">
+                <label for="radar-brightness"><span data-dense="brightness">Brightness</span> <output id="radar-brightness-value">100%</output></label><input id="radar-brightness" type="range" min="50" max="180" step="5" value="100">
+                <label for="radar-palette" data-dense="palette">Tint</label><select id="radar-palette"><option value="none" data-dense="original">Original</option><option value="warm" data-dense="warm">Warm</option><option value="cool" data-dense="cool">Cool</option></select>
+                <button type="button" class="btn" id="radar-filter-reset" data-dense="filterReset">Reset filters</button>
+                <p data-dense="filterNote">Both dates use the same display filters. Tints are artificial; they do not show natural colours or add detail.</p>
+              </fieldset>
+            </div>
+          <h3 data-dense="review">Your visual review</h3><p class="dense-case__hint" data-dense="private">Reviews are shared when the server is available. Comments stay in this browser. Reviews are not independent validation.</p><p id="detected-community" role="status"></p>
           <div class="dense-case__review"><label><span data-dense="verdict">Result</span> <select id="detected-verdict" aria-label="Review result / Результат проверки"><option value="" data-dense="unreviewed">Not reviewed</option><option value="visible_change" data-dense="visible">Change visible</option><option value="no_visible_change" data-dense="notVisible">No visible change</option><option value="uncertain" data-dense="uncertain">Uncertain / cannot see</option></select></label><label><span data-dense="basis">Images reviewed</span> <select id="detected-basis" aria-label="Images reviewed / Какие снимки проверены"><option value="" data-dense="choose">Choose source</option><option value="optical" data-dense="opticalOnly">Optical</option><option value="radar" data-dense="radarOnly">Radar</option><option value="both" data-dense="both">Both</option></select></label><label><span data-dense="comment">Comment (optional)</span> <input id="detected-comment" maxlength="500"></label></div>
           <p><button type="button" class="btn" id="detected-save" data-dense="save">Save review</button> <button type="button" class="btn" id="detected-clear" data-dense="reset">Reset review</button> <button type="button" class="btn" id="detected-export" data-dense="export">Download reviews</button></p><p id="detected-review-status" role="status"></p>
           <p><a id="detected-source" target="_blank" rel="noopener" data-dense="source">Granules and method</a> · <a href="scripts/detect_dense_changes.py" data-dense="code">Detection code</a> · <a id="detected-optical-source" target="_blank" rel="noopener" data-dense="opticalSource">Optical sources</a></p>
@@ -438,6 +456,7 @@
         <button type="button" id="terrain-retry" hidden>Retry tiles</button>
       </form>
       <p class="terrain-search-status" id="terrain-search-status" role="status" aria-live="polite"></p>
+      <div class="terrain-touch" role="group" aria-label="Touch controls / Сенсорное управление"><span id="terrain-touch-label">Touch:</span><button type="button" id="terrain-touch-pan" aria-pressed="false">Move</button><button type="button" id="terrain-touch-orbit" aria-pressed="true">Rotate</button><span id="terrain-touch-hint">Drag with one finger. Pinch with two fingers or use + / − to zoom.</span></div>
       <div class="cloud__viewport" id="cloud-viewport">
         <canvas id="cloud-canvas" tabindex="0" role="img" aria-label="Interactive 3D elevation map with geographically registered NISAR samples. Drag to orbit, shift-drag to pan, scroll to zoom. Arrow keys rotate; plus and minus zoom." aria-describedby="cloud-help cloud-explanation"></canvas>
         <div class="cloud__hud"><span class="terrain-terminal">OFFBEAT / TOPOGRAPHIC RECON</span><strong id="cloud-site-name">NISAR / L-BAND</strong><span id="cloud-date">-</span><span id="cloud-count">0 samples</span><span id="terrain-status" role="status">Loading elevation data...</span><span id="terrain-centre"></span></div>
@@ -536,19 +555,21 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=f61edef1dde4"></script>
+<script src="js/i18n.js?v=review-candidates-1"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
 <script src="js/terrain-tiles.js?v=d7bcae7cc86b"></script>
 <script src="js/terrain-renderer.js?v=d8d5b822896a"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=5c3ab24458e5"></script>
+<script src="js/scene.js?v=mobile-touch-4"></script>
+<script src="js/observed-events.js?v=1"></script>
+<script src="js/music-places.js?v=1"></script>
 <script src="js/evidence-model.js?v=2cbb51887449"></script>
-<script src="js/dense-candidates.js?v=a150329a9521"></script>
+<script src="js/dense-candidates.js?v=amazon-pol-1"></script>
 <script src="js/panels.js?v=6e020a23003e"></script>
-<script src="js/evidence.js?v=ee000d0dd646"></script>
+<script src="js/evidence.js?v=rural-review-2"></script>
 <script src="js/findings.js?v=86ea53095e87"></script>
-<script src="js/app.js?v=a5a94e8d32de"></script>
+<script src="js/app.js?v=touch-map-1"></script>
 </body>
 </html>

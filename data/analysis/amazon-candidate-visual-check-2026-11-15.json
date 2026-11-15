@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "retrospective_visual_screen_not_independent_validation",
+  "review_date": "2026-11-15",
+  "site": "amazon",
+  "radar_dates": [
+    "2026-08-23",
+    "2026-09-04"
+  ],
+  "radar_source": "data/change-candidates/amazon-6f219605b533.json",
+  "radar_source_sha256": "6f219605b53333717b3887d53175ef6adfa9fc8b46d3e7e315de523b8f155c28",
+  "optical_dates": [
+    "2026-08-14",
+    "2026-09-03",
+    "2026-09-21"
+  ],
+  "method": "Manual visual screening of 64x64-pixel crops centered on each native radar candidate, using the prepared 256x256 RGB previews and their geographic bounds. Crops enlarged with nearest-neighbour resampling; yellow cross marks approximate position. No reflectance change or event area estimated.",
+  "limitations": [
+    "Post-hoc, non-blind visual screening of previously selected candidates; not independent validation.",
+    "A wider optical interval cannot date change to the NISAR pair.",
+    "Apparent colour differences can arise from illumination, atmospheric effects, moisture, phenology, masking and different sensors.",
+    "Image-coordinate approximation and 10 m optical pixels do not establish the exact 20 m radar cell condition.",
+    "A missing alert does not show that an event was previously unknown."
+  ],
+  "items": [
+    {
+      "id": "r52-c44",
+      "en": "A field-like area changes slightly in colour; no clear event or cause is established.",
+      "ru": "Участок, похожий на поле, немного меняет цвет; событие и его причина не установлены."
+    },
+    {
+      "id": "r74-c99",
+      "en": "A field-like area looks greener on 14 August and browner on 3 and 21 September. This may reflect crop state, moisture or image conditions; forest loss is not demonstrated.",
+      "ru": "Участок, похожий на поле, выглядит зеленее 14 августа и бурее 3 и 21 сентября. Это может быть связано с состоянием посевов, влажностью или условиями съёмки; потеря леса не доказана."
+    },
+    {
+      "id": "r23-c67",
+      "en": "A pale, cleared-looking patch is already present on 14 August, before the radar pair ends. Its cause and date of formation are unknown.",
+      "ru": "Светлый участок, похожий на расчистку, уже виден 14 августа, ещё до завершения радарной пары. Причина и дата его появления неизвестны."
+    },
+    {
+      "id": "r109-c103",
+      "en": "Vegetated terrain looks broadly similar in these previews; small changes or radar-only changes cannot be ruled out.",
+      "ru": "Растительный покров на этих обзорных снимках выглядит в целом похожим; небольшие или заметные только радару изменения исключить нельзя."
+    },
+    {
+      "id": "r3-c30",
+      "en": "The candidate is near the edge of the prepared image; the surrounding crop is incomplete and cloud is visible nearby. Review with a wider clear image.",
+      "ru": "Точка находится у края подготовленного снимка: окружающий участок виден не полностью, рядом есть облачность. Нужен более широкий ясный снимок."
+    }
+  ],
+  "optical_images": [
+    {
+      "date": "2026-08-14",
+      "scene_id": "S2A_22MFV_20260814_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260814_0_L2A",
+      "path": "data/amazon/optical/S2A_22MFV_20260814_0_L2A.png",
+      "sha256": "7b8230c6a73aabd918c05a28853cf6535ea7cbeeeb6dac501b7301a9340316c4",
+      "bounds": {
+        "w": -49.2875,
+        "s": -4.7875,
+        "e": -49.2625,
+        "n": -4.7625
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "scene_id": "S2A_22MFV_20260903_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260903_0_L2A",
+      "path": "data/amazon/optical/S2A_22MFV_20260903_0_L2A.png",
+      "sha256": "6b7ed074e15f5b1f236a0f1f422843775062c280298fcbd108fa3b668d7945ec",
+      "bounds": {
+        "w": -49.2875,
+        "s": -4.7875,
+        "e": -49.2625,
+        "n": -4.7625
+      }
+    },
+    {
+      "date": "2026-09-21",
+      "scene_id": "S2C_22MFV_20260921_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260921_0_L2A",
+      "path": "data/amazon/optical/S2C_22MFV_20260921_0_L2A.png",
+      "sha256": "06efd7d10ed86177403cc9a584179fd63d7f2680056b5a3f81248f41b33afefc",
+      "bounds": {
+        "w": -49.2875,
+        "s": -4.7875,
+        "e": -49.2625,
+        "n": -4.7625
+      }
+    }
+  ],
+  "weather_context": {
+    "source": "data/analysis/amazon-era5.json",
+    "sha256": "f9fffcc54bd2417c0a644cc76d9a65ce98e85b9ddcdb304a0c2b90d33622d3ed",
+    "grid_degrees": 0.25,
+    "preceding_7_days_mm": {
+      "2026-08-23": 0.5,
+      "2026-09-04": 0.4
+    },
+    "note": "Retrospective coarse grid reanalysis, not pixel precipitation or a correction for moisture."
+  }
+}

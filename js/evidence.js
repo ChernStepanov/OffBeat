@@ -12,9 +12,9 @@ OB.evidence = (() => {
     start: ['Investigate a change', 'Исследовать пример изменения'],
     visibleClearing: ['See visually reviewed clearing', 'Посмотреть расчистку на снимках'],
     visibleCaveat: ['Optical review; NISAR detection has not been validated.', 'Визуальная проверка по снимкам; обнаружение радаром не подтверждено.'],
-    surpriseTitle: ['Not sure where to start?', 'Не знаете, с чего начать?'],
-    surpriseHint: ['Explore a reviewed Amazon story or an automatically selected measured sample. New samples are not independently reviewed.', 'Откройте разобранный пример Амазонии или автоматически выбранную точку измерений. Новые точки не прошли независимую проверку.'],
-    surprise: ['Surprise me', 'Удиви меня'],
+    surpriseTitle: ['Review detected changes', 'Проверка найденных изменений'],
+    surpriseHint: ['Explore a rural Amazon radar candidate with two dated optical images. The candidate is not independently confirmed; the reviewed clearing above is a separate example.', 'Изучите точку в сельской Амазонии с двумя датированными оптическими снимками. Кандидат не подтверждён; разобранная расчистка выше — отдельный пример.'],
+    surprise: ['Review a detected change', 'Проверить найденное изменение'],
     close: ['Close story', 'Закрыть историю'],
     scope: ['Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.', 'Исследовательские примеры: 0 пригодных подтверждённых событий для оценки детектора. Точность не установлена.'],
     selection: ['Evidence for selected sample', 'Доказательства для выбранной точки'],
@@ -187,15 +187,23 @@ OB.evidence = (() => {
     heading(dossier ? local(dossier.title) : t('Selected sample / not independently reviewed', 'Выбранная точка / независимой проверки нет'));
     if (dossier) paragraph(local(dossier.question));
     paragraph(`${site.name} / ${pixel.id} / ${pixel.lat.toFixed(5)}, ${pixel.lon.toFixed(5)}`);
+    const placeActions = el('div', undefined, 'casebook__bar');
+    function locate(terrain) {
+      OB.app.zoomTo(pixel.lat, pixel.lon, 15);
+      if (terrain) {
+        if ($('scene-win').hidden) $('scene-open').click();
+        else $('scene-win').scrollIntoView({behavior: 'smooth', block: 'start'});
+      } else $('map-win').scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+    placeActions.append(button(t('Show on maps', 'Показать на картах'), () => locate(false)),
+      button(t('View this place in 3D', 'Посмотреть это место в 3D'), () => locate(true)));
+    page.append(placeActions);
     if (step === 0) {
       paragraph(dossier ? t('Start with the place, then compare the measured series, inspect dated optical evidence and decide what to check next.', 'Начните с места, сравните измеренный ряд, проверьте датированную оптику и решите, что проверять дальше.') : t('Compare the measured series with neighbours. This automatically selected sample has no independent event review; its cause is unknown.', 'Сравните измерения точки с соседями. Эта точка выбрана автоматически и не прошла независимую проверку; причина неизвестна.'));
       table([[t('NISAR observations', 'Наблюдения NISAR'), `${site.dates[0]} / ${site.dates.at(-1)}`],
         [t('Valid HV dates', 'Валидные даты HV'), `${pixel.hv.filter(Number.isFinite).length} / ${site.dates.length}`],
         [t('Historical cover', 'Исторический покров'), `ESA WorldCover 2021 / ${pixel.cover}`],
         [t('Spatial support', 'Пространственная поддержка'), t('Sparse samples. No event area estimate.', 'Разреженные точки. Площадь события не оценена.')]]);
-      page.append(button(t('Locate on the map', 'Показать на карте'), () => {
-        OB.app.zoomTo(pixel.lat, pixel.lon, 15); $('map-win').scrollIntoView({behavior: 'smooth', block: 'start'});
-      }));
     } else if (step === 1) {
       paragraph(t('Navy: sample HV; teal: same-class peer median (stored local reference, not the separate benchmark model). Sound follows the measured series; it is not a classifier.', 'Синий: HV точки; бирюзовый: медиана соседей того же класса (сохранённый локальный фон, а не отдельная модель бенчмарка). Звук следует измеренному ряду; он не классификатор.'));
       const showBeat = renderChart(site, pixel);
@@ -292,39 +300,26 @@ OB.evidence = (() => {
     a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   $('launch-example').addEventListener('click', event => {
-    if (!$('case-start').disabled) { event.preventDefault(); open('amazon-hv-step'); }
+    if (!$('case-visible-clearing').disabled) { event.preventDefault(); open('amazon-visible-clearing', {step: 2}); }
   });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
   async function surprise() {
-    const key = 'offbeat.surprise.history.v1';
-    const candidates = OB.suggestPlaces(OB.app.sites(), 2.5, 8);
+    const key = 'offbeat.detected-review.history.v1';
     const dense = await OB.detected?.choices() || [];
-    const choices = [...(book?.cases || []).map(c => ({id: c.id, caseId: c.id})), ...dense,
-      ...candidates.map(({site, index}) => ({id: `sample:${site.id}:${index}`, site: site.id, index}))];
+    const choices = dense;
     let history = surpriseHistory;
     try { history = JSON.parse(localStorage.getItem(key)) || history; } catch (_) {}
     const next = model.nextSurprise(choices.map(c => c.id), history, active);
-    if (!next) return;
+    if (!next) { $('launch-review-status').textContent = $('case-status').textContent = t('No candidate with two dated images is available right now.', 'Сейчас нет доступных точек с двумя датированными снимками.'); return; }
+    $('launch-review-status').textContent = $('case-status').textContent = '';
     surpriseHistory = next.history;
     try { localStorage.setItem(key, JSON.stringify(next.history)); } catch (_) {}
     const choice = choices.find(c => c.id === next.id);
-    if (choice.caseId) { await open(choice.caseId); return; }
-    if (choice.marker) { await OB.detected.openCandidate(choice.site, choice.marker); return; }
-    try {
-      await OB.app.loadSite(choice.site);
-      if (OB.app.site()?.id !== choice.site) throw new Error('site unavailable');
-      await OB.app.pickCell(choice.index, false);
-      const pixel = OB.app.pixel();
-      if (!pixel) throw new Error('sample unavailable');
-      OB.app.selectDate(OB.app.site().dates.length - 1);
-      OB.app.zoomTo(pixel.lat, pixel.lon, 15);
-      await open(null, {step: 0});
-    } catch (_) {
-      $('case-status').textContent = t('Could not open this sample. Try another.', 'Не удалось открыть точку. Попробуйте другую.');
-    }
+    if (!await OB.detected.openCandidate(choice.site, choice.marker)) $('launch-review-status').textContent = $('case-status').textContent = t('Could not open this candidate. Try another.', 'Не удалось открыть точку. Попробуйте другую.');
   }
   $('case-surprise').addEventListener('click', surprise);
   $('launch-surprise').addEventListener('click', surprise);
+  $('detected-next').addEventListener('click', surprise);
   $('case-visible-clearing').addEventListener('click', () => open('amazon-visible-clearing', {step: 2}));
   $('evidence-selection').addEventListener('click', () => open(null));
   $('case-back').addEventListener('click', () => setStep(step - 1));

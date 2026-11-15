@@ -41,8 +41,11 @@ The package in `data/change-candidates/` contains hash-versioned reports, radar
 previews, source receipts and Sentinel-2 context selected for each radar date.
 Optical dates can fall outside the radar pair; one optical scene is explicitly not a before/after pair.
 AOI cloud scores do not guarantee that the selected point is visible. These
-images are not labels or proof of cause. Reviews are stored in the user's browser
-and may be exported; there is no shared review database or multi-user backend.
+images are not labels or proof of cause. The optional shared review API stores
+verdicts and image basis in SQLite when deployed; comments remain in the browser.
+If the shared API is not configured or reachable, the interface reports that the
+review was not sent. Public deployment requires a separate API service; the static
+site alone does not provide one. See `docs/api.md`.
 The service worker caches only content-versioned candidate files and hash-tagged
 optical images after their first successful load. Cache availability and lifetime
 depend on the browser; initial access requires the files to be reachable.

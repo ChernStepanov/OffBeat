@@ -56,7 +56,10 @@ For dataset inventory, endpoint checks and safe catalogue discovery, see the
 [operations guide](docs/operations.md). These tools do not automatically publish new measurements.
 
 The map also offers [automatic two-date candidate markers](docs/change-candidates.md)
-at seven prepared sites, with radar/optical comparison and browser-local review.
+at seven prepared sites, with radar/optical comparison and optional shared reviews
+when the separate review API is deployed; review comments remain browser-local.
+The [documented NASA image comparisons](data/observed-events/index.json) are
+separate reference examples, not detections by OffBeat.
 They are exploratory signal differences, not confirmed events or validated accuracy.
 
 

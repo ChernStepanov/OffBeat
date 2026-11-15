@@ -3,16 +3,23 @@ window.OB = window.OB || {};
 OB.createDenseCandidates = function (map, leaflet) {
   const $ = id => document.getElementById(id);
   map.createPane('detectedCandidates'); map.getPane('detectedCandidates').style.zIndex = 620;
-  const catalogPath = 'data/change-candidates/catalog-d9ad08d48004.json';
+  const catalogPath = 'data/change-candidates/catalog-9b22c7d45ddb.json';
   const cache = new Map(); let catalog = null, report = null, current = null, layer = null, serial = 0, reviews = {};
+  const visualScreen = fetch('data/analysis/amazon-candidate-visual-check-2026-11-15.json').then(r=>r.ok?r.json():null).catch(()=>null);
+  const polarizations = fetch('data/analysis/amazon-dense-polarizations-2026-11-15.json').then(r=>r.ok?r.json():null).catch(()=>null);
   const lang = () => document.documentElement.lang === 'ru';
   const t = (en, ru) => lang() ? ru : en;
   const words = {
     show:['Show automatic change candidates','Показать автоматически найденные точки'], browse:['Browse automatic candidates','Посмотреть найденные точки списком'], close:['Close','Закрыть'],
     warning:['Experimental radar signal difference, not a confirmed event or cause. Two-date rankings do not establish accuracy.','Экспериментальное изменение сигнала радара, а не подтверждённое событие или его причина. По двум датам нельзя оценить точность.'],
-    radar:['NISAR radar before and after','Радарные снимки NISAR до и после'], optical:['Dated optical context','Датированные оптические снимки'],
+    locate:['Show on maps','Показать на картах'], terrain:['View this place in 3D','Посмотреть это место в 3D'],
+    radarNote:['Black-and-white radar images show signal strength, not a photograph. The cross marks the candidate.','Чёрно-белые радарные изображения показывают силу сигнала, это не фотография. Крест отмечает выбранную точку.'],
+    filters:['Image filters','Фильтры снимков'], contrast:['Contrast','Контраст'], brightness:['Brightness','Яркость'], palette:['Tint','Оттенок'],
+    original:['Original','Оригинал'], warm:['Warm','Тёплый'], cool:['Cool','Холодный'], filterReset:['Reset filters','Сбросить фильтры'],
+    filterNote:['Both dates use the same display filters. Tints are artificial; they do not show natural colours or add detail.','Одинаковые фильтры применяются к обеим датам. Цвета условные: они не показывают реальные цвета и не добавляют деталей.'],
+    radar:['NISAR radar images and filters','Радарные снимки NISAR и фильтры'], optical:['Dated optical context','Датированные оптические снимки'],
     opticalNote:['Optical dates differ from radar dates. Clouds, shadows or masks may hide the point; visual differences do not establish the cause.','Даты оптики отличаются от радарных. Облака, тени или маски могут скрыть точку; снимки не доказывают причину изменения.'],
-    review:['Your visual review','Ваша визуальная проверка'], private:['Reviews stay in this browser only; they are not shared. A review is not independent validation.','Оценки хранятся только в этом браузере и не отправляются другим людям. Оценка не является независимой валидацией.'],
+    review:['Your visual review','Ваша визуальная проверка'], private:['Reviews are shared when the server is available. Comments stay in this browser. Reviews are not independent validation.','Оценки общие, когда сервер доступен. Комментарии остаются в этом браузере. Оценки не заменяют независимую проверку.'],
     verdict:['Result','Результат'], unreviewed:['Not reviewed','Не проверено'], visible:['Change visible','Изменение видно'], notVisible:['No visible change','Изменения не видно'], uncertain:['Uncertain / cannot see','Не уверен / плохо видно'],
     basis:['Images reviewed','Что вы смотрели'], choose:['Choose source','Выберите источник'], opticalOnly:['Optical','Оптические снимки'], radarOnly:['Radar','Радарные снимки'], both:['Both','Оба источника'], comment:['Comment (optional)','Комментарий (необязательно)'],
     save:['Save review','Сохранить оценку'], reset:['Reset review','Сбросить оценку'], export:['Download reviews','Скачать оценки'], source:['Granules and method','Гранулы и метод'], code:['Detection code','Код сравнения'], opticalSource:['Optical sources','Источники оптики']
@@ -28,8 +35,26 @@ OB.createDenseCandidates = function (map, leaflet) {
     if(d.site!==site || !Array.isArray(d.markers) || !Array.isArray(d.inputs) || d.inputs.length!==2)throw Error('invalid candidate data');
     cache.set(site,d);return d;
   }
-  function reviewKey(d) {return 'offbeat.dense-review.v1.'+d.inputs.map(x=>x.sha256.slice(0,16)).join('.');}
+  function reviewKey(d) {return 'offbeat.dense-review.v2.'+datasetKey(d);}
   function readReviews(d){try{return JSON.parse(localStorage.getItem(reviewKey(d)))||{}}catch{return {}}}
+  function datasetKey(d){return [...d.inputs,...(d.optical_images||[])].map(x=>x.sha256.slice(0,16)).join('.')}
+  function token(){
+    const key='offbeat.review-token.v1'; let value=localStorage.getItem(key);
+    if(!/^[a-f0-9]{64}$/.test(value||'')){const bytes=crypto.getRandomValues(new Uint8Array(32));value=[...bytes].map(x=>x.toString(16).padStart(2,'0')).join('');localStorage.setItem(key,value)}
+    return value;
+  }
+  function reviewParams(d,m){return {site:d.site,marker:m.id,dataset:datasetKey(d)}}
+  function showCounts(c){$('detected-community').textContent=`${t('Community reviews','Оценки пользователей')}: ${t('change visible','изменение видно')} ${c.visible_change} · ${t('no visible change','не видно')} ${c.no_visible_change} · ${t('uncertain','не уверен')} ${c.uncertain}`}
+  async function refreshCounts(){
+    if(!report||!current)return;const d=report,m=current;
+    $('detected-community').textContent=t('Loading community reviews…','Загружаем общие оценки…');
+    try{const response=await fetch('/api/v1/reviews?'+new URLSearchParams(reviewParams(d,m)),{cache:'no-store'});if(!response.ok)throw Error();const data=await response.json();if(report===d&&current===m)showCounts(data.counts)}
+    catch(_){if(report===d&&current===m)$('detected-community').textContent=t('Shared reviews are unavailable; no review can be submitted.','Общие оценки недоступны: сервер не подключён или не отвечает. Отправка оценок невозможна.')}
+  }
+  async function saveShared(verdict,basis){
+    const response=await fetch('/api/v1/reviews',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...reviewParams(report,current),token:token(),verdict,basis})});
+    if(!response.ok)throw Error('unavailable');return response.json();
+  }
   function pointCovered(image){const b=image.bounds;return b && current && current.lon>=b.w && current.lon<=b.e && current.lat>=b.s && current.lat<=b.n;}
   function clearLayer(){if(layer){map.removeLayer(layer);layer=null}}
   function mapStatus(){if(report)$('detected-map-status').textContent=`${t('Fixed pair, independent of date slider','Фиксированная пара, не зависит от ползунка дат')}: ${report.dates.join(' → ')} · ${report.markers.length}/${report.total_marker_count} ${t('candidates; not confirmed events','кандидатов; события не подтверждены')}`;}
@@ -58,20 +83,43 @@ OB.createDenseCandidates = function (map, leaflet) {
       figure.append(frame,caption);container.append(figure);
     });
   }
+  function applyRadarFilters() {
+    const contrast=$('radar-contrast').value, brightness=$('radar-brightness').value, palette=$('radar-palette').value;
+    const tint=palette==='warm'?' sepia(1) saturate(1.5)':palette==='cool'?' sepia(1) saturate(1.5) hue-rotate(165deg)':'';
+    $('radar-contrast-value').textContent=contrast+'%'; $('radar-brightness-value').textContent=brightness+'%';
+    $('detected-radar').querySelectorAll('img').forEach(img=>{img.style.filter=`brightness(${brightness}%) contrast(${contrast}%)${tint}`});
+  }
   function render(){
     localize(); if(!report || !current)return;
     $('detected-title').textContent=t('Automatic change candidate','Автоматически найденная точка');
     $('detected-summary').textContent=`${report.site_name} · ${current.id} · ${current.lat.toFixed(6)}, ${current.lon.toFixed(6)} · ${report.dates.join(' → ')} · ${t('native grid','шаг сетки')} ${Math.abs(report.grid.x_step)} m · ${t('smoothed deviation score','оценка сглаженного отклонения')} ${current.score} · HV Δ ${current.delta_db} dB`;
-    imageRow($('detected-radar'),report.radar_images||[],true);const optical=report.optical_images||[];imageRow($('detected-optical'),optical,false);
+    imageRow($('detected-radar'),report.radar_images||[],true);const optical=report.optical_images||[];imageRow($('detected-optical'),optical.filter(pointCovered),false);
+    applyRadarFilters();
     const covered=optical.filter(pointCovered).length;
-    $('detected-optical-status').textContent=covered>=2?t('Images selected for the two radar dates; optical dates and actual event timing may differ.','Снимки подобраны к двум датам радара; даты оптики и время события могут отличаться.'):covered===1?t('Only one image covers this point; before/after comparison is unavailable.','Точку покрывает только один снимок; сравнение до и после невозможно.'):t('No dated optical image covers this point.','Точку не покрывает ни один датированный оптический снимок.');
+    const bracket=optical.length>=2&&optical[0].date<=report.dates[0]&&optical.at(-1).date>=report.dates.at(-1);
+    $('detected-optical-status').textContent=covered>=2?(bracket?t('Optical images bracket the radar pair, but their wider interval does not date or prove the change.','Оптические снимки охватывают радарную пару, но более широкий интервал не доказывает изменение и его дату.'):t('These optical dates do not bracket the radar pair; they cannot show a before/after view of the full radar interval.','Даты оптики не охватывают радарную пару целиком: они не показывают «до и после» всего радарного интервала.')):covered===1?t('Only one image covers this point; before/after comparison is unavailable.','Точку покрывает только один снимок; сравнение до и после невозможно.'):t('No dated optical image covers this point.','Точку не покрывает ни один датированный оптический снимок.');
     $('detected-source').href=catalog.sites.find(x=>x.id===report.site).path; $('detected-optical-source').href=`data/${report.site}/optical/index.json`;
     const saved=reviews[current.id]||{};$('detected-verdict').value=saved.verdict||'';$('detected-basis').value=saved.basis||'';$('detected-comment').value=saved.comment||'';
     ['detected-verdict','detected-basis'].forEach(id=>$(id).dispatchEvent(new Event('ob:select-sync')));
+    const d=report,m=current,box=$('detected-visual-check');box.hidden=true;box.replaceChildren();
+    if(d.site==='amazon')visualScreen.then(screen=>{if(report!==d||current!==m||!screen)return;const item=screen.items.find(x=>x.id===m.id);if(!item)return;box.replaceChildren();
+      const title=document.createElement('strong');title.textContent=t('OffBeat preliminary visual check (not independent): ','Предварительный визуальный осмотр OffBeat (не независимая проверка): ');
+      const a=document.createElement('a');a.href='data/analysis/amazon-candidate-visual-check-2026-11-15.json';a.target='_blank';a.rel='noopener';a.textContent=t(' Method and sources',' Метод и источники');
+      box.append(title,document.createTextNode(item[lang()?'ru':'en']),a);box.hidden=false;
+    });
+    const pol=$('detected-polarizations');pol.hidden=true;pol.replaceChildren();
+    if(d.site==='amazon')polarizations.then(audit=>{if(report!==d||current!==m||!audit||audit.source_report_sha256!==catalog.sites.find(x=>x.id==='amazon')?.sha256)return;
+      const item=audit.items.find(x=>x.id===m.id);if(!item)return;pol.replaceChildren();const fmt=v=>Number.isFinite(v)?`${v>0?'+':''}${v.toFixed(2)} dB`:t('unavailable','нет данных');
+      const title=document.createElement('strong');title.textContent=t('HH/HV check across the radar pair','Проверка HH/HV за радарную пару');pol.append(title);
+      for(const channel of ['hh','hv']){const c=item[channel],line=document.createElement('p');line.textContent=`${channel.toUpperCase()}: ${t('cell','ячейка')} ${fmt(c.cell_delta_db)} · ${t('3×3 median','медиана 3×3')} ${fmt(c.near_3x3.median_db)} (${c.near_3x3.count}/9) · ${t('surrounding median','медиана окрестности')} ${fmt(c.surrounding_31x31_excluding_3x3.median_db)} (n=${c.surrounding_31x31_excluding_3x3.count})`;pol.append(line)}
+      const note=document.createElement('p');note.textContent=t('3×3 includes the selected cell; surrounding 31×31 excludes it and its 3×3 neighbours. These are spatial context, not independent confirmations or proof of cause.','3×3 включает выбранную ячейку; окрестность 31×31 исключает её и соседей 3×3. Это пространственный контекст, не независимое подтверждение и не доказательство причины.');
+      if(item.context_truncated_at_edge)note.append(document.createTextNode(t(' Context is truncated at the edge.',' Окрестность обрезана краем данных.')));
+      const a=document.createElement('a');a.href='data/analysis/amazon-dense-polarizations-2026-11-15.json';a.target='_blank';a.rel='noopener';a.textContent=t('Calculation and sources','Расчёт и источники');pol.append(note,a);pol.hidden=false;
+    });
   }
   function show(id,scroll){
     const item=report?.markers.find(m=>m.id===id);if(!item)return false;current=item;reviews=readReviews(report);
-    OB.app?.clearForCandidate?.();OB.evidence?.dismiss?.();$('detected-panel').hidden=false;$('detected-review-status').textContent='';render();
+    OB.app?.clearForCandidate?.();OB.evidence?.dismiss?.();$('detected-panel').hidden=false;$('detected-review-status').textContent='';render();refreshCounts();
     const url=new URL(location.href);['sample','case','step','lat','lon'].forEach(k=>url.searchParams.delete(k));url.searchParams.set('site',report.site);url.searchParams.set('candidate',id);history.replaceState(null,'',url);
     if(scroll)$('detected-panel').scrollIntoView({behavior:'smooth',block:'start'});return true;
   }
@@ -92,18 +140,42 @@ OB.createDenseCandidates = function (map, leaflet) {
     $('detected-visible').checked=true;drawMarkers();const item=report.markers.find(x=>x.id===id);if(!item)return false;
     OB.app.zoomTo(item.lat,item.lon,15);return show(id,true);
   }
-  async function choices(){const c=await ready;if(!c)return [];const results=await Promise.allSettled(c.sites.map(s=>get(s.id)));return results.flatMap(r=>r.status==='fulfilled'&&r.value?r.value.markers.map(m=>({id:`dense:${r.value.site}:${m.id}`,site:r.value.site,marker:m.id})):[])}
+  async function choices(){const c=await ready;if(!c)return [];const results=await Promise.allSettled(c.sites.map(s=>get(s.id)));return results.flatMap(r=>{
+    if(r.status!=='fulfilled'||!r.value)return [];
+    const d=r.value;
+    // The remaining prepared detection windows are urban; do not present them
+    // as rural discoveries until land-cover and event context are checked.
+    if(d.site!=='amazon')return [];
+    return d.markers.filter(m=>new Set((d.optical_images||[]).filter(i=>{const b=i.bounds;return b&&m.lon>=b.w&&m.lon<=b.e&&m.lat>=b.s&&m.lat<=b.n}).map(i=>i.date)).size>=2)
+      .map(m=>({id:`dense:${d.site}:${m.id}`,site:d.site,marker:m.id}));
+  })}
   function dismiss(){ $('detected-panel').hidden=true;const u=new URL(location.href);u.searchParams.delete('candidate');history.replaceState(null,'',u); }
+  function locate(terrain) {
+    if (!current) return;
+    OB.app.zoomTo(current.lat, current.lon, 15);
+    if (terrain) {
+      if ($('scene-win').hidden) $('scene-open').click();
+      else $('scene-win').scrollIntoView({behavior:'smooth',block:'start'});
+    } else $('map-win').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  $('detected-locate').addEventListener('click',()=>locate(false));
+  $('detected-3d').addEventListener('click',()=>locate(true));
+  ['radar-contrast','radar-brightness'].forEach(id=>$(id).addEventListener('input',applyRadarFilters));
+  $('radar-palette').addEventListener('change',applyRadarFilters);
+  $('radar-filter-reset').addEventListener('click',()=>{
+    $('radar-contrast').value='100'; $('radar-brightness').value='100'; $('radar-palette').value='none';
+    $('radar-palette').dispatchEvent(new Event('ob:select-sync')); applyRadarFilters();
+  });
   $('detected-visible').addEventListener('change',drawMarkers);
   $('detected-close').addEventListener('click',dismiss);
-  $('detected-save').addEventListener('click',()=>{if(!report||!current)return;const verdict=$('detected-verdict').value,basis=$('detected-basis').value,optical=report.optical_images||[];
+  $('detected-save').addEventListener('click',async()=>{if(!report||!current)return;const d=report,m=current,verdict=$('detected-verdict').value,basis=$('detected-basis').value,optical=report.optical_images||[];
     if(!verdict||!basis){$('detected-review-status').textContent=t('Choose a result and source.','Выберите результат и источник.');return}
     const covered=optical.filter(pointCovered).length;
     if((basis==='optical'||basis==='both')&&(!covered||(covered<2&&verdict!=='uncertain'))){$('detected-review-status').textContent=t('Two optical images do not cover this point; choose uncertain or an available source.','Два оптических снимка не покрывают эту точку: выберите «не уверен» или доступный источник.');return}
-    const next={...reviews,[current.id]:{verdict,basis,comment:$('detected-comment').value.trim(),reviewed_at:new Date().toISOString()}};
-    try{localStorage.setItem(reviewKey(report),JSON.stringify(next));reviews=next;$('detected-review-status').textContent=t('Saved in this browser.','Сохранено в этом браузере.')}catch(_){$('detected-review-status').textContent=t('Browser storage unavailable.','Не удалось сохранить оценку.')}
+    $('detected-save').disabled=true;
+    try{const result=await saveShared(verdict,basis);if(report!==d||current!==m)return;showCounts(result.counts);const next={...reviews,[m.id]:{verdict,basis,comment:$('detected-comment').value.trim(),reviewed_at:new Date().toISOString()}};try{localStorage.setItem(reviewKey(d),JSON.stringify(next));reviews=next}catch(_){}$('detected-review-status').textContent=t('Saved and shared.','Оценка сохранена и доступна другим.')}catch(_){if(report===d&&current===m)$('detected-review-status').textContent=t('Could not submit: the shared review server is unavailable.','Не удалось отправить оценку: общий сервер недоступен.')}finally{$('detected-save').disabled=false}
   });
-  $('detected-clear').addEventListener('click',()=>{if(!report||!current)return;const next={...reviews};delete next[current.id];try{localStorage.setItem(reviewKey(report),JSON.stringify(next));reviews=next;render();$('detected-review-status').textContent=t('Review cleared.','Оценка сброшена.')}catch(_){$('detected-review-status').textContent=t('Storage unavailable.','Не удалось сбросить оценку.')}});
+  $('detected-clear').addEventListener('click',async()=>{if(!report||!current)return;const d=report,m=current;$('detected-clear').disabled=true;try{const result=await saveShared('clear','');if(report!==d||current!==m)return;const next={...reviews};delete next[m.id];try{localStorage.setItem(reviewKey(d),JSON.stringify(next));reviews=next}catch(_){}render();showCounts(result.counts);$('detected-review-status').textContent=t('Shared review cleared.','Общая оценка удалена.')}catch(_){if(report===d&&current===m)$('detected-review-status').textContent=t('Could not clear shared review: server unavailable.','Не удалось удалить общую оценку: сервер недоступен.')}finally{$('detected-clear').disabled=false}});
   $('detected-export').addEventListener('click',()=>{if(!report)return;const data={kind:'local_human_review_not_validation',site:report.site,dates:report.dates,inputs:report.inputs,method:report.method,markers:report.markers,reviews};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`offbeat-${report.site}-reviews.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
   new MutationObserver(()=>{localize();mapStatus();drawList();if(current)render()}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});localize();
   return {ready,setSite,openCandidate,choices,dismiss};

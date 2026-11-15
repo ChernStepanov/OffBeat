@@ -1,10 +1,12 @@
-"""Read-only HTTP API for the prepared OffBeat datasets (Python standard library)."""
+"""HTTP API for prepared datasets and opt-in shared reviews (Python standard library)."""
 import argparse
 import json
 import math
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
+from api import reviews
+import sqlite3
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'data'
@@ -174,15 +176,49 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url = urlsplit(self.path)
         try:
-            result = dispatch(url.path, parse_qs(url.query, keep_blank_values=True))
+            params = parse_qs(url.query, keep_blank_values=True)
+            if url.path == '/api/v1/reviews':
+                result = reviews.counts(*(params.get(k, [''])[0] for k in ('site', 'marker', 'dataset')))
+            else:
+                result = dispatch(url.path, params)
             status = 200
-        except APIError as exc:
+        except (APIError, reviews.ReviewError) as exc:
             status, result = exc.status, {'error': {'status': exc.status, 'message': exc.message}}
+        except (sqlite3.Error, OSError):
+            status, result = 503, {'error': {'status': 503, 'message': 'Review storage unavailable'}}
+        self.respond(status, result)
+
+    def do_POST(self):
+        try:
+            if urlsplit(self.path).path != '/api/v1/reviews':
+                raise APIError(404, 'Unknown endpoint')
+            origin = self.headers.get('Origin')
+            if origin and urlsplit(origin).netloc != self.headers.get('Host'):
+                raise APIError(403, 'Cross-origin reviews are not accepted')
+            if self.headers.get_content_type() != 'application/json':
+                raise APIError(415, 'Expected JSON')
+            try:
+                size = int(self.headers.get('Content-Length', '0'))
+                if size < 1 or size > 4096:
+                    raise ValueError()
+                payload = json.loads(self.rfile.read(size))
+            except (ValueError, UnicodeDecodeError):
+                raise APIError(400, 'Invalid review body')
+            result = reviews.save(payload)
+            status = 200
+        except (APIError, reviews.ReviewError) as exc:
+            status, result = exc.status, {'error': {'status': exc.status, 'message': exc.message}}
+        except (sqlite3.Error, OSError):
+            status, result = 503, {'error': {'status': 503, 'message': 'Review storage unavailable'}}
+        self.respond(status, result)
+
+    def respond(self, status, result):
         body = json.dumps(result, ensure_ascii=False, allow_nan=False).encode('utf-8')
         self.send_response(status)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Content-Length', str(len(body)))
         self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('Cache-Control', 'no-store')
         self.end_headers()
         self.wfile.write(body)
 
