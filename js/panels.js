@@ -16,7 +16,7 @@
   window.addEventListener('pageshow', () => {
     const query = new URLSearchParams(location.search);
     if (!location.hash && !query.has('case') && !query.has('sample')) {
-      document.querySelectorAll('details[open]').forEach(panel => { panel.open = false; });
+      document.querySelectorAll('details').forEach(panel => { panel.open = panel.hasAttribute('data-default-open'); });
     }
   });
   reveal(location.hash);
