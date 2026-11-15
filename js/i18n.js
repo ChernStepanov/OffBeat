@@ -3,6 +3,8 @@
   const translations = {
     'Explore a change story':'Открыть историю изменения',
     'What the data says':'Что говорят данные',
+    'NISAR coverage dates appear when you zoom out to region scale.':'Даты покрытия NISAR видны, если отдалить карту до масштаба региона.',
+    'Acquisitions are not equally spaced. The date sets the chart marker and the map colours. A selected dated optical image follows the radar date.':'Съёмки идут неравномерно. Дата задаёт отметку на графике и цвета точек на карте. Выбранный датированный оптический снимок следует за датой радара.',
     'Measured sites':'Участки с измерениями', 'Map layers and threshold':'Слои карты и порог', 'Change styles legend':'Легенда типов изменений',
     'A place name or "lat, lon". Names are sent to':'Название места или "широта, долгота". Названия отправляются в', ', fallback':', резерв',
     'Loading statistical findings...':'Загрузка статистических выводов...',
@@ -68,7 +70,7 @@
     'Fit maps':'Показать весь участок',
     'Measured NISAR samples':'Точки измерений NISAR',
     'Measured acquisition':'Дата измерения',
-    'Map colours show the latest peer deviation; the cloud follows the date slider.':'Цвет карты: отклонение от соседей на последнюю дату; облако соответствует выбранной дате.',
+    'The map and the cloud follow the date slider.':'Карта и облако следуют за выбранной датой.',
     'Signal space - NISAR point cloud':'Пространство сигнала - облако точек NISAR',
     '3D orbit':'3D-обзор',
     'Top view':'Вид сверху',

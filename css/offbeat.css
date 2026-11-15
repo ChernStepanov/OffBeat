@@ -656,6 +656,7 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 
 /* Embedded terrain sits immediately below the paired maps. */
 .scene.scene--inline { position: static; inset: auto; z-index: auto; display: block; margin: 8px 0; }
+.scene.scene--inline[hidden] { display: none; }
 .scene--inline > .scene__title, .scene--inline > .scene__toolbar,
 .scene--inline > .scene__status, .scene--inline .scene__map-slot { display: none; }
 .scene--inline > .scene__layout { display: block; padding: 0; overflow: visible; }

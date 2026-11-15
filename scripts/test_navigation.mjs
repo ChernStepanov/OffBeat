@@ -32,7 +32,7 @@ function newMap() {
     containerPointToLatLng:()=>({lat:0,lng:0}),project:p=>vector(p.lng??p[1],p.lat??p[0]),unproject:p=>({lat:p.y,lng:p.x,wrap(){return this;}}),
     hasLayer:()=>false,removeLayer(){},getBounds:()=>({})};maps.push(map);return map;
 }
-const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){return this;},setContent(){return this;},bringToFront(){},bindTooltip(){return this;},on(){return this;}});
+const layer=()=>({addTo(){return this;},setBounds(){return this;},setLatLng(){return this;},setContent(){return this;},bringToFront(){},setRadius(){return this;},setStyle(){return this;},bindTooltip(){return this;},on(){return this;}});
 const tileLayers=[], imageLayers=[];
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};

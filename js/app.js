@@ -184,6 +184,8 @@
     OB.sonify.stop(); $('stop').disabled = true;
     state.date = Math.max(0, Math.min(state.site.dates.length - 1, index));
     updateAcquisition(); optical.setDate(state.site.dates[state.date]); drawCharts();
+    // map samples, counts, the top list and the card follow the selected date
+    restyleSamples(); refreshCounts(); drawTop(); showPixelZ();
   }
   $('date-index').addEventListener('input', e => selectAcquisition(+e.target.value));
   $('date-prev').addEventListener('click', () => selectAcquisition(state.date - 1));
@@ -379,6 +381,19 @@
     return { origin, width: (end.x - origin.x) / g.w, height: (end.y - origin.y) / g.h };
   }
 
+  // Peer deviation on the selected acquisition date; the summary p.z is the latest date.
+  const zNow = p => { const v = p && (p.z_hv ? p.z_hv[state.date] : p.z); return Number.isFinite(v) ? v : NaN; };
+  function restyleSamples() {
+    if (!state.samples || !state.raster) return;
+    for (const [p, marker] of state.samples) {
+      const z = zNow(p), off = Math.abs(z) >= state.z;
+      marker.setRadius(off ? 4.5 : 2);
+      marker.setStyle(off
+        ? { weight: 1, color: '#fff', fillColor: z < 0 ? '#1d4fd8' : '#d0161b', fillOpacity: .9 }
+        : { weight: 0, fillColor: '#5b6470', fillOpacity: .55 });
+      if (off) marker.bringToFront();
+    }
+  }
   function drawRaster() {
     $('map-caption').textContent = 'Measured samples: grey in step, blue below and red above their same-class neighbours (|z| over the threshold)';
     if (state.raster) map.removeLayer(state.raster);
@@ -387,12 +402,9 @@
     const g = state.site.grid, t = state.z;
     if (state.site.analysis_status === 'exploratory_sparse_samples') {
       const pts = state.site.pixels.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon));
-      state.raster = L.featureGroup(pts.map(p => {
-        const off = Number.isFinite(p.z) && Math.abs(p.z) >= t;
-        return L.circleMarker([p.lat, p.lon], off
-          ? { radius: 4.5, weight: 1, color: '#fff', fillColor: p.z < 0 ? '#1d4fd8' : '#d0161b', fillOpacity: .9, interactive: false }
-          : { radius: 2, weight: 0, fillColor: '#5b6470', fillOpacity: .55, interactive: false });
-      })).addTo(map);
+      state.samples = pts.map(p => [p, L.circleMarker([p.lat, p.lon], { interactive: false })]);
+      state.raster = L.featureGroup(state.samples.map(([, m]) => m)).addTo(map);
+      restyleSamples();
       return;
     }
     if (!g.z.some(Number.isFinite) && state.site.pixels) {
@@ -515,14 +527,14 @@
   function drawTop() {
     const s = state.site, g = s.grid, rows = state.patches.slice(0, 10);
     if (s.pixels && s.analysis_status === 'exploratory_sparse_samples') {
-      const off = s.pixels.map((p, i) => ({ p, i })).filter(({ p }) => Number.isFinite(p.z) && Math.abs(p.z) >= state.z && p.cover !== 80)
-        .sort((a, b) => Math.abs(b.p.z) - Math.abs(a.p.z)).slice(0, 10);
+      const off = s.pixels.map((p, i) => ({ p, i, z: zNow(p) })).filter(({ p, z }) => Math.abs(z) >= state.z && p.cover !== 80)
+        .sort((a, b) => Math.abs(b.z) - Math.abs(a.z)).slice(0, 10);
       if (off.length) {
-        $("top").tBodies[0].innerHTML = off.map(({ p, i }, k) => {
+        $("top").tBodies[0].innerHTML = off.map(({ p, i, z }, k) => {
           const st = p.style ? OB.STYLES[p.style] : null;
           return `<tr data-cell="${i}" tabindex="0" aria-selected="${state.cell === i}">
-            <td>${k + 1}</td><td>${st ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : (p.z < 0 ? 'Below neighbours' : 'Above neighbours')}</td>
-            <td>1 sample, ${OB.COVER[p.cover] ? OB.COVER[p.cover].name : 'class ' + p.cover}</td><td>${(p.z > 0 ? '+' : '') + p.z.toFixed(1)}</td><td>${p.since || '-'}</td></tr>`;
+            <td>${k + 1}</td><td>${st ? `<i class="tag" style="background:${st.color}"></i>${st.name}` : (z < 0 ? 'Below neighbours' : 'Above neighbours')}</td>
+            <td>1 sample, ${OB.COVER[p.cover] ? OB.COVER[p.cover].name : 'class ' + p.cover}</td><td>${(z > 0 ? '+' : '') + z.toFixed(1)}</td><td>${p.since || '-'}</td></tr>`;
         }).join("");
         return;
       }
@@ -540,13 +552,21 @@
   $("top").addEventListener("click", rowPick);
   $("top").addEventListener("keydown", e => { if (e.key === "Enter") rowPick(e); });
 
-  function refresh() {
+  function showPixelZ() {
+    const p = state.pixel; if (!p) return;
+    const z = zNow(p);
+    $("p-z").textContent = Number.isFinite(z) ? `${z > 0 ? "+" : ""}${z.toFixed(2)} (HV, ${state.site.dates[state.date]})` : 'Unavailable on this date';
+  }
+  function refreshCounts() {
     const g = state.site.grid;
+    // every sample past the threshold on the selected date, as the map draws them
+    const zs = state.site.pixels ? state.site.pixels.map(zNow) : g.z;
+    let px = 0; for (let i = 0; i < zs.length; i++) if (Number.isFinite(zs[i]) && Math.abs(zs[i]) >= state.z && g.cover[i] !== 80) px++;
+    $("sb-count").textContent = zs.some(Number.isFinite) ? `${px} off-beat sample${px === 1 ? '' : 's'} at |z| ≥ ${state.z}, ${state.patches.length} with a classified shape` : 'No valid peer deviations';
+  }
+  function refresh() {
     state.patches = findPatches();
-    // every sample past the threshold, as the map draws them; styles are not assigned on sparse samples
-    let px = 0; for (let i = 0; i < g.z.length; i++) if (Number.isFinite(g.z[i]) && Math.abs(g.z[i]) >= state.z && g.cover[i] !== 80) px++;
-    drawRaster(); drawTop();
-    $("sb-count").textContent = g.z.some(Number.isFinite) ? `${px} off-beat sample${px === 1 ? '' : 's'} at |z| ≥ ${state.z}, ${state.patches.length} with a classified shape` : 'No valid peer deviations';
+    drawRaster(); drawTop(); refreshCounts();
   }
 
   // --- validation summary (Amazon, from pipeline) ---
@@ -597,7 +617,8 @@
     const y = Math.floor((point.y - origin.y) / height);
     const index = y * g.w + x;
     const localVisible = $('l-offbeat').checked && x >= 0 && y >= 0 && x < g.w && y < g.h;
-    const isAnomaly = Number.isFinite(g.z[index]) && Math.abs(g.z[index]) >= state.z && g.cover[index] !== 80;
+    const zi = state.site.pixels ? zNow(state.site.pixels[index]) : g.z[index];
+    const isAnomaly = Number.isFinite(zi) && Math.abs(zi) >= state.z && g.cover[index] !== 80;
     if (localVisible && (isAnomaly || Number.isFinite(state.site.pixels?.[index]?.hv.at(-1)))) {
       pickCell(index, false).then(pixelSound);
       return;
@@ -612,7 +633,7 @@
   optic.on('click', onMapClick);
   function pixelSound() {
     const p = state.pixel; if (!p || !OB.sfx) return;
-    OB.sfx.play(p.style && Number.isFinite(p.z) && Math.abs(p.z) >= state.z ? "offbeat" : "instep");
+    OB.sfx.play(p.style && Math.abs(zNow(p)) >= state.z ? "offbeat" : "instep");
   }
 
   async function pickCell(i, fly) {
@@ -632,7 +653,7 @@
     $("px-id").textContent = p.id;
     $("p-cover").textContent = OB.COVER[p.cover] ? `${OB.COVER[p.cover].name} (${p.cover})` : 'No WorldCover measurement';
     $("p-peers").textContent = p.peers == null ? 'Unavailable' : `${p.peers} valid HV samples at latest date; same class, ≤1 km`;
-    $("p-z").textContent = Number.isFinite(p.z) ? (p.z > 0 ? "+" : "") + p.z.toFixed(2) : 'Unavailable';
+    showPixelZ();
     $("p-style").innerHTML = !Number.isFinite(p.z) ? 'Not classified' : st ? `<i class="tag" style="background:${st.color}"></i>${st.name} (unverified shape)` : 'No classified shape';
     $("p-since").textContent = p.since || "—";
     $('p-quality').textContent = p.coherence == null ? 'Unavailable' : `Coherence ${p.coherence.toFixed(2)}; component ${p.component}; ${p.disp ? 'accepted' : 'rejected'}; ionosphere ${p.ionosphere_interpolated ? 'product-interpolated' : 'not flagged as interpolated'}, σ ${p.ionosphere_sd_rad == null ? 'unavailable' : p.ionosphere_sd_rad.toFixed(2)} rad`;
