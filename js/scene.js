@@ -72,7 +72,7 @@
     terrainSite = site?.id || null; terrain = null; loadedSignalKey = '';
     gpu?.setTerrain(null, site);
     if (!site) { gpu?.setSamples(null, 0, channel); return; }
-    gpu.focusSite(site);
+    // The shared map viewport determines position, not the selected sample site.
     try {
       if (!terrainCache.has(site.id)) terrainCache.set(site.id, fetch(`data/terrain/${site.id}.json`).then(async response => {
         if (!response.ok) throw new Error(`DEM HTTP ${response.status}`);
@@ -154,7 +154,7 @@
     $('cloud-card').disabled = !selection;
     $('scene-fit').disabled = !selectedSite;
     $('terrain-study').disabled = !selectedSite;
-    canvas.setAttribute('aria-label', phrase(`3D terrain map with ${points.length} measured ${channel.toUpperCase()} samples. Drag or use arrow keys to orbit; shift-drag to pan; plus and minus zoom.`, `3D-карта рельефа: ${points.length} точек ${channel.toUpperCase()}. Перетаскивание или стрелки вращают карту; Shift - перемещение; плюс и минус - масштаб.`));
+    canvas.setAttribute('aria-label', phrase(`3D terrain map with ${points.length} measured ${channel.toUpperCase()} samples. Right drag or arrow keys to orbit; left drag to pan; plus and minus zoom.`, `3D-карта рельефа: ${points.length} точек ${channel.toUpperCase()}. Правая кнопка или стрелки вращают карту; левая кнопка перемещает; плюс и минус - масштаб.`));
     schedule();
   }
   function setChannel(next) {
@@ -169,7 +169,22 @@
     $('cloud-plan').setAttribute('aria-pressed', String(next === 'plan'));
     schedule();
   }
-  function zoom(factor) { gpu?.zoom(factor); schedule(); }
+  let syncingViewport = false;
+  function syncFromMaps() {
+    if (syncingViewport) return;
+    if (!gpu || !OB.app) { pendingMapFocus = true; return; }
+    const v = OB.app.viewport(); syncingViewport = true;
+    try { gpu.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); pendingMapFocus = false; }
+    finally { syncingViewport = false; }
+    schedule();
+  }
+  function syncToMaps() {
+    if (!gpu || !OB.app || syncingViewport) return;
+    const info = gpu.info(); syncingViewport = true;
+    try { OB.app.zoomTo(info.center.lat, info.center.lon, Math.max(2, Math.min(19, Math.round(info.zoom + 2)))); }
+    finally { syncingViewport = false; }
+  }
+  function zoom(factor) { gpu?.zoom(factor); syncToMaps(); schedule(); }
   // Start WebGL only when the embedded panel approaches the viewport. Stop
   // streaming when it leaves view; map and sample state remain available.
   async function startInline() {
@@ -184,7 +199,7 @@
       OB.terrainView = gpu;
       gpu.setActive(active);
       if (!active) return;
-      if ($('acquisition').hidden) pendingMapFocus = true;
+      pendingMapFocus = true;
       focusMapIfNeeded();
       $('cloud-viewport').classList.toggle('terrain-crt', $('terrain-crt').checked);
       update();
@@ -197,7 +212,7 @@
   function focusMapIfNeeded() {
     if (!pendingMapFocus || !gpu) return;
     pendingMapFocus = false;
-    const v = OB.app.viewport(); gpu.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); setView('plan');
+    syncFromMaps();
   }
   function showTerrain() {
     if (mapWindow.classList.contains('win--max')) $('map-max').click();
@@ -216,7 +231,7 @@
     const id = event.target.value;
     if (!OB.SITES.some(s => s.id === id)) { update(); return; }
     const url = new URL(location.href); url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url);
-    cancelSearch(); hovered = null; await OB.app.loadSite(id); OB.app.fit(); setView('orbit'); gpu?.focusSite(OB.app.site()); update();
+    cancelSearch(); hovered = null; await OB.app.loadSite(id); OB.app.fit(); setView('orbit'); syncFromMaps(); update();
   });
   ['hh', 'hv'].forEach(key => $('cloud-' + key).addEventListener('click', () => setChannel(key)));
   ['orbit', 'ground', 'plan'].forEach(key => $('cloud-' + key).addEventListener('click', () => setView(key)));
@@ -234,8 +249,8 @@
   $('terrain-date-prev').addEventListener('click', () => OB.app.selectDate(date - 1));
   $('terrain-date-next').addEventListener('click', () => OB.app.selectDate(date + 1));
   $('terrain-date').addEventListener('input', event => OB.app.selectDate(+event.target.value));
-  $('terrain-world').addEventListener('click', () => { cancelSearch(); setView('plan'); gpu?.goTo(0, 15, 0); $('terrain-search-status').textContent = phrase('Global terrain. NISAR measurements are available only at marked study areas.', 'Рельеф мира. Измерения NISAR доступны на отмеченных участках.'); schedule(); });
-  $('terrain-study').addEventListener('click', () => { cancelSearch(); if (selectedSite) { setView('orbit'); gpu?.focusSite(selectedSite); schedule(); } });
+  $('terrain-world').addEventListener('click', () => { cancelSearch(); setView('plan'); gpu?.goTo(0, 15, 0); syncToMaps(); $('terrain-search-status').textContent = phrase('Global terrain. NISAR measurements are available only at marked study areas.', 'Рельеф мира. Измерения NISAR доступны на отмеченных участках.'); schedule(); });
+  $('terrain-study').addEventListener('click', () => { cancelSearch(); if (selectedSite) { setView('orbit'); gpu?.focusSite(selectedSite); syncToMaps(); schedule(); } });
   $('terrain-map-centre').addEventListener('click', () => { cancelSearch(); const v = OB.app.viewport(); setView('orbit'); gpu?.goTo(v.lon, v.lat, Math.max(0, v.zoom - 2)); schedule(); });
   $('terrain-retry').addEventListener('click', () => { gpu?.retry(); schedule(); });
   let searchTicket = 0, lastSearchAt = 0;
@@ -263,7 +278,7 @@
         place = placeCache.get(query);
       }
       if (ticket !== searchTicket) return;
-      setView('orbit'); gpu?.goTo(place.lon, place.lat, 11); schedule();
+      setView('orbit'); gpu?.goTo(place.lon, place.lat, 11); syncToMaps(); schedule();
       $('terrain-search-status').textContent = `${place.name || query}. ${phrase('Terrain context; no additional NISAR measurements are inferred.', 'Рельеф местности; дополнительные измерения NISAR не подразумеваются.')}`;
     } catch (error) { if (ticket === searchTicket) $('terrain-search-status').textContent = error.message; }
     finally { if (ticket === searchTicket) $('terrain-go').disabled = false; }
@@ -275,7 +290,7 @@
     cancelSearch();
     canvas.focus({ preventScroll: true });
     const start = pointer(event);
-    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, button: event.button, pan: event.shiftKey || event.button === 2 };
+    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, button: event.button, pan: event.button === 0 && !event.shiftKey };
     canvas.setPointerCapture(event.pointerId);
     canvas.classList.add('is-dragging');
   });
@@ -285,7 +300,7 @@
       const dx = p.x - dragging.x, dy = p.y - dragging.y;
       if (Math.hypot(p.x - dragging.startX, p.y - dragging.startY) > 3) dragging.moved = true;
       if (dragging.moved) {
-        if (dragging.pan) gpu?.pan(dx, dy);
+        if (dragging.pan) { gpu?.pan(dx, dy); syncToMaps(); }
         else {
           // A drag from the fixed top view becomes a free 3D orbit.
           if (view === 'plan') setView('orbit');
@@ -304,7 +319,7 @@
     if (!dragging || dragging.id !== event.pointerId) return;
     if (!dragging.moved && dragging.button === 0) {
       const p = pointer(event), hit = gpu?.pick(p.x, p.y);
-      if (hit?.kind === 'site') { setView('orbit'); OB.app.loadSite(hit.siteId).then(() => { gpu.focusSite(OB.app.site()); schedule(); }); }
+      if (hit?.kind === 'site') { setView('orbit'); OB.app.loadSite(hit.siteId).then(() => { syncFromMaps(); schedule(); }); }
       else if (hit) OB.app.pickCell(hit.index, false);
     }
     dragging = null; canvas.classList.remove('is-dragging');
@@ -319,7 +334,7 @@
   canvas.addEventListener('keydown', event => {
     const key = /^Key[WASD]$/.test(event.code) ? event.code.slice(3).toLowerCase() : event.key.toLowerCase();
     if (view === 'ground' && ['w', 'a', 's', 'd'].includes(key)) {
-      event.preventDefault(); gpu?.walk(key === 'w' ? 1 : key === 's' ? -1 : 0, key === 'd' ? 1 : key === 'a' ? -1 : 0); schedule(); return;
+      event.preventDefault(); gpu?.walk(key === 'w' ? 1 : key === 's' ? -1 : 0, key === 'd' ? 1 : key === 'a' ? -1 : 0); syncToMaps(); schedule(); return;
     }
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', '0'].includes(event.key)) return;
     event.preventDefault();
@@ -333,6 +348,7 @@
     schedule();
   });
   document.addEventListener('ob:sample-change', () => { if (active) requestAnimationFrame(update); });
+  document.addEventListener('ob:viewport-change', syncFromMaps);
   document.addEventListener('ob:map-navigation', () => {
     if (!$('acquisition').hidden) return;
     pendingMapFocus = true;

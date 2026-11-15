@@ -24,8 +24,8 @@
   map.getPane('opticalMirror').style.zIndex = 225;
   map.getPane('opticalMirror').style.pointerEvents = 'none';
   const optical = OB.bindOptical(optic, $('optical-date'), $('optical-status'), map);
-  let clarity = true;
-  try { clarity = localStorage.getItem('offbeat.imagery.clarity') !== 'false'; } catch (_) {}
+  let clarity = false;
+  try { clarity = localStorage.getItem('offbeat.imagery.clarity') === 'true'; } catch (_) {}
   const imageryButton = $('imagery-clarity');
   imageryButton.setAttribute('aria-pressed', String(clarity));
   const imageryLayers = [];
@@ -82,6 +82,7 @@
     $('map-view-metrics').title = 'Altitude equivalent for a top-down view with a 45° vertical field of view.';
   }
   map.on('move resize', updateViewMetrics);
+  map.on('move', () => document.dispatchEvent(new Event('ob:viewport-change')));
   OB.bindArchive(() => map.getCenter().wrap());
   OB.bindNisarMap(map, $('l-nisar'), $('nisar-status'));
   const labelsButton = $('l-labels');
