@@ -59,3 +59,12 @@ def test_gnss_tie_uses_a_neighbourhood_anchor_and_keeps_every_sample_slot():
     assert tie['anchor_samples'] >= 10
     assert len(tie['tied_los_cm_per_year_mid_incidence']) == 1024
     assert len(tie['fastest']) == 6
+
+
+def test_findings_answer_the_challenge_questions():
+    published = json.loads((ROOT / 'data' / 'findings.json').read_text())
+    ids = {f['id'] for f in published['findings']}
+    assert 'polarisation' in ids
+    for f in published['findings']:
+        if f['strength'] in ('strong', 'suggestive'):
+            assert f.get('drivers_en') and f.get('drivers_ru'), f['id']
