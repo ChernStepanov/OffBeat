@@ -1,0 +1,107 @@
+{
+  "input_sha256": {
+    "data/mexico.json": "645ad2682598120b9a3d731e5451c17ee15dd50165f96202e47173aa2541fe3b",
+    "data/mexico/opera-disp.json": "cd2ab3b8322aeb13898a7405229bf36ad28715db61894ef50a3471d45171e257",
+    "data/analysis/mexico-gunw-postgap-quality.json": "4ab3c98454b78df5d6c90731f8307a2ccac0570dffd73de570379ea12643997a"
+  },
+  "site_points": 1024,
+  "opera_count": 15,
+  "opera_reference": "2025-12-25",
+  "opera_dates": [
+    "2025-12-31",
+    "2026-03-25"
+  ],
+  "accepted_min": 1018,
+  "accepted_max": 1021,
+  "nisar_opera_date_offsets": {
+    "ascending": [
+      [
+        {
+          "nisar": "2025-12-17",
+          "nearest_opera": "2025-12-31",
+          "offset_days": 14
+        },
+        {
+          "nisar": "2025-12-29",
+          "nearest_opera": "2025-12-31",
+          "offset_days": 2
+        }
+      ],
+      [
+        {
+          "nisar": "2025-12-29",
+          "nearest_opera": "2025-12-31",
+          "offset_days": 2
+        },
+        {
+          "nisar": "2026-01-10",
+          "nearest_opera": "2026-01-12",
+          "offset_days": 2
+        }
+      ],
+      [
+        {
+          "nisar": "2026-01-10",
+          "nearest_opera": "2026-01-12",
+          "offset_days": 2
+        },
+        {
+          "nisar": "2026-01-22",
+          "nearest_opera": "2026-01-24",
+          "offset_days": 2
+        }
+      ],
+      [
+        {
+          "nisar": "2026-01-22",
+          "nearest_opera": "2026-01-24",
+          "offset_days": 2
+        },
+        {
+          "nisar": "2026-02-03",
+          "nearest_opera": "2026-02-05",
+          "offset_days": 2
+        }
+      ]
+    ],
+    "descending": [
+      [
+        {
+          "nisar": "2026-01-05",
+          "nearest_opera": "2026-01-06",
+          "offset_days": 1
+        },
+        {
+          "nisar": "2026-01-17",
+          "nearest_opera": "2026-01-18",
+          "offset_days": 1
+        }
+      ],
+      [
+        {
+          "nisar": "2026-01-17",
+          "nearest_opera": "2026-01-18",
+          "offset_days": 1
+        },
+        {
+          "nisar": "2026-01-29",
+          "nearest_opera": "2026-01-30",
+          "offset_days": 1
+        }
+      ],
+      [
+        {
+          "nisar": "2026-01-29",
+          "nearest_opera": "2026-01-30",
+          "offset_days": 1
+        },
+        {
+          "nisar": "2026-02-10",
+          "nearest_opera": "2026-02-11",
+          "offset_days": 1
+        }
+      ]
+    ]
+  },
+  "limitations": "Temporal proximity is not a deformation comparison; geometry, reference, filtering, atmospheric residuals, phase signs and quality differ. No velocity or vertical decomposition is estimated."
+}

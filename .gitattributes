@@ -13,3 +13,6 @@ data/analysis/amazon-era5.json text eol=lf
 data/benchmark/amazon-v1/protocol.json text eol=lf
 data/amazon/alerts.geojson text eol=lf
 data/subsets/mmx1-gnss/2025-12-17_2026-02-10.tenv3 text eol=lf
+data/mexico.json text eol=lf
+data/mexico/opera-disp.json text eol=lf
+data/analysis/mexico-gunw-postgap-quality.json text eol=lf

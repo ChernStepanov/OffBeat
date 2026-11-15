@@ -81,6 +81,7 @@
     'Peers keep the beat, the pixel plays its HV curve.':'Соседние точки задают ритм, а пиксель воспроизводит кривую HV.', 'Water labels unavailable.':'Подписи водных объектов недоступны.', 'Unavailable':'Недоступно',
     'Sentinel-1 OPERA DISP-S1, short-wavelength relative LOS, cm; + toward satellite (':'Sentinel-1 OPERA DISP-S1, относительное смещение по линии визирования, см; + к спутнику (',
     'source and quality':'источник и качество',
+    'NISAR / OPERA date comparison':'Сравнение дат NISAR / OPERA',
     'Common reference date; locally filtered. Uncorrected atmosphere; not vertical motion or a validated subsidence rate.':'Общая опорная дата; данные локально отфильтрованы. Влияние атмосферы не устранено; это не вертикальное смещение и не подтверждённая скорость оседания.',
     'Suggested places to investigate':'Предлагаем изучить',
     "Strongest measured deviations from same-class neighbours in prepared sites, on each site's latest date. Candidates require verification; the cause is unknown.":'Самые сильные измеренные отклонения от соседей того же класса на подготовленных участках, на последнюю дату каждого участка. Это кандидаты для проверки; причина неизвестна.',
