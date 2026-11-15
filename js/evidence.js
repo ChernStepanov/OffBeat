@@ -93,10 +93,11 @@ OB.evidence = (() => {
     const pair = el('div', undefined, 'casebook__optics');
     dossier.optical.forEach(image => {
       const figure = el('figure'), viewport = el('div', undefined, 'casebook__image');
-      const b = image.bounds, px = (pixel.lon - b.w) / (b.e - b.w), py = (b.n - pixel.lat) / (b.n - b.s);
+      const crop = model.opticalCrop(image.bounds, pixel);
       const img = document.createElement('img'); img.src = image.path; img.alt = `${image.source} / ${image.date}`;
+      img.style.left = `${crop.left}%`; img.style.top = `${crop.top}%`;
       img.addEventListener('error', () => { viewport.replaceChildren(el('p', t('Image unavailable. Open source below.', 'Снимок недоступен. Источник ниже.'))); });
-      const marker = el('span', '+', 'casebook__cross'); marker.style.left = `${px * 100}%`; marker.style.top = `${py * 100}%`;
+      const marker = el('span', '+', 'casebook__cross'); marker.style.left = `${crop.x}%`; marker.style.top = `${crop.y}%`;
       viewport.append(img, marker);
       const caption = el('figcaption'); caption.append(source(image.item_url, `Sentinel-2 / ${image.date}`));
       caption.append(el('p', t(`AOI clear: ${(100 * image.aoi_clear_fraction).toFixed(1)}%; not point quality.`, `Ясная площадь AOI: ${(100 * image.aoi_clear_fraction).toFixed(1)}%; не качество точки.`)));
@@ -109,12 +110,13 @@ OB.evidence = (() => {
       const layers = dossier.optical.map(image => {
         const layer = el('div', undefined, 'story-compare__layer');
         const img = document.createElement('img'); img.src = image.path; img.alt = '';
+        const crop = model.opticalCrop(image.bounds, pixel);
+        img.style.left = `${crop.left}%`; img.style.top = `${crop.top}%`;
         layer.append(img); frame.append(layer); return layer;
       });
-      const bounds = dossier.optical[0].bounds;
+      const crop = model.opticalCrop(dossier.optical[0].bounds, pixel);
       const marker = el('span', '+', 'casebook__cross');
-      marker.style.left = `${100 * (pixel.lon - bounds.w) / (bounds.e - bounds.w)}%`;
-      marker.style.top = `${100 * (bounds.n - pixel.lat) / (bounds.n - bounds.s)}%`;
+      marker.style.left = `${crop.x}%`; marker.style.top = `${crop.y}%`;
       frame.append(marker);
       const slider = document.createElement('input'); slider.type = 'range'; slider.min = '0'; slider.max = '100'; slider.value = '50';
       slider.setAttribute('aria-label', t('Compare earlier and later optical images', 'Сравнить ранний и поздний оптические снимки'));
