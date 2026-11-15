@@ -17,6 +17,18 @@ not MCP.
 
 ## Shared candidate reviews
 
+The public site uses the separate persistent D1-backed review service at
+`https://offbeat-shared-reviews.glazedbream.chatgpt.site/api/v1/reviews`.
+Its `/health` endpoint checks the database. Browser access is restricted by CORS
+to `https://offbeat.chern.su`. The Worker validates catalogue fingerprints,
+candidate IDs and image coverage, hashes anonymous browser tokens, limits write
+requests per anonymized network/hour bucket, and exposes aggregate verdict counts.
+Comments and browser tokens are not exposed through the read API. Clearing a
+review requires its original browser token. This is anonymous community feedback,
+not an independently validated label set. The Python service below remains a
+local development alternative. Worker source is in the separate Sites source
+repository for project `appgprj_6af9cf16c13c8191add5ba9ffc84a1d1`.
+
 The optional `GET /api/v1/reviews?site=…&marker=…&dataset=…` returns aggregate
 counts. `POST /api/v1/reviews` accepts a candidate, dataset fingerprint, random
 browser token, verdict and image basis. A token may update or remove its own
