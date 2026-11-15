@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=7d84634c9a81">
+<link rel="stylesheet" href="css/offbeat.css?v=13178f265504">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -167,6 +167,25 @@
           <p class="findings__foot"><button type="button" class="btn" id="findings-more" hidden>Show all findings</button> <a href="data/findings.json" target="_blank" rel="noopener">All statistics (JSON)</a>, <a href="scripts/findings.py" target="_blank" rel="noopener">analysis code</a></p>
         </div>
       </section>
+
+      <details class="panel-disclosure" id="review-disclosure" data-default-open open>
+        <summary id="review-summary">Review queue / NISAR + Sentinel-1</summary>
+        <section class="win review-queue" id="review-win" aria-labelledby="review-title">
+          <div class="win-t"><h2 id="review-title">OffBeat / Inspection priorities</h2></div>
+          <div class="win-b">
+            <p id="review-intro"></p>
+            <p id="review-status" role="status" aria-live="polite">Loading review priorities...</p>
+            <div id="review-methods" class="review__controls" role="group" aria-label="Ranking variants"></div>
+            <label class="review__filter"><input id="review-candidates" type="checkbox" checked> <span id="review-candidates-label">Candidate samples only</span></label>
+            <p id="review-metrics" class="review__notice"></p>
+            <div class="review__table-wrap" tabindex="0"><table class="review__table"><caption id="review-caption"></caption><thead id="review-head"></thead><tbody id="review-body"></tbody></table></div>
+            <button class="btn" type="button" id="review-more" hidden>Show more</button>
+            <div id="review-detail" class="review__detail" tabindex="-1" hidden></div>
+            <details id="review-methodology"><summary id="review-how">Methods and limitations</summary><div id="review-explanation"></div></details>
+            <div id="review-downloads" class="review__controls"></div>
+          </div>
+        </section>
+      </details>
 
       <details class="panel-disclosure" id="evidence-disclosure"><summary>Explore a change story</summary>
       <section class="win casebook" id="evidence-win" aria-labelledby="evidence-title">
@@ -573,6 +592,7 @@
 <script src="js/panels.js?v=6e020a23003e"></script>
 <script src="js/evidence.js?v=cafa8e328987"></script>
 <script src="js/findings.js?v=86ea53095e87"></script>
+<script src="js/review-queue.js?v=4351375f0a89"></script>
 <script src="js/app.js?v=76bb088dbe8a"></script>
 </body>
 </html>
