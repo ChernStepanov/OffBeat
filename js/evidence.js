@@ -54,6 +54,7 @@ OB.evidence = (() => {
     svg.setAttribute('viewBox', '0 0 600 160'); svg.setAttribute('role', 'img');
     svg.setAttribute('aria-label', t('HV backscatter: sample and same-class peer median. Values are in the table below.', 'HV: точка и медиана соседей того же класса. Значения в таблице ниже.'));
     const values = [...pixel.hv, ...(pixel.peer?.hv_med || [])].filter(Number.isFinite);
+    if (!values.length) { paragraph(t('No HV measurements or peer values available.', 'Измерения HV и значения соседей отсутствуют.')); return () => {}; }
     const lo = Math.min(...values) - 1, hi = Math.max(...values) + 1;
     const positions = model.timeline(site.dates);
     const x = i => 45 + positions[i] * 510, y = v => 125 - (v - lo) * 100 / (hi - lo);
@@ -63,6 +64,9 @@ OB.evidence = (() => {
       node('line', {x1: 40, x2: 560, y1: y(v), y2: y(v), stroke: '#d0d0d0'});
       node('text', {x: 0, y: y(v) + 4, 'font-size': 12}, v.toFixed(1));
     }
+    const beat = document.createElementNS(svgNS, 'line');
+    beat.setAttribute('y1', '15'); beat.setAttribute('y2', '130'); beat.setAttribute('stroke', '#67217a');
+    beat.setAttribute('stroke-width', '2'); beat.setAttribute('visibility', 'hidden'); svg.append(beat);
     [[pixel.hv, '#000080'], [pixel.peer?.hv_med || [], '#008080']].forEach(([series, color]) => {
       let d = '', connected = false;
       series.forEach((v, i) => {
@@ -74,6 +78,10 @@ OB.evidence = (() => {
     node('text', {x: 45, y: 150, 'font-size': 12}, site.dates[0]);
     node('text', {x: 480, y: 150, 'font-size': 12}, site.dates.at(-1));
     $('case-page').append(svg);
+    return index => {
+      if (!Number.isInteger(index) || index < 0 || index >= positions.length) { beat.setAttribute('visibility', 'hidden'); return; }
+      beat.setAttribute('x1', x(index)); beat.setAttribute('x2', x(index)); beat.setAttribute('visibility', 'visible');
+    };
   }
   function opticalPair(dossier, pixel) {
     const pair = el('div', undefined, 'casebook__optics');
@@ -138,11 +146,27 @@ OB.evidence = (() => {
       }));
     } else if (step === 1) {
       paragraph(t('Navy: sample HV; teal: same-class peer median (stored local reference, not the separate benchmark model). Sound follows the measured series; it is not a classifier.', 'Синий: HV точки; бирюзовый: медиана соседей того же класса (сохранённый локальный фон, а не отдельная модель бенчмарка). Звук следует измеренному ряду; он не классификатор.'));
-      renderChart(site, pixel);
+      const showBeat = renderChart(site, pixel);
       const pair = dossier?.radar_pair || [0, site.dates.length - 1];
       const controls = el('div', undefined, 'casebook__bar');
       pair.forEach((index, i) => controls.append(button(`${t(i ? 'After' : 'Before', i ? 'После' : 'До')} / ${site.dates[index]}`, () => OB.app.selectDate(index))));
-      controls.append(button(t('Listen to sample + peers', 'Слушать точку и соседей'), () => OB.app.play()), button(t('Stop', 'Стоп'), () => OB.app.stop())); page.append(controls);
+      const audioStatus = el('p', t('Sound is a designed representation of HV, not a recording from space.', 'Звук — способ представить измерения HV, а не запись из космоса.'), 'casebook__audio-status');
+      audioStatus.setAttribute('role', 'status');
+      const audio = {pix: pixel.hv, med: pixel.peer?.hv_med || [], sd: pixel.peer?.hv_sd || []};
+      const canPlay = audio.pix.some((v, i) => Number.isFinite(v) && Number.isFinite(audio.med[i]) && Number.isFinite(audio.sd[i]) && audio.sd[i] > 0);
+      const play = button(t('Hear sample and neighbours', 'Слушать точку и соседей'), () => {
+        try {
+          OB.app.stop();
+          OB.sonify.play(audio, i => {
+            showBeat(i);
+            const available = Number.isFinite(audio.pix[i]) && Number.isFinite(audio.med[i]) && Number.isFinite(audio.sd[i]) && audio.sd[i] > 0;
+            audioStatus.textContent = site.dates[i] + ' / ' + (available ? t('HV sample and neighbours', 'HV точки и соседей') : t('missing values: silent beat', 'нет данных: пауза'));
+          }, () => { showBeat(null); audioStatus.textContent = t('Playback finished.', 'Воспроизведение завершено.'); });
+        } catch (_) { audioStatus.textContent = t('Audio is unavailable in this browser.', 'Звук недоступен в этом браузере.'); }
+      });
+      play.disabled = !canPlay;
+      controls.append(play, button(t('Stop', 'Стоп'), () => { OB.app.stop(); showBeat(null); audioStatus.textContent = t('Playback stopped.', 'Воспроизведение остановлено.'); }));
+      page.append(controls, audioStatus);
       table(site.dates.map((d, i) => [d + (i === OB.app.date() ? ' *' : ''), `HH ${fmt(pixel.hh?.[i])} dB / HV ${fmt(pixel.hv[i])} dB / HV ${t('peers', 'соседи')} ${fmt(pixel.peer?.hv_med?.[i])} dB`]));
       paragraph(`${t('Pairwise HH difference', 'Разность HH выбранной пары')}: ${fmt(Number.isFinite(pixel.hh?.[pair[0]]) && Number.isFinite(pixel.hh?.[pair[1]]) ? pixel.hh[pair[1]] - pixel.hh[pair[0]] : null)} dB.`);
       paragraph(`${t('Pairwise HV difference', 'Разность HV выбранной пары')}: ${fmt(Number.isFinite(pixel.hv[pair[0]]) && Number.isFinite(pixel.hv[pair[1]]) ? pixel.hv[pair[1]] - pixel.hv[pair[0]] : null)} dB.`);
@@ -152,7 +176,13 @@ OB.evidence = (() => {
       if (dossier) { opticalPair(dossier, pixel); paragraph(local(dossier.independent)); }
       else paragraph(t('No independent review is attached to this point. Open the source manifest and collect dated, quality-checked optical or field evidence before interpreting the cause.', 'Для этой точки нет независимого разбора. Откройте исходные данные и соберите датированную оптику с проверкой качества или полевые свидетельства до вывода о причине.'));
     } else {
-      table([[t('Selected observation', 'Выбранное наблюдение'), `${site.dates[OB.app.date()]} / HV ${fmt(pixel.hv[OB.app.date()])} dB`],
+      heading(t('Evidence passport', 'Паспорт данных'));
+      const selected = OB.app.date(), peerCount = pixel.peer_counts?.hv?.[selected], peerZ = pixel.z_hv?.[selected];
+      table([[t('Selected observation', 'Выбранное наблюдение'), `${site.dates[selected]} / HV ${fmt(pixel.hv[selected])} dB`],
+        [t('Comparable neighbours on this date', 'Соседи того же класса на эту дату'), Number.isFinite(peerCount) ? String(peerCount) : t('Unavailable', 'Нет данных')],
+        [t('Deviation from neighbours', 'Отклонение от соседей'), Number.isFinite(peerZ) ? `z ${peerZ.toFixed(2)}` : t('Unavailable', 'Нет данных')],
+        [t('Missing HV observations', 'Пропущенные наблюдения HV'), String(site.dates.length - pixel.hv.filter(Number.isFinite).length)],
+        [t('Dated optical context', 'Датированная оптика'), dossier?.optical?.length ? dossier.optical.map(image => image.date).join(' / ') : t('No reviewed images for this sample', 'Для этой точки нет проверенных снимков')],
         [t('Coverage / quality', 'Покрытие / качество'), t(`${pixel.hv.filter(Number.isFinite).length}/${site.dates.length} valid HV dates. Provisional NISAR; event cause is not quality-validated.`, `${pixel.hv.filter(Number.isFinite).length}/${site.dates.length} валидных дат HV. Предварительный продукт NISAR; качество не подтверждает причину события.`)],
         [t('Evidence status', 'Статус свидетельств'), dossier ? local(dossier.interpretation) : t('Not independently reviewed; cause unknown.', 'Независимой проверки нет; причина неизвестна.')],
         [t('Next action', 'Следующее действие'), dossier ? local(dossier.action) : t('Review dated independent observations and quality masks.', 'Проверить датированные независимые наблюдения и маски качества.')],
@@ -221,7 +251,7 @@ OB.evidence = (() => {
     ['case-start', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
   }, {once: true});
   document.addEventListener('ob:sample-change', () => requestAnimationFrame(() => {
-    if (!opening) { render(); persist(); }
+    if (!opening) { OB.app?.stop(); render(); persist(); }
   }));
   new MutationObserver(() => render()).observe(document.documentElement, {attributes: true, attributeFilter: ['lang']});
   return {open, restore, report: () => latestReport};

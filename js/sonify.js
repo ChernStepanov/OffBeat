@@ -33,9 +33,9 @@ OB.sonify = (function () {
     const lo = Math.min(...all), hi = Math.max(...all) + 0.01;
     const t0 = ctx.currentTime + 0.08;
     series.pix.forEach((v, i) => {
-      if (!Number.isFinite(v) || !Number.isFinite(series.med[i]) || !Number.isFinite(series.sd[i])) return;
+      if (!Number.isFinite(v) || !Number.isFinite(series.med[i]) || !Number.isFinite(series.sd[i]) || series.sd[i] <= 0) return;
       const t = t0 + i * BEAT;
-      const z = Math.min(4, Math.abs(v - series.med[i]) / (series.sd[i] || 1));
+      const z = Math.min(4, Math.abs(v - series.med[i]) / series.sd[i]);
       click(t);
       tone(t, hz(series.med[i], lo, hi), BEAT * 0.9, "sine", 0.06, -0.5, 0);
       const late = z > 1.5 ? z * 0.025 : 0;            // slips off the beat
