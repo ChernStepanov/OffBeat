@@ -714,6 +714,14 @@
     const pa = postgap?.directions?.ascending, pd = postgap?.directions?.descending;
     $('gunw-postgap-note').hidden = !(pa && pd);
     if (pa && pd) $('gunw-postgap-text').textContent = 'Later segments: ' + pa.quality_valid_in_all_pairs + ' ascending and ' + pd.quality_valid_in_all_pairs + ' descending points pass their respective pair masks. Dates differ; reference stability and velocity remain unverified.';
+    const fullDisplacementAudit = state.site.context?.long_displacement_audit;
+    const displacementAudit = fullDisplacementAudit || state.site.context?.displacement_audit;
+    // English in the page; js/i18n.js carries the audit's own Russian wording
+    const auditText = { insufficient_for_validated_velocity: "All 54 GUNW pairs were checked (38 more downloaded from Earthdata). Points continuous over the full interval: 0/0. A stable external reference is not confirmed. A validated velocity and vertical decomposition are not available.", insufficient_for_velocity: "GUNW: diagnostic relative displacement over 48/36 days; 39/1024 common points. Reference stability and agreement with OPERA are not confirmed. A validated velocity and vertical decomposition are not available." };
+    const auditMessage = displacementAudit?.ui && (auditText[displacementAudit.ui.status] || displacementAudit.ui.message_ru);
+    $('displacement-audit-note').hidden = !auditMessage;
+    $('displacement-audit-text').textContent = auditMessage || '';
+    $('displacement-audit-report').href = fullDisplacementAudit ? 'docs/mexico-long-series.md' : 'docs/mexico-displacement.md';
     const dispDates = state.site.displacement_dates || state.site.dates;
     OB.chart.displacement($("c-disp"), dispDates, p, null, head != null && head < dispDates.length ? head : null);
     const gnss = state.site.context && state.site.context.mmx1_gnss;

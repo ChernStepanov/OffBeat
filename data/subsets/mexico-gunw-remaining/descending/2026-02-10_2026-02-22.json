@@ -1,0 +1,69 @@
+{
+  "source": {
+    "id": "NISAR_L2_PR_GUNW_012_113_D_079_013_4000_SH_20260210T011334_20260210T011409_20260222T011335_20260222T011409_P05023_N_F_J_001",
+    "concept_id": "G4276072877-ASF",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GUNW_PROVISIONAL_V1/NISAR_L2_PR_GUNW_012_113_D_079_013_4000_SH_20260210T011334_20260210T011409_20260222T011335_20260222T011409_P05023_N_F_J_001/NISAR_L2_PR_GUNW_012_113_D_079_013_4000_SH_20260210T011334_20260210T011409_20260222T011335_20260222T011409_P05023_N_F_J_001.h5"
+  },
+  "catalogue_query": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=NISAR_L2_GUNW_PROVISIONAL_V1&bounding_box=-99.09%2C19.415%2C-99.065%2C19.44&page_size=2000&sort_key=start_date",
+  "retrieved_utc": "2026-11-15T15:01:29.247548+00:00",
+  "reference_date": "2026-02-10",
+  "secondary_date": "2026-02-22",
+  "identification": {
+    "track": 113,
+    "frame": 79,
+    "direction": "Descending",
+    "look_direction": "Left",
+    "product_version": "1.0.11"
+  },
+  "center_frequency_hz": 1239000000.0,
+  "grid": {
+    "epsg": 32614,
+    "spacing": [
+      80.0,
+      -80.0
+    ],
+    "window": [
+      1220,
+      1255,
+      2982,
+      3015
+    ],
+    "paths": {
+      "phase": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/unwrappedPhase",
+      "coherence": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/coherenceMagnitude",
+      "component": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/connectedComponents",
+      "iono": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreen",
+      "iono_sd": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreenUncertainty",
+      "mask": "/science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/mask"
+    },
+    "flattening": {
+      "ellipsoidalFlatteningApplied": "True",
+      "topographicFlatteningApplied": "True"
+    },
+    "geometry": {
+      "available": true,
+      "epsg": 32614,
+      "path": "science/LSAR/GUNW/metadata/radarGrid",
+      "window": [
+        200,
+        207,
+        481,
+        488
+      ],
+      "method": "Сохранены исходные ENU east/north кубы для всех высот; высота местности не подменена средним уровнем."
+    },
+    "external_correction_layer_names": [
+      "slantRangeSolidEarthTidesPhase"
+    ]
+  },
+  "subset_path": "data/subsets/mexico-gunw-remaining/descending/2026-02-10_2026-02-22.npz",
+  "sha256": "2a0ce297e1a24e29517f0066eca0aacdddf332f649faeb5e97cf679090895467",
+  "sample_count": 1024,
+  "quality_valid_count": 243,
+  "steps": [
+    "Authenticated HTTP Range чтение native окон 32×32 прежних координат.",
+    "Сохранены исходные phase/coherence/components/ionosphere/uncertainty/mask без заполнения.",
+    "Проверены реальные даты/track/frame/look direction; сохранены flattening flags и доступные LOS кубы.",
+    "Строгая маска прежнего расчёта, без изменения порогов; атмосфера не исправлялась."
+  ]
+}
