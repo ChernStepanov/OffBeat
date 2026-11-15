@@ -142,13 +142,50 @@ window.OB = window.OB || {};
 
   more.addEventListener('click', () => { expanded = !expanded; render(); });
 
-  // the presentation video in a Win98 dialog
+  // the presentation video in a Win98-era media player dialog
   const modal = $('video-modal'), player = $('video-player');
-  const closeVideo = () => { player.pause(); modal.hidden = true; $('video-open').focus(); };
-  $('video-open')?.addEventListener('click', () => { const stop = $('stop'); if (stop && !stop.disabled) stop.click(); modal.hidden = false; player.play().catch(() => {}); $('video-close').focus(); });
-  $('video-close')?.addEventListener('click', closeVideo);
-  modal?.addEventListener('click', e => { if (e.target === modal) closeVideo(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal && !modal.hidden) closeVideo(); });
+  if (modal && player) {
+    const mmss = v => `${String(Math.floor(v / 60)).padStart(2, '0')}:${String(Math.floor(v % 60)).padStart(2, '0')}`;
+    const status = () => {
+      const d = Number.isFinite(player.duration) ? player.duration : 30;
+      $('mp-state').textContent = player.ended ? t('Finished', 'Завершено') : player.paused ? (player.currentTime > 0 ? t('Paused', 'Пауза') : t('Stopped', 'Остановлено')) : t('Playing', 'Воспроизведение');
+      $('mp-time').textContent = `${mmss(player.currentTime)} / ${mmss(d)}`;
+      if (!seeking) $('mp-seek').value = String(Math.round(1000 * player.currentTime / d));
+      $('mp-play').setAttribute('aria-pressed', String(!player.paused));
+      $('mp-pause').setAttribute('aria-pressed', String(player.paused && player.currentTime > 0 && !player.ended));
+    };
+    let seeking = false;
+    const play = () => player.play().catch(() => {});
+    const toggle = () => player.paused ? play() : player.pause();
+    const stopAll = () => { player.pause(); player.currentTime = 0; status(); };
+    const closeVideo = () => { stopAll(); modal.hidden = true; $('video-open').focus(); };
+    ['play', 'pause', 'timeupdate', 'ended', 'loadedmetadata', 'seeked'].forEach(e => player.addEventListener(e, status));
+    $('mp-play').addEventListener('click', play);
+    $('mp-pause').addEventListener('click', () => player.pause());
+    $('mp-stop').addEventListener('click', stopAll);
+    $('mp-start').addEventListener('click', () => { player.currentTime = 0; });
+    $('mp-back').addEventListener('click', () => { player.currentTime = Math.max(0, player.currentTime - 5); });
+    $('mp-fwd').addEventListener('click', () => { player.currentTime = Math.min(player.duration || 30, player.currentTime + 5); });
+    $('mp-menu-play').addEventListener('click', toggle);
+    $('mp-view').addEventListener('click', () => (player.requestFullscreen ? player.requestFullscreen() : Promise.reject()).catch(() => {}));
+    player.addEventListener('click', toggle);
+    const seek = $('mp-seek');
+    seek.addEventListener('input', () => { seeking = true; player.currentTime = (player.duration || 30) * seek.value / 1000; });
+    seek.addEventListener('change', () => { seeking = false; });
+    const volume = $('mp-volume'), mute = $('mp-mute');
+    volume.addEventListener('input', () => { player.volume = volume.value / 100; player.muted = false; mute.setAttribute('aria-pressed', 'false'); });
+    mute.addEventListener('click', () => { player.muted = !player.muted; mute.setAttribute('aria-pressed', String(player.muted)); });
+    player.volume = volume.value / 100;
+    $('video-open')?.addEventListener('click', () => { const stop = $('stop'); if (stop && !stop.disabled) stop.click(); modal.hidden = false; play(); $('video-close').focus(); });
+    $('video-close')?.addEventListener('click', closeVideo);
+    modal.addEventListener('click', e => { if (e.target === modal) closeVideo(); });
+    document.addEventListener('keydown', e => {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') closeVideo();
+      if (e.key === ' ' && !['INPUT', 'BUTTON', 'A'].includes(document.activeElement?.tagName)) { e.preventDefault(); toggle(); }
+    });
+    status();
+  }
   document.addEventListener('ob:sample-change', () => { if (!rendering) render(); });
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
