@@ -4,6 +4,9 @@ OB.createDenseCandidates = function (map, leaflet) {
   const $ = id => document.getElementById(id);
   map.createPane('detectedCandidates'); map.getPane('detectedCandidates').style.zIndex = 620;
   const catalogPath = 'data/change-candidates/catalog-9b22c7d45ddb.json';
+  const reviewEndpoint = location.hostname === 'offbeat.chern.su'
+    ? 'https://offbeat-shared-reviews.glazedbream.chatgpt.site/api/v1/reviews'
+    : '/api/v1/reviews';
   const cache = new Map(); let catalog = null, report = null, current = null, layer = null, serial = 0, reviews = {};
   const visualScreen = fetch('data/analysis/amazon-candidate-visual-check-2026-11-15.json').then(r=>r.ok?r.json():null).catch(()=>null);
   const polarizations = fetch('data/analysis/amazon-dense-polarizations-2026-11-15.json').then(r=>r.ok?r.json():null).catch(()=>null);
@@ -48,11 +51,11 @@ OB.createDenseCandidates = function (map, leaflet) {
   async function refreshCounts(){
     if(!report||!current)return;const d=report,m=current;
     $('detected-community').textContent=t('Loading community reviews…','Загружаем общие оценки…');
-    try{const response=await fetch('/api/v1/reviews?'+new URLSearchParams(reviewParams(d,m)),{cache:'no-store'});if(!response.ok)throw Error();const data=await response.json();if(report===d&&current===m)showCounts(data.counts)}
+    try{const response=await fetch(reviewEndpoint+'?'+new URLSearchParams(reviewParams(d,m)),{cache:'no-store'});if(!response.ok)throw Error();const data=await response.json();if(report===d&&current===m)showCounts(data.counts)}
     catch(_){if(report===d&&current===m)$('detected-community').textContent=t('Shared reviews are unavailable; no review can be submitted.','Общие оценки недоступны: сервер не подключён или не отвечает. Отправка оценок невозможна.')}
   }
   async function saveShared(verdict,basis){
-    const response=await fetch('/api/v1/reviews',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...reviewParams(report,current),token:token(),verdict,basis})});
+    const response=await fetch(reviewEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...reviewParams(report,current),token:token(),verdict,basis})});
     if(!response.ok)throw Error('unavailable');return response.json();
   }
   function pointCovered(image){const b=image.bounds;return b && current && current.lon>=b.w && current.lon<=b.e && current.lat>=b.s && current.lat<=b.n;}

@@ -107,7 +107,9 @@ Peers use the same WorldCover 2021 class within 1 km, excluding self, with at le
 
 Optical processing searches Earth Search within +/-15 days, checks the local SCL mask, reads only AOI COG windows, and reprojects to the exact site bbox. All dates use reflectance 0 to 0.3 and gamma 2.2; provider harmonisation flags prevent applying the BOA offset twice.
 
-Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. The prepared Amazon RTC-S1 series and comparison are available offline; no OPERA displacement velocity has been calculated.
+Re-extracting NISAR/OPERA requires Earthdata Login. Keep credentials outside version control; enter them only locally, never in chat, issues or PRs. No credentials are bundled. The prepared Amazon RTC-S1 series and comparison are available offline; OPERA/GNSS rate estimates remain exploratory.
+
+Для Мехико подготовлен [полный воспроизводимый аудит GUNW](docs/mexico-long-series.md): догружены оставшиеся 38 окон гранул, проверены все 54 пары каталога, маски, связные интервалы, кандидаты опоры и покрытие OPERA. Подтверждённая стабильная опора, скорость грунта и вертикальное разложение не получены; это явно показано в интерфейсе. Запуск без Earthdata: `.venv/bin/python -m scripts.mexico_long_series`; проверки: `.venv/bin/python -m pytest scripts/test_mexico_long_series.py -q`. [Исходный расчёт первых 16 пар](docs/mexico-displacement.md) сохранён отдельно.
 
 ```sh
 node scripts/test_data.mjs
