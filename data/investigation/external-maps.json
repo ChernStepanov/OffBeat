@@ -1,0 +1,906 @@
+{
+  "study": "Amazon dense NISAR GCOV native AOI external map context; exploratory only",
+  "generated_on": "2026-11-15",
+  "native_grid": {
+    "epsg": 32722,
+    "window": [
+      6391,
+      6532,
+      13147,
+      13288
+    ],
+    "x_first": 689910.0,
+    "y_first": 9473370.0,
+    "x_step": 20.0,
+    "y_step": -20.0,
+    "shape": [
+      141,
+      141
+    ]
+  },
+  "source": {
+    "name": "AWS Terrain Tiles / Mapzen terrain; elevation derived from public terrain compilation",
+    "url": "https://elevation-tiles-prod.s3.amazonaws.com/geotiff/12/1487/2102.tif",
+    "zoom": 12,
+    "tile_xy": [
+      1487,
+      2102
+    ],
+    "raw_path": "data/investigation/layers/aws-terrain-z12-1487-2102.tif",
+    "raw_sha256": "671b6b7107e86f7caf570cfec5b62c827004bb005530bc92fca7d0002b050c2e",
+    "raw_bytes": 108327,
+    "access": "one bounded 512x512 GeoTIFF tile; URL supports HTTP byte ranges (verified 206); no credentials",
+    "resolution": "Web-Mercator zoom 12, approximately 19 m/pixel at this latitude",
+    "license": "Mapzen Terrain Tiles, CC BY 4.0 (attribution to Mapzen/OpenStreetMap contributors required); AWS hosts the tiles. The product is a mixed-source terrain compilation.",
+    "limitation": "Not a hydrologically conditioned DEM; cannot infer channel/flood status or event timing."
+  },
+  "derived": {
+    "path": "data/investigation/layers/amazon-dem-native.npz",
+    "sha256": "40fdd141768b524ab42a86752985d15998b8b3b8aeadb5e829f3e48c7f2e93af",
+    "method": "Bilinear reprojection to all 141x141 EPSG:32722 20 m native cell centers; slope from 20 m central differences; no smoothing or class labels.",
+    "valid_elevation_cells": 19881,
+    "elevation_range_m": [
+      76.0,
+      126.81
+    ],
+    "slope_range_deg": [
+      0.0,
+      19.65
+    ]
+  },
+  "forest_change": {
+    "product": "Hansen Global Forest Change 2024 v1.12",
+    "path": "data/investigation/layers/amazon-hansen-native.npz",
+    "sha256": "4bd415b8f3271113de12f8b6bea4e1ccf4e2f273fd9180ff0b1d491a91333434",
+    "treecover2000": {
+      "url": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/Hansen_GFC-2024-v1.12_treecover2000_00N_050W.tif",
+      "source_window_row_col_height_width": [
+        19048,
+        2848,
+        103,
+        103
+      ],
+      "raw_window_shape": [
+        103,
+        103
+      ],
+      "raw_window_sha256": "584ee3945ed18833fc505f05e476ea06f0a3f34119c4d5e47da7415e1da45411",
+      "source_year": 2024,
+      "resolution": "approximately 30 m / 1 arc-second",
+      "license": "CC BY 4.0; Hansen/UMD/Google attribution required",
+      "access": "GDAL /vsicurl HTTP byte-range read of AOI window; TIFF block layout is striped (1 x 40000), not tiled COG, so actual transferred bytes may exceed decoded window size."
+    },
+    "lossyear": {
+      "url": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/Hansen_GFC-2024-v1.12_lossyear_00N_050W.tif",
+      "source_window_row_col_height_width": [
+        19048,
+        2848,
+        103,
+        103
+      ],
+      "raw_window_shape": [
+        103,
+        103
+      ],
+      "raw_window_sha256": "ba1860b16a96a40351dc30445c8ec5c38ac2107e41b2b799b5a98a6fa6f5cf45",
+      "source_year": 2024,
+      "resolution": "approximately 30 m / 1 arc-second",
+      "license": "CC BY 4.0; Hansen/UMD/Google attribution required",
+      "access": "GDAL /vsicurl HTTP byte-range read of AOI window; TIFF block layout is striped (1 x 40000), not tiled COG, so actual transferred bytes may exceed decoded window size."
+    },
+    "method": "Two AOI-only source windows nearest-neighbor sampled to every 20 m native cell. Treecover2000 is canopy cover percent circa 2000. Lossyear code 0=no mapped loss; 1..24=2001..2024. Both source bands use 0 as a valid value (not nodata); source nodata 255 is retained as 255. Historical layer cannot date 2026 change. Upsampling 30m source to 20m means neighboring native cells can share source samples.",
+    "grid_stats": {
+      "canopy_ge_30pct_cells": 17494,
+      "canopy_ge_50pct_cells": 16108,
+      "lossyear_nonzero_cells": 8948,
+      "lossyear_counts": {
+        "2001": 15,
+        "2002": 155,
+        "2003": 11,
+        "2004": 68,
+        "2005": 781,
+        "2006": 474,
+        "2007": 87,
+        "2008": 75,
+        "2009": 188,
+        "2010": 183,
+        "2011": 36,
+        "2012": 80,
+        "2013": 610,
+        "2014": 188,
+        "2015": 186,
+        "2016": 591,
+        "2017": 745,
+        "2018": 618,
+        "2019": 310,
+        "2020": 1128,
+        "2021": 550,
+        "2022": 1334,
+        "2023": 275,
+        "2024": 260
+      }
+    },
+    "grid_and_sample_stats_separate": {
+      "all_native_grid": {
+        "n_native_cells": 19881,
+        "treecover2000_pct_median": 97.0,
+        "treecover2000_ge_30pct_n": 17494,
+        "lossyear_nonzero_n": 8948,
+        "lossyear_nonzero_pct": 45.01,
+        "lossyear_year_counts": {
+          "2001": 15,
+          "2002": 155,
+          "2003": 11,
+          "2004": 68,
+          "2005": 781,
+          "2006": 474,
+          "2007": 87,
+          "2008": 75,
+          "2009": 188,
+          "2010": 183,
+          "2011": 36,
+          "2012": 80,
+          "2013": 610,
+          "2014": 188,
+          "2015": 186,
+          "2016": 591,
+          "2017": 745,
+          "2018": 618,
+          "2019": 310,
+          "2020": 1128,
+          "2021": 550,
+          "2022": 1334,
+          "2023": 275,
+          "2024": 260
+        },
+        "worldcover2021_class_counts": {
+          "10": 11265,
+          "20": 2,
+          "30": 8614
+        }
+      },
+      "background_excluding_the_eight_displayed_points": {
+        "n_native_cells": 19873,
+        "treecover2000_pct_median": 97.0,
+        "treecover2000_ge_30pct_n": 17487,
+        "lossyear_nonzero_n": 8945,
+        "lossyear_nonzero_pct": 45.01,
+        "lossyear_year_counts": {
+          "2001": 15,
+          "2002": 155,
+          "2003": 11,
+          "2004": 68,
+          "2005": 781,
+          "2006": 473,
+          "2007": 87,
+          "2008": 75,
+          "2009": 188,
+          "2010": 183,
+          "2011": 36,
+          "2012": 80,
+          "2013": 610,
+          "2014": 188,
+          "2015": 186,
+          "2016": 590,
+          "2017": 745,
+          "2018": 618,
+          "2019": 310,
+          "2020": 1128,
+          "2021": 549,
+          "2022": 1334,
+          "2023": 275,
+          "2024": 260
+        },
+        "worldcover2021_class_counts": {
+          "10": 11259,
+          "20": 2,
+          "30": 8612
+        }
+      },
+      "all_eight_displayed_points": {
+        "n_native_cells": 8,
+        "treecover2000_pct_median": 83.5,
+        "treecover2000_ge_30pct_n": 7,
+        "lossyear_nonzero_n": 3,
+        "lossyear_nonzero_pct": 37.5,
+        "lossyear_year_counts": {
+          "2006": 1,
+          "2016": 1,
+          "2021": 1
+        },
+        "worldcover2021_class_counts": {
+          "10": 6,
+          "30": 2
+        }
+      },
+      "four_visual_candidates_only": {
+        "n_native_cells": 4,
+        "treecover2000_pct_median": 60.5,
+        "treecover2000_ge_30pct_n": 3,
+        "lossyear_nonzero_n": 2,
+        "lossyear_nonzero_pct": 50.0,
+        "lossyear_year_counts": {
+          "2006": 1,
+          "2016": 1
+        },
+        "worldcover2021_class_counts": {
+          "10": 2,
+          "30": 2
+        }
+      },
+      "four_visual_controls_only": {
+        "n_native_cells": 4,
+        "treecover2000_pct_median": 97.0,
+        "treecover2000_ge_30pct_n": 4,
+        "lossyear_nonzero_n": 1,
+        "lossyear_nonzero_pct": 25.0,
+        "lossyear_year_counts": {
+          "2021": 1
+        },
+        "worldcover2021_class_counts": {
+          "10": 4
+        }
+      }
+    },
+    "class_stratified_all_grid": {
+      "10": {
+        "n_native_cells": 11265,
+        "treecover2000_pct_median": 99.0,
+        "treecover2000_ge_30pct_n": 10500,
+        "lossyear_nonzero_n": 4399,
+        "lossyear_nonzero_pct": 39.05,
+        "lossyear_year_counts": {
+          "2001": 15,
+          "2002": 75,
+          "2003": 3,
+          "2004": 10,
+          "2005": 328,
+          "2006": 151,
+          "2007": 72,
+          "2008": 37,
+          "2009": 20,
+          "2010": 110,
+          "2012": 35,
+          "2013": 135,
+          "2014": 100,
+          "2015": 97,
+          "2016": 414,
+          "2017": 283,
+          "2018": 90,
+          "2019": 21,
+          "2020": 221,
+          "2021": 474,
+          "2022": 1238,
+          "2023": 249,
+          "2024": 221
+        },
+        "worldcover2021_class_counts": {
+          "10": 11265
+        }
+      },
+      "20": {
+        "n_native_cells": 2,
+        "treecover2000_pct_median": 62.5,
+        "treecover2000_ge_30pct_n": 2,
+        "lossyear_nonzero_n": 0,
+        "lossyear_nonzero_pct": 0.0,
+        "lossyear_year_counts": {},
+        "worldcover2021_class_counts": {
+          "20": 2
+        }
+      },
+      "30": {
+        "n_native_cells": 8614,
+        "treecover2000_pct_median": 76.0,
+        "treecover2000_ge_30pct_n": 6992,
+        "lossyear_nonzero_n": 4549,
+        "lossyear_nonzero_pct": 52.81,
+        "lossyear_year_counts": {
+          "2002": 80,
+          "2003": 8,
+          "2004": 58,
+          "2005": 453,
+          "2006": 323,
+          "2007": 15,
+          "2008": 38,
+          "2009": 168,
+          "2010": 73,
+          "2011": 36,
+          "2012": 45,
+          "2013": 475,
+          "2014": 88,
+          "2015": 89,
+          "2016": 177,
+          "2017": 462,
+          "2018": 528,
+          "2019": 289,
+          "2020": 907,
+          "2021": 76,
+          "2022": 96,
+          "2023": 26,
+          "2024": 39
+        },
+        "worldcover2021_class_counts": {
+          "30": 8614
+        }
+      }
+    },
+    "visual_candidate_class_subsets": {
+      "10": {
+        "n_points": 2,
+        "native_class_background": {
+          "n_native_cells": 11259,
+          "treecover2000_pct_median": 99.0,
+          "treecover2000_ge_30pct_n": 10494,
+          "lossyear_nonzero_n": 4396,
+          "lossyear_nonzero_pct": 39.04,
+          "lossyear_year_counts": {
+            "2001": 15,
+            "2002": 75,
+            "2003": 3,
+            "2004": 10,
+            "2005": 328,
+            "2006": 150,
+            "2007": 72,
+            "2008": 37,
+            "2009": 20,
+            "2010": 110,
+            "2012": 35,
+            "2013": 135,
+            "2014": 100,
+            "2015": 97,
+            "2016": 413,
+            "2017": 283,
+            "2018": 90,
+            "2019": 21,
+            "2020": 221,
+            "2021": 473,
+            "2022": 1238,
+            "2023": 249,
+            "2024": 221
+          },
+          "worldcover2021_class_counts": {
+            "10": 11259
+          }
+        },
+        "warning": "Point values are listed individually; 2 points per class do not support inferential comparison."
+      },
+      "30": {
+        "n_points": 2,
+        "native_class_background": {
+          "n_native_cells": 8612,
+          "treecover2000_pct_median": 76.0,
+          "treecover2000_ge_30pct_n": 6991,
+          "lossyear_nonzero_n": 4549,
+          "lossyear_nonzero_pct": 52.82,
+          "lossyear_year_counts": {
+            "2002": 80,
+            "2003": 8,
+            "2004": 58,
+            "2005": 453,
+            "2006": 323,
+            "2007": 15,
+            "2008": 38,
+            "2009": 168,
+            "2010": 73,
+            "2011": 36,
+            "2012": 45,
+            "2013": 475,
+            "2014": 88,
+            "2015": 89,
+            "2016": 177,
+            "2017": 462,
+            "2018": 528,
+            "2019": 289,
+            "2020": 907,
+            "2021": 76,
+            "2022": 96,
+            "2023": 26,
+            "2024": 39
+          },
+          "worldcover2021_class_counts": {
+            "30": 8612
+          }
+        },
+        "warning": "Point values are listed individually; 2 points per class do not support inferential comparison."
+      }
+    },
+    "group_stats": {
+      "candidate": {
+        "n": 4,
+        "median_treecover2000_pct": 60.5,
+        "lossyear_nonzero_n": 2
+      },
+      "control": {
+        "n": 4,
+        "median_treecover2000_pct": 97.0,
+        "lossyear_nonzero_n": 1
+      }
+    }
+  },
+  "candidate_matches": [
+    {
+      "id": "candidate-01",
+      "role": "candidate",
+      "row": 29,
+      "col": 66,
+      "lat": -4.767559782469801,
+      "lon": -49.275795926083,
+      "hv_shift_db": -8.480036735534668,
+      "elevation_m": 86.44,
+      "slope_deg": 7.26,
+      "treecover2000_pct": 100,
+      "lossyear_code": 6,
+      "lossyear_calendar_year": 2006,
+      "worldcover_2021_class": 10,
+      "distance_to_different_worldcover_class_m": 44.7,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 100.0,
+        "lossyear_code_counts": {
+          "6": 9
+        },
+        "worldcover_class_counts": {
+          "10": 9
+        }
+      }
+    },
+    {
+      "id": "candidate-02",
+      "role": "candidate",
+      "row": 35,
+      "col": 2,
+      "lat": -4.76867375815887,
+      "lon": -49.28733071998617,
+      "hv_shift_db": -8.052356719970703,
+      "elevation_m": 82.98,
+      "slope_deg": 2.47,
+      "treecover2000_pct": 21,
+      "lossyear_code": 0,
+      "lossyear_calendar_year": null,
+      "worldcover_2021_class": 30,
+      "distance_to_different_worldcover_class_m": 72.1,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 42.0,
+        "lossyear_code_counts": {
+          "0": 9
+        },
+        "worldcover_class_counts": {
+          "30": 9
+        }
+      }
+    },
+    {
+      "id": "candidate-03",
+      "role": "candidate",
+      "row": 34,
+      "col": 133,
+      "lat": -4.768433611145345,
+      "lon": -49.26371542914388,
+      "hv_shift_db": -7.912927627563477,
+      "elevation_m": 83.55,
+      "slope_deg": 1.62,
+      "treecover2000_pct": 70,
+      "lossyear_code": 0,
+      "lossyear_calendar_year": null,
+      "worldcover_2021_class": 30,
+      "distance_to_different_worldcover_class_m": 82.5,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 61.0,
+        "lossyear_code_counts": {
+          "0": 9
+        },
+        "worldcover_class_counts": {
+          "30": 9
+        }
+      }
+    },
+    {
+      "id": "candidate-04",
+      "role": "candidate",
+      "row": 129,
+      "col": 71,
+      "lat": -4.785642631735435,
+      "lon": -49.27484935051318,
+      "hv_shift_db": -6.935117721557617,
+      "elevation_m": 100.75,
+      "slope_deg": 18.53,
+      "treecover2000_pct": 51,
+      "lossyear_code": 16,
+      "lossyear_calendar_year": 2016,
+      "worldcover_2021_class": 10,
+      "distance_to_different_worldcover_class_m": 189.7,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 73.0,
+        "lossyear_code_counts": {
+          "0": 3,
+          "16": 6
+        },
+        "worldcover_class_counts": {
+          "10": 9
+        }
+      }
+    },
+    {
+      "id": "control-01",
+      "role": "control",
+      "row": 106,
+      "col": 101,
+      "lat": -4.781469414326616,
+      "lon": -49.26945148797003,
+      "hv_shift_db": 0.0004444122314453125,
+      "elevation_m": 102.11,
+      "slope_deg": 13.88,
+      "treecover2000_pct": 97,
+      "lossyear_code": 0,
+      "lossyear_calendar_year": null,
+      "worldcover_2021_class": 10,
+      "distance_to_different_worldcover_class_m": 121.7,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 97.0,
+        "lossyear_code_counts": {
+          "0": 4,
+          "14": 5
+        },
+        "worldcover_class_counts": {
+          "10": 9
+        }
+      }
+    },
+    {
+      "id": "control-02",
+      "role": "control",
+      "row": 107,
+      "col": 51,
+      "lat": -4.781672979533721,
+      "lon": -49.27846483965199,
+      "hv_shift_db": -0.0008287429809570312,
+      "elevation_m": 106.88,
+      "slope_deg": 2.4,
+      "treecover2000_pct": 99,
+      "lossyear_code": 0,
+      "lossyear_calendar_year": null,
+      "worldcover_2021_class": 10,
+      "distance_to_different_worldcover_class_m": 126.5,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 99.0,
+        "lossyear_code_counts": {
+          "0": 9
+        },
+        "worldcover_class_counts": {
+          "10": 9
+        }
+      }
+    },
+    {
+      "id": "control-03",
+      "role": "control",
+      "row": 28,
+      "col": 94,
+      "lat": -4.767366243902308,
+      "lon": -49.27074875218193,
+      "hv_shift_db": -0.000850677490234375,
+      "elevation_m": 90.52,
+      "slope_deg": 2.2,
+      "treecover2000_pct": 51,
+      "lossyear_code": 21,
+      "lossyear_calendar_year": 2021,
+      "worldcover_2021_class": 10,
+      "distance_to_different_worldcover_class_m": 20.0,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 51.0,
+        "lossyear_code_counts": {
+          "0": 1,
+          "21": 6,
+          "24": 2
+        },
+        "worldcover_class_counts": {
+          "10": 5,
+          "30": 4
+        }
+      }
+    },
+    {
+      "id": "control-04",
+      "role": "control",
+      "row": 60,
+      "col": 1,
+      "lat": -4.7731955166033435,
+      "lon": -49.287499786923156,
+      "hv_shift_db": -0.0014753341674804688,
+      "elevation_m": 104.91,
+      "slope_deg": 3.37,
+      "treecover2000_pct": 97,
+      "lossyear_code": 0,
+      "lossyear_calendar_year": null,
+      "worldcover_2021_class": 10,
+      "distance_to_different_worldcover_class_m": 140.0,
+      "neighborhood_3x3": {
+        "treecover2000_pct_median": 97.0,
+        "lossyear_code_counts": {
+          "0": 8,
+          "21": 1
+        },
+        "worldcover_class_counts": {
+          "10": 9
+        }
+      }
+    }
+  ],
+  "not_acquired": [
+    {
+      "source": "JRC Global Surface Water occurrence/seasonality",
+      "status": "not downloaded",
+      "reason": "public explorer provides styled map tiles, not verified numeric AOI raster access in this run; styling/color is not treated as measurements. Historical reference only, not event truth."
+    },
+    {
+      "source": "OpenStreetMap waterways/roads",
+      "status": "not acquired",
+      "reason": "small Overpass bbox query attempted, but public endpoints returned 406/429 or timed out; no infrastructure geometries are asserted. OSM would be ODbL with attribution and query date; it is not satellite validation."
+    },
+    {
+      "source": "Dynamic World",
+      "status": "not downloaded",
+      "reason": "no confirmed credentialless bounded probability-raster endpoint found. It is Sentinel-2-derived and therefore shares optical/cloud/seasonality limitations."
+    },
+    {
+      "source": "MapBiomas/PRODES/DETER geometries",
+      "status": "not downloaded",
+      "reason": "no verified dated geometry API matching this AOI obtained; alerts must not be represented as complete coverage."
+    }
+  ],
+  "interpretation": "Elevation/slope add geomorphic context independent of WorldCover class and NISAR backscatter. They can test whether candidate/control differences track relief, but cannot establish forest clearing, water, inundation, or cause.",
+  "overlays": {
+    "hansen_lossyear": {
+      "path": "data/investigation/layers/hansen-lossyear-2001-2024.png",
+      "sha256": "c8bd2399bd239d852fdf2308d2b81dcc374a0d65bbd9ff0d9f63eaf79d3e6467",
+      "bounds_wgs84": [
+        -49.28779729809565,
+        -4.787830694408399,
+        -49.26233803337432,
+        -4.762190867525927
+      ],
+      "legend": {
+        "title": "Hansen Global Forest Change loss year",
+        "unit": "year code",
+        "items": [
+          {
+            "value": 0,
+            "label": "No mapped loss through 2024",
+            "color": "#e0e8ee"
+          },
+          {
+            "value": 1,
+            "label": "2001",
+            "color": "#fff080"
+          },
+          {
+            "value": 2,
+            "label": "2002",
+            "color": "#ffe579"
+          },
+          {
+            "value": 3,
+            "label": "2003",
+            "color": "#ffdb71"
+          },
+          {
+            "value": 4,
+            "label": "2004",
+            "color": "#ffd06a"
+          },
+          {
+            "value": 5,
+            "label": "2005",
+            "color": "#ffc663"
+          },
+          {
+            "value": 6,
+            "label": "2006",
+            "color": "#ffbb5c"
+          },
+          {
+            "value": 7,
+            "label": "2007",
+            "color": "#ffb154"
+          },
+          {
+            "value": 8,
+            "label": "2008",
+            "color": "#ffa64d"
+          },
+          {
+            "value": 9,
+            "label": "2009",
+            "color": "#fb9b4c"
+          },
+          {
+            "value": 10,
+            "label": "2010",
+            "color": "#f8904a"
+          },
+          {
+            "value": 11,
+            "label": "2011",
+            "color": "#f48449"
+          },
+          {
+            "value": 12,
+            "label": "2012",
+            "color": "#f07948"
+          },
+          {
+            "value": 13,
+            "label": "2013",
+            "color": "#ec6e46"
+          },
+          {
+            "value": 14,
+            "label": "2014",
+            "color": "#e86245"
+          },
+          {
+            "value": 15,
+            "label": "2015",
+            "color": "#e55743"
+          },
+          {
+            "value": 16,
+            "label": "2016",
+            "color": "#e14c42"
+          },
+          {
+            "value": 17,
+            "label": "2017",
+            "color": "#d34641"
+          },
+          {
+            "value": 18,
+            "label": "2018",
+            "color": "#c53f3f"
+          },
+          {
+            "value": 19,
+            "label": "2019",
+            "color": "#b7393e"
+          },
+          {
+            "value": 20,
+            "label": "2020",
+            "color": "#a8323c"
+          },
+          {
+            "value": 21,
+            "label": "2021",
+            "color": "#9a2c3b"
+          },
+          {
+            "value": 22,
+            "label": "2022",
+            "color": "#8c263a"
+          },
+          {
+            "value": 23,
+            "label": "2023",
+            "color": "#7e1f38"
+          },
+          {
+            "value": 24,
+            "label": "2024",
+            "color": "#701937"
+          },
+          {
+            "value": 255,
+            "label": "Nodata / transparent",
+            "color": "transparent"
+          }
+        ],
+        "year_code_rule": "1..24 = 2000 + code; 0 is valid no mapped loss, not nodata"
+      },
+      "period": "2001–2024; code 0 means no mapped loss through 2024",
+      "resolution_qualification": "Hansen Landsat-derived source ~30 m; native 20 m grid sampling; WGS84 output raster is a visualization reprojection, not increased source resolution.",
+      "source_key": "forest_change.lossyear",
+      "crs": "EPSG:4326",
+      "width": 141,
+      "height": 142,
+      "pixel_transform_wgs84": [
+        0.00018056216114416577,
+        0.0,
+        -49.28779729809565,
+        0.0,
+        -0.00018056216114416577,
+        -4.762190867525927
+      ],
+      "resampling": "nearest",
+      "format": "RGBA PNG; alpha=0 only outside valid warped source coverage"
+    },
+    "hansen_treecover2000": {
+      "path": "data/investigation/layers/hansen-treecover2000.png",
+      "sha256": "e2eee2cd705d9fc379c93e12fdef06875d46ff2cd9e8e7b557ccea33bfe67989",
+      "bounds_wgs84": [
+        -49.28779729809565,
+        -4.787830694408399,
+        -49.26233803337432,
+        -4.762190867525927
+      ],
+      "legend": {
+        "title": "Tree canopy cover circa 2000",
+        "unit": "percent",
+        "min": 0,
+        "max": 100,
+        "palette_stops": [
+          {
+            "value": 0,
+            "color": "#bfa47a"
+          },
+          {
+            "value": 25,
+            "color": "#c4be7f"
+          },
+          {
+            "value": 50,
+            "color": "#70a667"
+          },
+          {
+            "value": 75,
+            "color": "#2c844f"
+          },
+          {
+            "value": 100,
+            "color": "#0a5339"
+          }
+        ],
+        "nodata": "transparent"
+      },
+      "period": "circa 2000",
+      "resolution_qualification": "Hansen Landsat-derived source ~30 m; nearest to native 20 m grid; WGS84 output is visualization-only.",
+      "source_key": "forest_change.treecover2000",
+      "crs": "EPSG:4326",
+      "width": 141,
+      "height": 142,
+      "pixel_transform_wgs84": [
+        0.00018056216114416577,
+        0.0,
+        -49.28779729809565,
+        0.0,
+        -0.00018056216114416577,
+        -4.762190867525927
+      ],
+      "resampling": "nearest",
+      "format": "RGBA PNG; alpha=0 only outside valid warped source coverage"
+    },
+    "dem_elevation": {
+      "path": "data/investigation/layers/aws-terrain-elevation.png",
+      "sha256": "c19435e5e19ecb6b3baa02642bdb39a7fb7b29a77ec995256b85be6171fed4e9",
+      "bounds_wgs84": [
+        -49.28779729809565,
+        -4.787830694408399,
+        -49.26233803337432,
+        -4.762190867525927
+      ],
+      "legend": {
+        "title": "Terrain elevation",
+        "unit": "m",
+        "min": 76.0,
+        "max": 126.81,
+        "palette": "blue/teal low → ochre/brown high",
+        "nodata": "transparent"
+      },
+      "period": "static terrain compilation (vintage varies by underlying source)",
+      "resolution_qualification": "AWS Terrain/Mapzen zoom 12 source ~19 m/pixel at AOI; sampled native grid then bilinear WGS84 visualization warp. Not hydrologically conditioned.",
+      "source_key": "derived.elevation_m",
+      "crs": "EPSG:4326",
+      "width": 141,
+      "height": 142,
+      "pixel_transform_wgs84": [
+        0.00018056216114416577,
+        0.0,
+        -49.28779729809565,
+        0.0,
+        -0.00018056216114416577,
+        -4.762190867525927
+      ],
+      "resampling": "bilinear",
+      "format": "RGBA PNG; alpha=0 only outside valid warped source coverage"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.research-desk { width: 1040px; }
+.research-intro .paper { max-width: none; }
+.research-intro .paper > p { max-width: 110ch; }
+.research-intro [role="status"] { margin: 10px 0 0; padding: 7px; background: #ffffe1; box-shadow: var(--sunken); }
+.research-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 10px; }
+.research-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
+.research-card { min-width: 0; padding: 8px; background: #ffffe1; box-shadow: var(--sunken); }
+.research-card h3 { margin: 0 0 6px; font-weight: bold; }
+.research-card__value { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 8px; padding: 3px 0; border-top: 1px solid #d0d0b8; }
+.research-card__label { color: #333; }
+.research-card__value strong { font-size: 14px; white-space: nowrap; }
+.research-card > p { margin: 5px 0 0; color: #333; }
+.research-section-title { margin: 8px 0 4px; font-weight: bold; }
+.research-list { margin: 4px 0 8px; padding-left: 22px; }
+.research-list li { margin: 3px 0; }
+.research-table-wrap { max-width: 100%; overflow-x: auto; margin: 4px 0 8px; }
+.research-table { width: 100%; border-collapse: collapse; background: var(--paper); }
+.research-table th, .research-table td { padding: 4px 6px; border: 1px solid #808080; text-align: left; vertical-align: top; }
+.research-table th { background: #dfdfdf; }
+.research-chart { display: block; width: 100%; height: 220px; margin: 6px 0; background: #fff; border: 1px solid #000; }
+.research-details { margin: 6px 0; padding: 5px 7px; background: #e5e5e5; box-shadow: var(--sunken); }
+.research-details > summary { font-weight: bold; cursor: pointer; }
+.research-details__body { padding: 5px 3px 0; }
+.research-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 4px 0 8px; }
+.research-legend span::before { content: ""; display: inline-block; width: 12px; height: 3px; margin: 0 5px 3px 0; background: var(--series-color); }
+.research-footer { padding: 5px 2px; }
+@media (max-width: 720px) {
+  body { padding-top: 6px; }
+  .research-desk { max-width: calc(100% - 12px); }
+  .research-grid { grid-template-columns: 1fr; gap: 0; }
+  .research-cards { grid-template-columns: 1fr; gap: 7px; }
+  .research-desk .app-bar > .win-t { align-items: flex-start; }
+  .research-desk .menu { gap: 2px; }
+  .research-desk .menu a { padding: 4px; }
+  .research-chart { height: 190px; }
+}
