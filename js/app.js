@@ -819,6 +819,9 @@
     loadSite(id) {
       ++navigationSerial; ++searchSerial; $('place-submit').disabled = false; $('place-results').replaceChildren();
       $('place-status').textContent = '';
+      // Opening a site replaces any searched place, as the site list does.
+      const url = new URL(location.href);
+      if (url.searchParams.has('lat') || url.searchParams.has('lon')) { url.searchParams.delete('lat'); url.searchParams.delete('lon'); history.replaceState(null, '', url); clearSearchMarkers(); }
       return (state.site && state.site.id === id && state.pixel) ? Promise.resolve(state.site) : loadSite(id);
     },
     setZ(v) { $("z").value = v; state.z = +$("z").value; $("z-out").textContent = state.z; refresh(); },

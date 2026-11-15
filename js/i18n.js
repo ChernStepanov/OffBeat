@@ -2,6 +2,9 @@
 (() => {
   const translations = {
     'Explore a change story':'Открыть историю изменения',
+    'What the data says':'Что говорят данные',
+    'Loading statistical findings...':'Загрузка статистических выводов...',
+    'All statistics (JSON)':'Вся статистика (JSON)', 'analysis code':'код анализа',
     'Search the NISAR archive':'Поиск в архиве NISAR',
     'How OffBeat works':'Как работает OffBeat',
     'The Earth is always moving.':'Земля постоянно меняется.',

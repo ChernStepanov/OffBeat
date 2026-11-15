@@ -1,0 +1,47 @@
+import hashlib
+import json
+
+import numpy as np
+
+from scripts import findings as F
+
+ROOT = F.ROOT
+
+
+def load(site):
+    return json.loads((ROOT / 'data' / f'{site}.json').read_text())
+
+
+def test_join_count_counts_rook_neighbours_only():
+    mask = np.array([[1, 1, 0], [0, 0, 0], [0, 1, 1]], dtype=bool)
+    assert F.joins(mask) == 2
+    assert F.joins(np.eye(3, dtype=bool)) == 0  # diagonal neighbours do not count
+
+
+def test_repeat_pairs_skip_gaps_longer_than_the_repeat_cycle():
+    assert F.repeat_pairs(['2026-07-09', '2026-07-21', '2026-08-14', '2026-08-26']) == [0, 2]
+
+
+def test_quality_gate_flags_implausible_khimki_and_passes_others():
+    rng = np.random.default_rng(0)
+    assert not F.analyse(load('khimki'), rng)['quality']['plausible']
+    assert F.analyse(load('tokyo'), rng)['quality']['plausible']
+
+
+def test_published_findings_match_current_data():
+    published = json.loads((ROOT / 'data' / 'findings.json').read_text())
+    for site, digest in published['inputs_sha256'].items():
+        assert hashlib.sha256((ROOT / 'data' / f'{site}.json').read_bytes()).hexdigest() == digest, f'rerun scripts/findings.py: {site} changed'
+    strengths = {f['strength'] for f in published['findings']}
+    assert strengths <= {'strong', 'suggestive', 'none', 'issue'}
+    for f in published['findings']:
+        assert f['en'] and f['ru'] and f['how_en'] and f['how_ru']
+        for index in f.get('samples', []):
+            assert 0 <= index < len(load(f['site'])['pixels'])
+
+
+def test_trend_candidates_are_fdr_controlled():
+    published = json.loads((ROOT / 'data' / 'findings.json').read_text())
+    trends = published['sites']['mexico']['trends']
+    assert trends['tests'] > 1000
+    assert all(h['q'] < trends['alpha'] for h in trends['strongest'])
