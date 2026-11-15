@@ -14,7 +14,7 @@ import numpy as np
 from scipy import stats
 
 ROOT = Path(__file__).resolve().parents[1]
-SITES = ['mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'khimki', 'nairobi', 'sydney']
+SITES = ['mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'nairobi', 'sydney']
 CLASSES = {10: ('tree cover', 'лес'), 20: ('shrubland', 'кустарник'), 30: ('grassland', 'луга'), 40: ('cropland', 'пашня'),
            50: ('built-up', 'застройка'), 60: ('bare ground', 'голая земля'), 80: ('water', 'вода')}
 OFFBEAT = 2.5          # |z| the map calls off-beat

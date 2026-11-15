@@ -3,6 +3,8 @@
   const translations = {
     'Explore a change story':'Открыть историю изменения',
     'What the data says':'Что говорят данные',
+    'Measured sites':'Участки с измерениями', 'Map layers and threshold':'Слои карты и порог', 'Change styles legend':'Легенда типов изменений',
+    'A place name or "lat, lon". Names are sent to':'Название места или "широта, долгота". Названия отправляются в', ', fallback':', резерв',
     'Loading statistical findings...':'Загрузка статистических выводов...',
     'All statistics (JSON)':'Вся статистика (JSON)', 'analysis code':'код анализа',
     'Search the NISAR archive':'Поиск в архиве NISAR',

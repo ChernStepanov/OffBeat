@@ -14,13 +14,13 @@ class OperationsTest(unittest.TestCase):
             (root / 'data').mkdir()
             (root / 'data' / 'mexico.json').write_text(json.dumps({'id': 'wrong'}))
             result = inventory(root)
-            self.assertEqual(len(result['errors']), 8)
+            self.assertEqual(len(result["errors"]), 7)
             self.assertEqual(result['sites'], [])
 
     def test_inventory_indexes_real_datasets(self):
         result = inventory()
         self.assertEqual(result['errors'], [])
-        self.assertEqual(len(result['sites']), 8)
+        self.assertEqual(len(result["sites"]), 7)
         self.assertTrue(all(len(site['sha256']) == 64 for site in result['sites']))
 
     def test_probe_reports_network_failure(self):

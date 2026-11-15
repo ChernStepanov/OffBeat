@@ -10,7 +10,7 @@ window.OB = window.OB || {};
     strong: ['Strong', 'Надёжно'], suggestive: ['Suggestive', 'Вероятно'],
     none: ['Not supported', 'Не подтверждено'], issue: ['Data issue', 'Проблема данных'],
   };
-  const FIRST = 5;
+  const FIRST = 3;
   let data = null, expanded = false, rendering = false;
   const cursor = {};
 
@@ -52,10 +52,11 @@ window.OB = window.OB || {};
     if (f.site) {
       const actions = document.createElement('div'); actions.className = 'finding__actions';
       if (f.samples?.length) {
-        const k = cursor[f.id] || 0;
-        actions.append(button(t(`Candidate ${k + 1} / ${f.samples.length}`, `Кандидат ${k + 1} / ${f.samples.length}`), () => show(f)));
+        // first press shows the strongest sample; later presses step through the others
+        const k = cursor[f.id] || 0, n = f.samples.length;
+        actions.append(button(k === 0 && !(f.id in cursor) ? t('Show on map', 'Показать на карте') : t(`Next sample (${k + 1} of ${n})`, `Следующая точка (${k + 1} из ${n})`), () => show(f)));
       } else if (f.site !== siteId()) {
-        actions.append(button(t('Open site', 'Открыть'), () => show(f)));
+        actions.append(button(t('Show on map', 'Показать на карте'), () => show(f)));
       }
       if (actions.childElementCount) li.append(actions);
     }

@@ -22,10 +22,9 @@ def test_repeat_pairs_skip_gaps_longer_than_the_repeat_cycle():
     assert F.repeat_pairs(['2026-07-09', '2026-07-21', '2026-08-14', '2026-08-26']) == [0, 2]
 
 
-def test_quality_gate_flags_implausible_khimki_and_passes_others():
-    rng = np.random.default_rng(0)
-    assert not F.analyse(load('khimki'), rng)['quality']['plausible']
-    assert F.analyse(load('tokyo'), rng)['quality']['plausible']
+def test_every_published_site_passes_the_plausibility_gate():
+    published = json.loads((ROOT / 'data' / 'findings.json').read_text())
+    assert all(site['quality']['plausible'] for site in published['sites'].values())
 
 
 def test_published_findings_match_current_data():

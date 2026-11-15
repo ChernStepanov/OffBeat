@@ -37,7 +37,7 @@ All paths below start with `/api/v1`. JSON errors have the shape
 | `/sites/amazon/context/alerts` | Alert GeoJSON |
 | `/sites/amazon/context/ranking` | Experimental sampled-point ranking data, metadata and limitations |
 
-Sites are `mexico`, `amazon`, `venezuela`, `delhi`, `tokyo`, `khimki`, `nairobi`, `sydney`. Index is zero-based row-major,
+Sites are `mexico`, `amazon`, `venezuela`, `delhi`, `tokyo`, `nairobi`, `sydney`. Index is zero-based row-major,
 from northwest; `row` and `col` are also zero-based. Pixel detail contains full
 HH/HV, peer and displacement arrays, with the date axes supplied separately.
 
