@@ -189,6 +189,24 @@ class Handler(BaseHTTPRequestHandler):
         self.respond(status, result)
 
     def do_POST(self):
+        if urlsplit(self.path).path == '/api/v1/copilot':
+            from api import copilot
+            try:
+                origin = self.headers.get('Origin')
+                if origin and urlsplit(origin).netloc != self.headers.get('Host'):
+                    raise APIError(403, 'Cross-origin requests are not accepted')
+                size = int(self.headers.get('Content-Length', '0'))
+                if self.headers.get_content_type() != 'application/json' or not 0 < size <= 100000:
+                    raise APIError(400, 'Invalid chat body')
+                payload = json.loads(self.rfile.read(size))
+                if not isinstance(payload, dict): raise APIError(400, 'Invalid chat body')
+                status, result = copilot.complete(payload)
+            except (ValueError, UnicodeDecodeError):
+                status, result = 400, {'error': 'Invalid chat JSON'}
+            except APIError as exc:
+                status, result = exc.status, {'error': exc.message}
+            self.respond(status, result)
+            return
         try:
             if urlsplit(self.path).path != '/api/v1/reviews':
                 raise APIError(404, 'Unknown endpoint')

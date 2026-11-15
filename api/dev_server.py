@@ -4,7 +4,7 @@ import os
 import tempfile
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, unquote
 from api.server import Handler
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -12,11 +12,15 @@ ROOT = Path(__file__).resolve().parent.parent
 
 class DevHandler(Handler, SimpleHTTPRequestHandler):
     def do_GET(self):
+        if any(part.startswith('.') for part in unquote(urlsplit(self.path).path).split('/') if part):
+            self.send_error(404); return
         if urlsplit(self.path).path.startswith('/api/'):
             return Handler.do_GET(self)
         return SimpleHTTPRequestHandler.do_GET(self)
 
     def do_HEAD(self):
+        if any(part.startswith('.') for part in unquote(urlsplit(self.path).path).split('/') if part):
+            self.send_error(404); return
         return SimpleHTTPRequestHandler.do_HEAD(self)
 
 
