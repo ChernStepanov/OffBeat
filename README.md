@@ -1,6 +1,6 @@
 # OffBeat
 
-Explore real NISAR radar samples, compare them with nearby samples of the same historical land-cover class, and hear the measured curves. Curve shapes are candidates for checking, not automatic event diagnoses.
+Explore real NISAR radar samples, compare them with nearby samples of the same historical land-cover class, and hear the measured curves. OffBeat is an exploratory prototype for changes in NISAR radar signals. Automatically identifying the physical causes of events is future work; candidate curve shapes are not verified event diagnoses.
 
 [Demo](https://offbeat.chern.su/) | [Repository](https://github.com/ChernStepanov/OffBeat)
 
@@ -99,10 +99,10 @@ The surface and dense terrain point cloud load visible elevation tiles from
 [Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).
 Detail adapts to scale. **World** shows the overview, **Study area** returns to
 the selected measurements, and **Map centre** opens the current 2D location.
-The 3D window also accepts place names or `latitude, longitude`; coordinates
+The 3D window shares its centre with the upper maps and also accepts place names or `latitude, longitude`; coordinates
 are processed locally, and names are sent to the same geocoders as the 2D search.
 Changing location does not infer or manufacture additional NISAR coverage.
-Surface colour represents elevation in metres. The separate **1,024 NISAR dots**
+The default surface displays Esri topographic map tiles draped over DEM elevations; other render modes use elevation colours. Map dates vary, and map imagery is not a NISAR measurement. The separate **1,024 NISAR dots**
 keep their actual lat/lon; their colour represents the selected HH/HV backscatter,
 not elevation. Changing acquisition or polarization does not move them vertically.
 No extra NISAR observations are invented. **Height 1x / 2x / 4x / 8x** changes only
