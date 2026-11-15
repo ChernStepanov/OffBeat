@@ -81,9 +81,13 @@ OB.createTerrainRenderer = async function (canvas) {
     return new T.Vector3((p.x - center.x) * s, h / (tiles.C * Math.cos(lat * Math.PI / 180)) * s * exaggeration, (p.y - center.y) * s);
   }
   function updateCamera() {
-    const geo = location(), h = elevationAt(geo.lon, geo.lat);
+    const geo = location();
     const previousHeight = targetHeight;
-    targetHeight = Number.isFinite(h) ? h / (tiles.C * Math.cos(geo.lat * Math.PI / 180)) * scale() * exaggeration : 0;
+    if (dragHeight !== null) targetHeight = dragHeight;
+    else {
+      const h = elevationAt(geo.lon, geo.lat);
+      targetHeight = Number.isFinite(h) ? h / (tiles.C * Math.cos(geo.lat * Math.PI / 180)) * scale() * exaggeration : 0;
+    }
     if (Math.abs(previousHeight - targetHeight) > .15) coverageDirty = true;
     if (ground) {
       // An illustrative near-ground view of the DEM, not a surveyed observer position.
@@ -215,6 +219,7 @@ OB.createTerrainRenderer = async function (canvas) {
       for (const [key, node] of nodes) if (!keep.has(key)) { disposeNode(node); nodes.delete(key); }
     }
     positionTiles(); if (overlayDirty || built) rebuildSamples();
+    followDrag();   // streaming LOD can move the surface: keep the grabbed point under its cursor
     positionPins();
     if (marker) {
       marker.quaternion.copy(camera.quaternion);
@@ -239,9 +244,34 @@ OB.createTerrainRenderer = async function (canvas) {
     }
     return null;
   }
+  // Grab-and-drag runs on the horizontal plane at the grab height — the model
+  // desk globes use. The streamed LOD meshes swap under the cursor mid-drag,
+  // which would make a mesh-anchored grab jitter; the plane is rigid, so the
+  // grabbed point stays under the cursor exactly, at any terrain relief.
+  let dragHeight = null, dragFollow = null;
+  function planeAt(x, y) {
+    screenPointer.set(x / width * 2 - 1, 1 - y / height * 2);
+    ray.setFromCamera(screenPointer, camera);
+    const p = ray.ray.intersectPlane(new T.Plane(new T.Vector3(0, 1, 0), -(dragHeight ?? targetHeight)), new T.Vector3());
+    if (!p) return null;
+    const s = scale();
+    return { x: center.x + p.x / s, y: center.y + p.z / s };
+  }
+  function followDrag() {
+    if (!dragFollow) return;
+    const now = planeAt(dragFollow.x, dragFollow.y);
+    if (!now) return;
+    const dx = dragFollow.anchor.x - now.x, dy = dragFollow.anchor.y - now.y;
+    if (Math.abs(dx) > 1e-9 || Math.abs(dy) > 1e-9) {
+      center.x = tiles.wrap(center.x + dx, 1);
+      center.y = tiles.clamp(center.y + dy, 0, 1);
+      updateCamera(); positionTiles();
+    }
+  }
   function changed() { coverageDirty = true; overlayDirty = true; notify(); }
   function goTo(lon, lat, zoom = viewZoom) {
     if (![lon, lat, zoom].every(Number.isFinite)) return false;
+    dragHeight = null;
     center = tiles.mercator(tiles.geographic((lon + 180) / 360, .5).lon, tiles.clamp(lat, -tiles.MAX_LAT, tiles.MAX_LAT));
     viewZoom = tiles.clamp(zoom, 0, 19); wantedKey = ''; changed(); return true;
   }
@@ -268,6 +298,21 @@ OB.createTerrainRenderer = async function (canvas) {
       notify();
     },
     pan(dx, dy) { const unit = camera.position.distanceTo(target) / height / scale(); center.x += (-dx * Math.cos(yaw) + dy * Math.sin(yaw)) * unit; center.y += (dx * Math.sin(yaw) + dy * Math.cos(yaw)) * unit; center.x = tiles.wrap(center.x, 1); center.y = tiles.clamp(center.y, 0, 1); changed(); },
+    // Grab-and-drag: the grabbed ground point stays under the cursor. The plane
+    // reference makes the mapping exact; followDrag re-checks it after each
+    // render as a guard, e.g. when zoom or coverage shifted the camera rig.
+    grabGround(x, y) { const p = planeAt(x, y); return p ? { ...p, h: targetHeight } : null; },
+    dragTo(anchor, x, y) {
+      if (!anchor) return;
+      if (Number.isFinite(anchor.h)) dragHeight = anchor.h;
+      dragFollow = { anchor, x, y };
+      const now = planeAt(x, y);
+      if (!now) return;
+      center.x = tiles.wrap(center.x + anchor.x - now.x, 1);
+      center.y = tiles.clamp(center.y + anchor.y - now.y, 0, 1);
+      changed();
+    },
+    endDrag() { dragFollow = null; if (dragHeight !== null) { dragHeight = null; changed(); } },
     walk(forward, right) {
       if (!ground || !Number.isFinite(forward) || !Number.isFinite(right)) return;
       const unit = .16 / scale();
@@ -275,8 +320,8 @@ OB.createTerrainRenderer = async function (canvas) {
       center.y = tiles.clamp(center.y + (-Math.cos(yaw) * forward + Math.sin(yaw) * right) * unit, 0, 1);
       changed();
     },
-    zoom(factor) { if (Number.isFinite(factor) && factor > 0) { viewZoom = tiles.clamp(viewZoom + Math.log2(factor), 0, 19); changed(); } },
-    setView(view) { plan = view === 'plan'; ground = view === 'ground'; yaw = plan ? 0 : -.65; pitch = .77; groundTilt = -.08; notify(); },
+    zoom(factor) { if (Number.isFinite(factor) && factor > 0) { dragHeight = null; viewZoom = tiles.clamp(viewZoom + Math.log2(factor), 0, 19); changed(); } },
+    setView(view) { dragHeight = null; plan = view === 'plan'; ground = view === 'ground'; yaw = plan ? 0 : -.65; pitch = .77; groundTilt = -.08; notify(); },
     setExaggeration(value) { exaggeration = value; overlayDirty = true; notify(); },
     setMode(value) { mode = value; wantedKey = ''; coverageDirty = true; notify(); }, setContours(value) { contours.value = value ? 1 : 0; notify(); },
     setPointsVisible(value) { pointsVisible = value; overlayDirty = true; notify(); },

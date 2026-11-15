@@ -285,7 +285,7 @@ window.OB = window.OB || {};
       if (e.key === "ArrowLeft" && !$("tour-back").disabled) $("tour-back").click();
     });
     if (OB.tourWanted) open(startAt);
-    else welcome();
+    // the landing section greets first-time visitors; the welcome box stays for an explicit call
   }
 
   // app.js loads its data asynchronously and announces itself when ready

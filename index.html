@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=af19cf925d64">
+<link rel="stylesheet" href="css/offbeat.css?v=2c4eefbaa536">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -33,19 +33,19 @@
   </header>
 
   <section class="win launch" aria-labelledby="launch-title">
-    <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2>OFFBEAT / EARTH OBSERVATION</h2><span class="launch__title-meta">NISAR / FIELD NOTES 01</span></div>
+    <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2>OffBeat - Earth observation</h2></div>
     <div class="launch__body">
       <div class="launch__copy">
-        <p class="launch__eyebrow">NASA + ISRO · NISAR DATA EXPLORER</p>
+        <p class="launch__eyebrow">NASA-ISRO NISAR radar, explained</p>
         <h2 id="launch-title">The Earth is always moving.<br><span>Listen for the unexpected.</span></h2>
         <p class="launch__lead">Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.</p>
-        <div class="launch__actions"><a class="btn launch__primary" id="launch-example" href="#evidence-win">Explore an example <span aria-hidden="true">→</span></a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Surprise me ✦</button><a class="btn launch__secondary" href="#map-win">Open the map <span aria-hidden="true">↗</span></a></div>
-        <p class="launch__note"><span aria-hidden="true">●</span> Exploratory prototype · Causes require independent verification</p>
+        <div class="launch__actions"><a class="btn btn--default launch__primary" id="launch-example" href="#evidence-win">Explore an example</a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Surprise me</button><a class="btn launch__secondary" href="#map-win">Open the map</a></div>
+        <p class="launch__note">Exploratory prototype. Causes need independent checks.</p>
       </div>
       <div class="launch__visual" aria-hidden="true">
-        <div class="launch__visual-top"><span>ILLUSTRATION / 01</span><span>NOT MEASURED DATA</span></div>
+        <div class="launch__visual-top"><span>Illustration</span><span>not measured data</span></div>
         <svg viewBox="0 0 420 160" preserveAspectRatio="none" focusable="false"><defs><pattern id="launch-grid" width="28" height="24" patternUnits="userSpaceOnUse"><path d="M28 0H0V24" fill="none" stroke="#c7d7e9" stroke-width=".7"/></pattern></defs><rect width="420" height="160" fill="url(#launch-grid)"/><path d="M0 100 L30 94 L55 102 L82 90 L108 97 L134 84 L158 96 L184 88 L210 94 L237 81 L261 88 L287 85 L313 90 L340 80 L367 86 L393 77 L420 81" fill="none" stroke="#94a9c3" stroke-width="2"/><path d="M0 111 L30 105 L55 110 L82 102 L108 106 L134 96 L158 102 L184 93 L210 104 L237 62 L261 93 L287 82 L313 88 L340 75 L367 85 L393 70 L420 75" fill="none" stroke="#073ba8" stroke-width="3"/><circle cx="237" cy="62" r="6" fill="#f3c800" stroke="#073ba8" stroke-width="2"/></svg>
-        <div class="launch__visual-bottom"><span>AN EXPLORER, NOT A FORECAST</span><span>•••</span></div>
+        <div class="launch__visual-bottom"><span>One sample leaves its neighbours</span></div>
       </div>
     </div>
     <div class="launch__steps" aria-label="How to explore"><div><b>01</b><span><strong>Choose a place</strong><small>Start with a prepared site</small></span></div><div><b>02</b><span><strong>Compare signals</strong><small>Explore points and neighbours</small></span></div><div><b>03</b><span><strong>Check the evidence</strong><small>Review dates and limitations</small></span></div></div>
@@ -135,7 +135,7 @@
       <div class="notice">
         <svg class="notice__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#fff" stroke="#000"/><rect x="7" y="7" width="2" height="5" fill="#000080"/><rect x="7" y="4" width="2" height="2" fill="#000080"/></svg>
         <p id="data-status" role="status">Loading measured data...</p>
-        <p class="notice__links"><a id="source-link" href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a>, <a href="docs/real-nisar.md">Processing and limitations</a></p>
+        <p class="notice__links"><a id="source-link" href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a><span class="notice__sep">, </span><a href="docs/real-nisar.md">Processing and limitations</a></p>
       </div>
 
       <details class="panel-disclosure" id="evidence-disclosure"><summary>Explore a change story</summary>
@@ -147,7 +147,7 @@
             <button type="button" class="btn btn--default" id="case-start" disabled data-case-text="start">Investigate a change</button>
           </div>
           <p><button type="button" class="btn" id="case-visible-clearing" disabled data-case-text="visibleClearing">See visually reviewed clearing</button> <span data-case-text="visibleCaveat">Optical review; NISAR detection has not been validated.</span></p>
-          <div class="story-prompt"><div><strong data-case-text="surpriseTitle">Not sure where to start?</strong><p data-case-text="surpriseHint">Explore a reviewed Amazon story or an automatically selected measured sample. New samples are not independently reviewed.</p></div><button type="button" class="btn story-prompt__button" id="case-surprise" disabled data-case-text="surprise">Surprise me ✦</button></div>
+          <div class="story-prompt"><div><strong data-case-text="surpriseTitle">Not sure where to start?</strong><p data-case-text="surpriseHint">Explore a reviewed Amazon story or an automatically selected measured sample. New samples are not independently reviewed.</p></div><button type="button" class="btn story-prompt__button" id="case-surprise" disabled data-case-text="surprise">Surprise me</button></div>
           <p class="casebook__scope" data-case-text="scope">Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.</p>
           <div class="casebook__choices" id="case-choices" role="group" aria-label="Reviewed examples"></div>
           <button type="button" class="btn" id="evidence-selection" disabled data-case-text="selection">Evidence for selected sample</button>
@@ -457,12 +457,12 @@
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"></script>
 <script src="js/map-cache.js?v=48304a06b06c"></script>
-<script src="js/map-imagery.js?v=f20b3156ebf0"></script>
+<script src="js/map-imagery.js?v=61f910cd955d"></script>
 <script src="js/text98.js?v=85fdf4481a27"></script>
 <script src="js/styles.js?v=1c84dd9b23f5"></script>
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
-<script src="js/nisar-map.js?v=ef5fc82e3333"></script>
+<script src="js/nisar-map.js?v=b08dd9f3a7fa"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
 <script src="js/data.js?v=0dc67ca648f0"></script>
 <script src="js/suggestions.js?v=eb8c52544811"></script>
@@ -471,19 +471,19 @@
 <script src="js/chart.js?v=93bbf53b86e0"></script>
 <script src="js/sonify.js?v=7856078c37e2"></script>
 <script src="js/sfx.js?v=19976406a47d"></script>
-<script src="js/story.js?v=1ee9521cc520"></script>
+<script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=956792472e79"></script>
+<script src="js/i18n.js?v=48d14424a5f8"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
 <script src="js/terrain-tiles.js?v=d7bcae7cc86b"></script>
-<script src="js/terrain-renderer.js?v=0355c22d4420"></script>
+<script src="js/terrain-renderer.js?v=d8d5b822896a"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=d42f0d32e184"></script>
+<script src="js/scene.js?v=5d7d5b7553d5"></script>
 <script src="js/evidence-model.js?v=0235cb26cfdf"></script>
 <script src="js/panels.js?v=4170805a19d9"></script>
-<script src="js/evidence.js?v=68a71a9d86f7"></script>
+<script src="js/evidence.js?v=85fc41365bf3"></script>
 <script src="js/app.js?v=33d96c0fdaa7"></script>
 </body>
 </html>

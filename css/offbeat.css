@@ -256,7 +256,7 @@ input[type="range"]:focus-visible { outline: 1px dotted #000; outline-offset: 1p
 .grayscale-imagery { filter: grayscale(100%); }
 #map { cursor: crosshair; }
 /* demo sites on the data map: a Win98 tooltip with a small square, clickable */
-.site-pin { display: flex; align-items: center; gap: 10px; width: max-content !important; transform: translate(-6px, -50%); cursor: pointer; }
+.site-pin { display: flex; align-items: center; gap: 10px; width: max-content !important; height: 18px; margin: -9px 0 0 -6px; cursor: pointer; }
 .site-pin__dot { width: 10px; height: 10px; background: #d0161b; border: 1px solid #000; box-shadow: 1px 1px 0 #fff inset; }
 .site-pin__name { background: #ffffe1; color: #000; border: 1px solid #000; padding: 1px 5px; font: 12.5px/16px var(--ui); white-space: nowrap; }
 .site-pin:hover .site-pin__name, .site-pin:focus .site-pin__name { background: var(--sel); color: #fff; }
@@ -672,16 +672,18 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .casebook__intro .btn { flex-shrink: 0; min-height: 36px; }
 .casebook__scope { padding: 7px 9px; background: #ffffe1; box-shadow: var(--sunken); }
 .panel-disclosure { margin: 0 0 10px; }
-.panel-disclosure > summary { cursor: pointer; min-height: 42px; display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: #e9edf5; color: #001b66; font-weight: bold; box-shadow: var(--raised); list-style: none; }
+.panel-disclosure > summary { cursor: pointer; min-height: 32px; display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: var(--face); color: #000; font: bold 12.5px/16px var(--ui); box-shadow: var(--raised); list-style: none; }
 .panel-disclosure > summary::-webkit-details-marker { display: none; }
-.panel-disclosure > summary::before { content: '+'; font-size: 20px; line-height: 1; }
-.panel-disclosure[open] > summary::before { content: '−'; }
-.panel-disclosure > summary:focus-visible { outline: 2px dotted #001b66; outline-offset: -5px; }
+.panel-disclosure > summary::before { content: '+'; flex: none; width: 9px; height: 9px; border: 1px solid #808080; background: #fff; color: #000; font: bold 11px/9px var(--ui); text-align: center; }
+.panel-disclosure[open] > summary::before { content: '-'; }
+.panel-disclosure > summary:active { box-shadow: var(--pressed); }
+.panel-disclosure > summary:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+#source-link[hidden] + .notice__sep { display: none; }
 .panel-disclosure > .win { margin-top: 5px; }
-.story-prompt { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 16px 0; padding: 15px; background: #e8edfa; border: 1px solid #a2b4d6; box-shadow: inset 1px 1px #fff; }
-.story-prompt strong { font-size: 16px; color: #001b66; }
+.story-prompt { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 16px 0; padding: 10px 12px; background: var(--face); border: 1px solid #808080; box-shadow: 1px 1px 0 #fff, inset 1px 1px 0 #fff; }
+.story-prompt strong { font: bold 12.5px/16px var(--ui); color: #000; }
 .story-prompt p { margin: 5px 0 0; }
-.story-prompt__button { flex-shrink: 0; min-height: 40px; padding: 8px 16px; }
+.story-prompt__button { flex-shrink: 0; min-width: 100px; }
 .story-compare { max-width: 500px; margin: 20px 0; }
 .story-compare__frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1; margin-top: 8px; background: #292929; box-shadow: var(--sunken); }
 .story-compare__layer { position: absolute; inset: 0; overflow: hidden; }
@@ -719,38 +721,39 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 
 /* Local redesign: an orientation screen above the working instruments. */
 #desk { width: 1180px; }
+/* landing: a Win98 welcome window. W95FA at exactly twice its 12.5px grid keeps the big title crisp */
 .launch { margin: 12px 0 14px; }
-.launch__title-meta { font-size: 11px; color: #d9eafa; letter-spacing: .05em; }
-.launch__body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 30px; padding: 30px 30px 25px; background: #f4f2e9; }
+.launch__body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 24px; padding: 18px 16px 16px; }
 .launch__copy { min-width: 0; }
-.launch__eyebrow { margin: 0 0 13px; color: #1248a4; font-size: 11px; letter-spacing: .08em; }
-.launch h2#launch-title { font: bold clamp(24px, 3.5vw, 38px)/1.08 var(--ui); letter-spacing: -.025em; margin: 0 0 14px; color: #0d1b31; }
-.launch h2#launch-title span { color: #1749a5; }
-.launch__lead { max-width: 450px; font-size: 15px; line-height: 1.45; color: #30435c; margin-bottom: 18px; }
-.launch__actions { display: flex; flex-wrap: wrap; gap: 9px; }
-.launch__actions a.btn { display: inline-flex; align-items: center; gap: 18px; min-height: 39px; padding: 8px 13px; text-decoration: none; font-weight: bold; color: #000; }
-.launch__actions .launch__surprise { min-height: 39px; padding: 8px 13px; font-weight: bold; background: #f7db63; }
-.launch__actions a.launch__primary { color: #fff; background: #123c99; box-shadow: inset 1px 1px #a7bfff, inset -1px -1px #091955, 2px 2px #151b2c; }
-.launch__actions a.launch__primary:active { box-shadow: inset 2px 2px #091955, inset -1px -1px #a7bfff; }
-.launch__note { margin: 17px 0 0; color: #566373; font-size: 11px; line-height: 16px; }
-.launch__note span { color: #28936c; }
-.launch__visual { align-self: center; background: #fff; padding: 11px; box-shadow: var(--sunken); min-width: 0; }
-.launch__visual-top, .launch__visual-bottom { display: flex; justify-content: space-between; gap: 8px; color: #526681; font-size: 10px; letter-spacing: .04em; }
-.launch__visual-top { padding: 1px 3px 8px; border-bottom: 1px solid #d8e1eb; }
+.launch__eyebrow { margin: 0 0 10px; color: #404040; }
+.launch h2#launch-title { font: bold 25px/30px var(--ui); margin: 0 0 12px; color: #000; }
+.launch h2#launch-title span { color: var(--title-a); }
+.launch__lead { max-width: 470px; margin-bottom: 14px; }
+.launch__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.launch__actions .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 26px; padding: 4px 14px; color: #000; text-decoration: none; }
+.launch__note { margin: 14px 0 0; color: #404040; }
+.launch__visual { align-self: center; background: var(--paper); padding: 8px; box-shadow: var(--sunken); min-width: 0; }
+.launch__visual-top, .launch__visual-bottom { display: flex; justify-content: space-between; gap: 8px; color: #404040; }
+.launch__visual-top { padding: 0 2px 6px; border-bottom: 1px solid var(--face); }
 .launch__visual svg { display: block; width: 100%; height: 150px; }
-.launch__visual-bottom { padding: 8px 3px 0; border-top: 1px solid #d8e1eb; }
-.launch__steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #9eacba; border-top: 1px solid #9eacba; }
-.launch__steps > div { display: flex; align-items: flex-start; gap: 10px; padding: 12px 18px; background: #e5e9e9; }
-.launch__steps b { font-size: 15px; color: #2453a7; }
+.launch__visual-bottom { padding: 6px 2px 0; border-top: 1px solid var(--face); }
+.launch__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 0 16px 14px; }
+.launch__steps > div { display: flex; align-items: flex-start; gap: 8px; padding: 6px 8px; box-shadow: inset -1px -1px 0 var(--hi), inset 1px 1px 0 var(--lo); }
+.launch__steps b { color: var(--title-a); }
 .launch__steps span, .launch__steps small { display: block; }
-.launch__steps small { margin-top: 3px; color: #596875; }
+.launch__steps small { margin-top: 2px; color: #404040; font-size: inherit; }
 @media (max-width: 720px) {
-  .launch__title-meta { display: none; }
   .launch__body { grid-template-columns: 1fr; gap: 18px; padding: 22px 18px 18px; }
   .launch__visual svg { height: 100px; }
   .launch__steps { grid-template-columns: 1fr; }
   .launch__steps > div { padding: 9px 14px; }
-  .launch__actions a.btn, .launch__actions .launch__surprise { min-height: 44px; }
+  .launch__actions .btn { min-height: 44px; flex: 1 1 140px; }
   .menu a { min-height: 32px; display: inline-flex; align-items: center; }
   .casebook__steps .btn, .casebook__choices .btn { min-height: 38px; }
 }
+
+/* Every other disclosure uses the same small Win98 tree expander. */
+details:not(.panel-disclosure) > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+details:not(.panel-disclosure) > summary::-webkit-details-marker { display: none; }
+details:not(.panel-disclosure) > summary::before { content: '+'; flex: none; width: 9px; height: 9px; border: 1px solid #808080; background: #fff; color: #000; font: bold 11px/9px var(--ui); text-align: center; }
+details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
