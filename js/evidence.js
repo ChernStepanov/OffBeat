@@ -266,10 +266,12 @@ OB.evidence = (() => {
     if (!$('case-start').disabled) { event.preventDefault(); open('amazon-hv-step'); }
   });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
-  $('case-surprise').addEventListener('click', () => {
+  function surprise() {
     const choices = (book?.cases || []).filter(c => c.id !== active);
     if (choices.length) open(choices[Math.floor(Math.random() * choices.length)].id);
-  });
+  }
+  $('case-surprise').addEventListener('click', surprise);
+  $('launch-surprise').addEventListener('click', surprise);
   $('case-visible-clearing').addEventListener('click', () => open('amazon-visible-clearing', {step: 2}));
   $('evidence-selection').addEventListener('click', () => open(null));
   $('case-back').addEventListener('click', () => setStep(step - 1));
@@ -292,7 +294,7 @@ OB.evidence = (() => {
   });
   document.addEventListener('ob:ready', async () => {
     const available = await ready;
-    ['case-start', 'case-visible-clearing', 'case-surprise', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
+    ['case-start', 'case-visible-clearing', 'case-surprise', 'launch-surprise', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
   }, {once: true});
   document.addEventListener('ob:sample-change', () => requestAnimationFrame(() => {
     if (!opening) { OB.app?.stop(); render(); persist(); }
