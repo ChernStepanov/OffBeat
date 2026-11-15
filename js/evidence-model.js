@@ -56,5 +56,16 @@ OB.evidenceModel = (() => {
     return {type: 'FeatureCollection', features: [{type: 'Feature', geometry: {type: 'Point',
       coordinates: [report.coordinates.lon, report.coordinates.lat]}, properties: report}]};
   }
-  return {timeline, link, selection, report, geojson};
+  function nextSurprise(ids, history, current, random = Math.random) {
+    const available = [...new Set(ids)], seen = Array.isArray(history) ? history.filter(id => available.includes(id)) : [];
+    if (!available.length) return null;
+    let candidates = available.filter(id => !seen.includes(id));
+    const cycle = candidates.length ? seen : [];
+    if (!candidates.length) candidates = available;
+    const previous = current || seen.at(-1);
+    if (candidates.length > 1) candidates = candidates.filter(id => id !== previous);
+    const id = candidates[Math.floor(random() * candidates.length)];
+    return {id, history: [...cycle, id]};
+  }
+  return {timeline, link, selection, report, geojson, nextSurprise};
 })();

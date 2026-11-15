@@ -5,6 +5,17 @@ import {createHash} from 'node:crypto';
 const context = {window: {}, URL}; context.window.OB = {}; context.OB = context.window.OB;
 vm.runInNewContext(fs.readFileSync('js/evidence-model.js', 'utf8'), context);
 const model = context.OB.evidenceModel;
+let history = [], previous = null;
+for (let cycle = 0; cycle < 3; cycle++) {
+  const shown = new Set();
+  for (let i = 0; i < 3; i++) {
+    const next = model.nextSurprise(['a', 'b', 'c'], history, previous, () => 0);
+    assert.notEqual(next.id, previous);
+    shown.add(next.id); history = next.history; previous = next.id;
+  }
+  assert.equal(shown.size, 3);
+}
+assert.equal(model.nextSurprise([], [], null), null);
 const book = JSON.parse(fs.readFileSync('data/cases/amazon-v1.json'));
 const site = JSON.parse(fs.readFileSync('data/amazon.json'));
 assert.deepEqual(Array.from(model.timeline(['2026-01-01','2026-01-02','2026-01-11'])), [0, 0.1, 1]);

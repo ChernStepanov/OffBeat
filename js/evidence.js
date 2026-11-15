@@ -22,7 +22,7 @@ OB.evidence = (() => {
     geojson: ['Download point / GeoJSON', 'Скачать точку / GeoJSON'], permalink: ['Open saved view', 'Открыть сохранённый вид'],
   };
   const t = (en, rus) => ru() ? rus : en;
-  let book, active = null, step = 0, engaged = false, opening = false, serial = 0;
+  let book, active = null, step = 0, engaged = false, opening = false, serial = 0, surpriseHistory = [];
   let latestReport = null;
   // Attach rejection handling immediately; a failed casebook must not break the map.
   const ready = fetch('data/cases/amazon-v1.json').then(r => {
@@ -267,8 +267,14 @@ OB.evidence = (() => {
   });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
   function surprise() {
-    const choices = (book?.cases || []).filter(c => c.id !== active);
-    if (choices.length) open(choices[Math.floor(Math.random() * choices.length)].id);
+    const key = 'offbeat.surprise.history.v1';
+    let history = surpriseHistory;
+    try { history = JSON.parse(localStorage.getItem(key)) || history; } catch (_) {}
+    const next = model.nextSurprise((book?.cases || []).map(c => c.id), history, active);
+    if (!next) return;
+    surpriseHistory = next.history;
+    try { localStorage.setItem(key, JSON.stringify(next.history)); } catch (_) {}
+    open(next.id);
   }
   $('case-surprise').addEventListener('click', surprise);
   $('launch-surprise').addEventListener('click', surprise);
