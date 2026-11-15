@@ -233,7 +233,7 @@
   }
   function showTerrain() {
     if (mapWindow.classList.contains('win--max')) $('map-max').click();
-    scene.hidden = false; launcher.setAttribute('aria-pressed', 'true');
+    scene.hidden = false; OB.pages?.openFor(scene); launcher.setAttribute('aria-pressed', 'true');
     scene.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function toggleTerrain() {

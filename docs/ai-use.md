@@ -39,6 +39,7 @@ difference, and the team corrected the claim on the site, in the video, README a
 | Tool | Role |
 |---|---|
 | **OpenAI Codex** (coding agent) | Used by team members for implementation, data-processing code, tests and drafting audits and documents. Commits it made directly are authored `Codex` / `CodexSandboxOffline`; others went through team members' `codex/...` branches. |
+| **Groq-hosted GPT-OSS 120B** (LLM) | Offline machine translation of the interface into French, German, Italian, Spanish, Portuguese, Japanese and Arabic (`scripts/build_locales.py`). Navigation and common controls were reviewed by people; numeric placeholders are checked automatically; the translations have not had a full native-speaker review. No AI runs when a visitor browses or changes language. |
 | **Anthropic Claude** (Claude Code) | Used by the project lead for implementation, interface work, statistics code, documentation and the video pipeline, under the lead's direction and review. Its commits are recorded under the lead's git identity. |
 
 Where the assistants helped most:

@@ -957,3 +957,16 @@ details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
   .review__facts dd { margin-bottom: 7px; }
   .review__controls .btn { white-space: normal; }
 }
+
+
+#language-switch,#research-language,#candidate-language { display: none !important; }
+#language-select { font: inherit; max-width: 170px; padding: 4px; background: #fff; color: #000; margin-inline-start: auto; }
+html[lang="ja"] { --ui: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+html[lang="ar"] { --ui: Tahoma, Arial, sans-serif; }
+html[dir="rtl"] .leaflet-container,html[dir="rtl"] svg,html[dir="rtl"] canvas,html[dir="rtl"] code,html[dir="rtl"] pre { direction: ltr; unicode-bidi: isolate; }
+html[dir="rtl"] .casebook__facts th,html[dir="rtl"] .review__table th,html[dir="rtl"] .review__table td { text-align: start; }
+
+html:not([lang="en"]):not([lang="ru"]) .btn { white-space: normal; overflow-wrap: anywhere; max-width: 100%; min-width: 0; }
+html[dir="rtl"] #card-content td,html[dir="rtl"] #date-label,html[dir="rtl"] #map-view-metrics { direction: ltr; unicode-bidi: plaintext; }
+/* Visually hidden skip link must not create left-side scroll overflow in RTL. */
+.skip:not(:focus) { position: fixed; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }

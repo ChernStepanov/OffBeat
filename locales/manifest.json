@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source_sha256": "180ecc78a77f566bae975f2cab643bb871b829b233fe4cbd914f6692cabbcb4f",
+  "entries": 845,
+  "languages": [
+    "en",
+    "ru",
+    "fr",
+    "de",
+    "it",
+    "es",
+    "pt",
+    "ja",
+    "ar"
+  ],
+  "generation": "Offline Groq catalogues; gpt-oss-20b and gpt-oss-120b; reviewed UI overrides are checked in separately.",
+  "runtime_translation_api": false,
+  "chat_model": "openai/gpt-oss-20b"
+}
