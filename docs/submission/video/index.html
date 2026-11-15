@@ -142,8 +142,8 @@
         <div class="clip" style="height:440px"><img id="i6" src="stills/subsidence.png" alt="" style="left:-180px; top:-80px; width:900px"></div>
         <div style="display:flex; flex-direction:column; gap:10px">
           <div class="field"><div>GNSS station MMX1, measured daily</div><div class="huge" style="color:#c00000"><span id="g6">0.0</span><span class="mid"> cm/yr</span></div><div style="color:#404040">vertical, 48 days</div></div>
-          <div class="field" id="o6"><div>Ready-made OPERA DISP-S1, 20 m away</div><div class="big"><span class="strike" id="s6">-4.8 cm/yr</span></div><div style="color:#404040">relative to a reference that sinks too</div></div>
-          <div class="field" id="t6" style="background:#ffffe1"><div>Tied to GNSS</div><div class="big navy">sinking 15-20 cm/yr</div><div style="color:#404040">along the radar line, 95% of points. An estimate.</div></div>
+          <div class="field" id="o6"><div>OPERA DISP-S1, 20 m away</div><div class="big">-4.8 cm/yr</div><div style="color:#404040">relative, along the radar line: other reference, not directly comparable</div></div>
+          <div class="field" id="t6" style="background:#ffffe1"><div>OPERA anchored at this GNSS station</div><div class="big navy">about 15-20 cm/yr</div><div style="color:#404040">along the radar line, 95% of points sinking. An estimate, not validation.</div></div>
         </div>
       </div>
     </section>
@@ -319,7 +319,6 @@ window.render = function (t) {
   // 6. GNSS counter, OPERA struck out, tied estimate
   const g = outCubic(prog(t, SC[5] + 0.5, 1.2));
   $('g6').textContent = (D.gnss * g).toFixed(1);
-  $('s6').style.setProperty('--k', String(outCubic(prog(t, SC[5] + 2.0, 0.25))));
   $('o6').style.opacity = String(prog(t, SC[5] + 1.0, 0.25));
   $('t6').style.opacity = String(prog(t, SC[5] + 2.6, 0.2));
   $('t6').style.transform = `scale(${lerp(1.25, 1, outCubic(prog(t, SC[5] + 2.6, 0.25)))})`;

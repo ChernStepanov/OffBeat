@@ -787,3 +787,19 @@ details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
 .regions button[aria-pressed="true"] { box-shadow: var(--pressed); background: #dfdfdf; }
 #side > .panel-disclosure > summary { min-height: 26px; padding: 4px 8px; }
 .scene-launch[aria-pressed="true"] { box-shadow: var(--pressed); }
+
+/* key numbers above the findings, in the same bevelled fields as the rest of the UI */
+.keynums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0 0 8px; }
+.keynum { display: flex; flex-direction: column; gap: 2px; background: #fff; box-shadow: var(--sunken); padding: 8px 10px; min-width: 0; }
+.keynum__value { font: 25px/30px var(--ui); color: #000080; white-space: nowrap; }
+.keynum__value--down { color: #c00000; }
+.keynum__label { font-weight: bold; }
+.keynum__note { color: #404040; }
+.keynum__note s { color: #c00000; }
+.keynum .btn { align-self: flex-start; margin-top: 4px; }
+/* video dialog */
+.modal--video { grid-template-columns: minmax(0, 980px); background: rgba(0, 0, 0, .45); }
+.modal--video video { display: block; width: 100%; height: auto; background: #000; box-shadow: var(--sunken); }
+.video-note { margin: 6px 0 0; color: #404040; }
+.win-btn--close { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h2V4H2V3H1V2H0z' fill='%23000'/%3E%3C/svg%3E"); background-size: 8px 7px; }
+@media (max-width: 600px) { .keynums { grid-template-columns: 1fr; } }
