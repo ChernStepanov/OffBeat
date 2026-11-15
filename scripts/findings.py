@@ -419,6 +419,8 @@ def build_findings(sites):
                     'Кроны деревьев многократно рассеивают сигнал между листьями и ветками, это поворачивает поляризацию и усиливает HV; стены и земля образуют уголковые отражатели с сильным HH.'),
         'coherence': ('Leaves and branches move with wind and grow between passes, so the radar phase decorrelates over vegetation; buildings and pavement stay put, which is why ground motion is measurable in cities.',
                       'Листья и ветки двигаются от ветра и растут между пролётами, поэтому фаза радара над растительностью теряет когерентность; здания и асфальт неподвижны, поэтому движение грунта измеримо в городах.'),
+        'calibration': ('Radar values have heavier tails than a bell curve because of speckle, mixed land cover inside one sample and occasional very bright targets such as metal roofs, vehicles or corner-like structures.',
+                        'У радарных значений хвосты тяжелее нормальных из-за спекла, смешанного покрытия внутри одной точки и редких очень ярких целей: металлических крыш, машин, уголковых конструкций.'),
         'noise': ('Radar speckle, small changes in soil moisture and slight differences in viewing geometry move every sample a little between passes.',
                   'Спекл радара, небольшие изменения влажности почвы и небольшие различия геометрии съёмки немного сдвигают каждую точку между пролётами.'),
     }
