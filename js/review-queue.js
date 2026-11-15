@@ -97,7 +97,7 @@ OB.reviewQueue = (() => {
     const ids = (candidates ? data.candidate_rankings : data.rankings)[method];
     const byId = new Map(data.rows.map(row => [row.sample_id, row]));
     const rows = ids.map(id => byId.get(id)).filter(Boolean);
-    $('review-status').textContent = t(`${data.rows.length} forest samples; ${data.rows.filter(r => r.candidate).length} candidate samples. Showing ${Math.min(count, rows.length)} of ${rows.length} spaced review locations.`, `${data.rows.length} лесных точек; ${data.rows.filter(r => r.candidate).length} точек-кандидатов. Показано ${Math.min(count, rows.length)} из ${rows.length} разнесённых мест проверки.`);
+    $('review-status').textContent = t(`${data.rows.length} tree-cover samples (2021); ${data.rows.filter(r => r.candidate).length} candidate samples. Showing ${Math.min(count, rows.length)} of ${rows.length} spaced review locations.`, `${data.rows.length} точек класса лес (2021); ${data.rows.filter(r => r.candidate).length} точек-кандидатов. Показано ${Math.min(count, rows.length)} из ${rows.length} разнесённых мест проверки.`);
     if (navigationFailed) $('review-status').textContent += t(' Sample could not open. Try the point link.', ' Не удалось открыть точку. Используйте ссылку на неё.');
     $('review-metrics').textContent = t('Independent test events: 0. Precision, recall and saved review effort are unknown. Score is a heuristic, not probability. Locations are not independent events.', 'Независимых тестовых событий: 0. Precision, recall и экономия проверок неизвестны. Балл — эвристика, не вероятность. Места проверки не являются независимыми событиями.');
     $('review-caption').textContent = `${names()[method]} / ${t('higher priority first', 'сначала больший приоритет')}`;
