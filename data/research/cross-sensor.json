@@ -1,0 +1,2501 @@
+{
+  "ablations": [
+    {
+      "matched_date_count": 0,
+      "matched_pairs": [],
+      "name": "unique_nearest_temporal_tolerance_0d",
+      "purpose": "Sensitivity to temporal mismatch; each C acquisition used at most once."
+    },
+    {
+      "matched_date_count": 6,
+      "matched_pairs": [
+        {
+          "lag_days": -1,
+          "nisar": "2026-07-18",
+          "opera": "2026-07-17"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-08-11",
+          "opera": "2026-08-10"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-08-23",
+          "opera": "2026-08-22"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-04",
+          "opera": "2026-09-03"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-16",
+          "opera": "2026-09-15"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-28",
+          "opera": "2026-09-27"
+        }
+      ],
+      "name": "unique_nearest_temporal_tolerance_3d",
+      "purpose": "Sensitivity to temporal mismatch; each C acquisition used at most once."
+    },
+    {
+      "matched_date_count": 6,
+      "matched_pairs": [
+        {
+          "lag_days": -1,
+          "nisar": "2026-07-18",
+          "opera": "2026-07-17"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-08-11",
+          "opera": "2026-08-10"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-08-23",
+          "opera": "2026-08-22"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-04",
+          "opera": "2026-09-03"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-16",
+          "opera": "2026-09-15"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-28",
+          "opera": "2026-09-27"
+        }
+      ],
+      "name": "unique_nearest_temporal_tolerance_6d",
+      "purpose": "Sensitivity to temporal mismatch; each C acquisition used at most once."
+    },
+    {
+      "matched_date_count": 6,
+      "matched_pairs": [
+        {
+          "lag_days": -1,
+          "nisar": "2026-07-18",
+          "opera": "2026-07-17"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-08-11",
+          "opera": "2026-08-10"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-08-23",
+          "opera": "2026-08-22"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-04",
+          "opera": "2026-09-03"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-16",
+          "opera": "2026-09-15"
+        },
+        {
+          "lag_days": -1,
+          "nisar": "2026-09-28",
+          "opera": "2026-09-27"
+        }
+      ],
+      "name": "unique_nearest_temporal_tolerance_12d",
+      "purpose": "Sensitivity to temporal mismatch; each C acquisition used at most once."
+    },
+    {
+      "name": "polarization_channel_pair",
+      "purpose": "Do not treat cross-pol HV/VH as equivalent to co-pol HH/VV or across sensors.",
+      "result_keys": [
+        "HV_vs_VH",
+        "HH_vs_VV"
+      ]
+    },
+    {
+      "name": "absolute_levels_vs_consecutive_changes",
+      "purpose": "Separate spatially persistent brightness/class association from temporal co-change.",
+      "result_keys": [
+        "pooled_level_correlation",
+        "consecutive_matched_change_correlation"
+      ]
+    },
+    {
+      "name": "within_class_and_date_centering",
+      "purpose": "Remove class/date location offsets to test class confounding / Simpson-like reversal.",
+      "result_keys": [
+        "pooled_level_correlation",
+        "within_class_and_date_centered_correlation"
+      ]
+    },
+    {
+      "name": "within_class_and_interval_change_centering",
+      "purpose": "Remove common class-specific shift in each consecutive interval before correlating pointwise changes.",
+      "result_keys": [
+        "consecutive_matched_change_correlation",
+        "class_and_interval_centered_change_correlation"
+      ]
+    },
+    {
+      "name": "paired_spatial_bootstrap_level_minus_change",
+      "purpose": "For each replicate, use the identical spatial block draw to compute r(levels), r(changes), and their difference.",
+      "result_keys": [
+        "level_change_contrast_spatial_bootstrap"
+      ]
+    },
+    {
+      "name": "shared_valid_coordinates_only",
+      "purpose": "Pairwise finite values at same ordered coordinate; reports counts; does not impute missing data."
+    },
+    {
+      "name": "spatial_block_bootstrap_4x4",
+      "purpose": "Paired spatial blocks, retaining all temporal/channel measurements per block; no pixel-iid inference."
+    },
+    {
+      "name": "long_OPERA_history_monthly_class_medians",
+      "purpose": "86 dates supply seasonal context but months mix years; descriptive only, not a validated seasonal model."
+    }
+  ],
+  "analyses": {
+    "HH_vs_VV": {
+      "change_block_bootstrap": {
+        "blocks": 64,
+        "ci95": [
+          0.13600529004817838,
+          0.20839513306296378
+        ],
+        "note": "Descriptive spatial uncertainty conditional on these dates/site; not event-level or temporal replication.",
+        "replicates": 2000,
+        "unit": "4x4 neighboring sample-cell blocks; all dates and channels paired within block"
+      },
+      "change_observation_count": 5120,
+      "class_and_interval_centered_change_correlation": 0.05411227026188641,
+      "classwise_level_correlations": {
+        "grassland": 0.2897807586033474,
+        "tree_cover": 0.4432632730988654
+      },
+      "consecutive_matched_change_correlation": 0.1728283086496195,
+      "interpretation": "Sensor polarizations differ (HH/HV vs VV/VH); association is descriptive, not wavelength effect.",
+      "level_change_contrast_spatial_bootstrap": {
+        "2": {
+          "approx_block_width_m": 174,
+          "approx_sample_spacing_m": 87,
+          "block_cells_per_side": 2,
+          "ci95": {
+            "contrast_r_levels_minus_r_changes": [
+              0.2732135708391094,
+              0.3376642009589141
+            ],
+            "r_changes": [
+              0.1426804736157529,
+              0.20312578733108885
+            ],
+            "r_levels": [
+              0.45257443821064675,
+              0.5072355723595534
+            ]
+          },
+          "interpretation": "Spatial-sampling interval conditional on this site and six NISAR acquisitions; not temporal/event uncertainty or an iid-pixel interval.",
+          "paired_same_block_draw_for_level_and_change": true,
+          "point_estimates": {
+            "contrast_r_levels_minus_r_changes": 0.3082396062839236,
+            "r_changes": 0.1728283086496195,
+            "r_levels": 0.4810679149335431
+          },
+          "replicates_requested": 1000,
+          "replicates_valid": 1000,
+          "resampling_unit": "spatial blocks; all dates and intervals for each point retained together",
+          "seed": 20261117,
+          "spatial_blocks": 256
+        },
+        "4": {
+          "approx_block_width_m": 348,
+          "approx_sample_spacing_m": 87,
+          "block_cells_per_side": 4,
+          "ci95": {
+            "contrast_r_levels_minus_r_changes": [
+              0.26149371898445734,
+              0.34355532548000167
+            ],
+            "r_changes": [
+              0.13764203622648785,
+              0.20963151274596548
+            ],
+            "r_levels": [
+              0.44743545051895134,
+              0.5084803552254796
+            ]
+          },
+          "interpretation": "Spatial-sampling interval conditional on this site and six NISAR acquisitions; not temporal/event uncertainty or an iid-pixel interval.",
+          "paired_same_block_draw_for_level_and_change": true,
+          "point_estimates": {
+            "contrast_r_levels_minus_r_changes": 0.3082396062839236,
+            "r_changes": 0.1728283086496195,
+            "r_levels": 0.4810679149335431
+          },
+          "replicates_requested": 1000,
+          "replicates_valid": 1000,
+          "resampling_unit": "spatial blocks; all dates and intervals for each point retained together",
+          "seed": 20261119,
+          "spatial_blocks": 64
+        },
+        "8": {
+          "approx_block_width_m": 696,
+          "approx_sample_spacing_m": 87,
+          "block_cells_per_side": 8,
+          "ci95": {
+            "contrast_r_levels_minus_r_changes": [
+              0.23300310588400236,
+              0.362882086487993
+            ],
+            "r_changes": [
+              0.1220570213848614,
+              0.21802616325408714
+            ],
+            "r_levels": [
+              0.43820844941119724,
+              0.5088114727666687
+            ]
+          },
+          "interpretation": "Spatial-sampling interval conditional on this site and six NISAR acquisitions; not temporal/event uncertainty or an iid-pixel interval.",
+          "paired_same_block_draw_for_level_and_change": true,
+          "point_estimates": {
+            "contrast_r_levels_minus_r_changes": 0.3082396062839236,
+            "r_changes": 0.1728283086496195,
+            "r_levels": 0.4810679149335431
+          },
+          "replicates_requested": 1000,
+          "replicates_valid": 1000,
+          "resampling_unit": "spatial blocks; all dates and intervals for each point retained together",
+          "seed": 20261123,
+          "spatial_blocks": 16
+        }
+      },
+      "matched_date_count": 6,
+      "matched_observation_count": 6144,
+      "pooled_level_correlation": 0.4810679149335431,
+      "spatial_block_bootstrap_pooled": {
+        "blocks": 64,
+        "ci95": [
+          0.4483973106589572,
+          0.5082995259763738
+        ],
+        "note": "Descriptive spatial uncertainty conditional on these dates/site; not event-level or temporal replication.",
+        "replicates": 2000,
+        "unit": "4x4 neighboring sample-cell blocks; all dates and channels paired within block"
+      },
+      "within_class_and_date_centered_correlation": 0.35538827884300556
+    },
+    "HV_vs_VH": {
+      "change_block_bootstrap": {
+        "blocks": 64,
+        "ci95": [
+          0.13646490919438484,
+          0.20809789466026898
+        ],
+        "note": "Descriptive spatial uncertainty conditional on these dates/site; not event-level or temporal replication.",
+        "replicates": 2000,
+        "unit": "4x4 neighboring sample-cell blocks; all dates and channels paired within block"
+      },
+      "change_observation_count": 5120,
+      "class_and_interval_centered_change_correlation": 0.06512960133031723,
+      "classwise_level_correlations": {
+        "grassland": 0.32310959383550186,
+        "tree_cover": 0.4308713641170389
+      },
+      "consecutive_matched_change_correlation": 0.1721321228042645,
+      "interpretation": "Sensor polarizations differ (HH/HV vs VV/VH); association is descriptive, not wavelength effect.",
+      "level_change_contrast_spatial_bootstrap": {
+        "2": {
+          "approx_block_width_m": 174,
+          "approx_sample_spacing_m": 87,
+          "block_cells_per_side": 2,
+          "ci95": {
+            "contrast_r_levels_minus_r_changes": [
+              0.24897244959287337,
+              0.32436552152735093
+            ],
+            "r_changes": [
+              0.13923881366531868,
+              0.2058854791269575
+            ],
+            "r_levels": [
+              0.4347747336480452,
+              0.4888711283737243
+            ]
+          },
+          "interpretation": "Spatial-sampling interval conditional on this site and six NISAR acquisitions; not temporal/event uncertainty or an iid-pixel interval.",
+          "paired_same_block_draw_for_level_and_change": true,
+          "point_estimates": {
+            "contrast_r_levels_minus_r_changes": 0.289626571374458,
+            "r_changes": 0.1721321228042645,
+            "r_levels": 0.4617586941787225
+          },
+          "replicates_requested": 1000,
+          "replicates_valid": 1000,
+          "resampling_unit": "spatial blocks; all dates and intervals for each point retained together",
+          "seed": 20261117,
+          "spatial_blocks": 256
+        },
+        "4": {
+          "approx_block_width_m": 348,
+          "approx_sample_spacing_m": 87,
+          "block_cells_per_side": 4,
+          "ci95": {
+            "contrast_r_levels_minus_r_changes": [
+              0.23884139804770885,
+              0.3303739655840009
+            ],
+            "r_changes": [
+              0.1352581429502033,
+              0.21035084268757193
+            ],
+            "r_levels": [
+              0.4320069370625299,
+              0.48580847489150136
+            ]
+          },
+          "interpretation": "Spatial-sampling interval conditional on this site and six NISAR acquisitions; not temporal/event uncertainty or an iid-pixel interval.",
+          "paired_same_block_draw_for_level_and_change": true,
+          "point_estimates": {
+            "contrast_r_levels_minus_r_changes": 0.289626571374458,
+            "r_changes": 0.1721321228042645,
+            "r_levels": 0.4617586941787225
+          },
+          "replicates_requested": 1000,
+          "replicates_valid": 1000,
+          "resampling_unit": "spatial blocks; all dates and intervals for each point retained together",
+          "seed": 20261119,
+          "spatial_blocks": 64
+        },
+        "8": {
+          "approx_block_width_m": 696,
+          "approx_sample_spacing_m": 87,
+          "block_cells_per_side": 8,
+          "ci95": {
+            "contrast_r_levels_minus_r_changes": [
+              0.23400102711530668,
+              0.3227127016793919
+            ],
+            "r_changes": [
+              0.12878944162293252,
+              0.21601778166339206
+            ],
+            "r_levels": [
+              0.4301685639913111,
+              0.47848708066346063
+            ]
+          },
+          "interpretation": "Spatial-sampling interval conditional on this site and six NISAR acquisitions; not temporal/event uncertainty or an iid-pixel interval.",
+          "paired_same_block_draw_for_level_and_change": true,
+          "point_estimates": {
+            "contrast_r_levels_minus_r_changes": 0.289626571374458,
+            "r_changes": 0.1721321228042645,
+            "r_levels": 0.4617586941787225
+          },
+          "replicates_requested": 1000,
+          "replicates_valid": 1000,
+          "resampling_unit": "spatial blocks; all dates and intervals for each point retained together",
+          "seed": 20261123,
+          "spatial_blocks": 16
+        }
+      },
+      "matched_date_count": 6,
+      "matched_observation_count": 6144,
+      "pooled_level_correlation": 0.4617586941787225,
+      "spatial_block_bootstrap_pooled": {
+        "blocks": 64,
+        "ci95": [
+          0.43194189740111666,
+          0.4878423876679505
+        ],
+        "note": "Descriptive spatial uncertainty conditional on these dates/site; not event-level or temporal replication.",
+        "replicates": 2000,
+        "unit": "4x4 neighboring sample-cell blocks; all dates and channels paired within block"
+      },
+      "within_class_and_date_centered_correlation": 0.36216223182855395
+    }
+  },
+  "findings": [
+    {
+      "centered_r": 0.36216223182855395,
+      "description": "Pooled association compared with class- and date-centered spatial association; attenuation/reversal indicates composition confounding, not causal mechanism.",
+      "id": "HV_vs_VH_class_confounding_check",
+      "pooled_r": 0.4617586941787225
+    },
+    {
+      "change_r": 0.1721321228042645,
+      "description": "Correlation of consecutive matched-date changes; only adjacent date intervals in this single site, exploratory.",
+      "id": "HV_vs_VH_temporal_change_check"
+    },
+    {
+      "centered_r": 0.35538827884300556,
+      "description": "Pooled association compared with class- and date-centered spatial association; attenuation/reversal indicates composition confounding, not causal mechanism.",
+      "id": "HH_vs_VV_class_confounding_check",
+      "pooled_r": 0.4810679149335431
+    },
+    {
+      "change_r": 0.1728283086496195,
+      "description": "Correlation of consecutive matched-date changes; only adjacent date intervals in this single site, exploratory.",
+      "id": "HH_vs_VV_temporal_change_check"
+    }
+  ],
+  "generated_at": "reproducible deterministic computation; no network access",
+  "inputs": [
+    {
+      "path": "data/amazon.json",
+      "sha256": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729"
+    },
+    {
+      "path": "data/amazon/sentinel1.json",
+      "sha256": "05e8439158f2fc6514692b1dca936629dfd154b86ec9edb571dbe905c33bce52"
+    },
+    {
+      "path": "data/amazon-manifest.json",
+      "sha256": "d8d78b4a5614964fb48285202a65bb29a349810b7f6b8600c2d34a9c9296eb03"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-07-18.json",
+      "sha256": "6967e3ee197b6213eda40f0e49affa5e3623973e519c9e0443d9a63e12584259"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-11.json",
+      "sha256": "bd5832e7c301bd0755c01731746cf8720899670cba92467d01f85483ba49d017"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-23.json",
+      "sha256": "605021014e0b4ac613533ef58da692656e45f40131af82cc0f235be86f2617a1"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-04.json",
+      "sha256": "126b8f11b7809a7e6884514725003c78418b39df27107c42f56591ba79f6cfe4"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-16.json",
+      "sha256": "50342f4268566875468db1153b40efb9edd4745d9e6afd7a0e545ffb702ed5b5"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-28.json",
+      "sha256": "1ff6be3b88c363a5df6d6a32f322ab945da7b6bd658abf66f900f23ebbbcaef8"
+    }
+  ],
+  "limitations": [
+    "One small study window/site; 1024 spatially autocorrelated sample locations are not independent events.",
+    "NISAR has six acquisitions; C-band dates do not create additional independent NISAR temporal observations.",
+    "L- and C-band polarization channels are not equivalent; frequency effects cannot be isolated from polarization, orbit, incidence geometry, resolution, processor and date.",
+    "RTC points have no per-point contributing-granule receipt or saved per-point quality/geometry mask; a date can combine bursts/versions in first-valid order. Granule-level UTC timestamp ranges cannot establish each point's actual lag or geometry.",
+    "Date matching uses calendar dates; UTC granule timestamps are separately recorded, but no per-point timestamp exists for the selected RTC value.",
+    "Difference between class/date medians is not treated as the median of paired pointwise differences; change correlations are computed from paired pointwise differences.",
+    "WorldCover 2021 is historical; class-30 grassland is not verified pasture.",
+    "No independent event labels; do not infer clearing, event detection accuracy, causation or wavelength superiority.",
+    "Monthly C-band medians pool years and can confound season with trend, orbit/track or acquisition geometry; not a fitted seasonal decomposition."
+  ],
+  "long_C_band_seasonality": {
+    "band": "VH",
+    "class": {
+      "grassland": {
+        "date_count": 86,
+        "monthly_median_of_date_medians_db": {
+          "1": -14.21,
+          "2": -13.345,
+          "3": -13.18,
+          "4": -13.37,
+          "5": -13.29,
+          "6": -14.07,
+          "7": -14.325,
+          "8": -15.29,
+          "9": -15.78,
+          "10": -15.65,
+          "11": -15.035,
+          "12": -14.43
+        },
+        "monthly_range_db": 2.5999999999999996,
+        "per_date": [
+          {
+            "date": "2024-01-10",
+            "median_db": -15.02,
+            "n": 449
+          },
+          {
+            "date": "2024-01-22",
+            "median_db": -14.47,
+            "n": 449
+          },
+          {
+            "date": "2024-02-03",
+            "median_db": -13.3,
+            "n": 449
+          },
+          {
+            "date": "2024-02-15",
+            "median_db": -13.25,
+            "n": 449
+          },
+          {
+            "date": "2024-02-27",
+            "median_db": -13.79,
+            "n": 449
+          },
+          {
+            "date": "2024-03-10",
+            "median_db": -13.24,
+            "n": 449
+          },
+          {
+            "date": "2024-03-22",
+            "median_db": -13.1,
+            "n": 449
+          },
+          {
+            "date": "2024-04-03",
+            "median_db": -13.24,
+            "n": 449
+          },
+          {
+            "date": "2024-04-15",
+            "median_db": -13.62,
+            "n": 449
+          },
+          {
+            "date": "2024-04-27",
+            "median_db": -13.41,
+            "n": 449
+          },
+          {
+            "date": "2024-05-09",
+            "median_db": -13.81,
+            "n": 449
+          },
+          {
+            "date": "2024-05-21",
+            "median_db": -13.05,
+            "n": 449
+          },
+          {
+            "date": "2024-06-02",
+            "median_db": -13.53,
+            "n": 449
+          },
+          {
+            "date": "2024-06-14",
+            "median_db": -14.14,
+            "n": 449
+          },
+          {
+            "date": "2024-06-26",
+            "median_db": -14.55,
+            "n": 449
+          },
+          {
+            "date": "2024-07-08",
+            "median_db": -13.05,
+            "n": 449
+          },
+          {
+            "date": "2024-07-20",
+            "median_db": -15.39,
+            "n": 449
+          },
+          {
+            "date": "2024-08-01",
+            "median_db": -15.52,
+            "n": 449
+          },
+          {
+            "date": "2024-08-13",
+            "median_db": -16.23,
+            "n": 449
+          },
+          {
+            "date": "2024-08-25",
+            "median_db": -16.73,
+            "n": 449
+          },
+          {
+            "date": "2024-09-06",
+            "median_db": -16.12,
+            "n": 449
+          },
+          {
+            "date": "2024-09-18",
+            "median_db": -17.05,
+            "n": 449
+          },
+          {
+            "date": "2024-09-30",
+            "median_db": -16.57,
+            "n": 449
+          },
+          {
+            "date": "2024-10-12",
+            "median_db": -13.32,
+            "n": 449
+          },
+          {
+            "date": "2024-10-24",
+            "median_db": -15.55,
+            "n": 449
+          },
+          {
+            "date": "2024-11-05",
+            "median_db": -16.92,
+            "n": 449
+          },
+          {
+            "date": "2024-11-17",
+            "median_db": -14.99,
+            "n": 449
+          },
+          {
+            "date": "2024-11-29",
+            "median_db": -15.85,
+            "n": 449
+          },
+          {
+            "date": "2024-12-11",
+            "median_db": -13.61,
+            "n": 449
+          },
+          {
+            "date": "2024-12-23",
+            "median_db": -13.85,
+            "n": 449
+          },
+          {
+            "date": "2025-01-04",
+            "median_db": -13.33,
+            "n": 449
+          },
+          {
+            "date": "2025-01-16",
+            "median_db": -14.13,
+            "n": 449
+          },
+          {
+            "date": "2025-01-28",
+            "median_db": -13.07,
+            "n": 449
+          },
+          {
+            "date": "2025-02-09",
+            "median_db": -13.18,
+            "n": 449
+          },
+          {
+            "date": "2025-02-21",
+            "median_db": -13.31,
+            "n": 449
+          },
+          {
+            "date": "2025-03-05",
+            "median_db": -13.24,
+            "n": 449
+          },
+          {
+            "date": "2025-03-17",
+            "median_db": -12.9,
+            "n": 449
+          },
+          {
+            "date": "2025-03-29",
+            "median_db": -13.14,
+            "n": 449
+          },
+          {
+            "date": "2025-04-10",
+            "median_db": -12.95,
+            "n": 449
+          },
+          {
+            "date": "2025-04-22",
+            "median_db": -13.45,
+            "n": 449
+          },
+          {
+            "date": "2025-05-04",
+            "median_db": -13.29,
+            "n": 449
+          },
+          {
+            "date": "2025-05-16",
+            "median_db": -13.12,
+            "n": 449
+          },
+          {
+            "date": "2025-05-28",
+            "median_db": -13.86,
+            "n": 449
+          },
+          {
+            "date": "2025-06-09",
+            "median_db": -13.75,
+            "n": 449
+          },
+          {
+            "date": "2025-06-21",
+            "median_db": -14.29,
+            "n": 449
+          },
+          {
+            "date": "2025-07-03",
+            "median_db": -14.05,
+            "n": 449
+          },
+          {
+            "date": "2025-07-15",
+            "median_db": -14.55,
+            "n": 449
+          },
+          {
+            "date": "2025-07-27",
+            "median_db": -14.26,
+            "n": 449
+          },
+          {
+            "date": "2025-08-08",
+            "median_db": -15.29,
+            "n": 449
+          },
+          {
+            "date": "2025-08-20",
+            "median_db": -13.47,
+            "n": 449
+          },
+          {
+            "date": "2025-09-01",
+            "median_db": -14.68,
+            "n": 449
+          },
+          {
+            "date": "2025-09-13",
+            "median_db": -15.72,
+            "n": 449
+          },
+          {
+            "date": "2025-09-25",
+            "median_db": -15.7,
+            "n": 449
+          },
+          {
+            "date": "2025-10-07",
+            "median_db": -15.99,
+            "n": 449
+          },
+          {
+            "date": "2025-10-19",
+            "median_db": -16.49,
+            "n": 449
+          },
+          {
+            "date": "2025-10-31",
+            "median_db": -16.68,
+            "n": 449
+          },
+          {
+            "date": "2025-11-12",
+            "median_db": -15.08,
+            "n": 449
+          },
+          {
+            "date": "2025-11-24",
+            "median_db": -13.93,
+            "n": 449
+          },
+          {
+            "date": "2025-12-06",
+            "median_db": -14.95,
+            "n": 449
+          },
+          {
+            "date": "2025-12-18",
+            "median_db": -14.43,
+            "n": 449
+          },
+          {
+            "date": "2025-12-30",
+            "median_db": -14.47,
+            "n": 449
+          },
+          {
+            "date": "2026-01-11",
+            "median_db": -14.21,
+            "n": 449
+          },
+          {
+            "date": "2026-01-23",
+            "median_db": -14.53,
+            "n": 449
+          },
+          {
+            "date": "2026-02-04",
+            "median_db": -14.31,
+            "n": 449
+          },
+          {
+            "date": "2026-02-16",
+            "median_db": -13.38,
+            "n": 449
+          },
+          {
+            "date": "2026-02-28",
+            "median_db": -13.42,
+            "n": 449
+          },
+          {
+            "date": "2026-03-12",
+            "median_db": -13.93,
+            "n": 449
+          },
+          {
+            "date": "2026-03-24",
+            "median_db": -13.18,
+            "n": 449
+          },
+          {
+            "date": "2026-04-17",
+            "median_db": -13.37,
+            "n": 449
+          },
+          {
+            "date": "2026-04-29",
+            "median_db": -12.93,
+            "n": 449
+          },
+          {
+            "date": "2026-05-11",
+            "median_db": -13.26,
+            "n": 449
+          },
+          {
+            "date": "2026-05-23",
+            "median_db": -13.61,
+            "n": 449
+          },
+          {
+            "date": "2026-06-04",
+            "median_db": -13.55,
+            "n": 449
+          },
+          {
+            "date": "2026-06-16",
+            "median_db": -14.0,
+            "n": 449
+          },
+          {
+            "date": "2026-06-28",
+            "median_db": -14.21,
+            "n": 449
+          },
+          {
+            "date": "2026-07-05",
+            "median_db": -14.39,
+            "n": 449
+          },
+          {
+            "date": "2026-07-17",
+            "median_db": -14.4,
+            "n": 449
+          },
+          {
+            "date": "2026-07-29",
+            "median_db": -13.41,
+            "n": 449
+          },
+          {
+            "date": "2026-08-10",
+            "median_db": -14.59,
+            "n": 449
+          },
+          {
+            "date": "2026-08-22",
+            "median_db": -15.02,
+            "n": 449
+          },
+          {
+            "date": "2026-09-03",
+            "median_db": -15.78,
+            "n": 449
+          },
+          {
+            "date": "2026-09-15",
+            "median_db": -16.23,
+            "n": 449
+          },
+          {
+            "date": "2026-09-27",
+            "median_db": -14.87,
+            "n": 449
+          },
+          {
+            "date": "2026-10-09",
+            "median_db": -15.65,
+            "n": 449
+          },
+          {
+            "date": "2026-10-21",
+            "median_db": -13.23,
+            "n": 449
+          },
+          {
+            "date": "2026-11-02",
+            "median_db": -14.73,
+            "n": 449
+          }
+        ]
+      },
+      "tree_cover": {
+        "date_count": 86,
+        "monthly_median_of_date_medians_db": {
+          "1": -13.75,
+          "2": -13.125,
+          "3": -13.12,
+          "4": -13.01,
+          "5": -13.03,
+          "6": -13.4,
+          "7": -13.575,
+          "8": -14.08,
+          "9": -14.12,
+          "10": -14.23,
+          "11": -14.100000000000001,
+          "12": -13.56
+        },
+        "monthly_range_db": 1.2200000000000006,
+        "per_date": [
+          {
+            "date": "2024-01-10",
+            "median_db": -14.26,
+            "n": 575
+          },
+          {
+            "date": "2024-01-22",
+            "median_db": -13.95,
+            "n": 575
+          },
+          {
+            "date": "2024-02-03",
+            "median_db": -13.09,
+            "n": 575
+          },
+          {
+            "date": "2024-02-15",
+            "median_db": -13.08,
+            "n": 575
+          },
+          {
+            "date": "2024-02-27",
+            "median_db": -13.62,
+            "n": 575
+          },
+          {
+            "date": "2024-03-10",
+            "median_db": -13.11,
+            "n": 575
+          },
+          {
+            "date": "2024-03-22",
+            "median_db": -13.1,
+            "n": 575
+          },
+          {
+            "date": "2024-04-03",
+            "median_db": -13.11,
+            "n": 575
+          },
+          {
+            "date": "2024-04-15",
+            "median_db": -13.32,
+            "n": 575
+          },
+          {
+            "date": "2024-04-27",
+            "median_db": -13.01,
+            "n": 575
+          },
+          {
+            "date": "2024-05-09",
+            "median_db": -13.71,
+            "n": 575
+          },
+          {
+            "date": "2024-05-21",
+            "median_db": -12.75,
+            "n": 575
+          },
+          {
+            "date": "2024-06-02",
+            "median_db": -13.39,
+            "n": 575
+          },
+          {
+            "date": "2024-06-14",
+            "median_db": -13.41,
+            "n": 575
+          },
+          {
+            "date": "2024-06-26",
+            "median_db": -13.49,
+            "n": 575
+          },
+          {
+            "date": "2024-07-08",
+            "median_db": -12.89,
+            "n": 575
+          },
+          {
+            "date": "2024-07-20",
+            "median_db": -14.04,
+            "n": 575
+          },
+          {
+            "date": "2024-08-01",
+            "median_db": -14.14,
+            "n": 575
+          },
+          {
+            "date": "2024-08-13",
+            "median_db": -14.08,
+            "n": 575
+          },
+          {
+            "date": "2024-08-25",
+            "median_db": -14.32,
+            "n": 575
+          },
+          {
+            "date": "2024-09-06",
+            "median_db": -14.24,
+            "n": 575
+          },
+          {
+            "date": "2024-09-18",
+            "median_db": -14.37,
+            "n": 575
+          },
+          {
+            "date": "2024-09-30",
+            "median_db": -14.36,
+            "n": 575
+          },
+          {
+            "date": "2024-10-12",
+            "median_db": -13.05,
+            "n": 575
+          },
+          {
+            "date": "2024-10-24",
+            "median_db": -14.06,
+            "n": 575
+          },
+          {
+            "date": "2024-11-05",
+            "median_db": -14.55,
+            "n": 575
+          },
+          {
+            "date": "2024-11-17",
+            "median_db": -14.21,
+            "n": 575
+          },
+          {
+            "date": "2024-11-29",
+            "median_db": -14.32,
+            "n": 575
+          },
+          {
+            "date": "2024-12-11",
+            "median_db": -13.28,
+            "n": 575
+          },
+          {
+            "date": "2024-12-23",
+            "median_db": -13.51,
+            "n": 575
+          },
+          {
+            "date": "2025-01-04",
+            "median_db": -13.25,
+            "n": 575
+          },
+          {
+            "date": "2025-01-16",
+            "median_db": -13.85,
+            "n": 575
+          },
+          {
+            "date": "2025-01-28",
+            "median_db": -13.13,
+            "n": 575
+          },
+          {
+            "date": "2025-02-09",
+            "median_db": -13.04,
+            "n": 575
+          },
+          {
+            "date": "2025-02-21",
+            "median_db": -13.11,
+            "n": 575
+          },
+          {
+            "date": "2025-03-05",
+            "median_db": -13.12,
+            "n": 575
+          },
+          {
+            "date": "2025-03-17",
+            "median_db": -13.19,
+            "n": 575
+          },
+          {
+            "date": "2025-03-29",
+            "median_db": -12.99,
+            "n": 575
+          },
+          {
+            "date": "2025-04-10",
+            "median_db": -13.0,
+            "n": 575
+          },
+          {
+            "date": "2025-04-22",
+            "median_db": -13.02,
+            "n": 575
+          },
+          {
+            "date": "2025-05-04",
+            "median_db": -13.03,
+            "n": 575
+          },
+          {
+            "date": "2025-05-16",
+            "median_db": -12.86,
+            "n": 575
+          },
+          {
+            "date": "2025-05-28",
+            "median_db": -13.21,
+            "n": 575
+          },
+          {
+            "date": "2025-06-09",
+            "median_db": -13.1,
+            "n": 575
+          },
+          {
+            "date": "2025-06-21",
+            "median_db": -13.66,
+            "n": 575
+          },
+          {
+            "date": "2025-07-03",
+            "median_db": -13.5,
+            "n": 575
+          },
+          {
+            "date": "2025-07-15",
+            "median_db": -13.75,
+            "n": 575
+          },
+          {
+            "date": "2025-07-27",
+            "median_db": -13.19,
+            "n": 575
+          },
+          {
+            "date": "2025-08-08",
+            "median_db": -14.11,
+            "n": 575
+          },
+          {
+            "date": "2025-08-20",
+            "median_db": -13.24,
+            "n": 575
+          },
+          {
+            "date": "2025-09-01",
+            "median_db": -13.81,
+            "n": 575
+          },
+          {
+            "date": "2025-09-13",
+            "median_db": -14.12,
+            "n": 575
+          },
+          {
+            "date": "2025-09-25",
+            "median_db": -14.12,
+            "n": 575
+          },
+          {
+            "date": "2025-10-07",
+            "median_db": -14.34,
+            "n": 575
+          },
+          {
+            "date": "2025-10-19",
+            "median_db": -14.42,
+            "n": 575
+          },
+          {
+            "date": "2025-10-31",
+            "median_db": -14.61,
+            "n": 575
+          },
+          {
+            "date": "2025-11-12",
+            "median_db": -13.99,
+            "n": 575
+          },
+          {
+            "date": "2025-11-24",
+            "median_db": -13.4,
+            "n": 575
+          },
+          {
+            "date": "2025-12-06",
+            "median_db": -13.7,
+            "n": 575
+          },
+          {
+            "date": "2025-12-18",
+            "median_db": -13.56,
+            "n": 575
+          },
+          {
+            "date": "2025-12-30",
+            "median_db": -13.89,
+            "n": 575
+          },
+          {
+            "date": "2026-01-11",
+            "median_db": -13.46,
+            "n": 575
+          },
+          {
+            "date": "2026-01-23",
+            "median_db": -13.75,
+            "n": 575
+          },
+          {
+            "date": "2026-02-04",
+            "median_db": -13.62,
+            "n": 575
+          },
+          {
+            "date": "2026-02-16",
+            "median_db": -13.14,
+            "n": 575
+          },
+          {
+            "date": "2026-02-28",
+            "median_db": -13.24,
+            "n": 575
+          },
+          {
+            "date": "2026-03-12",
+            "median_db": -13.62,
+            "n": 575
+          },
+          {
+            "date": "2026-03-24",
+            "median_db": -13.3,
+            "n": 575
+          },
+          {
+            "date": "2026-04-17",
+            "median_db": -13.01,
+            "n": 575
+          },
+          {
+            "date": "2026-04-29",
+            "median_db": -12.48,
+            "n": 575
+          },
+          {
+            "date": "2026-05-11",
+            "median_db": -12.89,
+            "n": 575
+          },
+          {
+            "date": "2026-05-23",
+            "median_db": -13.51,
+            "n": 575
+          },
+          {
+            "date": "2026-06-04",
+            "median_db": -13.14,
+            "n": 575
+          },
+          {
+            "date": "2026-06-16",
+            "median_db": -13.34,
+            "n": 575
+          },
+          {
+            "date": "2026-06-28",
+            "median_db": -13.58,
+            "n": 575
+          },
+          {
+            "date": "2026-07-05",
+            "median_db": -13.77,
+            "n": 575
+          },
+          {
+            "date": "2026-07-17",
+            "median_db": -13.65,
+            "n": 575
+          },
+          {
+            "date": "2026-07-29",
+            "median_db": -13.03,
+            "n": 575
+          },
+          {
+            "date": "2026-08-10",
+            "median_db": -13.61,
+            "n": 575
+          },
+          {
+            "date": "2026-08-22",
+            "median_db": -13.71,
+            "n": 575
+          },
+          {
+            "date": "2026-09-03",
+            "median_db": -14.07,
+            "n": 575
+          },
+          {
+            "date": "2026-09-15",
+            "median_db": -14.22,
+            "n": 575
+          },
+          {
+            "date": "2026-09-27",
+            "median_db": -13.86,
+            "n": 575
+          },
+          {
+            "date": "2026-10-09",
+            "median_db": -14.23,
+            "n": 575
+          },
+          {
+            "date": "2026-10-21",
+            "median_db": -12.96,
+            "n": 575
+          },
+          {
+            "date": "2026-11-02",
+            "median_db": -13.9,
+            "n": 575
+          }
+        ]
+      }
+    }
+  },
+  "matching": {
+    "by_tolerance_days": {
+      "0": [],
+      "12": [
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-07-18T09:04:11.000Z",
+          "nisar_date": "2026-07-18",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-07-17T08:58:10Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-07-17T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-07-17T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-07-17",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-08-11T09:04:09.000Z",
+          "nisar_date": "2026-08-11",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-08-10T08:58:11Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-10T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-10T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-08-10",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-08-23T09:04:09.000Z",
+          "nisar_date": "2026-08-23",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-08-22T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-22T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-22T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-08-22",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-04T09:04:08.000Z",
+          "nisar_date": "2026-09-04",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-03T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-03T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-03T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-03",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-16T09:04:08.000Z",
+          "nisar_date": "2026-09-16",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-15T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-15T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-15T08:58:16Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-15",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-28T09:04:08.000Z",
+          "nisar_date": "2026-09-28",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-27T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-27T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-27T08:58:16Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-27",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        }
+      ],
+      "3": [
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-07-18T09:04:11.000Z",
+          "nisar_date": "2026-07-18",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-07-17T08:58:10Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-07-17T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-07-17T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-07-17",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-08-11T09:04:09.000Z",
+          "nisar_date": "2026-08-11",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-08-10T08:58:11Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-10T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-10T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-08-10",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-08-23T09:04:09.000Z",
+          "nisar_date": "2026-08-23",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-08-22T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-22T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-22T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-08-22",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-04T09:04:08.000Z",
+          "nisar_date": "2026-09-04",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-03T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-03T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-03T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-03",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-16T09:04:08.000Z",
+          "nisar_date": "2026-09-16",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-15T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-15T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-15T08:58:16Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-15",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-28T09:04:08.000Z",
+          "nisar_date": "2026-09-28",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-27T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-27T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-27T08:58:16Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-27",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        }
+      ],
+      "6": [
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-07-18T09:04:11.000Z",
+          "nisar_date": "2026-07-18",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-07-17T08:58:10Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-07-17T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-07-17T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-07-17",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-08-11T09:04:09.000Z",
+          "nisar_date": "2026-08-11",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-08-10T08:58:11Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-10T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-10T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-08-10",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-08-23T09:04:09.000Z",
+          "nisar_date": "2026-08-23",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-08-22T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-22T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-08-22T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-08-22",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-04T09:04:08.000Z",
+          "nisar_date": "2026-09-04",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-03T08:58:12Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-03T08:58:14Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-03T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-03",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-16T09:04:08.000Z",
+          "nisar_date": "2026-09-16",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-15T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-15T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-15T08:58:16Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-15",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        },
+        {
+          "lag_days_calendar": -1,
+          "nisar_acquisition_start_utc": "2026-09-28T09:04:08.000Z",
+          "nisar_date": "2026-09-28",
+          "rtc_acquisition_times_utc": [
+            {
+              "acquisition_utc": "2026-09-27T08:58:13Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-27T08:58:15Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0"
+            },
+            {
+              "acquisition_utc": "2026-09-27T08:58:16Z",
+              "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+            }
+          ],
+          "rtc_date": "2026-09-27",
+          "rtc_granules": [
+            "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0",
+            "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+          ],
+          "utc_lag_scope": "Granule-level only; no per-point source granule."
+        }
+      ]
+    },
+    "nearest_12d_class_series": {
+      "HH_vs_VV": {
+        "nisar_band": "HH",
+        "opera_band": "VV",
+        "per_date_nearest_12d": [
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.100277777777777,
+              -24.099444444444444
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -10.10342,
+                "opera_db": -8.68
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -7.45118,
+                "opera_db": -7.42
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-07-18T09:04:11.000Z",
+            "nisar_date": "2026-07-18",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-07-17T08:58:10Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-07-17T08:58:12Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-07-17T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-07-17",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.099444444444444,
+              -24.09861111111111
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -9.95905,
+                "opera_db": -8.91
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -6.94928,
+                "opera_db": -7.42
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-08-11T09:04:09.000Z",
+            "nisar_date": "2026-08-11",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-08-10T08:58:11Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-10T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-10T08:58:14Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-08-10",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.099166666666665,
+              -24.098333333333333
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -10.57857,
+                "opera_db": -9.37
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -7.07336,
+                "opera_db": -7.62
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-08-23T09:04:09.000Z",
+            "nisar_date": "2026-08-23",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-08-22T08:58:12Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-22T08:58:14Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-22T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-08-22",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.09888888888889,
+              -24.098055555555554
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -11.87402,
+                "opera_db": -10.18
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -7.3253,
+                "opera_db": -7.9
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-09-04T09:04:08.000Z",
+            "nisar_date": "2026-09-04",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-09-03T08:58:12Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-03T08:58:14Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-03T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-09-03",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.09861111111111,
+              -24.09777777777778
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -12.06259,
+                "opera_db": -10.51
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -7.57395,
+                "opera_db": -8.06
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-09-16T09:04:08.000Z",
+            "nisar_date": "2026-09-16",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-09-15T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-15T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-15T08:58:16Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-09-15",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.09861111111111,
+              -24.09777777777778
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -7.58595,
+                "opera_db": -9.01
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -6.59851,
+                "opera_db": -7.77
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-09-28T09:04:08.000Z",
+            "nisar_date": "2026-09-28",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-09-27T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-27T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-27T08:58:16Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-09-27",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          }
+        ]
+      },
+      "HV_vs_VH": {
+        "nisar_band": "HV",
+        "opera_band": "VH",
+        "per_date_nearest_12d": [
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.100277777777777,
+              -24.099444444444444
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -17.39754,
+                "opera_db": -14.4
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -12.06549,
+                "opera_db": -13.65
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-07-18T09:04:11.000Z",
+            "nisar_date": "2026-07-18",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-07-17T08:58:10Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-07-17T08:58:12Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-07-17T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-07-17",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260717T085810Z_20261010T144944Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260717T085812Z_20261010T144944Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260717T085813Z_20261010T145140Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.099444444444444,
+              -24.09861111111111
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -18.05081,
+                "opera_db": -14.59
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -12.17936,
+                "opera_db": -13.61
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-08-11T09:04:09.000Z",
+            "nisar_date": "2026-08-11",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-08-10T08:58:11Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-10T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-10T08:58:14Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-08-10",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260810T085811Z_20261010T170357Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260810T085813Z_20261010T170357Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260810T085814Z_20261010T170450Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.099166666666665,
+              -24.098333333333333
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -18.76493,
+                "opera_db": -15.02
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -12.34019,
+                "opera_db": -13.71
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-08-23T09:04:09.000Z",
+            "nisar_date": "2026-08-23",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-08-22T08:58:12Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-22T08:58:14Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-08-22T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-08-22",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260822T085812Z_20261010T224000Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260822T085814Z_20261010T224000Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260822T085815Z_20261010T224126Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.09888888888889,
+              -24.098055555555554
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -19.69332,
+                "opera_db": -15.78
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -12.53233,
+                "opera_db": -14.07
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-09-04T09:04:08.000Z",
+            "nisar_date": "2026-09-04",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-09-03T08:58:12Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-03T08:58:14Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-03T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-09-03",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260903T085812Z_20261011T065018Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260903T085814Z_20261011T065018Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260903T085815Z_20261011T065014Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.09861111111111,
+              -24.09777777777778
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -20.01671,
+                "opera_db": -16.23
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -12.54094,
+                "opera_db": -14.22
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-09-16T09:04:08.000Z",
+            "nisar_date": "2026-09-16",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-09-15T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-15T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-15T08:58:16Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-09-15",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260915T085813Z_20261011T005001Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260915T085815Z_20261011T005001Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260915T085816Z_20261011T004424Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          },
+          {
+            "catalogue_granule_utc_lag_hours_range": [
+              -24.09861111111111,
+              -24.09777777777778
+            ],
+            "class_medians": {
+              "grassland": {
+                "n": 449,
+                "nisar_db": -15.54589,
+                "opera_db": -14.87
+              },
+              "tree_cover": {
+                "n": 575,
+                "nisar_db": -12.0055,
+                "opera_db": -13.86
+              }
+            },
+            "lag_days_rtc_minus_nisar": -1,
+            "nisar_acquisition_start_utc": "2026-09-28T09:04:08.000Z",
+            "nisar_date": "2026-09-28",
+            "rtc_acquisition_times_utc": [
+              {
+                "acquisition_utc": "2026-09-27T08:58:13Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-27T08:58:15Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0"
+              },
+              {
+                "acquisition_utc": "2026-09-27T08:58:16Z",
+                "granule_id": "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+              }
+            ],
+            "rtc_date": "2026-09-27",
+            "rtc_granules": [
+              "OPERA_L2_RTC-S1_T170-364105-IW2_20260927T085813Z_20261011T041047Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW1_20260927T085815Z_20261011T041047Z_S1D_30_v1.0",
+              "OPERA_L2_RTC-S1_T170-364106-IW2_20260927T085816Z_20261011T041110Z_S1D_30_v1.0"
+            ],
+            "utc_lag_scope": "Granule-level range only; actual contributing OPERA burst per point is not recorded.",
+            "valid_shared_points": 1024
+          }
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "acquisition_times": {
+      "nisar": "UTC start times from data/subsets/amazon-dense/<date>.json source metadata; these sidecars identify the same acquisition granules in the series.",
+      "opera": "UTC acquisition timestamp parsed from each granule ID; all per-date burst granules included",
+      "precision": "Granule-level UTC timestamps are available, but actual per-point contributing burst is unknown; exact per-point lag is therefore unavailable."
+    },
+    "coordinates": {
+      "assertions": "AMA row/column ID, grid-derived cell-center lat/lon, 1024 array length, and ordered coordinate hash.",
+      "coordinate_sha256": "214f68a0f4a832b1cf587a317028cec130216558e14401b76da2e4f0a4a85462",
+      "count": 1024,
+      "matching": "Validated each NISAR ID and lat/lon against declared 32x32 grid; verified ordered lat/lon SHA-256 equals OPERA points_sha256. OPERA coordinates/IDs are not stored per point; order contract is required."
+    },
+    "masks": "Analysis only requires finite, shared point values; no additional per-point geometry/quality mask can be applied from the stored RTC JSON.",
+    "nisar_collection": "NISAR L2 GCOV PROVISIONAL; track 146/frame 175 ascending per data/amazon-manifest.json",
+    "nisar_dates": [
+      "2026-07-18",
+      "2026-08-11",
+      "2026-08-23",
+      "2026-09-04",
+      "2026-09-16",
+      "2026-09-28"
+    ],
+    "nisar_pol": "HH/HV",
+    "opera_collection": "C2777436413-ASF",
+    "opera_date_range": [
+      "2024-01-10",
+      "2026-11-02"
+    ],
+    "opera_dates_count": 86,
+    "opera_granules_count": 219,
+    "opera_orbit_track_metadata": "per-granule orbit/track not in sidecar; not inferred; granule IDs retained for matched dates",
+    "opera_pol": "VV/VH",
+    "radiometry": {
+      "nisar": "GCOV gamma0, HH/HV, positive power to 10log10, source masks 0/255 rejected during extraction; only stored valid/null values consumed here.",
+      "opera": "RTC-S1 gamma0 VV/VH dB, per scripts/opera_rtc.py uses VV/VH assets and 10log10(linear power); no sigma0 auxiliary used.",
+      "quality": "No saved per-point RTC quality mask or contributing burst; finite values are not equivalent to verified quality/geometry."
+    },
+    "worldcover": {
+      "class_counts": {
+        "10_tree_cover": 575,
+        "30_grassland": 449
+      },
+      "version": "2021 v200"
+    }
+  },
+  "method": {
+    "bootstrap": {
+      "block_cells": [
+        4,
+        4
+      ],
+      "contrast_block_sizes_cells": [
+        2,
+        4,
+        8
+      ],
+      "contrast_replicates": 1000,
+      "contrast_seed_rule": "base seed + block size; identical block draw used for level/change correlation within each replicate",
+      "replicates": 2000,
+      "seed": 20261115,
+      "unit": "spatial blocks; paired coordinates and dates, not independent pixels"
+    },
+    "change": "per-coordinate consecutive differences over successive matched pairs; changes overlap in coordinates and temporal intervals; temporal sample size is number of dates, not point-date rows.",
+    "level_correlation": "pooled point-date observations; centered by WorldCover class AND acquisition-date median within each sensor before spatial correlation.",
+    "matching": "Nearest calendar date per NISAR acquisition, with unique RTC date assignments for tolerance analyses; ID+lat/lon grid and ordered hash checks; no interpolation; primary tolerance 6 days. UTC granule ranges are reported separately, not assigned to pixels.",
+    "primary_tolerance_days": 6,
+    "temporal_tolerances_days": [
+      0,
+      3,
+      6,
+      12
+    ]
+  },
+  "study": "Amazon NISAR L-band vs OPERA Sentinel-1 C-band; spatial/temporal association and class confounding",
+  "summary": {
+    "matched_unique_pairs_at_6d": 6,
+    "paired_point_date_rows": 6144,
+    "primary_HV_VH_centered_r": 0.36216223182855395,
+    "primary_HV_VH_change_r": 0.1721321228042645,
+    "primary_HV_VH_pooled_r": 0.4617586941787225
+  }
+}

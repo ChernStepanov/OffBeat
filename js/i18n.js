@@ -93,7 +93,7 @@
     'Dense analysis and sources':'Плотный анализ и источники',
     'Dense experiment: 1 candidate group(s); 0 overlap local dated alerts and 0 have a nearby fire record. Grid footprint is not confirmed event area; incomplete archives and post-hoc thresholds prevent recall or causal conclusions.':'Плотный эксперимент: 1 группа-кандидат; 0 пересекаются с локальными оповещениями и 0 имеют рядом записи о пожаре. Площадь ячеек не равна подтверждённой площади события; неполные архивы и пороги, выбранные после просмотра данных, не позволяют оценить полноту или установить причину.',
     'Skip to the map':'Перейти к карте', 'OffBeat - NISAR change finder':'OffBeat — поиск изменений NISAR',
-    'Take the tour':'Обзор', 'Map':'Карта', 'Pixel card':'Карточка пикселя', 'Top anomalies':'Основные аномалии', 'How it works':'Как это работает', 'NISAR data guide':'Справка по данным NISAR',
+    'Take the tour':'Обзор', 'Map':'Карта', 'Pixel card':'Карточка пикселя', 'Top anomalies':'Основные аномалии', 'How it works':'Как это работает', 'Research results':'Результаты исследования', 'Map findings':'Находки на карте', 'NISAR data guide':'Справка по данным NISAR',
     'Location search':'Поиск места', 'Search':'Найти', 'Name in any language or coordinates':'Название на любом языке или координаты',
     'Search names in any language. Coordinates: latitude, longitude. Names are sent to Open-Meteo, with Photon / Komoot as fallback.':'Ищите названия на любом языке или введите координаты: широта, долгота. Запрос отправляется в Open-Meteo; при необходимости используются Photon / Komoot.',
     'Explore the world':'Исследовать мир', 'World':'Мир', 'Europe':'Европа', 'Africa':'Африка', 'Asia':'Азия', 'Oceania':'Океания', 'Americas':'Америка',

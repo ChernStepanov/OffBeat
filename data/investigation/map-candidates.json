@@ -1,0 +1,3443 @@
+{
+  "study": "Amazon Itupiranga, Par\u00e1; exploratory map review; no event confirmation",
+  "summary": {
+    "ru": "\u0421\u0440\u0435\u0434\u0438 \u0447\u0435\u0442\u044b\u0440\u0451\u0445 \u043f\u0440\u043e\u0441\u0442\u0440\u0430\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u043e \u0440\u0430\u0437\u043d\u0435\u0441\u0451\u043d\u043d\u044b\u0445 HV-\u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u043e\u0432 \u043e\u043f\u0442\u0438\u043a\u0430 \u043d\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0430\u0435\u0442 \u043e\u0434\u043d\u043e\u0437\u043d\u0430\u0447\u043d\u043e \u043d\u043e\u0432\u0443\u044e \u0432\u044b\u0440\u0443\u0431\u043a\u0443; \u0434\u0432\u0430 \u043f\u0440\u0438\u0433\u043e\u0434\u043d\u044b\u0445 \u0434\u043b\u044f \u043c\u0435\u0441\u0442\u043d\u043e\u0433\u043e \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u044f \u043e\u043a\u0442\u044f\u0431\u0440\u044c\u0441\u043a\u0438\u0445 \u0441\u043d\u0438\u043c\u043a\u0430 \u0443\u0442\u043e\u0447\u043d\u044f\u044e\u0442 \u043a\u043e\u043d\u0442\u0435\u043a\u0441\u0442, \u043d\u043e \u043d\u0435 \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0442 \u043e\u0434\u043d\u043e\u0437\u043d\u0430\u0447\u043d\u0443\u044e SAR-\u043f\u0440\u0438\u0447\u0438\u043d\u0443.",
+    "en": "Across four spatially separated HV candidates, optical imagery does not unambiguously confirm new forest loss; two October scenes improve local context but do not establish the SAR cause."
+  },
+  "selection": {
+    "rule": "six valid native NISAR dates; median of Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and at least 2/3 post dates <= pre median -3 dB; 8-connected components were not required for the pixel screen; candidates thinned >=1 km; controls forest-class cells with smallest absolute shift, similarly thinned",
+    "candidate_count_screen": 1452,
+    "candidate_count_rule": "HV-only per-cell screen; 1,452 flagged. Not comparable to the earlier joint HH/HV dense component count of 83 under a different rule (which also applied component grouping).",
+    "displayed_candidates": 4,
+    "displayed_controls": 4,
+    "screen_channel": "HV only",
+    "candidate_vs_joint_note": "This selection is HV-only. The stored joint3dbflag is an independent per-cell calculation requiring both HH and HV to meet <= -3 dB median shift and >=2/3 post persistence; it is not the selector for displayed candidates."
+  },
+  "coordinate_mapping": "Dense native cell center: EPSG:32722 x=x_first+c*x_step, y=y_first+r*y_step -> WGS84 via pyproj. Optical crop center mapped using stored EPSG:4326 bounds of exact Sentinel-2 preview PNG (256x256). No sparse-to-dense point join performed.",
+  "sar_inputs": [
+    {
+      "path": "data/subsets/amazon-dense/2026-07-18.npz",
+      "sha256": "463465935e74e676d15cfc7daf2a56a6714ea72c7c1ea9de42d2155c67006a44"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-11.npz",
+      "sha256": "beea9a1438427dfa89d2fa79f18749099649e2e83e810cb35cd34b8a83fa94d4"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-08-23.npz",
+      "sha256": "7d0b33e3e0e6972e44ef58ad05a5b6ae9a6680181c682d38d2ef121473d3621d"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-04.npz",
+      "sha256": "4b677e61a240699402752a44d71ee229bde5fde727171b83859d40707fcdd0d3"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-16.npz",
+      "sha256": "0b5f6d0b6b872e438757d67bced674c2904446e8c4c5699f8e592c311215be04"
+    },
+    {
+      "path": "data/subsets/amazon-dense/2026-09-28.npz",
+      "sha256": "2f0c8b51deee3e10ec5aadb6849e1e1a3b1beaf4440244291bbdae848bb18b4b"
+    }
+  ],
+  "optical_scenes": [
+    {
+      "date": "2026-07-03",
+      "scene_id": "S2C_22MFV_20260703_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260703_0_L2A",
+      "path": "data/amazon/optical/S2C_22MFV_20260703_0_L2A.png",
+      "sha256": "f19ca700c9575c9fa7b2722a52666abff94f7fa88ce5770bad33d92b3bab0366",
+      "scl_clear_fraction": 0.9993896484375,
+      "scl_cloud_shadow_snow_fraction": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "scene_id": "S2A_22MFV_20260814_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260814_0_L2A",
+      "path": "data/amazon/optical/S2A_22MFV_20260814_0_L2A.png",
+      "sha256": "7b8230c6a73aabd918c05a28853cf6535ea7cbeeeb6dac501b7301a9340316c4",
+      "scl_clear_fraction": 0.9993896484375,
+      "scl_cloud_shadow_snow_fraction": 0.0
+    },
+    {
+      "date": "2026-09-03",
+      "scene_id": "S2A_22MFV_20260903_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20260903_0_L2A",
+      "path": "data/amazon/optical/S2A_22MFV_20260903_0_L2A.png",
+      "sha256": "6b7ed074e15f5b1f236a0f1f422843775062c280298fcbd108fa3b668d7945ec",
+      "scl_clear_fraction": 0.9993896484375,
+      "scl_cloud_shadow_snow_fraction": 0.0
+    },
+    {
+      "date": "2026-09-21",
+      "scene_id": "S2C_22MFV_20260921_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20260921_0_L2A",
+      "path": "data/amazon/optical/S2C_22MFV_20260921_0_L2A.png",
+      "sha256": "06efd7d10ed86177403cc9a584179fd63d7f2680056b5a3f81248f41b33afefc",
+      "scl_clear_fraction": 0.9782562255859375,
+      "scl_cloud_shadow_snow_fraction": 0.0211334228515625
+    }
+  ],
+  "maps": [
+    {
+      "id": "candidate-01",
+      "role": "candidate",
+      "native_row": 29,
+      "native_col": 66,
+      "lat": -4.767559782469801,
+      "lon": -49.275795926083,
+      "coordinate_fingerprint": "ea7ed64d1ed2aa5a53c64d7c9600ae86bdf83079f8774d7c65e1ddeba94011e6",
+      "worldcover2021_code": 10,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -4.458327293395996,
+          -1.7718772888183594,
+          -6.054729461669922,
+          -5.923484802246094,
+          -6.467136859893799,
+          -3.418921947479248
+        ],
+        "HV": [
+          -8.722996711730957,
+          -8.134343147277832,
+          -12.375900268554688,
+          -16.146093368530273,
+          -17.203033447265625,
+          -18.98441505432129
+        ]
+      },
+      "hv_shift_db": -8.480036735534668,
+      "hh_companion_shift_db": -1.4651575088500977,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/candidate-01.png",
+      "sha256": "f49c8c137fecddd6bbcd84fc109e37a4a80d5aacd042bb6f1a79ed0b6d857a73",
+      "visual_annotation_key": {
+        "native_row": 29,
+        "native_col": 66,
+        "contact_sheet_sha256": "f49c8c137fecddd6bbcd84fc109e37a4a80d5aacd042bb6f1a79ed0b6d857a73",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "ea7ed64d1ed2aa5a53c64d7c9600ae86bdf83079f8774d7c65e1ddeba94011e6",
+        "new_contact_sheet_sha256": "7e892aaccbfc43f1f95a4768594ae488dfad719ea09b8177351ad838be54ec01",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-candidate-01-2026-10-03-rgb.png",
+            "sha256": "47298b6a261dbf9e0dea44dc611bd6507af47c264f123afaabb3befe692567a1",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-candidate-01-2026-10-21-rgb.png",
+            "sha256": "7bc662f6e872844b8a2a966c408e5b0faf09ddcbf5d32f0930001671779ed06a",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "3165499257df9d2cb72edcaea356e6b1dcde3800de57fe5472f6f695f93f4a10"
+      },
+      "observation": {
+        "ru": "\u0412 \u0438\u044e\u043b\u0435 \u0438 \u0430\u0432\u0433\u0443\u0441\u0442\u0435 \u0432\u0438\u0434\u043d\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u0430\u044f \u0441\u0432\u0435\u0442\u043b\u0430\u044f \u043f\u043e\u0432\u0435\u0440\u0445\u043d\u043e\u0441\u0442\u044c \u0438 \u043b\u0438\u043d\u0435\u0439\u043d\u044b\u0435 \u0440\u0430\u0441\u0447\u0438\u0441\u0442\u043a\u0438 \u0443 \u043b\u0435\u0441\u043e-\u043f\u043e\u043b\u0435\u0432\u043e\u0439 \u043c\u043e\u0437\u0430\u0438\u043a\u0438. 3 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0431\u0435\u043b\u0430\u044f \u043e\u0431\u043b\u0430\u0447\u043d\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442 \u043a \u0442\u043e\u0447\u043a\u0435 \u0438 \u0437\u0430\u043a\u0440\u044b\u0432\u0430\u0435\u0442 \u0447\u0430\u0441\u0442\u044c \u043e\u043a\u043d\u0430; 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0442\u043e\u0447\u043a\u0430 \u043b\u0435\u0436\u0438\u0442 \u043d\u0430 \u0443\u0436\u0435 \u043e\u0442\u043a\u0440\u044b\u0442\u043e\u043c/\u043c\u043e\u0437\u0430\u0438\u0447\u043d\u043e\u043c \u0440\u0438\u0441\u0443\u043d\u043a\u0435. \u041c\u0435\u0436\u0434\u0443 \u0447\u0438\u0441\u0442\u044b\u043c\u0438 \u0443\u0447\u0430\u0441\u0442\u043a\u0430\u043c\u0438 \u0434\u0430\u0442 \u043d\u0435 \u0432\u0438\u0434\u043d\u043e \u0443\u0432\u0435\u0440\u0435\u043d\u043d\u043e \u043d\u043e\u0432\u043e\u0433\u043e \u043a\u043e\u043c\u043f\u0430\u043a\u0442\u043d\u043e\u0433\u043e \u043f\u0440\u043e\u0441\u0432\u0435\u0442\u0430.",
+        "en": "July and August show open pale ground and linear clearings at a forest/field mosaic edge. On October 3, a bright cloud approaches and partly obscures the target window; on October 21, the target lies in an already open/mosaic pattern. No confidently new compact opening is visible between clear portions of the dates."
+      },
+      "interpretation": {
+        "ru": "\u0422\u0435\u043a\u0443\u0449\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043d\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0430\u044e\u0442 \u043d\u043e\u0432\u0443\u044e \u0440\u0430\u0441\u0447\u0438\u0441\u0442\u043a\u0443; \u043e\u043a\u0442\u044f\u0431\u0440\u044c\u0441\u043a\u0430\u044f \u0441\u0446\u0435\u043d\u0430 \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043a\u0440\u0430\u0439, \u043d\u043e \u043e\u043a\u043d\u043e 3 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0447\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0437\u0430\u043a\u0440\u044b\u0442\u043e \u043e\u0431\u043b\u0430\u043a\u043e\u043c. \u0412\u043b\u0430\u0436\u043d\u043e\u0441\u0442\u043d\u044b\u0439/\u0440\u0430\u0434\u0430\u0440\u043d\u044b\u0439 \u044d\u0444\u0444\u0435\u043a\u0442 \u0438 \u043c\u0435\u043b\u043a\u043e\u0435 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u0435 \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u044b\u043c\u0438.",
+        "en": "The maps do not confirm new clearing; the October scene shows an existing agricultural edge, while the October 3 window is partly cloud-obscured. Moisture/radar effects and small changes remain possible."
+      },
+      "status": "inconclusive",
+      "limitations": "3 Oct local SCL clear fraction 0.809 (cloud-adjacent pixels may remain); 21 Oct 1.0. Global scene cloud percentage is not local quality.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.8092,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "candidate-01",
+            "role": "candidate",
+            "lat": -4.767559782469801,
+            "lon": -49.275795926083,
+            "rgb_path": "data/investigation/maps/new-candidate-01-2026-10-03-rgb.png",
+            "rgb_sha256": "47298b6a261dbf9e0dea44dc611bd6507af47c264f123afaabb3befe692567a1",
+            "ndvi": {
+              "valid_fraction": 0.8092,
+              "median": 0.5101245641708374,
+              "p10": 0.23545777797698975,
+              "p90": 0.6693328022956848
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-01-2026-10-03-ndvi.png",
+              "sha256": "031d67173c2e711f9ba2aa2fe2025fffbeaff6b48808b260329149bd82a14a4e"
+            },
+            "ndmi": {
+              "valid_fraction": 0.8092,
+              "median": -0.024609170854091644,
+              "p10": -0.17952513694763184,
+              "p90": 0.13785134255886078
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-01-2026-10-03-ndmi.png",
+              "sha256": "83ddf6a3dfd63d71cc8f14f0b74f0479e4b34fb7b1cd28e4c6bc69d2169ccbdf"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "candidate-01",
+            "role": "candidate",
+            "lat": -4.767559782469801,
+            "lon": -49.275795926083,
+            "rgb_path": "data/investigation/maps/new-candidate-01-2026-10-21-rgb.png",
+            "rgb_sha256": "7bc662f6e872844b8a2a966c408e5b0faf09ddcbf5d32f0930001671779ed06a",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.590453565120697,
+              "p10": 0.3948720693588257,
+              "p90": 0.781514048576355
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-01-2026-10-21-ndvi.png",
+              "sha256": "1a27123b8c16e0a8dc1394d0a6122902791ec8f81db68cd5baaca2b25b7c9523"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.0641917884349823,
+              "p10": -0.0994710624217987,
+              "p90": 0.261186420917511
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-01-2026-10-21-ndmi.png",
+              "sha256": "c11461d63eab8a9425b553804ef2d1d286820d49dbc54731474c780fd6f4df7a"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "candidate-01",
+        "path": "data/investigation/maps/new-candidate-01-contact.png",
+        "sha256": "7e892aaccbfc43f1f95a4768594ae488dfad719ea09b8177351ad838be54ec01",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "47298b6a261dbf9e0dea44dc611bd6507af47c264f123afaabb3befe692567a1",
+          "7bc662f6e872844b8a2a966c408e5b0faf09ddcbf5d32f0930001671779ed06a"
+        ]
+      }
+    },
+    {
+      "id": "candidate-02",
+      "role": "candidate",
+      "native_row": 35,
+      "native_col": 2,
+      "lat": -4.76867375815887,
+      "lon": -49.28733071998617,
+      "coordinate_fingerprint": "288ed36aec080ca17618c2690fa16bdc9510a2c5f0aa67d993846514801f49eb",
+      "worldcover2021_code": 30,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -9.182588577270508,
+          -10.059701919555664,
+          -10.567790031433105,
+          -10.997465133666992,
+          -10.871631622314453,
+          -7.348896026611328
+        ],
+        "HV": [
+          -14.136331558227539,
+          -16.017602920532227,
+          -20.732519149780273,
+          -24.06995964050293,
+          -25.02361488342285,
+          -14.396236419677734
+        ]
+      },
+      "hv_shift_db": -8.052356719970703,
+      "hh_companion_shift_db": -0.8119297027587891,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/candidate-02.png",
+      "sha256": "237917534c46e00ceec01499984f84ebc47d3f1ef9a4a9971d39933674c8dc9a",
+      "visual_annotation_key": {
+        "native_row": 35,
+        "native_col": 2,
+        "contact_sheet_sha256": "237917534c46e00ceec01499984f84ebc47d3f1ef9a4a9971d39933674c8dc9a",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "288ed36aec080ca17618c2690fa16bdc9510a2c5f0aa67d993846514801f49eb",
+        "new_contact_sheet_sha256": "dddd8fdb5037f8f04ece71a28866a75bd7a04e66f09e2c518e4657aea1363b56",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-candidate-02-2026-10-03-rgb.png",
+            "sha256": "700f6f55966afc3241753a3e1edf594fdd9976f555f6b2189939712f6fb24402",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-candidate-02-2026-10-21-rgb.png",
+            "sha256": "82a834c8017c995684e17f50b0c5e137d394f9835f091856781a043834837a9c",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "35aad4eb644b05a81503154329e09d6f61192a6e8db7fa1e3339a9e2769636af"
+      },
+      "observation": {
+        "ru": "\u0422\u043e\u0447\u043a\u0430 \u0440\u0430\u0441\u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0430 \u0443 \u0433\u0440\u0430\u043d\u0438\u0446\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u043e\u0433\u043e \u0443\u0447\u0430\u0441\u0442\u043a\u0430 \u0438 \u043b\u0435\u0441\u043d\u043e\u0433\u043e \u043f\u044f\u0442\u043d\u0430 \u0440\u044f\u0434\u043e\u043c \u0441 \u043b\u0438\u043d\u0435\u0439\u043d\u044b\u043c\u0438 \u043f\u0440\u043e\u0441\u0435\u043a\u0430\u043c\u0438; \u043e\u043a\u0442\u044f\u0431\u0440\u044c\u0441\u043a\u0438\u0435 \u043a\u0430\u0434\u0440\u044b \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0442 \u0442\u043e\u0442 \u0436\u0435 \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0439 \u043c\u043e\u0437\u0430\u0438\u0447\u043d\u044b\u0439 \u0440\u0438\u0441\u0443\u043d\u043e\u043a. \u0427\u0451\u0440\u043d\u044b\u0435 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 \u0432 \u043d\u043e\u0432\u044b\u0445 contact sheets \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0442 SCL cloud/no-data.",
+        "en": "The target is near an open-land/forest-patch margin and linear clearings; the October scenes show the same open mosaic pattern. Black areas in the new contact sheets are SCL cloud/no-data."
+      },
+      "interpretation": {
+        "ru": "\u041d\u043e\u0432\u0430\u044f \u0432\u044b\u0440\u0443\u0431\u043a\u0430 \u043d\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0430: \u0432\u0438\u0434\u0438\u043c\u044b\u0439 \u0440\u0438\u0441\u0443\u043d\u043e\u043a \u0432 \u043e\u0441\u043d\u043e\u0432\u043d\u043e\u043c \u0441\u043e\u0432\u043f\u0430\u0434\u0430\u0435\u0442 \u0441 \u0440\u0430\u043d\u0435\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u0432\u0448\u0435\u0439 \u0433\u0440\u0430\u043d\u0438\u0446\u0435\u0439; \u043c\u0430\u043b\u043e\u0435 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u0435 \u043f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u0438\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043d\u0435\u043b\u044c\u0437\u044f.",
+        "en": "New forest loss is not confirmed: the visible pattern largely follows a pre-existing boundary; a small change cannot be ruled out."
+      },
+      "status": "inconclusive",
+      "limitations": "3 Oct local clear fraction 0.742 (cloud-limited, not valid context by the >=0.8 review threshold); 21 Oct 1.0. Original PNG crop also had edge no-data.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.7424,
+          "context_status": "cloud_limited_context",
+          "metrics": {
+            "id": "candidate-02",
+            "role": "candidate",
+            "lat": -4.76867375815887,
+            "lon": -49.28733071998617,
+            "rgb_path": "data/investigation/maps/new-candidate-02-2026-10-03-rgb.png",
+            "rgb_sha256": "700f6f55966afc3241753a3e1edf594fdd9976f555f6b2189939712f6fb24402",
+            "ndvi": {
+              "valid_fraction": 0.7424,
+              "median": 0.5884596109390259,
+              "p10": 0.4937836527824402,
+              "p90": 0.7987309098243713
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-02-2026-10-03-ndvi.png",
+              "sha256": "5b4d31c7b384a2468bb148cd7d37e3da6494daa4772bf346f6ca13bd3ec39376"
+            },
+            "ndmi": {
+              "valid_fraction": 0.7424,
+              "median": 0.023824147880077362,
+              "p10": -0.06618650257587433,
+              "p90": 0.2526059150695801
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-02-2026-10-03-ndmi.png",
+              "sha256": "4f492fd899c1b66fa719f5cd1cdc7cad8c2b5f31b51dcd014014d39ff57274ca"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "candidate-02",
+            "role": "candidate",
+            "lat": -4.76867375815887,
+            "lon": -49.28733071998617,
+            "rgb_path": "data/investigation/maps/new-candidate-02-2026-10-21-rgb.png",
+            "rgb_sha256": "82a834c8017c995684e17f50b0c5e137d394f9835f091856781a043834837a9c",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.6335217356681824,
+              "p10": 0.5359099507331848,
+              "p90": 0.848125696182251
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-02-2026-10-21-ndvi.png",
+              "sha256": "0011110024d8ff62f8daec6002202771b4b6482dbf0f235475c549f54955e611"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.10609523206949234,
+              "p10": 0.02364290878176689,
+              "p90": 0.3402331471443176
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-02-2026-10-21-ndmi.png",
+              "sha256": "330843d686122769ba4d7703e98f87d9f80e28340e59428f063e1c3bbb8eefd0"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "candidate-02",
+        "path": "data/investigation/maps/new-candidate-02-contact.png",
+        "sha256": "dddd8fdb5037f8f04ece71a28866a75bd7a04e66f09e2c518e4657aea1363b56",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "700f6f55966afc3241753a3e1edf594fdd9976f555f6b2189939712f6fb24402",
+          "82a834c8017c995684e17f50b0c5e137d394f9835f091856781a043834837a9c"
+        ]
+      }
+    },
+    {
+      "id": "candidate-03",
+      "role": "candidate",
+      "native_row": 34,
+      "native_col": 133,
+      "lat": -4.768433611145345,
+      "lon": -49.26371542914388,
+      "coordinate_fingerprint": "e927602bfd8c18c87fa295adbbaec016011dbb5aea6350ce1aa2a6dcfe16b611",
+      "worldcover2021_code": 30,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -5.793007850646973,
+          -9.038029670715332,
+          -10.198101997375488,
+          -10.596585273742676,
+          -11.981310844421387,
+          -9.191450119018555
+        ],
+        "HV": [
+          -13.784521102905273,
+          -16.519271850585938,
+          -14.716028213500977,
+          -22.628955841064453,
+          -22.87919807434082,
+          -16.777727127075195
+        ]
+      },
+      "hv_shift_db": -7.912927627563477,
+      "hh_companion_shift_db": -1.5585556030273438,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/candidate-03.png",
+      "sha256": "afa2c6506025de041e3e56dd81992c5db68018c741408c776f0838144d7476d8",
+      "visual_annotation_key": {
+        "native_row": 34,
+        "native_col": 133,
+        "contact_sheet_sha256": "afa2c6506025de041e3e56dd81992c5db68018c741408c776f0838144d7476d8",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "e927602bfd8c18c87fa295adbbaec016011dbb5aea6350ce1aa2a6dcfe16b611",
+        "new_contact_sheet_sha256": "5a2cee37c0d53a45b86e665dd6c43f34f9d1aadc5aca36ab381504063ceb8d3e",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-candidate-03-2026-10-03-rgb.png",
+            "sha256": "4bee0040b202c717a63b423a369066f6ee00f68d7872abb574e1cb599df4572f",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-candidate-03-2026-10-21-rgb.png",
+            "sha256": "ea7008adfbb5c4e6baac8287d5cc72870f35ca237cdf84df360e2442d11dd225",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "3aca62c1635d46e0f09dd63bc09e76d6ea22b1420c1a881a3c5076874e9714ea"
+      },
+      "observation": {
+        "ru": "\u0412 \u0438\u044e\u043b\u044c\u0441\u043a\u0438\u0445 \u0438 \u043e\u043a\u0442\u044f\u0431\u0440\u044c\u0441\u043a\u0438\u0445 \u043e\u043a\u043d\u0430\u0445 \u0432\u0438\u0434\u043d\u0430 \u043e\u0442\u043a\u0440\u044b\u0442\u0430\u044f \u043c\u043e\u0437\u0430\u0438\u043a\u0430 \u0441 \u0438\u0437\u043e\u0433\u043d\u0443\u0442\u043e\u0439 \u0434\u0440\u0435\u0432\u0435\u0441\u043d\u043e\u0439 \u043f\u043e\u043b\u043e\u0441\u043e\u0439; \u043d\u0435\u0431\u043e\u043b\u044c\u0448\u043e\u0435 \u0442\u0451\u043c\u043d\u043e\u0435 \u043f\u044f\u0442\u043d\u043e \u0441\u0435\u0432\u0435\u0440\u043e-\u0437\u0430\u043f\u0430\u0434\u043d\u0435\u0435 \u043a\u0440\u0435\u0441\u0442\u0430 \u043f\u043e\u0432\u0442\u043e\u0440\u044f\u0435\u0442\u0441\u044f \u043d\u0430 3 \u0438 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f. \u041d\u043e\u0432\u043e\u0433\u043e \u043e\u0442\u0447\u0451\u0442\u043b\u0438\u0432\u043e\u0433\u043e \u043f\u044f\u0442\u043d\u0430 \u0432 \u0442\u043e\u0447\u043a\u0435 \u043d\u0435 \u0432\u0438\u0434\u043d\u043e.",
+        "en": "July and October windows show open mosaic with a curved wooded strip; a small dark spot northwest of the cross recurs on October 3 and 21. No distinct new patch is visible at the target."
+      },
+      "interpretation": {
+        "ru": "\u041f\u043e\u0432\u0442\u043e\u0440\u044f\u044e\u0449\u0438\u0439\u0441\u044f \u0442\u0451\u043c\u043d\u044b\u0439 \u043e\u0431\u044a\u0435\u043a\u0442 \u0438 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0430\u044f \u043c\u043e\u0437\u0430\u0438\u043a\u0430 \u043d\u0435 \u0434\u0430\u044e\u0442 \u0432\u0438\u0437\u0443\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0441\u0432\u0438\u0434\u0435\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430 \u043d\u043e\u0432\u043e\u0439 \u043f\u043e\u0442\u0435\u0440\u0438 \u043b\u0435\u0441\u0430; \u043f\u0440\u0438\u0440\u043e\u0434\u0430 SAR-\u0441\u0434\u0432\u0438\u0433\u0430 \u043e\u0441\u0442\u0430\u0451\u0442\u0441\u044f \u043d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u043e\u0439.",
+        "en": "The recurring dark feature and existing mosaic provide no visual evidence of new forest loss; the cause of the SAR shift remains unknown."
+      },
+      "status": "not_visually_confirmed",
+      "limitations": "3 Oct local SCL clear fraction 0.997; 21 Oct 1.0. RGB appearance is qualitative and not an index.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.9968,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "candidate-03",
+            "role": "candidate",
+            "lat": -4.768433611145345,
+            "lon": -49.26371542914388,
+            "rgb_path": "data/investigation/maps/new-candidate-03-2026-10-03-rgb.png",
+            "rgb_sha256": "4bee0040b202c717a63b423a369066f6ee00f68d7872abb574e1cb599df4572f",
+            "ndvi": {
+              "valid_fraction": 0.9968,
+              "median": 0.531967282295227,
+              "p10": 0.4434036612510681,
+              "p90": 0.6609209775924683
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-03-2026-10-03-ndvi.png",
+              "sha256": "aa55af17c8dc1ae71dde10f3c077f72df4f25d16e716abad348a83784408e01d"
+            },
+            "ndmi": {
+              "valid_fraction": 0.9968,
+              "median": -0.04400740936398506,
+              "p10": -0.1392918825149536,
+              "p90": 0.0884038433432579
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-03-2026-10-03-ndmi.png",
+              "sha256": "f78a989a87d369eafed287121a4c7891022435ec9d8f338c528b46fd08d7b212"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "candidate-03",
+            "role": "candidate",
+            "lat": -4.768433611145345,
+            "lon": -49.26371542914388,
+            "rgb_path": "data/investigation/maps/new-candidate-03-2026-10-21-rgb.png",
+            "rgb_sha256": "ea7008adfbb5c4e6baac8287d5cc72870f35ca237cdf84df360e2442d11dd225",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.6051446199417114,
+              "p10": 0.5077955722808838,
+              "p90": 0.7255403399467468
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-03-2026-10-21-ndvi.png",
+              "sha256": "01680d9b82418c79e6304128d95ddb08d31f4a7251db19b59b5d7445dd79f075"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.07043178379535675,
+              "p10": -0.033664729446172714,
+              "p90": 0.18842041492462158
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-03-2026-10-21-ndmi.png",
+              "sha256": "3577e583deefa2b696dfca158fe3d8220b97c4efb26548cc2b40421d0490084f"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "candidate-03",
+        "path": "data/investigation/maps/new-candidate-03-contact.png",
+        "sha256": "5a2cee37c0d53a45b86e665dd6c43f34f9d1aadc5aca36ab381504063ceb8d3e",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "4bee0040b202c717a63b423a369066f6ee00f68d7872abb574e1cb599df4572f",
+          "ea7008adfbb5c4e6baac8287d5cc72870f35ca237cdf84df360e2442d11dd225"
+        ]
+      }
+    },
+    {
+      "id": "candidate-04",
+      "role": "candidate",
+      "native_row": 129,
+      "native_col": 71,
+      "lat": -4.785642631735435,
+      "lon": -49.27484935051318,
+      "coordinate_fingerprint": "c67553155d14e5eab3d651ccd077daa11e01534663d0979019a5bcddce4e486a",
+      "worldcover2021_code": 10,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -11.440357208251953,
+          -7.818113327026367,
+          -7.230406761169434,
+          -7.688594818115234,
+          -7.123258113861084,
+          -8.715717315673828
+        ],
+        "HV": [
+          -14.47652816772461,
+          -7.655639171600342,
+          -9.817731857299805,
+          -16.778762817382812,
+          -11.499327659606934,
+          -16.752849578857422
+        ]
+      },
+      "hv_shift_db": -6.935117721557617,
+      "hh_companion_shift_db": 0.1295185089111328,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/candidate-04.png",
+      "sha256": "96bc8148387e44b234b14734b7e8e8d07b3688890799dcd03a4d64b871254dc3",
+      "visual_annotation_key": {
+        "native_row": 129,
+        "native_col": 71,
+        "contact_sheet_sha256": "96bc8148387e44b234b14734b7e8e8d07b3688890799dcd03a4d64b871254dc3",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "c67553155d14e5eab3d651ccd077daa11e01534663d0979019a5bcddce4e486a",
+        "new_contact_sheet_sha256": "ff6cc10dba84016bf0028fe66ee4d2b7506c34753cac0a54b35d45c970299236",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-candidate-04-2026-10-03-rgb.png",
+            "sha256": "0345e6160dc604141d404431255d8f5fb546ebcca469aa9df2239e16b4d94416",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-candidate-04-2026-10-21-rgb.png",
+            "sha256": "bc956bf00ca8d3e02297e9a5925630cf7c30a89ae614ab4a1c91189c4125928e",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "bf760219147a3e388f063ca09659e470bedfc0a4a483721eb0a13d2c579ba3ce"
+      },
+      "observation": {
+        "ru": "\u041d\u0430 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u043a\u0440\u0435\u0441\u0442 \u0432 \u043d\u0435\u043f\u0440\u0435\u0440\u044b\u0432\u043d\u043e \u0432\u044b\u0433\u043b\u044f\u0434\u044f\u0449\u0435\u043c \u0434\u0440\u0435\u0432\u0435\u0441\u043d\u043e\u043c \u043f\u043e\u043b\u043e\u0433\u0435 \u0443 \u043d\u0435\u0440\u043e\u0432\u043d\u043e\u0439 \u0433\u0440\u0430\u043d\u0438\u0446\u044b; \u0437\u0430\u043c\u0435\u0442\u043d\u043e\u0433\u043e \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u0440\u043e\u0441\u0432\u0435\u0442\u0430 \u043d\u0435 \u0432\u0438\u0434\u043d\u043e. 3 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0432\u0438\u0434\u0438\u043c\u044b\u0435 \u0443\u0447\u0430\u0441\u0442\u043a\u0438 \u0442\u0430\u043a\u0436\u0435 \u043b\u0435\u0441\u043d\u044b\u0435, \u043d\u043e \u0447\u0430\u0441\u0442\u044c \u043e\u043a\u043d\u0430 \u0437\u0430\u043a\u0440\u044b\u0442\u0430 \u043e\u0431\u043b\u0430\u043a\u043e\u043c/no-data.",
+        "en": "On October 21, the cross lies in apparently continuous canopy at an irregular edge; no obvious new opening is visible. Visible portions on October 3 are also wooded, but part of that window is cloud/no-data."
+      },
+      "interpretation": {
+        "ru": "\u041f\u043e\u0437\u0434\u043d\u044f\u044f \u0447\u0438\u0441\u0442\u0430\u044f \u043e\u043f\u0442\u0438\u043a\u0430 \u043d\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0430\u0435\u0442 \u043d\u043e\u0432\u0443\u044e \u043f\u043e\u0442\u0435\u0440\u044e \u043b\u0435\u0441\u0430 \u0432 \u044d\u0442\u043e\u0439 \u0442\u043e\u0447\u043a\u0435; \u044d\u0442\u043e \u043d\u0435 \u0438\u0441\u043a\u043b\u044e\u0447\u0430\u0435\u0442 \u043c\u0430\u043b\u044b\u0439/\u043a\u0440\u0430\u0442\u043a\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0439 \u0438\u043b\u0438 \u0438\u043d\u044b\u043c \u043e\u0431\u0440\u0430\u0437\u043e\u043c \u043d\u0435\u0440\u0430\u0437\u0440\u0435\u0448\u0438\u043c\u044b\u0439 \u0440\u0430\u0434\u0430\u0440\u043d\u044b\u0439 \u044d\u0444\u0444\u0435\u043a\u0442.",
+        "en": "The later clear optical image does not confirm new forest loss at this point; a small/transient or otherwise unresolved radar effect is not excluded."
+      },
+      "status": "not_visually_confirmed",
+      "limitations": "3 Oct local SCL clear fraction 0.489: unusable as complete context; 21 Oct 1.0 and is the useful post-Sep-28 comparison.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.4892,
+          "context_status": "cloud_limited_context",
+          "metrics": {
+            "id": "candidate-04",
+            "role": "candidate",
+            "lat": -4.785642631735435,
+            "lon": -49.27484935051318,
+            "rgb_path": "data/investigation/maps/new-candidate-04-2026-10-03-rgb.png",
+            "rgb_sha256": "0345e6160dc604141d404431255d8f5fb546ebcca469aa9df2239e16b4d94416",
+            "ndvi": {
+              "valid_fraction": 0.4892,
+              "median": 0.8702372312545776,
+              "p10": 0.7803048491477966,
+              "p90": 0.8844807744026184
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-04-2026-10-03-ndvi.png",
+              "sha256": "41fe1968793adb406abfb836a9e68c51551651eef2b481409412f81239b2c122"
+            },
+            "ndmi": {
+              "valid_fraction": 0.4892,
+              "median": 0.3707546591758728,
+              "p10": 0.2634355127811432,
+              "p90": 0.4031708538532257
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-04-2026-10-03-ndmi.png",
+              "sha256": "b89d342c6bd467781f50a9286440a24b5e5ed53b2350c166beaff2677ee299e0"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "candidate-04",
+            "role": "candidate",
+            "lat": -4.785642631735435,
+            "lon": -49.27484935051318,
+            "rgb_path": "data/investigation/maps/new-candidate-04-2026-10-21-rgb.png",
+            "rgb_sha256": "bc956bf00ca8d3e02297e9a5925630cf7c30a89ae614ab4a1c91189c4125928e",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.8603340983390808,
+              "p10": 0.6625171899795532,
+              "p90": 0.8738035559654236
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-candidate-04-2026-10-21-ndvi.png",
+              "sha256": "4dbecf6e4046273dcb4f6ba2d3ee36656cac2be3cf9433ffcceb04423b9fbc24"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.3495549261569977,
+              "p10": 0.1538660228252411,
+              "p90": 0.38197141885757446
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-candidate-04-2026-10-21-ndmi.png",
+              "sha256": "e9eb970cdd7583eb684477b291c3aa3bf9041b0d70a1a1138a595accb1c3f82e"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "candidate-04",
+        "path": "data/investigation/maps/new-candidate-04-contact.png",
+        "sha256": "ff6cc10dba84016bf0028fe66ee4d2b7506c34753cac0a54b35d45c970299236",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "0345e6160dc604141d404431255d8f5fb546ebcca469aa9df2239e16b4d94416",
+          "bc956bf00ca8d3e02297e9a5925630cf7c30a89ae614ab4a1c91189c4125928e"
+        ]
+      }
+    },
+    {
+      "id": "control-01",
+      "role": "control",
+      "native_row": 106,
+      "native_col": 101,
+      "lat": -4.781469414326616,
+      "lon": -49.26945148797003,
+      "coordinate_fingerprint": "c8102679ddc1797459a50f6f9ac63e4511dd618879ab1eb2a8bf4297ddc14751",
+      "worldcover2021_code": 10,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -7.2126264572143555,
+          -3.654576301574707,
+          -3.3870410919189453,
+          -5.77268123626709,
+          -3.4949374198913574,
+          -6.115498065948486
+        ],
+        "HV": [
+          -8.954896926879883,
+          -10.299725532531738,
+          -10.685827255249023,
+          -8.276981353759766,
+          -10.299281120300293,
+          -11.312421798706055
+        ]
+      },
+      "hv_shift_db": 0.0004444122314453125,
+      "hh_companion_shift_db": -2.118104934692383,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/control-01.png",
+      "sha256": "b45f1f3c7f5d8af9b698b63b04d2110ef9b9c6f6e4dbb303b593e4bce6f8b34a",
+      "visual_annotation_key": {
+        "native_row": 106,
+        "native_col": 101,
+        "contact_sheet_sha256": "b45f1f3c7f5d8af9b698b63b04d2110ef9b9c6f6e4dbb303b593e4bce6f8b34a",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "c8102679ddc1797459a50f6f9ac63e4511dd618879ab1eb2a8bf4297ddc14751",
+        "new_contact_sheet_sha256": "f1d413814c0cbe3b007a4dda9d09754bc5a152c7854f37dfa4f671997ec58149",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-control-01-2026-10-03-rgb.png",
+            "sha256": "0c245144b9f1e027b162a735298399ae8ebd139f0120bdf1d278de7b6982ff54",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-control-01-2026-10-21-rgb.png",
+            "sha256": "1603c2586b0e8894e0e0903bbe3287d23656ae8b391fde4a2c18207384b26f30",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "c64e4d3c4669e52b5b8c76c07577b7901bba65e823d88b193c135ed9e060381c"
+      },
+      "observation": {
+        "ru": "\u041f\u0440\u0435\u0438\u043c\u0443\u0449\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e \u0434\u0440\u0435\u0432\u0435\u0441\u043d\u044b\u0439 \u043f\u043e\u043a\u0440\u043e\u0432 \u0441 \u0443\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0435\u0439 \u043f\u0435\u0440\u0438\u0444\u0435\u0440\u0438\u0439\u043d\u043e\u0439 \u043b\u0438\u043d\u0438\u0435\u0439/\u043f\u0440\u043e\u0441\u0435\u043a\u043e\u0439; \u043d\u0430 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u043f\u043e\u043a\u0440\u043e\u0432 \u0432\u044b\u0433\u043b\u044f\u0434\u0438\u0442 \u043d\u0435\u043f\u0440\u0435\u0440\u044b\u0432\u043d\u044b\u043c.",
+        "en": "Mostly wooded cover with an established perimeter line/clearing; canopy appears continuous on October 21."
+      },
+      "interpretation": {
+        "ru": "\u041a\u043e\u043d\u0442\u0435\u043a\u0441\u0442\u043d\u044b\u0439 \u043f\u0440\u0438\u043c\u0435\u0440 \u043c\u0430\u043b\u043e\u0439 HV-\u0440\u0430\u0437\u043d\u043e\u0441\u0442\u0438, \u043d\u0435 \u043f\u0440\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u0430\u044f \u043e\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u043c\u0435\u0442\u043a\u0430 \u0438 \u043d\u0435 \u0434\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u043e \u043e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u044f \u0441\u043e\u0431\u044b\u0442\u0438\u044f.",
+        "en": "A low-HV-shift context example, not a verified negative label or evidence that no event occurred."
+      },
+      "status": "control_context",
+      "limitations": "3 Oct local SCL clear fraction 0.549 (cloud-limited); 21 Oct 1.0. Control \u0432\u044b\u0431\u0440\u0430\u043d \u043f\u043e \u043c\u0430\u043b\u043e\u043c\u0443 SAR-\u0441\u0434\u0432\u0438\u0433\u0443, \u043d\u0435 ground truth.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.5492,
+          "context_status": "cloud_limited_context",
+          "metrics": {
+            "id": "control-01",
+            "role": "control",
+            "lat": -4.781469414326616,
+            "lon": -49.26945148797003,
+            "rgb_path": "data/investigation/maps/new-control-01-2026-10-03-rgb.png",
+            "rgb_sha256": "0c245144b9f1e027b162a735298399ae8ebd139f0120bdf1d278de7b6982ff54",
+            "ndvi": {
+              "valid_fraction": 0.5492,
+              "median": 0.8515174388885498,
+              "p10": 0.599795937538147,
+              "p90": 0.8856068849563599
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-01-2026-10-03-ndvi.png",
+              "sha256": "8a720d691279e68d9851410e2ea925644740371d970d136f07b39e533f19fc80"
+            },
+            "ndmi": {
+              "valid_fraction": 0.5492,
+              "median": 0.3154897689819336,
+              "p10": 0.054456815123558044,
+              "p90": 0.37915855646133423
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-01-2026-10-03-ndmi.png",
+              "sha256": "f7684cfb48647b30161ea92c67b4091653ed3be4141fd77dea731449d8b5e9c7"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "control-01",
+            "role": "control",
+            "lat": -4.781469414326616,
+            "lon": -49.26945148797003,
+            "rgb_path": "data/investigation/maps/new-control-01-2026-10-21-rgb.png",
+            "rgb_sha256": "1603c2586b0e8894e0e0903bbe3287d23656ae8b391fde4a2c18207384b26f30",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.8484984636306763,
+              "p10": 0.6206358075141907,
+              "p90": 0.8737736940383911
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-01-2026-10-21-ndvi.png",
+              "sha256": "b4287b77c701445e4ff513e278a7aa861b99b00de06b2e028893a62aff611f51"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.3317698836326599,
+              "p10": 0.08230449259281158,
+              "p90": 0.36950743198394775
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-01-2026-10-21-ndmi.png",
+              "sha256": "85f840f5cbfff783a0ee483d41db66032afa37fa82dce043087ed34703546736"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "control-01",
+        "path": "data/investigation/maps/new-control-01-contact.png",
+        "sha256": "f1d413814c0cbe3b007a4dda9d09754bc5a152c7854f37dfa4f671997ec58149",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "0c245144b9f1e027b162a735298399ae8ebd139f0120bdf1d278de7b6982ff54",
+          "1603c2586b0e8894e0e0903bbe3287d23656ae8b391fde4a2c18207384b26f30"
+        ]
+      }
+    },
+    {
+      "id": "control-02",
+      "role": "control",
+      "native_row": 107,
+      "native_col": 51,
+      "lat": -4.781672979533721,
+      "lon": -49.27846483965199,
+      "coordinate_fingerprint": "678fce7eab28b6771ba1e1f4f02c355ee5dbb92d86b334e01d6831baa86d415f",
+      "worldcover2021_code": 10,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -8.070396423339844,
+          -6.571195602416992,
+          -10.150675773620605,
+          -6.370466232299805,
+          -7.612640857696533,
+          -6.114313125610352
+        ],
+        "HV": [
+          -10.70429801940918,
+          -11.823114395141602,
+          -8.97388744354248,
+          -10.705126762390137,
+          -6.951581001281738,
+          -13.038830757141113
+        ]
+      },
+      "hv_shift_db": -0.0008287429809570312,
+      "hh_companion_shift_db": 1.699930191040039,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/control-02.png",
+      "sha256": "62163499f5b4f35f58a67374ae6925e8f2dbd5c543a963d80851d95b6d8ee238",
+      "visual_annotation_key": {
+        "native_row": 107,
+        "native_col": 51,
+        "contact_sheet_sha256": "62163499f5b4f35f58a67374ae6925e8f2dbd5c543a963d80851d95b6d8ee238",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "678fce7eab28b6771ba1e1f4f02c355ee5dbb92d86b334e01d6831baa86d415f",
+        "new_contact_sheet_sha256": "3d88d24b3e60bf7a69d47620457256c172b573de503ec33ac011e217687ba3af",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-control-02-2026-10-03-rgb.png",
+            "sha256": "67cb435f85665340d59db5ac4430a34cd30683648b579faea14043439d1415ee",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-control-02-2026-10-21-rgb.png",
+            "sha256": "4d42c5d0bd7a027d475ac5e1aedc49da099f9ec3f535b1de067dd4d4537d645a",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "b3969d4295b622f90568b8f2b4c27d91005d9a7200384768f91aac86a8c4859a"
+      },
+      "observation": {
+        "ru": "\u0422\u0435\u043a\u0441\u0442\u0443\u0440\u043d\u043e \u043e\u0434\u043d\u043e\u0440\u043e\u0434\u043d\u044b\u0439 \u043b\u0435\u0441\u043d\u043e\u0439 \u0438\u043d\u0442\u0435\u0440\u044c\u0435\u0440; \u043d\u0430 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0432\u0438\u0434\u0435\u043d \u0441\u043f\u043b\u043e\u0448\u043d\u043e\u0439 \u0434\u0440\u0435\u0432\u0435\u0441\u043d\u044b\u0439 \u043f\u043e\u043a\u0440\u043e\u0432, \u044f\u0432\u043d\u043e\u0433\u043e \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u044f\u0442\u043d\u0430 \u043d\u0435\u0442.",
+        "en": "Texturally homogeneous forest interior; continuous wooded cover is visible on October 21, with no obvious new patch."
+      },
+      "interpretation": {
+        "ru": "\u041e\u043f\u0438\u0441\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044c, \u043d\u0435 \u0432\u0435\u0440\u0438\u0444\u0438\u0446\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 negative.",
+        "en": "Descriptive control, not a verified negative."
+      },
+      "status": "control_context",
+      "limitations": "3 Oct local SCL clear fraction 0.962; 21 Oct 1.0. \u042d\u0442\u043e \u043d\u0435 \u043d\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043c\u043e \u043f\u0440\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u0430\u044f \u043e\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u043c\u0435\u0442\u043a\u0430.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.9624,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "control-02",
+            "role": "control",
+            "lat": -4.781672979533721,
+            "lon": -49.27846483965199,
+            "rgb_path": "data/investigation/maps/new-control-02-2026-10-03-rgb.png",
+            "rgb_sha256": "67cb435f85665340d59db5ac4430a34cd30683648b579faea14043439d1415ee",
+            "ndvi": {
+              "valid_fraction": 0.9624,
+              "median": 0.8590623140335083,
+              "p10": 0.6436909437179565,
+              "p90": 0.881606936454773
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-02-2026-10-03-ndvi.png",
+              "sha256": "ef321c685720dfd4ed4686cefb7eac1c26143a8790dbc4489648f7e3f389454c"
+            },
+            "ndmi": {
+              "valid_fraction": 0.9624,
+              "median": 0.3556789755821228,
+              "p10": 0.15816229581832886,
+              "p90": 0.39659184217453003
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-02-2026-10-03-ndmi.png",
+              "sha256": "c631fe11da597bf812316eac599653a52682b07863d738b9829c663f382a5ca7"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "control-02",
+            "role": "control",
+            "lat": -4.781672979533721,
+            "lon": -49.27846483965199,
+            "rgb_path": "data/investigation/maps/new-control-02-2026-10-21-rgb.png",
+            "rgb_sha256": "4d42c5d0bd7a027d475ac5e1aedc49da099f9ec3f535b1de067dd4d4537d645a",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.8647576570510864,
+              "p10": 0.7181186676025391,
+              "p90": 0.8757997155189514
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-02-2026-10-21-ndvi.png",
+              "sha256": "1fa860d6b4adb5713c25e10f3b0c83b70d8ec8a1059d886d8af6a09e4948d59c"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.35474932193756104,
+              "p10": 0.2004614621400833,
+              "p90": 0.3829001784324646
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-02-2026-10-21-ndmi.png",
+              "sha256": "4ccc5f21c64e75a526220ccfa237d88cc867f1d34cb32560edc299c1e8f13fc8"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "control-02",
+        "path": "data/investigation/maps/new-control-02-contact.png",
+        "sha256": "3d88d24b3e60bf7a69d47620457256c172b573de503ec33ac011e217687ba3af",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "67cb435f85665340d59db5ac4430a34cd30683648b579faea14043439d1415ee",
+          "4d42c5d0bd7a027d475ac5e1aedc49da099f9ec3f535b1de067dd4d4537d645a"
+        ]
+      }
+    },
+    {
+      "id": "control-03",
+      "role": "control",
+      "native_row": 28,
+      "native_col": 94,
+      "lat": -4.767366243902308,
+      "lon": -49.27074875218193,
+      "coordinate_fingerprint": "e7f2326a1cea48af442c29c592f73707705191e13bb7c2a4c308d6a8f8bc618c",
+      "worldcover2021_code": 10,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -9.930627822875977,
+          -10.226807594299316,
+          -13.995223045349121,
+          -13.959362030029297,
+          -15.363748550415039,
+          -9.712461471557617
+        ],
+        "HV": [
+          -17.95562171936035,
+          -18.939977645874023,
+          -20.494979858398438,
+          -19.38744354248047,
+          -18.940828323364258,
+          -14.803831100463867
+        ]
+      },
+      "hv_shift_db": -0.000850677490234375,
+      "hh_companion_shift_db": -3.7325544357299805,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/control-03.png",
+      "sha256": "95521219355d80c382a36f635b73d2c4374b33561c70c0fe065d89b288417967",
+      "visual_annotation_key": {
+        "native_row": 28,
+        "native_col": 94,
+        "contact_sheet_sha256": "95521219355d80c382a36f635b73d2c4374b33561c70c0fe065d89b288417967",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "e7f2326a1cea48af442c29c592f73707705191e13bb7c2a4c308d6a8f8bc618c",
+        "new_contact_sheet_sha256": "7b450b76f38315857096c8475cfb62a9717f70b0e91e71f1572520a3fc9ba7bb",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-control-03-2026-10-03-rgb.png",
+            "sha256": "d3da5612ef19bbe87462fbd857c0dfad2a9e2a0feec60824e83e1038570d2ca8",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-control-03-2026-10-21-rgb.png",
+            "sha256": "861102cf41f3e9d9fa8a840c19c6de18391853216af52eba5052289ac80a242b",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "a29b6effcaf25068ed367d2dca20f1c8a01e286c0113a5ff93f7b21762cce167"
+      },
+      "observation": {
+        "ru": "\u041e\u0442\u043a\u0440\u044b\u0442\u0430\u044f \u0441\u0435\u043b\u044c\u0441\u043a\u043e\u0445\u043e\u0437\u044f\u0439\u0441\u0442\u0432\u0435\u043d\u043d\u0430\u044f/\u0440\u0430\u0441\u0447\u0438\u0449\u0435\u043d\u043d\u0430\u044f \u043c\u043e\u0437\u0430\u0438\u043a\u0430 \u0441 \u0448\u0438\u0440\u043e\u043a\u0438\u043c\u0438 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u043c\u0438 \u0433\u0440\u0430\u043d\u0438\u0446\u0430\u043c\u0438; \u043d\u0430 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0442\u043e\u0447\u0435\u0447\u043d\u0430\u044f \u043d\u043e\u0432\u0430\u044f \u0440\u0430\u0441\u0447\u0438\u0441\u0442\u043a\u0430 \u043d\u0435 \u0432\u044b\u0434\u0435\u043b\u044f\u0435\u0442\u0441\u044f.",
+        "en": "Open agricultural/cleared mosaic with broad existing boundaries; no point-centered new clearing stands out on October 21."
+      },
+      "interpretation": {
+        "ru": "\u041a\u043e\u043d\u0442\u0435\u043a\u0441\u0442 \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043d\u0435\u043e\u0434\u043d\u043e\u0440\u043e\u0434\u043d\u043e\u0441\u0442\u044c \u0443\u0436\u0435 \u043e\u0442\u043a\u0440\u044b\u0442\u043e\u0433\u043e/\u0441\u0435\u043b\u044c\u0445\u043e\u0437\u043d\u043e\u0433\u043e \u043b\u0430\u043d\u0434\u0448\u0430\u0444\u0442\u0430 \u043f\u0440\u0438 \u043c\u0430\u043b\u043e\u043c SAR-\u0441\u0434\u0432\u0438\u0433\u0435; \u043f\u0440\u0438\u0447\u0438\u043d\u043d\u0430\u044f \u0440\u043e\u043b\u044c \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0430.",
+        "en": "This context illustrates heterogeneity in already open/agricultural land despite a small SAR shift; no cause is established."
+      },
+      "status": "control_context",
+      "limitations": "3 Oct local SCL clear fraction 0.998; 21 Oct 1.0. Descriptive, not matched or verified control.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.9976,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "control-03",
+            "role": "control",
+            "lat": -4.767366243902308,
+            "lon": -49.27074875218193,
+            "rgb_path": "data/investigation/maps/new-control-03-2026-10-03-rgb.png",
+            "rgb_sha256": "d3da5612ef19bbe87462fbd857c0dfad2a9e2a0feec60824e83e1038570d2ca8",
+            "ndvi": {
+              "valid_fraction": 0.9976,
+              "median": 0.5072630643844604,
+              "p10": 0.3741826117038727,
+              "p90": 0.6320035457611084
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-03-2026-10-03-ndvi.png",
+              "sha256": "1ceb50eef6b133a0472037a7e1d26edf8266ef78ea3b35a683d1cb9ad322ffbe"
+            },
+            "ndmi": {
+              "valid_fraction": 0.9976,
+              "median": -0.058328963816165924,
+              "p10": -0.16927818953990936,
+              "p90": 0.08600696921348572
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-03-2026-10-03-ndmi.png",
+              "sha256": "9c3568aae0888c20880def4e3add922e742c4afee5543ba4b5492ffba30b7832"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "control-03",
+            "role": "control",
+            "lat": -4.767366243902308,
+            "lon": -49.27074875218193,
+            "rgb_path": "data/investigation/maps/new-control-03-2026-10-21-rgb.png",
+            "rgb_sha256": "861102cf41f3e9d9fa8a840c19c6de18391853216af52eba5052289ac80a242b",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.5425616502761841,
+              "p10": 0.4277293086051941,
+              "p90": 0.699732780456543
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-03-2026-10-21-ndvi.png",
+              "sha256": "ede00e9b7dee491a19b362923cc62c083593db7d369308957ec98bbc0926af83"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.020298462361097336,
+              "p10": -0.084128238260746,
+              "p90": 0.17676302790641785
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-03-2026-10-21-ndmi.png",
+              "sha256": "e1320c00b244d204202722d09b5b2c3289cd44f3dd2bdb592ffb2d7e4a67e8ee"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "control-03",
+        "path": "data/investigation/maps/new-control-03-contact.png",
+        "sha256": "7b450b76f38315857096c8475cfb62a9717f70b0e91e71f1572520a3fc9ba7bb",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "d3da5612ef19bbe87462fbd857c0dfad2a9e2a0feec60824e83e1038570d2ca8",
+          "861102cf41f3e9d9fa8a840c19c6de18391853216af52eba5052289ac80a242b"
+        ]
+      }
+    },
+    {
+      "id": "control-04",
+      "role": "control",
+      "native_row": 60,
+      "native_col": 1,
+      "lat": -4.7731955166033435,
+      "lon": -49.287499786923156,
+      "coordinate_fingerprint": "8f04725c34e2041cacb14114849c88c890d87cecdd1c00277bf76f1c9c25e859",
+      "worldcover2021_code": 10,
+      "sar_series_db": {
+        "dates": [
+          "2026-07-18",
+          "2026-08-11",
+          "2026-08-23",
+          "2026-09-04",
+          "2026-09-16",
+          "2026-09-28"
+        ],
+        "HH": [
+          -7.695460319519043,
+          -8.910517692565918,
+          -7.466269016265869,
+          -9.287149429321289,
+          -5.967578887939453,
+          -5.112092018127441
+        ],
+        "HV": [
+          -12.778709411621094,
+          -11.004505157470703,
+          -12.091924667358398,
+          -12.397031784057617,
+          -9.468009948730469,
+          -12.093400001525879
+        ]
+      },
+      "hv_shift_db": -0.0014753341674804688,
+      "hh_companion_shift_db": 1.7278814315795898,
+      "joint3dbflag": false,
+      "joint3dbflag_rule": "both HH and HV median Sep 4/16/28 minus median Jul 18/Aug 11/23 <= -3 dB and each band individually <= own pre median -3 dB on at least 2 of 3 post dates; six observations valid in both bands",
+      "optical_contact_sheet": "data/investigation/maps/control-04.png",
+      "sha256": "9641cb105c6dae6ce5746fbe63d070f0d89fd2ad28d030480e426809dc6fdcda",
+      "visual_annotation_key": {
+        "native_row": 60,
+        "native_col": 1,
+        "contact_sheet_sha256": "9641cb105c6dae6ce5746fbe63d070f0d89fd2ad28d030480e426809dc6fdcda",
+        "optical_source_fingerprint": "29a7cf32a9950e54cbb6f5e142fce4f58fe578a5a52429917a9b0a953500cece",
+        "coordinate_fingerprint": "8f04725c34e2041cacb14114849c88c890d87cecdd1c00277bf76f1c9c25e859",
+        "new_contact_sheet_sha256": "fdd393f9b00057f1d8bb142c1077efccd86d9da6f8196dc9dc5792bef4b5707b",
+        "new_source_images": [
+          {
+            "date": "2026-10-03",
+            "scene_id": "S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-control-04-2026-10-03-rgb.png",
+            "sha256": "fe9a36bd3804656e46b65ed188778ef1ede2175232194fd50c395e1eceb9834b",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A"
+          },
+          {
+            "date": "2026-10-21",
+            "scene_id": "S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-control-04-2026-10-21-rgb.png",
+            "sha256": "36a590c9cde13d4dc13a3f1a5a22bf5800e714c6d0b47ee8023b48d28d185324",
+            "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A"
+          }
+        ],
+        "source_fingerprint": "9ac153f715ca3b034952672edfeb3ccb293acecc83a091940cc1fa2eb83a537b"
+      },
+      "observation": {
+        "ru": "\u041d\u0430 \u0441\u0442\u044b\u043a\u0435 \u043b\u0435\u0441\u0430 \u0438 \u043e\u0442\u043a\u0440\u044b\u0442\u043e\u0433\u043e \u0443\u0447\u0430\u0441\u0442\u043a\u0430 \u0432\u0438\u0434\u043d\u044b \u0441\u0442\u0430\u0440\u044b\u0435 \u0432\u0435\u0442\u0432\u044f\u0449\u0438\u0435\u0441\u044f \u043b\u0438\u043d\u0438\u0438; 3 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u043e\u043a\u043d\u043e \u0447\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0437\u0430\u043a\u0440\u044b\u0442\u043e \u043e\u0431\u043b\u0430\u043a\u043e\u043c, 21 \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u0440\u0438\u0441\u0443\u043d\u043e\u043a \u0433\u0440\u0430\u043d\u0438\u0446 \u0441\u043e\u0445\u0440\u0430\u043d\u044f\u0435\u0442\u0441\u044f.",
+        "en": "Old branching lines are visible at the forest/open-land edge; the October 3 window is partly clouded, and the boundary pattern persists on October 21."
+      },
+      "interpretation": {
+        "ru": "\u041d\u0435\u043b\u044c\u0437\u044f \u0442\u0440\u0430\u043a\u0442\u043e\u0432\u0430\u0442\u044c \u043a\u0430\u043a verified negative; \u043f\u043e\u0437\u0434\u043d\u044f\u044f \u0447\u0438\u0441\u0442\u0430\u044f \u0434\u0430\u0442\u0430 \u043d\u0435 \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043e\u0447\u0435\u0432\u0438\u0434\u043d\u043e\u0433\u043e \u043d\u043e\u0432\u043e\u0433\u043e \u0442\u043e\u0447\u0435\u0447\u043d\u043e\u0433\u043e \u043f\u044f\u0442\u043d\u0430.",
+        "en": "Do not treat as a verified negative; the later clear date shows no obvious new point-centered patch."
+      },
+      "status": "control_context",
+      "limitations": "3 Oct local SCL clear fraction 0.451 (cloud-limited); 21 Oct 1.0. No independent negative label.",
+      "new_optical": [
+        {
+          "date": "2026-10-03",
+          "scene_id": "S2A_22MFV_20261003_0_L2A",
+          "local_scl_clear_fraction": 0.4512,
+          "context_status": "cloud_limited_context",
+          "metrics": {
+            "id": "control-04",
+            "role": "control",
+            "lat": -4.7731955166033435,
+            "lon": -49.287499786923156,
+            "rgb_path": "data/investigation/maps/new-control-04-2026-10-03-rgb.png",
+            "rgb_sha256": "fe9a36bd3804656e46b65ed188778ef1ede2175232194fd50c395e1eceb9834b",
+            "ndvi": {
+              "valid_fraction": 0.4512,
+              "median": 0.5408954620361328,
+              "p10": 0.4615100026130676,
+              "p90": 0.8318794965744019
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-04-2026-10-03-ndvi.png",
+              "sha256": "a8bd44727bf08cd469c9dcc6c481071ad13d09f2bea8fa7f218986a8362130b2"
+            },
+            "ndmi": {
+              "valid_fraction": 0.4512,
+              "median": 0.027406802400946617,
+              "p10": -0.062206488102674484,
+              "p90": 0.3379870653152466
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-04-2026-10-03-ndmi.png",
+              "sha256": "3049c43fde7c15ca2f0ed3567fadfd2382c68cc37b14c1a8b9dc7551d04d29cd"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-03",
+            "source_scene": "S2A_22MFV_20261003_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+            "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.6112616885756877,
+              "transparent_fraction": 0.38873831142431226,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "scene_id": "S2C_22MFV_20261021_0_L2A",
+          "local_scl_clear_fraction": 1.0,
+          "context_status": "usable_local_context",
+          "metrics": {
+            "id": "control-04",
+            "role": "control",
+            "lat": -4.7731955166033435,
+            "lon": -49.287499786923156,
+            "rgb_path": "data/investigation/maps/new-control-04-2026-10-21-rgb.png",
+            "rgb_sha256": "36a590c9cde13d4dc13a3f1a5a22bf5800e714c6d0b47ee8023b48d28d185324",
+            "ndvi": {
+              "valid_fraction": 1.0,
+              "median": 0.5897178649902344,
+              "p10": 0.5218736529350281,
+              "p90": 0.8517297506332397
+            },
+            "ndvi_map": {
+              "path": "data/investigation/maps/new-control-04-2026-10-21-ndvi.png",
+              "sha256": "e3e5d451b4c77471a8f8c405cc2d5c8eefae4e788621ae5e18003632c2d1deeb"
+            },
+            "ndmi": {
+              "valid_fraction": 1.0,
+              "median": 0.0846593901515007,
+              "p10": 0.003806362859904766,
+              "p90": 0.34486106038093567
+            },
+            "ndmi_map": {
+              "path": "data/investigation/maps/new-control-04-2026-10-21-ndmi.png",
+              "sha256": "40c0120d5fc2d3e6f5fa3ce41aea19a6cf25a1e76e4df731fc7f12cf70baa314"
+            }
+          },
+          "overlay": {
+            "date": "2026-10-21",
+            "source_scene": "S2C_22MFV_20261021_0_L2A",
+            "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+            "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+            "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+            "bounds_wgs84": [
+              -49.292483939249,
+              -4.790702097222239,
+              -49.25854819625791,
+              -4.762362141639251
+            ],
+            "crs": "EPSG:4326",
+            "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+            "output_dimensions_px": [
+              188,
+              157
+            ],
+            "source_grid": {
+              "crs": "EPSG:32722",
+              "bounds_m": [
+                689379.9999999993,
+                9470240.0,
+                693139.9999999993,
+                9473360.0
+              ],
+              "shape_px": [
+                156,
+                188
+              ],
+              "resolution_m": 20,
+              "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+            },
+            "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+            "legend": {
+              "type": "true_color_rgb",
+              "bands": [
+                "B04 red",
+                "B03 green",
+                "B02 blue"
+              ],
+              "reflectance_stretch": [
+                0,
+                0.3
+              ],
+              "gamma": 2.2,
+              "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+            },
+            "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+            "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+            "alpha": {
+              "valid_fraction": 0.9972557257080905,
+              "transparent_fraction": 0.002744274291909473,
+              "nonzero_values": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "new_optical_contact_sheet": {
+        "id": "control-04",
+        "path": "data/investigation/maps/new-control-04-contact.png",
+        "sha256": "fdd393f9b00057f1d8bb142c1077efccd86d9da6f8196dc9dc5792bef4b5707b",
+        "dates": [
+          "2026-10-03",
+          "2026-10-21"
+        ],
+        "source_rgb_sha256": [
+          "fe9a36bd3804656e46b65ed188778ef1ede2175232194fd50c395e1eceb9834b",
+          "36a590c9cde13d4dc13a3f1a5a22bf5800e714c6d0b47ee8023b48d28d185324"
+        ]
+      }
+    }
+  ],
+  "new_optical_evidence": {
+    "receipt": "data/investigation/maps/new-optical-receipts.json",
+    "query": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        -49.2875,
+        -4.7875,
+        -49.2625,
+        -4.7625
+      ],
+      "datetime": "2026-09-20T00:00:00Z/2026-11-15T23:59:59Z",
+      "limit": 100
+    },
+    "catalogue_status": 200,
+    "selected_scenes": [
+      {
+        "date": "2026-10-03",
+        "scene_id": "S2A_22MFV_20261003_0_L2A",
+        "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+        "scene_cloud_percent": 54.132897,
+        "processing_metadata": {
+          "s2_processing_baseline": "05.13",
+          "earthsearch_boa_offset_applied": true
+        },
+        "assets": {
+          "red": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B04.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B04.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "green": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B03.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B03.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "blue": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B02.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B02.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "nir": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B08.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B08.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "swir16": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B11.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/B11.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                20.0,
+                20.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                4469,
+                1333,
+                188,
+                156
+              ]
+            }
+          }
+        },
+        "bounds_m": [
+          689379.9999999993,
+          9470240.0,
+          693139.9999999993,
+          9473360.0
+        ],
+        "scl": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ],
+          "resampling": "nearest"
+        },
+        "scl_clear_by_point": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 0.8092
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 0.7424
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 0.9968
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 0.4892
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 0.5492
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 0.9624
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 0.9976
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 0.4512
+          }
+        ],
+        "asset_npz": "data/investigation/maps/new-2026-10-03-windows.npz",
+        "asset_npz_sha256": "d937d381e5d64c50b384e4fbe3fd68e0adbeb0d775375e68bf06594785e13016",
+        "native_analysis_grid": {
+          "resolution_m": 20,
+          "shape": [
+            156,
+            188
+          ],
+          "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+        },
+        "calibration": {
+          "red": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "green": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "blue": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "nir": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "swir16": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 20,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          }
+        },
+        "mask": "SCL classes 4,5,6 (vegetation, bare soil, water) retained; unclassified, cloud shadow, clouds, cirrus, snow, saturation, dark pixels and no-data excluded from NDVI/NDMI",
+        "indices": "NDVI=(B08-B04)/(B08+B04); NDMI=(B08-B11)/(B08+B11), after scale/offset; no RGB-derived indices"
+      },
+      {
+        "date": "2026-10-21",
+        "scene_id": "S2C_22MFV_20261021_0_L2A",
+        "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+        "scene_cloud_percent": 43.150672,
+        "processing_metadata": {
+          "s2_processing_baseline": "05.13",
+          "earthsearch_boa_offset_applied": true
+        },
+        "assets": {
+          "red": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B04.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B04.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "green": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B03.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B03.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "blue": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B02.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B02.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "nir": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B08.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B08.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                10.0,
+                10.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                8938,
+                2666,
+                376,
+                312
+              ]
+            }
+          },
+          "swir16": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B11.tif",
+            "local_read": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/B11.tif",
+              "crs": "EPSG:32722",
+              "native_resolution": [
+                20.0,
+                20.0
+              ],
+              "dtype": "uint16",
+              "scale": 1.0,
+              "offset": 0.0,
+              "nodata": 0.0,
+              "raster_band_tags": {},
+              "source_window": [
+                4469,
+                1333,
+                188,
+                156
+              ]
+            }
+          }
+        },
+        "bounds_m": [
+          689379.9999999993,
+          9470240.0,
+          693139.9999999993,
+          9473360.0
+        ],
+        "scl": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ],
+          "resampling": "nearest"
+        },
+        "scl_clear_by_point": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 1.0
+          }
+        ],
+        "asset_npz": "data/investigation/maps/new-2026-10-21-windows.npz",
+        "asset_npz_sha256": "49e27d17e790fdd42e31d32783face2dd136abfbbdb5756b2fe1d7cd2ef4e598",
+        "native_analysis_grid": {
+          "resolution_m": 20,
+          "shape": [
+            156,
+            188
+          ],
+          "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+        },
+        "calibration": {
+          "red": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "green": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "blue": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "nir": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          },
+          "swir16": {
+            "scale": 0.0001,
+            "offset": 0,
+            "unit": "surface reflectance",
+            "catalogue_raster_band": {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 20,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          }
+        },
+        "mask": "SCL classes 4,5,6 (vegetation, bare soil, water) retained; unclassified, cloud shadow, clouds, cirrus, snow, saturation, dark pixels and no-data excluded from NDVI/NDMI",
+        "indices": "NDVI=(B08-B04)/(B08+B04); NDMI=(B08-B11)/(B08+B11), after scale/offset; no RGB-derived indices"
+      }
+    ],
+    "attempts": [
+      {
+        "date": "2026-09-23",
+        "scene_id": "S2A_22MFV_20260923_0_L2A",
+        "cloud_percent_scene": 35.47059,
+        "status": "scl_probe_ok",
+        "per_point_1km_clear_fractions": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 0.0
+          }
+        ],
+        "points_ge_80pct_clear": 0,
+        "scl_asset": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/9/S2A_22MFV_20260923_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ]
+        },
+        "clear_fraction_bounded_region": 0.0
+      },
+      {
+        "date": "2026-10-21",
+        "scene_id": "S2C_22MFV_20261021_0_L2A",
+        "cloud_percent_scene": 43.150672,
+        "status": "scl_probe_ok",
+        "per_point_1km_clear_fractions": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 1.0
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 1.0
+          }
+        ],
+        "points_ge_80pct_clear": 8,
+        "scl_asset": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2C_22MFV_20261021_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ],
+          "resampling": "nearest"
+        },
+        "clear_fraction_bounded_region": 1.0
+      },
+      {
+        "date": "2026-11-05",
+        "scene_id": "S2B_22MFV_20261105_0_L2A",
+        "cloud_percent_scene": 44.645393,
+        "status": "scl_probe_ok",
+        "per_point_1km_clear_fractions": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 0.0172
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 0.0912
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 0.0
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 0.522
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 0.2884
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 0.886
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 0.0092
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 0.382
+          }
+        ],
+        "points_ge_80pct_clear": 1,
+        "scl_asset": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/11/S2B_22MFV_20261105_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ]
+        },
+        "clear_fraction_bounded_region": 0.3045894708128751
+      },
+      {
+        "date": "2026-10-03",
+        "scene_id": "S2A_22MFV_20261003_0_L2A",
+        "cloud_percent_scene": 54.132897,
+        "status": "scl_probe_ok",
+        "per_point_1km_clear_fractions": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 0.8092
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 0.7424
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 0.9968
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 0.4892
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 0.5492
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 0.9624
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 0.9976
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 0.4512
+          }
+        ],
+        "points_ge_80pct_clear": 4,
+        "scl_asset": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261003_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ],
+          "resampling": "nearest"
+        },
+        "clear_fraction_bounded_region": 0.6128955264593563
+      },
+      {
+        "date": "2026-10-13",
+        "scene_id": "S2A_22MFV_20261013_0_L2A",
+        "cloud_percent_scene": 56.125778,
+        "status": "scl_probe_ok",
+        "per_point_1km_clear_fractions": [
+          {
+            "id": "candidate-01",
+            "role": "candidate",
+            "clear_fraction": 0.096
+          },
+          {
+            "id": "candidate-02",
+            "role": "candidate",
+            "clear_fraction": 0.0124
+          },
+          {
+            "id": "candidate-03",
+            "role": "candidate",
+            "clear_fraction": 0.246
+          },
+          {
+            "id": "candidate-04",
+            "role": "candidate",
+            "clear_fraction": 0.836
+          },
+          {
+            "id": "control-01",
+            "role": "control",
+            "clear_fraction": 0.4156
+          },
+          {
+            "id": "control-02",
+            "role": "control",
+            "clear_fraction": 0.9116
+          },
+          {
+            "id": "control-03",
+            "role": "control",
+            "clear_fraction": 0.438
+          },
+          {
+            "id": "control-04",
+            "role": "control",
+            "clear_fraction": 0.2704
+          }
+        ],
+        "points_ge_80pct_clear": 2,
+        "scl_asset": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/22/M/FV/2026/10/S2A_22MFV_20261013_0_L2A/SCL.tif",
+          "crs": "EPSG:32722",
+          "native_resolution": [
+            20.0,
+            20.0
+          ],
+          "dtype": "uint8",
+          "scale": 1.0,
+          "offset": 0.0,
+          "nodata": 0.0,
+          "raster_band_tags": {},
+          "source_window": [
+            4469,
+            1333,
+            188,
+            156
+          ]
+        },
+        "clear_fraction_bounded_region": 0.4881683033278778
+      }
+    ],
+    "overlays": [
+      {
+        "date": "2026-10-03",
+        "source_scene": "S2A_22MFV_20261003_0_L2A",
+        "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+        "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+        "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+        "bounds_wgs84": [
+          -49.292483939249,
+          -4.790702097222239,
+          -49.25854819625791,
+          -4.762362141639251
+        ],
+        "crs": "EPSG:4326",
+        "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+        "output_dimensions_px": [
+          188,
+          157
+        ],
+        "source_grid": {
+          "crs": "EPSG:32722",
+          "bounds_m": [
+            689379.9999999993,
+            9470240.0,
+            693139.9999999993,
+            9473360.0
+          ],
+          "shape_px": [
+            156,
+            188
+          ],
+          "resolution_m": 20,
+          "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+        },
+        "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+        "legend": {
+          "type": "true_color_rgb",
+          "bands": [
+            "B04 red",
+            "B03 green",
+            "B02 blue"
+          ],
+          "reflectance_stretch": [
+            0,
+            0.3
+          ],
+          "gamma": 2.2,
+          "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+        },
+        "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+        "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+        "alpha": {
+          "valid_fraction": 0.6112616885756877,
+          "transparent_fraction": 0.38873831142431226,
+          "nonzero_values": [
+            0,
+            255
+          ]
+        }
+      },
+      {
+        "date": "2026-10-21",
+        "source_scene": "S2C_22MFV_20261021_0_L2A",
+        "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+        "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+        "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+        "bounds_wgs84": [
+          -49.292483939249,
+          -4.790702097222239,
+          -49.25854819625791,
+          -4.762362141639251
+        ],
+        "crs": "EPSG:4326",
+        "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+        "output_dimensions_px": [
+          188,
+          157
+        ],
+        "source_grid": {
+          "crs": "EPSG:32722",
+          "bounds_m": [
+            689379.9999999993,
+            9470240.0,
+            693139.9999999993,
+            9473360.0
+          ],
+          "shape_px": [
+            156,
+            188
+          ],
+          "resolution_m": 20,
+          "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+        },
+        "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+        "legend": {
+          "type": "true_color_rgb",
+          "bands": [
+            "B04 red",
+            "B03 green",
+            "B02 blue"
+          ],
+          "reflectance_stretch": [
+            0,
+            0.3
+          ],
+          "gamma": 2.2,
+          "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+        },
+        "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+        "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+        "alpha": {
+          "valid_fraction": 0.9972557257080905,
+          "transparent_fraction": 0.002744274291909473,
+          "nonzero_values": [
+            0,
+            255
+          ]
+        }
+      }
+    ]
+  },
+  "new_optical_overlays": [
+    {
+      "date": "2026-10-03",
+      "source_scene": "S2A_22MFV_20261003_0_L2A",
+      "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_22MFV_20261003_0_L2A",
+      "path": "data/investigation/maps/new-2026-10-03-leaflet-rgb.png",
+      "sha256": "a75e38a576485b4a113caf8a3eff6d69f000813f2a310ec768725d5ad5406687",
+      "bounds_wgs84": [
+        -49.292483939249,
+        -4.790702097222239,
+        -49.25854819625791,
+        -4.762362141639251
+      ],
+      "crs": "EPSG:4326",
+      "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+      "output_dimensions_px": [
+        188,
+        157
+      ],
+      "source_grid": {
+        "crs": "EPSG:32722",
+        "bounds_m": [
+          689379.9999999993,
+          9470240.0,
+          693139.9999999993,
+          9473360.0
+        ],
+        "shape_px": [
+          156,
+          188
+        ],
+        "resolution_m": 20,
+        "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+      },
+      "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+      "legend": {
+        "type": "true_color_rgb",
+        "bands": [
+          "B04 red",
+          "B03 green",
+          "B02 blue"
+        ],
+        "reflectance_stretch": [
+          0,
+          0.3
+        ],
+        "gamma": 2.2,
+        "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+      },
+      "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+      "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+      "alpha": {
+        "valid_fraction": 0.6112616885756877,
+        "transparent_fraction": 0.38873831142431226,
+        "nonzero_values": [
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "date": "2026-10-21",
+      "source_scene": "S2C_22MFV_20261021_0_L2A",
+      "source_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_22MFV_20261021_0_L2A",
+      "path": "data/investigation/maps/new-2026-10-21-leaflet-rgb.png",
+      "sha256": "6df562844c4d5a83b913704fd5da56f0cf9a84ec9184071356e3b2c2dec000f8",
+      "bounds_wgs84": [
+        -49.292483939249,
+        -4.790702097222239,
+        -49.25854819625791,
+        -4.762362141639251
+      ],
+      "crs": "EPSG:4326",
+      "pixel_registration": "north-up affine raster; bounds are outer pixel edges; source grid pixels interpreted at pixel centers by affine transform",
+      "output_dimensions_px": [
+        188,
+        157
+      ],
+      "source_grid": {
+        "crs": "EPSG:32722",
+        "bounds_m": [
+          689379.9999999993,
+          9470240.0,
+          693139.9999999993,
+          9473360.0
+        ],
+        "shape_px": [
+          156,
+          188
+        ],
+        "resolution_m": 20,
+        "pixel_support": "20 m square; B04/B08 bilinear resampled from native 10 m; B11/SCL native 20 m; all metrics on common 20 m grid"
+      },
+      "reprojection": "Rasterio/GDAL warp EPSG:32722 -> EPSG:4326 north-up; RGB bilinear; SCL nearest-neighbor. Source native grid transform is from pixel outer bounds, so samples are located at native pixel centers.",
+      "legend": {
+        "type": "true_color_rgb",
+        "bands": [
+          "B04 red",
+          "B03 green",
+          "B02 blue"
+        ],
+        "reflectance_stretch": [
+          0,
+          0.3
+        ],
+        "gamma": 2.2,
+        "display": "fixed RGB stretch; qualitative true-color appearance only; not an index"
+      },
+      "valid_mask_policy": "PNG alpha=255 only where nearest-reprojected SCL is class 4 vegetation, 5 not-vegetated, or 6 water AND all calibrated RGB bands are finite; otherwise alpha=0. Cloud/shadow/unclassified/snow/no-data and other SCL classes are transparent.",
+      "resolution_qualification": "Source optical composites are on a common 20 m grid; B04/B03/B02 were bilinear-resampled from native 10 m before this geographic warp. Output is a display overlay, not native 10 m imagery or an area/condition measurement.",
+      "alpha": {
+        "valid_fraction": 0.9972557257080905,
+        "transparent_fraction": 0.002744274291909473,
+        "nonzero_values": [
+          0,
+          255
+        ]
+      }
+    }
+  ]
+}
