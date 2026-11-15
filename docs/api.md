@@ -23,6 +23,7 @@ All paths below start with `/api/v1`. JSON errors have the shape
 | GET | Description |
 | --- | --- |
 | `/` | API entry point |
+| `/health` | Basic prepared dataset readiness; returns 503 if any site cannot load |
 | `/help` | Endpoint discovery |
 | `/sites` | Available sites and per-site loading errors |
 | `/sites/{site}` | Site metadata, grid, dates, status and limitations |

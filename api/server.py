@@ -95,6 +95,16 @@ def patches(site, threshold):
 
 def dispatch(path, params):
     parts = [unquote(p) for p in path.strip('/').split('/')]
+    if parts == ['api', 'v1', 'health']:
+        errors = []
+        for name in SITES:
+            try:
+                site_data(name)
+            except APIError:
+                errors.append(name)
+        if errors:
+            raise APIError(503, 'Prepared datasets unavailable: ' + ', '.join(errors))
+        return {'status': 'ok', 'datasets': len(SITES)}
     if parts == ['api', 'v1']:
         return {'name': 'OffBeat API', 'version': 1, 'documentation': '/api/v1/help', 'sites': '/api/v1/sites'}
     if parts == ['api', 'v1', 'help']:

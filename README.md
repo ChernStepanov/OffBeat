@@ -32,6 +32,9 @@ python -m http.server 8765
 Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Names are sent only on submit, cached in the session and throttled. Coordinate searches are local. Operators can override `OB_MULTILINGUAL_GEOCODER_URL` and `OB_GEOCODER_URL` before app.js. Translated-name coverage depends on the providers.
 For programmatic read-only access, run `python3 -m api.server` and see the [HTTP API documentation](docs/api.md).
 
+For dataset inventory, endpoint checks and safe catalogue discovery, see the
+[operations guide](docs/operations.md). These tools do not automatically publish new measurements.
+
 
 ## Actual prepared data
 

@@ -1,14 +1,21 @@
 import json
 import threading
 import unittest
+from unittest.mock import patch
 from http.server import ThreadingHTTPServer
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
-from api.server import Handler, dispatch, patches
+from api.server import APIError, Handler, dispatch, patches
 
 
 class APITest(unittest.TestCase):
+    def test_health_reports_missing_dataset(self):
+        with patch('api.server.site_data', side_effect=APIError(503, 'missing')):
+            with self.assertRaises(APIError) as error:
+                dispatch('/api/v1/health', {})
+        self.assertEqual(error.exception.status, 503)
+
     @classmethod
     def setUpClass(cls):
         cls.server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
@@ -28,6 +35,7 @@ class APITest(unittest.TestCase):
             return json.load(response)
 
     def test_sites_and_pixel_series(self):
+        self.assertEqual(self.get('/health')['status'], 'ok')
         sites = self.get('/sites')
         self.assertEqual({s['id'] for s in sites['items']}, {'mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'khimki', 'nairobi', 'sydney'})
         pixel = self.get('/sites/mexico/pixels/0')

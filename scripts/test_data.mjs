@@ -57,6 +57,19 @@ if (site.status === 'measured_pair') {
 context.fetch = async()=>({ok:false,status:503});
 await assert.rejects(context.OB.loadData(), /503/);
 
+const attempts = new Map();
+context.fetch = async path => {
+  if (/^data\/[^/]+\.json$/.test(path)) {
+    const n = (attempts.get(path) || 0) + 1;
+    attempts.set(path, n);
+    if (n === 1) return {ok:false, status:503};
+  }
+  return {ok:true, json:async()=>JSON.parse(fs.readFileSync(path, 'utf8'))};
+};
+await context.OB.loadData();
+assert.equal(context.OB.SITES.length, 8);
+assert([...attempts.values()].every(n => n === 2));
+
 const calls=[];
 const drawing = new Proxy({}, {get:(_,name)=> (...args)=>{
   if (name === 'measureText') return {width: String(args[0]).length * 7};
