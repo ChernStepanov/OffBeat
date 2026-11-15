@@ -294,6 +294,14 @@ OB.bindNisarMap = function (map, toggle, status) {
   }
   const legendCss = n => `linear-gradient(90deg, ${Array.from({ length: n }, (_, d) => `rgb(${dateColour(d, n).join(',')})`).join(',')})`;
 
+  // Hidden coverage is detached, not made transparent, so it stops downloading NASA tiles
+  // that would compete with the imagery the user is looking at.
+  function attach() {
+    const visible = map.getZoom() < CRISP_FROM;
+    if (visible && !map.hasLayer(layer)) layer.addTo(map).setOpacity(0.9);
+    if (!visible && map.hasLayer(layer)) map.removeLayer(layer);
+  }
+
   async function update() {
     status.hidden = !toggle.checked;
     if (!toggle.checked) {
@@ -316,8 +324,7 @@ OB.bindNisarMap = function (map, toggle, status) {
         legend.append(' ' + dates.at(-1));
       }
       if (toggle.checked) {
-        layer.addTo(map);
-        layer.setOpacity(map.getZoom() >= CRISP_FROM ? 0 : 0.9);
+        attach();
         showStatus();
       }
     } catch {
@@ -332,7 +339,7 @@ OB.bindNisarMap = function (map, toggle, status) {
   map.on('zoomend', () => {
     const r = rendering();
     for (const tile of tiles) tile.style.imageRendering = r;
-    if (layer) layer.setOpacity(map.getZoom() >= CRISP_FROM ? 0 : 0.9);
+    if (layer && toggle.checked) attach();
     showStatus();
   });
 

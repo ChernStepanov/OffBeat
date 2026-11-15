@@ -1,6 +1,26 @@
 // Keep a low-resolution Esri fallback underneath detailed tiles. Esri sometimes returns
 // a successful JPEG containing its grey "Map data not yet available" placeholder.
 window.OB = window.OB || {};
+
+// While a new zoom level loads, Leaflet keeps the previous level's tiles underneath to avoid a
+// blank flash, and drops them only when it judges the new level complete. Under an opaque layer
+// that is invisible; under a transparent one (place labels, NISAR coverage) the old tiles show
+// through, stretched 2-4x: giant labels next to normal ones. Once a layer has finished loading
+// its current level, remove its tiles from every other level.
+if (window.L && L.GridLayer && !L.GridLayer.__dropsStaleLevels) {
+  L.GridLayer.__dropsStaleLevels = true;
+  L.GridLayer.addInitHook(function () {
+    this.on('load', () => {
+      const zoom = this._tileZoom;
+      if (zoom === undefined || !this._tiles) return;
+      for (const key of Object.keys(this._tiles)) {
+        const tile = this._tiles[key];
+        if (tile && tile.coords && tile.coords.z !== zoom) this._removeTile(key);
+      }
+    });
+  });
+}
+
 OB.bindImagery = function (map, url, options) {
   const base = L.tileLayer(url, {...options, maxNativeZoom: 16, maxZoom: 19}).addTo(map);
   const Detailed = L.TileLayer.extend({

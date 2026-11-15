@@ -14,7 +14,7 @@ OB.evidence = (() => {
     visibleCaveat: ['Optical review; NISAR detection has not been validated.', 'Визуальная проверка по снимкам; обнаружение радаром не подтверждено.'],
     surpriseTitle: ['Not sure where to start?', 'Не знаете, с чего начать?'],
     surpriseHint: ['Explore a reviewed Amazon story or an automatically selected measured sample. New samples are not independently reviewed.', 'Откройте разобранный пример Амазонии или автоматически выбранную точку измерений. Новые точки не прошли независимую проверку.'],
-    surprise: ['Surprise me ✦', 'Удиви меня ✦'],
+    surprise: ['Surprise me', 'Удиви меня'],
     close: ['Close story', 'Закрыть историю'],
     scope: ['Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.', 'Исследовательские примеры: 0 пригодных подтверждённых событий для оценки детектора. Точность не установлена.'],
     selection: ['Evidence for selected sample', 'Доказательства для выбранной точки'],
