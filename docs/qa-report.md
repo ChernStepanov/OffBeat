@@ -24,6 +24,15 @@
 - Six-slide draft rendered and visually inspected; embedded editable chart data,
   slide geometry, fonts and package structure checked by the presentation finalizer.
 
+## 15 November 2026 re-check (Chromium emulation)
+
+Desktop, tablet (768 x 1024) and phone (375 x 812) emulation in Chromium after the findings window,
+date-aware map and Khimki removal: no horizontal page scroll, no console errors from the app, the
+findings window renders in English and Russian, "Show on map" opens the linked sample, the date
+slider recolours map samples, the 3D view opens and closes from its button, and sample playback
+starts. The service-worker registration error seen in the embedded test browser is that browser
+refusing service workers; the registration failure is caught. Emulation is not physical-device QA.
+
 ## Explicitly not checked
 
 Safari, Firefox, iPhone, Android physical hardware, OS/device audio output and
