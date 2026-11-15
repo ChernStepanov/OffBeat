@@ -816,6 +816,5 @@ details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
 .mp__gap { flex: 1; }
 .mp__controls input.mp__volume { flex: 0 0 96px; width: 96px; min-width: 0; }
 .mp__status { display: flex; justify-content: space-between; gap: 12px; background: #000; color: #0f0; box-shadow: var(--sunken); padding: 3px 8px; font: 12.5px/16px var(--ui); }
-.video-note { margin: 6px 2px 2px; color: #404040; }
 .win-btn--close { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h2V4H2V3H1V2H0z' fill='%23000'/%3E%3C/svg%3E"); background-size: 8px 7px; }
 @media (max-width: 600px) { .keynums { grid-template-columns: 1fr; } }

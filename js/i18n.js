@@ -10,7 +10,6 @@
     'Explore a change story':'Открыть историю изменения',
     'What the data says':'Что говорят данные',
     'Watch the 30-second video':'Смотреть видео (30 секунд)', 'Media Player - OffBeat in 30 seconds':'Проигрыватель - OffBeat за 30 секунд', 'File':'Файл', 'View':'Вид', 'Play':'Воспроизведение', 'Help':'Справка',
-    'Built from screenshots of this app and measured NISAR, OPERA and GNSS data. Music is synthesised; the melody in the chart scene is the sonification of sample MEX r8 c2.':'Собрано из скриншотов этого приложения и измеренных данных NISAR, OPERA и GNSS. Музыка синтезирована; мелодия в сцене с графиком - озвучка точки MEX r8 c2.',
     'Why might this happen?':'Почему так может быть?',
     'Subsidence estimate (OPERA tied to GNSS)':'Оценка проседания (OPERA с привязкой к GNSS)',
     'OPERA DISP-S1 rates over 16 dates, shifted to match GNSS station MMX1 (vertical only, incidence 29-46 deg, midpoint shown). An estimate, not a validated subsidence map.':'Скорости OPERA DISP-S1 по 16 датам, сдвинутые под GNSS-станцию MMX1 (только вертикаль, угол падения 29-46°, показана середина). Это оценка, а не проверенная карта проседания.',
