@@ -67,5 +67,12 @@ OB.evidenceModel = (() => {
     const id = candidates[Math.floor(random() * candidates.length)];
     return {id, history: [...cycle, id]};
   }
-  return {timeline, link, selection, report, geojson, nextSurprise};
+  function opticalCrop(bounds, pixel) {
+    const x = (pixel.lon - bounds.w) / (bounds.e - bounds.w);
+    const y = (bounds.n - pixel.lat) / (bounds.n - bounds.s);
+    const clamp = value => Math.max(0, Math.min(0.5, value - 0.25));
+    const left = clamp(x), top = clamp(y);
+    return {left: -200 * left, top: -200 * top, x: 200 * (x - left), y: 200 * (y - top)};
+  }
+  return {timeline, link, selection, report, geojson, nextSurprise, opticalCrop};
 })();

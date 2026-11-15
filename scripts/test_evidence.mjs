@@ -5,6 +5,16 @@ import {createHash} from 'node:crypto';
 const context = {window: {}, URL}; context.window.OB = {}; context.OB = context.window.OB;
 vm.runInNewContext(fs.readFileSync('js/evidence-model.js', 'utf8'), context);
 const model = context.OB.evidenceModel;
+const bounds = {w: 0, e: 1, s: 0, n: 1};
+const firstCrop = model.opticalCrop(bounds, {lon: 0.3, lat: 0.7});
+const secondCrop = model.opticalCrop(bounds, {lon: 0.7, lat: 0.3});
+assert.notEqual(firstCrop.left, secondCrop.left);
+assert.notEqual(firstCrop.top, secondCrop.top);
+assert.equal(firstCrop.x, 50);
+assert.equal(secondCrop.x, 50);
+const edgeCrop = model.opticalCrop(bounds, {lon: 0, lat: 1});
+assert.equal(Math.abs(edgeCrop.left), 0); assert.equal(Math.abs(edgeCrop.top), 0);
+assert.equal(edgeCrop.x, 0); assert.equal(edgeCrop.y, 0);
 let history = [], previous = null;
 for (let cycle = 0; cycle < 3; cycle++) {
   const shown = new Set();
