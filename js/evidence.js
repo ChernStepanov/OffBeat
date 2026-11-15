@@ -142,7 +142,8 @@ OB.evidence = (() => {
       const controls = el('div', undefined, 'casebook__bar');
       pair.forEach((index, i) => controls.append(button(`${t(i ? 'After' : 'Before', i ? 'После' : 'До')} / ${site.dates[index]}`, () => OB.app.selectDate(index))));
       controls.append(button(t('Listen to sample + peers', 'Слушать точку и соседей'), () => OB.app.play()), button(t('Stop', 'Стоп'), () => OB.app.stop())); page.append(controls);
-      table(site.dates.map((d, i) => [d + (i === OB.app.date() ? ' *' : ''), `HV ${fmt(pixel.hv[i])} dB / ${t('peers', 'соседи')} ${fmt(pixel.peer?.hv_med?.[i])} dB`]));
+      table(site.dates.map((d, i) => [d + (i === OB.app.date() ? ' *' : ''), `HH ${fmt(pixel.hh?.[i])} dB / HV ${fmt(pixel.hv[i])} dB / HV ${t('peers', 'соседи')} ${fmt(pixel.peer?.hv_med?.[i])} dB`]));
+      paragraph(`${t('Pairwise HH difference', 'Разность HH выбранной пары')}: ${fmt(Number.isFinite(pixel.hh?.[pair[0]]) && Number.isFinite(pixel.hh?.[pair[1]]) ? pixel.hh[pair[1]] - pixel.hh[pair[0]] : null)} dB.`);
       paragraph(`${t('Pairwise HV difference', 'Разность HV выбранной пары')}: ${fmt(Number.isFinite(pixel.hv[pair[0]]) && Number.isFinite(pixel.hv[pair[1]]) ? pixel.hv[pair[1]] - pixel.hv[pair[0]] : null)} dB.`);
       if (dossier) paragraph(local(dossier.observed));
       paragraph(t('Backscatter changes can reflect moisture, structure, speckle or acquisition effects. A radar change alone does not identify the cause. These before/after buttons select observations, not verified event boundaries.', 'На обратное рассеяние влияют влажность, структура, спекл и условия съёмки. Изменение радара само по себе не определяет причину. Кнопки «до/после» выбирают наблюдения, а не доказанные границы события.'));
