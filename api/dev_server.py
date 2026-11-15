@@ -11,6 +11,12 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class DevHandler(Handler, SimpleHTTPRequestHandler):
+    def do_POST(self):
+        host = urlsplit('//'+self.headers.get('Host', '')).hostname
+        if host not in ('127.0.0.1', 'localhost', '::1'):
+            self.respond(403, {'error': 'Local host required'}); return
+        return Handler.do_POST(self)
+
     def do_GET(self):
         if any(part.startswith('.') for part in unquote(urlsplit(self.path).path).split('/') if part):
             self.send_error(404); return
