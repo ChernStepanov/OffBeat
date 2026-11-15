@@ -61,9 +61,13 @@ for (const {options} of tileLayers) {
 assert.equal(tileLayers.length,2);
 assert.equal(imagery.length,2);
 assert.equal(imagery[0].url,imagery[1].url,'Both maps must use the same imagery');
-assert.match(imagery[0].url,/clarity\.maptiles/,'Sharper archival imagery is selected by default');
+assert.match(imagery[0].url,/services\.arcgisonline/,'Standard imagery is selected by default');
 $('imagery-clarity').listeners.click();
 assert.equal(imagery[0].url,imagery[1].url,'Switching imagery must affect both maps');
+assert.match(imagery[0].url,/clarity\.maptiles/);
+assert.equal($('imagery-clarity').getAttribute('aria-pressed'),'true');
+$('imagery-clarity').listeners.click();
+assert.equal(imagery[0].url,imagery[1].url,'Returning to standard imagery affects both maps');
 assert.match(imagery[0].url,/services\.arcgisonline/);
 assert.equal($('imagery-clarity').getAttribute('aria-pressed'),'false');
 assert.match(imagery[0].options.className,/grayscale/);

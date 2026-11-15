@@ -26,11 +26,14 @@ OB.chart = (function () {
       g.textAlign = "right"; g.fillText(+v.toFixed(1), PAD.l - 4, y + 3);
     }
     g.textAlign = "center";
+    // Include the day for closely spaced acquisitions; retain the year when it changes.
+    const crossYear = dates[0].slice(0, 4) !== dates.at(-1).slice(0, 4);
+    const tickLabel = date => crossYear ? date.slice(2) : date.slice(5);
     // date ticks; the ones at the ends hug the frame instead of spilling past it
     for (let i = 0; i < dates.length; i += Math.ceil(dates.length / 6)) {
-      const x = X(i), half = g.measureText(dates[i].slice(2, 7)).width / 2;
+      const x = X(i), half = g.measureText(tickLabel(dates[i])).width / 2;
       g.textAlign = x - half < 0 ? "left" : x + half > w ? "right" : "center";
-      g.fillText(dates[i].slice(2, 7), g.textAlign === "left" ? 0 : g.textAlign === "right" ? w : x, h - 6);
+      g.fillText(tickLabel(dates[i]), g.textAlign === "left" ? 0 : g.textAlign === "right" ? w : x, h - 6);
     }
     g.textAlign = "center";
     g.strokeStyle = "#808080"; g.strokeRect(PAD.l + 0.5, PAD.t + 0.5, w - PAD.l - PAD.r, h - PAD.t - PAD.b);
@@ -76,7 +79,7 @@ OB.chart = (function () {
   function backscatter(cv, dates, p, sinceIdx, head) {
     const { g, w, h } = setup(cv);
     const bound = (med, sd, sign) => med.map((m,i) => Number.isFinite(m) && Number.isFinite(sd[i]) ? m + sign * 2 * sd[i] : null);
-    const all = p.hh.concat(p.hv, bound(p.peer.hh_med,p.peer.hh_sd,1), bound(p.peer.hv_med,p.peer.hv_sd,-1)).filter(Number.isFinite);
+    const all = p.hh.concat(p.hv, bound(p.peer.hh_med,p.peer.hh_sd,1), bound(p.peer.hh_med,p.peer.hh_sd,-1), bound(p.peer.hv_med,p.peer.hv_sd,1), bound(p.peer.hv_med,p.peer.hv_sd,-1)).filter(Number.isFinite);
     if (!dates.length || !all.length) { empty(g,w,h,'No GCOV HH/HV measurements loaded for this pixel.'); return; }
     const lo = Math.floor(Math.min(...all) - 1), hi = Math.ceil(Math.max(...all) + 1);
     const { X, Y } = frame(g, w, h, dates, lo, hi);
@@ -98,7 +101,9 @@ OB.chart = (function () {
       g.fillText("No validated GUNW displacement for this pixel.", w / 2, h / 2 + 4);
       return;
     }
-    const all = p.disp.concat(p.peer_disp || []).filter(Number.isFinite);
+    const peer = p.peer_disp || [], spread = p.peer_disp_sd || [];
+    const bounds = peer.flatMap((m, i) => Number.isFinite(m) && Number.isFinite(spread[i]) ? [m - 2 * spread[i], m + 2 * spread[i]] : []);
+    const all = p.disp.concat(peer, bounds).filter(Number.isFinite);
     const lo = Math.floor(Math.min(...all) - 1), hi = Math.ceil(Math.max(...all) + 1);
     const { X, Y } = frame(g, w, h, dates, lo, hi);
     if (p.peer_disp && p.peer_disp_sd) band(g, X, Y, p.peer_disp, p.peer_disp_sd, 2);
