@@ -1,0 +1,46 @@
+{
+  "status": "not_trained_missing_independent_events",
+  "models": {},
+  "accuracy": null,
+  "manual_work_reduction": null,
+  "next_step": "Collect new independently reviewed event groups; do not relabel development pixels as test.",
+  "input_sha256": {
+    "data/review-queue/amazon-v1.json": "77836a3329f20bf0db49bcb312c33149af2b05c0e968e852987f18ae833bac5b",
+    "data/review-queue/independent-labels-v1.json": "5e5c1ef5cdd77785e1ffb3031e3728aa7f69e94462559ee4e66754c66e9afb31"
+  },
+  "code_sha256": "5b0d0504752951b475b65fb715c67a2e37546d093df75cb9c8bcc67b80530e68",
+  "training_config": {
+    "architecture": "binary logistic regression + held-out-event Platt calibration",
+    "train_penalty": 0.1,
+    "calibration_penalty": 0.01,
+    "iterations": 1500,
+    "learning_rate": 0.1,
+    "budget": 10,
+    "target_recall": 0.8,
+    "feature_names": {
+      "s1_only": [
+        "c_drop_db",
+        "c_last_change_db",
+        "c_post_support"
+      ],
+      "s1_nisar": [
+        "c_drop_db",
+        "c_last_change_db",
+        "c_post_support",
+        "l_drop_db",
+        "l_last_change_db",
+        "l_post_support"
+      ],
+      "s1_nisar_context": [
+        "c_drop_db",
+        "c_last_change_db",
+        "c_post_support",
+        "l_drop_db",
+        "l_last_change_db",
+        "l_post_support",
+        "clear_optical_pair_missing",
+        "rain_pre_post_difference_mm"
+      ]
+    }
+  }
+}

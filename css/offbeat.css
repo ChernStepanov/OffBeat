@@ -926,3 +926,53 @@ details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
 .mp__status { display: flex; justify-content: space-between; gap: 12px; background: #000; color: #0f0; box-shadow: var(--sunken); padding: 3px 8px; font: 12.5px/16px var(--ui); }
 .win-btn--close { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h2V4H2V3H1V2H0z' fill='%23000'/%3E%3C/svg%3E"); background-size: 8px 7px; }
 @media (max-width: 600px) { .mp__controls input.mp__volume { flex-basis: 45px; width: 45px; } }
+
+/* Evidence review priorities use the existing desktop window and paper surfaces. */
+.review__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; }
+.review__controls [aria-pressed="true"] { box-shadow: var(--pressed); background: #dfdfdf; font-weight: bold; }
+.review__notice { padding: 8px; background: #ffffe1; box-shadow: var(--sunken); }
+.review__filter { display: inline-flex; align-items: center; gap: 4px; }
+.review__table-wrap { overflow-x: auto; max-width: 100%; }
+.review__table { width: 100%; border-collapse: collapse; background: var(--paper); }
+.review__table caption { text-align: left; padding: 8px 0; }
+.review__table th, .review__table td { padding: 8px; text-align: left; vertical-align: top; border-bottom: 1px solid #ddd; }
+.review__table th { color: #555; font-weight: normal; }
+.review__table td:first-child { width: 28%; }
+.review__table small { display: block; margin-top: 4px; }
+.review__selected { background: #e7e7f5; }
+.review__detail { margin: 12px 0; padding: 14px; box-shadow: var(--sunken); background: var(--paper); overflow-wrap: anywhere; }
+.review__detail h3 { margin: 0 0 12px; }
+.review__detail:focus { outline: 1px dotted #000; outline-offset: -5px; }
+.review__facts { display: grid; grid-template-columns: minmax(110px, 1fr) 3fr; gap: 8px 12px; margin: 0; }
+.review__facts dt { color: #555; }
+.review__facts dd { margin: 0; }
+.review__annotation { display: grid; gap: 10px; max-width: 560px; }
+.review__annotation label { display: grid; gap: 4px; }
+.review__annotation input, .review__annotation textarea { width: 100%; font: inherit; padding: 5px; }
+.review__annotation textarea { min-height: 80px; resize: vertical; }
+#review-methodology { margin: 12px 0; }
+@media (max-width: 600px) {
+  .review__table th, .review__table td { padding: 7px 4px; }
+  .review__facts { grid-template-columns: 1fr; gap: 4px; }
+  .review__facts dd { margin-bottom: 7px; }
+  .review__controls .btn { white-space: normal; }
+}
+
+.copilot { margin-bottom: 14px; }
+.copilot__body { display: flex; flex-direction: column; gap: 10px; }
+.copilot__prompts,.copilot__entry { display: flex; flex-wrap: wrap; gap: 8px; }
+.copilot__log { background: #fff; box-shadow: var(--sunken); padding: 12px; min-height: 100px; max-height: 400px; overflow: auto; }
+.copilot__message { white-space: pre-wrap; overflow-wrap: anywhere; padding: 9px 12px; margin: 7px 0; max-width: 94%; background: #eee; border-left: 3px solid #008080; }
+.copilot__message--user { margin-left: auto; background: #e5e5ff; border-color: #000080; }
+.copilot__message--tool { color: #555; padding: 3px 8px; background: none; }
+.copilot__message--error { border-color: #c00000; }
+.copilot__entry textarea { flex: 1; min-width: 180px; padding: 8px; font: inherit; resize: vertical; }
+.copilot figure { margin: 12px 0; padding: 8px; border: 1px solid #808080; }
+.copilot svg { display: block; width: 100%; }
+.copilot--float { position: fixed; right: 20px; bottom: 40px; width: min(600px,95vw); z-index: 2300; box-shadow: 8px 10px 0 #0005; }
+.copilot--float .win-t { cursor: move; touch-action: none; }
+.copilot.copilot--full { position: fixed; inset: 8px 8px 32px !important; width: auto; z-index: 2400; display: flex; flex-direction: column; }
+.copilot--full .copilot__body { flex: 1; min-height: 0; }
+.copilot--full .copilot__log { flex: 1; max-height: none; min-height: 0; }
+@media(prefers-reduced-motion:no-preference){.copilot__message,.copilot figure { animation: copilot-appear .3s ease-out; } @keyframes copilot-appear { from {opacity:0;transform:translateY(8px)} to {opacity:1;transform:translateY(0)} }}
+@media(max-width:600px){.copilot__entry textarea{flex-basis:100%}.copilot__message{max-width:100%}.copilot--float{right:8px;bottom:32px}.copilot__log{max-height:330px}}

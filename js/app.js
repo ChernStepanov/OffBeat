@@ -908,6 +908,8 @@
       $('card-empty-message').textContent = 'This automatic candidate is a native radar cell. Its two-date comparison is shown in the candidate panel; it is not a sparse sample series.';
       $('card-empty-sites').hidden = true;
     },
+    visitPlace: place => showPlace(place),
+    flyTo(lat, lon, zoom) { map.flyTo([lat, lon], zoom, {duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1.6}); },
     zoomTo: (lat, lon, z) => map.setView([lat, lon], z, { animate: false }),
     fit: () => { const b = state.site.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16], animate: false }); },
     play: () => $("play").click(),

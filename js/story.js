@@ -256,6 +256,7 @@ window.OB = window.OB || {};
 
   // First visit with a bare address: a welcome dialog offers the tour instead of starting it unasked.
   function welcome() {
+    if (document.getElementById("copilot-win")) return; // Start directly in the command centre; tour remains in the menu.
     const KEY = "offbeat.welcome.v1", box = $("welcome");
     const params = new URL(location.href).searchParams;
     let seen = false;
