@@ -215,6 +215,46 @@ def opera_vs_gnss():
             'assumption': 'vertical-only projection with Sentinel-1 IW incidence 29-46 deg; horizontal GNSS rates are about 1 cm/year'}
 
 
+def opera_tied(anchor_m=200, incidence=(29, 46)):
+    """GNSS-tied OPERA LOS rates for every Mexico City sample.
+
+    OPERA DISP-S1 is relative to its own reference. Shifting every sample's rate by the median OPERA
+    rate within anchor_m of MMX1 and adding the GNSS vertical rate projected on the line of sight
+    gives an estimate of absolute LOS motion. Assumes vertical-only motion at the station, the same
+    GNSS rate after its saved window, and an incidence angle inside the Sentinel-1 IW range.
+    """
+    opera = json.loads((ROOT / 'data' / 'mexico' / 'opera-disp.json').read_text())
+    gnss = json.loads((ROOT / 'data' / 'analysis' / 'mexico-mmx1-gnss.json').read_text())
+    site = json.loads((ROOT / 'data' / 'mexico.json').read_text())
+    ref = date.fromisoformat(opera['reference_date'])
+    t = np.array([0] + [(date.fromisoformat(g['secondary_date']) - ref).days for g in opera['granules']]) / 365.25
+    n = len(site['pixels'])
+    disp = np.vstack([np.zeros(n)] + [[np.nan if v is None else v for v in g['values']['displacement']] for g in opera['granules']])
+    rate = np.full(n, np.nan); se = np.full(n, np.nan)
+    for i in range(n):
+        m = np.isfinite(disp[:, i])
+        if m.sum() >= 12:
+            fit = stats.linregress(t[m], disp[m, i] * 100); rate[i] = fit.slope; se[i] = fit.stderr
+    st = gnss['station_coordinates']
+    lat = np.array([p['lat'] for p in site['pixels']]); lon = np.array([p['lon'] for p in site['pixels']])
+    dist = np.hypot((lat - st['lat']) * 111320, (lon - st['lon']) * 111320 * np.cos(np.radians(st['lat'])))
+    near = (dist <= anchor_m) & np.isfinite(rate)
+    anchor = float(np.median(rate[near]))
+    up = opera_vs_gnss()['gnss_up_cm_per_year']
+    tied = {str(a): rate - anchor + up * np.cos(np.radians(a)) for a in incidence}
+    ok = np.isfinite(rate)
+    pct = {a: np.percentile(v[ok], [5, 50, 95]) for a, v in tied.items()}
+    mid = (tied[str(incidence[0])] + tied[str(incidence[1])]) / 2
+    order = [int(i) for i in np.argsort(np.where(ok, mid, np.inf))[:6]]
+    return {'samples': int(ok.sum()), 'anchor_samples': int(near.sum()), 'anchor_radius_m': anchor_m,
+            'anchor_opera_cm_per_year': r(anchor, 2), 'median_rate_se': r(np.nanmedian(se), 1),
+            'incidence_deg': list(incidence), 'gnss_up_cm_per_year': up,
+            'percentiles_5_50_95': {a: [r(x, 1) for x in v] for a, v in pct.items()},
+            'sinking_share': r(np.mean(mid[ok] < 0), 3), 'fastest': order,
+            'tied_los_cm_per_year_mid_incidence': [r(v, 1) for v in mid],
+            'assumptions': 'vertical-only GNSS motion; GNSS rate constant to the last OPERA date; Sentinel-1 IW incidence 29-46 deg; one GNSS station; atmosphere not corrected'}
+
+
 def names(sites, ids):
     return ', '.join(sites[i]['name'].split(',')[0] for i in ids)
 
@@ -329,6 +369,16 @@ def build_findings(sites):
         'how_en': f"Linear rates over the common window {v['window'][0]} to {v['window'][1]}: GNSS vertical {v['gnss_up_cm_per_year']} +/- {v['gnss_up_se']} cm/year from {v['gnss_days']} daily NGL solutions, expected along the radar line of sight {v['gnss_expected_los_cm_per_year'][0]} to {v['gnss_expected_los_cm_per_year'][1]} cm/year ({v['assumption']}). OPERA DISP-S1 at sample {v['sample']} ({v['distance_m']} m away): {v['opera_los_cm_per_year_common']} +/- {v['opera_los_se_common']} cm/year from {v['opera_dates_common']} dates; {v['opera_los_cm_per_year_all']} +/- {v['opera_los_se_all']} over all {v['opera_dates_all']}. Tying OPERA to a stable or GNSS-measured reference is required before any rate is quoted.",
         'how_ru': f"Линейные скорости за общее окно {v['window'][0]} - {v['window'][1]}: GNSS по вертикали {v['gnss_up_cm_per_year']} +/- {v['gnss_up_se']} см/год по {v['gnss_days']} суточным решениям NGL, ожидаемо вдоль луча радара {v['gnss_expected_los_cm_per_year'][0]} - {v['gnss_expected_los_cm_per_year'][1]} см/год (только вертикаль, угол падения Sentinel-1 IW 29-46°; горизонтальные скорости GNSS около 1 см/год). OPERA DISP-S1 в точке {v['sample']} ({v['distance_m']} м): {v['opera_los_cm_per_year_common']} +/- {v['opera_los_se_common']} см/год по {v['opera_dates_common']} датам; {v['opera_los_cm_per_year_all']} +/- {v['opera_los_se_all']} по всем {v['opera_dates_all']}. Прежде чем называть скорость, OPERA нужно привязать к стабильной опоре или к GNSS."})
 
+    tie = opera_tied()
+    lo_inc, hi_inc = (str(a) for a in tie['incidence_deg'])
+    med = sorted([tie['percentiles_5_50_95'][lo_inc][1], tie['percentiles_5_50_95'][hi_inc][1]])
+    span = [min(tie['percentiles_5_50_95'][lo_inc][0], tie['percentiles_5_50_95'][hi_inc][0]), max(tie['percentiles_5_50_95'][lo_inc][2], tie['percentiles_5_50_95'][hi_inc][2])]
+    out.append({'id': 'validation-opera-tied', 'strength': 'suggestive', 'site': 'mexico', 'samples': tie['fastest'],
+        'en': f"Tied to the GNSS station, OPERA suggests the sampled part of Mexico City sinks about {abs(med[1]):.0f}-{abs(med[0]):.0f} cm/year along the radar line of sight (median), and {round(100*tie['sinking_share'])}% of points are sinking.",
+        'ru': f"После привязки к GNSS-станции OPERA показывает, что выбранная часть Мехико проседает примерно на {abs(med[1]):.0f}-{abs(med[0]):.0f} см/год вдоль луча радара (медиана), и проседают {round(100*tie['sinking_share'])}% точек.",
+        'how_en': f"Linear OPERA DISP-S1 rate per sample over 16 dates (median standard error {tie['median_rate_se']} cm/year), shifted so that the median of {tie['anchor_samples']} samples within {tie['anchor_radius_m']} m of MMX1 ({tie['anchor_opera_cm_per_year']} cm/year) matches the GNSS vertical rate {tie['gnss_up_cm_per_year']} cm/year projected on the line of sight. 5th-95th percentile across points: {span[0]} to {span[1]} cm/year. Assumptions: {tie['assumptions']}. An estimate, not a validated subsidence map.",
+        'how_ru': f"Линейная скорость OPERA DISP-S1 по 16 датам в каждой точке (медианная ошибка {tie['median_rate_se']} см/год), сдвинутая так, чтобы медиана {tie['anchor_samples']} точек в радиусе {tie['anchor_radius_m']} м от MMX1 ({tie['anchor_opera_cm_per_year']} см/год) совпала с вертикальной скоростью GNSS {tie['gnss_up_cm_per_year']} см/год, спроецированной на луч. 5-95-й перцентили по точкам: от {span[0]} до {span[1]} см/год. Допущения: только вертикальное движение станции, та же скорость GNSS после сохранённого окна, угол падения Sentinel-1 IW 29-46°, одна станция, атмосфера не скорректирована. Это оценка, а не проверенная карта проседания."})
+
     short = [k for k in SITES if k in sites and sites[k]['dates'] < 3]
     if short:
         out.append({'id': 'short-records', 'strength': 'none', 'site': None,
@@ -354,7 +404,7 @@ def main():
         sites[k] = analyse(json.loads(raw), rng)
     result = {'schema_version': 1, 'method': 'scripts/findings.py', 'inputs_sha256': hashes,
               'notes': 'Measured NISAR GCOV and GUNW samples only. No interpolation, gap filling or simulation. Causes are not attributed.',
-              'findings': build_findings(sites), 'sites': sites, 'opera_vs_gnss': opera_vs_gnss()}
+              'findings': build_findings(sites), 'sites': sites, 'opera_vs_gnss': opera_vs_gnss(), 'opera_tied': opera_tied()}
     (ROOT / 'data' / 'findings.json').write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n')
     for f in result['findings']:
         print(f"[{f['strength']:10s}] {f['en']}")

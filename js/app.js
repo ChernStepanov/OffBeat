@@ -356,6 +356,7 @@
     up:        { label: "Vertical motion",               unit: "cm/yr", lo: "-30", hi: "+30", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(30), card: "Vertical", fmt: v => v.toFixed(1) + " cm/yr" },
     east:      { label: "East-west motion",              unit: "cm/yr, east +", lo: "-8", hi: "+8", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)", paint: diverging(8), card: "East-west", fmt: v => v.toFixed(1) + " cm/yr" },
     dense_z:   { label: "Dense HV peer deviation · 2026-09-28", unit: "z · latest date only", lo: "-4 or less", hi: "+4 or more", ramp: "linear-gradient(90deg,#1846d2,#ebebeb,#d22823)" },
+    opera_tied: { label: "Subsidence estimate (OPERA tied to GNSS)", unit: "cm/yr along the radar line, estimate", lo: "-30", hi: "+30", ramp: "linear-gradient(90deg,#c00000,#ffc8a0,#c0c0c0,#aac8ff,#0028c8)" },
     fires:     { label: "Active fires (NASA FIRMS)" },
     alerts:    { label: "Deforestation alerts" }
   };
@@ -437,11 +438,13 @@
   function buildSiteLayers() {
     const s = state.site, have = Object.keys(s.grid.extra || {});
     if (s.context && s.context.dense_z) have.push("dense_z");
+    if (s.id === 'mexico' && OB.findings) have.push("opera_tied");
     if (s.context && s.context.fires) have.push("fires");
     if (s.context && s.context.alerts) have.push("alerts");
     $("site-layers").hidden = !have.length;
     $("site-layer-list").innerHTML = have.map(k =>
       `<label><input type="checkbox" data-layer="${k}"> ${SITE_LAYERS[k].label}</label>`).join("");
+    if (have.includes('opera_tied')) $("site-layer-list").insertAdjacentHTML("beforeend", `<small>OPERA DISP-S1 rates over 16 dates, shifted to match GNSS station MMX1 (vertical only, incidence 29-46 deg, midpoint shown). An estimate, not a validated subsidence map. <a href="data/findings.json">Method and numbers</a>.</small>`);
     if (s.context && s.context.dense_z) $("site-layer-list").insertAdjacentHTML("beforeend", `<small>20 m measured samples, fixed 2026-09-28. Full 1 km peer radius required; missing edges are transparent. WorldCover 2021. <a href="data/amazon/dense-peer-z.json">Source and limitations</a>.</small>`);
     $("legend").hidden = true;
   }
@@ -458,6 +461,13 @@
       if (k === "dense_z") {
         const d = s.context.dense_z, b = d.bounds;
         if (b && d.image_path) state.extra[k] = L.imageOverlay(d.image_path + '?v=' + d.image_sha256, [[b.s,b.w],[b.n,b.e]], { className:'raster', interactive:false, attribution:'NISAR GCOV / ESA WorldCover 2021' }).addTo(map);
+      } else if (k === "opera_tied") {
+        const tie = OB.findings?.data()?.opera_tied;
+        if (!tie) return;
+        const colour = v => { const c = diverging(30)(v); return c ? `rgb(${c[0]},${c[1]},${c[2]})` : '#c0c0c0'; };
+        state.extra[k] = L.layerGroup(s.pixels.map((p, i) => [p, tie.tied_los_cm_per_year_mid_incidence[i]])
+          .filter(([p, v]) => Number.isFinite(v) && Number.isFinite(p.lat))
+          .map(([p, v]) => L.circleMarker([p.lat, p.lon], { radius: 3.5, weight: 0, fillColor: colour(v), fillOpacity: .95, interactive: false }))).addTo(map);
       } else if (k === "fires") {
         const pts = s.context.fires.map(f => L.circleMarker([f.lat, f.lon], { radius: 2.5, color: "#000", weight: 1, fillColor: "#ff6600", fillOpacity: 1 })
           .bindTooltip(`Fire ${f.date}${f.source ? ", " + f.source : ""}`));
