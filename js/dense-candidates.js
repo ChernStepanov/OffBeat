@@ -124,7 +124,7 @@ OB.createDenseCandidates = function (map, leaflet) {
     const item=report?.markers.find(m=>m.id===id);if(!item)return false;current=item;reviews=readReviews(report);
     OB.app?.clearForCandidate?.();OB.evidence?.dismiss?.();$('detected-panel').hidden=false;$('detected-review-status').textContent='';render();refreshCounts();
     const url=new URL(location.href);['sample','case','step','lat','lon'].forEach(k=>url.searchParams.delete(k));url.searchParams.set('site',report.site);url.searchParams.set('candidate',id);history.replaceState(null,'',url);
-    if(scroll)$('detected-panel').scrollIntoView({behavior:'smooth',block:'start'});return true;
+    if(scroll)(OB.pages?.openFor($('detected-panel')), $('detected-panel')).scrollIntoView({behavior:'smooth',block:'start'});return true;
   }
   async function setSite(id){
     const ticket=++serial;clearLayer();report=null;current=null;$('detected-panel').hidden=true;$('detected-list-panel').hidden=true;$('detected-list').replaceChildren();
@@ -158,8 +158,8 @@ OB.createDenseCandidates = function (map, leaflet) {
     OB.app.zoomTo(current.lat, current.lon, 15);
     if (terrain) {
       if ($('scene-win').hidden) $('scene-open').click();
-      else $('scene-win').scrollIntoView({behavior:'smooth',block:'start'});
-    } else $('map-win').scrollIntoView({behavior:'smooth',block:'start'});
+      else (OB.pages?.openFor($('scene-win')), $('scene-win')).scrollIntoView({behavior:'smooth',block:'start'});
+    } else (OB.pages?.openFor($('map-win')), $('map-win')).scrollIntoView({behavior:'smooth',block:'start'});
   }
   $('detected-locate').addEventListener('click',()=>locate(false));
   $('detected-3d').addEventListener('click',()=>locate(true));

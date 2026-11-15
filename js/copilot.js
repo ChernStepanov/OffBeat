@@ -9,8 +9,8 @@ OB.copilot = (() => {
 
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   function say(text, role='assistant') { const n=document.createElement('div');n.className='copilot__message copilot__message--'+role;n.textContent=text;log.append(n);n.scrollIntoView({block:'nearest',behavior:reduced()?'auto':'smooth'});return n; }
-  function reveal(node) { if(node!==box)box.classList.remove('copilot--full');const parent=node.closest('details');if(parent)parent.open=true;node.hidden=false;node.scrollIntoView({block:'start',behavior:reduced()?'auto':'smooth'});if(!reduced())node.animate([{opacity:.2,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:350,easing:'ease-out'}); }
-  function sample() { const s=OB.app.site(),p=OB.app.pixel();return {site:s?.id,sample:p?s.pixels.findIndex(x=>x.id===p.id):null}; }
+  function reveal(node) { OB.pages?.openFor(node); if(node!==box)box.classList.remove('copilot--full');const parent=node.closest('details');if(parent)parent.open=true;node.hidden=false;node.scrollIntoView({block:'start',behavior:reduced()?'auto':'smooth'});if(!reduced())node.animate([{opacity:.2,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:350,easing:'ease-out'}); }
+  function sample() { const s=OB.app.site(),p=OB.app.pixel();return {language:document.documentElement.lang,site:s?.id,sample:p?s.pixels.findIndex(x=>x.id===p.id):null}; }
   function measured() {const s=OB.app.site(),p=OB.app.pixel();if(!p)throw Error('No measured series at the selected location');return {s,p};}
   async function choose(a) {
     if(a.site){if(!OB.app.sites().some(s=>s.id===a.site))throw Error('Unknown measured site');await OB.app.loadSite(a.site);}
@@ -25,7 +25,7 @@ OB.copilot = (() => {
     for(let i=0;i<4;i++){const val=lo+i*(hi-lo)/3;draw('line',{x1:45,x2:610,y1:y(val),y2:y(val),stroke:'#ddd'});draw('text',{x:2,y:y(val)+4,'font-size':12},val.toFixed(1));}
     let path='',connected=false;series.forEach((d,i)=>{if(!Number.isFinite(d.y)){connected=false;return;}if(kind==='line'){path+=`${connected?'L':'M'}${x(i)} ${y(d.y)} `;connected=true;draw('circle',{cx:x(i),cy:y(d.y),r:3,fill:'#008080'});}else draw('rect',{x:45+i*550/series.length,y:y(d.y),width:Math.max(2,550/series.length-3),height:180-y(d.y),fill:'#008080'});});if(kind==='line')draw('path',{d:path,fill:'none',stroke:'#000080','stroke-width':2});
     draw('text',{x:45,y:210,'font-size':12},series[0].x);draw('text',{x:510,y:210,'font-size':12},series.at(-1).x);
-    const figure=document.createElement('figure'),caption=document.createElement('figcaption');caption.textContent=(a.title||`${p.id} / ${channel}`)+` · ${kind==='histogram'?'count':'dB'} · ${s.dates[0]} — ${s.dates.at(-1)} · NASA NISAR`;figure.append(caption,svg);log.append(figure);
+    const figure=document.createElement('figure'),caption=document.createElement('figcaption');caption.textContent=(a.title||`${p.id} / ${channel}`)+` · ${kind==='histogram'?'count':'dB'} · ${s.dates[0]} — ${s.dates.at(-1)} · NASA NISAR`;figure.append(caption,svg);log.append(figure);box.classList.add('copilot--peek');
     return {sample:p.id,dates:s.dates,values:v,units:kind==='histogram'?'count':'dB',source:s.source};
   }
   async function execute(a, cancelled=()=>false){
@@ -71,9 +71,9 @@ OB.copilot = (() => {
   $('copilot-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('copilot-form').requestSubmit();}});
   $('copilot-stop').addEventListener('click',()=>{epoch++;controller?.abort();OB.app?.stop();});
   $('copilot-full').addEventListener('click',()=>{box.classList.toggle('copilot--full');$('copilot-full').setAttribute('aria-pressed',String(box.classList.contains('copilot--full')));});
-  $('copilot-float').addEventListener('click',()=>box.classList.toggle('copilot--float'));
+  $('copilot-float').addEventListener('click',()=>{const floating=box.classList.toggle('copilot--float');if(!floating)OB.pages?.openFor(box);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){box.classList.remove('copilot--full');$('copilot-full').setAttribute('aria-pressed','false');}});
-  document.querySelectorAll('[data-copilot-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.copilotPrompt)));
+  document.querySelectorAll('[data-copilot-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.textContent)));
   let drag=null;box.querySelector('.win-t').addEventListener('pointerdown',e=>{if(!box.classList.contains('copilot--float')||box.classList.contains('copilot--full')||e.target.closest('button'))return;const r=box.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top};e.currentTarget.setPointerCapture(e.pointerId);});
   box.querySelector('.win-t').addEventListener('pointermove',e=>{if(!drag)return;box.style.left=Math.max(0,Math.min(innerWidth-box.offsetWidth,e.clientX-drag.x))+'px';box.style.top=Math.max(0,Math.min(innerHeight-box.offsetHeight-32,e.clientY-drag.y))+'px';box.style.right='auto';box.style.bottom='auto';});box.querySelector('.win-t').addEventListener('pointerup',()=>drag=null);box.querySelector('.win-t').addEventListener('pointercancel',()=>drag=null);
   if(OB.app)$('copilot-send').disabled=false;else document.addEventListener('ob:ready',()=>{$('copilot-send').disabled=false;},{once:true});

@@ -232,4 +232,5 @@
     } catch (_) { statusKey='error';$('research-status').textContent=text(statusKey); }
   })();
   window.OBResearch = { render, renderTable, renderChart, drawChart, safeLocalHref, get language(){return language;} };
+document.addEventListener?.('ob:language-change',e=>{language=e.detail.language==='ru'?'ru':'en';applyLanguage();});
 })();

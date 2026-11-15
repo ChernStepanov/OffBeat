@@ -116,6 +116,6 @@ assert.match(elements['ablation-content'].children[0].textContent,/83/,'3 dB can
 const html=fs.readFileSync('research.html','utf8'), index=fs.readFileSync('index.html','utf8');
 assert.match(fs.readFileSync('js/research.js','utf8'),/data\/research\/results\.json/); // stable future data location
 assert.match(index,/href="research\.html"/);
-assert.match(fs.readFileSync('js/i18n.js','utf8'),/Research results':'Результаты исследования/);
+assert.equal(JSON.parse(fs.readFileSync('locales/source-pairs.json','utf8'))['Research results'],'Результаты исследования');
 assert.match(html,/css\/research\.css/);assert.match(html,/js\/research\.js/);
 console.log('PASS: research page missing state, bilingual rendering, safe text output and chart/table adapter');

@@ -154,4 +154,5 @@
   $('candidate-language').addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';try{localStorage.setItem('offbeat.language.v1',lang);}catch(_){}applyLanguage();});if(lang!=='ru'){applyLanguage();$('candidate-status').textContent=t('loading');}$('filter-kind').addEventListener('change',render);$('filter-status').addEventListener('change',render);initMap();
   fetch('data/investigation/results.json').then(r=>{if(!r.ok)throw new Error('missing');return r.json();}).then(data=>{if(!data||typeof data!=='object'||!Array.isArray(data.candidates))throw new Error('invalid');$('candidate-status').hidden=true;renderPayload(data);}).catch(()=>{$('candidate-status').textContent=t('missing');});
   window.OBCandidates={adapt,adaptRegionalEvents,geometryBounds,safePath,render,renderPayload,renderRecord:selectRecord,setRasterLayers,setPreparedBounds,renderWeather,renderMexico,renderHydrology,renderSources,get records(){return records;},get language(){return lang;},get rasterLayers(){return rasterLayers;},assetURL};
+document.addEventListener?.('ob:language-change',e=>{lang=e.detail.language==='ru'?'ru':'en';applyLanguage();});
 })();

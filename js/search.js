@@ -35,7 +35,7 @@ OB.geocodePlace = async function (query, photon) {
   return features;
 };
 OB.parseCoordinates = function (input) {
-  const s = input.trim();
+  const s = input.normalize('NFKC').trim().replace(/[\u0660-\u0669\u06f0-\u06f9]/g,c=>String(c.charCodeAt(0)-(c.charCodeAt(0)<=0x669?0x660:0x6f0))).replace(/[\u060c\u3001]/g,',').replace(/\u066b/g,'.');
   if (!/^[+\-\d.,\s]+$/.test(s)) return { kind: 'place' };
   const m = s.match(/^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+))\s*(?:,|\s)\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+))\s*$/);
   if (!m) return { kind: 'invalid' };
