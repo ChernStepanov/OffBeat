@@ -32,9 +32,9 @@ The Khimki site was removed because its GCOV values failed physical plausibility
 
 103 Python tests (6 network tests not run) and 20 JS scenarios for data, search, maps, tour and style pass.
 
-## AI tools (Super Intelligence)
+## Team and AI tools (Super Intelligence)
 
-OffBeat was built with OpenAI Codex and Anthropic Claude (Claude Code) as coding and analysis assistants; people chose the idea, handled data credentials, reviewed every change and made the decisions. No image, video or music generation model was used, and no measurement or statistic was produced by an AI model. Who did what: [docs/ai-use.md](docs/ai-use.md).
+OffBeat was built by a team of seven contributors: the idea, data choices, design, analysis direction, reviews and every decision are theirs. Team members used OpenAI Codex and Anthropic Claude (Claude Code) as coding assistants on their own tasks. No image, video or music generation model was used, and no measurement or statistic was produced by an AI model. Who did what: [docs/ai-use.md](docs/ai-use.md).
 
 ## Run in five minutes
 

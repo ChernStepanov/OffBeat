@@ -1,71 +1,68 @@
-# How we used AI tools ("Super Intelligence" disclosure)
+# How we built OffBeat and where AI tools helped ("Super Intelligence" disclosure)
 
 Space Apps 2026 allows participants to use LLMs, chatbots, image or video generation, foundation
-models and code generation, and asks every submission to say how. This page is that statement for
-OffBeat. It is reconstructed from the repository history (231 commits as of 15 November 2026) and
-the team's working sessions; where a commit does not record which tool helped, the attribution below
-is by area, not commit by commit.
+models and code generation, and asks every submission to say how. This page is that statement. It is
+reconstructed from the repository history (more than 230 commits from seven contributors as of
+15 November 2026) and the team's working sessions.
 
-## Tools
+## The team's work
 
-| Tool | How it was used |
+OffBeat is the team's project: the idea, the science questions, the choice of data and sites, the
+design and every decision came from people. Team members wrote, reviewed and merged the work, and
+used AI coding assistants on their own tasks, the way one uses an editor or a compiler.
+
+- **Chern Stepanov** (project lead): the concept of "hearing" radar pixels that fall out of step with
+  their neighbours, the challenge choice, the Windows 98 design direction, the first skeleton, sounds
+  and story mode, deployment on GitHub Pages with the custom domain, NASA Earthdata access and data-use
+  terms, the statistical "What the data says" direction, removing implausible data (Khimki), the
+  Apache-2.0 licence, the idea and review of the presentation video, design reviews of every screen, and all merges and pushes.
+- **Anita Lapushkina:** the guided investigations and evidence passport, "Surprise me", the landing,
+  dated optical evidence for samples, the Amazon benchmark with leakage safeguards and alert screening,
+  synchronised 2D/3D navigation, the topographic map draped on the 3D terrain, and the audits that keep
+  the project honest: hackathon alignment and claims, OPERA/NISAR timing, and the sensitivity of the
+  GNSS anchoring.
+- **Ilya Karsakov:** anomaly computation on the real NISAR series, Sentinel-2 images matched to NISAR
+  dates with RGB cut-outs, the optical date selector, validation of Amazon candidates against
+  independent data and confirmed GLAD pixels, and fixes to the guided tour and map switching.
+- **Nikita:** the Win98 3D scene explorer with linked maps and the NISAR point cloud, real 3D terrain
+  streamed worldwide, expandable instrument windows, and the guided Amazon investigation with
+  shareable evidence cards.
+- **ir00nman:** grab-to-pan navigation in 3D and the map maximize control.
+- **rimgro:** the SAR anomaly exploration dashboard and the reproducible Amazon ranking benchmark.
+- **Fedor:** pull-request review and merges.
+
+People also logged in to NASA Earthdata and accepted data-use terms themselves and kept credentials
+out of every AI tool, tested the app, and checked AI output. For example, a team member's
+reference-sensitivity audit showed that an earlier AI-written sentence overstated the GNSS/OPERA
+difference, and the team corrected the claim on the site, in the video, README and slides.
+
+## AI tools we used
+
+| Tool | Role |
 |---|---|
-| **OpenAI Codex** (coding agent) | Implementation, data-processing code, tests, evidence audits and draft documents. Its own commits are authored `Codex` / `CodexSandboxOffline`; team members also worked with it on `codex/...` branches. |
-| **Anthropic Claude** (Claude Code, Claude Opus model) | Implementation, design, data analysis code, statistics, documentation and the presentation video, driven from a team member's machine. Its commits are recorded under that team member's git identity. |
+| **OpenAI Codex** (coding agent) | Used by team members for implementation, data-processing code, tests and drafting audits and documents. Commits it made directly are authored `Codex` / `CodexSandboxOffline`; others went through team members' `codex/...` branches. |
+| **Anthropic Claude** (Claude Code) | Used by the project lead for implementation, interface work, statistics code, documentation and the video pipeline, under the lead's direction and review. Its commits are recorded under the lead's git identity. |
 
-No image, video or music generation model was used. No satellite measurement, map value or
-statistic was produced by an AI model: every number comes from code run on the measured NASA,
-ESA and Copernicus files listed in the README, and synthetic data is rejected by the loader
-(`js/data.js`).
+Where the assistants helped most:
 
-## What OpenAI Codex did
+- **Codex:** the worldwide NISAR view and tile caching, multilingual place search, content-hashed
+  assets, verified sample analysis with dated optical previews, ERA5 context, issue summaries, the
+  slide draft and submission checklist, and drafting the team's audits.
+- **Claude:** Win98 interface details and UI sounds, the date-coloured NISAR coverage layer,
+  Sentinel-1 / OPERA readers, the `scripts/findings.py` statistics (clustering, false-discovery-controlled
+  trends, polarisation, GNSS/OPERA comparison), interface simplification, and the scripts that render
+  the presentation video and its Win98-style player.
 
-- Worldwide NISAR view with optional local overlays, transparent radar tiles, retrying and caching
-  NISAR tile requests with an honest "incomplete coverage" report.
-- Multilingual place search (GeoNames with Photon fallback, Unicode support).
-- Verified sparse-sample analysis, dated Sentinel-2 previews and issue evidence; retrospective ERA5
-  precipitation context for Amazon samples.
-- Content-hash pinning of JS/CSS so visitors never see a stale mix of files; consistent hashing across
-  Windows and deployment line endings.
-- Issue audits and status summaries, QA totals, the reviewed slide draft and submission checklist,
-  and, with a team member, the reference-sensitivity audit of the GNSS/OPERA comparison.
-- Visual audit work on `codex/master-visual-audit`: dated optical evidence centred on the selected
-  sample, homepage and help simplifications.
+## What AI did not do
 
-## What Anthropic Claude did
-
-- **Interface:** the Windows 98 look (windows, title bars, bevels, W95FA pixel font, buttons,
-  disclosures), Win98 UI sounds, story mode, the landing, a palette test that keeps pale "modern"
-  panels out, and later simplification (collapsed layers, 3D terrain on demand, removed clutter).
-- **Maps:** NISAR coverage coloured by acquisition date from NASA GIBS (requests only the dates that
-  cover a tile, ends on the last fully published day, hides at close zoom), fix for stale tiles of other
-  zoom levels showing through, map samples that follow the selected date, playback that animates the
-  map through acquisition dates.
-- **Data and science code:** Sentinel-1 / NASA OPERA RTC-S1 readers at the NISAR sample points
-  (the Earthdata token was handled by a team member only), additional measured NISAR sites, and
-  `scripts/findings.py`: join-count permutation tests for spatial clustering, peer-band calibration,
-  12-day noise floor, scene-wide shift detection, persistence, Kendall trend tests with
-  Benjamini-Hochberg false-discovery control, HH/HV complementarity, physics and coherence checks by
-  land cover, a physical plausibility gate (which led the team to remove the Khimki site), and the
-  OPERA DISP-S1 versus GNSS MMX1 comparison with a clearly labelled GNSS-anchored estimate.
-- **Explanations:** plain-language findings with "How we know" and labelled hypotheses about physical
-  drivers ("Why might this happen?"), in English and Russian.
-- **Submission material:** the 29.6-second video and its sources (`docs/submission/video/`), the
-  Win98-style player on the site, updates to the slides, submission draft, README and QA report.
-  The video is built from screenshots of the running app and a chart of measured data, rendered
-  frame by frame from HTML; its music is synthesised by a small Python program, and the melody in the
-  chart scene is the sonification of a measured sample.
-
-## What people did
-
-- Chose the challenge, the idea of hearing radar "off-beat" pixels, the sites and the overall design.
-- Logged in to NASA Earthdata, accepted data-use terms and kept credentials out of every tool.
-- Reviewed and steered every change, merged branches, and approved each push to GitHub.
-- Made the decisions: removing the implausible Khimki data, the Apache-2.0 licence, wording of claims,
-  what goes into the video and the submission.
-- Audited AI output: for example, a team member's reference-sensitivity audit (prepared with Codex) showed that an earlier
-  AI-written sentence overstated the GNSS/OPERA difference, and the claim was corrected on the site,
-  in the video, README and slides.
+- No image, video or music generation model was used. The video is rendered frame by frame from
+  screenshots of the running app and a chart of measured data; its music is synthesised by a small
+  program, and the melody is the sonification of a measured sample.
+- No satellite measurement, map value or statistic was produced by an AI model: every number comes
+  from code run on the measured NASA, ESA and Copernicus files listed in the README, and the loader
+  rejects synthetic data (`js/data.js`).
+- AI tools did not make the project's decisions or publish anything on their own: people reviewed
+  each change and approved every push.
 
 ## Safeguards
 
