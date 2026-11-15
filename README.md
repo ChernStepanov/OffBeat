@@ -43,16 +43,16 @@ For dataset inventory, endpoint checks and safe catalogue discovery, see the
 | Mexico City | 29, 2025-10-30 to 2026-10-13 | 357/1024, one 12-day pair | 29/29 radar dates |
 | Itupiranga, Para | 6, 2026-07-18 to 2026-09-28 | 0 | 6/6 radar dates |
 | Caracas | 6, 2025-11-09 to 2026-01-08 | 0 | 5/6 radar dates |
-| New Delhi, India | 2, 2025-11-21 to 2025-12-03 | 0 | not prepared |
-| Tokyo, Japan | 2, 2025-10-31 to 2025-11-12 | 803/1024, one 12-day pair | not prepared |
-| Nairobi, Kenya | 2, 2026-06-30 to 2026-07-12 | 593/1024, one 12-day pair | not prepared |
-| Sydney, Australia | 2, 2026-06-25 to 2026-07-07 | 573/1024, one 12-day pair | not prepared |
+| New Delhi, India | 2, 2025-11-21 to 2025-12-03 | 0 | 2 radar dates, one distinct optical image |
+| Tokyo, Japan | 2, 2025-10-31 to 2025-11-12 | 803/1024, one 12-day pair | 2 distinct optical images |
+| Nairobi, Kenya | 2, 2026-06-30 to 2026-07-12 | 593/1024, one 12-day pair | 2 radar dates, one distinct optical image |
+| Sydney, Australia | 2, 2026-06-25 to 2026-07-07 | 573/1024, one 12-day pair | 2 radar dates, one distinct optical image |
 
 Each site has 1024 sparse nearest-native sample locations. Missing and rejected observations stay null. GUNW has a separate date axis; its first zero is a reference convention. No vertical velocity, building-damage map, confirmed clearing area or forecast accuracy is claimed.
 
-The Delhi and Tokyo sites each cover a small 0.025° × 0.025° window, not the whole city. Their two GCOV dates are insufficient for curve-shape classification or a trend. Tokyo's GUNW pair is an apparent relative LOS change, not an independently validated ground-motion rate; no Delhi GUNW samples passed the quality mask. Dated optical images are not yet prepared for these two sites; the Esri mosaic is context only.
+The Delhi and Tokyo sites each cover a small 0.025° × 0.025° window, not the whole city. Their two GCOV dates are insufficient for curve-shape classification or a trend. Tokyo's GUNW pair is an apparent relative LOS change, not an independently validated ground-motion rate; no Delhi GUNW samples passed the quality mask. The Esri mosaic is context only; dated Sentinel-2 previews are separate.
 
-Nairobi and Sydney likewise cover only small 0.025° × 0.025° windows, with two GCOV dates and no dated optical preview. Khimki was removed: its GCOV values failed physical plausibility checks (HV above HH and above 0 dB, ~10 dB swings in 12 days). accepted Nairobi and Sydney pairs show apparent relative LOS change, not validated rates. Two dates are insufficient to classify curve shapes or determine a trend.
+Nairobi and Sydney likewise cover only small 0.025° × 0.025° windows, with two GCOV dates; accepted Nairobi and Sydney pairs show apparent relative LOS change, not validated rates. Two dates are insufficient to classify curve shapes or determine a trend. Dated optical previews are context, not independently confirmed event evidence. A Khimki site was removed: its GCOV values failed physical plausibility checks (HV above HH and above 0 dB, about 10 dB swings in 12 days).
 
 - `data/<site>.json`: measured values, leave-one-out peer bands, latest robust z, exploratory curve shapes and GUNW quality/provenance.
 - `data/<site>-manifest.json`: producer/CMR IDs, dates, tracks, footprints, polarizations and URLs. `data/subsets/`: numeric subsets and SHA-256 receipts.

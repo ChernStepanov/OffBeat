@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "site": "delhi",
+  "bbox": {
+    "w": 77.1975,
+    "s": 28.5975,
+    "e": 77.2225,
+    "n": 28.6225
+  },
+  "checked_at": "2026-11-15T09:07:32.372108+00:00",
+  "catalogue": "https://earth-search.aws.element84.com/v1/search",
+  "query": {
+    "collections": [
+      "sentinel-2-l2a"
+    ],
+    "bbox": [
+      77.1975,
+      28.5975,
+      77.2225,
+      28.6225
+    ],
+    "datetime": "2025-11-06T00:00:00Z/2025-12-18T23:59:59Z",
+    "limit": 100
+  },
+  "selection": "lowest scene cloud fraction among scenes with >=80% locally clear AOI, then nearest date; +/-15 days",
+  "entries": [
+    {
+      "nisar_date": "2025-11-21",
+      "source": "Copernicus Sentinel-2 L2A / Earth Search",
+      "scene_id": "S2B_43RGM_20251129_0_L2A",
+      "date": "2025-11-29",
+      "scene_cloud_percent": 0.000498,
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_43RGM_20251129_0_L2A",
+      "assets": {
+        "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/B04.tif",
+        "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/B03.tif",
+        "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/B02.tif",
+        "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/SCL.tif"
+      },
+      "status": "ready",
+      "aoi_cloud_shadow_snow_fraction": 0.0,
+      "aoi_clear_fraction": 0.999298095703125,
+      "path": "data/delhi/optical/S2B_43RGM_20251129_0_L2A.png",
+      "sha256": "57541f4823a418d4a4d1337ea2192aa56581274089e9e3dcabe3f49d49ae6e13",
+      "bounds": {
+        "w": 77.1975,
+        "s": 28.5975,
+        "e": 77.2225,
+        "n": 28.6225
+      },
+      "calibration": {
+        "red": {
+          "scale": 0.0001,
+          "offset": 0,
+          "provider_boa_offset_applied": true
+        },
+        "green": {
+          "scale": 0.0001,
+          "offset": 0,
+          "provider_boa_offset_applied": true
+        },
+        "blue": {
+          "scale": 0.0001,
+          "offset": 0,
+          "provider_boa_offset_applied": true
+        }
+      },
+      "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+    },
+    {
+      "nisar_date": "2025-12-03",
+      "source": "Copernicus Sentinel-2 L2A / Earth Search",
+      "scene_id": "S2B_43RGM_20251129_0_L2A",
+      "date": "2025-11-29",
+      "scene_cloud_percent": 0.000498,
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_43RGM_20251129_0_L2A",
+      "assets": {
+        "red": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/B04.tif",
+        "green": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/B03.tif",
+        "blue": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/B02.tif",
+        "scl": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/R/GM/2025/11/S2B_43RGM_20251129_0_L2A/SCL.tif"
+      },
+      "status": "ready",
+      "aoi_cloud_shadow_snow_fraction": 0.0,
+      "aoi_clear_fraction": 0.999298095703125,
+      "path": "data/delhi/optical/S2B_43RGM_20251129_0_L2A.png",
+      "sha256": "57541f4823a418d4a4d1337ea2192aa56581274089e9e3dcabe3f49d49ae6e13",
+      "bounds": {
+        "w": 77.1975,
+        "s": 28.5975,
+        "e": 77.2225,
+        "n": 28.6225
+      },
+      "calibration": {
+        "red": {
+          "scale": 0.0001,
+          "offset": 0,
+          "provider_boa_offset_applied": true
+        },
+        "green": {
+          "scale": 0.0001,
+          "offset": 0,
+          "provider_boa_offset_applied": true
+        },
+        "blue": {
+          "scale": 0.0001,
+          "offset": 0,
+          "provider_boa_offset_applied": true
+        }
+      },
+      "processing": "AOI-only reads; EPSG:4326, 256x256; fixed reflectance stretch 0..0.3 and gamma 2.2 for every date; cloud/shadow/snow/nodata transparent"
+    }
+  ]
+}

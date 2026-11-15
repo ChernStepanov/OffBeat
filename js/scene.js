@@ -296,7 +296,8 @@
     cancelSearch();
     canvas.focus({ preventScroll: true });
     const start = pointer(event);
-    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, button: event.button, pan: event.button === 0 && !event.shiftKey };
+    const pan = event.button === 0 && !event.shiftKey;
+    dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, button: event.button, pan, anchor: pan ? gpu?.grabGround(start.x, start.y) : null };
     canvas.setPointerCapture(event.pointerId);
     canvas.classList.add('is-dragging');
   });
@@ -306,7 +307,12 @@
       const dx = p.x - dragging.x, dy = p.y - dragging.y;
       if (Math.hypot(p.x - dragging.startX, p.y - dragging.startY) > 3) dragging.moved = true;
       if (dragging.moved) {
-        if (dragging.pan) { gpu?.pan(dx, dy); syncToMaps(); }
+        if (dragging.pan) {
+          // the grabbed ground point follows the cursor; pixel pan only if the start missed the ground
+          if (dragging.anchor) gpu?.dragTo(dragging.anchor, p.x, p.y);
+          else gpu?.pan(dx, dy);
+          syncToMaps();
+        }
         else {
           // A drag from the fixed top view becomes a free 3D orbit.
           if (view === 'plan') setView('orbit');
@@ -329,9 +335,10 @@
       else if (hit) OB.app.pickCell(hit.index, false);
     }
     dragging = null; canvas.classList.remove('is-dragging');
+    gpu?.endDrag();   // the camera may follow the terrain height again
     if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
   });
-  const cancelDrag = () => { dragging = null; canvas.classList.remove('is-dragging'); };
+  const cancelDrag = () => { dragging = null; canvas.classList.remove('is-dragging'); gpu?.endDrag(); };
   canvas.addEventListener('pointercancel', cancelDrag); canvas.addEventListener('lostpointercapture', cancelDrag);
   canvas.addEventListener('contextmenu', event => event.preventDefault());
   canvas.addEventListener('pointerleave', () => { hovered = null; schedule(); });
