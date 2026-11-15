@@ -1,0 +1,122 @@
+{
+  "id": "review-queue-development-v1",
+  "mode": "retrospective_development",
+  "decision_date": "2026-09-28",
+  "generator_sha256": "3b2e20695779a598d14098782b9f66e41b12b7aaccd8fae9379f6f1bfc5a52ab",
+  "input_sha256": {
+    "data/review-queue/protocol-v1.json": "37b7c2db23f3c77af0d5339fcd3796530565d1ab014ccc9b07f322915a806bdd",
+    "data/amazon.json": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729",
+    "data/amazon/sentinel1.json": "05e8439158f2fc6514692b1dca936629dfd154b86ec9edb571dbe905c33bce52",
+    "data/amazon-spatial-external-audit-v2.json": "3b17ab4fbc699d15dcc36eae402df6a2b2b976bc1028521062491704b1dfce4c",
+    "data/analysis/amazon-era5.json": "f9fffcc54bd2417c0a644cc76d9a65ce98e85b9ddcdb304a0c2b90d33622d3ed"
+  },
+  "comparison": {
+    "s1_only": {
+      "eligible_common_samples": 575,
+      "review_budget": 10,
+      "review_locations_returned": 10,
+      "top_ids": [
+        "AMA r13 c19",
+        "AMA r5 c15",
+        "AMA r2 c25",
+        "AMA r25 c4",
+        "AMA r8 c21",
+        "AMA r6 c24",
+        "AMA r30 c4",
+        "AMA r28 c9",
+        "AMA r25 c29",
+        "AMA r18 c9"
+      ],
+      "independent_labels": 0,
+      "event_precision": null,
+      "event_recall": null,
+      "manual_work_reduction": null
+    },
+    "s1_nisar": {
+      "eligible_common_samples": 575,
+      "review_budget": 10,
+      "review_locations_returned": 10,
+      "top_ids": [
+        "AMA r21 c0",
+        "AMA r5 c14",
+        "AMA r13 c19",
+        "AMA r20 c20",
+        "AMA r2 c25",
+        "AMA r1 c31",
+        "AMA r28 c1",
+        "AMA r23 c16",
+        "AMA r26 c4",
+        "AMA r17 c29"
+      ],
+      "independent_labels": 0,
+      "event_precision": null,
+      "event_recall": null,
+      "manual_work_reduction": null
+    },
+    "s1_nisar_context": {
+      "eligible_common_samples": 575,
+      "review_budget": 10,
+      "review_locations_returned": 10,
+      "top_ids": [
+        "AMA r21 c0",
+        "AMA r5 c14",
+        "AMA r13 c19",
+        "AMA r20 c20",
+        "AMA r2 c25",
+        "AMA r1 c31",
+        "AMA r28 c1",
+        "AMA r23 c16",
+        "AMA r26 c4",
+        "AMA r17 c29"
+      ],
+      "independent_labels": 0,
+      "event_precision": null,
+      "event_recall": null,
+      "manual_work_reduction": null
+    }
+  },
+  "ranking_changes": {
+    "s1_nisar": {
+      "shared_with_s1_top_budget": 2,
+      "new_review_locations": [
+        "AMA r1 c31",
+        "AMA r17 c29",
+        "AMA r20 c20",
+        "AMA r21 c0",
+        "AMA r23 c16",
+        "AMA r26 c4",
+        "AMA r28 c1",
+        "AMA r5 c14"
+      ],
+      "interpretation": "A changed priority list is not an improvement in event accuracy."
+    },
+    "s1_nisar_context": {
+      "shared_with_s1_top_budget": 2,
+      "new_review_locations": [
+        "AMA r1 c31",
+        "AMA r17 c29",
+        "AMA r20 c20",
+        "AMA r21 c0",
+        "AMA r23 c16",
+        "AMA r26 c4",
+        "AMA r28 c1",
+        "AMA r5 c14"
+      ],
+      "interpretation": "A changed priority list is not an improvement in event accuracy."
+    }
+  },
+  "evaluation": {
+    "status": "blocked_missing_independent_events",
+    "independent_event_groups": 0,
+    "accuracy": null,
+    "manual_work_reduction": null,
+    "target_manual_work_reduction": 0.25
+  },
+  "limitations": [
+    "Previously explored AOI; fixed development configuration, not preregistration or independent evaluation.",
+    "Retrospective snapshot. Acquisition dates are aligned; historical product publication availability is not established.",
+    "Heuristic scores are not event probabilities. Sensor thresholds do not establish the same physical response.",
+    "Spacing reduces duplicate inspections, not event dependence. All samples remain one development group.",
+    "A clear SCL pair is not a reviewed disturbance label. Absence of alerts is not a negative label."
+  ]
+}
