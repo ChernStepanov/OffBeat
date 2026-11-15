@@ -1,7 +1,7 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
-    'How to use Surprise me':'Как пользоваться «Удиви меня»',
+    'How Surprise me works':'Как пользоваться и как работает «Удиви меня»',
     'Press Surprise me to open a prepared story or an automatically selected measured sample.':'Нажмите «Удиви меня», чтобы открыть подготовленную историю или автоматически выбранную точку измерений.',
     'Use the numbered steps or arrows to see the place, radar signal, images and conclusion.':'Переходите по шагам или стрелкам: место, сигнал радара, снимки и вывод.',
     'Compare the dates and neighbours; where two optical images exist, move the slider to compare them.':'Сравните даты и соседние точки. Если есть два оптических снимка, передвигайте ползунок для сравнения.',

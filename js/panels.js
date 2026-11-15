@@ -11,5 +11,13 @@
     if (link) reveal(link.getAttribute('href'));
   });
   window.addEventListener('hashchange', () => reveal(location.hash));
+  // Browsers may restore previously opened details on reload or history navigation.
+  // Keep explicit links to a sample or section intact.
+  window.addEventListener('pageshow', () => {
+    const query = new URLSearchParams(location.search);
+    if (!location.hash && !query.has('case') && !query.has('sample')) {
+      document.querySelectorAll('details[open]').forEach(panel => { panel.open = false; });
+    }
+  });
   reveal(location.hash);
 })();
