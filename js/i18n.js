@@ -12,7 +12,7 @@ OB.i18n=(()=>{
   const select=document.createElement('select');select.id='language-select';select.setAttribute('aria-label','Language / Язык');select.dataset.noTranslate='';
   for(const[code,label]of Object.entries(languages)){const option=document.createElement('option');option.value=code;option.textContent=label;select.append(option);}select.value=language;
   (legacy?.parentElement||document.querySelector('header')||document.body).append(select);if(legacy)legacy.hidden=true;
-  const skip=n=>n.parentElement?.closest('script,style,textarea,code,pre,svg,canvas,.leaflet-container,.copilot__log,#place-results,[data-no-translate],#language-select');
+  const skip=n=>n.parentElement?.closest('script,style,textarea,code,pre,svg,canvas,.leaflet-container,#place-results,[data-no-translate],#language-select');
   function translate(value){const entry=index.get(signature(value));if(!entry)return value;const id=entry.id,captured=norm(value).match(numeric)||[],numbers=[];if(entry.order.some(i=>i<0))return value;entry.order.forEach((source,i)=>numbers[source]=captured[i]);let target=catalogues[language]?.[id]??catalogues.en?.[id];if(!target)return value;const wanted=[...target.matchAll(/\{(\d+)\}/g)].map(m=>+m[1]);if(wanted.some(i=>i>=numbers.length))return value;target=norm(target);
     return value.match(/^\s*/)[0]+target.replace(/\{(\d+)\}/g,(_,i)=>{const n=numbers[i];return n===undefined?'':language==='ar'?'\u2066'+n+'\u2069':n;})+value.match(/\s*$/)[0];}
   function text(n){if(!n.parentElement||skip(n)||!n.nodeValue.trim())return;let m=originals.get(n);if(!m||n.nodeValue!==m.output)m={source:n.nodeValue};const output=translate(m.source);m.output=output;originals.set(n,m);if(n.nodeValue!==output)n.nodeValue=output;}

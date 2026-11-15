@@ -13,7 +13,6 @@
     "ja",
     "ar"
   ],
-  "generation": "Offline Groq catalogues; gpt-oss-20b and gpt-oss-120b; reviewed UI overrides are checked in separately.",
-  "runtime_translation_api": false,
-  "chat_model": "openai/gpt-oss-20b"
+  "generation": "Checked-in local catalogues, originally generated offline; reviewed overrides are checked in separately. No model or translation API is used by the application or catalogue builder.",
+  "runtime_translation_api": false
 }

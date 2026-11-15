@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 from http.server import ThreadingHTTPServer
 from urllib.error import HTTPError
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 from api.server import APIError, Handler, dispatch, patches
 
@@ -33,6 +33,14 @@ class APITest(unittest.TestCase):
         with urlopen(self.url + path) as response:
             self.assertIn('application/json', response.headers['Content-Type'])
             return json.load(response)
+
+    def test_removed_assistant_endpoint(self):
+        request = Request(self.url + '/copilot', data=b'{"messages":[]}',
+                          headers={'Content-Type': 'application/json'})
+        with self.assertRaises(HTTPError) as error:
+            urlopen(request)
+        self.assertEqual(error.exception.code, 404)
+        self.assertIn('Unknown endpoint', error.exception.read().decode())
 
     def test_sites_and_pixel_series(self):
         self.assertEqual(self.get('/health')['status'], 'ok')

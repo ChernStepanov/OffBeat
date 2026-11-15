@@ -34,8 +34,5 @@ class LocalesTests(unittest.TestCase):
     def test_negative_values_are_placeholder_values_not_duplicate_signs(self):
         text=template('Joint HH/HV \u2264 \u22123 dB flag')
         self.assertEqual(text,'Joint HH/HV <= {0} dB flag')
-    def test_chat_model_is_not_changed_by_offline_translation(self):
-        from api.copilot import MODEL
-        self.assertEqual(MODEL,'openai/gpt-oss-20b')
 
 if __name__=='__main__':unittest.main()
