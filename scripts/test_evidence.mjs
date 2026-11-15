@@ -7,6 +7,9 @@ vm.runInNewContext(fs.readFileSync('js/evidence-model.js', 'utf8'), context);
 const model = context.OB.evidenceModel;
 const book = JSON.parse(fs.readFileSync('data/cases/amazon-v1.json'));
 const site = JSON.parse(fs.readFileSync('data/amazon.json'));
+assert.deepEqual(Array.from(model.timeline(['2026-01-01','2026-01-02','2026-01-11'])), [0, 0.1, 1]);
+assert.deepEqual(Array.from(model.timeline(['2026-01-01'])), [0.5]);
+assert.throws(() => model.timeline(['2026-01-02','2026-01-01']), /strictly increasing/);
 const candidate = book.cases[0], pixel = site.pixels[candidate.sample_index];
 for (const [path, hash] of Object.entries(book.input_sha256)) {
   assert.equal(createHash('sha256').update(fs.readFileSync(path)).digest('hex'), hash, `Stale evidence input: ${path}`);

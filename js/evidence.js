@@ -55,7 +55,8 @@ OB.evidence = (() => {
     svg.setAttribute('aria-label', t('HV backscatter: sample and same-class peer median. Values are in the table below.', 'HV: точка и медиана соседей того же класса. Значения в таблице ниже.'));
     const values = [...pixel.hv, ...(pixel.peer?.hv_med || [])].filter(Number.isFinite);
     const lo = Math.min(...values) - 1, hi = Math.max(...values) + 1;
-    const x = i => 45 + i * 510 / Math.max(1, site.dates.length - 1), y = v => 125 - (v - lo) * 100 / (hi - lo);
+    const positions = model.timeline(site.dates);
+    const x = i => 45 + positions[i] * 510, y = v => 125 - (v - lo) * 100 / (hi - lo);
     function node(tag, attrs, text) { const n = document.createElementNS(svgNS, tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); if (text) n.textContent = text; svg.append(n); }
     for (let i = 0; i < 3; i++) {
       const v = lo + i * (hi - lo) / 2;

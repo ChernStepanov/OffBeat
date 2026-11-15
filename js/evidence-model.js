@@ -2,6 +2,14 @@
 window.OB = window.OB || {};
 OB.evidenceModel = (() => {
   const finite = x => Number.isFinite(x) ? x : null;
+  function timeline(dates) {
+    if (!dates.length) return [];
+    const times = dates.map(date => Date.parse(date + 'T00:00:00Z'));
+    if (times.some(t => !Number.isFinite(t)) || times.some((t, i) => i > 0 && t <= times[i - 1]))
+      throw new Error('Timeline dates must be valid and strictly increasing');
+    const span = times.at(-1) - times[0];
+    return times.map(t => span ? (t - times[0]) / span : 0.5);
+  }
   function link(base, site, pixel, date, caseId, step = 0) {
     const url = new URL(base);
     for (const key of ['lat', 'lon', 'view', 'case', 'sample', 'date', 'step']) url.searchParams.delete(key);
@@ -48,5 +56,5 @@ OB.evidenceModel = (() => {
     return {type: 'FeatureCollection', features: [{type: 'Feature', geometry: {type: 'Point',
       coordinates: [report.coordinates.lon, report.coordinates.lat]}, properties: report}]};
   }
-  return {link, selection, report, geojson};
+  return {timeline, link, selection, report, geojson};
 })();
