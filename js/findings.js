@@ -176,6 +176,9 @@ window.OB = window.OB || {};
     volume.addEventListener('input', () => { player.volume = volume.value / 100; player.muted = false; mute.setAttribute('aria-pressed', 'false'); });
     mute.addEventListener('click', () => { player.muted = !player.muted; mute.setAttribute('aria-pressed', String(player.muted)); });
     player.volume = volume.value / 100;
+    // start downloading as soon as the visitor shows intent, so the first frames are ready by the click
+    const warm = () => { if (player.preload !== 'auto') { player.preload = 'auto'; player.load(); } };
+    ['pointerenter', 'focus', 'touchstart'].forEach(e => $('video-open')?.addEventListener(e, warm, { passive: true }));
     $('video-open')?.addEventListener('click', () => { const stop = $('stop'); if (stop && !stop.disabled) stop.click(); modal.hidden = false; play(); $('video-close').focus(); });
     $('video-close')?.addEventListener('click', closeVideo);
     modal.addEventListener('click', e => { if (e.target === modal) closeVideo(); });

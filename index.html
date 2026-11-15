@@ -453,7 +453,7 @@
       <button type="button" role="menuitem" id="mp-menu-play">Play</button>
       <a role="menuitem" href="docs/submission/video/README.md" target="_blank" rel="noopener">Help</a>
     </div>
-    <div class="mp__screen"><video id="video-player" preload="metadata" playsinline src="docs/submission/offbeat-video.mp4"></video></div>
+    <div class="mp__screen"><video id="video-player" preload="none" playsinline poster="docs/submission/offbeat-video-poster.jpg"><source src="docs/submission/offbeat-video.webm" type='video/webm; codecs="vp9, opus"'><source src="docs/submission/offbeat-video.mp4" type="video/mp4"></video></div>
     <input type="range" class="mp__seek" id="mp-seek" min="0" max="1000" value="0" step="1" aria-label="Position">
     <div class="mp__controls">
       <button type="button" class="mp__btn" id="mp-play" aria-label="Play"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M2 1h1v9H2zM3 2h1v7H3zM4 3h1v5H4zM5 4h1v3H5zM6 5h1v1H6z" fill="#000"/></svg></button>
@@ -532,7 +532,7 @@
 <script src="js/evidence-model.js?v=95f9fa1dd610"></script>
 <script src="js/panels.js?v=6e020a23003e"></script>
 <script src="js/evidence.js?v=11665f6c52c6"></script>
-<script src="js/findings.js?v=a175336d3797"></script>
+<script src="js/findings.js?v=86ea53095e87"></script>
 <script src="js/app.js?v=5be5c5b07ef7"></script>
 </body>
 </html>
