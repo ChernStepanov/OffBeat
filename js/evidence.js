@@ -192,8 +192,8 @@ OB.evidence = (() => {
       OB.app.zoomTo(pixel.lat, pixel.lon, 15);
       if (terrain) {
         if ($('scene-win').hidden) $('scene-open').click();
-        else $('scene-win').scrollIntoView({behavior: 'smooth', block: 'start'});
-      } else $('map-win').scrollIntoView({behavior: 'smooth', block: 'start'});
+        else (OB.pages?.openFor($('scene-win')), $('scene-win')).scrollIntoView({behavior: 'smooth', block: 'start'});
+      } else (OB.pages?.openFor($('map-win')), $('map-win')).scrollIntoView({behavior: 'smooth', block: 'start'});
     }
     placeActions.append(button(t('Show on maps', 'Показать на картах'), () => locate(false)),
       button(t('View this place in 3D', 'Посмотреть это место в 3D'), () => locate(true)));
@@ -277,7 +277,7 @@ OB.evidence = (() => {
       active = dossier?.id || null; engaged = true; step = options.step ?? (dossier ? 0 : 3);
       $('evidence-disclosure').open = true;
       render(); persist();
-      if (options.scroll !== false) { $('evidence-win').scrollIntoView({behavior: 'smooth', block: 'start'}); $('case-page').focus({preventScroll: true}); }
+      if (options.scroll !== false) { (OB.pages?.openFor($('evidence-win')), $('evidence-win')).scrollIntoView({behavior: 'smooth', block: 'start'}); $('case-page').focus({preventScroll: true}); }
     } catch (_) {
       $('case-status').textContent = t('Could not open the sample. Please choose an example again.', 'Не удалось открыть точку. Выберите пример ещё раз.');
     } finally { if (ticket === serial) opening = false; }

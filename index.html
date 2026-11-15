@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=7d84634c9a81">
+<link rel="stylesheet" href="css/offbeat.css?v=63a7875d988a">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -167,6 +167,25 @@
           <p class="findings__foot"><button type="button" class="btn" id="findings-more" hidden>Show all findings</button> <a href="data/findings.json" target="_blank" rel="noopener">All statistics (JSON)</a>, <a href="scripts/findings.py" target="_blank" rel="noopener">analysis code</a></p>
         </div>
       </section>
+
+      <details class="panel-disclosure" id="review-disclosure" data-default-open open>
+        <summary id="review-summary">Review queue / NISAR + Sentinel-1</summary>
+        <section class="win review-queue" id="review-win" aria-labelledby="review-title">
+          <div class="win-t"><h2 id="review-title">OffBeat / Inspection priorities</h2></div>
+          <div class="win-b">
+            <p id="review-intro"></p>
+            <p id="review-status" role="status" aria-live="polite">Loading review priorities...</p>
+            <div id="review-methods" class="review__controls" role="group" aria-label="Ranking variants"></div>
+            <label class="review__filter"><input id="review-candidates" type="checkbox" checked> <span id="review-candidates-label">Candidate samples only</span></label>
+            <p id="review-metrics" class="review__notice"></p>
+            <div class="review__table-wrap" tabindex="0"><table class="review__table"><caption id="review-caption"></caption><thead id="review-head"></thead><tbody id="review-body"></tbody></table></div>
+            <button class="btn" type="button" id="review-more" hidden>Show more</button>
+            <div id="review-detail" class="review__detail" tabindex="-1" hidden></div>
+            <details id="review-methodology"><summary id="review-how">Methods and limitations</summary><div id="review-explanation"></div></details>
+            <div id="review-downloads" class="review__controls"></div>
+          </div>
+        </section>
+      </details>
 
       <details class="panel-disclosure" id="evidence-disclosure"><summary>Explore a change story</summary>
       <section class="win casebook" id="evidence-win" aria-labelledby="evidence-title">
@@ -545,7 +564,7 @@
 <script src="js/map-imagery.js?v=61f910cd955d"></script>
 <script src="js/text98.js?v=85fdf4481a27"></script>
 <script src="js/styles.js?v=1c84dd9b23f5"></script>
-<script src="js/search.js?v=37957cc6033c"></script>
+<script src="js/search.js?v=f78f4dcb95f4"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
 <script src="js/nisar-map.js?v=f588ff3b2ef0"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
@@ -558,22 +577,23 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=cdd075bf39e8"></script>
+<script src="js/i18n.js?v=feaf8f24dbe6"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
 <script src="js/terrain-tiles.js?v=d7bcae7cc86b"></script>
 <script src="js/terrain-renderer.js?v=d8d5b822896a"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=32daa6876328"></script>
+<script src="js/scene.js?v=1dc5fea74020"></script>
 <script src="js/reviews.js?v=62a5cd7c817d"></script>
 <script src="js/observed-events.js?v=f13648ff71d4"></script>
 <script src="js/music-places.js?v=52acb924d6e3"></script>
 <script src="js/evidence-model.js?v=acea90329609"></script>
-<script src="js/dense-candidates.js?v=3f8199d88536"></script>
+<script src="js/dense-candidates.js?v=fdf5266eb477"></script>
 <script src="js/panels.js?v=6e020a23003e"></script>
-<script src="js/evidence.js?v=7302b8710eb5"></script>
-<script src="js/findings.js?v=86ea53095e87"></script>
+<script src="js/evidence.js?v=7dc1a0a7f584"></script>
+<script src="js/findings.js?v=6aa2f6c88cfe"></script>
+<script src="js/review-queue.js?v=4351375f0a89"></script>
 <script src="js/app.js?v=76bb088dbe8a"></script>
 </body>
 </html>

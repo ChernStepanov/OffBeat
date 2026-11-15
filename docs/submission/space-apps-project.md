@@ -29,7 +29,7 @@ OffBeat turns NISAR radar into a question anyone can ask of a place: which spots
 - open a point's card: its HH and HV history against the neighbours' band, its land-cover class, interferometric quality and, where available, Sentinel-1 C-band and GNSS curves;
 - read **What the data says**: findings with a strength badge, the test behind each one (**How we know**) and labelled hypotheses about physical drivers (**Why might this happen?**);
 - follow guided investigations with dated optical evidence, explore the samples on 3D terrain, and watch a 30-second video;
-- use it in English or Russian, on desktop or phone.
+- use it in nine languages (English, Russian, French, German, Italian, Spanish, Portuguese, Japanese, Arabic), on desktop or phone.
 
 ### How it works
 
@@ -77,7 +77,7 @@ Most radar tools show a change map between two dates. OffBeat asks a different q
 
 ### Use of AI
 
-OffBeat is the work of seven team members: the idea, data choices, design, analysis direction, reviews and every decision are theirs. Team members used OpenAI Codex and Anthropic Claude (Claude Code) as coding assistants on their own tasks: implementation, tests, statistics code, documentation drafts and the scripts that render the video. No image, video or music generation model was used. No measurement or statistic was produced by AI. People checked AI output and corrected an overstated claim after their own audit. Details: https://github.com/ChernStepanov/OffBeat/blob/master/docs/ai-use.md
+OffBeat is the work of seven team members: the idea, data choices, design, analysis direction, reviews and every decision are theirs. Team members used OpenAI Codex and Anthropic Claude (Claude Code) as coding assistants on their own tasks: implementation, tests, statistics code, documentation drafts and the scripts that render the video. A Groq-hosted GPT-OSS model machine-translated the interface into seven extra languages offline; navigation was reviewed by people. No image, video or music generation model was used. No measurement or statistic was produced by AI. People checked AI output and corrected an overstated claim after their own audit. Details: https://github.com/ChernStepanov/OffBeat/blob/master/docs/ai-use.md
 
 ## NASA Data
 

@@ -35,7 +35,7 @@ window.OB = window.OB || {};
       cursor[f.id] = (k + 1) % f.samples.length;
       render();
     }
-    $('map-win')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (OB.pages?.openFor($('map-win')), $('map-win'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function item(f) {
@@ -78,7 +78,7 @@ window.OB = window.OB || {};
     OB.app.setLayers({ offbeat: false, extra: ['opera_tied'] });
     document.querySelectorAll('#side details').forEach(d => { if (d.querySelector('#site-layers')) d.open = true; });
     OB.app.fit();
-    $('map-win')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (OB.pages?.openFor($('map-win')), $('map-win'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   async function playStrongest() {
     const trends = data.sites.mexico?.trends; if (!trends) return;
@@ -89,7 +89,7 @@ window.OB = window.OB || {};
     await OB.app.loadSite('mexico');
     OB.app.setLayers({ offbeat: true, extra: [] });
     await OB.app.pickCell(best.index, true);
-    $('map-win')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (OB.pages?.openFor($('map-win')), $('map-win'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(() => OB.app.play(), 600);   // the click is the user gesture that allows audio
   }
   function tile(value, label, note, down, action) {

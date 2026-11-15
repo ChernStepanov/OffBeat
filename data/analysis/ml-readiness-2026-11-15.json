@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "assessment_date": "2026-11-15",
+  "base_commit": "a862ce887564c7830cd19eccecd3a33d3c6c9f88",
+  "input_sha256": {
+    "data/amazon.json": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729",
+    "data/delhi.json": "79fd8905c8c6d92d7ed54c8bb75e9a482ffbdf7cf57bb9696c21824d6206a9ed",
+    "data/mexico.json": "645ad2682598120b9a3d731e5451c17ee15dd50165f96202e47173aa2541fe3b",
+    "data/nairobi.json": "1bf015d5036dafb8dba125bffbe3bef1b6aa5ce990f5cc289f5981a50aa6add9",
+    "data/sydney.json": "d371a7b545d6ae0c37c23ad03f8263da6b648a4fc9820bd94a92e38ceb1b91d8",
+    "data/tokyo.json": "9f870f1aef9e76a360d2b7a32f591b1ac4939bd6d5cb32006d7a7246ce6ee2a1",
+    "data/venezuela.json": "0a123a16453ea012dbbde53f72d6ad4c463982c83e884a63b0b7225620f08825"
+  },
+  "sites": [
+    {
+      "id": "amazon",
+      "samples": 1024,
+      "dates": [
+        "2026-07-18",
+        "2026-08-11",
+        "2026-08-23",
+        "2026-09-04",
+        "2026-09-16",
+        "2026-09-28"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 0,
+      "reconstruction": {
+        "status": "descriptive_reconstruction_only",
+        "test_dates": [
+          {
+            "date": "2026-09-04",
+            "eligible_targets": 1024
+          },
+          {
+            "date": "2026-09-16",
+            "eligible_targets": 1024
+          },
+          {
+            "date": "2026-09-28",
+            "eligible_targets": 1024
+          }
+        ],
+        "methods": {
+          "persistence": {
+            "n": 3072,
+            "mae_db": 2.2426,
+            "rmse_db": 3.0171
+          },
+          "history_median": {
+            "n": 3072,
+            "mae_db": 2.1083,
+            "rmse_db": 2.735
+          },
+          "peer_residual_reconstruction": {
+            "n": 3072,
+            "mae_db": 1.7612,
+            "rmse_db": 2.2684
+          }
+        },
+        "limitations": [
+          "Current OTHER-point observations are supplied to the peer method; it is not a future forecast.",
+          "No independent event labels; lower MAE does not establish disturbance detection quality.",
+          "Previously explored AOIs; correlated points/dates; no independent generalisation estimate.",
+          "Approximate geographic distances; residual baseline can absorb spatially widespread change."
+        ]
+      }
+    },
+    {
+      "id": "delhi",
+      "samples": 1024,
+      "dates": [
+        "2025-11-21",
+        "2025-12-03"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 0,
+      "reconstruction": {
+        "status": "insufficient_dates",
+        "minimum_dates": 4
+      }
+    },
+    {
+      "id": "mexico",
+      "samples": 1024,
+      "dates": [
+        "2025-10-30",
+        "2025-11-11",
+        "2025-11-23",
+        "2025-12-05",
+        "2025-12-17",
+        "2025-12-29",
+        "2026-01-10",
+        "2026-01-22",
+        "2026-02-03",
+        "2026-02-15",
+        "2026-02-27",
+        "2026-03-11",
+        "2026-03-23",
+        "2026-04-04",
+        "2026-04-16",
+        "2026-04-28",
+        "2026-05-10",
+        "2026-05-22",
+        "2026-06-03",
+        "2026-06-15",
+        "2026-06-27",
+        "2026-07-09",
+        "2026-07-21",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-07",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 357,
+      "reconstruction": {
+        "status": "descriptive_reconstruction_only",
+        "test_dates": [
+          {
+            "date": "2025-12-05",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2025-12-17",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2025-12-29",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-01-10",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-01-22",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-02-03",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-02-15",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-02-27",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-03-11",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-03-23",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-04-04",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-04-16",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-04-28",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-05-10",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-05-22",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-06-03",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-06-15",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-06-27",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-07-09",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-07-21",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-08-14",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-08-26",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-09-07",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-09-19",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-10-01",
+            "eligible_targets": 1003
+          },
+          {
+            "date": "2026-10-13",
+            "eligible_targets": 1003
+          }
+        ],
+        "methods": {
+          "persistence": {
+            "n": 26078,
+            "mae_db": 2.449,
+            "rmse_db": 3.2388
+          },
+          "history_median": {
+            "n": 26078,
+            "mae_db": 2.639,
+            "rmse_db": 3.5206
+          },
+          "peer_residual_reconstruction": {
+            "n": 26078,
+            "mae_db": 1.9976,
+            "rmse_db": 2.5969
+          }
+        },
+        "limitations": [
+          "Current OTHER-point observations are supplied to the peer method; it is not a future forecast.",
+          "No independent event labels; lower MAE does not establish disturbance detection quality.",
+          "Previously explored AOIs; correlated points/dates; no independent generalisation estimate.",
+          "Approximate geographic distances; residual baseline can absorb spatially widespread change."
+        ]
+      }
+    },
+    {
+      "id": "nairobi",
+      "samples": 1024,
+      "dates": [
+        "2026-06-30",
+        "2026-07-12"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 593,
+      "reconstruction": {
+        "status": "insufficient_dates",
+        "minimum_dates": 4
+      }
+    },
+    {
+      "id": "sydney",
+      "samples": 1024,
+      "dates": [
+        "2026-06-25",
+        "2026-07-07"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 573,
+      "reconstruction": {
+        "status": "insufficient_dates",
+        "minimum_dates": 4
+      }
+    },
+    {
+      "id": "tokyo",
+      "samples": 1024,
+      "dates": [
+        "2025-10-31",
+        "2025-11-12"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 803,
+      "reconstruction": {
+        "status": "insufficient_dates",
+        "minimum_dates": 4
+      }
+    },
+    {
+      "id": "venezuela",
+      "samples": 1024,
+      "dates": [
+        "2025-11-09",
+        "2025-11-21",
+        "2025-12-03",
+        "2025-12-15",
+        "2025-12-27",
+        "2026-01-08"
+      ],
+      "complete_hv_samples": 1024,
+      "displacement_samples_with_two_finite_values": 0,
+      "reconstruction": {
+        "status": "descriptive_reconstruction_only",
+        "test_dates": [
+          {
+            "date": "2025-12-15",
+            "eligible_targets": 1012
+          },
+          {
+            "date": "2025-12-27",
+            "eligible_targets": 1012
+          },
+          {
+            "date": "2026-01-08",
+            "eligible_targets": 1012
+          }
+        ],
+        "methods": {
+          "persistence": {
+            "n": 3036,
+            "mae_db": 4.0443,
+            "rmse_db": 5.1668
+          },
+          "history_median": {
+            "n": 3036,
+            "mae_db": 3.9597,
+            "rmse_db": 4.9326
+          },
+          "peer_residual_reconstruction": {
+            "n": 3036,
+            "mae_db": 2.1271,
+            "rmse_db": 2.7135
+          }
+        },
+        "limitations": [
+          "Current OTHER-point observations are supplied to the peer method; it is not a future forecast.",
+          "No independent event labels; lower MAE does not establish disturbance detection quality.",
+          "Previously explored AOIs; correlated points/dates; no independent generalisation estimate.",
+          "Approximate geographic distances; residual baseline can absorb spatially widespread change."
+        ]
+      }
+    }
+  ],
+  "total_samples": 7168,
+  "independent_event_accuracy": null,
+  "local_draft_inputs": {
+    "/Users/nikitasyzdykov/Desktop/realspace/OffBeat/pipeline/ml_engine.py": "d0b529fe0effd4ae6dd42d6d039b7aa6a947b87be70a85ca1cffd468ff8ed54d",
+    "/Users/nikitasyzdykov/Desktop/realspace/OffBeat/pipeline/phenomena.py": "013d1a1a2d56bbc2413219634e357f3e8eee0b8b5365e1d2e5d529277ba2e7a5",
+    "/Users/nikitasyzdykov/Desktop/realspace/OffBeat/data/analysis/ml_model_evaluation.json": "6ad269272f71981d271e3064df6a85da81ad1c28387099e77475eaf0073fcd13",
+    "/Users/nikitasyzdykov/Desktop/realspace/OffBeat/data/analysis/ml-facts.json": "fec35cd119af6602e4ecf1144a13da2c14a0410a4bd16a0242fb47f39a32f833"
+  },
+  "local_draft_evaluation": {
+    "reported_samples": 8192,
+    "confusion_total": 8192,
+    "reported_accuracy_percent": 89.72,
+    "confusion_accuracy_percent": 89.7217,
+    "macro_f1_from_rounded_receipt": 0.7303,
+    "majority_label_fraction": 0.5297,
+    "per_class": {
+      "deforestation": {
+        "precision": 0.725,
+        "recall": 0.751,
+        "f1_score": 0.738,
+        "support": 309.0
+      },
+      "inundation": {
+        "precision": 0.474,
+        "recall": 0.446,
+        "f1_score": 0.459,
+        "support": 579.0
+      },
+      "seasonal": {
+        "precision": 0.85,
+        "recall": 0.985,
+        "f1_score": 0.912,
+        "support": 1041.0
+      },
+      "seismic_step": {
+        "precision": 0.5,
+        "recall": 0.2,
+        "f1_score": 0.286,
+        "support": 20.0
+      },
+      "stable": {
+        "precision": 0.985,
+        "recall": 0.923,
+        "f1_score": 0.953,
+        "support": 1241.0
+      },
+      "subsidence": {
+        "precision": 0.973,
+        "recall": 0.99,
+        "f1_score": 0.981,
+        "support": 575.0
+      },
+      "unknown": {
+        "precision": 0.967,
+        "recall": 0.931,
+        "f1_score": 0.948,
+        "support": 4339.0
+      },
+      "wildfire": {
+        "precision": 0.415,
+        "recall": 0.886,
+        "f1_score": 0.565,
+        "support": 88.0
+      }
+    },
+    "interpretation": "Agreement with heuristic labels under random pixel cross-validation, not independent event accuracy.",
+    "rerun_training": false
+  },
+  "local_dataset_sha256": {
+    "amazon.json": "54264f406c107955afb43b2579eeca5e5a6389b6941eaf22fa1de28246739729",
+    "delhi.json": "79fd8905c8c6d92d7ed54c8bb75e9a482ffbdf7cf57bb9696c21824d6206a9ed",
+    "khimki.json": "f682eb906a737302e29a93c86d32a4410d0f0a11c0da94428e2ba54e7229fbdf",
+    "mexico.json": "645ad2682598120b9a3d731e5451c17ee15dd50165f96202e47173aa2541fe3b",
+    "nairobi.json": "1bf015d5036dafb8dba125bffbe3bef1b6aa5ce990f5cc289f5981a50aa6add9",
+    "sydney.json": "d371a7b545d6ae0c37c23ad03f8263da6b648a4fc9820bd94a92e38ceb1b91d8",
+    "tokyo.json": "9f870f1aef9e76a360d2b7a32f591b1ac4939bd6d5cb32006d7a7246ce6ee2a1",
+    "venezuela.json": "0a123a16453ea012dbbde53f72d6ad4c463982c83e884a63b0b7225620f08825"
+  },
+  "local_phenomenon_sha256": {
+    "amazon.json": "2f8e8856767643979b85805f934df423fef0f50e892afeb27fefa855b063523b",
+    "delhi.json": "80c353957728bf96e7c02d971c618ca37e7236d82cc2b2e156b682b2eb5df4cf",
+    "khimki.json": "b32172fb1aeebbdbe834ea2a12477eb661ef333df2373b8e4c1ee7f26ffb9527",
+    "mexico.json": "457962475cdaa5c3da8947511b729e050198a53f770098e2d214a14d1815c4ea",
+    "nairobi.json": "c6630a6e9ed1c065f016fefb31b8c11286323dfa9055288addf3f2377813aaee",
+    "sydney.json": "cb2f83663431dee2dc17bdbdfa2a9b5a759db12dc60a32ee37efad5294beb346",
+    "tokyo.json": "a2fffd2c6073dfb8c46d13ad022a9303b40204b732afd3591103592f51e5faed",
+    "venezuela.json": "eee1a022d0a49733d107e75d01c55b115a7a558e6a943d24b4521e352cc642eb"
+  },
+  "local_phenomenon_counts": {
+    "amazon": {
+      "unknown": 307,
+      "wildfire": 88,
+      "inundation": 268,
+      "seasonal": 249,
+      "stable": 68,
+      "deforestation": 44
+    },
+    "delhi": {
+      "unknown": 673,
+      "stable": 278,
+      "inundation": 44,
+      "deforestation": 29
+    },
+    "khimki": {
+      "unknown": 1015,
+      "inundation": 9
+    },
+    "mexico": {
+      "unknown": 168,
+      "stable": 24,
+      "inundation": 31,
+      "seasonal": 226,
+      "subsidence": 575
+    },
+    "nairobi": {
+      "unknown": 701,
+      "stable": 266,
+      "inundation": 34,
+      "deforestation": 23
+    },
+    "sydney": {
+      "stable": 280,
+      "unknown": 701,
+      "inundation": 23,
+      "deforestation": 20
+    },
+    "tokyo": {
+      "unknown": 691,
+      "stable": 308,
+      "deforestation": 13,
+      "inundation": 12
+    },
+    "venezuela": {
+      "seasonal": 566,
+      "deforestation": 180,
+      "seismic_step": 20,
+      "unknown": 83,
+      "inundation": 158,
+      "stable": 17
+    }
+  }
+}
