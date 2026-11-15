@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 
-for (const site of ['mexico','amazon','venezuela','delhi','tokyo','khimki','nairobi','sydney']) {
+for (const site of ['mexico','amazon','venezuela','delhi','tokyo','nairobi','sydney']) {
   const measurements = JSON.parse(fs.readFileSync(`data/${site}.json`, 'utf8'));
   const index = JSON.parse(fs.readFileSync(`data/${site}/optical/index.json`, 'utf8'));
   assert.equal(index.site, site);

@@ -4,7 +4,7 @@ OB.STYLE_KEYS = [null, 'drop', 'flood', 'drift', 'step'];
 OB.SITES = [];
 const CONTEXT = { mexico: { opera_disp: 'opera-disp.json', gunw_quality: '../analysis/mexico-gunw-quality.json', gunw_postgap: '../analysis/mexico-gunw-postgap-quality.json', mmx1_gnss: '../analysis/mexico-mmx1-gnss.json' }, amazon: { dense_validation: 'dense-validation.json', dense_z: 'dense-peer-z.json', fires: 'fires.json', alerts: 'alerts.geojson', sentinel1: 'sentinel1.json', validation: 'validation.json' } };
 OB.loadData = async function () {
-  const results = await Promise.allSettled(['mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'khimki', 'nairobi', 'sydney'].map(async id => {
+  const results = await Promise.allSettled(['mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'nairobi', 'sydney'].map(async id => {
     // Retry transient network/server failures once; never invent substitute values.
     let response;
     try { response = await fetch(`data/${id}.json`, {cache:'no-cache'}); }

@@ -133,7 +133,7 @@ def run(site_id, search_only=False):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--site',choices=['mexico','amazon','venezuela','delhi','tokyo','khimki','nairobi','sydney'])
+    parser.add_argument('--site',choices=['mexico','amazon','venezuela','delhi','tokyo','nairobi','sydney'])
     parser.add_argument('--search-only',action='store_true')
     args=parser.parse_args()
     for identifier in [args.site] if args.site else ['mexico','amazon','venezuela']:

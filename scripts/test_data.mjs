@@ -15,7 +15,7 @@ vm.createContext(context);
 vm.runInContext(fs.readFileSync('js/data.js','utf8'), context);
 await context.OB.loadData();
 assert.equal(context.OB.SITES[0].series(0,0).hh.length,site.dates.length);
-assert.deepEqual(Array.from(context.OB.SITES, s=>s.id),['mexico','amazon','venezuela','delhi','tokyo','khimki','nairobi','sydney']);
+assert.deepEqual(Array.from(context.OB.SITES, s=>s.id),['mexico','amazon','venezuela','delhi','tokyo','nairobi','sydney']);
 for (const loaded of context.OB.SITES) {
   assert(!/synthetic|mock/i.test(loaded.source));
   assert.equal(loaded.provenance.inputs.length,3);
@@ -67,7 +67,7 @@ context.fetch = async path => {
   return {ok:true, json:async()=>JSON.parse(fs.readFileSync(path, 'utf8'))};
 };
 await context.OB.loadData();
-assert.equal(context.OB.SITES.length, 8);
+assert.equal(context.OB.SITES.length, 7);
 assert([...attempts.values()].every(n => n === 2));
 
 const calls=[];

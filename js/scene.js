@@ -5,7 +5,8 @@
   const canvas = $('cloud-canvas');
   // The same terrain panel lives directly below the paired maps.
   mapWindow.after(scene);
-  scene.hidden = false;
+  // Opened from the map's 3D button; hidden it costs no GPU time and no page height.
+  scene.hidden = true;
   scene.classList.add('scene--inline');
   scene.removeAttribute('role'); scene.removeAttribute('aria-modal');
   let active = false, channel = 'hv', view = 'orbit', frame = 0, points = [];
@@ -216,7 +217,12 @@
   }
   function showTerrain() {
     if (mapWindow.classList.contains('win--max')) $('map-max').click();
+    scene.hidden = false; launcher.setAttribute('aria-pressed', 'true');
     scene.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function toggleTerrain() {
+    if (scene.hidden) { showTerrain(); return; }
+    scene.hidden = true; launcher.setAttribute('aria-pressed', 'false');
   }
   async function step(direction) {
     if (!points.length) return;
@@ -225,7 +231,7 @@
     await OB.app.pickCell(points[next].index, false);
   }
 
-  launcher.addEventListener('click', showTerrain);
+  launcher.addEventListener('click', toggleTerrain);
   $('scene-fit').addEventListener('click', () => OB.app.fit());
   $('scene-site').addEventListener('change', async event => {
     const id = event.target.value;

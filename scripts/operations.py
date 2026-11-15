@@ -9,7 +9,7 @@ from urllib.error import URLError
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
-SITES = ('mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'khimki', 'nairobi', 'sydney')
+SITES = ('mexico', 'amazon', 'venezuela', 'delhi', 'tokyo', 'nairobi', 'sydney')
 
 
 def inventory(root=ROOT):

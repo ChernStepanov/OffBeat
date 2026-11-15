@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=098705d6bdbf">
+<link rel="stylesheet" href="css/offbeat.css?v=0383e3a95566">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -58,7 +58,6 @@
         <div class="launch__visual-bottom"><span>One sample leaves its neighbours</span></div>
       </div>
     </div>
-    <div class="launch__steps" aria-label="How to explore"><div><b>01</b><span><strong>Choose a place</strong><small>Start with a prepared site</small></span></div><div><b>02</b><span><strong>Compare signals</strong><small>Explore points and neighbours</small></span></div><div><b>03</b><span><strong>Check the evidence</strong><small>Review dates and limitations</small></span></div></div>
   </section>
 
   <div id="cols">
@@ -73,17 +72,16 @@
             <input id="place-query" type="search" aria-label="Location search" placeholder="Name in any language or coordinates" dir="auto" autocomplete="off" required>
             <button class="btn" type="submit" id="place-submit">Search</button>
           </form>
-          <p class="place-hint">Search names in any language. Coordinates: latitude, longitude. Names are sent to Open-Meteo, with Photon / Komoot as fallback.</p>
           <p id="place-status" role="status" aria-live="polite"></p>
           <ul id="place-results" class="place-results"></ul>
-          <small>Search data: <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo</a> / <a href="https://www.geonames.org/">GeoNames</a>; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> / <a href="https://github.com/komoot/photon">Photon</a>.</small>
+          <small>A place name or "lat, lon". Names are sent to <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo</a> / <a href="https://www.geonames.org/">GeoNames</a>; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, fallback <a href="https://github.com/komoot/photon">Photon</a>.</small>
         </div>
       </section>
 
       <section class="win" aria-labelledby="t-site">
-        <div class="win-t"><h2 id="t-site">Explore the world</h2></div>
+        <div class="win-t"><h2 id="t-site">Measured sites</h2></div>
         <div class="win-b">
-          <ul class="sites" id="regions">
+          <ul class="regions" id="regions" aria-label="Map regions">
             <li><button type="button" data-region="world">World</button></li>
             <li><button type="button" data-region="europe">Europe</button></li>
             <li><button type="button" data-region="africa">Africa</button></li>
@@ -91,12 +89,11 @@
             <li><button type="button" data-region="oceania">Oceania</button></li>
             <li><button type="button" data-region="americas">Americas</button></li>
           </ul>
-          <p>NISAR measurements are available at the marked demo sites. Search the archive at the map centre for source acquisitions elsewhere.</p>
-          <p>Prepared measurement series:</p>
           <ul class="sites" id="sites"></ul>
         </div>
       </section>
 
+      <details class="panel-disclosure"><summary>Map layers and threshold</summary>
       <section class="win" aria-labelledby="t-layers">
         <div class="win-t"><h2 id="t-layers">Layers</h2></div>
         <div class="win-b">
@@ -130,13 +127,16 @@
           </fieldset>
         </div>
       </section>
+      </details>
 
+      <details class="panel-disclosure"><summary>Change styles legend</summary>
       <section class="win" aria-labelledby="t-styles">
         <div class="win-t"><h2 id="t-styles">Change styles</h2></div>
         <div class="win-b">
           <ul class="styles" id="styles"></ul>
         </div>
       </section>
+      </details>
 
     </aside>
 
@@ -145,8 +145,18 @@
       <div class="notice">
         <svg class="notice__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#fff" stroke="#000"/><rect x="7" y="7" width="2" height="5" fill="#000080"/><rect x="7" y="4" width="2" height="2" fill="#000080"/></svg>
         <p id="data-status" role="status">Loading measured data...</p>
+        <p id="data-quality" class="notice__warn" role="alert" hidden></p>
         <p class="notice__links"><a id="source-link" href="data/mexico-manifest.json" target="_blank" rel="noopener">NISAR sources and granule IDs</a><span class="notice__sep">, </span><a href="docs/real-nisar.md">Processing and limitations</a></p>
       </div>
+
+      <section class="win findings" id="findings-win" aria-labelledby="findings-title">
+        <div class="win-t"><h2 id="findings-title">What the data says</h2></div>
+        <div class="win-b">
+          <p class="findings__intro" id="findings-intro">Loading statistical findings...</p>
+          <ol class="findings__list" id="findings-list"></ol>
+          <p class="findings__foot"><button type="button" class="btn" id="findings-more" hidden>Show all findings</button> <a href="data/findings.json" target="_blank" rel="noopener">All statistics (JSON)</a>, <a href="scripts/findings.py" target="_blank" rel="noopener">analysis code</a></p>
+        </div>
+      </section>
 
       <details class="panel-disclosure" id="evidence-disclosure"><summary>Explore a change story</summary>
       <section class="win casebook" id="evidence-win" aria-labelledby="evidence-title">
@@ -209,7 +219,7 @@
       </section>
 
       <section class="win" id="map-win" aria-labelledby="t-map">
-        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>3D terrain</span></button><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
+        <div class="win-t"><h2 id="t-map">Off-Beat map - <span id="site-name">...</span></h2><button type="button" class="btn scene-launch" id="scene-open" aria-controls="scene-win" aria-pressed="false" disabled><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 3 6 1l5 2v6l-5 2-5-2zM1 3l5 2 5-2M6 5v6" fill="none" stroke="currentColor"/></svg><span>3D terrain</span></button><button type="button" class="win-btn" id="map-max" aria-pressed="false" title="Maximize map / Развернуть карту" aria-label="Maximize map / Развернуть карту"></button></div>
         <div class="win-b win-b--flush">
           <fieldset class="group acquisition" id="acquisition" hidden>
             <legend>Measured acquisition</legend>
@@ -220,9 +230,9 @@
               <button type="button" class="btn" id="date-next" aria-label="Next acquisition">&gt;</button>
             </div>
             <p id="date-status" role="status" aria-live="polite"></p>
-            <small>Acquisitions are not equally spaced. The date marks the chart; map colours show the latest peer deviation. A selected dated optical image follows the radar date.</small>
+            <small>Acquisitions are not equally spaced. The date sets the chart marker and the map colours. A selected dated optical image follows the radar date.</small>
           </fieldset>
-          <small class="scene-map-note">Map colours show the latest peer deviation; the cloud follows the date slider.</small>
+          <small class="scene-map-note">The map and the cloud follow the date slider.</small>
           <div class="maps">
             <div class="maps__pane" id="radar-pane">
               <div class="win-t map-pane-title"><h2>Radar / sample map</h2></div>
@@ -472,9 +482,9 @@
 <script src="js/styles.js?v=1c84dd9b23f5"></script>
 <script src="js/search.js?v=37957cc6033c"></script>
 <script src="js/archive.js?v=a69beae81229"></script>
-<script src="js/nisar-map.js?v=b08dd9f3a7fa"></script>
+<script src="js/nisar-map.js?v=92b7f06d5493"></script>
 <script src="js/water-labels.js?v=a136a87fce70"></script>
-<script src="js/data.js?v=0dc67ca648f0"></script>
+<script src="js/data.js?v=deb732bde122"></script>
 <script src="js/suggestions.js?v=eb8c52544811"></script>
 <script src="js/acquisitions.js?v=faedaefccc8f"></script>
 <script src="js/amazon-ranking.js?v=374ca1a4124b"></script>
@@ -483,17 +493,18 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=6f7d75eded8e"></script>
+<script src="js/i18n.js?v=536b0605767f"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
 <script src="js/terrain-tiles.js?v=d7bcae7cc86b"></script>
 <script src="js/terrain-renderer.js?v=d8d5b822896a"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
-<script src="js/scene.js?v=5d7d5b7553d5"></script>
+<script src="js/scene.js?v=5c3ab24458e5"></script>
 <script src="js/evidence-model.js?v=0235cb26cfdf"></script>
 <script src="js/panels.js?v=4170805a19d9"></script>
 <script src="js/evidence.js?v=fcc0a20f3926"></script>
-<script src="js/app.js?v=33d96c0fdaa7"></script>
+<script src="js/findings.js?v=5a790ddf1b04"></script>
+<script src="js/app.js?v=4881d422e62c"></script>
 </body>
 </html>

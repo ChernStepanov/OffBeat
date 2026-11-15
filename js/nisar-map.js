@@ -18,6 +18,9 @@ OB.bindNisarMap = function (map, toggle, status) {
   // each one into a soft blob, so it is drawn as the honest square it is.
   const CRISP_FROM = nativeZoom + 4;
   const rendering = () => map.getZoom() >= CRISP_FROM ? 'pixelated' : 'auto';
+  // Date-coloured strips answer "where did NISAR look?" at country and region scale. Over a
+  // site they only wash the measured samples in the same reds and blues, so they step aside.
+  const HIDE_FROM = 11;
 
   map.createPane('nisarRadar');
   map.getPane('nisarRadar').style.zIndex = 250;
@@ -61,7 +64,8 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   function showStatus() {
     if (!caption) return;
-    const past = map.getZoom() >= CRISP_FROM ? ' | Radar coverage hidden at this zoom; zoom out to see the dated strips.' : '';
+    if (map.getZoom() >= HIDE_FROM) { status.textContent = 'NISAR coverage dates appear when you zoom out to region scale.'; return; }
+    const past = map.getZoom() >= HIDE_FROM ? ' | Radar coverage hidden at this zoom; zoom out to see the dated strips.' : '';
     const busy = inflight > 0 ? ` | Loading NASA radar: ${inflight} request${inflight === 1 ? '' : 's'} left` : '';
     const text = caption + past + busy + (failedTiles
       ? ` | ${failedTiles} incomplete tile${failedTiles === 1 ? '' : 's'}: NASA did not answer, retrying. These gaps are not confirmed missing coverage.`
@@ -297,7 +301,7 @@ OB.bindNisarMap = function (map, toggle, status) {
   // Hidden coverage is detached, not made transparent, so it stops downloading NASA tiles
   // that would compete with the imagery the user is looking at.
   function attach() {
-    const visible = map.getZoom() < CRISP_FROM;
+    const visible = map.getZoom() < HIDE_FROM;
     if (visible && !map.hasLayer(layer)) layer.addTo(map).setOpacity(0.9);
     if (!visible && map.hasLayer(layer)) map.removeLayer(layer);
   }
