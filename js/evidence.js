@@ -10,6 +10,8 @@ OB.evidence = (() => {
     intro: ['Follow a real Amazon sample from radar measurement to independent evidence and a practical next step.', 'Пройдите путь реальной точки Амазонии: от измерения радара до независимых свидетельств и решения.'],
     welcome: ['Start with one Amazon investigation, or take a two-minute tour of the available sites.', 'Начните с одного исследования в Амазонии или пройдите двухминутный обзор доступных участков.'],
     start: ['Investigate a change', 'Исследовать пример изменения'],
+    visibleClearing: ['See visually reviewed clearing', 'Посмотреть расчистку на снимках'],
+    visibleCaveat: ['Optical review; NISAR detection has not been validated.', 'Визуальная проверка по снимкам; обнаружение радаром не подтверждено.'],
     scope: ['Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.', 'Исследовательские примеры: 0 пригодных подтверждённых событий для оценки детектора. Точность не установлена.'],
     selection: ['Evidence for selected sample', 'Доказательства для выбранной точки'],
     copy: ['Copy point link', 'Скопировать ссылку на точку'], json: ['Download evidence / JSON', 'Скачать доказательства / JSON'],
@@ -235,6 +237,7 @@ OB.evidence = (() => {
     a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
+  $('case-visible-clearing').addEventListener('click', () => open('amazon-visible-clearing', {step: 2}));
   $('evidence-selection').addEventListener('click', () => open(null));
   $('case-back').addEventListener('click', () => setStep(step - 1));
   $('case-next').addEventListener('click', () => setStep(step + 1));
@@ -248,7 +251,7 @@ OB.evidence = (() => {
   });
   document.addEventListener('ob:ready', async () => {
     const available = await ready;
-    ['case-start', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
+    ['case-start', 'case-visible-clearing', 'welcome-case', 'evidence-selection'].forEach(id => { $(id).disabled = !available; }); render();
   }, {once: true});
   document.addEventListener('ob:sample-change', () => requestAnimationFrame(() => {
     if (!opening) { OB.app?.stop(); render(); persist(); }
