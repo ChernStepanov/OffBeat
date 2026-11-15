@@ -125,6 +125,27 @@ OB.evidence = (() => {
     }
     paragraph(t('Same geographic crop, 4x preview; cross marks the sample. Transparent pixels are masked. Optical dates differ from radar dates. AOI-wide clarity cannot rule out cloud or shadow at this point.', 'Одинаковый географический фрагмент, превью 4x; крест — точка. Прозрачные пиксели замаскированы. Даты оптики отличаются от радара. Ясность всего AOI не исключает облако или тень в точке.'));
   }
+  async function loadSampleOptics(site, pixel, placeholder) {
+    try {
+      const response = await fetch(`data/${site.id}/optical/index.json`);
+      if (!response.ok) throw new Error('missing optical index');
+      const index = await response.json();
+      if (index.site !== site.id || !Array.isArray(index.entries)) throw new Error('invalid optical index');
+      const entries = index.entries.filter(image => image.status === 'ready' && image.path && image.bounds && image.date && image.item_url && Number.isFinite(image.aoi_clear_fraction) && pixel.lon >= image.bounds.w && pixel.lon <= image.bounds.e && pixel.lat >= image.bounds.s && pixel.lat <= image.bounds.n)
+        .sort((a, b) => a.date.localeCompare(b.date));
+      const unique = entries.filter((image, i) => !i || image.date !== entries[i - 1].date);
+      if (!placeholder.isConnected || step !== 2 || OB.app.site()?.id !== site.id || OB.app.pixel()?.id !== pixel.id) return;
+      if (!unique.length) throw new Error('no suitable optical images');
+      const images = unique.length > 1 ? [unique[0], unique.at(-1)] : [unique[0]];
+      placeholder.textContent = images.length > 1
+        ? t('Dated Sentinel-2 context: earliest and latest prepared images, not verified event boundaries.', 'Датированные снимки Sentinel-2: первый и последний доступные; это не подтверждённые границы события.')
+        : t('Only one dated Sentinel-2 image is available; before/after comparison is unavailable.', 'Доступен только один датированный снимок Sentinel-2; сравнить до и после нельзя.');
+      opticalPair({optical: images}, pixel);
+      paragraph(t('These images are geographic context, not an independent review of this sample or proof of a cause.', 'Снимки показывают местность, но не являются независимой проверкой этой точки или доказательством причины.'));
+    } catch (_) {
+      if (placeholder.isConnected) placeholder.textContent = t('No prepared dated optical image is available for this point. The map mosaic has varying dates and cannot establish when a change happened.', 'Для этой точки нет подготовленного датированного снимка. Мозаика на карте составлена из снимков разных дат и не позволяет установить время изменения.');
+    }
+  }
   function setStep(n, focus = true) {
     OB.app?.stop(); step = Math.max(0, Math.min(3, n)); render(); persist();
     if (focus) {
@@ -201,7 +222,11 @@ OB.evidence = (() => {
       paragraph(t('Backscatter changes can reflect moisture, structure, speckle or acquisition effects. A radar change alone does not identify the cause. These before/after buttons select observations, not verified event boundaries.', 'На обратное рассеяние влияют влажность, структура, спекл и условия съёмки. Изменение радара само по себе не определяет причину. Кнопки «до/после» выбирают наблюдения, а не доказанные границы события.'));
     } else if (step === 2) {
       if (dossier) { opticalPair(dossier, pixel); paragraph(local(dossier.independent)); }
-      else paragraph(t('No independent review is attached to this point. Open the source manifest and collect dated, quality-checked optical or field evidence before interpreting the cause.', 'Для этой точки нет независимого разбора. Откройте исходные данные и соберите датированную оптику с проверкой качества или полевые свидетельства до вывода о причине.'));
+      else {
+        paragraph(t('No independent event review is attached to this point.', 'Для этой точки нет независимого разбора события.'));
+        const loading = el('p', t('Loading dated optical images…', 'Загружаем датированные снимки…'));
+        page.append(loading); loadSampleOptics(site, pixel, loading);
+      }
     } else {
       heading(t('Evidence passport', 'Паспорт данных'));
       const selected = OB.app.date(), peerCount = pixel.peer_counts?.hv?.[selected], peerZ = pixel.z_hv?.[selected];
