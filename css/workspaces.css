@@ -5,17 +5,14 @@
 .workspaces-active .app-bar .menu > a { display: none; }
 .workspaces-active #cols { display: block; }
 .workspaces-active[data-workspace="map"] #cols { display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 12px; }
-.workspace-start { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
+.workspace-start { margin: 16px 0; }
+.workspace-start .win-b { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
 .workspace-start .btn { padding: 20px 12px; text-align: start; white-space: normal; }
 body:not(.workspaces-active) .workspace-start { display: none; }
-.workspaces-active #copilot-win:not(.copilot--float):not(.copilot--full) .copilot__log { min-height: 240px; max-height: 55vh; }
-@media(max-width:700px){.workspaces-active[data-workspace="map"] #cols{display:block}.workspace-start{grid-template-columns:1fr}#workspace-nav .btn{flex:1 0 28%;white-space:normal}#layout-toggle{margin-inline-start:0}}
+@media(max-width:700px){.workspaces-active[data-workspace="map"] #cols{display:block}.workspace-start .win-b{grid-template-columns:1fr}#workspace-nav .btn{flex:1 0 28%;white-space:normal}#layout-toggle{margin-inline-start:0}}
 @media(prefers-reduced-motion:no-preference){.workspaces-active #main > :not(.workspace-hidden){animation:workspace-enter .22s ease-out}@keyframes workspace-enter{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}}
 #workspace-nav a { color: #000; text-decoration: none; min-width: 0; overflow-wrap: anywhere; }
 #workspace-nav button { min-width: 0; overflow-wrap: anywhere; }
-.workspaces-active #copilot-win:not(.copilot--float):not(.copilot--full) .copilot__log:empty { min-height: 120px; }
 .workspace-controls { display: none; }
 @media(max-width:700px){.workspaces-active[data-workspace="map"] .workspace-controls{display:inline-block}.workspaces-active[data-workspace="map"]:not(.workspace-controls-open) #side{display:none}}
 .workspace-data-links .win-b { display: flex; flex-wrap: wrap; gap: 8px; }
-.workspace-chat-peek { display: none; }
-@media(max-width:700px){.workspaces-active .copilot--float:not(.copilot--full) .workspace-chat-peek{display:inline-block}.workspaces-active .copilot--float:not(.copilot--full):not(.copilot--peek) .copilot__body{display:none}.workspaces-active .copilot--float:not(.copilot--full){max-height:calc(100dvh - 72px);overflow:auto}}
