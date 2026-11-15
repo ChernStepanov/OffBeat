@@ -1,9 +1,4 @@
-# OffBeat: Space Apps project page (copy into the Project tab)
-
-Fields follow the Space Apps project form. Replace the demonstration link with the public YouTube
-or Google Drive link once uploaded; the site link below already works without login.
-
----
+# OffBeat
 
 ## Project name
 
@@ -15,7 +10,7 @@ OffBeat lets anyone see and hear where NASA-ISRO NISAR radar finds the ground fa
 
 ## Project Demonstration
 
-https://offbeat.chern.su/docs/submission/offbeat-video.mp4 (29.6 s; replace with the YouTube link once uploaded)
+https://offbeat.chern.su/docs/submission/offbeat-video.mp4
 
 ## Project
 
