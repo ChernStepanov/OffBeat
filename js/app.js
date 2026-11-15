@@ -681,7 +681,7 @@
     optical.setDate(p.since || s.dates.at(-1));
     const v = voice(p);
     $("play").disabled = !v.pix.some((x, i) => Number.isFinite(x) && Number.isFinite(v.med[i]) && Number.isFinite(v.sd[i]));
-    $("play-hint").textContent = $("play").disabled ? 'Audio unavailable: measured pixel and peer series required.' : `Peers keep the beat, the pixel plays its ${channelName(p)} curve.`;
+    $("play-hint").textContent = $("play").disabled ? 'Audio unavailable: measured pixel and peer series required.' : `Peers keep the beat, the pixel plays its ${channelName(p)} curve${voice(p).pix.length === state.site.dates.length ? ' and the map steps through the dates' : ''}.`;
     drawTop();
   }
 
@@ -741,12 +741,23 @@
     if (p.style === "flood") return { pix: p.hh, med: p.peer.hh_med, sd: p.peer.hh_sd };
     return { pix: p.hv, med: p.peer.hv_med, sd: p.peer.hv_sd };
   }
+  // Playback is also a time-series animation: each beat moves the map to that acquisition date.
+  // Only the slider, dots and counter change per beat; the rest follows once playback ends.
+  function settleDate() { updateAcquisition(); optical.setDate(state.site.dates[state.date]); drawTop(); showPixelZ(); }
   $("play").addEventListener("click", () => {
     const p = state.pixel; if (!p) return;
+    const v = voice(p), onRadarDates = v.pix.length === state.site.dates.length;
     $("stop").disabled = false; $("sb-state").textContent = `Playing ${p.id}...`;
-    OB.sonify.play(voice(p), i => drawCharts(i), () => { $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); });
+    OB.sonify.play(v, i => {
+      if (onRadarDates) {
+        state.date = i;
+        $('date-index').value = String(i); $('date-label').textContent = state.site.dates[i];
+        restyleSamples(); refreshCounts();
+      }
+      drawCharts(i);
+    }, () => { $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); if (onRadarDates) settleDate(); });
   });
-  $("stop").addEventListener("click", () => { OB.sonify.stop(); $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); });
+  $("stop").addEventListener("click", () => { OB.sonify.stop(); $("stop").disabled = true; $("sb-state").textContent = "Ready"; drawCharts(); settleDate(); });
 
   // --- site switch ---
   async function loadSite(id) {

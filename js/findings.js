@@ -61,6 +61,13 @@ window.OB = window.OB || {};
       if (actions.childElementCount) li.append(actions);
     }
     li.append(how);
+    if (f.drivers_en) {
+      // the challenge asks for hypotheses about physical drivers; they are labelled as such
+      const why = document.createElement('details'); why.className = 'finding__how';
+      const label = document.createElement('summary'); label.textContent = t('Why might this happen?', 'Почему так может быть?');
+      const text = document.createElement('p'); text.textContent = t(f.drivers_en, f.drivers_ru);
+      why.append(label, text); li.append(why);
+    }
     return li;
   }
 

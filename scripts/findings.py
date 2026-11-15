@@ -126,10 +126,11 @@ def trends(pixels, dates, alpha=0.05):
     q = stats.false_discovery_control([x[2] for x in tests])
     hits = [{'index': i, 'id': pixels[i]['id'], 'channel': ch, 'cover': pixels[i]['cover'], 'q': r(qv, 4),
              'slope_db_per_year': r(s, 1)} for (i, ch, _, s), qv in zip(tests, q) if qv < alpha]
+    by_channel = {ch: sum(h['channel'] == ch for h in hits) for ch in ('hh', 'hv')}
     hits.sort(key=lambda h: -abs(h['slope_db_per_year']))
     samples = sorted({h['index'] for h in hits})
     return {'tests': len(tests), 'alpha': alpha, 'significant_tests': len(hits), 'samples': len(samples),
-            'brightening': sum(h['slope_db_per_year'] > 0 for h in hits), 'darkening': sum(h['slope_db_per_year'] < 0 for h in hits),
+            'by_channel': by_channel, 'brightening': sum(h['slope_db_per_year'] > 0 for h in hits), 'darkening': sum(h['slope_db_per_year'] < 0 for h in hits),
             'expected_false_at_most': int(np.ceil(alpha * len(hits))), 'strongest': hits[:12],
             'test': 'Kendall tau of peer z vs time per sample and channel; Benjamini-Hochberg FDR; Theil-Sen slope of own minus peer median'}
 
@@ -160,6 +161,9 @@ def analyse(site, rng):
     coherence = np.array([np.nan if p.get('coherence') is None else p['coherence'] for p in px], dtype=float)
     z = np.array([np.nan if p['z'] is None else p['z'] for p in px], dtype=float)
     peer_z = np.concatenate([zhv[np.isfinite(zhv)], zhh[np.isfinite(zhh)]])
+    fh = np.abs(zhh) > OFFBEAT; fv = np.abs(zhv) > OFFBEAT
+    polarisation = {'hh_share': r(fh[np.isfinite(zhh)].mean(), 4), 'hv_share': r(fv[np.isfinite(zhv)].mean(), 4),
+                    'both_of_either': r((fh & fv).sum() / max(1, (fh | fv).sum()), 3)}
     by_class = {}
     for c in sorted(set(cover)):
         m = cover == c
@@ -177,7 +181,7 @@ def analyse(site, rng):
         'noise_floor': noise_floor(hv, cover, dates),
         'common_mode': common_mode(hv, cover, dates),
         'trends': trends(px, dates) if len(dates) >= 10 else None,
-        'classes': by_class,
+        'classes': by_class, 'polarisation': polarisation,
     }
 
 
@@ -369,6 +373,19 @@ def build_findings(sites):
         'how_en': f"Linear rates over the common window {v['window'][0]} to {v['window'][1]}: GNSS vertical {v['gnss_up_cm_per_year']} +/- {v['gnss_up_se']} cm/year from {v['gnss_days']} daily NGL solutions, expected along the radar line of sight {v['gnss_expected_los_cm_per_year'][0]} to {v['gnss_expected_los_cm_per_year'][1]} cm/year ({v['assumption']}). OPERA DISP-S1 at sample {v['sample']} ({v['distance_m']} m away): {v['opera_los_cm_per_year_common']} +/- {v['opera_los_se_common']} cm/year from {v['opera_dates_common']} dates; {v['opera_los_cm_per_year_all']} +/- {v['opera_los_se_all']} over all {v['opera_dates_all']}. Tying OPERA to a stable or GNSS-measured reference is required before any rate is quoted.",
         'how_ru': f"Линейные скорости за общее окно {v['window'][0]} - {v['window'][1]}: GNSS по вертикали {v['gnss_up_cm_per_year']} +/- {v['gnss_up_se']} см/год по {v['gnss_days']} суточным решениям NGL, ожидаемо вдоль луча радара {v['gnss_expected_los_cm_per_year'][0]} - {v['gnss_expected_los_cm_per_year'][1]} см/год (только вертикаль, угол падения Sentinel-1 IW 29-46°; горизонтальные скорости GNSS около 1 см/год). OPERA DISP-S1 в точке {v['sample']} ({v['distance_m']} м): {v['opera_los_cm_per_year_common']} +/- {v['opera_los_se_common']} см/год по {v['opera_dates_common']} датам; {v['opera_los_cm_per_year_all']} +/- {v['opera_los_se_all']} по всем {v['opera_dates_all']}. Прежде чем называть скорость, OPERA нужно привязать к стабильной опоре или к GNSS."})
 
+    overlap = [sites[k]['polarisation']['both_of_either'] for k in ok]
+    shares = [100 * sites[k]['polarisation'][c] for k in ok for c in ('hh_share', 'hv_share')]
+    mt = sites.get('mexico', {}).get('trends') or {}
+    split_en = f" Among Mexico City's significant trends, {mt['by_channel']['hh']} are in HH and {mt['by_channel']['hv']} in HV." if mt.get('by_channel') else ''
+    split_ru = f" Среди значимых трендов Мехико {mt['by_channel']['hh']} в HH и {mt['by_channel']['hv']} в HV." if mt.get('by_channel') else ''
+    out.append({'id': 'polarisation', 'strength': 'strong', 'site': None,
+        'en': f"HH and HV see different changes: only {round(100*min(overlap))}-{round(100*max(overlap))}% of off-beat samples depart in both channels, so watching both polarisations finds more candidates than either alone.",
+        'ru': f"HH и HV видят разные изменения: лишь {round(100*min(overlap))}-{round(100*max(overlap))}% выбросов отклоняются в обоих каналах, поэтому две поляризации вместе находят больше кандидатов, чем любая одна.",
+        'how_en': f"Per-date peer z in each channel at {len(ok)} sites; |z| > 2.5 flags {min(shares):.1f}-{max(shares):.1f}% of measurements per channel. Share of flagged sample-dates that are flagged in both channels: " + ', '.join(f"{sites[k]['name'].split(',')[0]} {round(100*sites[k]['polarisation']['both_of_either'])}%" for k in ok) + '.' + split_en,
+        'how_ru': f"z по датам в каждом канале на {len(ok)} участках; |z| > 2.5 отмечает {min(shares):.1f}-{max(shares):.1f}% измерений в канале. Доля отмеченных точек-дат, отмеченных в обоих каналах: " + ', '.join(f"{sites[k]['name'].split(',')[0]} {round(100*sites[k]['polarisation']['both_of_either'])}%" for k in ok) + '.' + split_ru,
+        'drivers_en': 'HH (co-polarised) is most sensitive to surface roughness, soil moisture and double-bounce between walls and ground or water, so it reacts to construction, flooding and wet soil. HV (cross-polarised) comes mainly from volume scattering in vegetation, so it reacts to canopy loss, regrowth and crop growth.',
+        'drivers_ru': 'HH (согласованная поляризация) сильнее всего чувствует шероховатость, влажность почвы и двойное отражение между стенами и землёй или водой: стройки, затопление, мокрая почва. HV (кросс-поляризация) рождается в основном объёмным рассеянием в растительности: потеря кроны, зарастание, рост посевов.'})
+
     tie = opera_tied()
     lo_inc, hi_inc = (str(a) for a in tie['incidence_deg'])
     med = sorted([tie['percentiles_5_50_95'][lo_inc][1], tie['percentiles_5_50_95'][hi_inc][1]])
@@ -387,9 +404,32 @@ def build_findings(sites):
             'how_en': 'Trend tests need at least 10 dates; persistence needs 3.',
             'how_ru': 'Для теста тренда нужно не меньше 10 дат, для устойчивости - 3.'})
 
+    drivers = {
+        'trends': ('Possible drivers: construction or demolition changing building geometry and double-bounce (HH), vegetation growing or being cleared on open lots (HV), and local ground deformation changing how surfaces face the radar. Each candidate needs a dated optical or field check.',
+                   'Возможные причины: стройка или снос меняют геометрию зданий и двойное отражение (HH), растительность на пустырях растёт или вырубается (HV), локальная деформация грунта меняет ориентацию поверхностей к радару. Каждого кандидата нужно проверить по датированному снимку или на месте.'),
+        'validation': ('Likely driver: groundwater pumping from the clay-rich lake beds beneath Mexico City compacts the clay; published InSAR studies report subsidence of up to about 40 cm/year in parts of the city.',
+                       'Вероятная причина: откачка грунтовых вод из глинистых озёрных отложений под Мехико уплотняет глину; опубликованные исследования InSAR сообщают о проседании до примерно 40 см/год в отдельных районах.'),
+        'cluster': ('Changes that affect neighbouring samples together point to area-wide causes, such as a construction site, airport or industrial works, or a drainage change, rather than single-pixel noise.',
+                    'Изменения, затрагивающие соседние точки вместе, указывают на причины на площади: стройплощадка, работы в аэропорту или на заводе, изменение дренажа, а не шум отдельного пикселя.'),
+        'common': ('Possible drivers: calibration or processing updates of the provisional product, or a change in surface moisture, since wet surfaces return more energy. In Mexico City the brighter August-October dates match the rainy season, but the abrupt 22 January drop fits a processing change better than weather.',
+                   'Возможные причины: обновление калибровки или обработки предварительного продукта либо изменение влажности поверхности, ведь мокрые поверхности отражают больше. В Мехико более яркие даты август-октябрь совпадают с сезоном дождей, но резкое падение 22 января больше похоже на изменение обработки, чем на погоду.'),
+        'persistence': ('Persistently different samples are usually different objects inside one land-cover class, such as a metal roof among houses or a pond in a field, not events.',
+                        'Устойчиво отличающиеся точки - обычно другие объекты внутри того же класса покрытия, например металлическая крыша среди домов или пруд в поле, а не события.'),
+        'physics': ('Tree canopies scatter the radar many times between leaves and branches, which rotates the polarisation and raises HV; walls and the ground form corner reflectors that return strong HH.',
+                    'Кроны деревьев многократно рассеивают сигнал между листьями и ветками, это поворачивает поляризацию и усиливает HV; стены и земля образуют уголковые отражатели с сильным HH.'),
+        'coherence': ('Leaves and branches move with wind and grow between passes, so the radar phase decorrelates over vegetation; buildings and pavement stay put, which is why ground motion is measurable in cities.',
+                      'Листья и ветки двигаются от ветра и растут между пролётами, поэтому фаза радара над растительностью теряет когерентность; здания и асфальт неподвижны, поэтому движение грунта измеримо в городах.'),
+        'noise': ('Radar speckle, small changes in soil moisture and slight differences in viewing geometry move every sample a little between passes.',
+                  'Спекл радара, небольшие изменения влажности почвы и небольшие различия геометрии съёмки немного сдвигают каждую точку между пролётами.'),
+    }
+    for f in out:
+        d = drivers.get(f['id'].split('-')[0])
+        if d and 'drivers_en' not in f:
+            f['drivers_en'], f['drivers_ru'] = d
+
     # Headline order for a first visit: the strongest substantive results, then method checks,
     # then what the data cannot support. A site's own findings are moved up by the page when it is open.
-    priority = ['trends', 'validation', 'physics', 'cluster', 'coherence', 'noise', 'persistence', 'common', 'calibration', 'quality', 'scattered', 'short']
+    priority = ['trends', 'validation', 'polarisation', 'physics', 'cluster', 'coherence', 'noise', 'persistence', 'common', 'calibration', 'quality', 'scattered', 'short']
     order = {'strong': 0, 'suggestive': 1, 'issue': 2, 'none': 3}
     out.sort(key=lambda f: (f['strength'] != 'strong' and order[f['strength']], priority.index(f['id'].split('-')[0])))
     return out
