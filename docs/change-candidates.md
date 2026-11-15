@@ -38,8 +38,8 @@ viewing conditions can cause false positives or missed changes. Group size is no
 confirmed event area. Missing data stay transparent.
 
 The package in `data/change-candidates/` contains hash-versioned reports, radar
-previews, source receipts and selected Sentinel-2 context. Optical dates can be
-outside the radar pair; one optical scene is explicitly not a before/after pair.
+previews, source receipts and Sentinel-2 context selected for each radar date.
+Optical dates can fall outside the radar pair; one optical scene is explicitly not a before/after pair.
 AOI cloud scores do not guarantee that the selected point is visible. These
 images are not labels or proof of cause. Reviews are stored in the user's browser
 and may be exported; there is no shared review database or multi-user backend.

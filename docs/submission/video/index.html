@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OffBeat video</title>
+<link rel="stylesheet" href="css/offbeat.css">
+<style>
+  html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+  #stage { position: relative; width: 960px; height: 540px; overflow: hidden; background: var(--desk); font: 12.5px/16px var(--ui); color: #000; }
+  .layer { position: absolute; inset: 0 0 28px 0; }
+  .w { position: absolute; margin: 0; transform-origin: 50% 50%; will-change: transform, opacity; }
+  .w .win-t h2 { font-size: 12.5px; }
+  .big { font: 37.5px/44px var(--ui); }
+  .huge { font: 50px/56px var(--ui); }
+  .mid { font: 25px/30px var(--ui); }
+  .navy { color: var(--title-a); }
+  .tip { position: absolute; background: #ffffe1; border: 1px solid #000; padding: 6px 10px; box-shadow: 2px 2px 0 rgba(0,0,0,.35); }
+  .field { background: #fff; box-shadow: var(--sunken); padding: 6px 8px; }
+  .clip { position: relative; overflow: hidden; background: #000; box-shadow: var(--sunken); }
+  .clip img { position: absolute; display: block; image-rendering: auto; }
+  /* taskbar */
+  #taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 28px; background: var(--face); box-shadow: inset 0 1px 0 var(--hi), inset 0 2px 0 #fff; display: flex; align-items: center; gap: 4px; padding: 0 3px; z-index: 50; }
+  #start { display: flex; align-items: center; gap: 4px; font-weight: bold; padding: 2px 8px; min-width: 0; min-height: 22px; }
+  #tasks { display: flex; gap: 3px; flex: 1; overflow: hidden; }
+  .task { width: 112px; padding: 3px 6px; min-height: 22px; box-shadow: var(--raised); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; gap: 4px; align-items: center; }
+  .task.on { box-shadow: var(--pressed); background: #dfdfdf; font-weight: bold; }
+  #tray { display: flex; align-items: center; gap: 6px; padding: 3px 8px; box-shadow: inset -1px -1px 0 var(--hi), inset 1px 1px 0 var(--lo); min-height: 22px; }
+  #eq { display: flex; align-items: flex-end; gap: 1px; height: 12px; }
+  #eq i { width: 3px; background: #000080; display: block; }
+  /* cursor */
+  #cursor { position: absolute; width: 12px; height: 19px; z-index: 60; pointer-events: none; image-rendering: pixelated; }
+  /* finding cards */
+  .card { position: absolute; left: 14px; right: 14px; display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: center; background: #fff; box-shadow: var(--sunken); padding: 10px 14px; transform-origin: 30% 50%; }
+  .card .finding__badge { font-size: 12.5px; }
+  .card b { font: 25px/30px var(--ui); color: #000080; display: block; }
+  .card span.s { color: #404040; }
+  .flash { position: absolute; inset: 0; background: #fff; pointer-events: none; z-index: 70; opacity: 0; }
+  .ring { position: absolute; border: 3px solid #ffcc00; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .slider98 { position: relative; height: 22px; }
+  .slider98 .rail { position: absolute; left: 0; right: 0; top: 9px; height: 4px; box-shadow: var(--sunken); background: #fff; }
+  .slider98 .thumb { position: absolute; top: 0; width: 11px; height: 21px; background: var(--face); box-shadow: var(--raised); }
+  .props td, .props th { text-align: left; padding: 4px 6px; vertical-align: top; }
+  .props th { font-weight: normal; color: #404040; width: 46%; }
+  .props td { font-weight: bold; }
+  .strike { position: relative; display: inline-block; }
+  .strike::after { content: ''; position: absolute; left: -4px; right: -4px; top: 50%; height: 4px; background: #c00000; transform-origin: 0 50%; transform: scaleX(var(--k, 0)); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="L">
+
+    <!-- 1. intro: the landing window -->
+    <section class="win w" id="w1" style="left:70px; top:56px; width:820px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>OffBeat - Earth observation</h2><span class="win-btn"></span></div>
+      <div class="win-b" style="display:grid; grid-template-columns: 1fr 300px; gap: 18px; padding: 18px 18px 16px;">
+        <div>
+          <p style="color:#404040; margin:0 0 12px">NASA-ISRO NISAR radar, explained</p>
+          <div class="big" id="t1a" style="min-height:44px"></div>
+          <div class="big navy" id="t1b" style="min-height:44px; margin-bottom:14px"></div>
+          <p id="t1c" style="max-width:420px">Real L-band radar measurements. Every point compared with its neighbours. Heard as music.</p>
+          <div style="display:flex; gap:8px; margin-top:16px">
+            <span class="btn btn--default">Explore an example</span><span class="btn">Surprise me</span><span class="btn" id="b-open">Open the map</span>
+          </div>
+        </div>
+        <div class="field" style="padding:6px">
+          <div style="display:flex; justify-content:space-between; color:#404040"><span>Real sample MEX r8 c2</span><span>HV, dB</span></div>
+          <svg id="intro-svg" viewBox="0 0 280 150" width="280" height="150"></svg>
+          <div style="color:#404040; border-top:1px solid var(--face); padding-top:4px">One sample leaves its neighbours</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. world -->
+    <section class="win w" id="w2" style="left:24px; top:10px; width:912px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>Off-Beat map - World</h2><span class="win-btn"></span></div>
+      <div class="win-b--flush"><div class="clip" id="c2" style="height:448px"><img id="i2" src="stills/world.png" alt=""></div></div>
+    </section>
+    <div class="tip" id="tip2" style="right:46px; top:58px; width:300px"></div>
+    <div class="tip mid" id="cap2" style="left:48px; bottom:50px"></div>
+
+    <!-- 3. Mexico City through 29 dates -->
+    <section class="win w" id="w3" style="left:24px; top:10px; width:912px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>Off-Beat map - Mexico City</h2><span class="win-btn"></span></div>
+      <div class="win-b--flush">
+        <fieldset class="group" style="margin:2px 4px 6px; padding:4px 10px 6px">
+          <legend>Measured acquisition</legend>
+          <div style="display:grid; grid-template-columns: 150px 1fr 260px; gap: 12px; align-items:center">
+            <span class="mid" id="d3">2025-10-30</span>
+            <div class="slider98"><div class="rail"></div><div class="thumb" id="th3"></div></div>
+            <span id="n3" style="text-align:right"></span>
+          </div>
+        </fieldset>
+        <div class="clip" id="c3" style="height:376px"><img id="i3" src="stills/mex-00.png" alt=""></div>
+      </div>
+    </section>
+    <div class="tip" id="tip3" style="right:44px; top:118px; width:250px">
+      <div class="mid" style="margin-bottom:6px">29 radar dates</div>
+      Each point is compared with points of the same land cover within 1 km.<br>
+      <span style="color:#d0161b">&#9632;</span> above &nbsp; <span style="color:#1d4fd8">&#9632;</span> below &nbsp; <span style="color:#5b6470">&#9632;</span> in step
+    </div>
+
+    <!-- 4. pixel card + sonification -->
+    <section class="win w" id="w4" style="left:24px; top:10px; width:912px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>Pixel card - MEX r8 c2</h2><span class="win-btn"></span></div>
+      <div class="win-b" style="display:grid; grid-template-columns: 250px 1fr; gap: 12px">
+        <div class="field" style="padding:4px">
+          <table class="props"><tbody>
+            <tr><th>WorldCover class</th><td>Built-up (50)</td></tr>
+            <tr><th>Dates</th><td>29, 2025-10 to 2026-10</td></tr>
+            <tr><th>Peers</th><td>same class, &lt;= 1 km</td></tr>
+            <tr><th>Trend vs peers</th><td>+13.1 dB / year</td></tr>
+            <tr><th>False discovery</th><td>q = 0.0006</td></tr>
+            <tr><th>Cause</th><td>unverified</td></tr>
+          </tbody></table>
+          <div class="mid navy" style="padding:14px 6px 6px">Hear it leave its neighbours</div>
+          <div id="spk" style="display:flex; gap:3px; align-items:flex-end; height:46px; padding:0 6px"></div>
+        </div>
+        <div class="field" style="padding:6px">
+          <div style="display:flex; gap:14px; color:#333"><span>Backscatter, dB</span><span><i style="display:inline-block;width:18px;height:3px;background:#000080;vertical-align:middle"></i> HV</span><span><i style="display:inline-block;width:18px;height:8px;background:rgba(150,150,150,.4);vertical-align:middle"></i> neighbours +/- 2 sd</span></div>
+          <svg id="chart" viewBox="0 0 600 380" width="600" height="380"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. findings -->
+    <section class="win w" id="w5" style="left:60px; top:10px; width:840px; height:490px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>What the data says</h2><span class="win-btn"></span></div>
+      <div style="position:relative; height:462px">
+        <p style="padding:10px 14px 0; margin:0">Statistical tests on 6,879 measured samples at 7 sites. Nothing interpolated or simulated.</p>
+        <div class="card" id="k1" style="top:40px"><span class="finding__badge finding--strong" style="background:#000080;color:#fff;border:1px solid #000;padding:1px 6px;text-align:center">Strong</span><div><b>114 Mexico City samples drift away</b><span class="s">from their neighbours over 29 dates, false discovery rate 5%</span></div></div>
+        <div class="card" id="k2" style="top:142px"><span style="background:#000080;color:#fff;border:1px solid #000;padding:1px 6px;text-align:center;font-weight:bold">Strong</span><div><b>Changes cluster: p = 0.007</b><span class="s">off-beat samples sit together more than chance allows</span></div></div>
+        <div class="card" id="k3" style="top:244px"><span style="background:#000080;color:#fff;border:1px solid #000;padding:1px 6px;text-align:center;font-weight:bold">Strong</span><div><b>HH and HV see different changes</b><span class="s">only 5-28% of off-beat samples depart in both polarisations</span></div></div>
+        <div class="card" id="k4" style="top:346px"><span style="background:#000080;color:#fff;border:1px solid #000;padding:1px 6px;text-align:center;font-weight:bold">Strong</span><div><b>The test is honest: 92-94% in band</b><span class="s">against the 95% it is designed for, at every site</span></div></div>
+      </div>
+    </section>
+
+    <!-- 6. subsidence -->
+    <section class="win w" id="w6" style="left:24px; top:10px; width:912px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>Subsidence estimate - Mexico City</h2><span class="win-btn"></span></div>
+      <div class="win-b" style="display:grid; grid-template-columns: 470px 1fr; gap: 14px">
+        <div class="clip" style="height:440px"><img id="i6" src="stills/subsidence.png" alt="" style="left:-180px; top:-80px; width:900px"></div>
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <div class="field"><div>GNSS station MMX1, measured daily</div><div class="huge" style="color:#c00000"><span id="g6">0.0</span><span class="mid"> cm/yr</span></div><div style="color:#404040">vertical, 48 days</div></div>
+          <div class="field" id="o6"><div>OPERA DISP-S1, 20 m away</div><div class="big">-4.8 cm/yr</div><div style="color:#404040">relative, along the radar line: other reference, not directly comparable</div></div>
+          <div class="field" id="t6" style="background:#ffffe1"><div>OPERA anchored at this GNSS station</div><div class="big navy">about 15-20 cm/yr</div><div style="color:#404040">along the radar line, 95% of points sinking. An estimate, not validation.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. end -->
+    <section class="win w" id="w7t" style="left:40px; top:30px; width:470px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>Terrain / NISAR - 3D</h2><span class="win-btn"></span></div>
+      <div class="win-b--flush"><div class="clip" style="height:260px"><img src="stills/terrain.png" alt="" style="left:-10px; top:-10px; width:490px"></div></div>
+    </section>
+    <section class="win w" id="w7" style="left:230px; top:110px; width:500px;">
+      <div class="win-t"><span class="win-t__icon"></span><h2>OffBeat</h2><span class="win-btn"></span></div>
+      <div class="win-b" style="padding:18px 22px 16px; display:grid; grid-template-columns: 64px 1fr; gap: 16px; align-items:start">
+        <svg width="64" height="64" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect width="16" height="16" fill="#000080"/><path d="M1 10h3l1-5 2 9 2-7 1 3h5" fill="none" stroke="#ffcc00" stroke-width="1.6"/></svg>
+        <div>
+          <div class="huge">OffBeat</div>
+          <div class="mid navy" style="margin:2px 0 10px">Hear how the Earth moves.</div>
+          <div class="mid">offbeat.chern.su</div>
+          <div style="margin-top:4px">github.com/ChernStepanov/OffBeat &nbsp;|&nbsp; Apache-2.0</div>
+          <div style="margin-top:10px; color:#404040">NASA Space Apps 2026 &nbsp;|&nbsp; Dancing with the SARs</div>
+          <div style="margin-top:14px; display:flex; justify-content:flex-end"><span class="btn btn--default" id="b-ok" style="min-width:90px; text-align:center">OK</span></div>
+        </div>
+      </div>
+    </section>
+    <div id="credit" style="position:absolute; left:0; right:0; bottom:8px; text-align:center; color:#fff">Data: NASA-ISRO NISAR via ASF DAAC, NASA OPERA, NASA GIBS, NGL GNSS, ESA WorldCover, Copernicus Sentinel-2. Imagery (c) Esri.</div>
+  </div>
+
+  <div id="taskbar">
+    <span class="btn" id="start"><span class="win-t__icon"></span>Start</span>
+    <div id="tasks"></div>
+    <div id="tray"><div id="eq"></div><span id="clock">NISAR L-band</span></div>
+  </div>
+  <svg id="cursor" width="12" height="19" viewBox="0 0 12 19" shape-rendering="crispEdges"><rect x="0" y="0" width="1" height="1" fill="#000"/><rect x="0" y="1" width="1" height="1" fill="#000"/><rect x="1" y="1" width="1" height="1" fill="#000"/><rect x="0" y="2" width="1" height="1" fill="#000"/><rect x="1" y="2" width="1" height="1" fill="#fff"/><rect x="2" y="2" width="1" height="1" fill="#000"/><rect x="0" y="3" width="1" height="1" fill="#000"/><rect x="1" y="3" width="1" height="1" fill="#fff"/><rect x="2" y="3" width="1" height="1" fill="#fff"/><rect x="3" y="3" width="1" height="1" fill="#000"/><rect x="0" y="4" width="1" height="1" fill="#000"/><rect x="1" y="4" width="1" height="1" fill="#fff"/><rect x="2" y="4" width="1" height="1" fill="#fff"/><rect x="3" y="4" width="1" height="1" fill="#fff"/><rect x="4" y="4" width="1" height="1" fill="#000"/><rect x="0" y="5" width="1" height="1" fill="#000"/><rect x="1" y="5" width="1" height="1" fill="#fff"/><rect x="2" y="5" width="1" height="1" fill="#fff"/><rect x="3" y="5" width="1" height="1" fill="#fff"/><rect x="4" y="5" width="1" height="1" fill="#fff"/><rect x="5" y="5" width="1" height="1" fill="#000"/><rect x="0" y="6" width="1" height="1" fill="#000"/><rect x="1" y="6" width="1" height="1" fill="#fff"/><rect x="2" y="6" width="1" height="1" fill="#fff"/><rect x="3" y="6" width="1" height="1" fill="#fff"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="5" y="6" width="1" height="1" fill="#fff"/><rect x="6" y="6" width="1" height="1" fill="#000"/><rect x="0" y="7" width="1" height="1" fill="#000"/><rect x="1" y="7" width="1" height="1" fill="#fff"/><rect x="2" y="7" width="1" height="1" fill="#fff"/><rect x="3" y="7" width="1" height="1" fill="#fff"/><rect x="4" y="7" width="1" height="1" fill="#fff"/><rect x="5" y="7" width="1" height="1" fill="#fff"/><rect x="6" y="7" width="1" height="1" fill="#fff"/><rect x="7" y="7" width="1" height="1" fill="#000"/><rect x="0" y="8" width="1" height="1" fill="#000"/><rect x="1" y="8" width="1" height="1" fill="#fff"/><rect x="2" y="8" width="1" height="1" fill="#fff"/><rect x="3" y="8" width="1" height="1" fill="#fff"/><rect x="4" y="8" width="1" height="1" fill="#fff"/><rect x="5" y="8" width="1" height="1" fill="#fff"/><rect x="6" y="8" width="1" height="1" fill="#fff"/><rect x="7" y="8" width="1" height="1" fill="#fff"/><rect x="8" y="8" width="1" height="1" fill="#000"/><rect x="0" y="9" width="1" height="1" fill="#000"/><rect x="1" y="9" width="1" height="1" fill="#fff"/><rect x="2" y="9" width="1" height="1" fill="#fff"/><rect x="3" y="9" width="1" height="1" fill="#fff"/><rect x="4" y="9" width="1" height="1" fill="#fff"/><rect x="5" y="9" width="1" height="1" fill="#fff"/><rect x="6" y="9" width="1" height="1" fill="#fff"/><rect x="7" y="9" width="1" height="1" fill="#fff"/><rect x="8" y="9" width="1" height="1" fill="#fff"/><rect x="9" y="9" width="1" height="1" fill="#000"/><rect x="0" y="10" width="1" height="1" fill="#000"/><rect x="1" y="10" width="1" height="1" fill="#fff"/><rect x="2" y="10" width="1" height="1" fill="#fff"/><rect x="3" y="10" width="1" height="1" fill="#fff"/><rect x="4" y="10" width="1" height="1" fill="#fff"/><rect x="5" y="10" width="1" height="1" fill="#fff"/><rect x="6" y="10" width="1" height="1" fill="#000"/><rect x="7" y="10" width="1" height="1" fill="#000"/><rect x="8" y="10" width="1" height="1" fill="#000"/><rect x="9" y="10" width="1" height="1" fill="#000"/><rect x="10" y="10" width="1" height="1" fill="#000"/><rect x="0" y="11" width="1" height="1" fill="#000"/><rect x="1" y="11" width="1" height="1" fill="#fff"/><rect x="2" y="11" width="1" height="1" fill="#fff"/><rect x="3" y="11" width="1" height="1" fill="#000"/><rect x="4" y="11" width="1" height="1" fill="#fff"/><rect x="5" y="11" width="1" height="1" fill="#fff"/><rect x="6" y="11" width="1" height="1" fill="#000"/><rect x="0" y="12" width="1" height="1" fill="#000"/><rect x="1" y="12" width="1" height="1" fill="#fff"/><rect x="2" y="12" width="1" height="1" fill="#000"/><rect x="4" y="12" width="1" height="1" fill="#000"/><rect x="5" y="12" width="1" height="1" fill="#fff"/><rect x="6" y="12" width="1" height="1" fill="#fff"/><rect x="7" y="12" width="1" height="1" fill="#000"/><rect x="0" y="13" width="1" height="1" fill="#000"/><rect x="1" y="13" width="1" height="1" fill="#000"/><rect x="4" y="13" width="1" height="1" fill="#000"/><rect x="5" y="13" width="1" height="1" fill="#fff"/><rect x="6" y="13" width="1" height="1" fill="#fff"/><rect x="7" y="13" width="1" height="1" fill="#000"/><rect x="0" y="14" width="1" height="1" fill="#000"/><rect x="5" y="14" width="1" height="1" fill="#000"/><rect x="6" y="14" width="1" height="1" fill="#fff"/><rect x="7" y="14" width="1" height="1" fill="#fff"/><rect x="8" y="14" width="1" height="1" fill="#000"/><rect x="5" y="15" width="1" height="1" fill="#000"/><rect x="6" y="15" width="1" height="1" fill="#fff"/><rect x="7" y="15" width="1" height="1" fill="#fff"/><rect x="8" y="15" width="1" height="1" fill="#000"/><rect x="6" y="16" width="1" height="1" fill="#000"/><rect x="7" y="16" width="1" height="1" fill="#fff"/><rect x="8" y="16" width="1" height="1" fill="#fff"/><rect x="9" y="16" width="1" height="1" fill="#000"/><rect x="6" y="17" width="1" height="1" fill="#000"/><rect x="7" y="17" width="1" height="1" fill="#fff"/><rect x="8" y="17" width="1" height="1" fill="#fff"/><rect x="9" y="17" width="1" height="1" fill="#000"/><rect x="7" y="18" width="1" height="1" fill="#000"/><rect x="8" y="18" width="1" height="1" fill="#000"/></svg>
+  <div class="flash" id="flash"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const outCubic = k => 1 - Math.pow(1 - k, 3);
+const inCubic = k => k * k * k;
+const outBack = k => { const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const prog = (t, t0, d) => clamp((t - t0) / d);
+
+// Beat grid: a sixteenth of 103 BPM. Scenes start on quarter beats.
+const S = 0.145, Q = 4 * S;
+const SC = [0, 6 * Q, 13 * Q, 21 * Q, 29 * Q, 38 * Q, 46 * Q, 51 * Q];
+window.DURATION = SC[7];
+
+// window open / close: Win98 does not animate, the video does: a quick overshoot pop and a shrink to the taskbar
+function windowState(el, t, open, close) {
+  if (t < open || t > close + 0.3) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  const a = outBack(prog(t, open, 0.32)), z = inCubic(prog(t, close, 0.3));
+  const s = lerp(0.82, 1, a) * lerp(1, 0.2, z);
+  const y = lerp(0, 260, z);
+  el.style.opacity = String(clamp(a * 1.6) * (1 - z));
+  el.style.transform = `translateY(${y}px) scale(${s})`;
+}
+
+// --- data-driven pieces ---
+const dates = D.dates, n = dates.length;
+const finite = D.hv.concat(D.med.map((m, i) => m + 2 * D.sd[i]), D.med.map((m, i) => m - 2 * D.sd[i])).filter(Number.isFinite);
+const lo = Math.floor(Math.min(...finite)) - 1, hi = Math.ceil(Math.max(...finite)) + 1;
+function chartPaths(W, H, pad) {
+  const X = i => pad.l + i / (n - 1) * (W - pad.l - pad.r), Y = v => pad.t + (1 - (v - lo) / (hi - lo)) * (H - pad.t - pad.b);
+  const up = D.med.map((m, i) => `${X(i)},${Y(m + 2 * D.sd[i])}`), dn = D.med.map((m, i) => `${X(i)},${Y(m - 2 * D.sd[i])}`).reverse();
+  return { X, Y, band: `M${up.join('L')}L${dn.join('L')}Z`, med: 'M' + D.med.map((m, i) => `${X(i)},${Y(m)}`).join('L'), hv: 'M' + D.hv.map((v, i) => `${X(i)},${Y(v)}`).join('L') };
+}
+function buildChart(svg, W, H, pad, axes) {
+  const p = chartPaths(W, H, pad);
+  let g = `<rect width="${W}" height="${H}" fill="#fff"/>`;
+  if (axes) {
+    for (let v = Math.ceil(lo / 5) * 5; v <= hi; v += 5) g += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${p.Y(v)}" y2="${p.Y(v)}" stroke="#e2e2e2"/><text x="${pad.l - 6}" y="${p.Y(v) + 4}" text-anchor="end" font-family="W95FA" font-size="12.5" fill="#333">${v}</text>`;
+    [0, 7, 14, 21, 28].forEach(i => g += `<text x="${p.X(i)}" y="${H - 6}" text-anchor="${i === 0 ? 'start' : i === 28 ? 'end' : 'middle'}" font-family="W95FA" font-size="12.5" fill="#333">${dates[i].slice(2, 7)}</text>`);
+  }
+  g += `<path d="${p.band}" fill="rgba(150,150,150,.30)"/><path d="${p.med}" fill="none" stroke="#8a8a8a" stroke-dasharray="4 4" stroke-width="1.5"/>`;
+  g += `<path class="hv" d="${p.hv}" fill="none" stroke="#000080" stroke-width="${axes ? 3 : 2.5}" stroke-linejoin="round"/>`;
+  g += `<g class="dots">` + D.hv.map((v, i) => `<rect x="${p.X(i) - 3}" y="${p.Y(v) - 3}" width="6" height="6" fill="#000080"/>`).join('') + '</g>';
+  if (axes) g += `<line class="head" x1="0" x2="0" y1="${pad.t}" y2="${H - pad.b}" stroke="#67217a" stroke-width="3"/><circle class="hit" r="0" fill="none" stroke="#d0161b" stroke-width="3"/>`;
+  else g += `<circle class="yellow" r="0" fill="#ffcc00" stroke="#000080" stroke-width="2"/>`;
+  svg.innerHTML = g;
+  const path = svg.querySelector('.hv'); const len = path.getTotalLength(); path.style.strokeDasharray = len; svg._len = len; svg._p = p;
+}
+buildChart($('intro-svg'), 280, 150, { l: 4, r: 4, t: 8, b: 8 }, false);
+buildChart($('chart'), 600, 380, { l: 40, r: 12, t: 10, b: 26 }, true);
+for (let i = 0; i < 18; i++) $('spk').insertAdjacentHTML('beforeend', '<i style="display:block;width:9px;background:#000080"></i>');
+for (let i = 0; i < 5; i++) $('eq').insertAdjacentHTML('beforeend', '<i></i>');
+
+const TASKS = [['w1', 'OffBeat - Earth', 0.2, SC[1]], ['w2', 'Map - World', SC[1], SC[2]], ['w3', 'Map - Mexico City', SC[2], SC[3]], ['w4', 'Pixel card', SC[3], SC[4]], ['w5', 'What the data says', SC[4], SC[5]], ['w6', 'Subsidence', SC[5], SC[6]], ['w7', 'OffBeat', SC[6] + 0.3, 99]];
+function typeText(el, text, t, t0, cps) { el.textContent = text.slice(0, Math.max(0, Math.floor((t - t0) * cps))); }
+
+window.render = function (t) {
+  // windows
+  windowState($('w1'), t, 0.15, SC[1] - 0.32);
+  windowState($('w2'), t, SC[1], SC[2] - 0.05);
+  windowState($('w3'), t, SC[2], SC[3] - 0.3);
+  windowState($('w4'), t, SC[3], SC[4] - 0.3);
+  windowState($('w5'), t, SC[4], SC[5] - 0.3);
+  windowState($('w6'), t, SC[5], SC[6] - 0.3);
+  windowState($('w7t'), t, SC[6] + 0.05, 99);
+  windowState($('w7'), t, SC[6] + 0.3, 99);
+
+  // 1. typing, drawing the illustration and the click
+  typeText($('t1a'), 'The Earth is always moving.', t, 0.45, 26);
+  typeText($('t1b'), 'Listen for the unexpected.', t, 1.6, 26);
+  $('t1c').style.opacity = String(prog(t, 2.5, 0.3));
+  const intro = $('intro-svg'); intro.querySelector('.hv').style.strokeDashoffset = intro._len * (1 - outCubic(prog(t, 0.6, 2.2)));
+  intro.querySelector('.dots').style.opacity = String(prog(t, 2.6, 0.2));
+  const yi = 22, yp = intro._p; const yel = intro.querySelector('.yellow');
+  yel.setAttribute('cx', yp.X(yi)); yel.setAttribute('cy', yp.Y(D.hv[yi])); yel.setAttribute('r', 7 * outBack(prog(t, 2.75, 0.3)) * (t < SC[1] ? 1 : 0));
+  // cursor path: in from the corner, onto "Open the map", click
+  const cur = $('cursor');
+  const aim = id => { const r = $(id).getBoundingClientRect(), st = $('stage').getBoundingClientRect(); return [r.left - st.left + r.width * 0.5, r.top - st.top + r.height * 0.55]; };
+  if (t < SC[1] - 0.1) {
+    const [bx, by] = aim('b-open'), k = outCubic(prog(t, 2.15, 0.75));
+    cur.style.display = ''; cur.style.left = lerp(905, bx, k) + 'px'; cur.style.top = lerp(505, by, k) + 'px';
+  } else if (t > SC[6] + 1.2) {
+    const [bx, by] = aim('b-ok'), k = outCubic(prog(t, SC[6] + 1.2, 0.75));
+    cur.style.display = ''; cur.style.left = lerp(905, bx, k) + 'px'; cur.style.top = lerp(505, by, k) + 'px';
+  } else cur.style.display = 'none';
+  $('b-open').style.boxShadow = t > 3.05 && t < 3.3 ? 'var(--pressed)' : '';
+  $('b-ok').style.boxShadow = t > SC[6] + 2.15 && t < SC[6] + 2.4 ? '0 0 0 1px #000, var(--pressed)' : '';
+
+  // 2. world: counters per beat, then a zoom punch into Mexico City
+  const w2 = t >= SC[1] && t < SC[2];
+  const pinX = 306, pinY = 430, i2 = $('i2');
+  const z2 = inCubic(prog(t, SC[2] - 1.0, 0.95));
+  const zoom = lerp(1, 7, z2), cx = lerp(pinX, 450, z2), cy = 240;
+  i2.style.width = 950 * zoom + 'px';
+  i2.style.left = (cx - pinX * zoom) + 'px'; i2.style.top = (cy - pinY * zoom) + 'px';
+  i2.style.filter = `blur(${z2 * 3}px)`;
+  const facts = ['<span class="huge">7</span> <span class="mid">sites, 4 continents</span>', `<span class="huge">${D.samples.toLocaleString('en')}</span> <span class="mid">measured points</span>`, '<span class="mid">L-band radar, HH + HV</span>', '<span class="mid">NASA-ISRO NISAR, 2025-2026</span>'];
+  const shown = Math.floor((t - SC[1] - 0.4) / Q);
+  $('tip2').style.display = w2 && shown >= 0 && z2 < 0.3 ? '' : 'none';
+  $('tip2').innerHTML = facts.slice(0, clamp(shown + 1, 0, 4)).map(f => `<div style="margin:2px 0">${f}</div>`).join('');
+  $('cap2').style.display = w2 && t > SC[1] + 0.6 && z2 < 0.2 ? '' : 'none';
+  $('cap2').textContent = 'Where NISAR looked, coloured by date';
+
+  // 3. Mexico City through every date, one per sixteenth
+  const step = clamp(Math.floor((t - SC[2] - 2 * S) / S), 0, n - 1);
+  const i3 = $('i3'); const src = `stills/mex-${String(step).padStart(2, '0')}.png`;
+  if (!i3.src.endsWith(src)) i3.src = src;
+  const punch = 1 + 0.25 * (1 - outCubic(prog(t, SC[2], 0.6)));
+  i3.style.width = 950 * punch + 'px'; i3.style.left = (450 - 450 * punch) + 'px'; i3.style.top = (-170 - 200 * (punch - 1)) + 'px';
+  $('d3').textContent = dates[step];
+  $('th3').style.left = `calc(${step / (n - 1) * 100}% - ${step / (n - 1) * 11}px)`;
+  $('n3').innerHTML = `<span class="mid" style="color:#d0161b">${D.counts[step]}</span> off-beat points`;
+  $('tip3').style.display = t >= SC[2] + 0.5 && t < SC[3] - 0.3 ? '' : 'none';
+
+  // 4. chart drawing with the playhead, sound bars
+  const ch = $('chart'), p = ch._p;
+  const playK = clamp((t - SC[3] - 2 * S) / (S * (n - 1)));
+  const at = Math.min(n - 1, Math.floor(playK * (n - 1) + 1e-6));
+  ch.querySelector('.hv').style.strokeDashoffset = ch._len * (1 - playK);
+  ch.querySelectorAll('.dots rect').forEach((r, i) => r.style.opacity = i <= at && t > SC[3] + 2 * S ? 1 : 0);
+  const hx = p.X(playK * (n - 1));
+  const head = ch.querySelector('.head'); head.setAttribute('x1', hx); head.setAttribute('x2', hx);
+  const z = Math.abs(D.z[at] ?? 0), hit = ch.querySelector('.hit');
+  const since = (t - SC[3] - 2 * S) / S - at;
+  hit.setAttribute('cx', p.X(at)); hit.setAttribute('cy', p.Y(D.hv[at])); hit.setAttribute('r', z > 1.5 && playK < 1 ? 6 + 16 * clamp(since) : 0);
+  hit.style.opacity = String(1 - clamp(since));
+  [...$('spk').children].forEach((b, i) => { const v = playK > 0 && playK < 1 ? Math.abs(Math.sin(t * 23 + i * 1.7)) * (0.3 + 0.7 * clamp(z / 3)) : 0.08; b.style.height = (4 + 40 * v) + 'px'; });
+
+  // 5. cards slam in on quarter beats with a screen kick
+  ['k1', 'k2', 'k3', 'k4'].forEach((id, i) => {
+    const t0 = SC[4] + Q + i * 2 * Q, k = prog(t, t0, 0.22), el = $(id);
+    el.style.opacity = String(k > 0 ? 1 : 0);
+    el.style.transform = `scale(${lerp(1.6, 1, outCubic(k))}) rotate(${lerp(-3, 0, outCubic(k))}deg)`;
+  });
+
+  // 6. GNSS counter, OPERA struck out, tied estimate
+  const g = outCubic(prog(t, SC[5] + 0.5, 1.2));
+  $('g6').textContent = (D.gnss * g).toFixed(1);
+  $('o6').style.opacity = String(prog(t, SC[5] + 1.0, 0.25));
+  $('t6').style.opacity = String(prog(t, SC[5] + 2.6, 0.2));
+  $('t6').style.transform = `scale(${lerp(1.25, 1, outCubic(prog(t, SC[5] + 2.6, 0.25)))})`;
+  $('i6').style.transform = `scale(${lerp(1.0, 1.12, prog(t, SC[5], SC[6] - SC[5]))})`;
+  $('credit').style.opacity = String(prog(t, SC[6] + 0.8, 0.4));
+
+  // flash on scene cuts
+  const cut = SC.slice(1, 7).map(c => clamp(1 - (t - c) / 0.18)).filter((v, i) => t >= SC[i + 1]);
+  $('flash').style.opacity = String(Math.max(0, ...cut) * 0.55);
+
+  // taskbar: tasks of open windows, the active one pressed; speaker bars on the beat
+  $('tasks').innerHTML = TASKS.filter(([, , a]) => t >= a).map(([id, label, a, b]) => `<span class="task${t >= a && t < b ? ' on' : ''}"><span class="win-t__icon"></span>${label}</span>`).join('');
+  const beatK = ((t % Q) / Q);
+  [...$('eq').children].forEach((b, i) => b.style.height = (t < SC[1] ? 2 : 2 + 10 * Math.max(0, 1 - beatK * (1.2 + i * 0.4))) + 'px');
+  $('clock').textContent = t < SC[2] ? 'NISAR L-band' : dates[step];
+};
+window.ready = (async () => {
+  await document.fonts.ready;
+  const srcs = ['stills/world.png', 'stills/subsidence.png', 'stills/terrain.png', ...dates.map((_, i) => `stills/mex-${String(i).padStart(2, '0')}.png`)];
+  await Promise.all(srcs.map(s => new Promise(r => { const im = new Image(); im.onload = im.onerror = r; im.src = s; })));
+  render(0);
+  return true;
+})();
+</script>
+</body>
+</html>

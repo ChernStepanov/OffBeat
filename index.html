@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=0c6dae7ab679">
+<link rel="stylesheet" href="css/offbeat.css?v=a658b203fa05">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -39,7 +39,7 @@
         <p class="launch__eyebrow">NASA-ISRO NISAR radar, explained</p>
         <h2 id="launch-title">Explore changes<br><span>on Earth.</span></h2>
         <p class="launch__lead">Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.</p>
-        <div class="launch__actions"><a class="btn btn--default launch__primary" id="launch-example" href="#evidence-win">Explore an example</a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Surprise me</button><a class="btn launch__secondary" href="#map-win">Open the map</a></div>
+        <div class="launch__actions"><a class="btn btn--default launch__primary" id="launch-example" href="#evidence-win">Explore an example</a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Surprise me</button><a class="btn launch__secondary" href="#map-win">Open the map</a><button type="button" class="btn" id="video-open">Watch the 30-second video</button></div>
         <details class="launch-help" id="surprise-help">
           <summary>How Surprise me works</summary>
           <ol>
@@ -153,6 +153,7 @@
         <div class="win-t"><h2 id="findings-title">What the data says</h2></div>
         <div class="win-b">
           <p class="findings__intro" id="findings-intro">Loading statistical findings...</p>
+          <div class="keynums" id="findings-keys"></div>
           <ol class="findings__list" id="findings-list"></ol>
           <p class="findings__foot"><button type="button" class="btn" id="findings-more" hidden>Show all findings</button> <a href="data/findings.json" target="_blank" rel="noopener">All statistics (JSON)</a>, <a href="scripts/findings.py" target="_blank" rel="noopener">analysis code</a></p>
         </div>
@@ -260,7 +261,7 @@
           <h3 data-dense="optical">Dated optical context</h3><p id="detected-optical-status"></p><div class="dense-case__images" id="detected-optical"></div>
           <p class="dense-case__hint" data-dense="opticalNote">Optical dates differ from radar dates. Clouds, shadows or masks may hide the point; visual differences do not establish the cause.</p>
           <h3 data-dense="review">Your visual review</h3><p class="dense-case__hint" data-dense="private">Reviews stay in this browser only; they are not shared. A review is not independent validation.</p>
-          <div class="dense-case__review"><label><span data-dense="verdict">Result</span> <select id="detected-verdict"><option value="" data-dense="unreviewed">Not reviewed</option><option value="visible_change" data-dense="visible">Change visible</option><option value="no_visible_change" data-dense="notVisible">No visible change</option><option value="uncertain" data-dense="uncertain">Uncertain / cannot see</option></select></label><label><span data-dense="basis">Images reviewed</span> <select id="detected-basis"><option value="" data-dense="choose">Choose source</option><option value="optical" data-dense="opticalOnly">Optical</option><option value="radar" data-dense="radarOnly">Radar</option><option value="both" data-dense="both">Both</option></select></label><label><span data-dense="comment">Comment (optional)</span> <input id="detected-comment" maxlength="500"></label></div>
+          <div class="dense-case__review"><label><span data-dense="verdict">Result</span> <select id="detected-verdict" aria-label="Review result / Результат проверки"><option value="" data-dense="unreviewed">Not reviewed</option><option value="visible_change" data-dense="visible">Change visible</option><option value="no_visible_change" data-dense="notVisible">No visible change</option><option value="uncertain" data-dense="uncertain">Uncertain / cannot see</option></select></label><label><span data-dense="basis">Images reviewed</span> <select id="detected-basis" aria-label="Images reviewed / Какие снимки проверены"><option value="" data-dense="choose">Choose source</option><option value="optical" data-dense="opticalOnly">Optical</option><option value="radar" data-dense="radarOnly">Radar</option><option value="both" data-dense="both">Both</option></select></label><label><span data-dense="comment">Comment (optional)</span> <input id="detected-comment" maxlength="500"></label></div>
           <p><button type="button" class="btn" id="detected-save" data-dense="save">Save review</button> <button type="button" class="btn" id="detected-clear" data-dense="reset">Reset review</button> <button type="button" class="btn" id="detected-export" data-dense="export">Download reviews</button></p><p id="detected-review-status" role="status"></p>
           <p><a id="detected-source" target="_blank" rel="noopener" data-dense="source">Granules and method</a> · <a href="scripts/detect_dense_changes.py" data-dense="code">Detection code</a> · <a id="detected-optical-source" target="_blank" rel="noopener" data-dense="opticalSource">Optical sources</a></p>
         </div>
@@ -458,6 +459,33 @@
   <div class="scene__status"><span id="scene-status" role="status">Ready</span><span>NASA-ISRO NISAR / ASF DAAC</span><span>Esc to return</span></div>
 </section>
 
+<div class="modal modal--video" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title" hidden>
+  <section class="win modal__win mp">
+    <div class="win-t"><span class="mp__icon" aria-hidden="true"></span><h2 id="video-title">Media Player - OffBeat in 30 seconds</h2><button type="button" class="win-btn win-btn--close" id="video-close" aria-label="Close video"></button></div>
+    <div class="mp__menu" role="menubar">
+      <a role="menuitem" href="docs/submission/offbeat-video.mp4" download>File</a>
+      <button type="button" role="menuitem" id="mp-view">View</button>
+      <button type="button" role="menuitem" id="mp-menu-play">Play</button>
+      <a role="menuitem" href="docs/submission/video/README.md" target="_blank" rel="noopener">Help</a>
+    </div>
+    <div class="mp__screen"><video id="video-player" preload="none" playsinline poster="docs/submission/offbeat-video-poster.jpg"><source src="docs/submission/offbeat-video.webm" type='video/webm; codecs="vp9, opus"'><source src="docs/submission/offbeat-video.mp4" type="video/mp4"></video></div>
+    <input type="range" class="mp__seek" id="mp-seek" min="0" max="1000" value="0" step="1" aria-label="Position">
+    <div class="mp__controls">
+      <button type="button" class="mp__btn" id="mp-play" aria-label="Play"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M2 1h1v9H2zM3 2h1v7H3zM4 3h1v5H4zM5 4h1v3H5zM6 5h1v1H6z" fill="#000"/></svg></button>
+      <button type="button" class="mp__btn" id="mp-pause" aria-label="Pause"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M2 1h2v9H2zM7 1h2v9H7z" fill="#000"/></svg></button>
+      <button type="button" class="mp__btn" id="mp-stop" aria-label="Stop"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M2 2h7v7H2z" fill="#000"/></svg></button>
+      <span class="mp__sep" aria-hidden="true"></span>
+      <button type="button" class="mp__btn" id="mp-start" aria-label="Back to start"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 1h1v9H1zM8 1h1v9H8zM7 2h1v7H7zM6 3h1v5H6zM5 4h1v3H5zM4 5h1v1H4z" fill="#000"/></svg></button>
+      <button type="button" class="mp__btn" id="mp-back" aria-label="Back 5 seconds"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M5 1h1v9H5zM4 2h1v7H4zM3 3h1v5H3zM2 4h1v3H2zM1 5h1v1H1zM10 1h1v9h-1zM9 2h1v7H9zM8 3h1v5H8zM7 4h1v3H7zM6 5h1v1H6z" fill="#000"/></svg></button>
+      <button type="button" class="mp__btn" id="mp-fwd" aria-label="Forward 5 seconds"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M0 1h1v9H0zM1 2h1v7H1zM2 3h1v5H2zM3 4h1v3H3zM4 5h1v1H4zM5 1h1v9H5zM6 2h1v7H6zM7 3h1v5H7zM8 4h1v3H8zM9 5h1v1H9z" fill="#000"/></svg></button>
+      <span class="mp__sep" aria-hidden="true"></span>
+      <span class="mp__gap"></span>
+      <button type="button" class="mp__btn mp__btn--flat" id="mp-mute" aria-label="Mute" aria-pressed="false"><svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 4h2v3H1zM3 3h1v5H3zM4 2h1v7H4zM5 1h1v9H5z" fill="#000"/><path class="mp__waves" d="M7 4h1v3H7zM9 2h1v7H9z" fill="#000"/></svg></button>
+      <input type="range" class="mp__volume" id="mp-volume" min="0" max="100" value="80" aria-label="Volume">
+    </div>
+    <div class="mp__status" role="status"><span id="mp-state">Stopped</span><span id="mp-time">00:00 / 00:30</span></div>
+  </section>
+</div>
 <div class="modal" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title" hidden>
   <section class="win modal__win">
     <div class="win-t"><span class="win-t__icon" aria-hidden="true"></span><h2 id="welcome-title">Welcome to OffBeat</h2></div>
@@ -508,7 +536,7 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=b80b4de59d0e"></script>
+<script src="js/i18n.js?v=f61edef1dde4"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>
@@ -517,10 +545,10 @@
 <script src="js/windows.js?v=e532fc6f132d"></script>
 <script src="js/scene.js?v=5c3ab24458e5"></script>
 <script src="js/evidence-model.js?v=2cbb51887449"></script>
-<script src="js/dense-candidates.js?v=851cd309b3fc"></script>
+<script src="js/dense-candidates.js?v=a150329a9521"></script>
 <script src="js/panels.js?v=6e020a23003e"></script>
 <script src="js/evidence.js?v=ee000d0dd646"></script>
-<script src="js/findings.js?v=5307ac2da17c"></script>
+<script src="js/findings.js?v=86ea53095e87"></script>
 <script src="js/app.js?v=a5a94e8d32de"></script>
 </body>
 </html>

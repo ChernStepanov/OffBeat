@@ -1,6 +1,6 @@
 # Recording draft (#27)
 
-Target: 28 seconds, 1920×1080, English narration. No completed recording is claimed.
+Target: 28 seconds, 1920×1080, English narration. A rendered 29.6 s version exists: [offbeat-video.mp4](submission/offbeat-video.mp4), built from app screenshots and measured data ([sources](submission/video/README.md)). It has music and on-screen English text, no narration; this script remains for a narrated recording.
 Confirm current official limits using the submission checklist before recording.
 
 | Time | Screen action | Narration |

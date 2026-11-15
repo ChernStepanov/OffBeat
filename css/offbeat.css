@@ -800,3 +800,35 @@ details:not(.panel-disclosure)[open] > summary::before { content: '-'; }
 .regions button[aria-pressed="true"] { box-shadow: var(--pressed); background: #dfdfdf; }
 #side > .panel-disclosure > summary { min-height: 26px; padding: 4px 8px; }
 .scene-launch[aria-pressed="true"] { box-shadow: var(--pressed); }
+
+/* key numbers above the findings, in the same bevelled fields as the rest of the UI */
+.keynums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0 0 8px; }
+.keynum { display: flex; flex-direction: column; gap: 2px; background: #fff; box-shadow: var(--sunken); padding: 8px 10px; min-width: 0; }
+.keynum__value { font: 25px/30px var(--ui); color: #000080; white-space: nowrap; }
+.keynum__value--down { color: #c00000; }
+.keynum__label { font-weight: bold; }
+.keynum__note { color: #404040; }
+.keynum__note s { color: #c00000; }
+.keynum .btn { align-self: flex-start; margin-top: 4px; }
+/* video dialog: a Win98-era media player built from the site's own window, buttons and trackbars */
+.modal--video { grid-template-columns: minmax(0, min(1280px, calc((100vh - 150px) * 16 / 9))); padding: 8px; background: rgba(0, 0, 0, .45); }
+@supports (height: 100dvh) { .modal--video { grid-template-columns: minmax(0, min(1280px, calc((100dvh - 150px) * 16 / 9))); } }
+.mp { padding: 3px; }
+.mp__icon { width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect x='1' y='3' width='14' height='11' fill='%23000'/%3E%3Crect x='2' y='4' width='12' height='9' fill='%23000080'/%3E%3Cpath d='M6 6h1v5H6zM7 7h1v3H7zM8 8h1v1H8z' fill='%23ffcc00'/%3E%3Crect x='1' y='1' width='14' height='2' fill='%23808080'/%3E%3Cpath d='M2 1h2v2H2zM6 1h2v2H6zM10 1h2v2h-2z' fill='%23fff'/%3E%3C/svg%3E"); }
+.mp__menu { display: flex; gap: 2px; padding: 2px 2px 3px; }
+.mp__menu a, .mp__menu button { color: #000; text-decoration: none; background: none; border: 0; padding: 2px 7px; min-width: 0; min-height: 0; font: inherit; box-shadow: none; }
+.mp__menu a:hover, .mp__menu button:hover, .mp__menu a:focus-visible, .mp__menu button:focus-visible { background: var(--sel); color: #fff; outline: none; }
+.mp__screen { background: #000; box-shadow: var(--sunken); padding: 2px; }
+.mp__screen video { display: block; width: 100%; height: auto; background: #000; }
+.mp input.mp__seek { display: block; width: 100%; margin: 6px 0 2px; }
+.mp__controls { display: flex; align-items: center; gap: 2px; padding: 2px 2px 4px; }
+.mp__btn { display: grid; place-items: center; width: 24px; min-width: 24px; height: 22px; min-height: 22px; padding: 0; background: var(--face); border: 0; box-shadow: var(--raised); }
+.mp__btn:active:not(:disabled), .mp__btn[aria-pressed="true"] { box-shadow: var(--pressed); padding: 1px 0 0 1px; }
+.mp__btn--flat { box-shadow: none; }
+.mp__btn[aria-pressed="true"] .mp__waves { display: none; }
+.mp__sep { width: 2px; height: 20px; margin: 0 4px; box-shadow: inset 1px 0 0 var(--lo), inset -1px 0 0 var(--hi); }
+.mp__gap { flex: 1; }
+.mp__controls input.mp__volume { flex: 0 0 96px; width: 96px; min-width: 0; }
+.mp__status { display: flex; justify-content: space-between; gap: 12px; background: #000; color: #0f0; box-shadow: var(--sunken); padding: 3px 8px; font: 12.5px/16px var(--ui); }
+.win-btn--close { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h2V4H2V3H1V2H0z' fill='%23000'/%3E%3C/svg%3E"); background-size: 8px 7px; }
+@media (max-width: 600px) { .keynums { grid-template-columns: 1fr; } }

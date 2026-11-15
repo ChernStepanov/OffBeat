@@ -3,7 +3,7 @@ window.OB = window.OB || {};
 OB.createDenseCandidates = function (map, leaflet) {
   const $ = id => document.getElementById(id);
   map.createPane('detectedCandidates'); map.getPane('detectedCandidates').style.zIndex = 620;
-  const catalogPath = 'data/change-candidates/catalog-d4c1a5a150f9.json';
+  const catalogPath = 'data/change-candidates/catalog-d9ad08d48004.json';
   const cache = new Map(); let catalog = null, report = null, current = null, layer = null, serial = 0, reviews = {};
   const lang = () => document.documentElement.lang === 'ru';
   const t = (en, ru) => lang() ? ru : en;
@@ -54,7 +54,7 @@ OB.createDenseCandidates = function (map, leaflet) {
       let x,y;if(radar){x=100*(current.col+.5)/report.grid.shape[1];y=100*(current.row+.5)/report.grid.shape[0]}
       else{const b=image.bounds;x=100*(current.lon-b.w)/(b.e-b.w);y=100*(b.n-current.lat)/(b.n-b.s)}
       if(Number.isFinite(x)&&Number.isFinite(y)&&x>=0&&x<=100&&y>=0&&y<=100){const cross=document.createElement('span');cross.className='dense-case__cross';cross.textContent='+';cross.style.left=x+'%';cross.style.top=y+'%';cross.setAttribute('aria-hidden','true');frame.append(cross)}
-      caption.textContent=`${radar?'NISAR GCOV':'Sentinel-2'} / ${image.date}`; if(!radar&&image.item_url){const a=document.createElement('a');a.href=image.item_url;a.target='_blank';a.rel='noopener';a.textContent=t(' source',' источник');caption.append(a)}
+      caption.textContent=`${radar?'NISAR GCOV':'Sentinel-2'} / ${image.date}`; if(!radar&&image.nisar_date)caption.append(document.createTextNode(` (${t('matched radar','к радарной дате')} ${image.nisar_date})`)); if(!radar&&image.item_url){const a=document.createElement('a');a.href=image.item_url;a.target='_blank';a.rel='noopener';a.textContent=t(' source',' источник');caption.append(a)}
       figure.append(frame,caption);container.append(figure);
     });
   }
@@ -64,9 +64,10 @@ OB.createDenseCandidates = function (map, leaflet) {
     $('detected-summary').textContent=`${report.site_name} · ${current.id} · ${current.lat.toFixed(6)}, ${current.lon.toFixed(6)} · ${report.dates.join(' → ')} · ${t('native grid','шаг сетки')} ${Math.abs(report.grid.x_step)} m · ${t('smoothed deviation score','оценка сглаженного отклонения')} ${current.score} · HV Δ ${current.delta_db} dB`;
     imageRow($('detected-radar'),report.radar_images||[],true);const optical=report.optical_images||[];imageRow($('detected-optical'),optical,false);
     const covered=optical.filter(pointCovered).length;
-    $('detected-optical-status').textContent=covered>=2?t('First and last prepared images; not necessarily the event dates.','Первый и последний подготовленные снимки; это не обязательно даты события.'):covered===1?t('Only one image covers this point; before/after comparison is unavailable.','Точку покрывает только один снимок; сравнение до и после невозможно.'):t('No dated optical image covers this point.','Точку не покрывает ни один датированный оптический снимок.');
+    $('detected-optical-status').textContent=covered>=2?t('Images selected for the two radar dates; optical dates and actual event timing may differ.','Снимки подобраны к двум датам радара; даты оптики и время события могут отличаться.'):covered===1?t('Only one image covers this point; before/after comparison is unavailable.','Точку покрывает только один снимок; сравнение до и после невозможно.'):t('No dated optical image covers this point.','Точку не покрывает ни один датированный оптический снимок.');
     $('detected-source').href=catalog.sites.find(x=>x.id===report.site).path; $('detected-optical-source').href=`data/${report.site}/optical/index.json`;
     const saved=reviews[current.id]||{};$('detected-verdict').value=saved.verdict||'';$('detected-basis').value=saved.basis||'';$('detected-comment').value=saved.comment||'';
+    ['detected-verdict','detected-basis'].forEach(id=>$(id).dispatchEvent(new Event('ob:select-sync')));
   }
   function show(id,scroll){
     const item=report?.markers.find(m=>m.id===id);if(!item)return false;current=item;reviews=readReviews(report);

@@ -15,7 +15,7 @@ for(const entry of c.sites){
   const ids=new Set();for(const m of d.markers){assert(!ids.has(m.id));ids.add(m.id);assert(m.row>=0&&m.row<d.grid.shape[0]&&m.col>=0&&m.col<d.grid.shape[1]);assert(Number.isFinite(m.lat)&&Number.isFinite(m.lon)&&Number.isFinite(m.delta_db)&&Number.isFinite(m.score));assert.equal(m.direction,m.score<0?'below':'above')}
   for(const input of d.inputs){assert(input.granule_id&&input.concept_id&&input.url.startsWith('https://'));assert.equal(hash(input.subset_path),input.sha256)}
   for(const image of d.radar_images){assert.equal(hash(image.path),image.sha256);const b=fs.readFileSync(image.path);assert.equal(b.readUInt32BE(16),d.grid.shape[1]);assert.equal(b.readUInt32BE(20),d.grid.shape[0])}
-  for(const image of d.optical_images){assert.equal(hash(image.path),image.sha256);assert(image.date&&image.bounds&&image.item_url)}
+  for(const image of d.optical_images){assert.equal(hash(image.path),image.sha256);assert(image.date&&image.bounds&&image.item_url);assert(d.dates.includes(image.nisar_date),'optical preview must match one of the fixed radar dates')}
   total+=d.markers.length;
 }
 assert.equal(total,185);

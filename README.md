@@ -4,33 +4,37 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 
 [Demo](https://offbeat.chern.su/) | [Repository](https://github.com/ChernStepanov/OffBeat)
 
-## Что сделано и что осталось
+## What is done and what is left
 
-Состояние на 15 ноября 2026; актуальные статусы и обсуждение — в [issues](https://github.com/ChernStepanov/OffBeat/issues). Подробные результаты и ограничения — в [аудите задач](docs/issue-audit.md).
+Status on 15 November 2026; live status and discussion are in the [issues](https://github.com/ChernStepanov/OffBeat/issues), results and limits in the [issue audit](docs/issue-audit.md).
 
-**Сделано:** подключены реальные выборки NISAR по 7 участкам и ссылки на гранулы; рассчитаны сравнения с соседями и предварительные формы кривых; добавлены датированные снимки Sentinel-2 и переключение дат, по которым теперь перекрашиваются точки на карте, счётчик, таблица и карточка точки. Страница начинается с окна «Что говорят данные»: [`scripts/findings.py`](scripts/findings.py) проверяет реальные измерения статистическими тестами и пишет [`data/findings.json`](data/findings.json):
+**Done:** real NISAR samples at 7 sites with granule links; neighbour comparisons and exploratory curve shapes; dated Sentinel-2 images and a date slider that recolours the map samples, the counter, the table and the pixel card. The page opens with **What the data says**: [`scripts/findings.py`](scripts/findings.py) runs statistical tests on the measured samples and writes [`data/findings.json`](data/findings.json):
 
-- в Мехико 114 точек устойчиво уходят от соседей за 29 дат (тест тренда Кендалла, доля ложных открытий 5%) — лучшие кандидаты на реальное изменение ([#33](https://github.com/ChernStepanov/OffBeat/issues/33));
-- выбросы в Мехико образуют связные пятна (перестановочный тест, p = 0.007), в остальных участках рассеяны как шум;
-- HH и HV отмечают в основном разные точки: в обоих каналах сразу отклоняются лишь 5–28% выбросов, поэтому две поляризации вместе находят больше кандидатов (в Мехико 63 значимых тренда в HH и 57 в HV);
-- GNSS-станция MMX1 опускается на 28.9 ± 1.0 см/год, а OPERA DISP-S1 в точке в 20 м показывает −4.8 ± 4.5 см/год: продукт OPERA отсчитан от проседающей опоры и без перепривязки не годится как абсолютное проседание ([#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16));
-- после привязки OPERA к GNSS (медиана 18 точек в 200 м от станции) выбранная часть Мехико проседает примерно на 15–20 см/год вдоль луча радара, проседают 95% точек; это оценка с допущениями, она показана отдельным слоем на карте Мехико;
-- полоса соседей откалибрована (92–94% измерений внутри при расчётных 95%), шум за 12 дней — 1.2–1.9 дБ (90-й перцентиль до 4.2 дБ), физика рассеяния и когерентность по классам покрытия согласуются с теорией;
-- сдвиги всей сцены (Мехико 2026-01-22, Каракас 2025-11-21) отделены от локальных изменений.
+- in Mexico City 114 samples drift steadily away from their neighbours over 29 dates (Kendall trend test, 5% false discovery rate), the best candidates for real gradual change ([#33](https://github.com/ChernStepanov/OffBeat/issues/33));
+- off-beat samples in Mexico City form connected patches (permutation test, p = 0.007); at the other sites they are scattered like noise;
+- HH and HV flag mostly different samples: only 5-28% of off-beat samples depart in both channels, so the two polarisations together find more candidates (Mexico City: 63 significant trends in HH, 57 in HV);
+- GNSS station MMX1 sinks 28.9 +/- 1.0 cm/year vertically, while OPERA DISP-S1 20 m away shows -4.8 +/- 4.5 cm/year of relative line-of-sight motion; references and geometry differ, so they are not directly comparable and the cause of the difference is not established ([sensitivity audit](docs/independent-signal-investigation.md), [#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16));
+- anchored at that station (median of 18 samples within 200 m), OPERA suggests the sampled part of Mexico City sinks about 15-20 cm/year along the radar line, with 95% of points sinking; this is an estimate with stated assumptions, shown as a separate map layer;
+- the neighbour band is calibrated (92-94% of measurements inside against the designed 95%), 12-day noise is 1.2-1.9 dB (90th percentile up to 4.2 dB), and scattering physics and coherence by land cover agree with theory;
+- scene-wide shifts (Mexico City 2026-01-22, Caracas 2025-11-21) are separated from local change.
 
-У каждого вывода есть раздел «Почему так может быть?» с гипотезами о физических причинах (стройки и двойное отражение в HH, растительность и объёмное рассеяние в HV, откачка грунтовых вод под Мехико, влажность и обновления обработки); это гипотезы, а не проверенные причины. Кнопка Play у точки теперь ещё и анимирует карту по датам в такт звуку.
+Every finding has **Why might this happen?** with labelled hypotheses about physical drivers (construction and double bounce in HH, vegetation and volume scattering in HV, groundwater pumping under Mexico City, moisture and processing updates); they are hypotheses, not verified causes. Playing a sample also animates the map through the acquisition dates in time with the sound. A [29.6-second video](docs/submission/offbeat-video.mp4) plays on the site in a Win98-style player.
 
-Участок Химки удалён: значения GCOV не прошли проверку физической правдоподобности (HV выше HH и выше 0 дБ, скачки около 10 дБ за 12 дней). Интерфейс упрощён: 3D-рельеф открывается кнопкой, слои и легенда свёрнуты. Подготовлены [научный разбор](docs/science-review.md), [черновик заявки](docs/submission-draft.md) и [проверенный черновик слайдов](docs/submission/offbeat-reviewed.pptx). Отсутствующие данные показываются явно.
+The Khimki site was removed because its GCOV values failed physical plausibility checks (HV above HH and above 0 dB, swings of about 10 dB in 12 days). The interface was simplified: 3D terrain opens from its button, layers and the legend are collapsed. See the [science review](docs/science-review.md), [submission draft](docs/submission-draft.md) and [reviewed slides](docs/submission/offbeat-reviewed.pptx). Missing data is always shown as missing.
 
-**Частично сделано:** z-score рассчитан для разреженных точек и ограниченного плотного участка Амазонии; глобального плотного растра нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)). Сверка точек с alert и пожарами выполнена, проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Поиск устойчивых изменений есть, но погодная коррекция и независимая размеченная выборка для оценки ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)). Расхождение OPERA и GNSS измерено, есть оценка с привязкой к одной станции; проверенная скорость по вертикали требует геометрии луча по пикселям, нескольких станций и коррекции атмосферы ([#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16)).
+**Partly done:** z-scores exist for the sparse samples and one bounded dense Amazon window; there is no global dense raster ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)). Samples were checked against dated alerts and fires, but patch areas are not validated ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Persistent change is searched for, but weather correction and an independent labelled evaluation set are not ready ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)). The OPERA/GNSS difference is measured and a one-station anchored estimate exists; a validated vertical rate needs per-pixel look vectors, several stations and atmospheric correction ([#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16)).
 
-**Заблокировано данными:** для Каракаса нет пригодного оптического снимка — лучшая мозаика HLS безоблачна лишь на 46.65% при пороге 80% ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)); в паре GUNW через землетрясение и трёх парах до него 0/1024 точек проходят полный фильтр качества ([#17](https://github.com/ChernStepanov/OffBeat/issues/17)). Пороги не ослаблялись ради картинки. Ряд OPERA RTC-S1 для Амазонии и его ограничения описаны [отдельно](docs/amazon-opera-rtc-comparison.md).
+**Blocked by data:** Caracas has no usable optical image for one date; the best HLS mosaic is only 46.65% cloud-free against an 80% threshold ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)). In the GUNW pair across the earthquake and the three pairs before it, 0/1024 samples pass the full quality filter ([#17](https://github.com/ChernStepanov/OffBeat/issues/17)). Thresholds were not relaxed to get a picture. The Amazon OPERA RTC-S1 series and its limits are described [separately](docs/amazon-opera-rtc-comparison.md).
 
-**Лицензия:** код и документация проекта распространяются по [Apache License 2.0](LICENSE); сторонние данные, шрифты и библиотеки сохраняют свои условия ([NOTICE](NOTICE)).
+**Licence:** OffBeat's code and documentation are under the [Apache License 2.0](LICENSE); third-party data, fonts and libraries keep their own terms ([NOTICE](NOTICE)).
 
-**Осталось сделать людям:** финально сверить правила ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание звука ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), записать видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)) и сдать заявку до 15 ноября, 23:59 по местному времени.
+**Left for people:** final rules check ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), testing on physical devices and listening to the sound ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), and submitting by 15 November, 23:59 local time.
 
-Проходят 103 Python-теста (6 сетевых не запускались) и 20 JS-сценариев данных, поиска, карты и тура.
+103 Python tests (6 network tests not run) and 20 JS scenarios for data, search, maps, tour and style pass.
+
+## Team and AI tools (Super Intelligence)
+
+OffBeat was built by a team of seven contributors: the idea, data choices, design, analysis direction, reviews and every decision are theirs. Team members used OpenAI Codex and Anthropic Claude (Claude Code) as coding assistants on their own tasks. No image, video or music generation model was used, and no measurement or statistic was produced by an AI model. Who did what: [docs/ai-use.md](docs/ai-use.md).
 
 ## Run in five minutes
 
@@ -40,10 +44,10 @@ No build or NASA login is needed for the prepared demo. Clone the repository, se
 python -m http.server 8765
 ```
 
-Выберите подготовленный участок для просмотра измеренных HH/HV. Слева — чёрно-белая спутниковая подложка, обзорное покрытие NISAR по датам и разреженные точки измерений. Цвет точек показывает отклонение от соседей; это не сплошной растр и не площадь события. Справа по умолчанию показан оптический контекст Esri; датированный Sentinel-2 выбирается в селекторе. Пропуски показаны явно. Для внешних тайлов и поиска нужен интернет. Звук запускается после нажатия.
+Choose a prepared site to see its measured HH/HV. The left map shows a grayscale satellite basemap, NISAR coverage coloured by date and the sparse measured samples; sample colour is the departure from neighbours, not a continuous raster or an event area. The right map shows Esri optical context by default; a dated Sentinel-2 image can be chosen in its selector. Gaps are shown explicitly. External tiles and search need internet. Sound starts after a click.
 
-Исторический аудит GLAD/RGB из прежней исследовательской ветки сохранён
-в [архиве эксперимента](archive/preview-2026-11-14/README.md); он не является оценкой текущего детектора.
+The historical GLAD/RGB audit from an earlier research branch is kept in the
+[experiment archive](archive/preview-2026-11-14/README.md); it is not an evaluation of the current detector.
 
 Search accepts Unicode names through Open-Meteo/GeoNames and Photon fallback. Names are sent only on submit, cached in the session and throttled. Coordinate searches are local. Operators can override `OB_MULTILINGUAL_GEOCODER_URL` and `OB_GEOCODER_URL` before app.js. Translated-name coverage depends on the providers.
 For programmatic read-only access, run `python3 -m api.server` and see the [HTTP API documentation](docs/api.md).
@@ -115,7 +119,7 @@ Synthetic numerical fixtures exist only in offline tests, never in application d
 
 ## 3D terrain and expandable windows
 
-The interactive 3D terrain appears below the two maps; **3D terrain** in the map title bar scrolls to it. The panel can be maximized independently. Terrain streams worldwide as the camera moves and is not cropped to the study areas. NISAR samples retain their measured coordinates. Rendering starts near the viewport and pauses when the panel is out of view. A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
+The interactive 3D terrain opens below the two maps from **3D terrain** in the map title bar. The panel can be maximized independently. Terrain streams worldwide as the camera moves and is not cropped to the study areas. NISAR samples retain their measured coordinates. Rendering starts near the viewport and pauses when the panel is out of view. A direct local link is `http://localhost:8765/?site=venezuela&view=scene`.
 
 The surface and dense terrain point cloud load visible elevation tiles from
 [Mapzen Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/).
