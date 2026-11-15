@@ -18,9 +18,10 @@ OB.bindNisarMap = function (map, toggle, status) {
   // each one into a soft blob, so it is drawn as the honest square it is.
   const CRISP_FROM = nativeZoom + 4;
   const rendering = () => map.getZoom() >= CRISP_FROM ? 'pixelated' : 'auto';
-  // Date-coloured strips answer "where did NISAR look?" at country and region scale. Over a
-  // site they only wash the measured samples in the same reds and blues, so they step aside.
-  const HIDE_FROM = 11;
+  // Date-coloured strips answer "where did NISAR look?" from country down to city scale. Closer
+  // in, one strip covers the whole window in a single colour and only washes the measured
+  // samples in the same reds and blues, so it steps aside.
+  const HIDE_FROM = 13;
 
   map.createPane('nisarRadar');
   map.getPane('nisarRadar').style.zIndex = 250;
@@ -64,12 +65,20 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   function showStatus() {
     if (!caption) return;
-    if (map.getZoom() >= HIDE_FROM) { status.textContent = 'NISAR coverage dates appear when you zoom out to region scale.'; return; }
-    const past = map.getZoom() >= HIDE_FROM ? ' | Radar coverage hidden at this zoom; zoom out to see the dated strips.' : '';
+    if (map.getZoom() >= HIDE_FROM) { status.textContent = 'NISAR coverage dates appear when you zoom out to city scale.'; return; }
+    const past = '';
+    // say what is actually drawn: a coloured strip in any loaded tile on screen
+    const view = map.getPixelBounds();
+    const visible = [...tiles].filter(tile => {
+      const c = tile.radar && tile.radar.coords; if (!c || c.z !== Math.round(map.getZoom())) return false;
+      const x = c.x * tileSize - (view.min.x), y = c.y * tileSize - (view.min.y);
+      return x > -tileSize && y > -tileSize && x < view.max.x - view.min.x && y < view.max.y - view.min.y;
+    });
+    const coloured = visible.some(tile => tile.radar.owner && tile.radar.owner.some(d => d >= 0));
     const busy = inflight > 0 ? ` | Loading NASA radar: ${inflight} request${inflight === 1 ? '' : 's'} left` : '';
     const text = caption + past + busy + (failedTiles
       ? ` | ${failedTiles} incomplete tile${failedTiles === 1 ? '' : 's'}: NASA did not answer, retrying. These gaps are not confirmed missing coverage.`
-      : inflight ? ' | Coverage is still loading.' : ' | No colour: no coverage detected in this window.');
+      : inflight ? ' | Coverage is still loading.' : coloured ? '' : ' | No colour: no coverage detected in this window.');
     status.textContent = '';
     if (legend) status.append(legend, ' ');
     status.append(text);
@@ -252,7 +261,7 @@ OB.bindNisarMap = function (map, toggle, status) {
       updateWhenIdle: true, updateWhenZooming: false, keepBuffer: 1,   // one ring of spare tiles: 12 requests each
       attribution: 'Radar &copy; NASA/ISRO NISAR, NASA GIBS',
     });
-    mosaic.on('tileload', e => tiles.add(e.tile));
+    mosaic.on('tileload', e => { tiles.add(e.tile); scheduleStatus(); });
     mosaic.on('tileunload', e => {
       tiles.delete(e.tile);
       e.tile.unloaded = true;
@@ -340,6 +349,7 @@ OB.bindNisarMap = function (map, toggle, status) {
 
   toggle.addEventListener('change', update);
   map.whenReady(update);
+  map.on('moveend', scheduleStatus);
   map.on('zoomend', () => {
     const r = rendering();
     for (const tile of tiles) tile.style.imageRendering = r;

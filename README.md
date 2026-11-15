@@ -13,18 +13,21 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 - в Мехико 114 точек устойчиво уходят от соседей за 29 дат (тест тренда Кендалла, доля ложных открытий 5%) — лучшие кандидаты на реальное изменение ([#33](https://github.com/ChernStepanov/OffBeat/issues/33));
 - выбросы в Мехико образуют связные пятна (перестановочный тест, p = 0.007), в остальных участках рассеяны как шум;
 - GNSS-станция MMX1 опускается на 28.9 ± 1.0 см/год, а OPERA DISP-S1 в точке в 20 м показывает −4.8 ± 4.5 см/год: продукт OPERA отсчитан от проседающей опоры и без перепривязки не годится как абсолютное проседание ([#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16));
+- после привязки OPERA к GNSS (медиана 18 точек в 200 м от станции) выбранная часть Мехико проседает примерно на 15–20 см/год вдоль луча радара, проседают 95% точек; это оценка с допущениями, она показана отдельным слоем на карте Мехико;
 - полоса соседей откалибрована (92–94% измерений внутри при расчётных 95%), шум за 12 дней — 1.2–1.9 дБ (90-й перцентиль до 4.2 дБ), физика рассеяния и когерентность по классам покрытия согласуются с теорией;
 - сдвиги всей сцены (Мехико 2026-01-22, Каракас 2025-11-21) отделены от локальных изменений.
 
 Участок Химки удалён: значения GCOV не прошли проверку физической правдоподобности (HV выше HH и выше 0 дБ, скачки около 10 дБ за 12 дней). Интерфейс упрощён: 3D-рельеф открывается кнопкой, слои и легенда свёрнуты. Подготовлены [научный разбор](docs/science-review.md), [черновик заявки](docs/submission-draft.md) и [проверенный черновик слайдов](docs/submission/offbeat-reviewed.pptx). Отсутствующие данные показываются явно.
 
-**Частично сделано:** z-score рассчитан для разреженных точек и ограниченного плотного участка Амазонии; глобального плотного растра нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)). Сверка точек с alert и пожарами выполнена, проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Поиск устойчивых изменений есть, но погодная коррекция и независимая размеченная выборка для оценки ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)). Расхождение OPERA и GNSS измерено; перепривязка OPERA к GNSS и скорость по вертикали требуют геометрии луча по пикселям и общей опоры ([#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16)).
+**Частично сделано:** z-score рассчитан для разреженных точек и ограниченного плотного участка Амазонии; глобального плотного растра нет ([#14](https://github.com/ChernStepanov/OffBeat/issues/14)). Сверка точек с alert и пожарами выполнена, проверка площадных пятен и их площади не завершена ([#18](https://github.com/ChernStepanov/OffBeat/issues/18)). Поиск устойчивых изменений есть, но погодная коррекция и независимая размеченная выборка для оценки ещё не готовы ([#33](https://github.com/ChernStepanov/OffBeat/issues/33)). Расхождение OPERA и GNSS измерено, есть оценка с привязкой к одной станции; проверенная скорость по вертикали требует геометрии луча по пикселям, нескольких станций и коррекции атмосферы ([#36](https://github.com/ChernStepanov/OffBeat/issues/36), [#16](https://github.com/ChernStepanov/OffBeat/issues/16)).
 
 **Заблокировано данными:** для Каракаса нет пригодного оптического снимка — лучшая мозаика HLS безоблачна лишь на 46.65% при пороге 80% ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)); в паре GUNW через землетрясение и трёх парах до него 0/1024 точек проходят полный фильтр качества ([#17](https://github.com/ChernStepanov/OffBeat/issues/17)). Пороги не ослаблялись ради картинки. Ряд OPERA RTC-S1 для Амазонии и его ограничения описаны [отдельно](docs/amazon-opera-rtc-comparison.md).
 
-**Осталось сделать людям:** выбрать лицензию (файла LICENSE нет) и финально сверить правила ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание звука ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), записать видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)) и сдать заявку до 15 ноября, 23:59 по местному времени.
+**Лицензия:** код и документация проекта распространяются по [Apache License 2.0](LICENSE); сторонние данные, шрифты и библиотеки сохраняют свои условия ([NOTICE](NOTICE)).
 
-Проходят 101 Python-тест (6 сетевых не запускались) и 19 JS-сценариев данных, поиска, карты и тура.
+**Осталось сделать людям:** финально сверить правила ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание звука ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), записать видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)) и сдать заявку до 15 ноября, 23:59 по местному времени.
+
+Проходят 102 Python-теста (6 сетевых не запускались) и 20 JS-сценариев данных, поиска, карты и тура.
 
 ## Run in five minutes
 
@@ -169,4 +172,4 @@ Full attribution and terms:
 [Tilezen/Joerd](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
 Three.js is MIT-licensed; its notice is preserved in `js/vendor/THREE-LICENSE.txt`.
 
-No software LICENSE is currently declared. Public visibility does not itself grant an open-source licence; copyright holders must choose one before claiming OSI licensing for submission.
+OffBeat's own code and documentation are licensed under the [Apache License 2.0](LICENSE); see [NOTICE](NOTICE). Third-party data, imagery, fonts and libraries listed above keep their own terms and are not relicensed.

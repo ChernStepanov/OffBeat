@@ -52,3 +52,10 @@ def test_opera_rate_is_compared_with_independent_gnss():
     lo, hi = v['gnss_expected_los_cm_per_year']
     assert lo <= hi < 0                      # projected subsidence is away from the satellite
     assert v['gnss_up_se'] < abs(v['gnss_up_cm_per_year']) / 5
+
+
+def test_gnss_tie_uses_a_neighbourhood_anchor_and_keeps_every_sample_slot():
+    tie = F.opera_tied()
+    assert tie['anchor_samples'] >= 10
+    assert len(tie['tied_los_cm_per_year_mid_incidence']) == 1024
+    assert len(tie['fastest']) == 6
