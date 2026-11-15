@@ -13,7 +13,7 @@ OB.evidence = (() => {
     visibleClearing: ['See visually reviewed clearing', 'Посмотреть расчистку на снимках'],
     visibleCaveat: ['Optical review; NISAR detection has not been validated.', 'Визуальная проверка по снимкам; обнаружение радаром не подтверждено.'],
     surpriseTitle: ['Not sure where to start?', 'Не знаете, с чего начать?'],
-    surpriseHint: ['Open one of three prepared Amazon investigations, then follow its evidence.', 'Откройте одно из трёх подготовленных исследований Амазонии и проверьте доказательства.'],
+    surpriseHint: ['Explore a reviewed Amazon story or an automatically selected measured sample. New samples are not independently reviewed.', 'Откройте разобранный пример Амазонии или автоматически выбранную точку измерений. Новые точки не прошли независимую проверку.'],
     surprise: ['Surprise me ✦', 'Удиви меня ✦'],
     close: ['Close story', 'Закрыть историю'],
     scope: ['Development casebook: 0 eligible confirmed events for detector evaluation. Accuracy is not established.', 'Исследовательские примеры: 0 пригодных подтверждённых событий для оценки детектора. Точность не установлена.'],
@@ -163,7 +163,7 @@ OB.evidence = (() => {
     if (dossier) paragraph(local(dossier.question));
     paragraph(`${site.name} / ${pixel.id} / ${pixel.lat.toFixed(5)}, ${pixel.lon.toFixed(5)}`);
     if (step === 0) {
-      paragraph(t('Start with the place, then compare the measured series, inspect dated optical evidence and decide what to check next.', 'Начните с места, сравните измеренный ряд, проверьте датированную оптику и решите, что проверять дальше.'));
+      paragraph(dossier ? t('Start with the place, then compare the measured series, inspect dated optical evidence and decide what to check next.', 'Начните с места, сравните измеренный ряд, проверьте датированную оптику и решите, что проверять дальше.') : t('Compare the measured series with neighbours. This automatically selected sample has no independent event review; its cause is unknown.', 'Сравните измерения точки с соседями. Эта точка выбрана автоматически и не прошла независимую проверку; причина неизвестна.'));
       table([[t('NISAR observations', 'Наблюдения NISAR'), `${site.dates[0]} / ${site.dates.at(-1)}`],
         [t('Valid HV dates', 'Валидные даты HV'), `${pixel.hv.filter(Number.isFinite).length} / ${site.dates.length}`],
         [t('Historical cover', 'Исторический покров'), `ESA WorldCover 2021 / ${pixel.cover}`],
@@ -214,7 +214,7 @@ OB.evidence = (() => {
         [t('Evidence status', 'Статус свидетельств'), dossier ? local(dossier.interpretation) : t('Not independently reviewed; cause unknown.', 'Независимой проверки нет; причина неизвестна.')],
         [t('Next action', 'Следующее действие'), dossier ? local(dossier.action) : t('Review dated independent observations and quality masks.', 'Проверить датированные независимые наблюдения и маски качества.')],
         [t('Evaluation', 'Оценка качества'), t('0 eligible positive events; 0 blind negative controls; precision, recall and FPR are unknown.', '0 пригодных положительных событий; 0 слепых отрицательных контролей; precision, recall и FPR неизвестны.')]]);
-      paragraph(t('Retrospective development examples. These three points are not independent test events or a validated stable / changed / false-alarm benchmark.', 'Ретроспективные исследовательские примеры. Эти три точки не являются независимыми тестовыми событиями или валидированным набором «стабильно / изменение / ложное срабатывание».'));
+      paragraph(t('Development samples are not independent test events or a validated stable / changed / false-alarm benchmark.', 'Исследовательские точки не являются независимыми тестовыми событиями или валидированным набором «стабильно / изменение / ложное срабатывание».'));
     }
     const sources = el('details'); sources.append(el('summary', t('Sources, dates and reproducibility', 'Источники, даты и воспроизводимость')));
     const list = el('ul');
@@ -266,15 +266,31 @@ OB.evidence = (() => {
     if (!$('case-start').disabled) { event.preventDefault(); open('amazon-hv-step'); }
   });
   $('case-start').addEventListener('click', () => open('amazon-hv-step'));
-  function surprise() {
+  async function surprise() {
     const key = 'offbeat.surprise.history.v1';
+    const candidates = OB.suggestPlaces(OB.app.sites(), 2.5, 8);
+    const choices = [...(book?.cases || []).map(c => ({id: c.id, caseId: c.id})),
+      ...candidates.map(({site, index}) => ({id: `sample:${site.id}:${index}`, site: site.id, index}))];
     let history = surpriseHistory;
     try { history = JSON.parse(localStorage.getItem(key)) || history; } catch (_) {}
-    const next = model.nextSurprise((book?.cases || []).map(c => c.id), history, active);
+    const next = model.nextSurprise(choices.map(c => c.id), history, active);
     if (!next) return;
     surpriseHistory = next.history;
     try { localStorage.setItem(key, JSON.stringify(next.history)); } catch (_) {}
-    open(next.id);
+    const choice = choices.find(c => c.id === next.id);
+    if (choice.caseId) { await open(choice.caseId); return; }
+    try {
+      await OB.app.loadSite(choice.site);
+      if (OB.app.site()?.id !== choice.site) throw new Error('site unavailable');
+      await OB.app.pickCell(choice.index, false);
+      const pixel = OB.app.pixel();
+      if (!pixel) throw new Error('sample unavailable');
+      OB.app.selectDate(OB.app.site().dates.length - 1);
+      OB.app.zoomTo(pixel.lat, pixel.lon, 15);
+      await open(null, {step: 0});
+    } catch (_) {
+      $('case-status').textContent = t('Could not open this sample. Try another.', 'Не удалось открыть точку. Попробуйте другую.');
+    }
   }
   $('case-surprise').addEventListener('click', surprise);
   $('launch-surprise').addEventListener('click', surprise);
