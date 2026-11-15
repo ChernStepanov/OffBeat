@@ -1,5 +1,7 @@
 # OffBeat — submission draft
 
+Ready-to-paste project page in the Space Apps format: [submission/space-apps-project.md](submission/space-apps-project.md).
+
 **Challenge:** Dancing with the SARs. The selected challenge and the team's registered event still need confirmation on the official project page.
 
 **One sentence:** Explore and hear how prepared NASA–ISRO NISAR radar measurements differ from nearby samples of the same historical land-cover class.
