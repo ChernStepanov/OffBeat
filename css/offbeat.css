@@ -730,6 +730,12 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .launch h2#launch-title span { color: var(--title-a); }
 .launch__lead { max-width: 470px; margin-bottom: 14px; }
 .launch__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.launch-help { margin-top: 12px; max-width: 560px; }
+.launch-help summary { cursor: pointer; color: #001b66; font-weight: bold; padding: 6px 0; }
+.launch-help summary:focus-visible { outline: 2px dotted #001b66; outline-offset: 2px; }
+.launch-help ol { margin: 6px 0 8px; padding-left: 22px; }
+.launch-help li { margin: 5px 0; line-height: 1.4; }
+.launch-help p { margin: 8px 0; line-height: 1.4; }
 .launch__actions .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 26px; padding: 4px 14px; color: #000; text-decoration: none; }
 .launch__note { margin: 14px 0 0; color: #404040; }
 .launch__visual { align-self: center; background: var(--paper); padding: 8px; box-shadow: var(--sunken); min-width: 0; }

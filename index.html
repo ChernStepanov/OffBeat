@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=1178d065c639">
+<link rel="stylesheet" href="css/offbeat.css?v=098705d6bdbf">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -40,6 +40,16 @@
         <h2 id="launch-title">The Earth is always moving.<br><span>Listen for the unexpected.</span></h2>
         <p class="launch__lead">Explore real radar measurements, compare a point with its neighbours, and investigate what might have changed.</p>
         <div class="launch__actions"><a class="btn btn--default launch__primary" id="launch-example" href="#evidence-win">Explore an example</a><button type="button" class="btn launch__surprise" id="launch-surprise" data-case-text="surprise" disabled>Surprise me</button><a class="btn launch__secondary" href="#map-win">Open the map</a></div>
+        <details class="launch-help" id="surprise-help">
+          <summary>How to use Surprise me</summary>
+          <ol>
+            <li>Press Surprise me to open a prepared story or an automatically selected measured sample.</li>
+            <li>Use the numbered steps or arrows to see the place, radar signal, images and conclusion.</li>
+            <li>Compare the dates and neighbours; where two optical images exist, move the slider to compare them.</li>
+            <li>A signal difference is a clue, not proof of its cause. Some samples lack independent review or a second image.</li>
+          </ol>
+          <p>Choose Surprise me again for another example. Close story hides the current one.</p>
+        </details>
         <p class="launch__note">Exploratory prototype. Causes need independent checks.</p>
       </div>
       <div class="launch__visual" aria-hidden="true">
@@ -473,7 +483,7 @@
 <script src="js/sfx.js?v=19976406a47d"></script>
 <script src="js/story.js?v=c974e410a5d4"></script>
 <script src="js/optical.js?v=1bc34ce97c77"></script>
-<script src="js/i18n.js?v=48d14424a5f8"></script>
+<script src="js/i18n.js?v=6f7d75eded8e"></script>
 <script src="js/select98.js?v=e6ed0b7b748b"></script>
 <script src="js/point-cloud.js?v=1ac5ff904712"></script>
 <script src="js/terrain-model.js?v=b520e2e37d01"></script>

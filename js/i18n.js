@@ -1,6 +1,12 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
+    'How to use Surprise me':'Как пользоваться «Удиви меня»',
+    'Press Surprise me to open a prepared story or an automatically selected measured sample.':'Нажмите «Удиви меня», чтобы открыть подготовленную историю или автоматически выбранную точку измерений.',
+    'Use the numbered steps or arrows to see the place, radar signal, images and conclusion.':'Переходите по шагам или стрелкам: место, сигнал радара, снимки и вывод.',
+    'Compare the dates and neighbours; where two optical images exist, move the slider to compare them.':'Сравните даты и соседние точки. Если есть два оптических снимка, передвигайте ползунок для сравнения.',
+    'A signal difference is a clue, not proof of its cause. Some samples lack independent review or a second image.':'Отклонение сигнала — повод для исследования, а не доказательство причины. Для некоторых точек нет независимой проверки или второго снимка.',
+    'Choose Surprise me again for another example. Close story hides the current one.':'Нажмите «Удиви меня» ещё раз, чтобы выбрать другой пример. Кнопка «Закрыть историю» скроет текущий.',
     'Explore a change story':'Открыть историю изменения',
     'Search the NISAR archive':'Поиск в архиве NISAR',
     'How OffBeat works':'Как работает OffBeat',
