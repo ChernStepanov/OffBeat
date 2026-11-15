@@ -16,7 +16,7 @@
 
 **NASA data used:** NASA–ISRO NISAR provisional GCOV and GUNW products via ASF DAAC, NASA GIBS browse coverage, and NASA OPERA products. NASA FIRMS appears as source context where identified in the retained records. GIBS browse colours show acquisition coverage, not calibrated backscatter or a global event map. [Granule IDs, dates and processing](https://github.com/ChernStepanov/OffBeat/blob/master/docs/real-nisar.md) and [site manifests](https://github.com/ChernStepanov/OffBeat/tree/master/data) are available.
 
-**Other sources:** ESA WorldCover 2021, Copernicus Sentinel-2 through Earth Search, and INPE/GLAD/FIRMS contextual records where individually identified. Retained sources and caveats are linked in the scientific review. Third-party terms and project licence still require rights-holder verification before submission.
+**Other sources:** ESA WorldCover 2021, Copernicus Sentinel-2 through Earth Search, and INPE/GLAD/FIRMS contextual records where individually identified. Retained sources and caveats are linked in the scientific review. OffBeat's own code and documentation are licensed under the Apache License 2.0; third-party data, imagery, fonts and libraries keep their own terms, which still require verification before submission.
 
 **Links:** [Live demo](https://offbeat.chern.su/), [source repository](https://github.com/ChernStepanov/OffBeat), [reviewed seven-slide draft](https://github.com/ChernStepanov/OffBeat/blob/master/docs/submission/offbeat-reviewed.pptx). Test the final actual links in a private browser; a link in this draft is not proof of accessibility or submission.
 

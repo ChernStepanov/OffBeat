@@ -23,7 +23,9 @@ Explore real NISAR radar samples, compare them with nearby samples of the same h
 
 **Заблокировано данными:** для Каракаса нет пригодного оптического снимка — лучшая мозаика HLS безоблачна лишь на 46.65% при пороге 80% ([#13](https://github.com/ChernStepanov/OffBeat/issues/13)); в паре GUNW через землетрясение и трёх парах до него 0/1024 точек проходят полный фильтр качества ([#17](https://github.com/ChernStepanov/OffBeat/issues/17)). Пороги не ослаблялись ради картинки. Ряд OPERA RTC-S1 для Амазонии и его ограничения описаны [отдельно](docs/amazon-opera-rtc-comparison.md).
 
-**Осталось сделать людям:** выбрать лицензию (файла LICENSE нет) и финально сверить правила ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание звука ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), записать видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)) и сдать заявку до 15 ноября, 23:59 по местному времени.
+**Лицензия:** код и документация проекта распространяются по [Apache License 2.0](LICENSE); сторонние данные, шрифты и библиотеки сохраняют свои условия ([NOTICE](NOTICE)).
+
+**Осталось сделать людям:** финально сверить правила ([#24](https://github.com/ChernStepanov/OffBeat/issues/24)), QA на устройствах и прослушивание звука ([#26](https://github.com/ChernStepanov/OffBeat/issues/26)), записать видео ([#27](https://github.com/ChernStepanov/OffBeat/issues/27)) и сдать заявку до 15 ноября, 23:59 по местному времени.
 
 Проходят 102 Python-теста (6 сетевых не запускались) и 19 JS-сценариев данных, поиска, карты и тура.
 
@@ -170,4 +172,4 @@ Full attribution and terms:
 [Tilezen/Joerd](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
 Three.js is MIT-licensed; its notice is preserved in `js/vendor/THREE-LICENSE.txt`.
 
-No software LICENSE is currently declared. Public visibility does not itself grant an open-source licence; copyright holders must choose one before claiming OSI licensing for submission.
+OffBeat's own code and documentation are licensed under the [Apache License 2.0](LICENSE); see [NOTICE](NOTICE). Third-party data, imagery, fonts and libraries listed above keep their own terms and are not relicensed.

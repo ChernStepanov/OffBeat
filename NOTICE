@@ -1,0 +1,14 @@
+OffBeat
+Copyright 2026 OffBeat contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The Apache License covers the OffBeat source code and documentation written for
+this project. It does not relicense third-party material, which keeps its own
+terms (see "Sources and licences" in README.md), including:
+- NASA-ISRO NISAR, NASA OPERA, NASA GIBS and NASA FIRMS data
+- Copernicus Sentinel-2 data and ESA WorldCover 2021 (CC BY 4.0)
+- INPE and UMD GLAD context records, NGL GNSS solutions
+- W95FA and Ark Pixel fonts (SIL Open Font License 1.1, see fonts/)
+- Three.js (MIT, see js/vendor/THREE-LICENSE.txt)
+- Mapzen Terrain Tiles and their upstream elevation datasets
