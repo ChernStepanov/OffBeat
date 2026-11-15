@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "note": "NASA-published rendered comparisons, not OffBeat detections. Hubbard uses NISAR GSLC; other cases use optical imagery. JPEGs are regional context, not georeferenced maps.",
+  "cases": [
+    {
+      "id": "cottonwood",
+      "title": {
+        "en": "Cottonwood fire, Utah",
+        "ru": "Пожар Cottonwood, Юта"
+      },
+      "description": {
+        "en": "A large burn scar is visible in natural-colour HLS L30 images. Clouds and their shadows are present in the earlier image.",
+        "ru": "На цветных снимках HLS L30 виден большой след пожара. На раннем изображении есть облака и их тени."
+      },
+      "source": "https://science.nasa.gov/mission/landsat/hls-vegetation-indices/",
+      "credit": "NASA Landsat / Ross Walter",
+      "kind": "natural colour",
+      "images": [
+        {
+          "date": "2026-06-05",
+          "path": "data/observed-events/cottonwood-2026-06-05.jpg",
+          "sha256": "87cb4f9f5e325fd8537bc9de25f1bc14c789a3c819703198055a41a321d2a09d",
+          "url": "https://assets.science.nasa.gov/content/dam/science/missions/landsat/hls-vi/CottonwoodFire_Utah_NaturalColor_June5_2026_Before.jpg"
+        },
+        {
+          "date": "2026-06-29",
+          "path": "data/observed-events/cottonwood-2026-06-29.jpg",
+          "sha256": "dd0e9fc6324ec0904b5108527efd0d59edfd4be0bfc357a6caa73e98dc129c90",
+          "url": "https://assets.science.nasa.gov/content/dam/science/missions/landsat/hls-vi/CottonwoodFire_Utah_NaturalColor_June29_2026_After_v2.jpg"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    },
+    {
+      "id": "morrill",
+      "title": {
+        "en": "Morrill fire, Nebraska",
+        "ru": "Степной пожар Morrill, Небраска"
+      },
+      "description": {
+        "en": "VIIRS false-colour images show regional burn scars. The later view also includes areas affected by other fires.",
+        "ru": "Снимки VIIRS в условных цветах показывают следы пожаров в регионе. На позднем снимке есть и участки других пожаров."
+      },
+      "source": "https://science.nasa.gov/earth/earth-observatory/fires-tear-through-nebraska-grasslands/",
+      "credit": "NASA Earth Observatory / Lauren Dauphin; NOAA-21 VIIRS",
+      "kind": "false colour",
+      "images": [
+        {
+          "date": "2026-02-28",
+          "path": "data/observed-events/nebraska-2026-02-28.jpg",
+          "sha256": "b279c97b6eb444969962593b6ae49c671deb606e96b3293619fab17d54ed8a2e",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/fires-tear-through-nebraska-grasslands/nebraskafire_vir2_20260228.jpg?w=1280"
+        },
+        {
+          "date": "2026-03-29",
+          "path": "data/observed-events/nebraska-2026-03-29.jpg",
+          "sha256": "d1588c4e0ae29f831bcd353181118f078f970c932da46cc22f446352c56ec559",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/fires-tear-through-nebraska-grasslands/nebraskafire_vir2_20260329.jpg?w=1280"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    },
+    {
+      "id": "gandak",
+      "title": {
+        "en": "Gandak floodplain, Nepal and India",
+        "ru": "Наводнение на Гандаке, Непал и Индия"
+      },
+      "description": {
+        "en": "MODIS false-colour images show flooding across the river plain; water appears blue. These are regional images, not field-scale measurements.",
+        "ru": "На снимках MODIS в условных цветах видно наводнение в речной пойме: вода показана синим. Это обзор региона, а не измерения отдельного поля."
+      },
+      "source": "https://science.nasa.gov/earth/earth-observatory/rains-swamp-the-gandak-river/",
+      "credit": "NASA Earth Observatory / Lauren Dauphin; Terra and Aqua MODIS",
+      "kind": "false colour",
+      "images": [
+        {
+          "date": "2026-09-20",
+          "path": "data/observed-events/gandak-2026-09-20.jpg",
+          "sha256": "a9f78d3daabcb72bfdf156b08f10073729900b7c244c35d9434e0dd1c9f6bfdb",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/torrential-rains-swamp-the-gandaki-river/floodingindianepal_tmo_20260920.jpg?w=1280"
+        },
+        {
+          "date": "2026-09-29",
+          "path": "data/observed-events/gandak-2026-09-29.jpg",
+          "sha256": "98eb3332127bef928e1eab4f3fb7c02a0d7c38d1d93883f72bfe75b0f641bcb8",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/torrential-rains-swamp-the-gandaki-river/floodingindianepal_amo_20260929.jpg?w=1280"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    },
+    {
+      "id": "mozambique",
+      "title": {
+        "en": "Limpopo and Incomati floods, Mozambique",
+        "ru": "Наводнение на Лимпопо и Инкомати, Мозамбик"
+      },
+      "description": {
+        "en": "MODIS false-colour images show floodwater spreading over river plains. The images cover a large region.",
+        "ru": "На снимках MODIS в условных цветах видно, как вода затопила речные поймы. Снимки охватывают большой регион."
+      },
+      "source": "https://science.nasa.gov/earth/earth-observatory/floods-inundate-southern-mozambique/",
+      "credit": "NASA Earth Observatory / Michala Garrison; Terra and Aqua MODIS",
+      "kind": "false colour",
+      "images": [
+        {
+          "date": "2025-12-17",
+          "path": "data/observed-events/mozambique-2025-12-17.jpg",
+          "sha256": "418d52564da07a957fb2e07bd64a903f8f06968fafdd6189ad8152c9e425280e",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/floods-inundate-southern-mozambique/mozambiqueflood_tmo_20251217.jpg?w=1280"
+        },
+        {
+          "date": "2026-01-25",
+          "path": "data/observed-events/mozambique-2026-01-25.jpg",
+          "sha256": "181a295ce8fc5415567b553822a27c8f9955afe25e8d1989afd30fbf6fa72b87",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/floods-inundate-southern-mozambique/mozambiqueflood_amo_20260125.jpg?w=1280"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    },
+    {
+      "id": "hubbard",
+      "title": {
+        "en": "Earthquake and landslides, Hubbard Glacier",
+        "ru": "Землетрясение и оползни на леднике Хаббард"
+      },
+      "description": {
+        "en": "NASA NISAR GSLC radar imagery shows landslide debris after the earthquake; colours are artificial.",
+        "ru": "Радарные снимки NISAR GSLC показывают следы оползней после землетрясения; цвета условные."
+      },
+      "source": "https://science.nasa.gov/earth/earth-observatory/landslide-and-avalanche-debris-litter-hubbard-glacier/",
+      "credit": "NASA / JPL / Lauren Dauphin; NISAR GSLC",
+      "kind": "false colour",
+      "images": [
+        {
+          "date": "2025-11-26",
+          "path": "data/observed-events/hubbard-2025-11-26.jpg",
+          "sha256": "43da7c16a7c0e8c2a6ad9ab4e78c7e7c7f1a2c45bb2ec7f33e2547831dfe5a07",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/landslide-and-avalanche-debris-litter-hubbard-glacier/hubbardearthquakewide_nisar_20251126.jpg?w=1280"
+        },
+        {
+          "date": "2025-12-08",
+          "path": "data/observed-events/hubbard-2025-12-08.jpg",
+          "sha256": "e83ffafb9f3395371dbd31d85ce8cc5b310a552b49a4d2bed1f8ec94bc02ea8d",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/landslide-and-avalanche-debris-litter-hubbard-glacier/hubbardearthquakewide_nisar_20251208.jpg?w=1280"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    },
+    {
+      "id": "tracy",
+      "title": {
+        "en": "Landslide and tsunami, Tracy Arm, Alaska",
+        "ru": "Оползень и цунами в заливе Трейси-Арм, Аляска"
+      },
+      "description": {
+        "en": "Landsat images show the 2025 landslide and loss of vegetation along the fjord.",
+        "ru": "Снимки Landsat показывают оползень и уничтоженную растительность вдоль фьорда после цунами 2025 года."
+      },
+      "source": "https://science.nasa.gov/earth/earth-observatory/tracy-arms-post-tsunami-landscape/",
+      "credit": "NASA Earth Observatory / Michala Garrison; Landsat 8 and 9",
+      "kind": "natural colour",
+      "images": [
+        {
+          "date": "2025-07-26",
+          "path": "data/observed-events/tracy-2025-07-26.jpg",
+          "sha256": "2ae57eb2014ab8baa4e455593514a0cf181a15632b6f9d97ba4ebf63a6a2d5f3",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/tracy-arm%E2%80%99s-post-tsunami-landscape/alaskalandslide_oli_20250726.jpg?w=1280"
+        },
+        {
+          "date": "2025-08-19",
+          "path": "data/observed-events/tracy-2025-08-19.jpg",
+          "sha256": "b246fe2d4e414a3c6f5f99ee1586311d3b3b4dcd7c6377fd4349d50d11921d11",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2026/tracy-arm%E2%80%99s-post-tsunami-landscape/alaskalandslide_oli2_20250819.jpg?w=1280"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    },
+    {
+      "id": "lacrouge",
+      "title": {
+        "en": "Lake Rouge drains, Quebec",
+        "ru": "Исчезновение озера Руж, Квебек"
+      },
+      "description": {
+        "en": "Landsat shows the lake before and after its bank breached in 2025. The cause was not established.",
+        "ru": "Landsat показывает озеро до и после прорыва берега в 2025 году. Причина не установлена."
+      },
+      "source": "https://science.nasa.gov/earth/earth-observatory/the-disappearance-of-lac-rouge-154526/",
+      "credit": "NASA Earth Observatory / Wanmei Liang; Landsat 9",
+      "kind": "natural colour",
+      "images": [
+        {
+          "date": "2024-06-21",
+          "path": "data/observed-events/lacrouge-2024-06-21.jpg",
+          "sha256": "af65c8f508d47914997a31ff1444075c725d9c7542e60406581b39d466c9367f",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/imagerecords/154000/154526/lacrouge_oli2_20240621.jpg?w=1280"
+        },
+        {
+          "date": "2025-06-15",
+          "path": "data/observed-events/lacrouge-2025-06-15.jpg",
+          "sha256": "f7442fa6c8d247ba8e3652cd4bd61981575b1c3ee4935483505c33b65e23f563",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/imagerecords/154000/154526/lacrouge_oli2_20250615.jpg?w=1280"
+        }
+      ],
+      "granule_ids": null,
+      "granule_note": "Underlying source granule identifiers were not supplied by the NASA image page and have not been independently verified."
+    }
+  ],
+  "retrieved_at": "2026-11-15",
+  "processing": "Downloaded NASA-published JPEG renderings; selected previews are server-resized to 1280 px. No georeferencing or OffBeat detection performed."
+}

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 class Element {
-  constructor(id='') { this.id=id; this.children=[]; this.listeners={}; this.attrs={}; this.dataset={}; this.checked=false; this.value=''; this.hidden=false; this.tBodies=[{innerHTML:''}]; }
+  constructor(id='') { this.id=id; this.children=[]; this.listeners={}; this.attrs={}; this.dataset={}; this.checked=false; this.value=''; this.hidden=false; this.tBodies=[{innerHTML:''}]; this.classList={toggle(){}}; }
   addEventListener(name,fn) { this.listeners[name]=fn; }
   setAttribute(name,value) { this.attrs[name]=value; }
   getAttribute(name) { return this.attrs[name]; }
@@ -20,13 +20,15 @@ const sites=['mexico','amazon','venezuela'].map(id=>JSON.parse(fs.readFileSync(`
 const siteButtons=sites.map(s=>Object.assign(new Element(),{dataset:{site:s.id}}));
 const regionButtons=['world','europe','africa','asia','oceania','americas'].map(region=>Object.assign(new Element(),{dataset:{region}}));
 const listeners={};
-const document={getElementById:$,createElement:()=>new Element(),createTextNode:text=>({textContent:text}),
+const document={documentElement:{lang:'en'},getElementById:$,createElement:()=>new Element(),createTextNode:text=>({textContent:text}),
   querySelectorAll:selector=>selector==='#sites button'?siteButtons:selector==='#regions button'?regionButtons:[],
   addEventListener:(name,fn)=>(listeners[name] ||= []).push(fn),dispatchEvent:event=>(listeners[event.type]||[]).forEach(fn=>fn(event))};
 const vector=(x=0,y=0)=>({x,y,add(v){return vector(x+(v.x??v[0]),y+(v.y??v[1]));},subtract(v){return vector(x-(v.x??v[0]),y-(v.y??v[1]));},divideBy(n){return vector(x/n,y/n);}});
 const maps=[];
 function newMap() {
+  const gesture=()=>({active:false,enable(){this.active=true},disable(){this.active=false}});
   const handlers={},panes={};const map={handlers,attributionControl:{setPrefix(){}},on(names,fn){for(const name of names.split(' '))handlers[name]=fn;return map;},
+    dragging:gesture(),touchZoom:gesture(),doubleClickZoom:gesture(),
     createPane:name=>panes[name]={style:{}},getPane:name=>panes[name],getCenter:()=>({lat:0,lng:0,wrap(){return this;}}),getZoom:()=>12,
     setView(){return map;},fitBounds(){return map;},getSize:()=>vector(400,360),distance:()=>10,
     containerPointToLatLng:()=>({lat:0,lng:0}),project:p=>vector(p.lng??p[1],p.lat??p[0]),unproject:p=>({lat:p.y,lng:p.x,wrap(){return this;}}),
@@ -37,7 +39,7 @@ const tileLayers=[], imageLayers=[];
 let href='http://localhost/?site=mexico';
 const location={get href(){return href;},get hash(){return new URL(href).hash;}};
 const opticalLoads=[];let holdMexico=null; let radarBinding=null; const imagery=[];
-const context={URL,AbortSignal,Event,console,document,location,history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
+const context={URL,AbortSignal,Event,console,document,location,MutationObserver:class {observe(){}},history:{replaceState(_a,_b,url){href=new URL(url,href).href;}},
   localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},
   fetch:async path=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path))}),
   L:{map:newMap,tileLayer:(url,options)=>{tileLayers.push({url,options});return layer();},imageOverlay:(url,bounds,options)=>{imageLayers.push({url,bounds,options});return layer();},rectangle:layer,tooltip:layer,circleMarker:layer,layerGroup:layer,geoJSON:layer,point:vector,marker:layer,divIcon:()=>({}),featureGroup:layer},
@@ -51,6 +53,13 @@ Object.assign(OB,{tourWanted:true,bindArchive(){},bindNisarMap:(map,toggle,statu
 vm.runInContext(fs.readFileSync('js/app.js','utf8'),context);
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 await tick();await tick();assert(OB.app);
+assert(maps.every(m=>m.dragging.active&&m.touchZoom.active),'desktop maps accept gestures');
+context.matchMedia=()=>({matches:true});
+$('map-touch-toggle').listeners.click();
+assert(maps.every(m=>m.dragging.active&&m.touchZoom.active),'mobile can enable both maps');
+$('map-touch-toggle').listeners.click();
+assert(maps.every(m=>!m.dragging.active&&!m.touchZoom.active),'mobile can resume page scrolling');
+assert.equal($('map-touch-toggle').getAttribute('aria-pressed'),'false');
 assert.equal(radarBinding.map,maps[0],'NASA coverage must be bound to the left map');
 assert.equal(radarBinding.toggle,$('l-nisar'));
 assert.equal(radarBinding.status,$('nisar-status'));

@@ -1,12 +1,13 @@
 // Interface translations. Data, coordinates, source identifiers and place names are kept intact.
 (() => {
   const translations = {
-    'How Surprise me works':'Как пользоваться и как работает «Удиви меня»',
-    'Press Surprise me to open a prepared story or an automatically selected measured sample.':'Нажмите «Удиви меня», чтобы открыть подготовленную историю или автоматически выбранную точку измерений.',
-    'Use the numbered steps or arrows to see the place, radar signal, images and conclusion.':'Переходите по шагам или стрелкам: место, сигнал радара, снимки и вывод.',
-    'Compare the dates and neighbours; where two optical images exist, move the slider to compare them.':'Сравните даты и соседние точки. Если есть два оптических снимка, передвигайте ползунок для сравнения.',
-    'A signal difference is a clue, not proof of its cause. Some samples lack independent review or a second image.':'Отклонение сигнала — повод для исследования, а не доказательство причины. Для некоторых точек нет независимой проверки или второго снимка.',
-    'Choose Surprise me again for another example. Close story hides the current one.':'Нажмите «Удиви меня» ещё раз, чтобы выбрать другой пример. Кнопка «Закрыть историю» скроет текущий.',
+    'How to review detected changes':'Как проверять найденные изменения',
+    'See a reviewed clearing':'Посмотреть разобранную расчистку',
+    'Choose Review a detected change to open an automatic radar candidate with two dated optical images. Press again for another candidate.':'Нажмите «Проверить найденное изменение»: откроется точка, найденная по радарным данным, с двумя датированными оптическими снимками. Нажмите ещё раз для другой точки.',
+    'Use Show on maps or View this place in 3D to explore its location. In a story, use the steps to move between the signal, evidence and conclusion.':'Чтобы посмотреть, где находится место, нажмите «Показать на картах» или «Посмотреть это место в 3D». В истории переключайтесь между шагами: сигнал, снимки и вывод.',
+    'Compare the available dated images and radar measurements. Colour images show the landscape; black-and-white radar images show signal strength. Some places have no usable image pair.':'Сравните доступные снимки с датами и измерения радара. Цветные снимки показывают местность, а чёрно-белые радарные изображения — силу сигнала. Для некоторых мест пары подходящих снимков нет.',
+    'For an automatic candidate, record whether you can see a change. Your review stays in this browser and can be downloaded.':'Для точки, найденной алгоритмом, отметьте, видно ли изменение. Ваша оценка сохраняется в этом браузере; её можно скачать.',
+    'A radar difference is a clue, not proof of what happened. Image dates may differ and the cause may be unknown.':'Изменение радарного сигнала — повод проверить место, но не доказательство события. Даты снимков могут отличаться, а причина изменения может быть неизвестна.',
     'Explore a change story':'Открыть историю изменения',
     'What the data says':'Что говорят данные',
     'Watch the 30-second video':'Смотреть видео (30 секунд)', 'Media Player - OffBeat in 30 seconds':'Проигрыватель - OffBeat за 30 секунд', 'File':'Файл', 'View':'Вид', 'Play':'Воспроизведение', 'Help':'Справка',

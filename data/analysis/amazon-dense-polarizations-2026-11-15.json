@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "kind": "retrospective_exploratory_not_independent_validation",
+  "source_report": "data/change-candidates/amazon-6f219605b533.json",
+  "source_report_sha256": "6f219605b53333717b3887d53175ef6adfa9fc8b46d3e7e315de523b8f155c28",
+  "dates": [
+    "2026-08-23",
+    "2026-09-04"
+  ],
+  "inputs": [
+    {
+      "date": "2026-08-23",
+      "granule_id": "NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001",
+      "concept_id": "G4289088978-ASF",
+      "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001/NISAR_L2_PR_GCOV_028_146_A_175_2005_DHDH_A_20260823T090409_20260823T090443_P05023_N_F_J_001.h5",
+      "subset_path": "data/subsets/amazon-dense/2026-08-23.npz",
+      "sha256": "7d0b33e3e0e6972e44ef58ad05a5b6ae9a6680181c682d38d2ef121473d3621d"
+    },
+    {
+      "date": "2026-09-04",
+      "granule_id": "NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001",
+      "concept_id": "G4299942915-ASF",
+      "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001/NISAR_L2_PR_GCOV_029_146_A_175_2005_DHDH_A_20260904T090408_20260904T090443_P05023_N_F_J_001.h5",
+      "subset_path": "data/subsets/amazon-dense/2026-09-04.npz",
+      "sha256": "4b677e61a240699402752a44d71ee229bde5fde727171b83859d40707fcdd0d3"
+    }
+  ],
+  "grid_spacing_m": 20,
+  "method": "For HH and HV separately, require mask 1..254 and finite positive power in both scenes; compute 10 log10(later/earlier). For each previously selected marker report cell value, 3x3 median and percentiles, and 31x31 context excluding the 3x3. Clip windows to the available grid; no imputation.",
+  "limitations": [
+    "Retrospective checks are not independent event confirmation or a blind test.",
+    "The existing mask rule is not a complete quality assessment.",
+    "Spatial neighbours can share the same event, land cover, speckle and weather; they are not independent observations.",
+    "Two dates cannot establish cause, event area, longer-term trend, or detector accuracy.",
+    "Context is not restricted to the same land-cover class and can include edges of the same patch."
+  ],
+  "items": [
+    {
+      "id": "r52-c44",
+      "row": 52,
+      "col": 44,
+      "lat": -4.771729312850042,
+      "lon": -49.27975157330993,
+      "score": -3.78,
+      "hh": {
+        "cell_delta_db": -2.357,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -1.499,
+          "p10_db": -2.379,
+          "p90_db": 0.041
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.843,
+          "p10_db": -2.972,
+          "p90_db": 1.22
+        }
+      },
+      "hv": {
+        "cell_delta_db": -4.302,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -4.302,
+          "p10_db": -5.584,
+          "p90_db": 1.6
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.75,
+          "p10_db": -3.333,
+          "p90_db": 1.609
+        }
+      },
+      "context_truncated_at_edge": false
+    },
+    {
+      "id": "r74-c99",
+      "row": 74,
+      "col": 99,
+      "lat": -4.775683105067722,
+      "lon": -49.269826555744544,
+      "score": -3.74,
+      "hh": {
+        "cell_delta_db": -1.792,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -1.412,
+          "p10_db": -2.877,
+          "p90_db": -0.138
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.616,
+          "p10_db": -3.155,
+          "p90_db": 1.76
+        }
+      },
+      "hv": {
+        "cell_delta_db": -5.924,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -4.141,
+          "p10_db": -6.097,
+          "p90_db": -0.885
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.675,
+          "p10_db": -3.243,
+          "p90_db": 1.871
+        }
+      },
+      "context_truncated_at_edge": false
+    },
+    {
+      "id": "r23-c67",
+      "row": 23,
+      "col": 67,
+      "lat": -4.766474222508907,
+      "lon": -49.27561835961175,
+      "score": -3.49,
+      "hh": {
+        "cell_delta_db": -6.65,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -5.656,
+          "p10_db": -6.881,
+          "p90_db": 0.568
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.863,
+          "p10_db": -3.575,
+          "p90_db": 1.344
+        }
+      },
+      "hv": {
+        "cell_delta_db": -1.042,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -4.29,
+          "p10_db": -5.972,
+          "p90_db": -0.508
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -1.135,
+          "p10_db": -3.645,
+          "p90_db": 1.51
+        }
+      },
+      "context_truncated_at_edge": false
+    },
+    {
+      "id": "r109-c103",
+      "row": 109,
+      "col": 103,
+      "lat": -4.782011054934685,
+      "lon": -49.269089574340164,
+      "score": 3.12,
+      "hh": {
+        "cell_delta_db": 1.346,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -0.775,
+          "p10_db": -3.793,
+          "p90_db": 2.029
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.285,
+          "p10_db": -2.779,
+          "p90_db": 2.398
+        }
+      },
+      "hv": {
+        "cell_delta_db": 3.169,
+        "near_3x3": {
+          "count": 9,
+          "median_db": 2.493,
+          "p10_db": -0.241,
+          "p90_db": 3.283
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 952,
+          "median_db": -0.441,
+          "p10_db": -3.161,
+          "p90_db": 2.292
+        }
+      },
+      "context_truncated_at_edge": false
+    },
+    {
+      "id": "r3-c30",
+      "row": 3,
+      "col": 30,
+      "lat": -4.762873891758363,
+      "lon": -49.28229742794384,
+      "score": 2.92,
+      "hh": {
+        "cell_delta_db": 0.347,
+        "near_3x3": {
+          "count": 9,
+          "median_db": -0.767,
+          "p10_db": -2.509,
+          "p90_db": 2.419
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 580,
+          "median_db": -0.494,
+          "p10_db": -2.664,
+          "p90_db": 1.991
+        }
+      },
+      "hv": {
+        "cell_delta_db": 2.152,
+        "near_3x3": {
+          "count": 9,
+          "median_db": 1.914,
+          "p10_db": -2.869,
+          "p90_db": 3.156
+        },
+        "surrounding_31x31_excluding_3x3": {
+          "count": 580,
+          "median_db": -0.574,
+          "p10_db": -3.283,
+          "p90_db": 2.235
+        }
+      },
+      "context_truncated_at_edge": true
+    }
+  ]
+}

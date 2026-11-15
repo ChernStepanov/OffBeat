@@ -10,3 +10,6 @@ _netrc
 
 # Earthdata Login bearer token for scripts/opera_rtc.py, never commit
 .earthdata_token
+*.sqlite
+*.sqlite3
+*.db

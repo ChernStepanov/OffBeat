@@ -20,6 +20,20 @@
   // minZoom 2 keeps the world filling the panel instead of grey margins around a tiny globe
   const map = L.map("map", { zoomControl: true, maxZoom: 19, minZoom: 2, worldCopyJump: true });
   const optic = L.map("optic", { zoomControl: true, maxZoom: 19, minZoom: 2, worldCopyJump: true });
+  let touchMapsEnabled = false;
+  const touchLayout = () => window.matchMedia?.('(pointer: coarse), (max-width: 720px)').matches || false;
+  function updateMapGestures() {
+    const touch = touchLayout(), enabled = !touch || touchMapsEnabled, ru = document.documentElement.lang === 'ru';
+    $('map-touch-controls').hidden = !touch;
+    $('map-win').classList.toggle('map-touch-idle', !enabled);
+    $('map-touch-toggle').setAttribute('aria-pressed', String(touchMapsEnabled));
+    $('map-touch-toggle').textContent = touchMapsEnabled ? (ru ? 'Прокручивать страницу' : 'Scroll the page') : (ru ? 'Управлять картами' : 'Enable map gestures');
+    $('map-touch-help').textContent = touchMapsEnabled ? (ru ? 'Палец — перемещение, два пальца — масштаб. Кнопка вернёт прокрутку страницы.' : 'Drag to move, pinch to zoom. Use the button to resume page scrolling.') : (ru ? 'Можно прокручивать страницу поверх карт. Включите управление, чтобы двигать и масштабировать карты.' : 'Scroll the page over the maps. Enable gestures to move and pinch the maps.');
+    for (const m of [map, optic]) for (const handler of ['dragging', 'touchZoom', 'doubleClickZoom']) m[handler]?.[enabled ? 'enable' : 'disable']();
+  }
+  $('map-touch-toggle').addEventListener('click', () => { touchMapsEnabled = !touchMapsEnabled; updateMapGestures(); });
+  new MutationObserver(updateMapGestures).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
+  window.addEventListener('resize', updateMapGestures); updateMapGestures();
   map.createPane('opticalMirror');
   map.getPane('opticalMirror').style.zIndex = 225;
   map.getPane('opticalMirror').style.pointerEvents = 'none';

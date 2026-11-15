@@ -9,13 +9,26 @@
   scene.hidden = true;
   scene.classList.add('scene--inline');
   scene.removeAttribute('role'); scene.removeAttribute('aria-modal');
-  let active = false, channel = 'hv', view = 'orbit', frame = 0, points = [];
+  let active = false, channel = 'hv', view = 'orbit', frame = 0, points = [], touchMode = 'orbit';
+  const touches = new Map();
+  let pinchDistance = 0;
   let selectedSite = null, date = 0, selection = null, dragging = null, hovered = null;
   let gpu = null, gpuPromise = null, starting = false, pendingMapFocus = false, terrain = null, terrainSite = null, terrainTicket = 0, loadedSignalKey = '';
   const terrainCache = new Map();
   const ru = () => document.documentElement.lang === 'ru';
   const phrase = (en, russian) => ru() ? russian : en;
   const fixed = value => Number.isFinite(value) ? value.toFixed(2) : '-';
+  function updateTouchControls() {
+    $('terrain-touch-label').textContent = phrase('Touch:', 'Палец:');
+    $('terrain-touch-pan').textContent = phrase('Move', 'Перемещение');
+    $('terrain-touch-orbit').textContent = phrase('Rotate', 'Поворот');
+    $('terrain-touch-hint').textContent = phrase('Drag with one finger. Pinch with two fingers or use + / − to zoom.', 'Ведите одним пальцем. Масштаб — двумя пальцами или кнопками + / −.');
+    $('terrain-touch-pan').setAttribute('aria-pressed', String(touchMode === 'pan'));
+    $('terrain-touch-orbit').setAttribute('aria-pressed', String(touchMode === 'orbit'));
+  }
+  $('terrain-touch-pan').addEventListener('click', () => { touchMode = 'pan'; updateTouchControls(); });
+  $('terrain-touch-orbit').addEventListener('click', () => { touchMode = 'orbit'; updateTouchControls(); });
+  updateTouchControls();
 
   function schedule() {
     if (!active || frame) return;
@@ -155,7 +168,10 @@
     $('cloud-card').disabled = !selection;
     $('scene-fit').disabled = !selectedSite;
     $('terrain-study').disabled = !selectedSite;
-    canvas.setAttribute('aria-label', phrase(`3D terrain map with ${points.length} measured ${channel.toUpperCase()} samples. Right drag or arrow keys to orbit; left drag to pan; plus and minus zoom.`, `3D-карта рельефа: ${points.length} точек ${channel.toUpperCase()}. Правая кнопка или стрелки вращают карту; левая кнопка перемещает; плюс и минус - масштаб.`));
+    const touch = window.matchMedia('(pointer: coarse), (max-width: 720px)').matches;
+    canvas.setAttribute('aria-label', touch
+      ? phrase(`3D terrain map with ${points.length} measured samples. Choose move or rotate, then drag with one finger. Pinch to zoom.`, `3D-карта рельефа: ${points.length} точек. Выберите перемещение или поворот и ведите одним пальцем. Масштабируйте двумя пальцами.`)
+      : phrase(`3D terrain map with ${points.length} measured ${channel.toUpperCase()} samples. Right drag or arrow keys to orbit; left drag to pan; plus and minus zoom.`, `3D-карта рельефа: ${points.length} точек ${channel.toUpperCase()}. Правая кнопка или стрелки вращают карту; левая кнопка перемещает; плюс и минус - масштаб.`));
     schedule();
   }
   function setChannel(next) {
@@ -291,18 +307,32 @@
   });
 
   function pointer(event) { const rect = canvas.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; }
+  function touchDistance() { const [a,b] = [...touches.values()]; return a && b ? Math.hypot(a.x-b.x, a.y-b.y) : 0; }
   canvas.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch') {
+      touches.set(event.pointerId, pointer(event));
+      canvas.setPointerCapture(event.pointerId);
+      if (touches.size > 1) { dragging = null; canvas.classList.remove('is-dragging'); gpu?.endDrag(); pinchDistance = touchDistance(); return; }
+    }
     if (![0, 2].includes(event.button) || dragging) return;
     cancelSearch();
     canvas.focus({ preventScroll: true });
     const start = pointer(event);
-    const pan = event.button === 0 && !event.shiftKey;
+    const pan = event.pointerType === 'touch' ? touchMode === 'pan' : event.button === 0 && !event.shiftKey;
     dragging = { id: event.pointerId, ...start, startX: start.x, startY: start.y, moved: false, button: event.button, pan, anchor: pan ? gpu?.grabGround(start.x, start.y) : null };
     canvas.setPointerCapture(event.pointerId);
     canvas.classList.add('is-dragging');
   });
   canvas.addEventListener('pointermove', event => {
     const p = pointer(event);
+    if (event.pointerType === 'touch' && touches.has(event.pointerId)) {
+      touches.set(event.pointerId, p);
+      if (touches.size > 1) {
+        const distance = touchDistance();
+        if (pinchDistance > 0 && distance > 0) zoom(Math.max(.8, Math.min(1.25, distance / pinchDistance)));
+        pinchDistance = distance; return;
+      }
+    }
     if (dragging && dragging.id === event.pointerId) {
       const dx = p.x - dragging.x, dy = p.y - dragging.y;
       if (Math.hypot(p.x - dragging.startX, p.y - dragging.startY) > 3) dragging.moved = true;
@@ -328,6 +358,15 @@
     schedule();
   });
   canvas.addEventListener('pointerup', event => {
+    if (event.pointerType === 'touch') {
+      const wasPinching = touches.size > 1 || pinchDistance > 0;
+      touches.delete(event.pointerId);
+      if (wasPinching) {
+        if (!touches.size) pinchDistance = 0;
+        if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+        return;
+      }
+    }
     if (!dragging || dragging.id !== event.pointerId) return;
     if (!dragging.moved && dragging.button === 0) {
       const p = pointer(event), hit = gpu?.pick(p.x, p.y);
@@ -338,7 +377,7 @@
     gpu?.endDrag();   // the camera may follow the terrain height again
     if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
   });
-  const cancelDrag = () => { dragging = null; canvas.classList.remove('is-dragging'); gpu?.endDrag(); };
+  const cancelDrag = event => { if (event?.pointerId !== undefined) touches.delete(event.pointerId); else touches.clear(); if (!touches.size) pinchDistance = 0; dragging = null; canvas.classList.remove('is-dragging'); gpu?.endDrag(); };
   canvas.addEventListener('pointercancel', cancelDrag); canvas.addEventListener('lostpointercapture', cancelDrag);
   canvas.addEventListener('contextmenu', event => event.preventDefault());
   canvas.addEventListener('pointerleave', () => { hovered = null; schedule(); });
@@ -374,7 +413,7 @@
     else update();
   });
   new ResizeObserver(() => { if (active) { OB.app?.resizeMaps(); schedule(); } }).observe($('cloud-viewport'));
-  new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  new MutationObserver(() => { update(); updateTouchControls(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   document.addEventListener('ob:ready', () => {
     // Include every prepared site from the merged catalogue, including future additions.
     const select = $('scene-site');

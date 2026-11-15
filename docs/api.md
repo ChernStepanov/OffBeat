@@ -1,6 +1,6 @@
 # OffBeat HTTP API v1
 
-Read-only JSON API over the same prepared data as the interface. It requires Python 3
+JSON API over the same prepared data as the interface. It requires Python 3
 and no additional dependencies. Run from the project root:
 
 ```sh
@@ -14,6 +14,34 @@ and appropriate network access controls. Binding to `0.0.0.0` exposes an
 **unauthenticated** read-only service; do not do so on an untrusted network without
 those protections. No browser CORS access is enabled by default. This is HTTP API,
 not MCP.
+
+## Shared candidate reviews
+
+The public site uses the separate persistent D1-backed review service at
+`https://offbeat-shared-reviews.glazedbream.chatgpt.site/api/v1/reviews`.
+Its `/health` endpoint checks the database. Browser access is restricted by CORS
+to `https://offbeat.chern.su`. The Worker validates catalogue fingerprints,
+candidate IDs and image coverage, hashes anonymous browser tokens, limits write
+requests per anonymized network/hour bucket, and exposes aggregate verdict counts.
+Comments and browser tokens are not exposed through the read API. Clearing a
+review requires its original browser token. This is anonymous community feedback,
+not an independently validated label set. The Python service below remains a
+local development alternative. Worker source is in the separate Sites source
+repository for project `appgprj_6af9cf16c13c8191add5ba9ffc84a1d1`.
+
+The optional `GET /api/v1/reviews?site=…&marker=…&dataset=…` returns aggregate
+counts. `POST /api/v1/reviews` accepts a candidate, dataset fingerprint, random
+browser token, verdict and image basis. A token may update or remove its own
+review. Comments are browser-local and are not sent. Counts are unverified and
+do not establish detector accuracy. Browser tokens do not prevent deliberate
+multiple votes; production needs rate limiting, moderation and backups.
+
+Storage is disabled until `OFFBEAT_REVIEWS_DB` is set to a writable SQLite file
+outside any publicly served directory. Serve the API under the same HTTPS origin
+as the site using a reverse proxy. GitHub Pages alone cannot run the API. The
+production endpoint must be deployed separately; adding these files does not
+make reviews public. For local testing only, `python -m api.dev_server` serves
+the UI and a SQLite database on `127.0.0.1:8873`.
 
 ## Endpoints
 
