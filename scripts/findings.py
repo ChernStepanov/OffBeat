@@ -181,6 +181,40 @@ def analyse(site, rng):
     }
 
 
+def opera_vs_gnss():
+    """Mexico City: OPERA DISP-S1 LOS rate at the sample nearest GNSS station MMX1 vs the station's own motion.
+
+    Uses only saved files: data/mexico/opera-disp.json (15 products, common reference date) and
+    data/analysis/mexico-mmx1-gnss.json (daily NGL IGS20 positions). The LOS projection uses the
+    Sentinel-1 IW incidence range (29-46 deg) because the per-pixel geometry layer was not retrieved.
+    """
+    opera = json.loads((ROOT / 'data' / 'mexico' / 'opera-disp.json').read_text())
+    gnss = json.loads((ROOT / 'data' / 'analysis' / 'mexico-mmx1-gnss.json').read_text())
+    ref = date.fromisoformat(opera['reference_date'])
+    days = np.array([0] + [(date.fromisoformat(g['secondary_date']) - ref).days for g in opera['granules']], dtype=float)
+    idx = gnss['nearest_nisar_sample']['index']
+    los = np.array([0.0] + [np.nan if g['values']['displacement'][idx] is None else g['values']['displacement'][idx] for g in opera['granules']])
+    def fit(t_days, y):
+        m = np.isfinite(y); res = stats.linregress(t_days[m] / 365.25, y[m] * 100)
+        return res.slope, res.stderr, int(m.sum())
+    end = max((date.fromisoformat(r['date']) - ref).days for r in gnss['records'])
+    common = days <= end
+    o_all, o_all_se, n_all = fit(days, los)
+    o_common, o_common_se, n_common = fit(days[common], los[common])
+    g_days = np.array([(date.fromisoformat(r['date']) - ref).days for r in gnss['records']], dtype=float)
+    up = np.array([r['up_m'] for r in gnss['records']])
+    keep = g_days >= 0
+    g_up, g_up_se, n_gnss = fit(g_days[keep], up[keep])
+    lo, hi = sorted([g_up * np.cos(np.radians(29)), g_up * np.cos(np.radians(46))])
+    return {'station': gnss['station'], 'sample': gnss['nearest_nisar_sample']['id'], 'index': idx, 'distance_m': gnss['nearest_nisar_sample']['distance_m'],
+            'window': [opera['reference_date'], gnss['records'][-1]['date']],
+            'gnss_up_cm_per_year': r(g_up, 1), 'gnss_up_se': r(g_up_se, 1), 'gnss_days': n_gnss,
+            'gnss_expected_los_cm_per_year': [r(lo, 1), r(hi, 1)],
+            'opera_los_cm_per_year_common': r(o_common, 1), 'opera_los_se_common': r(o_common_se, 1), 'opera_dates_common': n_common,
+            'opera_los_cm_per_year_all': r(o_all, 1), 'opera_los_se_all': r(o_all_se, 1), 'opera_dates_all': n_all,
+            'assumption': 'vertical-only projection with Sentinel-1 IW incidence 29-46 deg; horizontal GNSS rates are about 1 cm/year'}
+
+
 def names(sites, ids):
     return ', '.join(sites[i]['name'].split(',')[0] for i in ids)
 
@@ -288,6 +322,13 @@ def build_findings(sites):
             'how_en': f"Median GUNW coherence of one acquisition pair per site, by WorldCover class. Sites: {names(sites, coh)}.",
             'how_ru': f"Медианная когерентность GUNW по одной паре съёмок на участок, по классам WorldCover. Участки: {names(sites, coh)}."})
 
+    v = opera_vs_gnss()
+    out.append({'id': 'validation-opera-gnss', 'strength': 'strong', 'site': 'mexico', 'samples': [v['index']],
+        'en': f"Mexico City is sinking fast, and the ready-made OPERA product misses it: GNSS station {v['station']} drops {abs(v['gnss_up_cm_per_year']):.0f} cm/year, but OPERA shows only {v['opera_los_cm_per_year_common']} cm/year at the point 20 m away. OPERA's values are relative to a reference that sinks with the basin, so they are not absolute subsidence.",
+        'ru': f"Мехико быстро проседает, а готовый продукт OPERA этого не видит: GNSS-станция {v['station']} опускается на {abs(v['gnss_up_cm_per_year']):.0f} см/год, а OPERA в точке в 20 м показывает лишь {v['opera_los_cm_per_year_common']} см/год. Значения OPERA отсчитаны от опорной точки, которая проседает вместе с котловиной, поэтому это не абсолютное проседание.",
+        'how_en': f"Linear rates over the common window {v['window'][0]} to {v['window'][1]}: GNSS vertical {v['gnss_up_cm_per_year']} +/- {v['gnss_up_se']} cm/year from {v['gnss_days']} daily NGL solutions, expected along the radar line of sight {v['gnss_expected_los_cm_per_year'][0]} to {v['gnss_expected_los_cm_per_year'][1]} cm/year ({v['assumption']}). OPERA DISP-S1 at sample {v['sample']} ({v['distance_m']} m away): {v['opera_los_cm_per_year_common']} +/- {v['opera_los_se_common']} cm/year from {v['opera_dates_common']} dates; {v['opera_los_cm_per_year_all']} +/- {v['opera_los_se_all']} over all {v['opera_dates_all']}. Tying OPERA to a stable or GNSS-measured reference is required before any rate is quoted.",
+        'how_ru': f"Линейные скорости за общее окно {v['window'][0]} - {v['window'][1]}: GNSS по вертикали {v['gnss_up_cm_per_year']} +/- {v['gnss_up_se']} см/год по {v['gnss_days']} суточным решениям NGL, ожидаемо вдоль луча радара {v['gnss_expected_los_cm_per_year'][0]} - {v['gnss_expected_los_cm_per_year'][1]} см/год (только вертикаль, угол падения Sentinel-1 IW 29-46°; горизонтальные скорости GNSS около 1 см/год). OPERA DISP-S1 в точке {v['sample']} ({v['distance_m']} м): {v['opera_los_cm_per_year_common']} +/- {v['opera_los_se_common']} см/год по {v['opera_dates_common']} датам; {v['opera_los_cm_per_year_all']} +/- {v['opera_los_se_all']} по всем {v['opera_dates_all']}. Прежде чем называть скорость, OPERA нужно привязать к стабильной опоре или к GNSS."})
+
     short = [k for k in SITES if k in sites and sites[k]['dates'] < 3]
     if short:
         out.append({'id': 'short-records', 'strength': 'none', 'site': None,
@@ -298,7 +339,7 @@ def build_findings(sites):
 
     # Headline order for a first visit: the strongest substantive results, then method checks,
     # then what the data cannot support. A site's own findings are moved up by the page when it is open.
-    priority = ['trends', 'physics', 'cluster', 'coherence', 'noise', 'persistence', 'common', 'calibration', 'quality', 'scattered', 'short']
+    priority = ['trends', 'validation', 'physics', 'cluster', 'coherence', 'noise', 'persistence', 'common', 'calibration', 'quality', 'scattered', 'short']
     order = {'strong': 0, 'suggestive': 1, 'issue': 2, 'none': 3}
     out.sort(key=lambda f: (f['strength'] != 'strong' and order[f['strength']], priority.index(f['id'].split('-')[0])))
     return out
@@ -313,7 +354,7 @@ def main():
         sites[k] = analyse(json.loads(raw), rng)
     result = {'schema_version': 1, 'method': 'scripts/findings.py', 'inputs_sha256': hashes,
               'notes': 'Measured NISAR GCOV and GUNW samples only. No interpolation, gap filling or simulation. Causes are not attributed.',
-              'findings': build_findings(sites), 'sites': sites}
+              'findings': build_findings(sites), 'sites': sites, 'opera_vs_gnss': opera_vs_gnss()}
     (ROOT / 'data' / 'findings.json').write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n')
     for f in result['findings']:
         print(f"[{f['strength']:10s}] {f['en']}")

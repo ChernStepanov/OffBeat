@@ -44,3 +44,11 @@ def test_trend_candidates_are_fdr_controlled():
     trends = published['sites']['mexico']['trends']
     assert trends['tests'] > 1000
     assert all(h['q'] < trends['alpha'] for h in trends['strongest'])
+
+
+def test_opera_rate_is_compared_with_independent_gnss():
+    v = F.opera_vs_gnss()
+    assert v['station'] == 'MMX1' and v['distance_m'] < 50
+    lo, hi = v['gnss_expected_los_cm_per_year']
+    assert lo <= hi < 0                      # projected subsidence is away from the satellite
+    assert v['gnss_up_se'] < abs(v['gnss_up_cm_per_year']) / 5

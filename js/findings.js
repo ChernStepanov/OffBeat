@@ -54,7 +54,7 @@ window.OB = window.OB || {};
       if (f.samples?.length) {
         // first press shows the strongest sample; later presses step through the others
         const k = cursor[f.id] || 0, n = f.samples.length;
-        actions.append(button(k === 0 && !(f.id in cursor) ? t('Show on map', 'Показать на карте') : t(`Next sample (${k + 1} of ${n})`, `Следующая точка (${k + 1} из ${n})`), () => show(f)));
+        actions.append(button(n === 1 || (k === 0 && !(f.id in cursor)) ? t('Show on map', 'Показать на карте') : t(`Next sample (${k + 1} of ${n})`, `Следующая точка (${k + 1} из ${n})`), () => show(f)));
       } else if (f.site !== siteId()) {
         actions.append(button(t('Show on map', 'Показать на карте'), () => show(f)));
       }
