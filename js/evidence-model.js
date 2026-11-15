@@ -12,7 +12,7 @@ OB.evidenceModel = (() => {
   }
   function link(base, site, pixel, date, caseId, step = 0) {
     const url = new URL(base);
-    for (const key of ['lat', 'lon', 'view', 'case', 'sample', 'date', 'step']) url.searchParams.delete(key);
+    for (const key of ['lat', 'lon', 'view', 'case', 'sample', 'date', 'step', 'candidate']) url.searchParams.delete(key);
     url.hash = '';
     url.searchParams.set('site', site.id);
     url.searchParams.set('sample', String(site.pixels.findIndex(p => p.id === pixel.id)));

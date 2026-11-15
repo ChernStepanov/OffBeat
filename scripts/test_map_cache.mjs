@@ -19,4 +19,9 @@ const topo=new Request('https://services.arcgisonline.com/ArcGIS/rest/services/W
 assert(await send(topo)); assert(entries.has(topo.url),'topographic tiles must be cached according to their response policy');
 entries.delete(request.url);directive='max-age=3600';const before=network;
 await Promise.all([send(),send()]);assert.equal(network,before+1,'matching concurrent requests share one download');
+context.self.location={origin:'https://offbeat.test'};
+const candidate=new Request('https://offbeat.test/data/change-candidates/amazon-a1b2c3d4e5f6.json');
+const prior=network;assert(await send(candidate));assert(await send(candidate));assert.equal(network,prior+1,'versioned candidate data is reused');
+assert.equal(await send(new Request('https://offbeat.test/data/change-candidates/amazon.json')),null,'unversioned candidate data is never cached');
+assert.equal(await send(new Request('https://offbeat.test/data/amazon/optical/a.png')),null,'unversioned optical images are not intercepted');
 console.log('PASS: map tile reuse, expiration, no-store and origin restriction');

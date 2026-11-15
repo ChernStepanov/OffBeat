@@ -262,6 +262,7 @@
       $('data-status').textContent = `${site.message} Showing a measured sample at the selected location.`;
       $('place-status').textContent = `Inside ${site.name}: measured sample selected.`;
     } else {
+      OB.detected?.setSite(null);
       optical.context();
       clearPixel();
       $('data-status').textContent = 'No prepared NISAR series at this location. Select a marked demo site; the basemap and optical mosaic provide geographic context.';
@@ -647,6 +648,7 @@
   }
 
   async function pickCell(i, fly) {
+    OB.detected?.dismiss();
     OB.sonify.stop();
     const s = state.site, g = s.grid, x = i % g.w, y = (i - x) / g.w;
     state.cell = i;
@@ -771,6 +773,7 @@
     if (ticket !== state.loading) return;
     clearSiteLayers();
     state.site = s; state.pixel = null; state.cell = null;
+    OB.detected?.setSite(s.id);
     document.querySelectorAll('#regions button').forEach(button => button.setAttribute('aria-pressed', 'false'));
     // Optical metadata must not delay the map or radar measurements.
     optical.load(s,s.dates.at(-1));
@@ -878,11 +881,17 @@
     },
     patches: () => state.patches,
     pickCell: (i, fly) => pickCell(i, fly),
+    clearForCandidate() {
+      clearPixel();
+      $('card-empty-message').textContent = 'This automatic candidate is a native radar cell. Its two-date comparison is shown in the candidate panel; it is not a sparse sample series.';
+      $('card-empty-sites').hidden = true;
+    },
     zoomTo: (lat, lon, z) => map.setView([lat, lon], z, { animate: false }),
     fit: () => { const b = state.site.grid.bbox; map.fitBounds([[b.s, b.w], [b.n, b.e]], { paddingTopLeft: [16, 32], paddingBottomRight: [16, 16], animate: false }); },
     play: () => $("play").click(),
     stop: () => OB.sonify.stop()
   };
+  OB.detected = OB.createDenseCandidates?.(map, L);
   document.dispatchEvent(new Event("ob:ready"));
 
   window.addEventListener("resize", () => drawCharts());
@@ -905,6 +914,7 @@
       const v = previousViewport;
       if (!worldStart && v && state.site && v.site === state.site.id && v.anchor === viewportAnchor() && Number.isFinite(v.lat) && Math.abs(v.lat) <= 85.05112878 && Number.isFinite(v.lon) && Math.abs(v.lon) <= 180 && Number.isFinite(v.zoom) && v.zoom >= 0 && v.zoom <= 19) map.setView([v.lat, v.lon], v.zoom, { animate: false });
       await OB.evidence?.restore();
+      if (params.has('candidate') && state.site) await OB.detected?.openCandidate(state.site.id, params.get('candidate'));
       viewportReady = true; saveViewport();
     });
   }

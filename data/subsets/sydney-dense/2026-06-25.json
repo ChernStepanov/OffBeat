@@ -1,0 +1,36 @@
+{
+  "site": "sydney",
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_023_167_A_161_4005_DHDH_A_20260625T195356_20260625T195435_P05023_N_F_J_001",
+    "concept_id": "G4242206435-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2026-06-25T19:53:56.000Z",
+    "end": "2026-06-25T19:54:35.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_023_167_A_161_4005_DHDH_A_20260625T195356_20260625T195435_P05023_N_F_J_001/NISAR_L2_PR_GCOV_023_167_A_161_4005_DHDH_A_20260625T195356_20260625T195435_P05023_N_F_J_001.h5"
+  },
+  "date": "2026-06-25",
+  "grid": {
+    "epsg": 32756,
+    "window": [
+      25153,
+      25436,
+      17773,
+      18011
+    ],
+    "x_first": 333255.0,
+    "y_first": 6252225.0,
+    "x_step": 10.0,
+    "y_step": -10.0,
+    "shape": [
+      283,
+      238
+    ]
+  },
+  "subset_path": "data/subsets/sydney-dense/2026-06-25.npz",
+  "sha256": "fed8332131d13064a75668df8df5445b4bbd7f7118eacc292acd6b91ca0a69c4",
+  "steps": [
+    "Read native frequency A HHHH, HVHV and mask within prepared bbox",
+    "No resampling or imputation"
+  ],
+  "limitation": "Mask and quality checks required; not validated events."
+}

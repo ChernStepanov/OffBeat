@@ -256,7 +256,7 @@ OB.evidence = (() => {
     const ticket = ++serial; opening = true;
     try {
       if (!await ready || !OB.app) return;
-      document.dispatchEvent(new Event('ob:manual-navigation')); OB.app.stop();
+      document.dispatchEvent(new Event('ob:manual-navigation')); OB.app.stop(); OB.detected?.dismiss();
       const dossier = book.cases.find(c => c.id === id);
       if (dossier) {
         await OB.app.loadSite(dossier.site);
@@ -298,7 +298,8 @@ OB.evidence = (() => {
   async function surprise() {
     const key = 'offbeat.surprise.history.v1';
     const candidates = OB.suggestPlaces(OB.app.sites(), 2.5, 8);
-    const choices = [...(book?.cases || []).map(c => ({id: c.id, caseId: c.id})),
+    const dense = await OB.detected?.choices() || [];
+    const choices = [...(book?.cases || []).map(c => ({id: c.id, caseId: c.id})), ...dense,
       ...candidates.map(({site, index}) => ({id: `sample:${site.id}:${index}`, site: site.id, index}))];
     let history = surpriseHistory;
     try { history = JSON.parse(localStorage.getItem(key)) || history; } catch (_) {}
@@ -308,6 +309,7 @@ OB.evidence = (() => {
     try { localStorage.setItem(key, JSON.stringify(next.history)); } catch (_) {}
     const choice = choices.find(c => c.id === next.id);
     if (choice.caseId) { await open(choice.caseId); return; }
+    if (choice.marker) { await OB.detected.openCandidate(choice.site, choice.marker); return; }
     try {
       await OB.app.loadSite(choice.site);
       if (OB.app.site()?.id !== choice.site) throw new Error('site unavailable');
@@ -327,14 +329,15 @@ OB.evidence = (() => {
   $('evidence-selection').addEventListener('click', () => open(null));
   $('case-back').addEventListener('click', () => setStep(step - 1));
   $('case-next').addEventListener('click', () => setStep(step + 1));
-  $('case-close').addEventListener('click', () => {
+  function dismiss() {
     serial++; opening = false; engaged = false; active = null; latestReport = null;
     OB.app?.stop(); $('case-workspace').hidden = true;
     const url = new URL(location.href);
     ['case', 'step', 'sample'].forEach(key => url.searchParams.delete(key));
     history.replaceState(null, '', url);
-    render(); $('case-surprise').focus();
-  });
+    render();
+  }
+  $('case-close').addEventListener('click', () => { dismiss(); $('case-surprise').focus(); });
   $('evidence-json').addEventListener('click', () => download(false));
   $('evidence-geojson').addEventListener('click', () => download(true));
   $('evidence-copy').addEventListener('click', async () => {
@@ -351,5 +354,5 @@ OB.evidence = (() => {
     if (!opening) { OB.app?.stop(); render(); persist(); }
   }));
   new MutationObserver(() => render()).observe(document.documentElement, {attributes: true, attributeFilter: ['lang']});
-  return {open, restore, report: () => latestReport};
+  return {open, restore, dismiss, report: () => latestReport};
 })();

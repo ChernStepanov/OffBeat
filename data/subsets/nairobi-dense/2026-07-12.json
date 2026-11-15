@@ -1,0 +1,36 @@
+{
+  "site": "nairobi",
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_025_057_A_001_4005_DHDH_A_20260712T031542_20260712T031616_P05023_N_F_J_001",
+    "concept_id": "G4252522655-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2026-07-12T03:15:42.000Z",
+    "end": "2026-07-12T03:16:16.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_025_057_A_001_4005_DHDH_A_20260712T031542_20260712T031616_P05023_N_F_J_001/NISAR_L2_PR_GCOV_025_057_A_001_4005_DHDH_A_20260712T031542_20260712T031616_P05023_N_F_J_001.h5"
+  },
+  "date": "2026-07-12",
+  "grid": {
+    "epsg": 32737,
+    "window": [
+      18385,
+      18664,
+      21282,
+      21563
+    ],
+    "x_first": 256025.0,
+    "y_first": 9858705.0,
+    "x_step": 10.0,
+    "y_step": -10.0,
+    "shape": [
+      279,
+      281
+    ]
+  },
+  "subset_path": "data/subsets/nairobi-dense/2026-07-12.npz",
+  "sha256": "4cd100ab4f4a44a34695c570808ab86751cfaf8d4e731131807f26a896c33907",
+  "steps": [
+    "Read native frequency A HHHH, HVHV and mask within prepared bbox",
+    "No resampling or imputation"
+  ],
+  "limitation": "Mask and quality checks required; not validated events."
+}

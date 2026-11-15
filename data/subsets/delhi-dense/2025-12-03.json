@@ -1,0 +1,36 @@
+{
+  "site": "delhi",
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_006_156_A_016_4005_DHDH_A_20251203T001237_20251203T001312_P05023_N_F_J_001",
+    "concept_id": "G4271540666-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2025-12-03T00:12:37.000Z",
+    "end": "2025-12-03T00:13:12.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_006_156_A_016_4005_DHDH_A_20251203T001237_20251203T001312_P05023_N_F_J_001/NISAR_L2_PR_GCOV_006_156_A_016_4005_DHDH_A_20251203T001237_20251203T001312_P05023_N_F_J_001.h5"
+  },
+  "date": "2025-12-03",
+  "grid": {
+    "epsg": 32643,
+    "window": [
+      18125,
+      18408,
+      23099,
+      23350
+    ],
+    "x_first": 714835.0,
+    "y_first": 3168185.0,
+    "x_step": 10.0,
+    "y_step": -10.0,
+    "shape": [
+      283,
+      251
+    ]
+  },
+  "subset_path": "data/subsets/delhi-dense/2025-12-03.npz",
+  "sha256": "597046b181637f50bc6ebdbffd59445437220dd92dbb5a172794c9591b90e5cb",
+  "steps": [
+    "Read native frequency A HHHH, HVHV and mask within prepared bbox",
+    "No resampling or imputation"
+  ],
+  "limitation": "Mask and quality checks required; not validated events."
+}

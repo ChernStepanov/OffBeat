@@ -1,0 +1,42 @@
+{
+  "site": "mexico",
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_005_019_A_011_4005_DHDH_A_20251111T120539_20251111T120614_P05023_N_F_J_001",
+    "concept_id": "G4271586309-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2025-11-11T12:05:39.000Z",
+    "end": "2025-11-11T12:06:14.999Z",
+    "size_mb": 6872.26261138916,
+    "polygons": [
+      [
+        "17.9937 -97.90822 20.1317 -98.47251 19.55612 -100.83162 17.42768 -100.24516 17.9937 -97.90822"
+      ]
+    ],
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_005_019_A_011_4005_DHDH_A_20251111T120539_20251111T120614_P05023_N_F_J_001/NISAR_L2_PR_GCOV_005_019_A_011_4005_DHDH_A_20251111T120539_20251111T120614_P05023_N_F_J_001.h5"
+  },
+  "date": "2025-11-11",
+  "grid": {
+    "epsg": 32614,
+    "window": [
+      9687,
+      9966,
+      20542,
+      20807
+    ],
+    "x_first": 490545.0,
+    "y_first": 2149525.0,
+    "x_step": 10.0,
+    "y_step": -10.0,
+    "shape": [
+      279,
+      265
+    ]
+  },
+  "subset_path": "data/subsets/mexico-dense/2025-11-11.npz",
+  "sha256": "28b58827d26b648bfdae499e44db07a3e4687e198436d343fbb5336d2439d86a",
+  "steps": [
+    "Read native frequency A HHHH, HVHV and mask within prepared bbox",
+    "No resampling or imputation"
+  ],
+  "limitation": "Mask and quality checks required; not validated events."
+}

@@ -43,6 +43,8 @@ for (const c of book.cases) {
   }
 }
 const href = model.link('https://offbeat.test/?view=scene&lat=12&lon=15#tour/2',site,pixel,3,candidate.id,2);
+const withoutCandidate = model.link('https://offbeat.test/?candidate=r1-c2',site,pixel,3,candidate.id,2);
+assert.equal(new URL(withoutCandidate).searchParams.has('candidate'),false);
 const params = new URL(href).searchParams;
 assert.equal(params.has('lat'),false);assert.equal(params.has('view'),false);assert.equal(new URL(href).hash,'');
 const saved = model.selection(params,[site],book.cases);

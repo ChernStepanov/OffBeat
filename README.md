@@ -51,6 +51,10 @@ For programmatic read-only access, run `python3 -m api.server` and see the [HTTP
 For dataset inventory, endpoint checks and safe catalogue discovery, see the
 [operations guide](docs/operations.md). These tools do not automatically publish new measurements.
 
+The map also offers [automatic two-date candidate markers](docs/change-candidates.md)
+at seven prepared sites, with radar/optical comparison and browser-local review.
+They are exploratory signal differences, not confirmed events or validated accuracy.
+
 
 ## Actual prepared data
 

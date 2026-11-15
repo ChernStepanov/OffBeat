@@ -1,0 +1,36 @@
+{
+  "site": "venezuela",
+  "source": {
+    "id": "NISAR_L2_PR_GCOV_004_162_A_007_4005_DHDH_A_20251109T100653_20251109T100728_P05023_N_F_J_001",
+    "concept_id": "G4271567051-ASF",
+    "collection": "C2854338529-ASF",
+    "start": "2025-11-09T10:06:53.000Z",
+    "end": "2025-11-09T10:07:28.999Z",
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_004_162_A_007_4005_DHDH_A_20251109T100653_20251109T100728_P05023_N_F_J_001/NISAR_L2_PR_GCOV_004_162_A_007_4005_DHDH_A_20251109T100653_20251109T100728_P05023_N_F_J_001.h5"
+  },
+  "date": "2025-11-09",
+  "grid": {
+    "epsg": 32619,
+    "window": [
+      20642,
+      20922,
+      29836,
+      30114
+    ],
+    "x_first": 708765.0,
+    "y_first": 1159415.0,
+    "x_step": 10.0,
+    "y_step": -10.0,
+    "shape": [
+      280,
+      278
+    ]
+  },
+  "subset_path": "data/subsets/venezuela-dense/2025-11-09.npz",
+  "sha256": "24e104686e091548b7e6184cebbaf7000146cd5d40587a0390c57fcc1b396c2b",
+  "steps": [
+    "Read native frequency A HHHH, HVHV and mask within prepared bbox",
+    "No resampling or imputation"
+  ],
+  "limitation": "Mask and quality checks required; not validated events."
+}

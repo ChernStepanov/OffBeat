@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000080'/%3E%3Cpath d='M1 10h3l1-5 2 9 2-7 1 3h5' fill='none' stroke='%23ffcc00' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="css/offbeat.css?v=3ff545eff4c0">
+<link rel="stylesheet" href="css/offbeat.css?v=0c6dae7ab679">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the map</a>
@@ -248,6 +248,21 @@
           <div id="optical-status" class="pane-label" role="status">Context imagery is not date-matched validation.</div>
           <div id="nisar-status" class="pane-label" role="status">Loading NISAR radar coverage…</div>
           <div id="map-view-metrics" class="pane-label"></div>
+          <div class="pane-label"><label><input type="checkbox" id="detected-visible" checked> <span data-dense="show">Show automatic change candidates</span></label> <span id="detected-map-status" role="status"></span></div>
+          <details id="detected-list-panel" class="pane-label" hidden><summary data-dense="browse">Browse automatic candidates</summary><div id="detected-list" class="dense-case__list"></div></details>
+        </div>
+      </section>
+
+      <section class="win dense-case" id="detected-panel" hidden aria-labelledby="detected-title">
+        <div class="win-t"><h2 id="detected-title">Automatic change candidate</h2><button type="button" class="btn" id="detected-close" data-dense="close">Close</button></div>
+        <div class="win-b"><p id="detected-summary"></p><p class="dense-case__warning" data-dense="warning">Experimental radar signal difference, not a confirmed event or cause. Two-date rankings do not establish accuracy.</p>
+          <h3 data-dense="radar">NISAR radar before and after</h3><div class="dense-case__images" id="detected-radar"></div>
+          <h3 data-dense="optical">Dated optical context</h3><p id="detected-optical-status"></p><div class="dense-case__images" id="detected-optical"></div>
+          <p class="dense-case__hint" data-dense="opticalNote">Optical dates differ from radar dates. Clouds, shadows or masks may hide the point; visual differences do not establish the cause.</p>
+          <h3 data-dense="review">Your visual review</h3><p class="dense-case__hint" data-dense="private">Reviews stay in this browser only; they are not shared. A review is not independent validation.</p>
+          <div class="dense-case__review"><label><span data-dense="verdict">Result</span> <select id="detected-verdict"><option value="" data-dense="unreviewed">Not reviewed</option><option value="visible_change" data-dense="visible">Change visible</option><option value="no_visible_change" data-dense="notVisible">No visible change</option><option value="uncertain" data-dense="uncertain">Uncertain / cannot see</option></select></label><label><span data-dense="basis">Images reviewed</span> <select id="detected-basis"><option value="" data-dense="choose">Choose source</option><option value="optical" data-dense="opticalOnly">Optical</option><option value="radar" data-dense="radarOnly">Radar</option><option value="both" data-dense="both">Both</option></select></label><label><span data-dense="comment">Comment (optional)</span> <input id="detected-comment" maxlength="500"></label></div>
+          <p><button type="button" class="btn" id="detected-save" data-dense="save">Save review</button> <button type="button" class="btn" id="detected-clear" data-dense="reset">Reset review</button> <button type="button" class="btn" id="detected-export" data-dense="export">Download reviews</button></p><p id="detected-review-status" role="status"></p>
+          <p><a id="detected-source" target="_blank" rel="noopener" data-dense="source">Granules and method</a> · <a href="scripts/detect_dense_changes.py" data-dense="code">Detection code</a> · <a id="detected-optical-source" target="_blank" rel="noopener" data-dense="opticalSource">Optical sources</a></p>
         </div>
       </section>
 
@@ -501,10 +516,11 @@
 <script src="js/terrain-renderer.js?v=d8d5b822896a"></script>
 <script src="js/windows.js?v=e532fc6f132d"></script>
 <script src="js/scene.js?v=5c3ab24458e5"></script>
-<script src="js/evidence-model.js?v=95f9fa1dd610"></script>
+<script src="js/evidence-model.js?v=2cbb51887449"></script>
+<script src="js/dense-candidates.js?v=851cd309b3fc"></script>
 <script src="js/panels.js?v=6e020a23003e"></script>
-<script src="js/evidence.js?v=11665f6c52c6"></script>
+<script src="js/evidence.js?v=ee000d0dd646"></script>
 <script src="js/findings.js?v=5307ac2da17c"></script>
-<script src="js/app.js?v=5be5c5b07ef7"></script>
+<script src="js/app.js?v=a5a94e8d32de"></script>
 </body>
 </html>
