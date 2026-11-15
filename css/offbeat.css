@@ -684,10 +684,10 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .story-prompt strong { font: bold 12.5px/16px var(--ui); color: #000; }
 .story-prompt p { margin: 5px 0 0; }
 .story-prompt__button { flex-shrink: 0; min-width: 100px; }
-.story-compare { max-width: 500px; margin: 20px 0; }
+.story-compare { max-width: 360px; margin: 20px 0; }
 .story-compare__frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1; margin-top: 8px; background: #292929; box-shadow: var(--sunken); }
 .story-compare__layer { position: absolute; inset: 0; overflow: hidden; }
-.story-compare__layer img { position: absolute; width: 400%; height: 400%; max-width: none; image-rendering: pixelated; }
+.story-compare__layer img { display: block; width: 100%; height: 100%; }
 .story-compare input { width: 100%; margin: 10px 0 4px; cursor: ew-resize; }
 .story-compare__labels { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; }
 @media (max-width: 600px) { .story-prompt { align-items: stretch; flex-direction: column; } }
@@ -700,10 +700,10 @@ button.scene__close:active:not(:disabled) { padding: 1px 0 0 1px; }
 .casebook__facts { width: 100%; border-collapse: collapse; margin: 12px 0; }
 .casebook__facts th { width: 28%; text-align: left; font-weight: normal; color: #555; }
 .casebook__facts th, .casebook__facts td { padding: 7px 8px; border-bottom: 1px solid #ddd; vertical-align: top; }
-.casebook__optics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 840px; }
+.casebook__optics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 680px; }
 .casebook__optics figure { min-width: 0; margin: 6px 0; }
 .casebook__image { position: relative; aspect-ratio: 1; overflow: hidden; background: #292929; box-shadow: var(--sunken); }
-.casebook__image img { position: absolute; width: 400%; max-width: none; height: 400%; image-rendering: pixelated; }
+.casebook__image img { display: block; width: 100%; height: 100%; }
 .casebook__image p { padding: 14px; color: #fff; }
 .casebook__cross { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #fff; font: 30px/30px monospace; text-shadow: 1px 1px #000, -1px -1px #000; }
 .casebook figcaption { padding: 7px 0; }
