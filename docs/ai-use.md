@@ -13,8 +13,7 @@ used AI coding assistants on their own tasks, the way one uses an editor or a co
 
 - **Chern Stepanov** (project lead): the concept of "hearing" radar pixels that fall out of step with
   their neighbours, the challenge choice, the Windows 98 design direction, the first skeleton, sounds
-  and story mode, deployment on GitHub Pages with the custom domain, NASA Earthdata access and data-use
-  terms, the statistical "What the data says" direction, removing implausible data (Khimki), the
+  and story mode, deployment (probably the only place AI completely kept out off), the statistical "What the data says" direction, removing implausible data, the
   Apache-2.0 licence, the idea and review of the presentation video, design reviews of every screen, and all merges and pushes.
 - **Anita Lapushkina:** the guided investigations and evidence passport, "Surprise me", the landing,
   dated optical evidence for samples, the Amazon benchmark with leakage safeguards and alert screening,
