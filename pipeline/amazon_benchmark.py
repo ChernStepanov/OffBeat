@@ -1,6 +1,7 @@
 """Frozen, event-grouped Amazon ranking. No event labels enter scoring."""
 import hashlib
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -14,14 +15,16 @@ def digest(path):
 
 def metrics(rows, k):
     """Unknowns stay in the denominator; never silently count them as negatives."""
+    if not isinstance(k, int) or isinstance(k, bool) or k <= 0:
+        raise ValueError('K must be a positive integer')
     top = rows[:k]
     n = len(top)
     positive = sum(r['label'] == 'confirmed' for r in top)
     negative = sum(r['label'] == 'refuted' for r in top)
     unknown = n - positive - negative
     return {'requested_k': k, 'n': n, 'confirmed': positive, 'refuted': negative,
-            'unknown': unknown, 'precision_at_k': positive / n if n and not unknown else None,
-            'precision_bounds': [positive / n, (positive + unknown) / n] if n else None,
+            'unknown': unknown, 'precision_at_k': positive / n if n == k and not unknown else None,
+            'precision_bounds': [positive / n, (positive + unknown) / n] if n == k else None,
             'false_discoveries': negative, 'false_discovery_fraction': negative / n if n and not unknown else None,
             'label_coverage': (positive + negative) / n if n else None}
 
@@ -29,6 +32,8 @@ def metrics(rows, k):
 def validate_protocol(protocol, site):
     if set(protocol['ids']) != {p['id'] for p in site['pixels']}:
         raise ValueError('Frozen sample membership changed')
+    if any(a.get('split') not in ('development', 'test') or not a.get('event_group') for a in protocol['assignments']):
+        raise ValueError('Every sample needs a valid split and event group')
     groups = {}
     for item in protocol['assignments']:
         groups.setdefault(item['event_group'], set()).add(item['split'])
@@ -38,6 +43,22 @@ def validate_protocol(protocol, site):
         raise ValueError('Missing assignments')
     if {a['id'] for a in protocol['assignments']} != set(protocol['ids']):
         raise ValueError('Duplicate or missing assignments')
+    # Twice the 1.2 km peer radius prevents direct overlap across splits.
+    # This is necessary, not sufficient: a single event may extend farther.
+    by_id = {p['id']: p for p in site['pixels']}
+    dev = [by_id[a['id']] for a in protocol['assignments'] if a['split'] == 'development']
+    test = [by_id[a['id']] for a in protocol['assignments'] if a['split'] == 'test']
+    for a in dev:
+        for b in test:
+            if any(not isinstance(p.get(c), (int, float)) or not math.isfinite(p[c])
+                   for p in (a, b) for c in ('lat', 'lon')):
+                raise ValueError('Cross-split samples require valid coordinates')
+            lat1, lat2 = math.radians(a['lat']), math.radians(b['lat'])
+            dlat, dlon = lat2 - lat1, math.radians(b['lon'] - a['lon'])
+            hav = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+            distance = 2 * 6371008.8 * math.asin(min(1, math.sqrt(max(0, hav))))
+            if distance < 2400:
+                raise ValueError('Cross-split peer neighbourhoods overlap (< 2400 m)')
 
 
 def rank(site, weather, protocol):
